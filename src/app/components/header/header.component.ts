@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
-import { MenuItem } from './MenuItem';
+import { DTOMenuItem } from './DTOMenuItem';
 import { NgFor } from '@angular/common';
 
 @Component({
@@ -10,7 +10,7 @@ import { NgFor } from '@angular/common';
   styleUrl: './header.component.sass'
 })
 export class HeaderComponent {
-  menu: readonly MenuItem[] = [
+  menu: readonly DTOMenuItem[] = [
     { label: 'Valeurs', routerLink: 'valeurs' },
     { label: 'Portefeuilles', routerLink: 'portefeuilles' }
   ];
