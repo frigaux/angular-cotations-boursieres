@@ -9,7 +9,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class AuthentificationService {
-  public jwt?: JwtPayload | undefined;
+  public jwt!: JwtPayload;
 
   constructor(private http: HttpClient) { }
 

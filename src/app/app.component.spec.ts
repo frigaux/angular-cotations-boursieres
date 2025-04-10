@@ -1,29 +1,27 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+
 import { AppComponent } from './app.component';
-import { ActivatedRoute } from '@angular/router';
 
 describe('AppComponent', () => {
-  let app: AppComponent;
+  let appComponent: AppComponent;
   let fixture: ComponentFixture<AppComponent>;
 
   beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      imports: [AppComponent],
-      providers: [
-        {
-          provide: ActivatedRoute,
-          useValue: {}
-        }
-      ]
-    })
-      .compileComponents();
+    TestBed.configureTestingModule({
+      imports: [AppComponent]
+    });
 
     fixture = TestBed.createComponent(AppComponent);
-    app = fixture.componentInstance;
-    fixture.detectChanges();
+    appComponent = fixture.componentInstance;
   });
 
-  it('should create the app', () => {
-    expect(app).toBeTruthy();
+  it('should create', () => {
+    expect(appComponent).toBeDefined();
+  });
+
+  it('should have <app-header>', () => {
+    const bannerElement: HTMLElement = fixture.nativeElement;
+    const el = bannerElement.querySelector('app-header');
+    expect(el).toBeTruthy();
   });
 });

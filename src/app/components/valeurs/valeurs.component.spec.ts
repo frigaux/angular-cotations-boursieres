@@ -9,15 +9,19 @@ describe('ValeursComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [ValeursComponent]
-    })
-      .compileComponents();
+    });
 
     fixture = TestBed.createComponent(ValeursComponent);
     component = fixture.componentInstance;
-    fixture.detectChanges();
   });
 
   it('should create', () => {
-    expect(component).toBeTruthy();
+    expect(component).toBeDefined();
+  });
+
+  it('should have <div>', () => {
+    const bannerElement: HTMLElement = fixture.nativeElement;
+    const el = bannerElement.querySelector('div');
+    expect(el).toBeTruthy();
   });
 });

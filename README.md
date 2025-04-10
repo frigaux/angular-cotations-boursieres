@@ -49,6 +49,16 @@ npm run coverage
 ng generate environments
 ```
 
+### Guard
+```
+ng generate guard authentification
+```
+
+## Décodage d'un JWT
+```
+npm install --save jwt-decode
+```
+
 ## Ajout de bootstrap et fontawesome
 ```
 npm install --save bootstrap

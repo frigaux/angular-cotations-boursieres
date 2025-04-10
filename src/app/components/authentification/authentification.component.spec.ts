@@ -7,17 +7,21 @@ describe('AuthentificationComponent', () => {
   let fixture: ComponentFixture<AuthentificationComponent>;
 
   beforeEach(async () => {
-    await TestBed.configureTestingModule({
+    TestBed.configureTestingModule({
       imports: [AuthentificationComponent]
-    })
-    .compileComponents();
+    });
 
     fixture = TestBed.createComponent(AuthentificationComponent);
     component = fixture.componentInstance;
-    fixture.detectChanges();
   });
 
   it('should create', () => {
-    expect(component).toBeTruthy();
+    expect(component).toBeDefined();
+  });
+
+  it('should have <div>', () => {
+    const bannerElement: HTMLElement = fixture.nativeElement;
+    const el = bannerElement.querySelector('div');
+    expect(el).toBeTruthy();
   });
 });

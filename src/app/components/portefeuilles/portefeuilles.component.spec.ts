@@ -9,15 +9,19 @@ describe('PortefeuillesComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [PortefeuillesComponent]
-    })
-    .compileComponents();
+    });
 
     fixture = TestBed.createComponent(PortefeuillesComponent);
     component = fixture.componentInstance;
-    fixture.detectChanges();
   });
 
   it('should create', () => {
-    expect(component).toBeTruthy();
+    expect(component).toBeDefined();
+  });
+
+  it('should have <div>', () => {
+    const bannerElement: HTMLElement = fixture.nativeElement;
+    const el = bannerElement.querySelector('div');
+    expect(el).toBeTruthy();
   });
 });

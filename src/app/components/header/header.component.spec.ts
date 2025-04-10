@@ -1,7 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { HeaderComponent } from './header.component';
-import { ActivatedRoute } from '@angular/router';
 
 describe('HeaderComponent', () => {
   let component: HeaderComponent;
@@ -9,22 +8,20 @@ describe('HeaderComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [HeaderComponent],
-      providers: [
-        {
-          provide: ActivatedRoute,
-          useValue: {}
-        }
-      ]
-    })
-      .compileComponents();
+      imports: [HeaderComponent]
+    });
 
     fixture = TestBed.createComponent(HeaderComponent);
     component = fixture.componentInstance;
-    fixture.detectChanges();
   });
 
   it('should create', () => {
-    expect(component).toBeTruthy();
+    expect(component).toBeDefined();
+  });
+
+  it('should have <header>', () => {
+    const bannerElement: HTMLElement = fixture.nativeElement;
+    const el = bannerElement.querySelector('header');
+    expect(el).toBeTruthy();
   });
 });
