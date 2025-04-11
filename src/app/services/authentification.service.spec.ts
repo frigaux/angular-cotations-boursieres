@@ -6,12 +6,12 @@ import { HttpTestingController, provideHttpClientTesting } from '@angular/common
 import { environment } from '../../environments/environment';
 
 describe('AuthentificationService', () => {
-  let service: AuthentificationService;
+  let authentificationService: AuthentificationService;
   let httpTesting: HttpTestingController;
 
   let requestAndMokeAuthentifier = (jwt: string) => {
     // appel du service qui dépend d'une ressource HTTP
-    service.authentifier().subscribe();
+    authentificationService.authentifier().subscribe();
     // bouchonnage de la ressource HTTP
     const req = httpTesting.expectOne({
       method: 'POST',
@@ -27,13 +27,17 @@ describe('AuthentificationService', () => {
         provideHttpClientTesting()
       ]
     });
-    service = TestBed.inject(AuthentificationService);
+    authentificationService = TestBed.inject(AuthentificationService);
     httpTesting = TestBed.inject(HttpTestingController);
   });
 
   describe('Given n\'est pas authentifié', () => {
+    beforeEach(() => {
+      authentificationService.reinitialiser();
+    });
+
     it('#isAuthentifie doit renvoyer false', () => {
-      expect(service.isAuthentifie()).toBe(false);
+      expect(authentificationService.isAuthentifie()).toBe(false);
     });
   });
 
@@ -43,7 +47,7 @@ describe('AuthentificationService', () => {
     });
 
     it('#isAuthentifie doit renvoyer false', () => {
-      expect(service.isAuthentifie()).toBe(false);
+      expect(authentificationService.isAuthentifie()).toBe(false);
     });
   });
 
@@ -53,7 +57,7 @@ describe('AuthentificationService', () => {
     });
 
     it('#isAuthentifie doit renvoyer true', () => {
-      expect(service.isAuthentifie()).toBe(true);
+      expect(authentificationService.isAuthentifie()).toBe(true);
     });
   });
 });

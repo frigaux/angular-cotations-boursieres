@@ -9,15 +9,21 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class AuthentificationService {
-  public jwt!: JwtPayload;
+  private static readonly JWT = 'jwt';
+  private jwt: JwtPayload | undefined;
 
   constructor(private http: HttpClient) { }
 
   public isAuthentifie(): boolean {
-    if (this.jwt) {
-      return Date.now() < this.jwt.exp! * 1000;
+    if (!this.jwt) {
+      this.jwt = this.fromLocalStorage();
     }
-    return false;
+    return !this.isExpired();
+  }
+
+  public reinitialiser(): void {
+    this.jwt = undefined;
+    window.localStorage.removeItem(AuthentificationService.JWT);
   }
 
   public authentifier(): Observable<void> {
@@ -32,9 +38,28 @@ export class AuthentificationService {
           }
         }
       ).subscribe(jwt => {
+        window.localStorage.setItem(AuthentificationService.JWT, jwt.jwt);
         this.jwt = jwtDecode(jwt.jwt);
         observer.complete();
       });
     });
+  }
+
+  private fromLocalStorage(): JwtPayload | undefined {
+    const token = window.localStorage.getItem(AuthentificationService.JWT);
+    if (token) {
+      return jwtDecode(token);
+    }
+    return undefined;
+  }
+
+  private isExpired(): boolean {
+    if (this.jwt) {
+      if (Date.now() < this.jwt.exp! * 1000) {
+        return false;
+      }
+      this.reinitialiser();
+    }
+    return true;
   }
 }
