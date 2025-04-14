@@ -1,11 +1,16 @@
 import { Component } from '@angular/core';
 
+import { Dialog } from 'primeng/dialog';
+import { ProgressBar } from 'primeng/progressbar';
+
 @Component({
   selector: 'app-authentification',
-  imports: [],
+  imports: [Dialog, ProgressBar],
   templateUrl: './authentification.component.html',
   styleUrl: './authentification.component.sass'
 })
 export class AuthentificationComponent {
-// TODO : appeler le WS d'authent ; intercepteur avec rideau ; observable qui route vers la route par défaut
+  // TODO : appeler le WS d'authent ; observable qui route vers la route par défaut
+  ngOnInit(): void {
+  }
 }

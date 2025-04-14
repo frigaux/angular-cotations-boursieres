@@ -1,18 +1,25 @@
 import { Component } from '@angular/core';
-import { RouterLink, RouterLinkActive } from '@angular/router';
-import { DTOMenuItem } from './DTOMenuItem';
-import { NgFor } from '@angular/common';
+
+import { MenuItem } from 'primeng/api';
+import { Menubar } from 'primeng/menubar';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-header',
-  imports: [RouterLink, RouterLinkActive, NgFor],
+  imports: [Menubar, CommonModule],
   templateUrl: './header.component.html',
   styleUrl: './header.component.sass'
 })
 export class HeaderComponent {
-  menu: readonly DTOMenuItem[] = [
-    { label: 'Valeurs', routerLink: 'valeurs' },
-    { label: 'Portefeuilles', routerLink: 'portefeuilles' }
+  items: MenuItem[] = [
+    {
+      label: 'Valeurs',
+      routerLink: 'valeurs'
+    },
+    {
+      label: 'Portefeuilles',
+      routerLink: 'portefeuilles'
+    }
   ];
 
 }

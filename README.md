@@ -59,7 +59,22 @@ ng generate guard authentification
 npm install --save jwt-decode
 ```
 
-## Ajout de bootstrap et fontawesome
+## Ajout de PrimeNG
+```
+npm install primeng @primeng/themes --force
+```
+
+Ajout des deux providers providePrimeNG, provideAnimationsAsync et définition du thème dans le fichier app.config.ts :
+`
+    provideAnimationsAsync(),
+    providePrimeNG({
+      theme: {
+        preset: Material // Aura, Material, Lara and Nora
+      }
+    })
+`
+
+## Finalement pas ajoutés : bootstrap et fontawesome
 ```
 npm install --save bootstrap
 npm install --save @fortawesome/fontawesome-free
