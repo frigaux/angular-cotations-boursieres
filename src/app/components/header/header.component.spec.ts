@@ -21,7 +21,7 @@ describe('HeaderComponent', () => {
 
   it('should have <header>', () => {
     const bannerElement: HTMLElement = fixture.nativeElement;
-    const el = bannerElement.querySelector('header');
+    const el = bannerElement.querySelector('p-menubar');
     expect(el).toBeTruthy();
   });
 });

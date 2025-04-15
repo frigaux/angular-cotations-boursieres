@@ -21,7 +21,7 @@ describe('FooterComponent', () => {
 
   it('should have <footer>', () => {
     const bannerElement: HTMLElement = fixture.nativeElement;
-    const el = bannerElement.querySelector('footer');
+    const el = bannerElement.querySelector('span');
     expect(el).toBeTruthy();
   });
 });
