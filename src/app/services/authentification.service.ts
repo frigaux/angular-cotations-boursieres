@@ -37,10 +37,13 @@ export class AuthentificationService {
             'Content-Type': 'application/json'
           }
         }
-      ).subscribe(jwt => {
-        window.localStorage.setItem(AuthentificationService.JWT, jwt.jwt);
-        this.jwt = jwtDecode(jwt.jwt);
-        observer.complete();
+      ).subscribe({
+        error: httpResponseError => observer.error(httpResponseError),
+        next: jwt => {
+          window.localStorage.setItem(AuthentificationService.JWT, jwt.jwt);
+          this.jwt = jwtDecode(jwt.jwt);
+          observer.complete();
+        }
       });
     });
   }
