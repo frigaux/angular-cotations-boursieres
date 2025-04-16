@@ -5,10 +5,14 @@ import { provideHttpClient } from '@angular/common/http';
 import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
 import { environment } from '../../environments/environment';
 import { lastValueFrom } from 'rxjs';
+// import { HttpClient } from '@angular/common/http';
+// import { Observable } from 'rxjs';
 
 describe('AuthentificationService', () => {
   let authentificationService: AuthentificationService;
   let httpTesting: HttpTestingController;
+
+  // const httpClientSpy = jasmine.createSpyObj('HttpClient', ['post']);
 
   // https://angular.dev/guide/http/testing
   let requestAndMokeAuthentifier = async (jwt: string) => {
@@ -23,6 +27,11 @@ describe('AuthentificationService', () => {
     await promiseAuthentifier;
     // vérification qu'il n'y a pas de requêtes en attente
     httpTesting.verify();
+
+    // // bouchonnage de la ressource HTTP
+    // httpClientSpy.post.and.returnValue(new Observable(observer => observer.next({ jwt })));
+    // // appel du service qui dépend d'une ressource HTTP
+    // await lastValueFrom(authentificationService.authentifier());
   }
 
   beforeEach(() => {
@@ -30,7 +39,8 @@ describe('AuthentificationService', () => {
       providers: [
         AuthentificationService,
         provideHttpClient(),
-        provideHttpClientTesting()
+        provideHttpClientTesting(),
+        // { provide: HttpClient, useValue: httpClientSpy }
       ]
     });
     authentificationService = TestBed.inject(AuthentificationService);
