@@ -26,7 +26,7 @@ export class AuthentificationService {
     window.localStorage.removeItem(AuthentificationService.JWT);
   }
 
-  public authentifier(): Observable<void> {
+  public authentifier(): Observable<DTOJwt> {
     return new Observable(observer => {
       this.http.post<DTOJwt>(
         environment.apiUrl + '/v1/bourse/authentification',
@@ -42,6 +42,7 @@ export class AuthentificationService {
         next: jwt => {
           window.localStorage.setItem(AuthentificationService.JWT, jwt.jwt);
           this.jwt = jwtDecode(jwt.jwt);
+          observer.next(jwt);
           observer.complete();
         }
       });

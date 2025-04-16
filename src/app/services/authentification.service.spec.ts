@@ -4,19 +4,25 @@ import { AuthentificationService } from './authentification.service';
 import { provideHttpClient } from '@angular/common/http';
 import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
 import { environment } from '../../environments/environment';
+import { lastValueFrom } from 'rxjs';
 
 describe('AuthentificationService', () => {
   let authentificationService: AuthentificationService;
   let httpTesting: HttpTestingController;
 
-  let requestAndMokeAuthentifier = (jwt: string) => {
-    // appel du service qui dépend d'une ressource HTTP
-    authentificationService.authentifier().subscribe();
+  // https://angular.dev/guide/http/testing
+  let requestAndMokeAuthentifier = async (jwt: string) => {
+    // création d'une promesse sur l'observable qui fait la requête HTTP d'authentification
+    const promiseAuthentifier = lastValueFrom(authentificationService.authentifier());
     // bouchonnage de la ressource HTTP
     const req = httpTesting.expectOne({
       method: 'POST',
       url: environment.apiUrl + '/v1/bourse/authentification',
     }).flush({ jwt });
+    // on attend la résolution de la promise
+    await promiseAuthentifier;
+    // vérification qu'il n'y a pas de requêtes en attente
+    httpTesting.verify();
   }
 
   beforeEach(() => {
