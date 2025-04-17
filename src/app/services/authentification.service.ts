@@ -38,7 +38,10 @@ export class AuthentificationService {
           }
         }
       ).subscribe({
-        error: httpResponseError => observer.error(httpResponseError),
+        error: httpResponseError => {
+          observer.error(httpResponseError);
+          observer.complete();
+        },
         next: jwt => {
           window.localStorage.setItem(AuthentificationService.JWT, jwt.jwt);
           this.jwt = jwtDecode(jwt.jwt);

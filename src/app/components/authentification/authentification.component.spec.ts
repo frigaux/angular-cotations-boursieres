@@ -2,6 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { AuthentificationComponent } from './authentification.component';
 import { AuthentificationService } from '../../services/authentification.service';
+import { firstValueFrom, lastValueFrom, Observable } from 'rxjs';
 
 describe('AuthentificationComponent', () => {
   let component: AuthentificationComponent;
@@ -25,9 +26,25 @@ describe('AuthentificationComponent', () => {
     expect(component).toBeDefined();
   });
 
-  it('should have <div>', () => {// TODO : appeler ngOnInit ? avec mock AuthentificationService ?
-    const bannerElement: HTMLElement = fixture.nativeElement;
-    const el = bannerElement.querySelector('div');
-    expect(el).toBeTruthy();
+  it('Given le composant est crée when ngOnInit n\'est pas encore appelée then le statut est AUTHENTIFICATION', () => {
+    expect(component.statut).toBe(component.enumStatut.AUTHENTIFICATION);
+  });
+
+  it('Given le composant est crée when ngOnInit est appelée et que l\'authentification échoue then le statut est ERREUR', async () => {
+    mockAuthentificationService.authentifier.and.returnValue(new Observable(observer => {
+      observer.error({url: 'u', status: 's'});
+    }));
+    component.ngOnInit();
+    fixture.detectChanges(); // pour essayer de s'assurer que le error sur l'observable a bien été traité
+    expect(component.statut).toBe(component.enumStatut.ERREUR);
+  });
+
+  it('Given le composant est crée when ngOnInit est appelée et que l\'authentification réussie then le statut est SUCCES', async () => {
+    mockAuthentificationService.authentifier.and.returnValue(new Observable(observer => {
+      observer.complete();
+    }));
+    component.ngOnInit();
+    fixture.detectChanges(); // pour essayer de s'assurer que le complete sur l'observable a bien été traité
+    expect(component.statut).toBe(component.enumStatut.SUCCES);
   });
 });

@@ -19,7 +19,7 @@ describe('AuthentificationService', () => {
     // création d'une promesse sur l'observable qui fait la requête HTTP d'authentification
     const promiseAuthentifier = lastValueFrom(authentificationService.authentifier());
     // bouchonnage de la ressource HTTP
-    const req = httpTesting.expectOne({
+    httpTesting.expectOne({
       method: 'POST',
       url: environment.apiUrl + '/v1/bourse/authentification',
     }).flush({ jwt });
@@ -32,6 +32,20 @@ describe('AuthentificationService', () => {
     // httpClientSpy.post.and.returnValue(new Observable(observer => observer.next({ jwt })));
     // // appel du service qui dépend d'une ressource HTTP
     // await lastValueFrom(authentificationService.authentifier());
+  }
+
+  let requestAndMokeAuthentifierWithError = async () => {
+    // création d'une promesse sur l'observable qui fait la requête HTTP d'authentification
+    const promiseAuthentifier = lastValueFrom(authentificationService.authentifier());
+    // bouchonnage de la ressource HTTP
+    httpTesting.expectOne({
+      method: 'POST',
+      url: environment.apiUrl + '/v1/bourse/authentification',
+    }).error(new ProgressEvent(''));
+    // on attend la résolution de la promise
+    await promiseAuthentifier;
+    // vérification qu'il n'y a pas de requêtes en attente
+    httpTesting.verify();
   }
 
   beforeEach(() => {
@@ -57,8 +71,20 @@ describe('AuthentificationService', () => {
     });
   });
 
+  describe('Given l\'authentification a échoué', () => {
+    beforeEach(() => {
+      authentificationService.reinitialiser();
+      requestAndMokeAuthentifierWithError();
+    });
+
+    it('#isAuthentifie doit renvoyer false', () => {
+      expect(authentificationService.isAuthentifie()).toBe(false);
+    });
+  });
+
   describe('Given est authentifié avec un JWT expiré', () => {
     beforeEach(() => {
+      authentificationService.reinitialiser();
       requestAndMokeAuthentifier('eyJhbGciOiJIUzUxMiJ9.eyJleHAiOjE3NDMwMDU4ODUsImlhdCI6MTc0MzAwNTgyNSwiaWRlbnRpZmlhbnQiOiJhbm9ueW1vdXMifQ.O6-l5v3xeD1ZozJJxRdofAS6dCvG2VCQLVh8KRuJ_fTCkYaWTbvhlB-w5ON8Fw01baZHDIe1ndGFOgQjMXI6fA');
     });
 
@@ -67,8 +93,9 @@ describe('AuthentificationService', () => {
     });
   });
 
-  describe('Given  est authentifié avec un JWT valide', () => {
+  describe('Given est authentifié avec un JWT valide', () => {
     beforeEach(() => {
+      authentificationService.reinitialiser();
       requestAndMokeAuthentifier('eyJhbGciOiJIUzUxMiJ9.eyJleHAiOjQ4OTY2MDU5NDUsImlhdCI6MTc0MzAwNTk0NSwiaWRlbnRpZmlhbnQiOiJhbm9ueW1vdXMifQ.xr0mjZ2cYZ89slsif4-Kg923jB4dFstZhzaOdZnM_gKo99MrhkJIiOUPXecanpzBDhTMsOwFK6W-zSv176vjOA');
     });
 
