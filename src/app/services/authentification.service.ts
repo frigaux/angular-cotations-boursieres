@@ -29,7 +29,7 @@ export class AuthentificationService {
   public authentifier(): Observable<DTOJwt> {
     return new Observable(observer => {
       this.http.post<DTOJwt>(
-        environment.apiUrl + '/v1/bourse/authentification',
+        environment.apiUrl + '/v' + environment.apiVersion + '/bourse/authentification',
         { identifiant: 'anonymous', motDePasse: 'anonymous' },
         {
           headers: {

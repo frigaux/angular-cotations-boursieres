@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { ValeursService } from '../../services/valeurs.service';
 
 @Component({
   selector: 'app-valeurs',
@@ -7,5 +8,8 @@ import { Component } from '@angular/core';
   styleUrl: './valeurs.component.sass'
 })
 export class ValeursComponent {
+  constructor(private valeursService: ValeursService) { }
 
+  ngOnInit(): void {
+  }
 }
