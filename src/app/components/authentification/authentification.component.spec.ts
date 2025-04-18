@@ -2,7 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { AuthentificationComponent } from './authentification.component';
 import { AuthentificationService } from '../../services/authentification.service';
-import { firstValueFrom, lastValueFrom, Observable } from 'rxjs';
+import { Observable } from 'rxjs';
 
 describe('AuthentificationComponent', () => {
   let component: AuthentificationComponent;

@@ -32,7 +32,8 @@
               }
             ],
             "styles": [
-              "src/styles.sass"
+              "src/styles.sass",
+              "primeicons/primeicons.css"
             ],
             "scripts": []
           },

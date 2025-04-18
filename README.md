@@ -61,7 +61,7 @@ npm install --save jwt-decode
 
 ## Ajout de PrimeNG
 ```
-npm install primeng @primeng/themes --force
+npm install primeng @primeng/themes primeicons --force
 ```
 
 Ajout des deux providers providePrimeNG, provideAnimationsAsync et définition du thème dans le fichier app.config.ts :
@@ -72,6 +72,14 @@ Ajout des deux providers providePrimeNG, provideAnimationsAsync et définition d
         preset: Material // Aura, Material, Lara and Nora
       }
     })
+`
+
+Ajout de primeicons.css dans le fichier angular.json :
+`
+            "styles": [
+              "src/styles.sass",
+              "primeicons/primeicons.css"
+            ],
 `
 
 ## Finalement pas ajoutés : bootstrap et fontawesome

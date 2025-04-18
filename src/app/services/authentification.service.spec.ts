@@ -85,6 +85,7 @@ describe('AuthentificationService', () => {
   describe('Given est authentifié avec un JWT expiré', () => {
     beforeEach(() => {
       authentificationService.reinitialiser();
+      // JWT anonyme expiré
       requestAndMokeAuthentifier('eyJhbGciOiJIUzUxMiJ9.eyJleHAiOjE3NDMwMDU4ODUsImlhdCI6MTc0MzAwNTgyNSwiaWRlbnRpZmlhbnQiOiJhbm9ueW1vdXMifQ.O6-l5v3xeD1ZozJJxRdofAS6dCvG2VCQLVh8KRuJ_fTCkYaWTbvhlB-w5ON8Fw01baZHDIe1ndGFOgQjMXI6fA');
     });
 
@@ -96,6 +97,8 @@ describe('AuthentificationService', () => {
   describe('Given est authentifié avec un JWT valide', () => {
     beforeEach(() => {
       authentificationService.reinitialiser();
+      // JWT anonyme avec validité quasi illimitée
+      // ATTENTION ! ne surtout pas exposer un vrai jeton avec accès illimité dans ce test le jour où l'authentification sera en place !
       requestAndMokeAuthentifier('eyJhbGciOiJIUzUxMiJ9.eyJleHAiOjQ4OTY2MDU5NDUsImlhdCI6MTc0MzAwNTk0NSwiaWRlbnRpZmlhbnQiOiJhbm9ueW1vdXMifQ.xr0mjZ2cYZ89slsif4-Kg923jB4dFstZhzaOdZnM_gKo99MrhkJIiOUPXecanpzBDhTMsOwFK6W-zSv176vjOA');
     });
 

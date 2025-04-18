@@ -14,11 +14,13 @@ export class HeaderComponent {
   items: MenuItem[] = [
     {
       label: 'Valeurs',
-      routerLink: 'valeurs'
+      routerLink: 'valeurs',
+      icon: 'pi pi-warehouse'
     },
     {
       label: 'Portefeuilles',
-      routerLink: 'portefeuilles'
+      routerLink: 'portefeuilles',
+      icon: 'pi pi-chart-line'
     }
   ];
 
