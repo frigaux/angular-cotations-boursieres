@@ -1,14 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ValeursComponent } from './valeurs.component';
+import { ValeursService } from '../../services/valeurs.service';
 
 describe('ValeursComponent', () => {
   let component: ValeursComponent;
   let fixture: ComponentFixture<ValeursComponent>;
 
+  const mockValeursService = jasmine.createSpyObj('ValeursService', ['getValeurs']);
+
   beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      imports: [ValeursComponent]
+    TestBed.configureTestingModule({
+      imports: [ValeursComponent],
+      providers: [
+        { provide: ValeursService, useValue: mockValeursService }
+      ]
     });
 
     fixture = TestBed.createComponent(ValeursComponent);

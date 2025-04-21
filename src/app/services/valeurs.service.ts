@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { DTOValeur } from './DTOValeur';
 import { Observable } from 'rxjs';
-import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -15,13 +14,7 @@ export class ValeursService {
   public getValeurs(): Observable<DTOValeur[]> {
     return new Observable(observer => {
       this.http.get<DTOValeur[]>(
-        environment.apiUrl + '/v' + environment.apiVersion + '/bourse/valeurs',
-        {
-          headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json'
-          }
-        }
+        'bourse/valeurs'
       ).subscribe({
         error: httpResponseError => {
           observer.error(httpResponseError);
