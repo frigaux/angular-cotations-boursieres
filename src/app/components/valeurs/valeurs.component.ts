@@ -16,7 +16,7 @@ export class ValeursComponent {
         console.log(httpResponseError);
       },
       next: valeurs => {
-        console.log(valeurs);
+        console.log('valeurs', valeurs);
       }
     });
   }

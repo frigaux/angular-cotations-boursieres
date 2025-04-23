@@ -10,22 +10,9 @@ export class ValeursService {
 
   constructor(private http: HttpClient) { }
 
-  // TODO : intercepteur avec ajout JWT, modif url et headers
   public getValeurs(): Observable<DTOValeur[]> {
-    return new Observable(observer => {
-      this.http.get<DTOValeur[]>(
-        'bourse/valeurs'
-      ).subscribe({
-        error: httpResponseError => {
-          observer.error(httpResponseError);
-          observer.complete();
-        },
-        next: valeurs => {
-          observer.next(valeurs);
-          observer.complete();
-        }
-      });
-    });
-
+    return this.http.get<DTOValeur[]>(
+      'bourse/valeurs'
+    );
   }
 }

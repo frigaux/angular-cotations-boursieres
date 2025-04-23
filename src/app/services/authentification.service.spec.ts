@@ -74,6 +74,7 @@ describe('AuthentificationService', () => {
     });
   });
 
+  // log une erreur : "context.js:265 HttpErrorResponse"
   describe('Given l\'authentification a échoué', () => {
     beforeEach(() => {
       authentificationService.reinitialiser();
@@ -107,6 +108,7 @@ describe('AuthentificationService', () => {
 
     it('#isAuthentifie doit renvoyer true', () => {
       expect(authentificationService.isAuthentifie()).toBe(true);
+      expect(authentificationService.getJwt()).toBeDefined();
     });
   });
 });
