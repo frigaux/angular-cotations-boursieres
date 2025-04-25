@@ -54,7 +54,7 @@ describe('AuthentificationService', () => {
       providers: [
         AuthentificationService,
         provideHttpClient(
-          withInterceptors([httpRequestInterceptor])
+          withInterceptors([httpRequestInterceptor])// TODO : remove !
         ),
         provideHttpClientTesting(),
         // { provide: HttpClient, useValue: httpClientSpy }
@@ -111,4 +111,6 @@ describe('AuthentificationService', () => {
       expect(authentificationService.getJwt()).toBeDefined();
     });
   });
+
+  // TODO : localStorage pas testé !
 });

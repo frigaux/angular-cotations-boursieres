@@ -12,11 +12,8 @@ export class ValeursComponent {
 
   ngOnInit(): void {
     this.valeursService.getValeurs().subscribe({
-      error: httpResponseError => {
-        console.log(httpResponseError);
-      },
       next: valeurs => {
-        console.log('valeurs', valeurs);
+        // console.log('valeurs', valeurs);
       }
     });
   }

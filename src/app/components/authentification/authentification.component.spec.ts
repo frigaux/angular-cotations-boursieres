@@ -26,11 +26,11 @@ describe('AuthentificationComponent', () => {
     expect(component).toBeDefined();
   });
 
-  it('Given le composant est crée when ngOnInit n\'est pas encore appelée then le statut est AUTHENTIFICATION', () => {
+  it('Given le composant est crée when #ngOnInit n\'est pas encore appelée then le statut est AUTHENTIFICATION', () => {
     expect(component.statut).toBe(component.enumStatut.AUTHENTIFICATION);
   });
 
-  it('Given le composant est crée when ngOnInit est appelée et que l\'authentification échoue then le statut est ERREUR', async () => {
+  it('Given le composant est crée when #ngOnInit est appelée et que l\'authentification échoue then le statut est ERREUR', async () => {
     mockAuthentificationService.authentifier.and.returnValue(new Observable(observer => {
       observer.error({url: 'u', status: 's'});
     }));
@@ -39,7 +39,7 @@ describe('AuthentificationComponent', () => {
     expect(component.statut).toBe(component.enumStatut.ERREUR);
   });
 
-  it('Given le composant est crée when ngOnInit est appelée et que l\'authentification réussie then le statut est SUCCES', async () => {
+  it('Given le composant est crée when #ngOnInit est appelée et que l\'authentification réussie then le statut est SUCCES', async () => {
     mockAuthentificationService.authentifier.and.returnValue(new Observable(observer => {
       observer.complete();
     }));

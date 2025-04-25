@@ -17,7 +17,7 @@ export class AuthentificationService {
 
   public isAuthentifie(): boolean {
     if (!this.jwtPayload) {
-      this.jwtPayload = this.fromLocalStorage();
+      this.initFromLocalStorage();
     }
     return !this.isExpire();
   }
@@ -54,12 +54,12 @@ export class AuthentificationService {
     return this.jwt;
   }
 
-  private fromLocalStorage(): JwtPayload | undefined {
+  private initFromLocalStorage(): void {
     const token = window.localStorage.getItem(AuthentificationService.JWT);
     if (token) {
-      return jwtDecode(token);
+      this.jwt = token;
+      this.jwtPayload = jwtDecode(token);
     }
-    return undefined;
   }
 
   private isExpire(): boolean {

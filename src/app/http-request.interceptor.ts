@@ -1,9 +1,9 @@
-import { HttpContextToken, HttpInterceptorFn } from '@angular/common/http';
-import { environment } from '../environments/environment';
-import { AuthentificationService } from './services/authentification.service';
-import { inject } from '@angular/core';
-import { Router } from '@angular/router';
-import { EMPTY } from 'rxjs';
+import {HttpContextToken, HttpInterceptorFn} from '@angular/common/http';
+import {environment} from '../environments/environment';
+import {AuthentificationService} from './services/authentification.service';
+import {inject} from '@angular/core';
+import {Router} from '@angular/router';
+import {throwError} from 'rxjs';
 
 export const AUTHENTIFICATION_REQUISE = new HttpContextToken<boolean>(() => true);
 
@@ -22,9 +22,8 @@ export const httpRequestInterceptor: HttpInterceptorFn = (req, next) => {
       updateRequest.headers = updateRequest.headers.append('Authorization', 'Bearer ' + authentificationService.getJwt());
       return next(req.clone(updateRequest));
     } else {
-      const router = inject(Router);
-      router.navigate(['/authentification']);
-      return EMPTY;
+      inject(Router).navigate(['/authentification']);
+      return throwError(() => 'pas authentifié, routage vers authentification');
     }
   } else {
     return next(req.clone(updateRequest));
