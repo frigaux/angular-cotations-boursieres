@@ -22,7 +22,7 @@ describe('AuthentificationService', () => {
     // bouchonnage de la ressource HTTP
     httpTesting.expectOne({
       method: 'POST',
-      url: environment.apiUrl + '/v1/bourse/authentification',
+      url: 'bourse/authentification',
     }).flush({ jwt });
     // on attend la résolution de la promise
     await promiseAuthentifier;
@@ -41,7 +41,7 @@ describe('AuthentificationService', () => {
     // bouchonnage de la ressource HTTP
     httpTesting.expectOne({
       method: 'POST',
-      url: environment.apiUrl + '/v1/bourse/authentification',
+      url: 'bourse/authentification',
     }).error(new ProgressEvent(''));
     // on attend la résolution de la promise
     await promiseAuthentifier;
@@ -53,9 +53,7 @@ describe('AuthentificationService', () => {
     TestBed.configureTestingModule({
       providers: [
         AuthentificationService,
-        provideHttpClient(
-          withInterceptors([httpRequestInterceptor])// TODO : remove !
-        ),
+        provideHttpClient(),
         provideHttpClientTesting(),
         // { provide: HttpClient, useValue: httpClientSpy }
       ]
@@ -90,7 +88,7 @@ describe('AuthentificationService', () => {
     beforeEach(() => {
       authentificationService.reinitialiser();
       // JWT anonyme expiré
-      requestAndMokeAuthentifier('eyJhbGciOiJIUzUxMiJ9.eyJleHAiOjE3NDMwMDU4ODUsImlhdCI6MTc0MzAwNTgyNSwiaWRlbnRpZmlhbnQiOiJhbm9ueW1vdXMifQ.O6-l5v3xeD1ZozJJxRdofAS6dCvG2VCQLVh8KRuJ_fTCkYaWTbvhlB-w5ON8Fw01baZHDIe1ndGFOgQjMXI6fA');
+      requestAndMokeAuthentifier('eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3NDMwMDU4ODUsImlhdCI6MTc0MzAwNTgyNSwiaWRlbnRpZmlhbnQiOiJhbm9ueW1vdXMifQ.zFNfQX4OkP84FRlINOFiPABEsKBzoixJ7L_4AfXdy98nhdzepORBTOl4ClqtAzVlXX__Xbdf-GCCA9TtU5lsRQ');
     });
 
     it('#isAuthentifie doit renvoyer false', () => {
@@ -102,8 +100,8 @@ describe('AuthentificationService', () => {
     beforeEach(() => {
       authentificationService.reinitialiser();
       // JWT anonyme avec validité quasi illimitée
-      // ATTENTION ! ne surtout pas exposer un vrai jeton avec accès illimité dans ce test le jour où l'authentification sera en place !
-      requestAndMokeAuthentifier('eyJhbGciOiJIUzUxMiJ9.eyJleHAiOjQ4OTY2MDU5NDUsImlhdCI6MTc0MzAwNTk0NSwiaWRlbnRpZmlhbnQiOiJhbm9ueW1vdXMifQ.xr0mjZ2cYZ89slsif4-Kg923jB4dFstZhzaOdZnM_gKo99MrhkJIiOUPXecanpzBDhTMsOwFK6W-zSv176vjOA');
+      // ahahaha ! vous pensiez que c'était un vrai jeton ?
+      requestAndMokeAuthentifier('eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJleHAiOjQ4OTY2MDU5NDUsImlhdCI6MTc0MzAwNTk0NSwiaWRlbnRpZmlhbnQiOiJhbm9ueW1vdXMifQ.4KvXcysGt5JykHhhZW9qh9a4kFirx2Mjj-8nIFgCl35Dz8u6D8VpzWd0gtwBJWTZtNvx8nyYU9HtB-cOrMu2IQ');
     });
 
     it('#isAuthentifie doit renvoyer true', () => {
@@ -112,5 +110,17 @@ describe('AuthentificationService', () => {
     });
   });
 
-  // TODO : localStorage pas testé !
+
+  describe('Given n\'est pas authentifié mais le localStorage contient un JWT valide', () => {
+    beforeEach(() => {
+      authentificationService.reinitialiser();
+      // JWT anonyme avec validité quasi illimitée
+      // ahahaha ! vous pensiez que c'était un vrai jeton ?
+      window.localStorage.setItem(AuthentificationService.JWT, 'eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJleHAiOjQ4OTY2MDU5NDUsImlhdCI6MTc0MzAwNTk0NSwiaWRlbnRpZmlhbnQiOiJhbm9ueW1vdXMifQ.4KvXcysGt5JykHhhZW9qh9a4kFirx2Mjj-8nIFgCl35Dz8u6D8VpzWd0gtwBJWTZtNvx8nyYU9HtB-cOrMu2IQ');
+    });
+
+    it('#isAuthentifie doit renvoyer true', () => {
+      expect(authentificationService.isAuthentifie()).toBe(true);
+    });
+  });
 });

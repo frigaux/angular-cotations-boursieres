@@ -9,7 +9,7 @@ import { AUTHENTIFICATION_REQUISE } from '../http-request.interceptor';
   providedIn: 'root'
 })
 export class AuthentificationService {
-  private static readonly JWT = 'jwt';
+  static readonly JWT = 'jwt';
   private jwt: string | undefined;
   private jwtPayload: JwtPayload | undefined;
 

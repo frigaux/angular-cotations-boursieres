@@ -65,7 +65,6 @@ describe('httpRequestInterceptor', () => {
     const expectedResponse = new HttpResponse({status: 200, body: {data: 'test'}});
 
     beforeEach(() => {
-      mockRequest.context.set(AUTHENTIFICATION_REQUISE, true);
       mockHandler.and.returnValue(of(expectedResponse));
       mockAuthentificationService.isAuthentifie.and.returnValue(false);
     });
@@ -87,7 +86,6 @@ describe('httpRequestInterceptor', () => {
     const jwt = 'token';
 
     beforeEach(() => {
-      mockRequest.context.set(AUTHENTIFICATION_REQUISE, true);
       mockHandler.and.returnValue(of(expectedResponse));
       mockAuthentificationService.isAuthentifie.and.returnValue(true);
       mockAuthentificationService.getJwt.and.returnValue(jwt);
