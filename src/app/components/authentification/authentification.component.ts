@@ -1,14 +1,15 @@
-import { Component } from '@angular/core';
-import { NgSwitch, NgSwitchCase } from '@angular/common';
+import {Component} from '@angular/core';
+import {NgSwitch, NgSwitchCase} from '@angular/common';
 
-import { Dialog } from 'primeng/dialog';
-import { ProgressBar } from 'primeng/progressbar';
-import { AuthentificationService } from '../../services/authentification.service';
-import { Statut } from './statut';
+import {Dialog} from 'primeng/dialog';
+import {ProgressBar} from 'primeng/progressbar';
+import {AuthentificationService} from '../../services/authentification.service';
+import {Statut} from './statut';
+import {TranslatePipe} from "@ngx-translate/core";
 
 @Component({
   selector: 'app-authentification',
-  imports: [Dialog, ProgressBar, NgSwitch, NgSwitchCase],
+  imports: [Dialog, ProgressBar, NgSwitch, NgSwitchCase, TranslatePipe],
   templateUrl: './authentification.component.html',
   styleUrl: './authentification.component.sass'
 })
@@ -17,7 +18,8 @@ export class AuthentificationComponent {
   messageErreur: string | undefined;
   enumStatut = Statut;
 
-  constructor(private authentificationService: AuthentificationService) { }
+  constructor(private authentificationService: AuthentificationService) {
+  }
 
   ngOnInit(): void {
     this.authentificationService.authentifier().subscribe({

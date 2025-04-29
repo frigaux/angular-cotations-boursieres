@@ -9,10 +9,14 @@ import {providePrimeNG} from 'primeng/config';
 import Aura from '@primeng/themes/aura';
 import {httpRequestInterceptor} from './http-request.interceptor';
 import {httpResponseInterceptor} from './http-response.interceptor';
+import {provideTranslateService} from "@ngx-translate/core";
 
 export const appConfig: ApplicationConfig = {
   providers: [
     provideZoneChangeDetection({eventCoalescing: true}),
+    provideTranslateService({
+      defaultLanguage: 'fr'
+    }),
     provideRouter(routes),
     provideHttpClient(
       withInterceptors([httpRequestInterceptor, httpResponseInterceptor])
