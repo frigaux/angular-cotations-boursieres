@@ -1,5 +1,19 @@
 {
-  "authentification": {
-    "reussie": "Authentification réussie !"
+  "COMPOSANT": {
+    "AUTHENTIFICATION": {
+      "REUSSIE": "Authentification réussie !"
+    },
+    "VALEURS" : {
+      "LIBELLE" : "Libellé",
+      "MARCHE" : "Marché",
+      "TICKER" : "Ticker"
+    }
+  },
+  "ENUMERATION": {
+    "MARCHE": {
+      "EURO_LIST_A": "Euronext A",
+      "EURO_LIST_B": "Euronext B",
+      "EURO_LIST_C": "Euronext C"
+    }
   }
 }

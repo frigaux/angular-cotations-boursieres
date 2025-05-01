@@ -1,5 +1,7 @@
+import {Marche} from './marche';
+
 export interface DTOValeur {
     ticker: string;
-    marche: string;
+    marche: Marche;
     libelle: string;
 }
