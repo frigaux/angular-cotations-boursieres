@@ -1,6 +1,7 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { AppComponent } from './app.component';
+import {AppComponent} from './app.component';
+import {TranslateModule} from '@ngx-translate/core';
 
 describe('AppComponent', () => {
   let appComponent: AppComponent;
@@ -8,7 +9,10 @@ describe('AppComponent', () => {
 
   beforeEach(async () => {
     TestBed.configureTestingModule({
-      imports: [AppComponent]
+      imports: [
+        AppComponent,
+        TranslateModule.forRoot({})
+      ]
     });
 
     fixture = TestBed.createComponent(AppComponent);

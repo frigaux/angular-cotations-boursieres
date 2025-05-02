@@ -2,14 +2,13 @@ import {HttpErrorResponse, HttpInterceptorFn} from '@angular/common/http';
 import {catchError, delay, throwError} from 'rxjs';
 import {inject} from '@angular/core';
 import {Router} from '@angular/router';
+import {environment} from '../environments/environment';
 
 export const httpResponseInterceptor: HttpInterceptorFn = (req, next) => {
   const router = inject(Router);
-  const DELAY = 500;
-
 
   return next(req).pipe(
-    delay(DELAY),
+    delay(environment.httpDelay),
     catchError((error: unknown) => {
       if (error instanceof HttpErrorResponse) {
         switch (error.status) {

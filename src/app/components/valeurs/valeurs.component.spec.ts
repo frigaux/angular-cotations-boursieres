@@ -1,9 +1,11 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { ValeursComponent } from './valeurs.component';
-import { ValeursService } from '../../services/valeurs.service';
-import { DTOValeur } from '../../services/DTOValeur';
-import { Observable } from 'rxjs';
+import {ValeursComponent} from './valeurs.component';
+import {ValeursService} from '../../services/valeurs.service';
+import {DTOValeur} from '../../services/DTOValeur';
+import {Observable} from 'rxjs';
+import {Marche} from '../../services/marche';
+import {TranslateModule} from '@ngx-translate/core';
 
 describe('ValeursComponent', () => {
   let component: ValeursComponent;
@@ -13,20 +15,23 @@ describe('ValeursComponent', () => {
 
   const valeurs: DTOValeur[] = [{
     "ticker": "GLE",
-    "marche": "EURO_LIST_A",
+    "marche": Marche.EURO_LIST_A,
     "libelle": "Societe Generale"
   },
-  {
-    "ticker": "BNP",
-    "marche": "EURO_LIST_A",
-    "libelle": "Bnp Paribas"
-  }];
+    {
+      "ticker": "BNP",
+      "marche": Marche.EURO_LIST_A,
+      "libelle": "Bnp Paribas"
+    }];
 
   beforeEach(async () => {
     TestBed.configureTestingModule({
-      imports: [ValeursComponent],
+      imports: [
+        ValeursComponent,
+        TranslateModule.forRoot({})
+      ],
       providers: [
-        { provide: ValeursService, useValue: mockValeursService }
+        {provide: ValeursService, useValue: mockValeursService}
       ]
     });
 

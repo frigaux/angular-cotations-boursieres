@@ -1,5 +1,5 @@
 {
-  "COMPOSANT": {
+  "COMPOSANTS": {
     "AUTHENTIFICATION": {
       "REUSSIE": "Authentification réussie !"
     },
@@ -9,7 +9,7 @@
       "TICKER" : "Ticker"
     }
   },
-  "ENUMERATION": {
+  "ENUMERATIONS": {
     "MARCHE": {
       "EURO_LIST_A": "Euronext A",
       "EURO_LIST_B": "Euronext B",

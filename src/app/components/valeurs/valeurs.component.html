@@ -2,20 +2,20 @@
   <ng-template #header>
     <tr>
       <th pSortableColumn="libelle" style="width:20%">
-        {{ 'COMPOSANT.VALEURS.LIBELLE' | translate }} <p-sortIcon field="libelle" />
+        {{ 'COMPOSANTS.VALEURS.LIBELLE' | translate }} <p-sortIcon field="libelle" />
       </th>
       <th pSortableColumn="marche" style="width:20%">
-        {{ 'COMPOSANT.VALEURS.MARCHE' | translate }} <p-sortIcon field="marche" />
+        {{ 'COMPOSANTS.VALEURS.MARCHE' | translate }} <p-sortIcon field="marche" />
       </th>
       <th pSortableColumn="ticker" style="width:20%">
-        {{ 'COMPOSANT.VALEURS.TICKER' | translate }} <p-sortIcon field="ticker" />
+        {{ 'COMPOSANTS.VALEURS.TICKER' | translate }} <p-sortIcon field="ticker" />
       </th>
     </tr>
   </ng-template>
   <ng-template #body let-valeur>
     <tr>
       <td>{{ valeur.libelle }}</td>
-      <td>{{ 'ENUMERATION.MARCHE.' + valeur.marche | translate }}</td>
+      <td>{{ 'ENUMERATIONS.MARCHE.' + valeur.marche | translate }}</td>
       <td>{{ valeur.ticker }}</td>
     </tr>
   </ng-template>

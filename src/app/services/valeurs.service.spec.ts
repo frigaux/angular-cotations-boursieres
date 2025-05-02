@@ -8,6 +8,7 @@ import {firstValueFrom} from 'rxjs';
 import {DTOValeur} from './DTOValeur';
 import {RouterModule} from '@angular/router';
 import {AuthentificationComponent} from '../components/authentification/authentification.component';
+import {Marche} from './marche';
 
 describe('ValeursService', () => {
   let valeursService: ValeursService;
@@ -16,7 +17,7 @@ describe('ValeursService', () => {
   const mockAuthentificationService = jasmine.createSpyObj('AuthentificationService', ['isAuthentifie', 'getJwt']);
   const valeurs: DTOValeur[] = [{
     "ticker": "GLE",
-    "marche": "EURO_LIST_A",
+    "marche": Marche.EURO_LIST_A,
     "libelle": "Societe Generale"
   }];
 
