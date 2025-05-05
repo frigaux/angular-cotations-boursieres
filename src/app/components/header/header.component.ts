@@ -18,6 +18,11 @@ export class HeaderComponent {
       icon: 'pi pi-warehouse'
     },
     {
+      label: 'Cours',
+      routerLink: 'cours',
+      icon: 'pi pi-list'
+    },
+    {
       label: 'Portefeuilles',
       routerLink: 'portefeuilles',
       icon: 'pi pi-chart-line'

@@ -3,10 +3,10 @@ import {ValeursService} from '../../services/valeurs/valeurs.service';
 import {TableModule} from 'primeng/table';
 import {CommonModule} from '@angular/common';
 import {TranslatePipe, TranslateService} from '@ngx-translate/core';
-import {Marche} from '../../services/valeurs/marche';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {Select} from 'primeng/select';
 import {Valeur} from './Valeur';
+import {Marche} from '../../services/valeurs/marche';
 
 @Component({
   selector: 'app-valeurs',
@@ -24,11 +24,11 @@ export class ValeursComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.marches = [
-      {libelle: 'Euronext A', valeur: 'Euronext A'},
-      {libelle: 'Euronext B', valeur: 'Euronext B'},
-      {libelle: 'Euronext C', valeur: 'Euronext C'}
-    ];
+    this.marches = Object.values(Marche)
+      .map(marche => {
+        const libelle: string = this.translateService.instant('ENUMERATIONS.MARCHE.' + marche);
+        return {libelle, valeur: libelle};
+      });
     this.valeursService.getValeurs().subscribe({
       next: valeurs => {
         this.valeurs = valeurs.map(valeur => new Valeur(valeur, this.translateService));

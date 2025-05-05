@@ -5,6 +5,7 @@ import {PortefeuillesComponent} from './components/portefeuilles/portefeuilles.c
 import {authentificationGuard} from './authentification.guard';
 import {AuthentificationComponent} from './components/authentification/authentification.component';
 import {ErreurTechniqueComponent} from './components/erreur-technique/erreur-technique.component';
+import {CoursComponent} from './components/cours/cours.component';
 
 export const routes: Routes = [
   {
@@ -20,7 +21,13 @@ export const routes: Routes = [
   {
     path: 'valeurs',
     component: ValeursComponent,
-    title: 'Cotations des valeurs',
+    title: 'Liste des valeurs',
+    canActivate: [authentificationGuard]
+  },
+  {
+    path: 'cours',
+    component: CoursComponent,
+    title: 'Cotation des valeurs',
     canActivate: [authentificationGuard]
   },
   {
