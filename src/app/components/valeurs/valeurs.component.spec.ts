@@ -1,10 +1,10 @@
 import {ComponentFixture, TestBed} from '@angular/core/testing';
 
 import {ValeursComponent} from './valeurs.component';
-import {ValeursService} from '../../services/valeurs.service';
-import {DTOValeur} from '../../services/DTOValeur';
+import {ValeursService} from '../../services/valeurs/valeurs.service';
+import {DTOValeur} from '../../services/valeurs/DTOValeur';
 import {Observable} from 'rxjs';
-import {Marche} from '../../services/marche';
+import {Marche} from '../../services/valeurs/marche';
 import {TranslateModule} from '@ngx-translate/core';
 
 describe('ValeursComponent', () => {

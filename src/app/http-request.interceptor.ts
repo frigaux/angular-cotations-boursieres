@@ -1,6 +1,6 @@
 import {HttpContextToken, HttpInterceptorFn} from '@angular/common/http';
 import {environment} from '../environments/environment';
-import {AuthentificationService} from './services/authentification.service';
+import {AuthentificationService} from './services/authentification/authentification.service';
 import {inject} from '@angular/core';
 import {Router} from '@angular/router';
 import {throwError} from 'rxjs';

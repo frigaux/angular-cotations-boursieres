@@ -1,9 +1,9 @@
-import {Component} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {NgSwitch, NgSwitchCase} from '@angular/common';
 
 import {Dialog} from 'primeng/dialog';
 import {ProgressBar} from 'primeng/progressbar';
-import {AuthentificationService} from '../../services/authentification.service';
+import {AuthentificationService} from '../../services/authentification/authentification.service';
 import {Statut} from './statut';
 import {TranslatePipe} from "@ngx-translate/core";
 
@@ -13,7 +13,7 @@ import {TranslatePipe} from "@ngx-translate/core";
   templateUrl: './authentification.component.html',
   styleUrl: './authentification.component.sass'
 })
-export class AuthentificationComponent {
+export class AuthentificationComponent implements OnInit {
   statut: Statut = Statut.AUTHENTIFICATION;
   messageErreur: string | undefined;
   enumStatut = Statut;

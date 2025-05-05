@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { jwtDecode, JwtPayload } from 'jwt-decode';
 import { DTOJwt } from './DTOJwt';
 import { Observable } from 'rxjs';
-import { AUTHENTIFICATION_REQUISE } from '../http-request.interceptor';
+import { AUTHENTIFICATION_REQUISE } from '../../http-request.interceptor';
 
 @Injectable({
   providedIn: 'root'

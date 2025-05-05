@@ -1,7 +1,7 @@
 import {ComponentFixture, TestBed} from '@angular/core/testing';
 
 import {AuthentificationComponent} from './authentification.component';
-import {AuthentificationService} from '../../services/authentification.service';
+import {AuthentificationService} from '../../services/authentification/authentification.service';
 import {Observable} from 'rxjs';
 import {TranslateModule} from '@ngx-translate/core';
 

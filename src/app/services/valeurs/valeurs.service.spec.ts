@@ -3,11 +3,11 @@ import {TestBed} from '@angular/core/testing';
 import {ValeursService} from './valeurs.service';
 import {provideHttpClient} from '@angular/common/http';
 import {HttpTestingController, provideHttpClientTesting} from '@angular/common/http/testing';
-import {AuthentificationService} from './authentification.service';
+import {AuthentificationService} from '../authentification/authentification.service';
 import {firstValueFrom} from 'rxjs';
 import {DTOValeur} from './DTOValeur';
 import {RouterModule} from '@angular/router';
-import {AuthentificationComponent} from '../components/authentification/authentification.component';
+import {AuthentificationComponent} from '../../components/authentification/authentification.component';
 import {Marche} from './marche';
 
 describe('ValeursService', () => {

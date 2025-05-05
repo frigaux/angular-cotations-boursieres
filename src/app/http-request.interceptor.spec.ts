@@ -4,7 +4,7 @@ import {HttpHandlerFn, HttpInterceptorFn, HttpRequest, HttpResponse} from '@angu
 import {AUTHENTIFICATION_REQUISE, httpRequestInterceptor} from './http-request.interceptor';
 import {Router} from '@angular/router';
 import {of} from 'rxjs';
-import {AuthentificationService} from './services/authentification.service';
+import {AuthentificationService} from './services/authentification/authentification.service';
 
 describe('httpRequestInterceptor', () => {
   let interceptor: HttpInterceptorFn;

@@ -2,7 +2,7 @@ import { TestBed } from '@angular/core/testing';
 import { ActivatedRouteSnapshot, CanActivateFn, RouterStateSnapshot } from '@angular/router';
 
 import { authentificationGuard } from './authentification.guard';
-import { AuthentificationService } from './services/authentification.service';
+import { AuthentificationService } from './services/authentification/authentification.service';
 
 describe('authentificationGuard', () => {
   const executeGuard: CanActivateFn = (...guardParameters) =>
