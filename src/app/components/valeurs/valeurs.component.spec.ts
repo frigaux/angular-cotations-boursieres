@@ -11,7 +11,7 @@ describe('ValeursComponent', () => {
   let component: ValeursComponent;
   let fixture: ComponentFixture<ValeursComponent>;
 
-  const mockValeursService = jasmine.createSpyObj('ValeursService', ['getValeurs']);
+  const mockValeursService = jasmine.createSpyObj('ValeursService', ['chargerValeurs']);
 
   const valeurs: DTOValeur[] = [{
     "ticker": "GLE",
@@ -49,9 +49,9 @@ describe('ValeursComponent', () => {
     expect(el).toBeTruthy();
   });
 
-  describe('Given #getValeurs renvoie des valeurs', () => {
+  describe('Given #chargerValeurs renvoie des valeurs', () => {
     beforeEach(() => {
-      mockValeursService.getValeurs.and.returnValue(new Observable(observer => {
+      mockValeursService.chargerValeurs.and.returnValue(new Observable(observer => {
         observer.next(valeurs);
       }));
     });

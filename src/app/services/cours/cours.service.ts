@@ -11,7 +11,7 @@ export class CoursService {
   constructor(private http: HttpClient) {
   }
 
-  public getCours(): Observable<DTOListeCours> {
+  public chargerCours(): Observable<DTOListeCours> {
     return this.http.get<DTOListeCours>(
       'bourse/cours'
     );

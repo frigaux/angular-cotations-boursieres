@@ -3,10 +3,19 @@
     "AUTHENTIFICATION": {
       "REUSSIE": "Authentification réussie !"
     },
-    "VALEURS" : {
-      "LIBELLE" : "Libellé",
-      "MARCHE" : "Marché",
-      "TICKER" : "Ticker"
+    "VALEURS": {
+      "LIBELLE": "Libellé",
+      "MARCHE": "Marché",
+      "TICKER": "Ticker"
+    },
+    "COURS": {
+      "LIBELLE": "Libellé",
+      "OUVERTURE": "Ouverture",
+      "CLOTURE": "Clôture",
+      "PLUSBAS": "Plus bas",
+      "PLUSHAUT": "Plus haut",
+      "VOLUME": "Volume",
+      "ALERTE": "Alerte"
     }
   },
   "ENUMERATIONS": {

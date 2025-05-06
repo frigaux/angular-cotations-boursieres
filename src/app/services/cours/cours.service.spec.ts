@@ -60,9 +60,9 @@ describe('CoursService', () => {
       mockAuthentificationService.isAuthentifie.and.returnValue(true);
     });
 
-    it('#getCours doit renvoyer le dernier cours pour chaque valeur', async () => {
+    it('#chargerCours doit renvoyer le dernier cours pour chaque valeur', async () => {
       // création d'une promesse sur l'observable qui fait la requête HTTP d'authentification
-      const promiseCours: Promise<DTOListeCours> = firstValueFrom(coursService.getCours());
+      const promiseCours: Promise<DTOListeCours> = firstValueFrom(coursService.chargerCours());
       // bouchonnage de la ressource HTTP
       httpTesting.expectOne({
         method: 'GET',

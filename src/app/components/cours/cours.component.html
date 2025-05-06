@@ -1,3 +1,74 @@
-<div>
-  <p>cours works!</p>
+<div class="titre">A la date du {{ date | date: 'dd/MM/yyyy' }}</div>
+<div class="conteneur" *ngFor="let marche of marches">
+  <div class="marche">{{ marche.libelle }}</div>
+  <div class="cours">
+    <p-table
+      sortField="libelle"
+      [value]="marche.cours"
+      [loading]="loading">
+      <ng-template #header>
+        <tr>
+          <th style="width:10%" pSortableColumn="libelle">
+            {{ 'COMPOSANTS.COURS.LIBELLE' | translate }}
+            <p-sortIcon field="libelle"/>
+            <p-columnFilter type="text" field="libelle" matchMode="contains" display="menu" [showMatchModes]="false"
+                            [showOperator]="false" [showAddButton]="false"/>
+          </th>
+          <th style="width:10%" pSortableColumn="ouverture">
+            {{ 'COMPOSANTS.COURS.OUVERTURE' | translate }}
+            <p-sortIcon field="ouverture"/>
+            <p-columnFilter type="numeric" field="ouverture" matchMode="contains" display="menu"
+                            [showMatchModes]="false"
+                            [showOperator]="false" [showAddButton]="false"/>
+          </th>
+          <th style="width:10%" pSortableColumn="cloture">
+            {{ 'COMPOSANTS.COURS.CLOTURE' | translate }}
+            <p-sortIcon field="cloture"/>
+            <p-columnFilter type="numeric" field="cloture" matchMode="contains" display="menu"
+                            [showMatchModes]="false"
+                            [showOperator]="false" [showAddButton]="false"/>
+          </th>
+          <th style="width:10%" pSortableColumn="plusBas">
+            {{ 'COMPOSANTS.COURS.PLUSBAS' | translate }}
+            <p-sortIcon field="plusBas"/>
+            <p-columnFilter type="numeric" field="plusBas" matchMode="contains" display="menu"
+                            [showMatchModes]="false"
+                            [showOperator]="false" [showAddButton]="false"/>
+          </th>
+          <th style="width:10%" pSortableColumn="plusHaut">
+            {{ 'COMPOSANTS.COURS.PLUSHAUT' | translate }}
+            <p-sortIcon field="plusHaut"/>
+            <p-columnFilter type="numeric" field="plusHaut" matchMode="contains" display="menu"
+                            [showMatchModes]="false"
+                            [showOperator]="false" [showAddButton]="false"/>
+          </th>
+          <th style="width:10%" pSortableColumn="volume">
+            {{ 'COMPOSANTS.COURS.VOLUME' | translate }}
+            <p-sortIcon field="volume"/>
+            <p-columnFilter type="numeric" field="volume" matchMode="contains" display="menu"
+                            [showMatchModes]="false"
+                            [showOperator]="false" [showAddButton]="false"/>
+          </th>
+          <th style="width:10%" pSortableColumn="alerte">
+            {{ 'COMPOSANTS.COURS.ALERTE' | translate }}
+            <p-sortIcon field="alerte"/>
+            <p-columnFilter type="boolean" field="alerte" matchMode="contains" display="menu"
+                            [showMatchModes]="false"
+                            [showOperator]="false" [showAddButton]="false"/>
+          </th>
+        </tr>
+      </ng-template>
+      <ng-template #body let-cours>
+        <tr>
+          <td>{{ cours.libelle }}</td>
+          <td>{{ cours.ouverture | currency : 'EUR' }}</td>
+          <td>{{ cours.cloture | currency : 'EUR' }}</td>
+          <td>{{ cours.plusBas | currency : 'EUR' }}</td>
+          <td>{{ cours.plusHaut | currency : 'EUR' }}</td>
+          <td>{{ cours.volume | number }}</td>
+          <td>{{ cours.alerte }}</td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </div>
 </div>

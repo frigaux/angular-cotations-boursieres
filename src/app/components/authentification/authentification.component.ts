@@ -22,6 +22,10 @@ export class AuthentificationComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.authentifier();
+  }
+
+  authentifier(): void {
     this.authentificationService.authentifier().subscribe({
       error: httpResponseError => {
         this.messageErreur = `${httpResponseError.url} => ${httpResponseError.status}`;

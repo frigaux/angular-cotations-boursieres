@@ -48,9 +48,9 @@ describe('ValeursService', () => {
       mockAuthentificationService.isAuthentifie.and.returnValue(true);
     });
 
-    it('#getValeurs doit renvoyer les valeurs', async () => {
+    it('#chargerValeurs doit renvoyer les valeurs', async () => {
       // création d'une promesse sur l'observable qui fait la requête HTTP d'authentification
-      const promiseValeurs: Promise<DTOValeur[]> = firstValueFrom(valeursService.getValeurs());
+      const promiseValeurs: Promise<DTOValeur[]> = firstValueFrom(valeursService.chargerValeurs());
       // bouchonnage de la ressource HTTP
       httpTesting.expectOne({
         method: 'GET',
