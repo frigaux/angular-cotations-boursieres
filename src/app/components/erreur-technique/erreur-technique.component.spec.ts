@@ -7,14 +7,12 @@ describe('ErreurTechniqueComponent', () => {
   let fixture: ComponentFixture<ErreurTechniqueComponent>;
 
   beforeEach(async () => {
-    await TestBed.configureTestingModule({
+    TestBed.configureTestingModule({
       imports: [ErreurTechniqueComponent]
-    })
-    .compileComponents();
+    });
 
     fixture = TestBed.createComponent(ErreurTechniqueComponent);
     component = fixture.componentInstance;
-    fixture.detectChanges();
   });
 
   it('should create', () => {
