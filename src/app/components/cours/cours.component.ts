@@ -9,10 +9,13 @@ import {CoursMarche} from './CoursMarche';
 import {Cours} from './Cours';
 import {Marche} from '../../services/valeurs/marche';
 import {DTOListeCours} from '../../services/cours/DTOListeCours';
+import {Accordion, AccordionContent, AccordionHeader, AccordionPanel} from 'primeng/accordion';
+import {ProgressSpinner} from 'primeng/progressspinner';
 
+// TODO : nouveau composant valeur + revoir les WS : pas de moyennes mobiles sur le WS de récupération des cours pour n jours ?
 @Component({
   selector: 'app-cours',
-  imports: [TableModule, CommonModule, TranslatePipe],
+  imports: [TableModule, CommonModule, TranslatePipe, Accordion, AccordionPanel, AccordionHeader, AccordionContent, ProgressSpinner],
   templateUrl: './cours.component.html',
   styleUrl: './cours.component.sass'
 })

@@ -8,6 +8,7 @@ import {TranslateModule} from '@ngx-translate/core';
 import {ValeursService} from '../../services/valeurs/valeurs.service';
 import {of} from 'rxjs';
 import {DTOListeCours} from '../../services/cours/DTOListeCours';
+import {provideAnimations} from '@angular/platform-browser/animations';
 
 describe('CoursComponent', () => {
   let component: CoursComponent;
@@ -52,6 +53,7 @@ describe('CoursComponent', () => {
       providers: [
         {provide: ValeursService, useValue: mockValeursService},
         {provide: CoursService, useValue: mockCoursService},
+        provideAnimations()
       ]
     });
 
@@ -65,7 +67,7 @@ describe('CoursComponent', () => {
 
   it('should have <div>', () => {
     const bannerElement: HTMLElement = fixture.nativeElement;
-    const el = bannerElement.querySelector('div');
+    const el = bannerElement.querySelector('h1');
     expect(el).toBeTruthy();
   });
 
