@@ -6,10 +6,11 @@ import {TranslatePipe, TranslateService} from '@ngx-translate/core';
 import {Select} from 'primeng/select';
 import {Valeur} from './Valeur';
 import {Marche} from '../../services/valeurs/marche';
+import { ScrollPanelModule } from 'primeng/scrollpanel';
 
 @Component({
   selector: 'app-valeurs',
-  imports: [TableModule, CommonModule, TranslatePipe, Select],
+  imports: [TableModule, CommonModule, TranslatePipe, Select, ScrollPanelModule],
   templateUrl: './valeurs.component.html',
   styleUrl: './valeurs.component.sass'
 })

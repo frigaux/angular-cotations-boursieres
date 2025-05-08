@@ -11,11 +11,12 @@ import {Marche} from '../../services/valeurs/marche';
 import {DTOListeCours} from '../../services/cours/DTOListeCours';
 import {Accordion, AccordionContent, AccordionHeader, AccordionPanel} from 'primeng/accordion';
 import {ProgressSpinner} from 'primeng/progressspinner';
+import {ScrollPanel} from 'primeng/scrollpanel';
 
-// TODO : nouveau composant valeur + revoir les WS : pas de moyennes mobiles sur le WS de récupération des cours pour n jours ?
+// TODO : nouveau composant valeur
 @Component({
   selector: 'app-cours',
-  imports: [TableModule, CommonModule, TranslatePipe, Accordion, AccordionPanel, AccordionHeader, AccordionContent, ProgressSpinner],
+  imports: [TableModule, CommonModule, TranslatePipe, Accordion, AccordionPanel, AccordionHeader, AccordionContent, ProgressSpinner, ScrollPanel],
   templateUrl: './cours.component.html',
   styleUrl: './cours.component.sass'
 })
@@ -59,4 +60,6 @@ export class CoursComponent implements OnInit {
       this.marches.push(new CoursMarche(marche, this.translateService, cours));
     });
   }
+
+  protected readonly Date = Date;
 }
