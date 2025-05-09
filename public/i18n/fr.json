@@ -9,6 +9,7 @@
       "TICKER": "Ticker"
     },
     "COURS": {
+      "DATE": "A la date du",
       "LIBELLE": "Libellé",
       "OUVERTURE": "Ouverture",
       "CLOTURE": "Clôture",

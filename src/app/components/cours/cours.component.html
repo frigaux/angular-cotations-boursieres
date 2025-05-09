@@ -1,7 +1,10 @@
-<h1>A la date du
+<app-moyennes-mobiles [value]="coursSelectionne"></app-moyennes-mobiles>
+
+<h1>{{ 'COMPOSANTS.COURS.DATE' | translate }}
   <p-progress-spinner *ngIf="date === undefined" strokeWidth="8" [style]="{ width: '25px', height: '25px' }"/>
   {{ date | date: 'dd/MM/yyyy' }}
 </h1>
+
 <p-accordion>
   @for (marche of marches; track marche.libelle; let i = $index) {
     <p-accordion-panel value="{{i}}">
@@ -60,12 +63,14 @@
             </ng-template>
             <ng-template #body let-cours>
               <tr>
-                <td>
-            <span class="pi pi-arrow-up" [ngClass]="{
-            'pi-arrow-up': (cours.ouverture < cours.cloture),
-             'pi-arrow-down': (cours.ouverture > cours.cloture),
-             'pi-equals': (cours.ouverture === cours.cloture)
-             }"></span>
+                <td (mouseenter)="coursSelectionne = cours" (mouseleave)="coursSelectionne = undefined">
+                  <span class="pi pi-arrow-up"
+                    [ngClass]="{
+                      'pi-arrow-up': (cours.ouverture < cours.cloture),
+                      'pi-arrow-down': (cours.ouverture > cours.cloture),
+                      'pi-equals': (cours.ouverture === cours.cloture)
+                    }">
+                  </span>
                   {{ cours.libelle }}
                   <span class="pi pi-exclamation-triangle" *ngIf="cours.alerte"></span>
                 </td>

@@ -71,7 +71,6 @@ describe('CoursComponent', () => {
     expect(el).toBeTruthy();
   });
 
-
   describe('Given #chargerValeurs et #chargerCours renvoient des valeurs et des cours', () => {
     beforeEach(() => {
       mockValeursService.chargerValeurs.and.returnValue(of(valeurs));

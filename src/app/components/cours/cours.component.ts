@@ -12,18 +12,24 @@ import {DTOListeCours} from '../../services/cours/DTOListeCours';
 import {Accordion, AccordionContent, AccordionHeader, AccordionPanel} from 'primeng/accordion';
 import {ProgressSpinner} from 'primeng/progressspinner';
 import {ScrollPanel} from 'primeng/scrollpanel';
+import {MoyennesMobilesComponent} from './moyennes-mobiles/moyennes-mobiles.component';
 
-// TODO : nouveau composant valeur
 @Component({
   selector: 'app-cours',
-  imports: [TableModule, CommonModule, TranslatePipe, Accordion, AccordionPanel, AccordionHeader, AccordionContent, ProgressSpinner, ScrollPanel],
+  imports: [TableModule, CommonModule, TranslatePipe, Accordion, AccordionPanel, AccordionHeader, AccordionContent, ProgressSpinner, ScrollPanel, MoyennesMobilesComponent],
   templateUrl: './cours.component.html',
   styleUrl: './cours.component.sass'
 })
 export class CoursComponent implements OnInit {
+  // chargement des cours
   loading: boolean = true;
+  // données pour la vue
   date!: Date;
   marches: CoursMarche[] = [];
+  // cours pour lequel afficher les moyennes mobiles
+  coursSelectionne : Cours | undefined = undefined;
+
+  // services
   private translateService = inject(TranslateService);
 
   constructor(private valeursService: ValeursService,
