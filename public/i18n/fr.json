@@ -15,7 +15,11 @@
       "CLOTURE": "Clôture",
       "PLUSBAS": "Plus bas",
       "PLUSHAUT": "Plus haut",
-      "VOLUME": "Volume échangé"
+      "VOLUME": "Volume échangé",
+      "MOYENNES_MOBILES": {
+        "COURBE": "Courbe des moyennes mobiles",
+        "NB_JOUR_CALCUL": "Nombre de jours de cotations utilisés pour le calcul de la moyenne mobile"
+      }
     }
   },
   "ENUMERATIONS": {

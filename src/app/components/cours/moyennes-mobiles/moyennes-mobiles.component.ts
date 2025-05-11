@@ -1,35 +1,36 @@
-import {Component, effect, inject, input, InputSignal} from '@angular/core';
+import {Component, effect, input, InputSignal, output} from '@angular/core';
 import {Panel} from 'primeng/panel';
 import {Cours} from '../Cours';
 import {UIChart} from 'primeng/chart';
-import {CurrencyPipe} from '@angular/common';
+import {TranslatePipe, TranslateService} from '@ngx-translate/core';
 
 @Component({
   selector: 'app-moyennes-mobiles',
   imports: [
     Panel,
-    UIChart
+    UIChart,
+    TranslatePipe
   ],
   templateUrl: './moyennes-mobiles.component.html',
   styleUrl: './moyennes-mobiles.component.sass',
-  providers: [CurrencyPipe]
+  providers: []
 })
 export class MoyennesMobilesComponent {
-  value: InputSignal<Cours | undefined> = input();
+  cours: InputSignal<Cours | undefined> = input();
+  closed = output<void>();
 
   // https://www.chartjs.org/
-  donnees: any;
+  data: any;
   options: any;
 
-  constructor() {
-    const currencyPipe = inject(CurrencyPipe);
+  constructor(private translateService: TranslateService) {
     effect(() => {
-      this.initChart(currencyPipe);
+      this.initChart();
     });
   }
 
-  initChart(currencyPipe: CurrencyPipe) {
-    const cours: Cours | undefined = this.value();
+  initChart() {
+    const cours: Cours | undefined = this.cours();
     if (cours) {
       const labels: string[] = [];
       const data: number[] = [];
@@ -38,35 +39,43 @@ export class MoyennesMobilesComponent {
         data.push(cours.moyennesMobiles[i]);
       }
 
-      this.donnees = {
-        labels,
-        datasets: [
-          {
-            label: cours.libelle,
-            data,
-            tension: 0.4
-          }
-        ]
-      };
+      this.data = this.wrapData(labels, cours, data);
 
-      this.options = {
-        scales: {
-          x: {
-            title: {
-              display: true,
-              text: 'Moyennes mobiles'
-            }
-          },
-          y: {
-            ticks: {
-              callback: function (value: number) {
-                // TODO : showHeader is deprecated ; currencyPipe position du euro ; traduction du texte
-                return currencyPipe.transform(value, 'EUR', 'symbol-narrow');
-              }
+      this.options = this.wrapOptions();
+    }
+  }
+
+  private wrapOptions() {
+    return {
+      scales: {
+        x: {
+          title: {
+            display: true,
+            text: this.translateService.instant('COMPOSANTS.COURS.MOYENNES_MOBILES.NB_JOUR_CALCUL')
+          }
+        },
+        y: {
+          ticks: {
+            callback: function (value: number) {
+              // return currencyPipe.transform(value, 'EUR');
+              return new Intl.NumberFormat('fr-FR', {style: 'currency', currency: 'EUR'}).format(value);
             }
           }
         }
-      };
-    }
+      }
+    };
+  }
+
+  private wrapData(labels: string[], cours: Cours, data: number[]) {
+    return {
+      labels,
+      datasets: [
+        {
+          label: cours.libelle,
+          data,
+          tension: 0.4
+        }
+      ]
+    };
   }
 }

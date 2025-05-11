@@ -1,4 +1,4 @@
-<app-moyennes-mobiles [value]="coursSelectionne"></app-moyennes-mobiles>
+<app-moyennes-mobiles [cours]="coursSelectionne" (closed)="coursSelectionne = undefined"></app-moyennes-mobiles>
 
 <h1>{{ 'COMPOSANTS.COURS.DATE' | translate }}
   <p-progress-spinner *ngIf="date === undefined" strokeWidth="8" [style]="{ width: '25px', height: '25px' }"/>
@@ -63,8 +63,8 @@
             </ng-template>
             <ng-template #body let-cours>
               <tr>
-                <td (mouseenter)="coursSelectionne = cours" (mouseleave)="coursSelectionne = undefined">
-                  <span class="pi pi-arrow-up"
+                <td (mouseenter)="coursSelectionne = cours">
+                  <span class="pi"
                     [ngClass]="{
                       'pi-arrow-up': (cours.ouverture < cours.cloture),
                       'pi-arrow-down': (cours.ouverture > cours.cloture),
