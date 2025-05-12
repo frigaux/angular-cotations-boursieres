@@ -46,19 +46,31 @@ export class MoyennesMobilesComponent {
   }
 
   private wrapOptions() {
+    const title: string = this.translateService.instant('COMPOSANTS.COURS.MOYENNES_MOBILES.JOURS');
     return {
       scales: {
         x: {
           title: {
             display: true,
-            text: this.translateService.instant('COMPOSANTS.COURS.MOYENNES_MOBILES.NB_JOUR_CALCUL')
+            text: this.translateService.instant('COMPOSANTS.COURS.MOYENNES_MOBILES.NB_JOURS_CALCUL')
           }
         },
         y: {
           ticks: {
             callback: function (value: number) {
-              // return currencyPipe.transform(value, 'EUR');
               return new Intl.NumberFormat('fr-FR', {style: 'currency', currency: 'EUR'}).format(value);
+            }
+          }
+        }
+      },
+      plugins: {
+        tooltip: {
+          callbacks: {
+            title: function(context: any) {
+              return context[0].label + ' ' + title;
+            },
+            label: function (context: any) {
+              return new Intl.NumberFormat('fr-FR', {style: 'currency', currency: 'EUR'}).format(context.parsed.y);
             }
           }
         }

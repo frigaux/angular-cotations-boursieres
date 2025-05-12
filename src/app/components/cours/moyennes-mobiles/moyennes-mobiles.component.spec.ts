@@ -1,6 +1,7 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { MoyennesMobilesComponent } from './moyennes-mobiles.component';
+import {MoyennesMobilesComponent} from './moyennes-mobiles.component';
+import {TranslateModule} from '@ngx-translate/core';
 
 describe('MoyennesMobilesComponent', () => {
   let component: MoyennesMobilesComponent;
@@ -8,7 +9,10 @@ describe('MoyennesMobilesComponent', () => {
 
   beforeEach(async () => {
     TestBed.configureTestingModule({
-      imports: [MoyennesMobilesComponent]
+      imports: [
+        MoyennesMobilesComponent,
+        TranslateModule.forRoot({})
+      ]
     });
 
     fixture = TestBed.createComponent(MoyennesMobilesComponent);
