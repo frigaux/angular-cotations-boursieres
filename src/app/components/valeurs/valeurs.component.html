@@ -1,3 +1,5 @@
+<app-valeur [ticker]="ticker" (closed)="ticker = undefined"></app-valeur>
+
 <p-scrollpanel [style]="{ margin: '2rem', height: '81vh' }">
   <p-table
     sortField="libelle"
@@ -32,7 +34,7 @@
       </tr>
     </ng-template>
     <ng-template #body let-valeur>
-      <tr>
+      <tr (click)="ticker = valeur.ticker">
         <td>{{ valeur.ticker }}</td>
         <td>{{ valeur.marche }}</td>
         <td>{{ valeur.libelle }}</td>

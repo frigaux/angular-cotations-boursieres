@@ -6,12 +6,14 @@ import {DTOValeur} from '../../services/valeurs/DTOValeur';
 import {of} from 'rxjs';
 import {Marche} from '../../services/valeurs/marche';
 import {TranslateModule} from '@ngx-translate/core';
+import {CoursService} from '../../services/cours/cours.service';
 
 describe('ValeursComponent', () => {
   let component: ValeursComponent;
   let fixture: ComponentFixture<ValeursComponent>;
 
   const mockValeursService = jasmine.createSpyObj('ValeursService', ['chargerValeurs']);
+  const mockCoursService = jasmine.createSpyObj('CoursService', ['chargerCoursTicker', 'chargerCoursTickerWithLimit']);
 
   const valeurs: DTOValeur[] = [
     {
@@ -33,7 +35,8 @@ describe('ValeursComponent', () => {
         TranslateModule.forRoot({})
       ],
       providers: [
-        {provide: ValeursService, useValue: mockValeursService}
+        {provide: ValeursService, useValue: mockValeursService},
+        {provide: CoursService, useValue: mockCoursService}
       ]
     });
 

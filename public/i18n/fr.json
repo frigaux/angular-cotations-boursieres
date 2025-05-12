@@ -6,7 +6,12 @@
     "VALEURS": {
       "LIBELLE": "Libellé",
       "MARCHE": "Marché",
-      "TICKER": "Ticker"
+      "TICKER": "Ticker",
+      "VALEUR": {
+        "COURBE": "Courbe des moyennes mobiles",
+        "NB_JOURS_CALCUL": "Nombre de jours de cotations utilisés pour le calcul de la moyenne mobile",
+        "JOURS": "jours"
+      }
     },
     "COURS": {
       "DATE": "A la date du",

@@ -7,17 +7,23 @@ import {Select} from 'primeng/select';
 import {Valeur} from './Valeur';
 import {Marche} from '../../services/valeurs/marche';
 import { ScrollPanelModule } from 'primeng/scrollpanel';
+import {ValeurComponent} from './valeur/valeur.component';
 
 @Component({
   selector: 'app-valeurs',
-  imports: [TableModule, CommonModule, TranslatePipe, Select, ScrollPanelModule],
+  imports: [TableModule, CommonModule, TranslatePipe, Select, ScrollPanelModule, ValeurComponent],
   templateUrl: './valeurs.component.html',
   styleUrl: './valeurs.component.sass'
 })
 export class ValeursComponent implements OnInit {
-  valeurs!: Valeur[];
+  // chargement des cours
   loading: boolean = true;
+  // données pour la vue
+  valeurs!: Valeur[];
   marches!: any[];
+  // ticker pour lequel afficher les détails
+  ticker : string | undefined = undefined;
+
   private translateService = inject(TranslateService);
 
   constructor(private valeursService: ValeursService) {

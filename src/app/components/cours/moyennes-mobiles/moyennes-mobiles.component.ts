@@ -16,6 +16,7 @@ import {TranslatePipe, TranslateService} from '@ngx-translate/core';
   providers: []
 })
 export class MoyennesMobilesComponent {
+  // input/output
   cours: InputSignal<Cours | undefined> = input();
   closed = output<void>();
 

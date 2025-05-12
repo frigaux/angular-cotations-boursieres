@@ -1,0 +1,12 @@
+@if (ticker() !== undefined) {
+  <p-panel *ngIf="loading">
+    <p-progressbar mode="indeterminate" [style]="{'height': '10px'}" />
+  </p-panel>
+  <p-panel *ngIf="!loading">
+    <ng-template #header>
+      <h3>{{'COMPOSANTS.VALEURS.VALEUR.COURBE' | translate }}</h3>
+      <span class="pi pi-times-circle" (click)="this.closed.emit()"></span>
+    </ng-template>
+    <p-chart type="line" [data]="data" [options]="options" class="h-[30rem]" />
+  </p-panel>
+}
