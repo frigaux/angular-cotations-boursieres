@@ -1,4 +1,4 @@
-<app-valeur [ticker]="ticker" (closed)="ticker = undefined"></app-valeur>
+<app-valeur [valeur]="valeurSelectionnee" (closed)="valeurSelectionnee = undefined"></app-valeur>
 
 <p-scrollpanel [style]="{ margin: '2rem', height: '81vh' }">
   <p-table
@@ -34,7 +34,7 @@
       </tr>
     </ng-template>
     <ng-template #body let-valeur>
-      <tr (click)="ticker = valeur.ticker">
+      <tr (click)="valeurSelectionnee = valeur">
         <td>{{ valeur.ticker }}</td>
         <td>{{ valeur.marche }}</td>
         <td>{{ valeur.libelle }}</td>

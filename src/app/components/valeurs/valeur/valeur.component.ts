@@ -7,6 +7,7 @@ import {NgIf} from '@angular/common';
 import {DTOCoursTicker} from '../../../services/cours/DTOCoursTicker';
 import {DTOCoursTickerLight} from '../../../services/cours/DTOCoursTickerLight';
 import {ProgressBar} from 'primeng/progressbar';
+import {Valeur} from '../Valeur';
 
 @Component({
   selector: 'app-valeur',
@@ -22,7 +23,7 @@ import {ProgressBar} from 'primeng/progressbar';
 })
 export class ValeurComponent {
   // input/output
-  ticker: InputSignal<string | undefined> = input();
+  valeur: InputSignal<Valeur | undefined> = input();
   closed = output<void>();
 
   // chargement des cours
@@ -44,21 +45,21 @@ export class ValeurComponent {
   }
 
   initChart() {
-    const ticker: string | undefined = this.ticker();
-    if (ticker) {
+    const valeur: Valeur | undefined = this.valeur();
+    if (valeur) {
       this.loading = true;
-      this.coursService.chargerCoursTicker(ticker).subscribe(cours => {
+      this.coursService.chargerCoursTicker(valeur.ticker).subscribe(cours => {
         this.cours = cours;
-        this.coursService.chargerCoursTickerWithLimit(ticker, this.limit).subscribe(cours => {
+        this.coursService.chargerCoursTickerWithLimit(valeur.ticker, this.limit).subscribe(cours => {
           this.coursLight = cours;
           this.loading = false;
-          this.initChartMoyennesMobiles(this.cours!);
+          this.initChartMoyennesMobiles(valeur, this.cours!);
         })
       });
     }
   }
 
-  private initChartMoyennesMobiles(cours: DTOCoursTicker) {
+  private initChartMoyennesMobiles(valeur: Valeur, cours: DTOCoursTicker) {
     const labels: string[] = [];
     const data: number[] = [];
     for (let i = cours.moyennesMobiles.length - 1; i >= 0; i--) {
@@ -66,7 +67,7 @@ export class ValeurComponent {
       data.push(cours.moyennesMobiles[i]);
     }
 
-    this.data = this.wrapData(labels, cours, data);
+    this.data = this.wrapData(labels, valeur, data);
 
     this.options = this.wrapOptions();
   }
@@ -104,12 +105,12 @@ export class ValeurComponent {
     };
   }
 
-  private wrapData(labels: string[], cours: DTOCoursTicker, data: number[]) {
+  private wrapData(labels: string[], valeur: Valeur, data: number[]) {
     return {
       labels,
       datasets: [
         {
-          label: 'cours.libelle',
+          label: valeur.libelle,
           data,
           tension: 0.4
         }

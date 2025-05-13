@@ -1,13 +1,13 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { ValeurComponent } from './valeur.component';
+import {ValeurComponent} from './valeur.component';
 import {TranslateModule} from '@ngx-translate/core';
-import {ValeursService} from '../../../services/valeurs/valeurs.service';
 import {CoursService} from '../../../services/cours/cours.service';
 import {of} from 'rxjs';
 import {DTOCoursTicker} from '../../../services/cours/DTOCoursTicker';
 import {DTOCoursTickerLight} from '../../../services/cours/DTOCoursTickerLight';
 import {provideAnimations} from '@angular/platform-browser/animations';
+import {Marche} from '../../../services/valeurs/marche';
 
 describe('ValeurComponent', () => {
   let component: ValeurComponent;
@@ -74,7 +74,11 @@ describe('ValeurComponent', () => {
 
     it('when l\'input ticker est définie then le composant <p-panel> est rendu', () => {
       const element: HTMLElement = fixture.nativeElement;
-      fixture.componentRef.setInput('ticker', 'GLE');
+      fixture.componentRef.setInput('valeur', {
+        "ticker": "GLE",
+        "marche": Marche.EURO_LIST_A,
+        "libelle": "Societe Generale"
+      });
       fixture.detectChanges();
       const el = element.querySelector('p-panel');
       expect(el).toBeTruthy();

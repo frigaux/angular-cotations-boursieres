@@ -32,7 +32,7 @@ export class MoyennesMobilesComponent {
 
   initChart() {
     const cours: Cours | undefined = this.cours();
-    if (cours) {console.log(cours);
+    if (cours) {
       const labels: string[] = [];
       const data: number[] = [];
       for (let i = cours.moyennesMobiles.length - 1; i >= 0; i--) {

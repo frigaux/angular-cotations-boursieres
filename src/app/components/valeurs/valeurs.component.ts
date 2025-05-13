@@ -21,8 +21,8 @@ export class ValeursComponent implements OnInit {
   // données pour la vue
   valeurs!: Valeur[];
   marches!: any[];
-  // ticker pour lequel afficher les détails
-  ticker : string | undefined = undefined;
+  // valeur pour laquelle afficher les détails
+  valeurSelectionnee : Valeur | undefined = undefined;
 
   private translateService = inject(TranslateService);
 
