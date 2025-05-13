@@ -66,8 +66,8 @@ describe('CoursComponent', () => {
   });
 
   it('should have <div>', () => {
-    const bannerElement: HTMLElement = fixture.nativeElement;
-    const el = bannerElement.querySelector('h1');
+    const element: HTMLElement = fixture.nativeElement;
+    const el = element.querySelector('h1');
     expect(el).toBeTruthy();
   });
 

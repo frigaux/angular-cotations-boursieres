@@ -24,8 +24,8 @@ describe('AppComponent', () => {
   });
 
   it('should have <app-header>', () => {
-    const bannerElement: HTMLElement = fixture.nativeElement;
-    const el = bannerElement.querySelector('app-header');
+    const element: HTMLElement = fixture.nativeElement;
+    const el = element.querySelector('app-header');
     expect(el).toBeTruthy();
   });
 });

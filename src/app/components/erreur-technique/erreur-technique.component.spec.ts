@@ -20,8 +20,8 @@ describe('ErreurTechniqueComponent', () => {
   });
 
   it('should have <div>', () => {
-    const bannerElement: HTMLElement = fixture.nativeElement;
-    const el = bannerElement.querySelector('div');
+    const element: HTMLElement = fixture.nativeElement;
+    const el = element.querySelector('div');
     expect(el).toBeTruthy();
   });
 });

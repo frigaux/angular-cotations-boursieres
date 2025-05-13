@@ -20,8 +20,8 @@ describe('HeaderComponent', () => {
   });
 
   it('should have <header>', () => {
-    const bannerElement: HTMLElement = fixture.nativeElement;
-    const el = bannerElement.querySelector('p-menubar');
+    const element: HTMLElement = fixture.nativeElement;
+    const el = element.querySelector('p-menubar');
     expect(el).toBeTruthy();
   });
 });
