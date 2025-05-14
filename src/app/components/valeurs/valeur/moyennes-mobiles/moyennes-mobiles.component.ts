@@ -1,24 +1,19 @@
 import {Component, effect, input, InputSignal, output} from '@angular/core';
-import {Panel} from 'primeng/panel';
-import {Cours} from '../Cours';
+import {TranslateService} from '@ngx-translate/core';
 import {UIChart} from 'primeng/chart';
-import {TranslatePipe, TranslateService} from '@ngx-translate/core';
+import {Cours} from '../../../cours/Cours';
 
 @Component({
   selector: 'app-moyennes-mobiles',
   imports: [
-    Panel,
-    UIChart,
-    TranslatePipe
+    UIChart
   ],
   templateUrl: './moyennes-mobiles.component.html',
-  styleUrl: './moyennes-mobiles.component.sass',
-  providers: []
+  styleUrl: './moyennes-mobiles.component.sass'
 })
 export class MoyennesMobilesComponent {
   // input/output
   cours: InputSignal<Cours | undefined> = input();
-  closed = output<void>();
 
   // https://www.chartjs.org/
   data: any;
@@ -47,13 +42,13 @@ export class MoyennesMobilesComponent {
   }
 
   private wrapOptions() {
-    const title: string = this.translateService.instant('COMPOSANTS.COURS.MOYENNES_MOBILES.JOURS');
+    const title: string = this.translateService.instant('COMPOSANTS.VALEURS.VALEUR.MOYENNES_MOBILES.JOURS');
     return {
       scales: {
         x: {
           title: {
             display: true,
-            text: this.translateService.instant('COMPOSANTS.COURS.MOYENNES_MOBILES.NB_JOURS_CALCUL')
+            text: this.translateService.instant('COMPOSANTS.VALEURS.VALEUR.MOYENNES_MOBILES.NB_JOURS_CALCUL')
           }
         },
         y: {

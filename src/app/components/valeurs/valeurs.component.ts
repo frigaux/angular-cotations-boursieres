@@ -18,9 +18,11 @@ import {ValeurComponent} from './valeur/valeur.component';
 export class ValeursComponent implements OnInit {
   // chargement des cours
   loading: boolean = true;
+
   // données pour la vue
   valeurs!: Valeur[];
   marches!: any[];
+  
   // valeur pour laquelle afficher les détails
   valeurSelectionnee : Valeur | undefined = undefined;
 

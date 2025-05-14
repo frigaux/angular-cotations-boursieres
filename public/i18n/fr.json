@@ -9,8 +9,16 @@
       "TICKER": "Ticker",
       "VALEUR": {
         "COURBE": "Courbe des moyennes mobiles",
-        "NB_JOURS_CALCUL": "Nombre de jours de cotations utilisés pour le calcul de la moyenne mobile",
-        "JOURS": "jours"
+        "DETAILS_VALEUR": {
+          "MINIMUM": "minimum",
+          "OUVERTURE": "ouverture",
+          "CLOTURE": "clôture",
+          "MAXIMUM": "maximum"
+        },
+        "MOYENNES_MOBILES": {
+          "NB_JOURS_CALCUL": "Nombre de jours de cotations utilisés pour le calcul de la moyenne mobile",
+          "JOURS": "jours"
+        }
       }
     },
     "COURS": {

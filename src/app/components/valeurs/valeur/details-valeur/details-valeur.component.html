@@ -1,0 +1,8 @@
+<p-timeline [value]="timelineItems">
+  <ng-template #opposite let-item>
+    {{ item.libelle }}
+  </ng-template>
+  <ng-template #content let-item>
+    {{ item.cours }}
+  </ng-template>
+</p-timeline>

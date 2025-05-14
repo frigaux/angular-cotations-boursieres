@@ -1,5 +1,5 @@
 import {DTOCours} from '../../services/cours/DTOCours';
-import {DTOValeur} from '../../services/valeurs/DTOValeur';
+import {DTOCoursTicker} from '../../services/cours/DTOCoursTicker';
 
 export class Cours {
   ticker!: string;
@@ -12,9 +12,9 @@ export class Cours {
   moyennesMobiles!: number[];
   alerte!: boolean;
 
-  constructor(private dto: DTOCours, private valeurByTicker : Map<string, DTOValeur>) {
-    this.ticker = dto.ticker;
-    this.libelle = valeurByTicker.get(dto.ticker)!.libelle;
+  constructor(private ticker_: string, private libelle_: string, private dto: DTOCours | DTOCoursTicker) {
+    this.ticker = ticker_;
+    this.libelle = libelle_;
     this.ouverture = dto.ouverture;
     this.plusHaut = dto.plusHaut;
     this.plusBas = dto.plusBas;

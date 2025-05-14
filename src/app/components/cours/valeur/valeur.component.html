@@ -4,6 +4,6 @@
       <h3>{{ 'COMPOSANTS.COURS.MOYENNES_MOBILES.COURBE' | translate }}</h3>
       <span class="pi pi-times-circle" (click)="this.closed.emit()"></span>
     </ng-template>
-    <p-chart type="line" [data]="data" [options]="options" class="h-[30rem]"/>
+    <app-moyennes-mobiles [cours]="cours()"></app-moyennes-mobiles>
   </p-panel>
 }

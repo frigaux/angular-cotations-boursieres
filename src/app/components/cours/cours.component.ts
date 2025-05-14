@@ -6,17 +6,17 @@ import {ValeursService} from '../../services/valeurs/valeurs.service';
 import {CoursService} from '../../services/cours/cours.service';
 import {DTOValeur} from '../../services/valeurs/DTOValeur';
 import {CoursMarche} from './CoursMarche';
-import {Cours} from './Cours';
 import {Marche} from '../../services/valeurs/marche';
 import {DTOListeCours} from '../../services/cours/DTOListeCours';
 import {Accordion, AccordionContent, AccordionHeader, AccordionPanel} from 'primeng/accordion';
 import {ProgressSpinner} from 'primeng/progressspinner';
 import {ScrollPanel} from 'primeng/scrollpanel';
-import {MoyennesMobilesComponent} from './moyennes-mobiles/moyennes-mobiles.component';
+import {Cours} from './Cours';
+import {ValeurComponent} from './valeur/valeur.component';
 
 @Component({
   selector: 'app-cours',
-  imports: [TableModule, CommonModule, TranslatePipe, Accordion, AccordionPanel, AccordionHeader, AccordionContent, ProgressSpinner, ScrollPanel, MoyennesMobilesComponent],
+  imports: [TableModule, CommonModule, TranslatePipe, Accordion, AccordionPanel, AccordionHeader, AccordionContent, ProgressSpinner, ScrollPanel, ValeurComponent],
   templateUrl: './cours.component.html',
   styleUrl: './cours.component.sass'
 })
@@ -55,7 +55,11 @@ export class CoursComponent implements OnInit {
   private mapCours(liste: DTOListeCours, valeurByTicker: Map<string, DTOValeur>) {
     this.date = liste.date;
     const coursByMarche = new Map<Marche, Cours[]>();
-    liste.cours.map(value => new Cours(value, valeurByTicker)).forEach(cours => {
+
+    liste.cours.map(dto => {
+      const valeur = valeurByTicker.get(dto.ticker);
+      return new Cours(valeur!.ticker, valeur!.libelle, dto);
+    }).forEach(cours => {
       const marche = valeurByTicker.get(cours.ticker)!.marche;
       if (!coursByMarche.has(marche)) {
         coursByMarche.set(marche, []);
