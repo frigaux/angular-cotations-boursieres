@@ -3,6 +3,7 @@ import {ComponentFixture, TestBed} from '@angular/core/testing';
 import {DetailsValeurComponent} from './details-valeur.component';
 import {TranslateModule} from '@ngx-translate/core';
 import {Cours} from '../../../cours/Cours';
+import {provideAnimations} from '@angular/platform-browser/animations';
 
 describe('DetailsValeurComponent', () => {
   let component: DetailsValeurComponent;
@@ -45,6 +46,9 @@ describe('DetailsValeurComponent', () => {
       imports: [
         DetailsValeurComponent,
         TranslateModule.forRoot({})
+      ],
+      providers: [
+        provideAnimations()
       ]
     })
       .compileComponents();

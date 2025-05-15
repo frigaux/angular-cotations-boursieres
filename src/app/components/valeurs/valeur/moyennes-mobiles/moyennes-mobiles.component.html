@@ -1,1 +1,3 @@
-<p-chart type="line" [data]="data" [options]="options"/>
+@if (cours() !== undefined) {
+  <p-chart type="line" [data]="data" [options]="options"/>
+}

@@ -4,7 +4,7 @@
   </p-panel>
   <p-panel *ngIf="!loading">
     <ng-template #header>
-      <h3>{{ 'COMPOSANTS.VALEURS.VALEUR.COURBE' | translate }}</h3>
+      <h3>{{ cours!.libelle }} <span class="pi pi-exclamation-triangle" *ngIf="cours!.alerte"></span></h3>
       <span class="pi pi-times-circle" (click)="this.closed.emit()"></span>
     </ng-template>
     <app-details-valeur [cours]="cours"></app-details-valeur>

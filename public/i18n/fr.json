@@ -8,8 +8,12 @@
       "MARCHE": "Marché",
       "TICKER": "Ticker",
       "VALEUR": {
-        "COURBE": "Courbe des moyennes mobiles",
         "DETAILS_VALEUR": {
+          "DETAILS": "Détails",
+          "LIBELLE": "Libellé",
+          "TICKER": "Ticker",
+          "VOLUME": "Volume échangé",
+          "COURS": "Cours",
           "MINIMUM": "minimum",
           "OUVERTURE": "ouverture",
           "CLOTURE": "clôture",

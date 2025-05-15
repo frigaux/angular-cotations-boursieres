@@ -1,8 +1,32 @@
-<p-timeline [value]="timelineItems">
-  <ng-template #opposite let-item>
-    {{ item.libelle }}
-  </ng-template>
-  <ng-template #content let-item>
-    {{ item.cours }}
-  </ng-template>
-</p-timeline>
+@if (cours() !== undefined) {
+  <div>
+    <div>
+      <p-fieldset legend="{{ 'COMPOSANTS.VALEURS.VALEUR.DETAILS_VALEUR.DETAILS' | translate }}">
+        <div>
+          <label>{{ 'COMPOSANTS.VALEURS.VALEUR.DETAILS_VALEUR.LIBELLE' | translate }}</label>
+          {{ cours()!.libelle }}
+        </div>
+        <div>
+          <label>{{ 'COMPOSANTS.VALEURS.VALEUR.DETAILS_VALEUR.TICKER' | translate }}</label>
+          {{ cours()!.ticker }}
+        </div>
+        <div>
+          <label>{{ 'COMPOSANTS.VALEURS.VALEUR.DETAILS_VALEUR.VOLUME' | translate }}</label>
+          {{ cours()!.volume | number }}
+        </div>
+      </p-fieldset>
+    </div>
+    <div>
+      <p-fieldset legend="{{ 'COMPOSANTS.VALEURS.VALEUR.DETAILS_VALEUR.COURS' | translate }}">
+        <p-timeline [value]="timelineItems" [ngClass]="croissant?'croissant':'decroissant'">
+          <ng-template #opposite let-item>
+            {{ item.libelle }}
+          </ng-template>
+          <ng-template #content let-item>
+            {{ item.cours }}
+          </ng-template>
+        </p-timeline>
+      </p-fieldset>
+    </div>
+  </div>
+}

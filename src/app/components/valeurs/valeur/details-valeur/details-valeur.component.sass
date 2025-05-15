@@ -1,3 +1,24 @@
+:host
+  & > div
+    display: flex
+    flex-direction: row
+
+    & > div
+      margin: 1rem
+
+    & > div:first-child
+      label
+        display: inline-block
+        width: 10rem
+
+    & > div:last-child
+      width: 20rem
+
 p-timeline
   --p-timeline-event-min-height: 25px
-  --p-timeline-event-marker-content-background: var(--p-blue-400)
+
+  &.croissant
+    --p-timeline-event-marker-content-background: var(--p-green-500)
+
+  &.decroissant
+    --p-timeline-event-marker-content-background: var(--p-red-500)
