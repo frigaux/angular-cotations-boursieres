@@ -19,16 +19,19 @@ export class DetailsValeurComponent {
 
   constructor(private translateService: TranslateService) {
     effect(() => {
+      this.timelineItems = [];
       const cours = this.cours();
-      this.addItem(translateService, 'MINIMUM', cours!.plusBas);
-      if (cours!.ouverture < cours!.cloture) {
-        this.addItem(translateService, 'OUVERTURE', cours!.ouverture);
-        this.addItem(translateService, 'CLOTURE', cours!.cloture);
-      } else {
-        this.addItem(translateService, 'CLOTURE', cours!.cloture);
-        this.addItem(translateService, 'OUVERTURE', cours!.ouverture);
+      if (cours) {
+        this.addItem(translateService, 'MINIMUM', cours!.plusBas);
+        if (cours!.ouverture < cours!.cloture) {
+          this.addItem(translateService, 'OUVERTURE', cours!.ouverture);
+          this.addItem(translateService, 'CLOTURE', cours!.cloture);
+        } else {
+          this.addItem(translateService, 'CLOTURE', cours!.cloture);
+          this.addItem(translateService, 'OUVERTURE', cours!.ouverture);
+        }
+        this.addItem(translateService, 'MAXIMUM', cours!.plusHaut);
       }
-      this.addItem(translateService, 'MAXIMUM', cours!.plusHaut);
     });
   }
 

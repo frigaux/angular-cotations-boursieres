@@ -1,4 +1,4 @@
-import {Component, effect, input, InputSignal, output} from '@angular/core';
+import {Component, effect, input, InputSignal} from '@angular/core';
 import {TranslateService} from '@ngx-translate/core';
 import {UIChart} from 'primeng/chart';
 import {Cours} from '../../../cours/Cours';
