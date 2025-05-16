@@ -16,6 +16,7 @@
       <span class="pi pi-times-circle" (click)="this.closed.emit()"></span>
     </ng-template>
     <app-details-valeur [cours]="cours"></app-details-valeur>
-    <app-moyennes-mobiles [cours]="cours"></app-moyennes-mobiles>
+    <app-chart-moyennes-mobiles [cours]="cours"></app-chart-moyennes-mobiles>
+    <app-chart-cours [coursLight]="coursLight"></app-chart-cours>
   </p-panel>
 }

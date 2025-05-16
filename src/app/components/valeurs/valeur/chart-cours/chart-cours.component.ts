@@ -1,19 +1,19 @@
 import {Component, effect, input, InputSignal} from '@angular/core';
 import {TranslateService} from '@ngx-translate/core';
 import {UIChart} from 'primeng/chart';
-import {Cours} from '../../../cours/Cours';
+import {DTOCoursTickerLight} from '../../../../services/cours/DTOCoursTickerLight';
 
 @Component({
-  selector: 'app-moyennes-mobiles',
+  selector: 'app-chart-cours',
   imports: [
     UIChart
   ],
-  templateUrl: './moyennes-mobiles.component.html',
-  styleUrl: './moyennes-mobiles.component.sass'
+  templateUrl: './chart-cours.component.html',
+  styleUrl: './chart-cours.component.sass'
 })
-export class MoyennesMobilesComponent {
+export class ChartCoursComponent {
   // input/output
-  cours: InputSignal<Cours | undefined> = input();
+  coursLight: InputSignal<DTOCoursTickerLight[] | undefined> = input();
 
   // https://www.chartjs.org/
   data: any;
@@ -26,29 +26,29 @@ export class MoyennesMobilesComponent {
   }
 
   initChart() {
-    const cours: Cours | undefined = this.cours();
+    const cours: DTOCoursTickerLight[] | undefined = this.coursLight();
     if (cours) {
       const labels: string[] = [];
       const data: number[] = [];
-      for (let i = cours.moyennesMobiles.length - 1; i >= 0; i--) {
-        labels.push(`${i + 1}`);
-        data.push(cours.moyennesMobiles[i]);
+      for (let i = cours.length - 1; i >= 0; i--) {
+        labels.push(cours[i].date.toString());
+        data.push(cours[i].cloture);
       }
 
-      this.data = this.wrapData(labels, cours, data);
+      this.data = this.wrapData(labels, 'todo', data);
 
       this.options = this.wrapOptions();
     }
   }
 
   private wrapOptions() {
-    const title: string = this.translateService.instant('COMPOSANTS.VALEURS.VALEUR.MOYENNES_MOBILES.JOURS');
+    const tooltipTitle: string = this.translateService.instant('COMPOSANTS.VALEURS.VALEUR.CHART_COURS.JOURS');
     return {
       scales: {
         x: {
           title: {
             display: true,
-            text: this.translateService.instant('COMPOSANTS.VALEURS.VALEUR.MOYENNES_MOBILES.NB_JOURS_CALCUL')
+            text: this.translateService.instant('COMPOSANTS.VALEURS.VALEUR.CHART_COURS.CLOTURE')
           }
         },
         y: {
@@ -63,7 +63,7 @@ export class MoyennesMobilesComponent {
         tooltip: {
           callbacks: {
             title: function(context: any) {
-              return context[0].label + ' ' + title;
+              return context[0].label + ' ' + tooltipTitle;
             },
             label: function (context: any) {
               return new Intl.NumberFormat('fr-FR', {style: 'currency', currency: 'EUR'}).format(context.parsed.y);
@@ -74,12 +74,12 @@ export class MoyennesMobilesComponent {
     };
   }
 
-  private wrapData(labels: string[], cours: Cours, data: number[]) {
+  private wrapData(labels: string[], libelle: string, data: number[]) {
     return {
       labels,
       datasets: [
         {
-          label: cours.libelle,
+          label: libelle,
           data,
           tension: 0.4
         }

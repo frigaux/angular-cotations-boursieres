@@ -1,22 +1,22 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { MoyennesMobilesComponent } from './moyennes-mobiles.component';
+import { ChartMoyennesMobilesComponent } from './chart-moyennes-mobiles.component';
 import {TranslateModule} from '@ngx-translate/core';
 
-describe('MoyennesMobilesComponent', () => {
-  let component: MoyennesMobilesComponent;
-  let fixture: ComponentFixture<MoyennesMobilesComponent>;
+describe('ChartMoyennesMobilesComponent', () => {
+  let component: ChartMoyennesMobilesComponent;
+  let fixture: ComponentFixture<ChartMoyennesMobilesComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [
-        MoyennesMobilesComponent,
+        ChartMoyennesMobilesComponent,
         TranslateModule.forRoot({})
       ]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(MoyennesMobilesComponent);
+    fixture = TestBed.createComponent(ChartMoyennesMobilesComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

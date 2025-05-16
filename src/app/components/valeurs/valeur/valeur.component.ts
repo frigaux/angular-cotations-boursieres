@@ -7,8 +7,9 @@ import {DTOCoursTickerLight} from '../../../services/cours/DTOCoursTickerLight';
 import {ProgressBar} from 'primeng/progressbar';
 import {Valeur} from '../Valeur';
 import {DetailsValeurComponent} from './details-valeur/details-valeur.component';
-import {MoyennesMobilesComponent} from './moyennes-mobiles/moyennes-mobiles.component';
+import {ChartMoyennesMobilesComponent} from './chart-moyennes-mobiles/chart-moyennes-mobiles.component';
 import {Cours} from '../../cours/Cours';
+import {ChartCoursComponent} from './chart-cours/chart-cours.component';
 
 @Component({
   selector: 'app-valeur',
@@ -17,8 +18,9 @@ import {Cours} from '../../cours/Cours';
     NgIf,
     ProgressBar,
     DetailsValeurComponent,
-    MoyennesMobilesComponent,
-    NgClass
+    ChartMoyennesMobilesComponent,
+    NgClass,
+    ChartCoursComponent
   ],
   templateUrl: './valeur.component.html',
   styleUrl: './valeur.component.sass'

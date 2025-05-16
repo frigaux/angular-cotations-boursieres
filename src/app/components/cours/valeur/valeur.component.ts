@@ -1,7 +1,7 @@
 import {Component, input, InputSignal, output} from '@angular/core';
 import {TranslatePipe} from '@ngx-translate/core';
 import {Panel} from 'primeng/panel';
-import {MoyennesMobilesComponent} from '../../valeurs/valeur/moyennes-mobiles/moyennes-mobiles.component';
+import {ChartMoyennesMobilesComponent} from '../../valeurs/valeur/chart-moyennes-mobiles/chart-moyennes-mobiles.component';
 import {Cours} from '../Cours';
 
 @Component({
@@ -9,7 +9,7 @@ import {Cours} from '../Cours';
   imports: [
     Panel,
     TranslatePipe,
-    MoyennesMobilesComponent,
+    ChartMoyennesMobilesComponent,
   ],
   templateUrl: './valeur.component.html',
   styleUrl: './valeur.component.sass'
