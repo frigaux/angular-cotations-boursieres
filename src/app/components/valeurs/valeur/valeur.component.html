@@ -4,7 +4,15 @@
   </p-panel>
   <p-panel *ngIf="!loading">
     <ng-template #header>
-      <h3>{{ cours!.libelle }} <span class="pi pi-exclamation-triangle" *ngIf="cours!.alerte"></span></h3>
+      <span class="pi pi-exclamation-triangle" *ngIf="cours!.alerte"></span>
+      <h1>
+        <span class="pi" [ngClass]="{
+                      'pi-arrow-up': (cours!.ouverture < cours!.cloture),
+                      'pi-arrow-down': (cours!.ouverture > cours!.cloture),
+                      'pi-equals': (cours!.ouverture === cours!.cloture)
+                    }"></span>
+        {{ cours!.libelle }}
+      </h1>
       <span class="pi pi-times-circle" (click)="this.closed.emit()"></span>
     </ng-template>
     <app-details-valeur [cours]="cours"></app-details-valeur>

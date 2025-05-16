@@ -2,7 +2,7 @@ import {Component, effect, input, InputSignal, output} from '@angular/core';
 import {TranslateService} from '@ngx-translate/core';
 import {Panel} from 'primeng/panel';
 import {CoursService} from '../../../services/cours/cours.service';
-import {NgIf} from '@angular/common';
+import {NgClass, NgIf} from '@angular/common';
 import {DTOCoursTickerLight} from '../../../services/cours/DTOCoursTickerLight';
 import {ProgressBar} from 'primeng/progressbar';
 import {Valeur} from '../Valeur';
@@ -17,7 +17,8 @@ import {Cours} from '../../cours/Cours';
     NgIf,
     ProgressBar,
     DetailsValeurComponent,
-    MoyennesMobilesComponent
+    MoyennesMobilesComponent,
+    NgClass
   ],
   templateUrl: './valeur.component.html',
   styleUrl: './valeur.component.sass'
