@@ -1,5 +1,5 @@
 import {Component, effect, input, InputSignal, output} from '@angular/core';
-import {TranslatePipe, TranslateService} from '@ngx-translate/core';
+import {TranslateService} from '@ngx-translate/core';
 import {Panel} from 'primeng/panel';
 import {CoursService} from '../../../services/cours/cours.service';
 import {NgIf} from '@angular/common';
@@ -15,7 +15,6 @@ import {Cours} from '../../cours/Cours';
   imports: [
     Panel,
     NgIf,
-    TranslatePipe,
     ProgressBar,
     DetailsValeurComponent,
     MoyennesMobilesComponent

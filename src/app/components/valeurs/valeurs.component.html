@@ -1,44 +1,42 @@
 <app-valeur [valeur]="valeurSelectionnee" (closed)="valeurSelectionnee = undefined"></app-valeur>
 
-<p-scrollpanel [style]="{ margin: '2rem', height: '81vh' }">
-  <p-table
-    sortField="libelle"
-    [value]="valeurs"
-    [loading]="loading">
-    <ng-template #header>
-      <tr>
-        <th style="width:25%" pSortableColumn="ticker">
-          {{ 'COMPOSANTS.VALEURS.TICKER' | translate }}
-          <p-sortIcon field="ticker"/>
-          <p-columnFilter type="text" field="ticker" matchMode="contains" display="menu" [showMatchModes]="false"
-                          [showOperator]="false" [showAddButton]="false"/>
-        </th>
-        <th style="width:25%" pSortableColumn="marche">
-          {{ 'COMPOSANTS.VALEURS.MARCHE' | translate }}
-          <p-sortIcon field="marche"/>
-          <p-columnFilter field="marche" matchMode="equals" display="menu" [showMatchModes]="false"
-                          [showOperator]="false"
-                          [showAddButton]="false">
-            <ng-template #filter let-filter="filterCallback">
-              <p-select [options]="marches" placeholder="..." optionLabel="libelle" optionValue="valeur"
-                        (onChange)="filter($event.value)"/>
+<p-accordion>
+  @for (marche of marches; track marche.libelle; let i = $index) {
+    <p-accordion-panel value="{{i}}">
+      <p-accordion-header>{{ marche.libelle }}</p-accordion-header>
+      <p-accordion-content>
+        <p-scrollpanel [style]="{ margin: '2rem', height: '81vh' }">
+          <p-table
+            sortField="libelle"
+            [value]="marche.valeurs"
+            [loading]="loading">
+            <ng-template #header>
+              <tr>
+                <th pSortableColumn="libelle">
+                  {{ 'COMPOSANTS.VALEURS.LIBELLE' | translate }}
+                  <p-sortIcon field="libelle"/>
+                  <p-columnFilter type="text" field="libelle" matchMode="contains" display="menu"
+                                  [showMatchModes]="false"
+                                  [showOperator]="false" [showAddButton]="false"/>
+                </th>
+                <th pSortableColumn="ticker">
+                  {{ 'COMPOSANTS.VALEURS.TICKER' | translate }}
+                  <p-sortIcon field="ticker"/>
+                  <p-columnFilter type="text" field="ticker" matchMode="contains" display="menu"
+                                  [showMatchModes]="false"
+                                  [showOperator]="false" [showAddButton]="false"/>
+                </th>
+              </tr>
             </ng-template>
-          </p-columnFilter>
-        </th>
-        <th style="width:50%" pSortableColumn="libelle">
-          {{ 'COMPOSANTS.VALEURS.LIBELLE' | translate }}
-          <p-sortIcon field="libelle"/>
-          <p-columnFilter type="text" field="libelle" matchMode="contains" display="menu" [showMatchModes]="false"
-                          [showOperator]="false" [showAddButton]="false"/>
-        </th>
-      </tr>
-    </ng-template>
-    <ng-template #body let-valeur>
-      <tr (click)="valeurSelectionnee = valeur">
-        <td>{{ valeur.ticker }}</td>
-        <td>{{ valeur.marche }}</td>
-        <td>{{ valeur.libelle }}</td>
-      </tr>
-    </ng-template>
-  </p-table>
-</p-scrollpanel>
+            <ng-template #body let-valeur>
+              <tr (click)="valeurSelectionnee = valeur">
+                <td>{{ valeur.libelle }}</td>
+                <td>{{ valeur.ticker }}</td>
+              </tr>
+            </ng-template>
+          </p-table>
+        </p-scrollpanel>
+      </p-accordion-content>
+    </p-accordion-panel>
+  }
+</p-accordion>

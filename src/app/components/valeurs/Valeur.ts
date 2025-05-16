@@ -1,14 +1,13 @@
 import {DTOValeur} from '../../services/valeurs/DTOValeur';
-import {TranslateService, _} from "@ngx-translate/core";
 
 export class Valeur {
   ticker!: string;
   marche!: string;
   libelle!: string;
 
-  constructor(private dto: DTOValeur, private translateService: TranslateService) {
+  constructor(private dto: DTOValeur, private libelleMarche: string) {
     this.ticker = dto.ticker;
-    this.marche = this.translateService.instant('ENUMERATIONS.MARCHE.' + dto.marche);
+    this.marche = libelleMarche;
     this.libelle = dto.libelle;
   }
 }
