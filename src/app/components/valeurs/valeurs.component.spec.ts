@@ -7,6 +7,7 @@ import {of} from 'rxjs';
 import {Marche} from '../../services/valeurs/marche';
 import {TranslateModule} from '@ngx-translate/core';
 import {CoursService} from '../../services/cours/cours.service';
+import {provideAnimations} from '@angular/platform-browser/animations';
 
 describe('ValeursComponent', () => {
   let component: ValeursComponent;
@@ -36,7 +37,8 @@ describe('ValeursComponent', () => {
       ],
       providers: [
         {provide: ValeursService, useValue: mockValeursService},
-        {provide: CoursService, useValue: mockCoursService}
+        {provide: CoursService, useValue: mockCoursService},
+        provideAnimations()
       ]
     });
 
@@ -48,9 +50,9 @@ describe('ValeursComponent', () => {
     expect(component).toBeDefined();
   });
 
-  it('should have <div>', () => {
+  it('should have <p-accordion>', () => {
     const element: HTMLElement = fixture.nativeElement;
-    const el = element.querySelector('div');
+    const el = element.querySelector('p-accordion');
     expect(el).toBeTruthy();
   });
 
