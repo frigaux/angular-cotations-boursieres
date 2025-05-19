@@ -3,16 +3,20 @@
     <div>
       <p-fieldset legend="{{ 'COMPOSANTS.VALEURS.VALEUR.DETAILS_VALEUR.DETAILS' | translate }}">
         <div>
+          <label>{{ 'COMPOSANTS.VALEURS.VALEUR.DETAILS_VALEUR.DATE' | translate }}</label>
+          <span>{{ cours()!.date | date:'dd/MM/yyyy' }}</span>
+        </div>
+        <div>
           <label>{{ 'COMPOSANTS.VALEURS.VALEUR.DETAILS_VALEUR.LIBELLE' | translate }}</label>
-          {{ cours()!.libelle }}
+          <span>{{ cours()!.libelle }}</span>
         </div>
         <div>
           <label>{{ 'COMPOSANTS.VALEURS.VALEUR.DETAILS_VALEUR.TICKER' | translate }}</label>
-          {{ cours()!.ticker }}
+          <span>{{ cours()!.ticker }}</span>
         </div>
         <div>
           <label>{{ 'COMPOSANTS.VALEURS.VALEUR.DETAILS_VALEUR.VOLUME' | translate }}</label>
-          {{ cours()!.volume | number }}
+          <span>{{ cours()!.volume | number }}</span>
         </div>
       </p-fieldset>
     </div>

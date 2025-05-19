@@ -58,7 +58,7 @@ export class CoursComponent implements OnInit {
 
     liste.cours.map(dto => {
       const valeur = valeurByTicker.get(dto.ticker);
-      return new Cours(valeur!.ticker, valeur!.libelle, dto);
+      return new Cours(liste.date, valeur!.ticker, valeur!.libelle, dto);
     }).forEach(cours => {
       const marche = valeurByTicker.get(cours.ticker)!.marche;
       if (!coursByMarche.has(marche)) {

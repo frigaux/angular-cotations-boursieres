@@ -2,7 +2,7 @@ import {Component, effect, input, InputSignal} from '@angular/core';
 import {Timeline} from "primeng/timeline";
 import {Cours} from '../../../cours/Cours';
 import {TranslatePipe, TranslateService} from '@ngx-translate/core';
-import {DecimalPipe, NgClass} from '@angular/common';
+import {DatePipe, DecimalPipe, NgClass} from '@angular/common';
 import {Fieldset} from 'primeng/fieldset';
 
 @Component({
@@ -12,7 +12,8 @@ import {Fieldset} from 'primeng/fieldset';
     NgClass,
     Fieldset,
     TranslatePipe,
-    DecimalPipe
+    DecimalPipe,
+    DatePipe
   ],
   templateUrl: './details-valeur.component.html',
   styleUrl: './details-valeur.component.sass'

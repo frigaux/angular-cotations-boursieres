@@ -2,14 +2,13 @@ import {Component, effect, input, InputSignal, output} from '@angular/core';
 import {TranslateService} from '@ngx-translate/core';
 import {Panel} from 'primeng/panel';
 import {CoursService} from '../../../services/cours/cours.service';
-import {NgClass, NgIf} from '@angular/common';
+import {DatePipe, NgClass, NgIf} from '@angular/common';
 import {DTOCoursTickerLight} from '../../../services/cours/DTOCoursTickerLight';
 import {ProgressBar} from 'primeng/progressbar';
 import {Valeur} from '../Valeur';
 import {DetailsValeurComponent} from './details-valeur/details-valeur.component';
-import {ChartMoyennesMobilesComponent} from './chart-moyennes-mobiles/chart-moyennes-mobiles.component';
 import {Cours} from '../../cours/Cours';
-import {ChartCoursComponent} from './chart-cours/chart-cours.component';
+import {ChartsComponent} from './charts/charts.component';
 
 @Component({
   selector: 'app-valeur',
@@ -18,9 +17,9 @@ import {ChartCoursComponent} from './chart-cours/chart-cours.component';
     NgIf,
     ProgressBar,
     DetailsValeurComponent,
-    ChartMoyennesMobilesComponent,
     NgClass,
-    ChartCoursComponent
+    ChartsComponent,
+    DatePipe
   ],
   templateUrl: './valeur.component.html',
   styleUrl: './valeur.component.sass'
@@ -49,7 +48,7 @@ export class ValeurComponent {
     if (valeur) {
       this.loading = true;
       this.coursService.chargerCoursTicker(valeur.ticker).subscribe(cours => {
-        this.cours = new Cours(valeur.ticker, valeur.libelle, cours);
+        this.cours = new Cours(cours.date, valeur.ticker, valeur.libelle, cours);
         this.coursService.chargerCoursTickerWithLimit(valeur.ticker, this.limit).subscribe(cours => {
           this.coursLight = cours;
           this.loading = false;

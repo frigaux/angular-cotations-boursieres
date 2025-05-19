@@ -2,6 +2,7 @@ import {DTOCours} from '../../services/cours/DTOCours';
 import {DTOCoursTicker} from '../../services/cours/DTOCoursTicker';
 
 export class Cours {
+  date: Date;
   ticker!: string;
   libelle!: string;
   ouverture!: number;
@@ -12,7 +13,8 @@ export class Cours {
   moyennesMobiles!: number[];
   alerte!: boolean;
 
-  constructor(private ticker_: string, private libelle_: string, private dto: DTOCours | DTOCoursTicker) {
+  constructor(private date_: Date, private ticker_: string, private libelle_: string, private dto: DTOCours | DTOCoursTicker) {
+    this.date = date_;
     this.ticker = ticker_;
     this.libelle = libelle_;
     this.ouverture = dto.ouverture;

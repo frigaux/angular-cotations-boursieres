@@ -42,7 +42,6 @@ export class ChartMoyennesMobilesComponent {
   }
 
   private wrapOptions() {
-    const tooltipTitle: string = this.translateService.instant('COMPOSANTS.VALEURS.VALEUR.CHART_MOYENNES_MOBILES.JOURS');
     return {
       scales: {
         x: {
@@ -63,7 +62,7 @@ export class ChartMoyennesMobilesComponent {
         tooltip: {
           callbacks: {
             title: function(context: any) {
-              return context[0].label + ' ' + tooltipTitle;
+              return `MM${context[0].label}`;
             },
             label: function (context: any) {
               return new Intl.NumberFormat('fr-FR', {style: 'currency', currency: 'EUR'}).format(context.parsed.y);

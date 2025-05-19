@@ -10,6 +10,7 @@
       "VALEUR": {
         "DETAILS_VALEUR": {
           "DETAILS": "Détails",
+          "DATE": "Date",
           "LIBELLE": "Libellé",
           "TICKER": "Ticker",
           "VOLUME": "Volume échangé",
@@ -20,12 +21,14 @@
           "MAXIMUM": "maximum"
         },
         "CHART_MOYENNES_MOBILES": {
-          "NB_JOURS_CALCUL": "Nombre de jours de cotations utilisés pour le calcul de la moyenne mobile",
-          "JOURS": "jours"
+          "NB_JOURS_CALCUL": "Nombre de jours de cotations utilisés pour le calcul de la moyenne mobile"
         },
         "CHART_COURS": {
-          "CLOTURE": "Cours à la clôture",
-          "JOURS": "jours"
+          "CLOTURE": "Cours à la clôture"
+        },
+        "CHARTS": {
+          "COURS": "Cours à la clôture",
+          "MOYENNES_MOBILES": "Moyennes mobiles au "
         }
       }
     },

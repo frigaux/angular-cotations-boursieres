@@ -11,12 +11,11 @@
                       'pi-arrow-down': (cours!.ouverture > cours!.cloture),
                       'pi-equals': (cours!.ouverture === cours!.cloture)
                     }"></span>
-        {{ cours!.libelle }}
+        {{ cours!.libelle }} ({{ cours!.date | date:'dd/MM/yyyy' }})
       </h1>
       <span class="pi pi-times-circle" (click)="this.closed.emit()"></span>
     </ng-template>
+    <app-charts [cours]="cours" [coursLight]="coursLight"></app-charts>
     <app-details-valeur [cours]="cours"></app-details-valeur>
-    <app-chart-moyennes-mobiles [cours]="cours"></app-chart-moyennes-mobiles>
-    <app-chart-cours [cours]="cours" [coursLight]="coursLight"></app-chart-cours>
   </p-panel>
 }
