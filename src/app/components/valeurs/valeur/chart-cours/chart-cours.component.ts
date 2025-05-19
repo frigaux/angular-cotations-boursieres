@@ -2,40 +2,44 @@ import {Component, effect, input, InputSignal} from '@angular/core';
 import {TranslateService} from '@ngx-translate/core';
 import {UIChart} from 'primeng/chart';
 import {DTOCoursTickerLight} from '../../../../services/cours/DTOCoursTickerLight';
+import {Cours} from '../../../cours/Cours';
+import {DatePipe} from '@angular/common';
 
 @Component({
   selector: 'app-chart-cours',
   imports: [
     UIChart
   ],
+  providers: [DatePipe],
   templateUrl: './chart-cours.component.html',
   styleUrl: './chart-cours.component.sass'
 })
 export class ChartCoursComponent {
   // input/output
+  cours: InputSignal<Cours | undefined> = input();
   coursLight: InputSignal<DTOCoursTickerLight[] | undefined> = input();
 
   // https://www.chartjs.org/
   data: any;
   options: any;
 
-  constructor(private translateService: TranslateService) {
+  constructor(private translateService: TranslateService, public datepipe: DatePipe) {
     effect(() => {
       this.initChart();
     });
   }
 
   initChart() {
-    const cours: DTOCoursTickerLight[] | undefined = this.coursLight();
-    if (cours) {
+    const listeCours: DTOCoursTickerLight[] | undefined = this.coursLight();
+    if (listeCours) {
       const labels: string[] = [];
       const data: number[] = [];
-      for (let i = cours.length - 1; i >= 0; i--) {
-        labels.push(cours[i].date.toString());
-        data.push(cours[i].cloture);
+      for (let i = listeCours.length - 1; i >= 0; i--) {
+        labels.push(this.datepipe.transform(listeCours[i].date, 'dd/MM/yyyy')!);
+        data.push(listeCours[i].cloture);
       }
 
-      this.data = this.wrapData(labels, 'todo', data);
+      this.data = this.wrapData(labels, data);
 
       this.options = this.wrapOptions();
     }
@@ -62,7 +66,7 @@ export class ChartCoursComponent {
       plugins: {
         tooltip: {
           callbacks: {
-            title: function(context: any) {
+            title: function (context: any) {
               return context[0].label + ' ' + tooltipTitle;
             },
             label: function (context: any) {
@@ -74,12 +78,13 @@ export class ChartCoursComponent {
     };
   }
 
-  private wrapData(labels: string[], libelle: string, data: number[]) {
+  private wrapData(labels: string[], data: number[]) {
+    const cours: Cours | undefined = this.cours();
     return {
       labels,
       datasets: [
         {
-          label: libelle,
+          label: cours!.libelle,
           data,
           tension: 0.4
         }
