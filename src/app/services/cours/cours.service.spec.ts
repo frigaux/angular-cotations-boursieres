@@ -8,58 +8,11 @@ import {firstValueFrom} from 'rxjs';
 import {DTOListeCours} from './DTOListeCours';
 import {DTOCoursTicker} from './DTOCoursTicker';
 import {DTOCoursTickerLight} from './DTOCoursTickerLight';
+import {LISTE_COURS, COURS_TICKER, LISTE_COURS_TICKER_LIGHT} from '../jdd/JDDCours';
 
 describe('CoursService', () => {
   let coursService: CoursService;
   let httpTesting: HttpTestingController;
-
-  const cours: DTOListeCours = {
-    "date": new Date("2025-05-09"),
-    "cours": [
-      {
-        "ticker": "GLE",
-        "ouverture": 46.23,
-        "plusHaut": 46.82,
-        "plusBas": 46.06,
-        "cloture": 46.8,
-        "volume": 2141570,
-        "moyennesMobiles": [
-          46.8,
-          46.68
-        ],
-        "alerte": true
-      }
-    ]
-  };
-
-  const coursTicker: DTOCoursTicker = {
-    "date": new Date("2025-05-09"),
-    "ouverture": 46.23,
-    "plusHaut": 46.82,
-    "plusBas": 46.06,
-    "cloture": 46.8,
-    "volume": 2141570,
-    "moyennesMobiles": [
-      46.8,
-      46.68
-    ],
-    "alerte": true
-  };
-
-  const coursTickerLights: DTOCoursTickerLight[] = [
-    {
-      "date": new Date("2025-05-09"),
-      "cloture": 46.23,
-      "volume": 2141570,
-      "alerte": true
-    },
-    {
-      "date": new Date("2025-05-08"),
-      "cloture": 45.7,
-      "volume": 2047911,
-      "alerte": true
-    }
-  ];
 
   beforeEach(() => {
     TestBed.configureTestingModule({
@@ -89,8 +42,8 @@ describe('CoursService', () => {
     httpTesting.expectOne({
       method: 'GET',
       url: 'bourse/cours',
-    }).flush(cours);
-    expect(await promiseCours).toEqual(cours);
+    }).flush(LISTE_COURS);
+    expect(await promiseCours).toEqual(LISTE_COURS);
     // vérification qu'il n'y a pas de requêtes en attente
     httpTesting.verify();
   });
@@ -102,8 +55,8 @@ describe('CoursService', () => {
     httpTesting.expectOne({
       method: 'GET',
       url: 'bourse/cours/GLE',
-    }).flush(coursTicker);
-    expect(await promiseCours).toEqual(coursTicker);
+    }).flush(COURS_TICKER);
+    expect(await promiseCours).toEqual(COURS_TICKER);
     // vérification qu'il n'y a pas de requêtes en attente
     httpTesting.verify();
   });
@@ -115,8 +68,8 @@ describe('CoursService', () => {
     httpTesting.expectOne({
       method: 'GET',
       url: 'bourse/cours/GLE/2',
-    }).flush(coursTickerLights);
-    expect(await promiseCours).toEqual(coursTickerLights);
+    }).flush(LISTE_COURS_TICKER_LIGHT);
+    expect(await promiseCours).toEqual(LISTE_COURS_TICKER_LIGHT);
     // vérification qu'il n'y a pas de requêtes en attente
     httpTesting.verify();
   });

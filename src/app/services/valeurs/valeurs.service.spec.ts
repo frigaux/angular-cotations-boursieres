@@ -6,17 +6,11 @@ import {HttpTestingController, provideHttpClientTesting} from '@angular/common/h
 import {firstValueFrom} from 'rxjs';
 import {DTOValeur} from './DTOValeur';
 import {RouterModule} from '@angular/router';
-import {Marche} from './marche';
+import {VALEURS} from '../jdd/JDDValeur';
 
 describe('ValeursService', () => {
   let valeursService: ValeursService;
   let httpTesting: HttpTestingController;
-
-  const valeurs: DTOValeur[] = [{
-    "ticker": "GLE",
-    "marche": Marche.EURO_LIST_A,
-    "libelle": "Societe Generale"
-  }];
 
   beforeEach(() => {
     TestBed.configureTestingModule({
@@ -46,13 +40,13 @@ describe('ValeursService', () => {
     httpTesting.expectOne({
       method: 'GET',
       url: 'bourse/valeurs',
-    }).flush(valeurs);
-    expect(await promiseValeurs).toEqual(valeurs);
+    }).flush(VALEURS);
+    expect(await promiseValeurs).toEqual(VALEURS);
     // vérification qu'il n'y a pas de requêtes en attente
     httpTesting.verify();
 
     // 2 - création d'une promesse sur l'observable qui récupère les valeurs dans le cache
     const promiseValeursCache: Promise<DTOValeur[]> = firstValueFrom(valeursService.chargerValeurs());
-    expect(await promiseValeursCache).toEqual(valeurs);
+    expect(await promiseValeursCache).toEqual(VALEURS);
   });
 });

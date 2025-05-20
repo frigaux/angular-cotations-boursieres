@@ -2,12 +2,11 @@ import {ComponentFixture, TestBed} from '@angular/core/testing';
 
 import {ValeursComponent} from './valeurs.component';
 import {ValeursService} from '../../services/valeurs/valeurs.service';
-import {DTOValeur} from '../../services/valeurs/DTOValeur';
 import {of} from 'rxjs';
-import {Marche} from '../../services/valeurs/marche';
 import {TranslateModule} from '@ngx-translate/core';
 import {CoursService} from '../../services/cours/cours.service';
 import {provideAnimations} from '@angular/platform-browser/animations';
+import {VALEURS} from '../../services/jdd/JDDValeur';
 
 describe('ValeursComponent', () => {
   let component: ValeursComponent;
@@ -15,19 +14,6 @@ describe('ValeursComponent', () => {
 
   const mockValeursService = jasmine.createSpyObj('ValeursService', ['chargerValeurs']);
   const mockCoursService = jasmine.createSpyObj('CoursService', ['chargerCoursTicker', 'chargerCoursTickerWithLimit']);
-
-  const valeurs: DTOValeur[] = [
-    {
-      "ticker": "GLE",
-      "marche": Marche.EURO_LIST_A,
-      "libelle": "Societe Generale"
-    },
-    {
-      "ticker": "BNP",
-      "marche": Marche.EURO_LIST_A,
-      "libelle": "Bnp Paribas"
-    }
-  ];
 
   beforeEach(async () => {
     TestBed.configureTestingModule({
@@ -58,7 +44,7 @@ describe('ValeursComponent', () => {
 
   describe('Given #chargerValeurs renvoie des valeurs', () => {
     beforeEach(() => {
-      mockValeursService.chargerValeurs.and.returnValue(of(valeurs));
+      mockValeursService.chargerValeurs.and.returnValue(of(VALEURS));
     });
 
     it('when #ngOnInit then component is loaded', () => {

@@ -2,44 +2,12 @@ import {ComponentFixture, TestBed} from '@angular/core/testing';
 
 import {DetailsValeurComponent} from './details-valeur.component';
 import {TranslateModule} from '@ngx-translate/core';
-import {Cours} from '../../../cours/Cours';
 import {provideAnimations} from '@angular/platform-browser/animations';
+import {COURS_CROISSANT, COURS_DECROISSANT} from '../../../../services/jdd/JDDCours';
 
 describe('DetailsValeurComponent', () => {
   let component: DetailsValeurComponent;
   let fixture: ComponentFixture<DetailsValeurComponent>;
-
-  const coursCroissant: Cours = new Cours("GLE", "Societe Generale",
-    {
-      "date": new Date("2025-05-09"),
-      "ouverture": 46.23,
-      "plusHaut": 46.82,
-      "plusBas": 46.06,
-      "cloture": 46.8,
-      "volume": 2141570,
-      "moyennesMobiles": [
-        46.8,
-        46.68
-      ],
-      "alerte": true
-    }
-  );
-
-  const coursDecroissant: Cours = new Cours("GLE", "Societe Generale",
-    {
-      "date": new Date("2025-05-09"),
-      "ouverture": 46.8,
-      "plusHaut": 46.82,
-      "plusBas": 46.06,
-      "cloture": 46.23,
-      "volume": 2141570,
-      "moyennesMobiles": [
-        46.8,
-        46.68
-      ],
-      "alerte": true
-    }
-  );
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
@@ -64,7 +32,7 @@ describe('DetailsValeurComponent', () => {
 
   it('Given un cours croissant when la timeline est construite then le composant <p-timeline> est rendue croissante', () => {
     const element: HTMLElement = fixture.nativeElement;
-    fixture.componentRef.setInput('cours', coursCroissant);
+    fixture.componentRef.setInput('cours', COURS_CROISSANT);
     fixture.detectChanges();
     const el = element.querySelector('p-timeline');
     expect(el).toBeTruthy();
@@ -73,7 +41,7 @@ describe('DetailsValeurComponent', () => {
 
   it('Given un cours décroissant when la timeline est construite then le composant <p-timeline> est rendue décroissante', () => {
     const element: HTMLElement = fixture.nativeElement;
-    fixture.componentRef.setInput('cours', coursDecroissant);
+    fixture.componentRef.setInput('cours', COURS_DECROISSANT);
     fixture.detectChanges();
     const el = element.querySelector('p-timeline');
     expect(el).toBeTruthy();

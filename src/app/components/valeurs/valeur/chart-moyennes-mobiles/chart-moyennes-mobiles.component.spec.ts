@@ -2,6 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ChartMoyennesMobilesComponent } from './chart-moyennes-mobiles.component';
 import {TranslateModule} from '@ngx-translate/core';
+import {COURS_CROISSANT} from '../../../../services/jdd/JDDCours';
 
 describe('ChartMoyennesMobilesComponent', () => {
   let component: ChartMoyennesMobilesComponent;
@@ -23,5 +24,13 @@ describe('ChartMoyennesMobilesComponent', () => {
 
   it('should create', () => {
     expect(component).toBeDefined();
+  });
+
+  it('Given un cours when le composant est rendu then le <p-chart> sont rendus', () => {
+    const element: HTMLElement = fixture.nativeElement;
+    fixture.componentRef.setInput('cours', COURS_CROISSANT);
+    fixture.detectChanges();
+    const elChart = element.querySelector('p-chart');
+    expect(elChart).toBeTruthy();
   });
 });
