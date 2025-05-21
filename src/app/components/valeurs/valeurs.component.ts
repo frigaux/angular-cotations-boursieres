@@ -9,15 +9,16 @@ import {ValeurComponent} from './valeur/valeur.component';
 import {ValeurMarche} from './ValeurMarche';
 import {DTOValeur} from '../../services/valeurs/DTOValeur';
 import {Accordion, AccordionContent, AccordionHeader, AccordionPanel} from 'primeng/accordion';
+import {ProgressBar} from 'primeng/progressbar';
 
 @Component({
   selector: 'app-valeurs',
-  imports: [TableModule, CommonModule, TranslatePipe, ValeurComponent, Accordion, AccordionContent, AccordionHeader, AccordionPanel],
+  imports: [TableModule, CommonModule, TranslatePipe, ValeurComponent, Accordion, AccordionContent, AccordionHeader, AccordionPanel, ProgressBar],
   templateUrl: './valeurs.component.html',
   styleUrl: './valeurs.component.sass'
 })
 export class ValeursComponent implements OnInit {
-  // chargement des cours
+  // chargement des valeurs
   loading: boolean = true;
 
   // données pour la vue

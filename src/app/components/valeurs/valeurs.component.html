@@ -1,5 +1,9 @@
 <app-valeur [valeur]="valeurSelectionnee" (closed)="valeurSelectionnee = undefined"></app-valeur>
 
+<div *ngIf="loading">
+  <p-progressbar mode="indeterminate" [style]="{'height': '10px'}"/>
+</div>
+
 <p-accordion>
   @for (marche of marches; track marche.libelle; let i = $index) {
     <p-accordion-panel value="{{i}}">
