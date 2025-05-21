@@ -1,6 +1,5 @@
 import {Component, effect, input, InputSignal, output} from '@angular/core';
 import {TranslateService} from '@ngx-translate/core';
-import {Panel} from 'primeng/panel';
 import {CoursService} from '../../../services/cours/cours.service';
 import {DatePipe, NgClass, NgIf} from '@angular/common';
 import {DTOCoursTickerLight} from '../../../services/cours/DTOCoursTickerLight';
@@ -9,17 +8,18 @@ import {Valeur} from '../Valeur';
 import {DetailsValeurComponent} from './details-valeur/details-valeur.component';
 import {Cours} from '../../cours/Cours';
 import {ChartsComponent} from './charts/charts.component';
+import {Drawer} from 'primeng/drawer';
 
 @Component({
   selector: 'app-valeur',
   imports: [
-    Panel,
     NgIf,
     ProgressBar,
     DetailsValeurComponent,
     NgClass,
     ChartsComponent,
-    DatePipe
+    DatePipe,
+    Drawer
   ],
   templateUrl: './valeur.component.html',
   styleUrl: './valeur.component.sass'

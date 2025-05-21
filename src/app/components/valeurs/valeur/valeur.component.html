@@ -1,21 +1,23 @@
-@if (valeur() !== undefined) {
-  <p-panel *ngIf="loading">
-    <p-progressbar mode="indeterminate" [style]="{'height': '10px'}"/>
-  </p-panel>
-  <p-panel *ngIf="!loading">
-    <ng-template #header>
-      <span class="pi pi-exclamation-triangle" *ngIf="cours!.alerte"></span>
-      <h1>
+<p-drawer [visible]="valeur() !== undefined" position="full">
+  <ng-template #headless>
+    <h1>
+      <div *ngIf="loading">
+        <p-progressbar mode="indeterminate" [style]="{'height': '10px'}"/>
+      </div>
+      <div *ngIf="!loading">
+        <span class="pi pi-exclamation-triangle" *ngIf="cours!.alerte"></span>
         <span class="pi" [ngClass]="{
                       'pi-arrow-up': (cours!.ouverture < cours!.cloture),
                       'pi-arrow-down': (cours!.ouverture > cours!.cloture),
                       'pi-equals': (cours!.ouverture === cours!.cloture)
                     }"></span>
         {{ cours!.libelle }} ({{ cours!.date | date:'dd/MM/yyyy' }})
-      </h1>
-      <span class="pi pi-times-circle" (click)="this.closed.emit()"></span>
-    </ng-template>
-    <app-charts [cours]="cours" [coursLight]="coursLight"></app-charts>
-    <app-details-valeur [cours]="cours"></app-details-valeur>
-  </p-panel>
-}
+        <span class="pi pi-times-circle" (click)="this.closed.emit()"></span>
+      </div>
+    </h1>
+    <div *ngIf="!loading" class="content">
+      <app-charts [cours]="cours" [coursLight]="coursLight"></app-charts>
+      <app-details-valeur [cours]="cours"></app-details-valeur>
+    </div>
+  </ng-template>
+</p-drawer>
