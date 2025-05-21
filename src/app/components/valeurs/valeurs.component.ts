@@ -5,7 +5,6 @@ import {CommonModule} from '@angular/common';
 import {TranslatePipe, TranslateService} from '@ngx-translate/core';
 import {Valeur} from './Valeur';
 import {Marche} from '../../services/valeurs/marche';
-import {ScrollPanelModule} from 'primeng/scrollpanel';
 import {ValeurComponent} from './valeur/valeur.component';
 import {ValeurMarche} from './ValeurMarche';
 import {DTOValeur} from '../../services/valeurs/DTOValeur';
@@ -13,7 +12,7 @@ import {Accordion, AccordionContent, AccordionHeader, AccordionPanel} from 'prim
 
 @Component({
   selector: 'app-valeurs',
-  imports: [TableModule, CommonModule, TranslatePipe, ScrollPanelModule, ValeurComponent, Accordion, AccordionContent, AccordionHeader, AccordionPanel],
+  imports: [TableModule, CommonModule, TranslatePipe, ValeurComponent, Accordion, AccordionContent, AccordionHeader, AccordionPanel],
   templateUrl: './valeurs.component.html',
   styleUrl: './valeurs.component.sass'
 })

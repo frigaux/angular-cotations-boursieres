@@ -10,13 +10,12 @@ import {Marche} from '../../services/valeurs/marche';
 import {DTOListeCours} from '../../services/cours/DTOListeCours';
 import {Accordion, AccordionContent, AccordionHeader, AccordionPanel} from 'primeng/accordion';
 import {ProgressSpinner} from 'primeng/progressspinner';
-import {ScrollPanel} from 'primeng/scrollpanel';
 import {Cours} from './Cours';
 import {ValeurComponent} from './valeur/valeur.component';
 
 @Component({
   selector: 'app-cours',
-  imports: [TableModule, CommonModule, TranslatePipe, Accordion, AccordionPanel, AccordionHeader, AccordionContent, ProgressSpinner, ScrollPanel, ValeurComponent],
+  imports: [TableModule, CommonModule, TranslatePipe, Accordion, AccordionPanel, AccordionHeader, AccordionContent, ProgressSpinner, ValeurComponent],
   templateUrl: './cours.component.html',
   styleUrl: './cours.component.sass'
 })
