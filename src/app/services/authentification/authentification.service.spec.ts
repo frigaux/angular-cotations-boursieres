@@ -70,7 +70,7 @@ describe('AuthentificationService', () => {
     });
   });
 
-  // log une erreur : "context.js:265 HttpErrorResponse"
+  // TODO : log une erreur : "context.js:265 HttpErrorResponse"
   describe('Given l\'authentification a échoué', () => {
     beforeEach(() => {
       authentificationService.reinitialiser();

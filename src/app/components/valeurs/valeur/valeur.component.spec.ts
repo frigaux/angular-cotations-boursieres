@@ -42,11 +42,12 @@ describe('ValeurComponent', () => {
       mockCoursService.chargerCoursTickerWithLimit.and.returnValue(of(LISTE_COURS_TICKER_LIGHT));
     });
 
-    it('when l\'input ticker est définie then le composant <p-panel> est rendu', () => {
+    it('when l\'input ticker est définie then le composant <p-drawer> est rendu', () => {
       const element: HTMLElement = fixture.nativeElement;
       fixture.componentRef.setInput('valeur', VALEUR);
       fixture.detectChanges();
-      const el = element.querySelector('p-panel');
+      // TODO : le p-drawer est affiché dans le rapport généré par karma :/
+      const el = element.querySelector('p-drawer');
       expect(el).toBeTruthy();
     });
   });
