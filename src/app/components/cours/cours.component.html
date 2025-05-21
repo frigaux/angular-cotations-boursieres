@@ -10,9 +10,10 @@
     <p-accordion-panel value="{{i}}">
       <p-accordion-header>{{ marche.libelle }}</p-accordion-header>
       <p-accordion-content>
-        <p-scrollpanel [style]="{ margin: '1rem', height: '50vh' }">
+        <p-scrollpanel [style]="{ margin: '1rem' }">
           <p-table
             sortField="libelle"
+            [scrollable]="true" scrollHeight="50vh"
             [value]="marche.cours"
             [loading]="loading">
             <ng-template #header>
@@ -65,7 +66,7 @@
               <tr>
                 <td (mouseenter)="coursSelectionne = cours">
                   <span class="pi"
-                    [ngClass]="{
+                        [ngClass]="{
                       'pi-arrow-up': (cours.ouverture < cours.cloture),
                       'pi-arrow-down': (cours.ouverture > cours.cloture),
                       'pi-equals': (cours.ouverture === cours.cloture)
