@@ -9,12 +9,11 @@
       "TICKER": "Ticker",
       "VALEUR": {
         "DETAILS_VALEUR": {
-          "DETAILS": "Détails",
-          "DATE": "Date",
+          "DETAILS": "Détails au",
           "LIBELLE": "Libellé",
           "TICKER": "Ticker",
           "VOLUME": "Volume échangé",
-          "COURS": "Cours",
+          "COURS": "Cours au",
           "MINIMUM": "minimum",
           "OUVERTURE": "ouverture",
           "CLOTURE": "clôture",
@@ -27,6 +26,7 @@
           "CLOTURE": "Cours à la clôture"
         },
         "CHARTS": {
+          "JOURS": "Nombre de jours affichés",
           "COURS": "Cours à la clôture",
           "MOYENNES_MOBILES": "Moyennes mobiles au "
         }

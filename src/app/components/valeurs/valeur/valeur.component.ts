@@ -31,7 +31,6 @@ export class ValeurComponent {
 
   // chargement des cours
   loading: boolean = true;
-  limit: number = 100;
 
   // données pour la vue
   cours: Cours | undefined;
@@ -49,7 +48,7 @@ export class ValeurComponent {
       this.loading = true;
       this.coursService.chargerCoursTicker(valeur.ticker).subscribe(cours => {
         this.cours = new Cours(cours.date, valeur.ticker, valeur.libelle, cours);
-        this.coursService.chargerCoursTickerWithLimit(valeur.ticker, this.limit).subscribe(cours => {
+        this.coursService.chargerCoursTickerWithLimit(valeur.ticker, 300).subscribe(cours => {
           this.coursLight = cours;
           this.loading = false;
         })

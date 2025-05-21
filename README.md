@@ -59,9 +59,10 @@ ng generate guard authentification
 npm install --save jwt-decode
 ```
 
-## Ajout de PrimeNG
+## Ajout de PrimeNG et chart.js
 ```
 npm install primeng @primeng/themes primeicons --force
+npm install chart.js --save
 ```
 
 Ajout des deux providers providePrimeNG, provideAnimationsAsync et définition du thème dans le fichier app.config.ts :
@@ -94,6 +95,11 @@ Ajout des lignes suivantes dans les styles du fichier angular.json :
 "node_modules/bootstrap/dist/css/bootstrap-grid.min.css",
 "node_modules/@fortawesome/fontawesome-free/css/all.min.css"
 `
+
+## Ajout de NGX-translate
+```
+npm install @ngx-translate/core
+```
 
 ## Scripts dans package.json
 ```
