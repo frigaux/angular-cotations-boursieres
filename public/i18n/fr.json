@@ -1,7 +1,21 @@
 {
+  "ROUTER": {
+    "AUTHENTIFICATION": "Authentification",
+    "ERREUR_TECHNIQUE": "Erreur technique",
+    "VALEURS": "Liste des valeurs",
+    "COURS": "Cotation des valeurs",
+    "PORTEFEUILLES": "Portefeuilles",
+    "GESTION_PORTEFEUILLES": "Gestion des portefeuilles"
+  },
   "COMPOSANTS": {
     "AUTHENTIFICATION": {
       "REUSSIE": "Authentification réussie !"
+    },
+    "HEADER": {
+      "VALEURS": "Valeurs",
+      "COURS": "Cours",
+      "PORTEFEUILLES": "Portefeuilles",
+      "GESTION_PORTEFEUILLES": "Gestion des portefeuilles"
     },
     "VALEURS": {
       "LIBELLE": "Libellé",
@@ -44,6 +58,12 @@
         "COURBE": "Courbe des moyennes mobiles",
         "NB_JOURS_CALCUL": "Nombre de jours de cotations utilisés pour le calcul de la moyenne mobile",
         "JOURS": "jours"
+      }
+    },
+    "PORTEFEUILLES": {
+      "SELECTEUR_VALEURS": {
+        "VALEURS": "Valeurs du portefeuille",
+        "RECHERCHE": "Recherche par libellé"
       }
     }
   },

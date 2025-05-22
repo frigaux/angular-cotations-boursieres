@@ -1,11 +1,23 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {NgIf} from '@angular/common';
+import {ProgressBar} from 'primeng/progressbar';
 
 @Component({
   selector: 'app-portefeuilles',
-  imports: [],
+  imports: [
+    NgIf,
+    ProgressBar
+  ],
   templateUrl: './portefeuilles.component.html',
   styleUrl: './portefeuilles.component.sass'
 })
-export class PortefeuillesComponent {
+export class PortefeuillesComponent implements OnInit {
+  // chargement des cours
+  loading: boolean = false;
 
+  constructor() {
+  }
+
+  ngOnInit(): void {
+  }
 }

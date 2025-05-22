@@ -29,7 +29,6 @@ describe('ValeurComponent', () => {
 
     fixture = TestBed.createComponent(ValeurComponent);
     component = fixture.componentInstance;
-    fixture.detectChanges();
   });
 
   it('should create', () => {

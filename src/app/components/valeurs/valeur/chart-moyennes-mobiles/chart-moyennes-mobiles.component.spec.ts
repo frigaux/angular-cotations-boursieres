@@ -19,7 +19,6 @@ describe('ChartMoyennesMobilesComponent', () => {
 
     fixture = TestBed.createComponent(ChartMoyennesMobilesComponent);
     component = fixture.componentInstance;
-    fixture.detectChanges();
   });
 
   it('should create', () => {

@@ -19,7 +19,6 @@ describe('ChartCoursComponent', () => {
 
     fixture = TestBed.createComponent(ChartCoursComponent);
     component = fixture.componentInstance;
-    fixture.detectChanges();
   });
 
   it('should create', () => {

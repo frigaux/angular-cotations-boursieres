@@ -48,8 +48,7 @@ describe('ValeursComponent', () => {
     });
 
     it('when #ngOnInit then component is loaded', () => {
-      component.ngOnInit();
-      fixture.detectChanges(); // pour essayer de s'assurer que le error sur l'observable a bien été traité
+      fixture.detectChanges(); // appelle le ngOnInit
       expect(component).toBeDefined();
       expect(component.loading).toBeFalse();
     });

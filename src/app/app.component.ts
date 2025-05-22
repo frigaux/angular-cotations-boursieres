@@ -1,9 +1,10 @@
 import {Component} from '@angular/core';
-import {RouterOutlet} from '@angular/router';
+import {NavigationEnd, Router, RouterOutlet} from '@angular/router';
 import {HeaderComponent} from "./components/header/header.component";
 import {FooterComponent} from "./components/footer/footer.component";
 import {TranslateService} from "@ngx-translate/core";
 import translationsFR from "../../public/i18n/fr.json";
+import {Title} from '@angular/platform-browser';
 
 @Component({
   selector: 'app-root',
@@ -13,10 +14,18 @@ import translationsFR from "../../public/i18n/fr.json";
   styleUrl: './app.component.sass'
 })
 export class AppComponent {
-  constructor(private translate: TranslateService) {
-    this.translate.setTranslation('fr', translationsFR);
-    this.translate.addLangs(['fr']);
-    this.translate.setDefaultLang('fr');
-    this.translate.use('fr');
+  constructor(private translateService: TranslateService, private router: Router, private titleService: Title) {
+    this.translateService.setTranslation('fr', translationsFR);
+    this.translateService.addLangs(['fr']);
+    this.translateService.setDefaultLang('fr');
+    this.translateService.use('fr');
+    router.events.subscribe((event: any) => {
+      if (event instanceof NavigationEnd) {
+        const translateKey = event.url.substring(1)
+          .replaceAll('-', '_')
+          .toUpperCase();
+        titleService.setTitle(translateService.instant(`ROUTER.${translateKey}`));
+      }
+    });
   }
 }
