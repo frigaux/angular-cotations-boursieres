@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { HeaderComponent } from './header.component';
+import {TranslateModule} from '@ngx-translate/core';
 
 describe('HeaderComponent', () => {
   let component: HeaderComponent;
@@ -8,7 +9,10 @@ describe('HeaderComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [HeaderComponent]
+      imports: [
+        HeaderComponent,
+        TranslateModule.forRoot({})
+      ]
     });
 
     fixture = TestBed.createComponent(HeaderComponent);
@@ -19,7 +23,7 @@ describe('HeaderComponent', () => {
     expect(component).toBeDefined();
   });
 
-  it('should have <header>', () => {
+  it('should have <p-menubar>', () => {
     const element: HTMLElement = fixture.nativeElement;
     const el = element.querySelector('p-menubar');
     expect(el).toBeTruthy();

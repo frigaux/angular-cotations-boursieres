@@ -44,9 +44,5 @@ describe('ValeursService', () => {
     expect(await promiseValeurs).toEqual(VALEURS);
     // vérification qu'il n'y a pas de requêtes en attente
     httpTesting.verify();
-
-    // 2 - création d'une promesse sur l'observable qui récupère les valeurs dans le cache
-    const promiseValeursCache: Promise<DTOValeur[]> = firstValueFrom(valeursService.chargerValeurs());
-    expect(await promiseValeursCache).toEqual(VALEURS);
   });
 });

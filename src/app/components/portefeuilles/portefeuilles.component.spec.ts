@@ -1,10 +1,8 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { PortefeuillesComponent } from './portefeuilles.component';
+import {PortefeuillesComponent} from './portefeuilles.component';
 import {TranslateModule} from '@ngx-translate/core';
 import {ValeursService} from '../../services/valeurs/valeurs.service';
-import {CoursService} from '../../services/cours/cours.service';
-import {provideAnimations} from '@angular/platform-browser/animations';
 
 describe('PortefeuillesComponent', () => {
   let component: PortefeuillesComponent;
