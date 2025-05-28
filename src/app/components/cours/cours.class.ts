@@ -1,5 +1,5 @@
-import {DTOCours} from '../../services/cours/DTOCours';
-import {DTOCoursTicker} from '../../services/cours/DTOCoursTicker';
+import {DTOCours} from '../../services/cours/dto-cours.interface';
+import {DTOCoursTicker} from '../../services/cours/dto-cours-ticker.interface';
 
 export class Cours {
   date: Date;

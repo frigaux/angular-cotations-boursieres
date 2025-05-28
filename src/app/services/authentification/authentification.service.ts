@@ -1,7 +1,7 @@
 import { HttpClient, HttpContext } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { jwtDecode, JwtPayload } from 'jwt-decode';
-import { DTOJwt } from './DTOJwt';
+import { DTOJwt } from './dto-jwt.interface';
 import { Observable } from 'rxjs';
 import { AUTHENTIFICATION_REQUISE } from '../../http-request.interceptor';
 

@@ -3,7 +3,7 @@ import {ComponentFixture, TestBed} from '@angular/core/testing';
 import {DetailsValeurComponent} from './details-valeur.component';
 import {TranslateModule} from '@ngx-translate/core';
 import {provideAnimations} from '@angular/platform-browser/animations';
-import {COURS_CROISSANT, COURS_DECROISSANT} from '../../../../services/jdd/JDDCours';
+import {COURS_CROISSANT, COURS_DECROISSANT} from '../../../../services/jdd/jdd-cours.dataset';
 
 describe('DetailsValeurComponent', () => {
   let component: DetailsValeurComponent;

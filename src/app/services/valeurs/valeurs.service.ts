@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
-import {DTOValeur} from './DTOValeur';
+import {DTOValeur} from './dto-valeur.interface';
 import {Observable} from 'rxjs';
 
 @Injectable({

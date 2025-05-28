@@ -4,7 +4,7 @@ import { SelecteurValeursComponent } from './selecteur-valeurs.component';
 import {TranslateModule} from '@ngx-translate/core';
 import {ValeursService} from '../../../../services/valeurs/valeurs.service';
 import {of} from 'rxjs';
-import {VALEURS} from '../../../../services/jdd/JDDValeur';
+import {VALEURS} from '../../../../services/jdd/jdd-valeur.dataset';
 
 describe('SelecteurValeursComponent', () => {
   let component: SelecteurValeursComponent;

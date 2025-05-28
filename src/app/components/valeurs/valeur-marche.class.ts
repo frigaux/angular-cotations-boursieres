@@ -1,7 +1,7 @@
 import {TranslateService} from '@ngx-translate/core';
-import {Marche} from '../../services/valeurs/marche';
-import {Valeur} from './Valeur';
-import {DTOValeur} from '../../services/valeurs/DTOValeur';
+import {Marche} from '../../services/valeurs/marche.enum';
+import {Valeur} from './valeur.class';
+import {DTOValeur} from '../../services/valeurs/dto-valeur.interface';
 
 export class ValeurMarche {
   libelle!: string;

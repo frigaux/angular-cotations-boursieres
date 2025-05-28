@@ -1,7 +1,7 @@
 import {ComponentFixture, TestBed} from '@angular/core/testing';
 
 import {ValeurComponent} from './valeur.component';
-import {COURS_CROISSANT} from '../../../services/jdd/JDDCours';
+import {COURS_CROISSANT} from '../../../services/jdd/jdd-cours.dataset';
 import {TranslateModule} from '@ngx-translate/core';
 import {provideAnimations} from '@angular/platform-browser/animations';
 

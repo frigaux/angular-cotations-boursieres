@@ -1,7 +1,7 @@
 import {Component, effect, input, InputSignal} from '@angular/core';
 import {TranslateService} from '@ngx-translate/core';
 import {UIChart} from 'primeng/chart';
-import {Cours} from '../../../cours/Cours';
+import {Cours} from '../../../cours/cours.class';
 
 @Component({
   selector: 'app-chart-moyennes-mobiles',

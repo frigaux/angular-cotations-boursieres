@@ -4,9 +4,9 @@ import {ValeursService} from './valeurs.service';
 import {provideHttpClient} from '@angular/common/http';
 import {HttpTestingController, provideHttpClientTesting} from '@angular/common/http/testing';
 import {firstValueFrom} from 'rxjs';
-import {DTOValeur} from './DTOValeur';
+import {DTOValeur} from './dto-valeur.interface';
 import {RouterModule} from '@angular/router';
-import {VALEURS} from '../jdd/JDDValeur';
+import {VALEURS} from '../jdd/jdd-valeur.dataset';
 
 describe('ValeursService', () => {
   let valeursService: ValeursService;

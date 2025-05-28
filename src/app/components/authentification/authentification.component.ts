@@ -4,7 +4,7 @@ import {NgSwitch, NgSwitchCase} from '@angular/common';
 import {Dialog} from 'primeng/dialog';
 import {ProgressBar} from 'primeng/progressbar';
 import {AuthentificationService} from '../../services/authentification/authentification.service';
-import {Statut} from './statut';
+import {Statut} from './statut.enum';
 import {TranslatePipe} from "@ngx-translate/core";
 
 @Component({

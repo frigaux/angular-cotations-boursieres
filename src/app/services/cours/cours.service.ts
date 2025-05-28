@@ -1,9 +1,9 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
-import {DTOListeCours} from './DTOListeCours';
-import {DTOCoursTicker} from './DTOCoursTicker';
-import {DTOCoursTickerLight} from './DTOCoursTickerLight';
+import {DTOListeCours} from './dto-liste-cours.interface';
+import {DTOCoursTicker} from './dto-cours-ticker.interface';
+import {DTOCoursTickerLight} from './dto-cours-ticker-light.interface';
 
 @Injectable({
   providedIn: 'root'

@@ -3,11 +3,11 @@ import {ValeursService} from '../../services/valeurs/valeurs.service';
 import {TableModule} from 'primeng/table';
 import {CommonModule} from '@angular/common';
 import {TranslatePipe, TranslateService} from '@ngx-translate/core';
-import {Valeur} from './Valeur';
-import {Marche} from '../../services/valeurs/marche';
+import {Valeur} from './valeur.class';
+import {Marche} from '../../services/valeurs/marche.enum';
 import {ValeurComponent} from './valeur/valeur.component';
-import {ValeurMarche} from './ValeurMarche';
-import {DTOValeur} from '../../services/valeurs/DTOValeur';
+import {ValeurMarche} from './valeur-marche.class';
+import {DTOValeur} from '../../services/valeurs/dto-valeur.interface';
 import {Accordion, AccordionContent, AccordionHeader, AccordionPanel} from 'primeng/accordion';
 import {ProgressBar} from 'primeng/progressbar';
 

@@ -1,4 +1,4 @@
-import {DTOValeur} from '../../services/valeurs/DTOValeur';
+import {DTOValeur} from '../../services/valeurs/dto-valeur.interface';
 
 export class Valeur {
   ticker!: string;

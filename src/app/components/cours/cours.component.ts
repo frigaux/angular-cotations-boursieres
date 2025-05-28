@@ -4,13 +4,13 @@ import {CommonModule} from '@angular/common';
 import {TranslatePipe, TranslateService} from '@ngx-translate/core';
 import {ValeursService} from '../../services/valeurs/valeurs.service';
 import {CoursService} from '../../services/cours/cours.service';
-import {DTOValeur} from '../../services/valeurs/DTOValeur';
-import {CoursMarche} from './CoursMarche';
-import {Marche} from '../../services/valeurs/marche';
-import {DTOListeCours} from '../../services/cours/DTOListeCours';
+import {DTOValeur} from '../../services/valeurs/dto-valeur.interface';
+import {CoursMarche} from './cours-marche.class';
+import {Marche} from '../../services/valeurs/marche.enum';
+import {DTOListeCours} from '../../services/cours/dto-liste-cours.interface';
 import {Accordion, AccordionContent, AccordionHeader, AccordionPanel} from 'primeng/accordion';
 import {ProgressSpinner} from 'primeng/progressspinner';
-import {Cours} from './Cours';
+import {Cours} from './cours.class';
 import {ValeurComponent} from './valeur/valeur.component';
 
 @Component({

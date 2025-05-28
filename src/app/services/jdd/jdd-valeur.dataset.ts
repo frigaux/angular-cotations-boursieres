@@ -1,5 +1,5 @@
-import {Marche} from '../valeurs/marche';
-import {DTOValeur} from '../valeurs/DTOValeur';
+import {Marche} from '../valeurs/marche.enum';
+import {DTOValeur} from '../valeurs/dto-valeur.interface';
 
 export const VALEUR: DTOValeur = {
   "ticker": "GLE",

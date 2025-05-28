@@ -6,8 +6,8 @@ import {TranslateModule} from '@ngx-translate/core';
 import {ValeursService} from '../../services/valeurs/valeurs.service';
 import {of} from 'rxjs';
 import {provideAnimations} from '@angular/platform-browser/animations';
-import {VALEUR} from '../../services/jdd/JDDValeur';
-import {LISTE_COURS} from '../../services/jdd/JDDCours';
+import {VALEUR} from '../../services/jdd/jdd-valeur.dataset';
+import {LISTE_COURS} from '../../services/jdd/jdd-cours.dataset';
 
 describe('CoursComponent', () => {
   let component: CoursComponent;

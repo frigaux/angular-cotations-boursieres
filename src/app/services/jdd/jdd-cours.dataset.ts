@@ -1,7 +1,7 @@
-import { DTOCoursTicker } from "../cours/DTOCoursTicker";
-import {DTOCoursTickerLight} from '../cours/DTOCoursTickerLight';
-import {DTOListeCours} from '../cours/DTOListeCours';
-import {Cours} from '../../components/cours/Cours';
+import { DTOCoursTicker } from "../cours/dto-cours-ticker.interface";
+import {DTOCoursTickerLight} from '../cours/dto-cours-ticker-light.interface';
+import {DTOListeCours} from '../cours/dto-liste-cours.interface';
+import {Cours} from '../../components/cours/cours.class';
 
 export const LISTE_COURS: DTOListeCours = {
   "date": new Date("2025-05-09"),

@@ -2,11 +2,11 @@ import {Component, effect, input, InputSignal, output} from '@angular/core';
 import {TranslateService} from '@ngx-translate/core';
 import {CoursService} from '../../../services/cours/cours.service';
 import {DatePipe, NgClass, NgIf} from '@angular/common';
-import {DTOCoursTickerLight} from '../../../services/cours/DTOCoursTickerLight';
+import {DTOCoursTickerLight} from '../../../services/cours/dto-cours-ticker-light.interface';
 import {ProgressBar} from 'primeng/progressbar';
-import {Valeur} from '../Valeur';
+import {Valeur} from '../valeur.class';
 import {DetailsValeurComponent} from './details-valeur/details-valeur.component';
-import {Cours} from '../../cours/Cours';
+import {Cours} from '../../cours/cours.class';
 import {ChartsComponent} from './charts/charts.component';
 import {Drawer} from 'primeng/drawer';
 

@@ -5,10 +5,10 @@ import {HttpTestingController, provideHttpClientTesting} from '@angular/common/h
 import {RouterModule} from '@angular/router';
 import {provideHttpClient} from '@angular/common/http';
 import {firstValueFrom} from 'rxjs';
-import {DTOListeCours} from './DTOListeCours';
-import {DTOCoursTicker} from './DTOCoursTicker';
-import {DTOCoursTickerLight} from './DTOCoursTickerLight';
-import {LISTE_COURS, COURS_TICKER, LISTE_COURS_TICKER_LIGHT} from '../jdd/JDDCours';
+import {DTOListeCours} from './dto-liste-cours.interface';
+import {DTOCoursTicker} from './dto-cours-ticker.interface';
+import {DTOCoursTickerLight} from './dto-cours-ticker-light.interface';
+import {LISTE_COURS, COURS_TICKER, LISTE_COURS_TICKER_LIGHT} from '../jdd/jdd-cours.dataset';
 
 describe('CoursService', () => {
   let coursService: CoursService;

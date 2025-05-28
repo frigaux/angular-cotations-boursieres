@@ -5,8 +5,8 @@ import {TranslateModule} from '@ngx-translate/core';
 import {CoursService} from '../../../services/cours/cours.service';
 import {of} from 'rxjs';
 import {provideAnimations} from '@angular/platform-browser/animations';
-import {COURS_TICKER, LISTE_COURS_TICKER_LIGHT} from '../../../services/jdd/JDDCours';
-import {VALEUR} from '../../../services/jdd/JDDValeur';
+import {COURS_TICKER, LISTE_COURS_TICKER_LIGHT} from '../../../services/jdd/jdd-cours.dataset';
+import {VALEUR} from '../../../services/jdd/jdd-valeur.dataset';
 
 describe('ValeurComponent', () => {
   let component: ValeurComponent;

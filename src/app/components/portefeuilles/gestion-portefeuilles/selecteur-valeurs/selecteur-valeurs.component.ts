@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {NgIf} from "@angular/common";
 import {PickList} from "primeng/picklist";
-import {DTOValeur} from '../../../../services/valeurs/DTOValeur';
+import {DTOValeur} from '../../../../services/valeurs/dto-valeur.interface';
 import {ValeursService} from '../../../../services/valeurs/valeurs.service';
 import {ProgressBar} from 'primeng/progressbar';
 import {TranslatePipe} from '@ngx-translate/core';

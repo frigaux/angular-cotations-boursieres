@@ -2,7 +2,7 @@ import {ComponentFixture, TestBed} from '@angular/core/testing';
 
 import {ChartCoursComponent} from './chart-cours.component';
 import {TranslateModule} from '@ngx-translate/core';
-import {COURS_CROISSANT, LISTE_COURS_TICKER_LIGHT} from '../../../../services/jdd/JDDCours';
+import {COURS_CROISSANT, LISTE_COURS_TICKER_LIGHT} from '../../../../services/jdd/jdd-cours.dataset';
 
 describe('ChartCoursComponent', () => {
   let component: ChartCoursComponent;

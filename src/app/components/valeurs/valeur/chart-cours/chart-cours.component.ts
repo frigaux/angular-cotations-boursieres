@@ -1,8 +1,8 @@
 import {Component, effect, input, InputSignal} from '@angular/core';
 import {TranslateService} from '@ngx-translate/core';
 import {UIChart} from 'primeng/chart';
-import {DTOCoursTickerLight} from '../../../../services/cours/DTOCoursTickerLight';
-import {Cours} from '../../../cours/Cours';
+import {DTOCoursTickerLight} from '../../../../services/cours/dto-cours-ticker-light.interface';
+import {Cours} from '../../../cours/cours.class';
 import {DatePipe} from '@angular/common';
 
 @Component({

@@ -1,6 +1,6 @@
 import {Component, effect, input, InputSignal} from '@angular/core';
 import {Timeline} from "primeng/timeline";
-import {Cours} from '../../../cours/Cours';
+import {Cours} from '../../../cours/cours.class';
 import {TranslatePipe, TranslateService} from '@ngx-translate/core';
 import {DatePipe, DecimalPipe, NgClass} from '@angular/common';
 import {Fieldset} from 'primeng/fieldset';

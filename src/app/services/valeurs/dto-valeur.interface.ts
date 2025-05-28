@@ -1,4 +1,4 @@
-import {Marche} from './marche';
+import {Marche} from './marche.enum';
 
 export interface DTOValeur {
   ticker: string;
