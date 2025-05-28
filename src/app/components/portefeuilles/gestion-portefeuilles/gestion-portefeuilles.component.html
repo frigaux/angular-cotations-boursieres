@@ -2,4 +2,51 @@
   <p-progressbar mode="indeterminate" [style]="{'height': '10px'}"/>
 </div>
 
-<app-selecteur-valeurs></app-selecteur-valeurs>
+<p-card header="{{ 'COMPOSANTS.PORTEFEUILLES.GESTION_PORTEFEUILLES.CREATION' | translate }}">
+  <form [formGroup]="formulaireCreationPortefeuille" (ngSubmit)="creerPortefeuille()">
+    <div>
+      <p-floatlabel>
+        <input pInputText id="nom" formControlName="champNom" autocomplete="off"/>
+        <label for="nom">{{ 'COMPOSANTS.PORTEFEUILLES.GESTION_PORTEFEUILLES.NOM' | translate }}</label>
+      </p-floatlabel>
+    </div>
+    <div>
+      <p-button label="{{ 'COMPOSANTS.PORTEFEUILLES.GESTION_PORTEFEUILLES.CREER' | translate }}" type="submit"/>
+    </div>
+  </form>
+</p-card>
+
+<p-card header="{{ 'COMPOSANTS.PORTEFEUILLES.GESTION_PORTEFEUILLES.PORTEFEUILLES' | translate }}"
+        *ngIf="portefeuilles.length != 0">
+  <form *ngIf="portefeuilleEnRenommage" [formGroup]="formulaireModificationPortefeuille"
+        (ngSubmit)="renommagePortefeuille()">
+    <div>
+      <p-floatlabel>
+        <input pInputText id="nom" formControlName="champNom" autocomplete="off"/>
+        <label for="nom">{{ 'COMPOSANTS.PORTEFEUILLES.GESTION_PORTEFEUILLES.NOM' | translate }}</label>
+      </p-floatlabel>
+    </div>
+    <div>
+      <p-button label="{{ 'COMPOSANTS.PORTEFEUILLES.GESTION_PORTEFEUILLES.MODIFIER' | translate }}"
+                type="submit" severity="danger"/>
+    </div>
+    <div>
+      <p-button label="{{ 'COMPOSANTS.PORTEFEUILLES.GESTION_PORTEFEUILLES.ANNULER' | translate }}"
+                (onClick)="annulerRenommage()" type="reset" severity="warn"/>
+    </div>
+  </form>
+  <div class="liste">
+    @for (portefeuille of portefeuilles; track portefeuille.nom; let i = $index) {
+      <div>
+        <div><span class="pi pi-cog" (click)="configurerPortefeuille(portefeuille)"
+                   title="{{ 'COMPOSANTS.PORTEFEUILLES.GESTION_PORTEFEUILLES.CONFIGURER' | translate }}"></span></div>
+        <div><span class="pi pi-pencil" (click)="renommerPortefeuille(portefeuille)"
+                   title="{{ 'COMPOSANTS.PORTEFEUILLES.GESTION_PORTEFEUILLES.RENOMMER' | translate }}"></span></div>
+        <div><span class="pi pi-trash" (click)="supprimerPortefeuille(portefeuille)"
+                   title="{{ 'COMPOSANTS.PORTEFEUILLES.GESTION_PORTEFEUILLES.SUPPRIMER' | translate }}"></span></div>
+        <div>{{ portefeuille.nom }}</div>
+
+      </div>
+    }
+  </div>
+</p-card>

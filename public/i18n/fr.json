@@ -61,9 +61,20 @@
       }
     },
     "PORTEFEUILLES": {
-      "SELECTEUR_VALEURS": {
-        "VALEURS": "Valeurs du portefeuille",
-        "RECHERCHE": "Recherche par libellé"
+      "GESTION_PORTEFEUILLES": {
+        "CREATION": "Création d'un portefeuille",
+        "NOM": "Nom du portefeuille",
+        "CREER": "Créer",
+        "PORTEFEUILLES": "Portefeuilles",
+        "CONFIGURER": "Configurer le portefeuille",
+        "RENOMMER": "Renommer le portefeuille",
+        "SUPPRIMER": "Supprimer le portefeuille",
+        "MODIFIER": "Modifier",
+        "ANNULER": "Annuler",
+        "SELECTEUR_VALEURS": {
+          "VALEURS": "Valeurs du portefeuille",
+          "RECHERCHE": "Recherche par libellé"
+        }
       }
     }
   },

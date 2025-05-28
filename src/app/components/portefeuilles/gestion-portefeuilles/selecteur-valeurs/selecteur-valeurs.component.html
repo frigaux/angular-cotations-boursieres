@@ -3,14 +3,14 @@
 </div>
 
 <div *ngIf="!loading">
-  <H1>{{ 'COMPOSANTS.PORTEFEUILLES.SELECTEUR_VALEURS.VALEURS' | translate }}</H1>
+  <H1>{{ 'COMPOSANTS.PORTEFEUILLES.GESTION_PORTEFEUILLES.SELECTEUR_VALEURS.VALEURS' | translate }}</H1>
   <p-picklist [source]="valeursSource" [target]="valeursTarget"
               [showSourceControls]="false" [showTargetControls]="false"
               [responsive]="true"
               (onMoveToSource)="onMove()" (onMoveToTarget)="onMove()"
               filterBy="libelle"
-              sourceFilterPlaceholder="{{ 'COMPOSANTS.PORTEFEUILLES.SELECTEUR_VALEURS.RECHERCHE' | translate }}"
-              targetFilterPlaceholder="{{ 'COMPOSANTS.PORTEFEUILLES.SELECTEUR_VALEURS.RECHERCHE' | translate }}">
+              sourceFilterPlaceholder="{{ 'COMPOSANTS.PORTEFEUILLES.GESTION_PORTEFEUILLES.SELECTEUR_VALEURS.RECHERCHE' | translate }}"
+              targetFilterPlaceholder="{{ 'COMPOSANTS.PORTEFEUILLES.GESTION_PORTEFEUILLES.SELECTEUR_VALEURS.RECHERCHE' | translate }}">
     <ng-template let-valeur #item>
       {{ valeur.libelle }}
     </ng-template>

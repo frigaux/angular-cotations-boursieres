@@ -2,6 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { GestionPortefeuillesComponent } from './gestion-portefeuilles.component';
 import {ValeursService} from '../../../services/valeurs/valeurs.service';
+import {TranslateModule} from '@ngx-translate/core';
 
 describe('GestionPortefeuillesComponent', () => {
   let component: GestionPortefeuillesComponent;
@@ -11,7 +12,10 @@ describe('GestionPortefeuillesComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [GestionPortefeuillesComponent],
+      imports: [
+        GestionPortefeuillesComponent,
+        TranslateModule.forRoot({})
+      ],
       providers: [
         {provide: ValeursService, useValue: mockValeursService}
       ]

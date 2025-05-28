@@ -1,0 +1,33 @@
+form
+  display: flex
+  flex-direction: row
+  margin: 1rem
+  & > div
+    margin: 0.5rem
+  input
+    &.ng-invalid.ng-touched, &.ng-invalid.ng-dirty
+      border-color: var(--p-red-800)
+    &.ng-valid
+      border-color: var(--p-green-800)
+  //p-button, button
+  //  background-color: red !important
+  //  color: red !important
+
+div.liste
+  display: flex
+  flex-direction: column
+  margin: 1rem
+  & > div
+    display: flex
+    flex-direction: row
+    align-items: center
+    margin: 0.5rem
+    & > div
+      margin: 0.5rem
+    span.pi
+      cursor: pointer
+    span.pi-trash
+      color: var(--p-red-800)
+    form
+      margin: 0
+
