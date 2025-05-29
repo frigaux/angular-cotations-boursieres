@@ -61,40 +61,39 @@ export class GestionPortefeuillesComponent implements OnInit {
     this.formulaireCreationPortefeuille.get('champNom')?.updateValueAndValidity();
     if (this.formulaireCreationPortefeuille.valid && this.formulaireCreationPortefeuille.value.champNom) {
       this.portefeuilles.push({nom: this.formulaireCreationPortefeuille.value.champNom, tickers: []});
-      this.setLocalStorage();
+      this.setLocalStorage(this.portefeuilles);
     }
   }
 
-  renommagePortefeuille() {
+  renommagePortefeuille(idx: number) {
+    this.portefeuilleEnRenommage = this.portefeuilles[idx];
+    this.formulaireModificationPortefeuille.get('champNom')?.setValue(this.portefeuilles[idx].nom);
+  }
+
+  renommerPortefeuille() {
     this.formulaireModificationPortefeuille.get('champNom')?.updateValueAndValidity();
     if (this.formulaireModificationPortefeuille.valid && this.formulaireModificationPortefeuille.value.champNom) {
       this.portefeuilleEnRenommage!.nom = this.formulaireModificationPortefeuille.value.champNom;
     }
     this.portefeuilleEnRenommage = undefined;
-    this.setLocalStorage();
+    this.setLocalStorage(this.portefeuilles);
   }
 
   annulerRenommage() {
     this.portefeuilleEnRenommage = undefined;
   }
 
-  configurerPortefeuille(portefeuille: Portefeuille) {
+  configurerPortefeuille(idx: number) {
   }
 
-  renommerPortefeuille(portefeuille: Portefeuille) {
-    this.portefeuilleEnRenommage = portefeuille;
-    this.formulaireModificationPortefeuille.get('champNom')?.setValue(portefeuille.nom);
-  }
-
-  supprimerPortefeuille(portefeuille: Portefeuille) {
-    const idx = this.portefeuilles.findIndex(obj => obj.nom === portefeuille.nom);
-    if (idx !== -1) {
+  supprimerPortefeuille(idx: number) {
+    if (idx < this.portefeuilles.length) {
       this.portefeuilles.splice(idx, 1);
+      this.setLocalStorage(this.portefeuilles);
     }
-    this.setLocalStorage();
   }
 
-  private setLocalStorage() {
-    window.localStorage.setItem(GestionPortefeuillesComponent.PORTEFEUILLES, JSON.stringify(this.portefeuilles));
+  setLocalStorage(portefeuilles: Array<Portefeuille>) {
+    window.localStorage.setItem(GestionPortefeuillesComponent.PORTEFEUILLES, JSON.stringify(portefeuilles));
   }
 }

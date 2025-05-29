@@ -28,10 +28,4 @@ describe('PortefeuillesComponent', () => {
   it('should create', () => {
     expect(component).toBeDefined();
   });
-
-  // it('should have <div>', () => {
-  //   const element: HTMLElement = fixture.nativeElement;
-  //   const el = element.querySelector('div');
-  //   expect(el).toBeTruthy();
-  // });
 });

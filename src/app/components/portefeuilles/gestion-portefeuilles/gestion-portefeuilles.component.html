@@ -19,7 +19,7 @@
 <p-card header="{{ 'COMPOSANTS.PORTEFEUILLES.GESTION_PORTEFEUILLES.PORTEFEUILLES' | translate }}"
         *ngIf="portefeuilles.length != 0">
   <form *ngIf="portefeuilleEnRenommage" [formGroup]="formulaireModificationPortefeuille"
-        (ngSubmit)="renommagePortefeuille()">
+        (ngSubmit)="renommerPortefeuille()">
     <div>
       <p-floatlabel>
         <input pInputText id="nom" formControlName="champNom" autocomplete="off"/>
@@ -36,13 +36,13 @@
     </div>
   </form>
   <div class="liste">
-    @for (portefeuille of portefeuilles; track portefeuille.nom; let i = $index) {
+    @for (portefeuille of portefeuilles; track portefeuille.nom; let idx = $index) {
       <div>
-        <div><span class="pi pi-cog" (click)="configurerPortefeuille(portefeuille)"
+        <div><span class="pi pi-cog" (click)="configurerPortefeuille(idx)"
                    title="{{ 'COMPOSANTS.PORTEFEUILLES.GESTION_PORTEFEUILLES.CONFIGURER' | translate }}"></span></div>
-        <div><span class="pi pi-pencil" (click)="renommerPortefeuille(portefeuille)"
+        <div><span class="pi pi-pencil" (click)="renommagePortefeuille(idx)"
                    title="{{ 'COMPOSANTS.PORTEFEUILLES.GESTION_PORTEFEUILLES.RENOMMER' | translate }}"></span></div>
-        <div><span class="pi pi-trash" (click)="supprimerPortefeuille(portefeuille)"
+        <div><span class="pi pi-trash" (click)="supprimerPortefeuille(idx)"
                    title="{{ 'COMPOSANTS.PORTEFEUILLES.GESTION_PORTEFEUILLES.SUPPRIMER' | translate }}"></span></div>
         <div>{{ portefeuille.nom }}</div>
 
