@@ -66,14 +66,16 @@
         "NOM": "Nom du portefeuille",
         "CREER": "Créer",
         "PORTEFEUILLES": "Portefeuilles",
-        "CONFIGURER": "Configurer le portefeuille",
+        "EDITER": "Editer les valeurs du portefeuille",
         "RENOMMER": "Renommer le portefeuille",
         "SUPPRIMER": "Supprimer le portefeuille",
         "MODIFIER": "Modifier",
         "ANNULER": "Annuler",
         "SELECTEUR_VALEURS": {
-          "VALEURS": "Valeurs du portefeuille",
-          "RECHERCHE": "Recherche par libellé"
+          "MODIFICATION_PORTEFEUILLE": "Modification des valeurs du portefeuille",
+          "RECHERCHE": "Recherche par libellé",
+          "SOURCE": "Valeurs disponibles",
+          "TARGET": "Valeurs du portefeuille"
         }
       }
     }

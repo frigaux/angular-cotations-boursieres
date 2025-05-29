@@ -5,6 +5,9 @@ import {TranslateModule} from '@ngx-translate/core';
 import {ValeursService} from '../../../../services/valeurs/valeurs.service';
 import {of} from 'rxjs';
 import {VALEURS} from '../../../../services/jdd/jdd-valeur.dataset';
+import {COURS_CROISSANT} from '../../../../services/jdd/jdd-cours.dataset';
+import {PORTEFEUILLES} from '../../../../services/jdd/jdd-portefeuille.dataset';
+import {provideAnimations} from '@angular/platform-browser/animations';
 
 describe('SelecteurValeursComponent', () => {
   let component: SelecteurValeursComponent;
@@ -19,7 +22,8 @@ describe('SelecteurValeursComponent', () => {
         TranslateModule.forRoot({})
       ],
       providers: [
-        {provide: ValeursService, useValue: mockValeursService}
+        {provide: ValeursService, useValue: mockValeursService},
+        provideAnimations()
       ]
     })
     .compileComponents();
@@ -37,10 +41,12 @@ describe('SelecteurValeursComponent', () => {
       mockValeursService.chargerValeurs.and.returnValue(of(VALEURS));
     });
 
-    it('when #ngOnInit then component is loaded', () => {
+    it('when un portefeuille est fournit en entrée du composant then la picklist est initialisée', () => {
+      fixture.componentRef.setInput('portefeuille', PORTEFEUILLES[0]);
       fixture.detectChanges(); // appelle le ngOnInit
       expect(component).toBeDefined();
       expect(component.loading).toBeFalse();
+      expect(component.valeursTarget).toEqual(VALEURS)
     });
   });
 });

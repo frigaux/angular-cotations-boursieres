@@ -1,4 +1,4 @@
-<app-valeur [cours]="coursSelectionne" (closed)="coursSelectionne = undefined"></app-valeur>
+<app-valeur [cours]="coursSelectionne" (ferme)="coursSelectionne = undefined"></app-valeur>
 
 <h1>{{ 'COMPOSANTS.COURS.DATE' | translate }}
   <p-progress-spinner *ngIf="date === undefined" strokeWidth="8" [style]="{ width: '25px', height: '25px' }"/>

@@ -27,7 +27,7 @@ import {Drawer} from 'primeng/drawer';
 export class ValeurComponent {
   // input/output
   valeur: InputSignal<Valeur | undefined> = input();
-  closed = output<void>();
+  ferme = output<void>();
 
   // chargement des cours
   loading: boolean = true;

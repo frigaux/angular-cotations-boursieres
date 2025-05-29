@@ -17,5 +17,5 @@ import {Cours} from '../cours.class';
 export class ValeurComponent {
   // input/output
   cours: InputSignal<Cours | undefined> = input();
-  closed = output<void>();
+  ferme = output<void>();
 }

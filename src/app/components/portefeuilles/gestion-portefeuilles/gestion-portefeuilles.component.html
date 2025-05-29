@@ -2,6 +2,10 @@
   <p-progressbar mode="indeterminate" [style]="{'height': '10px'}"/>
 </div>
 
+<app-selecteur-valeurs [portefeuille]="portefeuilleEnEdition"
+                       (ferme)="this.portefeuilleEnEdition = undefined"
+                       (modifie)="editerPortefeuille($event)"></app-selecteur-valeurs>
+
 <p-card header="{{ 'COMPOSANTS.PORTEFEUILLES.GESTION_PORTEFEUILLES.CREATION' | translate }}">
   <form [formGroup]="formulaireCreationPortefeuille" (ngSubmit)="creerPortefeuille()">
     <div>
@@ -18,6 +22,7 @@
 
 <p-card header="{{ 'COMPOSANTS.PORTEFEUILLES.GESTION_PORTEFEUILLES.PORTEFEUILLES' | translate }}"
         *ngIf="portefeuilles.length != 0">
+
   <form *ngIf="portefeuilleEnRenommage" [formGroup]="formulaireModificationPortefeuille"
         (ngSubmit)="renommerPortefeuille()">
     <div>
@@ -35,17 +40,19 @@
                 (onClick)="annulerRenommage()" type="reset" severity="warn"/>
     </div>
   </form>
+
   <div class="liste">
     @for (portefeuille of portefeuilles; track portefeuille.nom; let idx = $index) {
       <div>
-        <div><span class="pi pi-cog" (click)="configurerPortefeuille(idx)"
-                   title="{{ 'COMPOSANTS.PORTEFEUILLES.GESTION_PORTEFEUILLES.CONFIGURER' | translate }}"></span></div>
+        <div><span class="pi pi-cog" (click)="editionPortefeuille(idx)"
+                   title="{{ 'COMPOSANTS.PORTEFEUILLES.GESTION_PORTEFEUILLES.EDITER' | translate }}"></span></div>
         <div><span class="pi pi-pencil" (click)="renommagePortefeuille(idx)"
                    title="{{ 'COMPOSANTS.PORTEFEUILLES.GESTION_PORTEFEUILLES.RENOMMER' | translate }}"></span></div>
         <div><span class="pi pi-trash" (click)="supprimerPortefeuille(idx)"
                    title="{{ 'COMPOSANTS.PORTEFEUILLES.GESTION_PORTEFEUILLES.SUPPRIMER' | translate }}"></span></div>
-        <div>{{ portefeuille.nom }}</div>
-
+        <div>
+          {{ portefeuille.nom }} {{tickers(portefeuille)}}
+        </div>
       </div>
     }
   </div>

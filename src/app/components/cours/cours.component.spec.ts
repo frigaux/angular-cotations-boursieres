@@ -49,7 +49,7 @@ describe('CoursComponent', () => {
       mockCoursService.chargerCours.and.returnValue(of(LISTE_COURS));
     });
 
-    it('when #ngOnInit then component is loaded', () => {
+    it('when #ngOnInit then le composant est chargé', () => {
       fixture.detectChanges(); // appelle le ngOnInit
       expect(component).toBeDefined();
       expect(component.loading).toBeFalse();

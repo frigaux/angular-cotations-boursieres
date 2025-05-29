@@ -9,7 +9,10 @@ import {Card} from 'primeng/card';
 import {pasDeNomEnDoublonValidator} from './pas-de-nom-en-doublon.validator';
 import {TranslatePipe} from '@ngx-translate/core';
 import {Portefeuille} from './portefeuille.interface';
+import {SelecteurValeursComponent} from './selecteur-valeurs/selecteur-valeurs.component';
 
+// TODO : faire deux composants pour la création et le renommage
+// TODO : composant de sauvegarde/restauration des portefeuilles
 @Component({
   selector: 'app-gestion-portefeuilles',
   imports: [
@@ -20,7 +23,8 @@ import {Portefeuille} from './portefeuille.interface';
     Button,
     Card,
     ReactiveFormsModule,
-    TranslatePipe
+    TranslatePipe,
+    SelecteurValeursComponent
   ],
   templateUrl: './gestion-portefeuilles.component.html',
   styleUrl: './gestion-portefeuilles.component.sass'
@@ -45,6 +49,7 @@ export class GestionPortefeuillesComponent implements OnInit {
   //données pour la vue
   portefeuilles: Array<Portefeuille> = [];
   portefeuilleEnRenommage: Portefeuille | undefined;
+  portefeuilleEnEdition: Portefeuille | undefined;
 
   ngOnInit(): void {
     this.portefeuilles = [];
@@ -54,6 +59,13 @@ export class GestionPortefeuillesComponent implements OnInit {
     }
     this.formulaireCreationPortefeuille.get('champNom')?.addValidators(pasDeNomEnDoublonValidator(this.portefeuilles))
     this.formulaireModificationPortefeuille.get('champNom')?.addValidators(pasDeNomEnDoublonValidator(this.portefeuilles))
+  }
+
+  tickers(portefeuille: Portefeuille) {
+    if (portefeuille.tickers.length > 0) {
+      return '(' + portefeuille.tickers.reduce((t1, t2) => t1 + ', ' + t2) + ')';
+    }
+    return '';
   }
 
   creerPortefeuille() {
@@ -74,16 +86,23 @@ export class GestionPortefeuillesComponent implements OnInit {
     this.formulaireModificationPortefeuille.get('champNom')?.updateValueAndValidity();
     if (this.formulaireModificationPortefeuille.valid && this.formulaireModificationPortefeuille.value.champNom) {
       this.portefeuilleEnRenommage!.nom = this.formulaireModificationPortefeuille.value.champNom;
+      this.portefeuilleEnRenommage = undefined;
+      this.setLocalStorage(this.portefeuilles);
     }
-    this.portefeuilleEnRenommage = undefined;
-    this.setLocalStorage(this.portefeuilles);
   }
 
   annulerRenommage() {
     this.portefeuilleEnRenommage = undefined;
   }
 
-  configurerPortefeuille(idx: number) {
+  editionPortefeuille(idx: number) {
+    this.portefeuilleEnEdition = this.portefeuilles[idx];
+  }
+
+  editerPortefeuille(tickers: string[]) {
+    this.portefeuilleEnEdition!.tickers = tickers;
+    this.setLocalStorage(this.portefeuilles);
+    this.portefeuilleEnEdition = undefined;
   }
 
   supprimerPortefeuille(idx: number) {

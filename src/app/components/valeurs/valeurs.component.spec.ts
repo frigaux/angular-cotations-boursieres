@@ -47,7 +47,7 @@ describe('ValeursComponent', () => {
       mockValeursService.chargerValeurs.and.returnValue(of(VALEURS));
     });
 
-    it('when #ngOnInit then component is loaded', () => {
+    it('when #ngOnInit then le composant est chargé', () => {
       fixture.detectChanges(); // appelle le ngOnInit
       expect(component).toBeDefined();
       expect(component.loading).toBeFalse();

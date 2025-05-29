@@ -98,7 +98,6 @@ export class ChartsComponent {
         tooltip: {
           callbacks: {
             title: function (context: any) {
-              console.log(context);
               const dot= context[0];
               if (dot.datasetIndex === 0) {
                 return dot.label;
