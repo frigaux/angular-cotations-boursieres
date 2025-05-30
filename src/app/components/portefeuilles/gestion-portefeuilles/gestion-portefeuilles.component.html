@@ -7,51 +7,26 @@
                        (modifie)="editerPortefeuille($event)"></app-selecteur-valeurs>
 
 <p-card header="{{ 'COMPOSANTS.PORTEFEUILLES.GESTION_PORTEFEUILLES.CREATION' | translate }}">
-  <form [formGroup]="formulaireCreationPortefeuille" (ngSubmit)="creerPortefeuille()">
-    <div>
-      <p-floatlabel>
-        <input pInputText id="nom" formControlName="champNom" autocomplete="off"/>
-        <label for="nom">{{ 'COMPOSANTS.PORTEFEUILLES.GESTION_PORTEFEUILLES.NOM' | translate }}</label>
-      </p-floatlabel>
-    </div>
-    <div>
-      <p-button label="{{ 'COMPOSANTS.PORTEFEUILLES.GESTION_PORTEFEUILLES.CREER' | translate }}" type="submit"/>
-    </div>
-  </form>
+  <app-formulaire-creation [portefeuilles]="portefeuilles" (cree)="creerPortefeuille($event)"></app-formulaire-creation>
 </p-card>
 
 <p-card header="{{ 'COMPOSANTS.PORTEFEUILLES.GESTION_PORTEFEUILLES.PORTEFEUILLES' | translate }}"
         *ngIf="portefeuilles.length != 0">
 
-  <form *ngIf="portefeuilleEnRenommage" [formGroup]="formulaireModificationPortefeuille"
-        (ngSubmit)="renommerPortefeuille()">
-    <div>
-      <p-floatlabel>
-        <input pInputText id="nom" formControlName="champNom" autocomplete="off"/>
-        <label for="nom">{{ 'COMPOSANTS.PORTEFEUILLES.GESTION_PORTEFEUILLES.NOM' | translate }}</label>
-      </p-floatlabel>
-    </div>
-    <div>
-      <p-button label="{{ 'COMPOSANTS.PORTEFEUILLES.GESTION_PORTEFEUILLES.MODIFIER' | translate }}"
-                type="submit" severity="danger"/>
-    </div>
-    <div>
-      <p-button label="{{ 'COMPOSANTS.PORTEFEUILLES.GESTION_PORTEFEUILLES.ANNULER' | translate }}"
-                (onClick)="annulerRenommage()" type="reset" severity="warn"/>
-    </div>
-  </form>
+  <app-formulaire-modification [portefeuilles]="portefeuilles" [portefeuille]="portefeuilleEnModification"
+                               (annule)="this.portefeuilleEnModification = undefined" (modifie)="modifierPortefeuille($event)"></app-formulaire-modification>
 
   <div class="liste">
     @for (portefeuille of portefeuilles; track portefeuille.nom; let idx = $index) {
       <div>
         <div><span class="pi pi-cog" (click)="editionPortefeuille(idx)"
                    title="{{ 'COMPOSANTS.PORTEFEUILLES.GESTION_PORTEFEUILLES.EDITER' | translate }}"></span></div>
-        <div><span class="pi pi-pencil" (click)="renommagePortefeuille(idx)"
+        <div><span class="pi pi-pencil" (click)="modificationPortefeuille(idx)"
                    title="{{ 'COMPOSANTS.PORTEFEUILLES.GESTION_PORTEFEUILLES.RENOMMER' | translate }}"></span></div>
         <div><span class="pi pi-trash" (click)="supprimerPortefeuille(idx)"
                    title="{{ 'COMPOSANTS.PORTEFEUILLES.GESTION_PORTEFEUILLES.SUPPRIMER' | translate }}"></span></div>
         <div>
-          {{ portefeuille.nom }} {{tickers(portefeuille)}}
+          {{ portefeuille.nom }} {{ tickers(portefeuille) }}
         </div>
       </div>
     }

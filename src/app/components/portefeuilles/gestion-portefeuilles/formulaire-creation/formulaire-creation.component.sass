@@ -1,0 +1,14 @@
+form
+  display: flex
+  flex-direction: row
+  margin: 1rem
+
+  & > div
+    margin: 0.5rem
+
+  input
+    &.ng-invalid.ng-touched, &.ng-invalid.ng-dirty
+      border-color: var(--p-red-800)
+
+    &.ng-valid
+      border-color: var(--p-green-800)

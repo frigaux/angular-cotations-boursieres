@@ -1,0 +1,11 @@
+<form [formGroup]="formulaireCreationPortefeuille" (ngSubmit)="creerPortefeuille()">
+  <div>
+    <p-floatlabel>
+      <input pInputText id="nom" formControlName="champNom" autocomplete="off"/>
+      <label for="nom">{{ 'COMPOSANTS.PORTEFEUILLES.GESTION_PORTEFEUILLES.FORMULAIRE_CREATION.NOM' | translate }}</label>
+    </p-floatlabel>
+  </div>
+  <div>
+    <p-button label="{{ 'COMPOSANTS.PORTEFEUILLES.GESTION_PORTEFEUILLES.FORMULAIRE_CREATION.CREER' | translate }}" type="submit"/>
+  </div>
+</form>

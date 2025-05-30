@@ -63,14 +63,19 @@
     "PORTEFEUILLES": {
       "GESTION_PORTEFEUILLES": {
         "CREATION": "Création d'un portefeuille",
-        "NOM": "Nom du portefeuille",
-        "CREER": "Créer",
         "PORTEFEUILLES": "Portefeuilles",
         "EDITER": "Editer les valeurs du portefeuille",
         "RENOMMER": "Renommer le portefeuille",
         "SUPPRIMER": "Supprimer le portefeuille",
-        "MODIFIER": "Modifier",
-        "ANNULER": "Annuler",
+        "FORMULAIRE_CREATION": {
+          "NOM": "Nom du portefeuille",
+          "CREER": "Créer"
+        },
+        "FORMULAIRE_MODIFICATION": {
+          "NOM": "Nouveau nom du portefeuille",
+          "MODIFIER": "Modifier le portefeuille",
+          "ANNULER": "Annuler"
+        },
         "SELECTEUR_VALEURS": {
           "MODIFICATION_PORTEFEUILLE": "Modification des valeurs du portefeuille",
           "RECHERCHE": "Recherche par libellé",

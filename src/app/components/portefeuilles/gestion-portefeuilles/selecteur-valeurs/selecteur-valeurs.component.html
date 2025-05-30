@@ -8,6 +8,7 @@
       <span class="pi pi-save" (click)="modifier()"></span>
       <span class="pi pi-times-circle" (click)="this.ferme.emit()"></span>
     </ng-template>
+
     <div *ngIf="loading">
       <p-progressbar mode="indeterminate" [style]="{'height': '10px'}"/>
     </div>
