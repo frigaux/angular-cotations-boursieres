@@ -8,8 +8,9 @@ import {Portefeuille} from './portefeuille.interface';
 import {SelecteurValeursComponent} from './selecteur-valeurs/selecteur-valeurs.component';
 import {FormulaireCreationComponent} from './formulaire-creation/formulaire-creation.component';
 import {FormulaireModificationComponent} from './formulaire-modification/formulaire-modification.component';
+import {ImportExportComponent} from './import-export/import-export.component';
+import {PortefeuillesService} from '../../../services/portefeuilles/portefeuilles.service';
 
-// TODO : composant de sauvegarde/restauration des portefeuilles
 @Component({
   selector: 'app-gestion-portefeuilles',
   imports: [
@@ -20,14 +21,13 @@ import {FormulaireModificationComponent} from './formulaire-modification/formula
     TranslatePipe,
     SelecteurValeursComponent,
     FormulaireCreationComponent,
-    FormulaireModificationComponent
+    FormulaireModificationComponent,
+    ImportExportComponent
   ],
   templateUrl: './gestion-portefeuilles.component.html',
   styleUrl: './gestion-portefeuilles.component.sass'
 })
 export class GestionPortefeuillesComponent implements OnInit {
-  private static readonly PORTEFEUILLES: string = 'portefeuilles';
-
   // chargement des cours
   loading: boolean = false;
 
@@ -36,12 +36,12 @@ export class GestionPortefeuillesComponent implements OnInit {
   portefeuilleEnModification: Portefeuille | undefined;
   portefeuilleEnEdition: Portefeuille | undefined;
 
+  constructor(private portefeuillesService: PortefeuillesService) {
+  }
+
   ngOnInit(): void {
-    this.portefeuilles = [];
-    const json = window.localStorage.getItem(GestionPortefeuillesComponent.PORTEFEUILLES);
-    if (json) {
-      this.portefeuilles = JSON.parse(json);
-    }
+    this.portefeuilles = this.portefeuillesService.charger();
+    this.portefeuillesService.onImport(portefeuilles => this.portefeuilles = portefeuilles);
   }
 
   tickers(portefeuille: Portefeuille) {
@@ -53,7 +53,7 @@ export class GestionPortefeuillesComponent implements OnInit {
 
   creerPortefeuille(nom: string) {
     this.portefeuilles.push({nom, tickers: []});
-    this.setLocalStorage(this.portefeuilles);
+    this.portefeuillesService.enregistrer(this.portefeuilles);
   }
 
   modificationPortefeuille(idx: number) {
@@ -63,7 +63,7 @@ export class GestionPortefeuillesComponent implements OnInit {
   modifierPortefeuille(nom: string) {
     this.portefeuilleEnModification!.nom = nom;
     this.portefeuilleEnModification = undefined;
-    this.setLocalStorage(this.portefeuilles);
+    this.portefeuillesService.enregistrer(this.portefeuilles);
   }
 
   editionPortefeuille(idx: number) {
@@ -72,18 +72,14 @@ export class GestionPortefeuillesComponent implements OnInit {
 
   editerPortefeuille(tickers: string[]) {
     this.portefeuilleEnEdition!.tickers = tickers;
-    this.setLocalStorage(this.portefeuilles);
+    this.portefeuillesService.enregistrer(this.portefeuilles);
     this.portefeuilleEnEdition = undefined;
   }
 
   supprimerPortefeuille(idx: number) {
     if (idx < this.portefeuilles.length) {
       this.portefeuilles.splice(idx, 1);
-      this.setLocalStorage(this.portefeuilles);
+      this.portefeuillesService.enregistrer(this.portefeuilles);
     }
-  }
-
-  setLocalStorage(portefeuilles: Array<Portefeuille>) {
-    window.localStorage.setItem(GestionPortefeuillesComponent.PORTEFEUILLES, JSON.stringify(portefeuilles));
   }
 }

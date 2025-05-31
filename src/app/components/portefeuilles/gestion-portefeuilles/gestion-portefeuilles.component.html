@@ -6,12 +6,19 @@
                        (ferme)="this.portefeuilleEnEdition = undefined"
                        (modifie)="editerPortefeuille($event)"></app-selecteur-valeurs>
 
-<p-card header="{{ 'COMPOSANTS.PORTEFEUILLES.GESTION_PORTEFEUILLES.CREATION' | translate }}">
+<p-card>
+  <div class="p-card-title">
+    {{ 'COMPOSANTS.PORTEFEUILLES.GESTION_PORTEFEUILLES.CREATION' | translate }}
+    <app-import-export></app-import-export>
+  </div>
+
   <app-formulaire-creation [portefeuilles]="portefeuilles" (cree)="creerPortefeuille($event)"></app-formulaire-creation>
 </p-card>
 
-<p-card header="{{ 'COMPOSANTS.PORTEFEUILLES.GESTION_PORTEFEUILLES.PORTEFEUILLES' | translate }}"
-        *ngIf="portefeuilles.length != 0">
+<p-card *ngIf="portefeuilles.length != 0">
+  <div class="p-card-title">
+    {{ 'COMPOSANTS.PORTEFEUILLES.GESTION_PORTEFEUILLES.PORTEFEUILLES' | translate }}
+  </div>
 
   <app-formulaire-modification [portefeuilles]="portefeuilles" [portefeuille]="portefeuilleEnModification"
                                (annule)="this.portefeuilleEnModification = undefined" (modifie)="modifierPortefeuille($event)"></app-formulaire-modification>

@@ -5,6 +5,9 @@ import {TranslateModule} from '@ngx-translate/core';
 import {PORTEFEUILLES} from '../../../services/jdd/jdd-portefeuille.dataset';
 import {Portefeuille} from './portefeuille.interface';
 import {ValeursService} from '../../../services/valeurs/valeurs.service';
+import {of} from 'rxjs';
+import {VALEURS} from '../../../services/jdd/jdd-valeur.dataset';
+import {PortefeuillesService} from '../../../services/portefeuilles/portefeuilles.service';
 
 describe('GestionPortefeuillesComponent', () => {
   let component: GestionPortefeuillesComponent;
@@ -12,6 +15,7 @@ describe('GestionPortefeuillesComponent', () => {
   const clonePORTEFEUILLES: Function = () => JSON.parse(JSON.stringify(PORTEFEUILLES))
 
   const mockValeursService = jasmine.createSpyObj('ValeursService', ['chargerValeurs']);
+  const mockPortefeuillesService = jasmine.createSpyObj('PortefeuillesService', ['charger', 'onImport', 'enregistrer']);
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
@@ -20,7 +24,8 @@ describe('GestionPortefeuillesComponent', () => {
         TranslateModule.forRoot({})
       ],
       providers: [
-        {provide: ValeursService, useValue: mockValeursService}
+        {provide: ValeursService, useValue: mockValeursService},
+        {provide: PortefeuillesService, useValue: mockPortefeuillesService}
       ]
     })
       .compileComponents();
@@ -35,7 +40,7 @@ describe('GestionPortefeuillesComponent', () => {
 
   describe('Given un LocalStorage avec des portefeuilles existants', () => {
     beforeEach(() => {
-      component.setLocalStorage(clonePORTEFEUILLES());
+      mockPortefeuillesService.charger.and.returnValue(of(PORTEFEUILLES));
     });
 
     it('when #ngOnInit then les portefeuilles sont chargés', () => {

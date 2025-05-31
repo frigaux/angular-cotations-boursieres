@@ -81,6 +81,10 @@
           "RECHERCHE": "Recherche par libellé",
           "SOURCE": "Valeurs disponibles",
           "TARGET": "Valeurs du portefeuille"
+        },
+        "IMPORT_EXPORT": {
+          "EXPORT": "Export de la configuration des portefeuilles",
+          "IMPORT": "Import de la configuration des portefeuilles"
         }
       }
     }
