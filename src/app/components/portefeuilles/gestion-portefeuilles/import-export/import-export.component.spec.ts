@@ -38,6 +38,7 @@ describe('ImportExportComponent', () => {
       component.importer();
       fixture.detectChanges();
       component.exporter(); // waiting Promise resolve
+      fixture.detectChanges();
       expect(navigator.clipboard.writeText).toHaveBeenCalledWith(portefeuilles);
     });
   });
