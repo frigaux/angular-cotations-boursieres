@@ -7,14 +7,10 @@ import {Observable, Subscriber} from 'rxjs';
 })
 export class PortefeuillesService {
   private static readonly PORTEFEUILLES: string = 'portefeuilles';
-  private observerImport!: Subscriber<Array<Portefeuille>>;
-  private observableImport!: Observable<Array<Portefeuille>>;
-
-  constructor() {
-    this.observableImport = new Observable(observer => {
-      this.observerImport = observer;
-    });
-  }
+  private static readonly OBSERVERS_IMPORT: Array<Subscriber<Array<Portefeuille>>> = [];
+  private static readonly OBSERVABLE_IMPORT: Observable<Array<Portefeuille>> = new Observable(observer => {
+    PortefeuillesService.OBSERVERS_IMPORT.push(observer);
+  });
 
   charger(): Array<Portefeuille> {
     const json = window.localStorage.getItem(PortefeuillesService.PORTEFEUILLES);
@@ -45,7 +41,7 @@ export class PortefeuillesService {
           || !portefeuille.hasOwnProperty('tickers'));
         if (!error) {
           window.localStorage.setItem(PortefeuillesService.PORTEFEUILLES, json);
-          this.observerImport.next(portefeuilles);
+          PortefeuillesService.OBSERVERS_IMPORT.forEach(observer => observer.next(portefeuilles));
         }
       }
     } catch (e) {
@@ -54,6 +50,6 @@ export class PortefeuillesService {
   }
 
   onImport(o: ((value: Array<Portefeuille>) => void)): void {
-    this.observableImport.subscribe(o);
+    PortefeuillesService.OBSERVABLE_IMPORT.subscribe(o);
   }
 }

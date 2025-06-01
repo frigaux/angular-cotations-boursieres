@@ -5,8 +5,6 @@ import {TranslateModule} from '@ngx-translate/core';
 import {PORTEFEUILLES} from '../../../services/jdd/jdd-portefeuille.dataset';
 import {Portefeuille} from './portefeuille.interface';
 import {ValeursService} from '../../../services/valeurs/valeurs.service';
-import {of} from 'rxjs';
-import {VALEURS} from '../../../services/jdd/jdd-valeur.dataset';
 import {PortefeuillesService} from '../../../services/portefeuilles/portefeuilles.service';
 
 describe('GestionPortefeuillesComponent', () => {
@@ -40,7 +38,7 @@ describe('GestionPortefeuillesComponent', () => {
 
   describe('Given un LocalStorage avec des portefeuilles existants', () => {
     beforeEach(() => {
-      mockPortefeuillesService.charger.and.returnValue(of(PORTEFEUILLES));
+      mockPortefeuillesService.charger.and.returnValue(clonePORTEFEUILLES());
     });
 
     it('when #ngOnInit then les portefeuilles sont chargés', () => {
