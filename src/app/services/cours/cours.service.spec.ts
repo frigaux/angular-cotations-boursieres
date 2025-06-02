@@ -7,8 +7,14 @@ import {provideHttpClient} from '@angular/common/http';
 import {firstValueFrom} from 'rxjs';
 import {DTOListeCours} from './dto-liste-cours.interface';
 import {DTOCoursTicker} from './dto-cours-ticker.interface';
-import {DTOCoursTickerLight} from './dto-cours-ticker-light.interface';
-import {LISTE_COURS, COURS_TICKER, LISTE_COURS_TICKER_LIGHT} from '../jdd/jdd-cours.dataset';
+import {DTOCoursTickerAllege} from './dto-cours-ticker-allege.interface';
+import {
+  LISTE_COURS,
+  COURS_TICKER,
+  LISTE_COURS_TICKER_LIGHT,
+  LISTE_COURS_AVEC_LISTE_ALLEGEE
+} from '../jdd/jdd-cours.dataset';
+import {DtoCoursAvecListeAllege} from './dto-cours-avec-liste-allege.interface';
 
 describe('CoursService', () => {
   let coursService: CoursService;
@@ -61,15 +67,28 @@ describe('CoursService', () => {
     httpTesting.verify();
   });
 
-  it('#chargerCoursTickerWithLimit doit renvoyer les n dernier cours pour le ticker', async () => {
+  it('#chargerCoursTickerWithLimit doit renvoyer les n derniers cours pour le ticker', async () => {
     // création d'une promesse sur l'observable qui fait la requête HTTP de récupération des cours
-    const promiseCours: Promise<DTOCoursTickerLight[]> = firstValueFrom(coursService.chargerCoursTickerWithLimit('GLE', 2));
+    const promiseCours: Promise<DTOCoursTickerAllege[]> = firstValueFrom(coursService.chargerCoursTickerWithLimit('GLE', 2));
     // bouchonnage de la ressource HTTP
     httpTesting.expectOne({
       method: 'GET',
       url: 'bourse/cours/GLE/2',
     }).flush(LISTE_COURS_TICKER_LIGHT);
     expect(await promiseCours).toEqual(LISTE_COURS_TICKER_LIGHT);
+    // vérification qu'il n'y a pas de requêtes en attente
+    httpTesting.verify();
+  });
+
+  it('#chargerCoursTickersWithLimit doit renvoyer les n derniers cours pour les tickers', async () => {
+    // création d'une promesse sur l'observable qui fait la requête HTTP de récupération des cours
+    const promiseCours: Promise<DtoCoursAvecListeAllege[]> = firstValueFrom(coursService.chargerCoursTickersWithLimit(['GLE','BNP'], 4));
+    // bouchonnage de la ressource HTTP
+    httpTesting.expectOne({
+      method: 'GET',
+      url: 'bourse/cours/tickers/4?tickers=GLE,BNP',
+    }).flush(LISTE_COURS_AVEC_LISTE_ALLEGEE);
+    expect(await promiseCours).toEqual(LISTE_COURS_AVEC_LISTE_ALLEGEE);
     // vérification qu'il n'y a pas de requêtes en attente
     httpTesting.verify();
   });

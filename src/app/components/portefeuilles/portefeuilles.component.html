@@ -1,3 +1,14 @@
 <div *ngIf="loading">
   <p-progressbar mode="indeterminate" [style]="{'height': '10px'}"/>
 </div>
+
+<p-accordion value="{{portefeuillesAvecCours.length === 1 ? 0 : undefined}}" (onOpen)="onOpen($event)">
+  @for (portefeuilleAvecCours of portefeuillesAvecCours; track portefeuilleAvecCours.portefeuille.nom; let i = $index) {
+    <p-accordion-panel value="{{i}}">
+      <p-accordion-header>{{portefeuilleAvecCours.portefeuille.nom}}</p-accordion-header>
+      <p-accordion-content>
+        TODO
+      </p-accordion-content>
+    </p-accordion-panel>
+  }
+</p-accordion>

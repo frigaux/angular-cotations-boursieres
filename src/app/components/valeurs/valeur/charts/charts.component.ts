@@ -1,6 +1,6 @@
 import {Component, effect, input, InputSignal} from '@angular/core';
 import {Cours} from '../../../cours/cours.class';
-import {DTOCoursTickerLight} from '../../../../services/cours/dto-cours-ticker-light.interface';
+import {DTOCoursTickerAllege} from '../../../../services/cours/dto-cours-ticker-allege.interface';
 import {TranslatePipe, TranslateService} from '@ngx-translate/core';
 import {DatePipe} from '@angular/common';
 import {UIChart} from 'primeng/chart';
@@ -24,7 +24,7 @@ import {FormsModule} from '@angular/forms';
 export class ChartsComponent {
   // input/output
   cours: InputSignal<Cours | undefined> = input();
-  coursLight: InputSignal<DTOCoursTickerLight[] | undefined> = input();
+  coursLight: InputSignal<DTOCoursTickerAllege[] | undefined> = input();
 
   // données pour la vue
   // https://www.chartjs.org/
@@ -44,7 +44,7 @@ export class ChartsComponent {
   }
 
   initChart() {
-    const listeCours: DTOCoursTickerLight[] | undefined = this.coursLight();
+    const listeCours: DTOCoursTickerAllege[] | undefined = this.coursLight();
     if (listeCours) {
       this.periodes = [];
       for (const periode of [50, 100, 150, 200, 250, 300]) {
@@ -60,7 +60,7 @@ export class ChartsComponent {
 
   displayChart() {
     const cours: Cours | undefined = this.cours();
-    const listeCours: DTOCoursTickerLight[] | undefined = this.coursLight();
+    const listeCours: DTOCoursTickerAllege[] | undefined = this.coursLight();
     if (cours && listeCours && listeCours.length <= cours.moyennesMobiles.length) {
       const labels: string[] = [];
       const dataCours: number[] = [];

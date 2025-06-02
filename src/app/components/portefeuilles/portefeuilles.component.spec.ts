@@ -3,12 +3,14 @@ import {ComponentFixture, TestBed} from '@angular/core/testing';
 import {PortefeuillesComponent} from './portefeuilles.component';
 import {TranslateModule} from '@ngx-translate/core';
 import {ValeursService} from '../../services/valeurs/valeurs.service';
+import {CoursService} from '../../services/cours/cours.service';
 
 describe('PortefeuillesComponent', () => {
   let component: PortefeuillesComponent;
   let fixture: ComponentFixture<PortefeuillesComponent>;
 
   const mockValeursService = jasmine.createSpyObj('ValeursService', ['chargerValeurs']);
+  const mockCoursService = jasmine.createSpyObj('CoursService', ['chargerCoursTickersWithLimit']);
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
@@ -17,7 +19,8 @@ describe('PortefeuillesComponent', () => {
         TranslateModule.forRoot({})
       ],
       providers: [
-        {provide: ValeursService, useValue: mockValeursService}
+        {provide: ValeursService, useValue: mockValeursService},
+        {provide: CoursService, useValue: mockCoursService}
       ]
     });
 

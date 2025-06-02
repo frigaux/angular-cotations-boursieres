@@ -22,9 +22,11 @@ import {ValeurComponent} from './valeur/valeur.component';
 export class CoursComponent implements OnInit {
   // chargement des cours
   loading: boolean = true;
+
   // données pour la vue
   date!: Date;
   marches: CoursMarche[] = [];
+
   // cours pour lequel afficher les moyennes mobiles
   coursSelectionne : Cours | undefined = undefined;
 

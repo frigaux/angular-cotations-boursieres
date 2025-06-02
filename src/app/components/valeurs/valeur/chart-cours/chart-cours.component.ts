@@ -1,7 +1,7 @@
 import {Component, effect, input, InputSignal} from '@angular/core';
 import {TranslateService} from '@ngx-translate/core';
 import {UIChart} from 'primeng/chart';
-import {DTOCoursTickerLight} from '../../../../services/cours/dto-cours-ticker-light.interface';
+import {DTOCoursTickerAllege} from '../../../../services/cours/dto-cours-ticker-allege.interface';
 import {Cours} from '../../../cours/cours.class';
 import {DatePipe} from '@angular/common';
 
@@ -17,7 +17,7 @@ import {DatePipe} from '@angular/common';
 export class ChartCoursComponent {
   // input/output
   cours: InputSignal<Cours | undefined> = input();
-  coursLight: InputSignal<DTOCoursTickerLight[] | undefined> = input();
+  coursLight: InputSignal<DTOCoursTickerAllege[] | undefined> = input();
 
   // https://www.chartjs.org/
   data: any;
@@ -30,7 +30,7 @@ export class ChartCoursComponent {
   }
 
   initChart() {
-    const listeCours: DTOCoursTickerLight[] | undefined = this.coursLight();
+    const listeCours: DTOCoursTickerAllege[] | undefined = this.coursLight();
     if (listeCours) {
       const labels: string[] = [];
       const data: number[] = [];

@@ -1,4 +1,4 @@
-import {ComponentFixture, TestBed} from '@angular/core/testing';
+import {ComponentFixture, fakeAsync, TestBed, tick} from '@angular/core/testing';
 
 import {ImportExportComponent} from './import-export.component';
 import {TranslateModule} from '@ngx-translate/core';
@@ -34,12 +34,11 @@ describe('ImportExportComponent', () => {
       fixture.detectChanges();
     });
 
-    it('when on importe then l\'export renvoie les portefeuilles importés', () => {
-      component.importer();
-      fixture.detectChanges();
-      component.exporter(); // waiting Promise resolve
-      fixture.detectChanges();
+    it('when on importe then l\'export renvoie les portefeuilles importés', fakeAsync(() => {
+      component.importer(); // need Promise resolution
+      tick(10);
+      component.exporter();
       expect(navigator.clipboard.writeText).toHaveBeenCalledWith(portefeuilles);
-    });
+    }));
   });
 });
