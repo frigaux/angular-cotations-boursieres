@@ -41,6 +41,10 @@ export class Cours {
   }
 
   private calculerVariation(dto: DtoCoursAvecListeAllege, jours: number) {
-    return (dto.cours[0].cloture / dto.cours[jours].cloture) - 1;
+    if (dto.cours.length > jours) {
+      return (dto.cours[0].cloture / dto.cours[jours].cloture) - 1;
+    } else {
+      return 0;
+    }
   }
 }

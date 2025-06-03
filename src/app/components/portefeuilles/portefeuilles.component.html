@@ -61,7 +61,7 @@
                       'positive': (cours.cloture >= cours.ouverture),
                       'negative': (cours.cloture < cours.ouverture)
                     }"
-                      (mouseenter)="coursSelectionne = cours"></span>
+                      (mouseenter)="afficherDetails(cours)"></span>
                 {{ cours.libelle }}
                 <span class="pi pi-exclamation-triangle" *ngIf="cours.alerte"></span>
               </td>

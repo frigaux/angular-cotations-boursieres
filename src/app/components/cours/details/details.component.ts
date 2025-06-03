@@ -5,16 +5,16 @@ import {ChartMoyennesMobilesComponent} from '../../valeurs/valeur/chart-moyennes
 import {Cours} from '../cours.class';
 
 @Component({
-  selector: 'app-valeur',
+  selector: 'app-details',
   imports: [
     Panel,
     TranslatePipe,
     ChartMoyennesMobilesComponent,
   ],
-  templateUrl: './valeur.component.html',
-  styleUrl: './valeur.component.sass'
+  templateUrl: './details.component.html',
+  styleUrl: './details.component.sass'
 })
-export class ValeurComponent {
+export class DetailsComponent {
   // input/output
   cours: InputSignal<Cours | undefined> = input();
   ferme = output<void>();

@@ -54,8 +54,10 @@
       "PLUSBAS": "Plus bas",
       "PLUSHAUT": "Plus haut",
       "VOLUME": "Volume échangé",
+      "DETAILS": {
+        "COURBE": "Courbe des moyennes mobiles"
+      },
       "MOYENNES_MOBILES": {
-        "COURBE": "Courbe des moyennes mobiles",
         "NB_JOURS_CALCUL": "Nombre de jours de cotations utilisés pour le calcul de la moyenne mobile",
         "JOURS": "jours"
       }

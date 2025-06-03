@@ -37,9 +37,6 @@ export class PortefeuillesComponent implements OnInit {
   portefeuillesAvecCours: Array<PortefeuilleAvecCours> = [];
   currencyFormatter: Intl.NumberFormat;
 
-  // cours pour lequel afficher les détails
-  coursSelectionne: Cours | undefined = undefined;
-
   // privé
   private readonly valeurByTicker = new Map<string, DTOValeur>();
 
@@ -74,9 +71,6 @@ export class PortefeuillesComponent implements OnInit {
           const libelle: string = this.valeurByTicker.get(dto.ticker)!.libelle;
           return new Cours(libelle, dto);
         });
-
-        console.log(liste, portefeuilleAvecCours);
-        // portefeuilleAvecCours.cours[0].coursAlleges[0]
         this.loading = false;
       })
   }
@@ -87,5 +81,9 @@ export class PortefeuillesComponent implements OnInit {
 
   classeMM(cours: Cours, mm: number) {
     return cours.cloture >= mm ? 'positive' : 'negative';
+  }
+
+  afficherDetails(cours: Cours) {
+
   }
 }

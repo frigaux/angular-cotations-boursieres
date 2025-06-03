@@ -1,18 +1,18 @@
 import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import {ValeurComponent} from './valeur.component';
+import {DetailsComponent} from './details.component';
 import {COURS_CROISSANT} from '../../../services/jdd/jdd-cours.dataset';
 import {TranslateModule} from '@ngx-translate/core';
 import {provideAnimations} from '@angular/platform-browser/animations';
 
-describe('ValeurComponent', () => {
-  let component: ValeurComponent;
-  let fixture: ComponentFixture<ValeurComponent>;
+describe('DetailsComponent', () => {
+  let component: DetailsComponent;
+  let fixture: ComponentFixture<DetailsComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [
-        ValeurComponent,
+        DetailsComponent,
         TranslateModule.forRoot({})
       ],
       providers: [
@@ -21,7 +21,7 @@ describe('ValeurComponent', () => {
     })
       .compileComponents();
 
-    fixture = TestBed.createComponent(ValeurComponent);
+    fixture = TestBed.createComponent(DetailsComponent);
     component = fixture.componentInstance;
   });
 

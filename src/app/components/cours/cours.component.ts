@@ -10,7 +10,7 @@ import {DTOListeCours} from '../../services/cours/dto-liste-cours.interface';
 import {Accordion, AccordionContent, AccordionHeader, AccordionPanel} from 'primeng/accordion';
 import {ProgressSpinner} from 'primeng/progressspinner';
 import {Cours} from './cours.class';
-import {ValeurComponent} from './valeur/valeur.component';
+import {DetailsComponent} from './details/details.component';
 import {DatePipe, DecimalPipe, NgClass, NgIf} from '@angular/common';
 
 @Component({
@@ -23,7 +23,7 @@ import {DatePipe, DecimalPipe, NgClass, NgIf} from '@angular/common';
     AccordionHeader,
     AccordionContent,
     ProgressSpinner,
-    ValeurComponent,
+    DetailsComponent,
     DecimalPipe,
     NgClass,
     DatePipe,
