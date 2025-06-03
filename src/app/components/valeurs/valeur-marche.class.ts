@@ -4,8 +4,8 @@ import {Valeur} from './valeur.class';
 import {DTOValeur} from '../../services/valeurs/dto-valeur.interface';
 
 export class ValeurMarche {
-  libelle!: string;
-  valeurs!: Valeur[];
+  libelle: string;
+  valeurs: Valeur[];
 
   constructor(private marche: Marche, private translateService: TranslateService, private liste: DTOValeur[]) {
     this.libelle = this.translateService.instant('ENUMERATIONS.MARCHE.' + marche);

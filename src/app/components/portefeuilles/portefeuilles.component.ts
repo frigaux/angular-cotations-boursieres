@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {NgIf} from '@angular/common';
+import {DecimalPipe, NgClass, NgIf, PercentPipe} from '@angular/common';
 import {ProgressBar} from 'primeng/progressbar';
 import {PortefeuillesService} from '../../services/portefeuilles/portefeuilles.service';
 import {Accordion, AccordionContent, AccordionHeader, AccordionPanel, AccordionTabOpenEvent} from 'primeng/accordion';
@@ -8,6 +8,8 @@ import {ValeursService} from '../../services/valeurs/valeurs.service';
 import {CoursService} from '../../services/cours/cours.service';
 import {DTOValeur} from '../../services/valeurs/dto-valeur.interface';
 import {PortefeuilleAvecCours} from './portefeuille-avec-cours.class';
+import {Cours} from './cours.class';
+import {TranslatePipe} from '@ngx-translate/core';
 
 @Component({
   selector: 'app-portefeuilles',
@@ -18,7 +20,11 @@ import {PortefeuilleAvecCours} from './portefeuille-avec-cours.class';
     AccordionContent,
     AccordionHeader,
     AccordionPanel,
-    TableModule
+    TableModule,
+    DecimalPipe,
+    TranslatePipe,
+    PercentPipe,
+    NgClass
   ],
   templateUrl: './portefeuilles.component.html',
   styleUrl: './portefeuilles.component.sass'
@@ -29,13 +35,18 @@ export class PortefeuillesComponent implements OnInit {
 
   // données pour la vue
   portefeuillesAvecCours: Array<PortefeuilleAvecCours> = [];
+  currencyFormatter: Intl.NumberFormat;
 
-  //
-  readonly valeurByTicker = new Map<string, DTOValeur>();
+  // cours pour lequel afficher les détails
+  coursSelectionne: Cours | undefined = undefined;
+
+  // privé
+  private readonly valeurByTicker = new Map<string, DTOValeur>();
 
   constructor(private portefeuillesService: PortefeuillesService,
               private valeursService: ValeursService,
               private coursService: CoursService) {
+    this.currencyFormatter = new Intl.NumberFormat('fr-FR', {style: 'currency', currency: 'EUR'});
   }
 
   ngOnInit(): void {
@@ -45,6 +56,8 @@ export class PortefeuillesComponent implements OnInit {
       valeurs.forEach(valeur => this.valeurByTicker.set(valeur.ticker, valeur));
       if (this.portefeuillesAvecCours.length === 1) {
         this.chargerCours(this.portefeuillesAvecCours[0]);
+      } else {
+        this.loading = false;
       }
     });
   }
@@ -57,8 +70,22 @@ export class PortefeuillesComponent implements OnInit {
     this.loading = true;
     this.coursService.chargerCoursTickersWithLimit(portefeuilleAvecCours.portefeuille.tickers, 300)
       .subscribe(liste => {
-        // TODO
+        portefeuilleAvecCours.cours = liste.map(dto => {
+          const libelle: string = this.valeurByTicker.get(dto.ticker)!.libelle;
+          return new Cours(libelle, dto);
+        });
+
+        console.log(liste, portefeuilleAvecCours);
+        // portefeuilleAvecCours.cours[0].coursAlleges[0]
         this.loading = false;
       })
+  }
+
+  classeVariation(variation: number): string {
+    return variation >= 0 ? 'positive' : 'negative';
+  }
+
+  classeMM(cours: Cours, mm: number) {
+    return cours.cloture >= mm ? 'positive' : 'negative';
   }
 }

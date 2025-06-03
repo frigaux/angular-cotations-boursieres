@@ -61,6 +61,16 @@
       }
     },
     "PORTEFEUILLES": {
+      "LIBELLE": "Libellé",
+      "CLOTURE": "Clôture",
+      "VOLUME": "Volume échangé",
+      "MM5": "MM5",
+      "MM20": "MM20",
+      "MM50": "MM50",
+      "VAR1": "Var./Préc.",
+      "VAR5": "Var./5j",
+      "VAR20": "Var./20j",
+      "VAR50": "Var./50j",
       "GESTION_PORTEFEUILLES": {
         "CREATION": "Création d'un portefeuille",
         "PORTEFEUILLES": "Portefeuilles",

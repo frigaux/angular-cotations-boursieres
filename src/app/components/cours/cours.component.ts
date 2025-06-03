@@ -1,6 +1,5 @@
 import {Component, inject, OnInit} from '@angular/core';
 import {TableModule} from 'primeng/table';
-import {CommonModule} from '@angular/common';
 import {TranslatePipe, TranslateService} from '@ngx-translate/core';
 import {ValeursService} from '../../services/valeurs/valeurs.service';
 import {CoursService} from '../../services/cours/cours.service';
@@ -12,10 +11,24 @@ import {Accordion, AccordionContent, AccordionHeader, AccordionPanel} from 'prim
 import {ProgressSpinner} from 'primeng/progressspinner';
 import {Cours} from './cours.class';
 import {ValeurComponent} from './valeur/valeur.component';
+import {DatePipe, DecimalPipe, NgClass, NgIf} from '@angular/common';
 
 @Component({
   selector: 'app-cours',
-  imports: [TableModule, CommonModule, TranslatePipe, Accordion, AccordionPanel, AccordionHeader, AccordionContent, ProgressSpinner, ValeurComponent],
+  imports: [
+    TableModule,
+    TranslatePipe,
+    Accordion,
+    AccordionPanel,
+    AccordionHeader,
+    AccordionContent,
+    ProgressSpinner,
+    ValeurComponent,
+    DecimalPipe,
+    NgClass,
+    DatePipe,
+    NgIf
+  ],
   templateUrl: './cours.component.html',
   styleUrl: './cours.component.sass'
 })
@@ -26,15 +39,17 @@ export class CoursComponent implements OnInit {
   // données pour la vue
   date!: Date;
   marches: CoursMarche[] = [];
+  currencyFormatter: Intl.NumberFormat;
 
   // cours pour lequel afficher les moyennes mobiles
-  coursSelectionne : Cours | undefined = undefined;
+  coursSelectionne: Cours | undefined = undefined;
 
   // services
   private translateService = inject(TranslateService);
 
   constructor(private valeursService: ValeursService,
               private coursService: CoursService) {
+    this.currencyFormatter = new Intl.NumberFormat('fr-FR', {style: 'currency', currency: 'EUR'});
   }
 
   ngOnInit(): void {

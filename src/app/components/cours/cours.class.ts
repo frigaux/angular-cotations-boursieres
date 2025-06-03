@@ -3,15 +3,15 @@ import {DTOCoursTicker} from '../../services/cours/dto-cours-ticker.interface';
 
 export class Cours {
   date: Date;
-  ticker!: string;
-  libelle!: string;
-  ouverture!: number;
-  plusHaut!: number;
-  plusBas!: number;
-  cloture!: number;
-  volume!: number;
-  moyennesMobiles!: number[];
-  alerte!: boolean;
+  ticker: string;
+  libelle: string;
+  ouverture: number;
+  plusHaut: number;
+  plusBas: number;
+  cloture: number;
+  volume: number;
+  moyennesMobiles: number[];
+  alerte: boolean;
 
   constructor(private date_: Date, private ticker_: string, private libelle_: string, private dto: DTOCours | DTOCoursTicker) {
     this.date = date_;

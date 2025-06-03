@@ -19,13 +19,18 @@ import {Fieldset} from 'primeng/fieldset';
   styleUrl: './details-valeur.component.sass'
 })
 export class DetailsValeurComponent {
+  // input/output
   cours: InputSignal<Cours | undefined> = input<Cours>();
 
   // données pour la vue
   timelineItems: any[] = [];
   croissant: boolean = true;
 
+  // privé
+  private currencyFormatter : Intl.NumberFormat;
+
   constructor(private translateService: TranslateService) {
+    this.currencyFormatter = new Intl.NumberFormat('fr-FR', {style: 'currency', currency: 'EUR'});
     effect(() => {
       this.timelineItems = [];
       const cours = this.cours();
@@ -48,7 +53,7 @@ export class DetailsValeurComponent {
   addItem(translateService: TranslateService, keyTranslate: string, cours: number): void {
     this.timelineItems.push({
       libelle: translateService.instant(`COMPOSANTS.VALEURS.VALEUR.DETAILS_VALEUR.${keyTranslate}`),
-      cours: new Intl.NumberFormat('fr-FR', {style: 'currency', currency: 'EUR'}).format(cours)
+      cours: this.currencyFormatter.format(cours)
     });
   }
 }

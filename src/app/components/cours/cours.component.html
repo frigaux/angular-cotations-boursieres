@@ -28,57 +28,41 @@
               <th pSortableColumn="cloture">
                 {{ 'COMPOSANTS.COURS.CLOTURE' | translate }}
                 <p-sortIcon field="cloture"/>
-                <p-columnFilter type="numeric" field="cloture" matchMode="contains" display="menu"
-                                [showMatchModes]="false"
-                                [showOperator]="false" [showAddButton]="false"/>
               </th>
               <th pSortableColumn="ouverture">
                 {{ 'COMPOSANTS.COURS.OUVERTURE' | translate }}
                 <p-sortIcon field="ouverture"/>
-                <p-columnFilter type="numeric" field="ouverture" matchMode="contains" display="menu"
-                                [showMatchModes]="false"
-                                [showOperator]="false" [showAddButton]="false"/>
               </th>
               <th pSortableColumn="plusBas">
                 {{ 'COMPOSANTS.COURS.PLUSBAS' | translate }}
                 <p-sortIcon field="plusBas"/>
-                <p-columnFilter type="numeric" field="plusBas" matchMode="contains" display="menu"
-                                [showMatchModes]="false"
-                                [showOperator]="false" [showAddButton]="false"/>
               </th>
               <th pSortableColumn="plusHaut">
                 {{ 'COMPOSANTS.COURS.PLUSHAUT' | translate }}
                 <p-sortIcon field="plusHaut"/>
-                <p-columnFilter type="numeric" field="plusHaut" matchMode="contains" display="menu"
-                                [showMatchModes]="false"
-                                [showOperator]="false" [showAddButton]="false"/>
               </th>
               <th pSortableColumn="volume">
                 {{ 'COMPOSANTS.COURS.VOLUME' | translate }}
                 <p-sortIcon field="volume"/>
-                <p-columnFilter type="numeric" field="volume" matchMode="contains" display="menu"
-                                [showMatchModes]="false"
-                                [showOperator]="false" [showAddButton]="false"/>
               </th>
             </tr>
           </ng-template>
           <ng-template #body let-cours>
             <tr>
-              <td (mouseenter)="coursSelectionne = cours">
-                  <span class="pi"
-                        [ngClass]="{
-                      'pi-arrow-up': (cours.ouverture < cours.cloture),
-                      'pi-arrow-down': (cours.ouverture > cours.cloture),
-                      'pi-equals': (cours.ouverture === cours.cloture)
-                    }">
-                  </span>
+              <td>
+                <span class="pi pi-chart-line"
+                      [ngClass]="{
+                      'positive': (cours.cloture >= cours.ouverture),
+                      'negative': (cours.cloture < cours.ouverture)
+                    }"
+                      (mouseenter)="coursSelectionne = cours"></span>
                 {{ cours.libelle }}
                 <span class="pi pi-exclamation-triangle" *ngIf="cours.alerte"></span>
               </td>
-              <td>{{ cours.cloture | currency : 'EUR' }}</td>
-              <td>{{ cours.ouverture | currency : 'EUR' }}</td>
-              <td>{{ cours.plusBas | currency : 'EUR' }}</td>
-              <td>{{ cours.plusHaut | currency : 'EUR' }}</td>
+              <td>{{ currencyFormatter.format(cours.cloture) }}</td>
+              <td>{{ currencyFormatter.format(cours.ouverture) }}</td>
+              <td>{{ currencyFormatter.format(cours.plusBas) }}</td>
+              <td>{{ currencyFormatter.format(cours.plusHaut) }}</td>
               <td>{{ cours.volume | number }}</td>
             </tr>
           </ng-template>
