@@ -1,5 +1,7 @@
 import {DTOCours} from '../../services/cours/dto-cours.interface';
 import {DTOCoursTicker} from '../../services/cours/dto-cours-ticker.interface';
+import {DTOCoursTickerAllege} from '../../services/cours/dto-cours-ticker-allege.interface';
+import {CoursPortefeuille} from '../portefeuilles/cours-portefeuille.class';
 
 export class Cours {
   date: Date;
@@ -12,17 +14,32 @@ export class Cours {
   volume: number;
   moyennesMobiles: number[];
   alerte: boolean;
+  coursAlleges: DTOCoursTickerAllege[];
 
-  constructor(private date_: Date, private ticker_: string, private libelle_: string, private dto: DTOCours | DTOCoursTicker) {
-    this.date = date_;
-    this.ticker = ticker_;
-    this.libelle = libelle_;
-    this.ouverture = dto.ouverture;
-    this.plusHaut = dto.plusHaut;
-    this.plusBas = dto.plusBas;
-    this.cloture = dto.cloture;
-    this.volume = dto.volume;
-    this.moyennesMobiles = dto.moyennesMobiles;
-    this.alerte = dto.alerte;
+  constructor(date: Date, ticker: string, libelle: string, ouverture: number, plusHaut: number, plusBas: number,
+              cloture: number, volume: number, moyennesMobiles: number[], alerte: boolean, coursAlleges: DTOCoursTickerAllege[]) {
+    this.date = date;
+    this.ticker = ticker;
+    this.libelle = libelle;
+    this.ouverture = ouverture;
+    this.plusHaut = plusHaut;
+    this.plusBas = plusBas;
+    this.cloture = cloture;
+    this.volume = volume;
+    this.moyennesMobiles = moyennesMobiles;
+    this.alerte = alerte;
+    this.coursAlleges = coursAlleges;
+  }
+
+  public static fromDTOCours(date: Date, libelle: string, dto: DTOCours) {
+    return new Cours(date, dto.ticker, libelle, dto.ouverture, dto.plusHaut, dto.plusBas, dto.cloture, dto.volume, dto.moyennesMobiles, dto.alerte, []);
+  }
+
+  public static fromDTOCoursTicker(ticker: string, libelle: string, dto: DTOCoursTicker, cours: DTOCoursTickerAllege[]) {
+    return new Cours(dto.date, ticker, libelle, dto.ouverture, dto.plusHaut, dto.plusBas, dto.cloture, dto.volume, dto.moyennesMobiles, dto.alerte, cours);
+  }
+
+  public static fromCoursPortefeuille(dto: CoursPortefeuille) {
+    return new Cours(dto.date, dto.ticker, dto.libelle, dto.ouverture, dto.plusHaut, dto.plusBas, dto.cloture, dto.volume, dto.moyennesMobiles, dto.alerte, dto.coursAlleges);
   }
 }

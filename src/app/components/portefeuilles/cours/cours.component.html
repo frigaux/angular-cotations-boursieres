@@ -1,0 +1,17 @@
+@if (cours() !== undefined && coursVue) {
+  <p-panel>
+    <ng-template #header>
+      <h1>
+        <span class="pi pi-exclamation-triangle" *ngIf="coursVue.alerte"></span>
+        <span class="pi" [ngClass]="{
+                      'pi-arrow-up': (coursVue.ouverture < coursVue.cloture),
+                      'pi-arrow-down': (coursVue.ouverture > coursVue.cloture),
+                      'pi-equals': (coursVue.ouverture === coursVue.cloture)
+                    }"></span>
+        {{ coursVue.libelle }} ({{ coursVue.date | date:'dd/MM/yyyy' }})
+        <span class="pi pi-times-circle" (click)="this.ferme.emit()"></span>
+      </h1>
+    </ng-template>
+    <app-charts [cours]="coursVue"></app-charts>
+  </p-panel>
+}

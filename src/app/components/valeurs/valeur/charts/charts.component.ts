@@ -1,14 +1,11 @@
 import {Component, effect, input, InputSignal} from '@angular/core';
 import {Cours} from '../../../cours/cours.class';
-import {DTOCoursTickerAllege} from '../../../../services/cours/dto-cours-ticker-allege.interface';
 import {TranslatePipe, TranslateService} from '@ngx-translate/core';
 import {DatePipe} from '@angular/common';
 import {UIChart} from 'primeng/chart';
 import {RadioButton} from 'primeng/radiobutton';
 import {FormsModule} from '@angular/forms';
 
-// TODO : courbes des MMxx glissantes
-// TODO : portefeuille
 @Component({
   selector: 'app-charts',
   imports: [
@@ -24,7 +21,6 @@ import {FormsModule} from '@angular/forms';
 export class ChartsComponent {
   // input/output
   cours: InputSignal<Cours | undefined> = input();
-  coursLight: InputSignal<DTOCoursTickerAllege[] | undefined> = input();
 
   // données pour la vue
   // https://www.chartjs.org/
@@ -44,13 +40,13 @@ export class ChartsComponent {
   }
 
   initChart() {
-    const listeCours: DTOCoursTickerAllege[] | undefined = this.coursLight();
-    if (listeCours) {
+    const cours: Cours | undefined = this.cours();
+    if (cours) {
       this.periodes = [];
       for (const periode of [50, 100, 150, 200, 250, 300]) {
         this.periodes.push(periode);
         this.periodeSelectionnee = periode;
-        if (listeCours.length <= periode) {
+        if (cours.coursAlleges.length <= periode) {
           break;
         }
       }
@@ -60,15 +56,16 @@ export class ChartsComponent {
 
   displayChart() {
     const cours: Cours | undefined = this.cours();
-    const listeCours: DTOCoursTickerAllege[] | undefined = this.coursLight();
-    if (cours && listeCours && listeCours.length <= cours.moyennesMobiles.length) {
+    // const listeCours: DTOCoursTickerAllege[] | undefined = this.coursLight();
+    if (cours && cours.coursAlleges.length <= cours.moyennesMobiles.length) {
       const labels: string[] = [];
       const dataCours: number[] = [];
       const dataMM: number[] = [];
-      const surplus = cours.moyennesMobiles.length - listeCours.length;
-      for (let i = Math.min(listeCours.length, this.periodeSelectionnee) - 1; i >= 0; i--) {
-        labels.push(this.datepipe.transform(listeCours[i].date, 'dd/MM/yyyy')!);
-        dataCours.push(listeCours[i].cloture);
+      const coursAlleges = cours.coursAlleges;
+      const surplus = cours.moyennesMobiles.length - coursAlleges.length;
+      for (let i = Math.min(coursAlleges.length, this.periodeSelectionnee) - 1; i >= 0; i--) {
+        labels.push(this.datepipe.transform(coursAlleges[i].date, 'dd/MM/yyyy')!);
+        dataCours.push(coursAlleges[i].cloture);
         dataMM.push(cours.moyennesMobiles[i + surplus]);
       }
 
@@ -98,7 +95,7 @@ export class ChartsComponent {
         tooltip: {
           callbacks: {
             title: function (context: any) {
-              const dot= context[0];
+              const dot = context[0];
               if (dot.datasetIndex === 0) {
                 return dot.label;
               } else {
@@ -120,12 +117,12 @@ export class ChartsComponent {
       datasets: [
         {
           label: this.translateService.instant('COMPOSANTS.VALEURS.VALEUR.CHARTS.COURS'),
-          data : dataCours,
+          data: dataCours,
           tension: 0.4
         },
         {
           label: this.translateService.instant('COMPOSANTS.VALEURS.VALEUR.CHARTS.MOYENNES_MOBILES') + labels[labels.length - 1],
-          data : dataMM,
+          data: dataMM,
           tension: 0.4
         }
       ]

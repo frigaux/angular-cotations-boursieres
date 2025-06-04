@@ -1,9 +1,9 @@
 import {Portefeuille} from './gestion-portefeuilles/portefeuille.interface';
-import {Cours} from './cours.class';
+import {CoursPortefeuille} from './cours-portefeuille.class';
 
 export class PortefeuilleAvecCours {
   portefeuille: Portefeuille;
-  cours: Array<Cours> = [];
+  cours: Array<CoursPortefeuille> = [];
 
   constructor(portefeuille: Portefeuille) {
     this.portefeuille = portefeuille;

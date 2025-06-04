@@ -3,6 +3,7 @@ import {DTOCoursTickerAllege} from '../cours/dto-cours-ticker-allege.interface';
 import {DTOListeCours} from '../cours/dto-liste-cours.interface';
 import {Cours} from '../../components/cours/cours.class';
 import {DtoCoursAvecListeAllege} from '../cours/dto-cours-avec-liste-allege.interface';
+import {CoursPortefeuille} from '../../components/portefeuilles/cours-portefeuille.class';
 
 export const LISTE_COURS: DTOListeCours = {
   "date": new Date("2025-05-09"),
@@ -37,7 +38,7 @@ export const COURS_TICKER: DTOCoursTicker = {
   "alerte": true
 };
 
-export const LISTE_COURS_TICKER_LIGHT: DTOCoursTickerAllege[] = [
+export const LISTE_COURS_TICKER_ALLEGE: DTOCoursTickerAllege[] = [
   {
     "date": new Date("2025-05-09"),
     "cloture": 46.23,
@@ -52,7 +53,7 @@ export const LISTE_COURS_TICKER_LIGHT: DTOCoursTickerAllege[] = [
   }
 ];
 
-export const COURS_CROISSANT: Cours = new Cours(new Date("2025-05-09"), "GLE", "Societe Generale",
+export const COURS_CROISSANT: Cours = Cours.fromDTOCoursTicker("GLE", "Societe Generale",
   {
     "date": new Date("2025-05-09"),
     "ouverture": 46.23,
@@ -65,10 +66,9 @@ export const COURS_CROISSANT: Cours = new Cours(new Date("2025-05-09"), "GLE", "
       46.68
     ],
     "alerte": true
-  }
-);
+  }, LISTE_COURS_TICKER_ALLEGE);
 
-export const COURS_DECROISSANT: Cours = new Cours(new Date("2025-05-09"), "GLE", "Societe Generale",
+export const COURS_DECROISSANT: Cours = Cours.fromDTOCoursTicker("GLE", "Societe Generale",
   {
     "date": new Date("2025-05-09"),
     "ouverture": 46.8,
@@ -81,11 +81,11 @@ export const COURS_DECROISSANT: Cours = new Cours(new Date("2025-05-09"), "GLE",
       46.68
     ],
     "alerte": true
-  }
-);
+  }, LISTE_COURS_TICKER_ALLEGE);
 
 export const LISTE_COURS_AVEC_LISTE_ALLEGEE: DtoCoursAvecListeAllege[] = [
   {
+    "date": new Date("2025-05-09"),
     "ticker": "GLE",
     "ouverture": 46.23,
     "plusHaut": 46.82,
@@ -97,6 +97,8 @@ export const LISTE_COURS_AVEC_LISTE_ALLEGEE: DtoCoursAvecListeAllege[] = [
       46.68
     ],
     "alerte": true,
-    "cours": LISTE_COURS_TICKER_LIGHT
+    "cours": LISTE_COURS_TICKER_ALLEGE
   }
 ];
+
+export const COURS_PORTEFEUILLE = new CoursPortefeuille('Societe Generale', LISTE_COURS_AVEC_LISTE_ALLEGEE[0]);

@@ -1,7 +1,8 @@
 import {DtoCoursAvecListeAllege} from '../../services/cours/dto-cours-avec-liste-allege.interface';
 import {DTOCoursTickerAllege} from '../../services/cours/dto-cours-ticker-allege.interface';
 
-export class Cours {
+export class CoursPortefeuille {
+  date: Date;
   ticker: string;
   libelle: string;
   ouverture: number;
@@ -12,15 +13,16 @@ export class Cours {
   moyennesMobiles: number[];
   alerte: boolean;
   coursAlleges: DTOCoursTickerAllege[];
-  mm5: number;
-  mm20: number;
-  mm50: number;
-  var1: number;
-  var5: number;
-  var20: number;
-  var50: number;
+  mm5: number | undefined;
+  mm20: number | undefined;
+  mm50: number | undefined;
+  var1: number | undefined;
+  var5: number | undefined;
+  var20: number | undefined;
+  var50: number | undefined;
 
   constructor(private libelle_: string, private dto: DtoCoursAvecListeAllege) {
+    this.date = dto.cours[0].date;
     this.ticker = dto.ticker;
     this.libelle = libelle_;
     this.ouverture = dto.ouverture;
@@ -44,7 +46,7 @@ export class Cours {
     if (dto.cours.length > jours) {
       return (dto.cours[0].cloture / dto.cours[jours].cloture) - 1;
     } else {
-      return 0;
+      return undefined;
     }
   }
 }

@@ -1,4 +1,4 @@
-@if (cours() !== undefined) {
+@if (cours() !== undefined && timelineItems) {
   <div>
     <div>
       <p-fieldset legend="{{ 'COMPOSANTS.VALEURS.VALEUR.DETAILS_VALEUR.DETAILS' | translate }} {{ cours()!.date | date:'dd/MM/yyyy' }}">

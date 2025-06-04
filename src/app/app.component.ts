@@ -6,6 +6,7 @@ import {TranslateService} from "@ngx-translate/core";
 import translationsFR from "../../public/i18n/fr.json";
 import {Title} from '@angular/platform-browser';
 
+// TODO : courbes des MMxx glissantes
 @Component({
   selector: 'app-root',
   standalone: true,

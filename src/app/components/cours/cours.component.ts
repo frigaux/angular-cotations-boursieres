@@ -74,7 +74,7 @@ export class CoursComponent implements OnInit {
 
     liste.cours.map(dto => {
       const valeur = valeurByTicker.get(dto.ticker);
-      return new Cours(liste.date, valeur!.ticker, valeur!.libelle, dto);
+      return Cours.fromDTOCours(liste.date, valeur!.libelle, dto)
     }).forEach(cours => {
       const marche = valeurByTicker.get(cours.ticker)!.marche;
       if (!coursByMarche.has(marche)) {
@@ -86,6 +86,4 @@ export class CoursComponent implements OnInit {
       this.marches.push(new CoursMarche(marche, this.translateService, cours));
     });
   }
-
-  protected readonly Date = Date;
 }

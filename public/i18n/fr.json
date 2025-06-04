@@ -47,7 +47,7 @@
       }
     },
     "COURS": {
-      "DATE": "A la date du",
+      "MARCHES_DATE": "Marchés à la date du",
       "LIBELLE": "Libellé",
       "OUVERTURE": "Ouverture",
       "CLOTURE": "Clôture",
@@ -63,6 +63,7 @@
       }
     },
     "PORTEFEUILLES": {
+      "PORTEFEUILLES_DATE": "Portefeuilles à la date du",
       "LIBELLE": "Libellé",
       "CLOTURE": "Clôture",
       "VOLUME": "Volume échangé",

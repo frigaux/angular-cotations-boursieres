@@ -34,7 +34,6 @@ export class ValeurComponent {
 
   // données pour la vue
   cours: Cours | undefined;
-  coursLight: DTOCoursTickerAllege[] | undefined;
 
   constructor(private translateService: TranslateService, private coursService: CoursService) {
     effect(() => {
@@ -46,10 +45,9 @@ export class ValeurComponent {
     const valeur: Valeur | undefined = this.valeur();
     if (valeur) {
       this.loading = true;
-      this.coursService.chargerCoursTicker(valeur.ticker).subscribe(cours => {
-        this.cours = new Cours(cours.date, valeur.ticker, valeur.libelle, cours);
-        this.coursService.chargerCoursTickerWithLimit(valeur.ticker, 300).subscribe(cours => {
-          this.coursLight = cours;
+      this.coursService.chargerCoursTicker(valeur.ticker).subscribe(dto => {
+        this.coursService.chargerCoursTickerWithLimit(valeur.ticker, 300).subscribe(coursAlleges => {
+          this.cours = Cours.fromDTOCoursTicker(valeur.ticker, valeur.libelle, dto, coursAlleges);
           this.loading = false;
         })
       });

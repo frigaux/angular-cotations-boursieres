@@ -1,7 +1,6 @@
 import {Component, effect, input, InputSignal} from '@angular/core';
 import {TranslateService} from '@ngx-translate/core';
 import {UIChart} from 'primeng/chart';
-import {DTOCoursTickerAllege} from '../../../../services/cours/dto-cours-ticker-allege.interface';
 import {Cours} from '../../../cours/cours.class';
 import {DatePipe} from '@angular/common';
 
@@ -17,29 +16,29 @@ import {DatePipe} from '@angular/common';
 export class ChartCoursComponent {
   // input/output
   cours: InputSignal<Cours | undefined> = input();
-  coursLight: InputSignal<DTOCoursTickerAllege[] | undefined> = input();
 
   // https://www.chartjs.org/
   data: any;
   options: any;
 
-  constructor(private translateService: TranslateService, public datepipe: DatePipe) {
+  constructor(private translateService: TranslateService, public datepipe: DatePipe) {console.log('constructor');
     effect(() => {
       this.initChart();
     });
   }
 
-  initChart() {
-    const listeCours: DTOCoursTickerAllege[] | undefined = this.coursLight();
-    if (listeCours) {
+  initChart() {console.log('initChart');
+    const cours: Cours | undefined = this.cours();
+    if (cours) {
       const labels: string[] = [];
       const data: number[] = [];
-      for (let i = listeCours.length - 1; i >= 0; i--) {
-        labels.push(this.datepipe.transform(listeCours[i].date, 'dd/MM/yyyy')!);
-        data.push(listeCours[i].cloture);
+      const coursAlleges = cours.coursAlleges;
+      for (let i = coursAlleges.length - 1; i >= 0; i--) {
+        labels.push(this.datepipe.transform(coursAlleges[i].date, 'dd/MM/yyyy')!);
+        data.push(coursAlleges[i].cloture);
       }
 
-      this.data = this.wrapData(labels, data);
+      this.data = this.wrapData(cours.libelle, labels, data);
 
       this.options = this.wrapOptions();
     }
@@ -77,13 +76,12 @@ export class ChartCoursComponent {
     };
   }
 
-  private wrapData(labels: string[], data: number[]) {
-    const cours: Cours | undefined = this.cours();
+  private wrapData(libelle: string, labels: string[], data: number[]) {
     return {
       labels,
       datasets: [
         {
-          label: cours!.libelle,
+          label: libelle,
           data,
           tension: 0.4
         }

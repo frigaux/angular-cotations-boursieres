@@ -1,8 +1,11 @@
-<div *ngIf="loading">
-  <p-progressbar mode="indeterminate" [style]="{'height': '10px'}"/>
-</div>
+<app-cours [cours]="coursSelectionne" (ferme)="coursSelectionne = undefined"></app-cours>
 
-<p-accordion value="{{portefeuillesAvecCours.length === 1 ? 0 : undefined}}" (onOpen)="onOpen($event)">
+<h1>{{ 'COMPOSANTS.PORTEFEUILLES.PORTEFEUILLES_DATE' | translate }}
+  <p-progress-spinner *ngIf="date === undefined" strokeWidth="8" [style]="{ width: '25px', height: '25px' }"/>
+  {{ date | date: 'dd/MM/yyyy' }}
+</h1>
+
+<p-accordion *ngIf="!loading" value="{{portefeuillesAvecCours.length === 1 ? 0 : undefined}}" (onOpen)="onOpen($event)">
   @for (portefeuilleAvecCours of portefeuillesAvecCours; track portefeuilleAvecCours.portefeuille.nom; let i = $index) {
     <p-accordion-panel value="{{i}}">
       <p-accordion-header>{{ portefeuilleAvecCours.portefeuille.nom }}</p-accordion-header>
@@ -61,7 +64,7 @@
                       'positive': (cours.cloture >= cours.ouverture),
                       'negative': (cours.cloture < cours.ouverture)
                     }"
-                      (mouseenter)="afficherDetails(cours)"></span>
+                      (mouseenter)="coursSelectionne = cours"></span>
                 {{ cours.libelle }}
                 <span class="pi pi-exclamation-triangle" *ngIf="cours.alerte"></span>
               </td>

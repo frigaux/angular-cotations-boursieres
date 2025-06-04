@@ -11,7 +11,7 @@ import {DTOCoursTickerAllege} from './dto-cours-ticker-allege.interface';
 import {
   LISTE_COURS,
   COURS_TICKER,
-  LISTE_COURS_TICKER_LIGHT,
+  LISTE_COURS_TICKER_ALLEGE,
   LISTE_COURS_AVEC_LISTE_ALLEGEE
 } from '../jdd/jdd-cours.dataset';
 import {DtoCoursAvecListeAllege} from './dto-cours-avec-liste-allege.interface';
@@ -74,8 +74,8 @@ describe('CoursService', () => {
     httpTesting.expectOne({
       method: 'GET',
       url: 'bourse/cours/GLE/2',
-    }).flush(LISTE_COURS_TICKER_LIGHT);
-    expect(await promiseCours).toEqual(LISTE_COURS_TICKER_LIGHT);
+    }).flush(LISTE_COURS_TICKER_ALLEGE);
+    expect(await promiseCours).toEqual(LISTE_COURS_TICKER_ALLEGE);
     // vérification qu'il n'y a pas de requêtes en attente
     httpTesting.verify();
   });

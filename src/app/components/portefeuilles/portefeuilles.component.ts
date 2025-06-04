@@ -1,6 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {DecimalPipe, NgClass, NgIf, PercentPipe} from '@angular/common';
-import {ProgressBar} from 'primeng/progressbar';
+import {DatePipe, DecimalPipe, NgClass, NgIf, PercentPipe} from '@angular/common';
 import {PortefeuillesService} from '../../services/portefeuilles/portefeuilles.service';
 import {Accordion, AccordionContent, AccordionHeader, AccordionPanel, AccordionTabOpenEvent} from 'primeng/accordion';
 import {TableModule} from 'primeng/table';
@@ -8,14 +7,15 @@ import {ValeursService} from '../../services/valeurs/valeurs.service';
 import {CoursService} from '../../services/cours/cours.service';
 import {DTOValeur} from '../../services/valeurs/dto-valeur.interface';
 import {PortefeuilleAvecCours} from './portefeuille-avec-cours.class';
-import {Cours} from './cours.class';
+import {CoursPortefeuille} from './cours-portefeuille.class';
 import {TranslatePipe} from '@ngx-translate/core';
+import {ProgressSpinner} from 'primeng/progressspinner';
+import {CoursComponent} from './cours/cours.component';
 
 @Component({
   selector: 'app-portefeuilles',
   imports: [
     NgIf,
-    ProgressBar,
     Accordion,
     AccordionContent,
     AccordionHeader,
@@ -24,7 +24,10 @@ import {TranslatePipe} from '@ngx-translate/core';
     DecimalPipe,
     TranslatePipe,
     PercentPipe,
-    NgClass
+    NgClass,
+    DatePipe,
+    ProgressSpinner,
+    CoursComponent
   ],
   templateUrl: './portefeuilles.component.html',
   styleUrl: './portefeuilles.component.sass'
@@ -34,8 +37,12 @@ export class PortefeuillesComponent implements OnInit {
   loading: boolean = true;
 
   // données pour la vue
+  date: Date | undefined;
   portefeuillesAvecCours: Array<PortefeuilleAvecCours> = [];
   currencyFormatter: Intl.NumberFormat;
+
+  // cours pour lequel afficher les courbes
+  coursSelectionne: CoursPortefeuille | undefined = undefined;
 
   // privé
   private readonly valeurByTicker = new Map<string, DTOValeur>();
@@ -67,9 +74,10 @@ export class PortefeuillesComponent implements OnInit {
     this.loading = true;
     this.coursService.chargerCoursTickersWithLimit(portefeuilleAvecCours.portefeuille.tickers, 300)
       .subscribe(liste => {
+        this.date = liste.length > 0 ? liste[0].date : undefined;
         portefeuilleAvecCours.cours = liste.map(dto => {
           const libelle: string = this.valeurByTicker.get(dto.ticker)!.libelle;
-          return new Cours(libelle, dto);
+          return new CoursPortefeuille(libelle, dto);
         });
         this.loading = false;
       })
@@ -79,11 +87,7 @@ export class PortefeuillesComponent implements OnInit {
     return variation >= 0 ? 'positive' : 'negative';
   }
 
-  classeMM(cours: Cours, mm: number) {
+  classeMM(cours: CoursPortefeuille, mm: number) {
     return cours.cloture >= mm ? 'positive' : 'negative';
-  }
-
-  afficherDetails(cours: Cours) {
-
   }
 }

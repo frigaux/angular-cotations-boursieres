@@ -1,6 +1,6 @@
 <app-details [cours]="coursSelectionne" (ferme)="coursSelectionne = undefined"></app-details>
 
-<h1>{{ 'COMPOSANTS.COURS.DATE' | translate }}
+<h1>{{ 'COMPOSANTS.COURS.MARCHES_DATE' | translate }}
   <p-progress-spinner *ngIf="date === undefined" strokeWidth="8" [style]="{ width: '25px', height: '25px' }"/>
   {{ date | date: 'dd/MM/yyyy' }}
 </h1>
