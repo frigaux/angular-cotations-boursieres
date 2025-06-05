@@ -2,7 +2,7 @@
       (ngSubmit)="modifierPortefeuille()">
   <div>
     <p-floatlabel>
-      <input pInputText id="nom" formControlName="champNom" autocomplete="off"/>
+      <input pInputText [pAutoFocus]="true" id="nom" formControlName="champNom" autocomplete="off"/>
       <label for="nom">{{ 'COMPOSANTS.PORTEFEUILLES.GESTION_PORTEFEUILLES.FORMULAIRE_MODIFICATION.NOM' | translate }}</label>
     </p-floatlabel>
   </div>

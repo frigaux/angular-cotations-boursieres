@@ -25,7 +25,7 @@ describe('ChartMoyennesMobilesComponent', () => {
     expect(component).toBeDefined();
   });
 
-  it('Given un cours when le composant est rendu then le <p-chart> sont rendus', () => {
+  it('Given un cours when le composant est rendu then le <p-chart> est rendu', () => {
     const element: HTMLElement = fixture.nativeElement;
     fixture.componentRef.setInput('cours', COURS_CROISSANT);
     fixture.detectChanges();

@@ -4,6 +4,8 @@ import {MenuItem} from 'primeng/api';
 import {Menubar} from 'primeng/menubar';
 import {CommonModule} from '@angular/common';
 import {TranslateService} from '@ngx-translate/core';
+import {PortefeuillesService} from '../../services/portefeuilles/portefeuilles.service';
+import {Portefeuille} from '../portefeuilles/gestion-portefeuilles/portefeuille.interface';
 
 @Component({
   selector: 'app-header',
@@ -12,9 +14,14 @@ import {TranslateService} from '@ngx-translate/core';
   styleUrl: './header.component.sass'
 })
 export class HeaderComponent {
-  items: MenuItem[];
+  items: MenuItem[] = [];
 
-  constructor(private translateService: TranslateService) {
+  constructor(private translateService: TranslateService, private portefeuillesService: PortefeuillesService) {
+    portefeuillesService.onUpdate(portefeuilles => this.makeItems(translateService, portefeuilles))
+    this.makeItems(translateService, portefeuillesService.charger());
+  }
+
+  private makeItems(translateService: TranslateService, portefeuilles: Array<Portefeuille>) {
     this.items = [
       {
         label: translateService.instant('COMPOSANTS.HEADER.VALEURS'),
@@ -25,17 +32,20 @@ export class HeaderComponent {
         label: translateService.instant('COMPOSANTS.HEADER.COURS'),
         routerLink: 'cours',
         icon: 'pi pi-list'
-      },
-      {
+      }
+    ];
+    const portefeuilleParDefaut: Portefeuille | undefined = portefeuilles.find(portefeuille => portefeuille.parDefaut);
+    if (portefeuilleParDefaut && portefeuilleParDefaut.tickers.length > 0) {
+      this.items.push({
         label: translateService.instant('COMPOSANTS.HEADER.PORTEFEUILLES'),
         routerLink: 'portefeuilles',
         icon: 'pi pi-chart-line'
-      },
-      {
-        label: translateService.instant('COMPOSANTS.HEADER.GESTION_PORTEFEUILLES'),
-        routerLink: 'gestion-portefeuilles',
-        icon: 'pi pi-chart-line'
-      }
-    ];
+      });
+    }
+    this.items.push({
+      label: translateService.instant('COMPOSANTS.HEADER.GESTION_PORTEFEUILLES'),
+      routerLink: 'gestion-portefeuilles',
+      icon: 'pi pi-chart-line'
+    });
   }
 }

@@ -80,6 +80,14 @@ describe('CoursService', () => {
     httpTesting.verify();
   });
 
+  it('when #chargerCoursTickersWithLimit appelé sans ticker then doit renvoyer un tableau vide', async () => {
+    // création d'une promesse sur l'observable qui fait la requête HTTP de récupération des cours
+    const promiseCours: Promise<DtoCoursAvecListeAllege[]> = firstValueFrom(coursService.chargerCoursTickersWithLimit([], 4));
+    expect(await promiseCours).toEqual([]);
+    // vérification qu'il n'y a pas de requêtes en attente
+    httpTesting.verify();
+  });
+
   it('#chargerCoursTickersWithLimit doit renvoyer les n derniers cours pour les tickers', async () => {
     // création d'une promesse sur l'observable qui fait la requête HTTP de récupération des cours
     const promiseCours: Promise<DtoCoursAvecListeAllege[]> = firstValueFrom(coursService.chargerCoursTickersWithLimit(['GLE','BNP'], 4));

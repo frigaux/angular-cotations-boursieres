@@ -2,7 +2,7 @@ import {ComponentFixture, TestBed} from '@angular/core/testing';
 
 import {ChartCoursComponent} from './chart-cours.component';
 import {TranslateModule} from '@ngx-translate/core';
-import {COURS_CROISSANT, LISTE_COURS_TICKER_ALLEGE} from '../../../../services/jdd/jdd-cours.dataset';
+import {COURS_CROISSANT} from '../../../../services/jdd/jdd-cours.dataset';
 
 describe('ChartCoursComponent', () => {
   let component: ChartCoursComponent;
@@ -25,7 +25,7 @@ describe('ChartCoursComponent', () => {
     expect(component).toBeDefined();
   });
 
-  it('Given des cours when le composant est rendu then le <p-chart> sont rendus', () => {
+  it('Given des cours when le composant est rendu then le <p-chart> est rendu', () => {
     const element: HTMLElement = fixture.nativeElement;
     fixture.componentRef.setInput('cours', COURS_CROISSANT);
     fixture.detectChanges();

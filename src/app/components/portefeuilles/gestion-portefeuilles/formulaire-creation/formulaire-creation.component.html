@@ -1,7 +1,7 @@
 <form [formGroup]="formulaireCreationPortefeuille" (ngSubmit)="creerPortefeuille()">
   <div>
     <p-floatlabel>
-      <input pInputText id="nom" formControlName="champNom" autocomplete="off"/>
+      <input pInputText [pAutoFocus]="true" id="nom" formControlName="champNom" autocomplete="off"/>
       <label for="nom">{{ 'COMPOSANTS.PORTEFEUILLES.GESTION_PORTEFEUILLES.FORMULAIRE_CREATION.NOM' | translate }}</label>
     </p-floatlabel>
   </div>

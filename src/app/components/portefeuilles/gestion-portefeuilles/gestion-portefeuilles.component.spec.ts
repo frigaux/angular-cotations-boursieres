@@ -47,17 +47,17 @@ describe('GestionPortefeuillesComponent', () => {
       expect(component.portefeuilles).toEqual(PORTEFEUILLES);
     });
 
-    it('when #creerPortefeuille then les un nouveau portefeuille est crée', () => {
+    it('when #creerPortefeuille then un nouveau portefeuille est crée', () => {
       fixture.detectChanges(); // appelle le ngOnInit
       component.creerPortefeuille('nomUnique');
-      const expected = clonePORTEFEUILLES().concat({'nom': 'nomUnique', tickers: []});
+      const expected = clonePORTEFEUILLES().concat({'nom': 'nomUnique', 'parDefaut': false, tickers: []});
       expect(component.portefeuilles).toEqual(expected);
     });
 
     it('when #modifierPortefeuille then le portefeuille est modifié', () => {
       fixture.detectChanges(); // appelle le ngOnInit
-      component.modificationPortefeuille(0);
-      component.modifierPortefeuille('nomUnique');
+      component.modificationNomPortefeuille(0);
+      component.modifierNomPortefeuille('nomUnique');
       const expected: Array<Portefeuille> = clonePORTEFEUILLES();
       expected[0].nom = 'nomUnique';
       expect(component.portefeuilles).toEqual(expected);
@@ -68,13 +68,14 @@ describe('GestionPortefeuillesComponent', () => {
       component.supprimerPortefeuille(0);
       const expected: Array<Portefeuille> = clonePORTEFEUILLES()
       expected.splice(0, 1);
+      expected[0].parDefaut = true;
       expect(component.portefeuilles).toEqual(expected);
     });
 
     it('when #editerPortefeuille then le portefeuille est bien modifié', () => {
       fixture.detectChanges(); // appelle le ngOnInit
-      component.editionPortefeuille(0);
-      component.editerPortefeuille([]);
+      component.modificationValeursPortefeuille(0);
+      component.modifierValeursPortefeuille([]);
       const expected: Array<Portefeuille> = clonePORTEFEUILLES()
       expected[0].tickers = [];
       expect(component.portefeuilles).toEqual(expected);

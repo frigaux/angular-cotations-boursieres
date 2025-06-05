@@ -8,8 +8,12 @@ import {Observable, Subscriber} from 'rxjs';
 export class PortefeuillesService {
   private static readonly PORTEFEUILLES: string = 'portefeuilles';
   private static readonly OBSERVERS_IMPORT: Array<Subscriber<Array<Portefeuille>>> = [];
+  private static readonly OBSERVERS_UPDATE: Array<Subscriber<Array<Portefeuille>>> = [];
   private static readonly OBSERVABLE_IMPORT: Observable<Array<Portefeuille>> = new Observable(observer => {
     PortefeuillesService.OBSERVERS_IMPORT.push(observer);
+  });
+  private static readonly OBSERVABLE_UPDATE: Observable<Array<Portefeuille>> = new Observable(observer => {
+    PortefeuillesService.OBSERVERS_UPDATE.push(observer);
   });
 
   charger(): Array<Portefeuille> {
@@ -26,6 +30,7 @@ export class PortefeuillesService {
 
   enregistrer(portefeuilles: Array<Portefeuille>): void {
     window.localStorage.setItem(PortefeuillesService.PORTEFEUILLES, JSON.stringify(portefeuilles));
+    PortefeuillesService.OBSERVERS_UPDATE.forEach(observer => observer.next(portefeuilles));
   }
 
   export(): string {
@@ -38,10 +43,12 @@ export class PortefeuillesService {
       if (portefeuilles instanceof Array) {
         const error = portefeuilles.find(portefeuille =>
           !portefeuille.hasOwnProperty('nom')
+          || !portefeuille.hasOwnProperty('parDefaut')
           || !portefeuille.hasOwnProperty('tickers'));
         if (!error) {
           window.localStorage.setItem(PortefeuillesService.PORTEFEUILLES, json);
           PortefeuillesService.OBSERVERS_IMPORT.forEach(observer => observer.next(portefeuilles));
+          PortefeuillesService.OBSERVERS_UPDATE.forEach(observer => observer.next(portefeuilles));
         }
       }
     } catch (e) {
@@ -51,5 +58,13 @@ export class PortefeuillesService {
 
   onImport(o: ((value: Array<Portefeuille>) => void)): void {
     PortefeuillesService.OBSERVABLE_IMPORT.subscribe(o);
+  }
+
+  /**
+   * Enregistrements et imports.
+   * @param o lambda avec les portefeuilles en paramètre
+   */
+  onUpdate(o: ((value: Array<Portefeuille>) => void)): void {
+    PortefeuillesService.OBSERVABLE_UPDATE.subscribe(o);
   }
 }

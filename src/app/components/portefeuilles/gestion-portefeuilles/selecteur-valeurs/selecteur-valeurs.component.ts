@@ -51,7 +51,7 @@ export class SelecteurValeursComponent {
     }
   }
 
-  modifier() {
+  enregistrer() {
     this.modifie.emit(this.valeursTarget.map(valeur => valeur.ticker));
   }
 }

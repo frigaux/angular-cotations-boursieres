@@ -4,12 +4,11 @@
 
 <app-selecteur-valeurs [portefeuille]="portefeuilleEnEdition"
                        (ferme)="this.portefeuilleEnEdition = undefined"
-                       (modifie)="editerPortefeuille($event)"></app-selecteur-valeurs>
+                       (modifie)="modifierValeursPortefeuille($event)"></app-selecteur-valeurs>
 
-<p-card>
+<p-card *ngIf="afficherCreation || this.portefeuilles.length === 0">
   <div class="p-card-title">
     {{ 'COMPOSANTS.PORTEFEUILLES.GESTION_PORTEFEUILLES.CREATION' | translate }}
-    <app-import-export></app-import-export>
   </div>
 
   <app-formulaire-creation [portefeuilles]="portefeuilles" (cree)="creerPortefeuille($event)"></app-formulaire-creation>
@@ -18,17 +17,28 @@
 <p-card *ngIf="portefeuilles.length != 0">
   <div class="p-card-title">
     {{ 'COMPOSANTS.PORTEFEUILLES.GESTION_PORTEFEUILLES.PORTEFEUILLES' | translate }}
+    <div>
+      <span class="pi pi-plus-circle" (click)="afficherCreation = true"
+            title="{{ 'COMPOSANTS.PORTEFEUILLES.GESTION_PORTEFEUILLES.CREATION' | translate }}"></span>
+    </div>
+    <app-import-export></app-import-export>
   </div>
 
   <app-formulaire-modification [portefeuilles]="portefeuilles" [portefeuille]="portefeuilleEnModification"
-                               (annule)="this.portefeuilleEnModification = undefined" (modifie)="modifierPortefeuille($event)"></app-formulaire-modification>
+                               (annule)="this.portefeuilleEnModification = undefined"
+                               (modifie)="modifierNomPortefeuille($event)"></app-formulaire-modification>
 
   <div class="liste">
     @for (portefeuille of portefeuilles; track portefeuille.nom; let idx = $index) {
       <div>
-        <div><span class="pi pi-cog" (click)="editionPortefeuille(idx)"
-                   title="{{ 'COMPOSANTS.PORTEFEUILLES.GESTION_PORTEFEUILLES.EDITER' | translate }}"></span></div>
-        <div><span class="pi pi-pencil" (click)="modificationPortefeuille(idx)"
+        <div>
+          <input type="radio" name="idxPortefeuilleParDefaut" [value]="idx" [checked]="portefeuille.parDefaut"
+                 title="{{ 'COMPOSANTS.PORTEFEUILLES.GESTION_PORTEFEUILLES.PAR_DEFAUT' | translate }}"
+                 (change)="onChangeParDefaut($event)">
+        </div>
+        <div><span class="pi pi-cog" (click)="modificationValeursPortefeuille(idx)"
+                   title="{{ 'COMPOSANTS.PORTEFEUILLES.GESTION_PORTEFEUILLES.MODIFIER_VALEUR' | translate }}"></span></div>
+        <div><span class="pi pi-pencil" (click)="modificationNomPortefeuille(idx)"
                    title="{{ 'COMPOSANTS.PORTEFEUILLES.GESTION_PORTEFEUILLES.RENOMMER' | translate }}"></span></div>
         <div><span class="pi pi-trash" (click)="supprimerPortefeuille(idx)"
                    title="{{ 'COMPOSANTS.PORTEFEUILLES.GESTION_PORTEFEUILLES.SUPPRIMER' | translate }}"></span></div>

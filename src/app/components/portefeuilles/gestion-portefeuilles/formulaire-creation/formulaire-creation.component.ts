@@ -6,6 +6,7 @@ import {TranslatePipe} from '@ngx-translate/core';
 import {Portefeuille} from '../portefeuille.interface';
 import {pasDeNomEnDoublonValidator} from '../pas-de-nom-en-doublon.validator';
 import {InputText} from 'primeng/inputtext';
+import {AutoFocus} from 'primeng/autofocus';
 
 @Component({
   selector: 'app-formulaire-creation',
@@ -14,7 +15,8 @@ import {InputText} from 'primeng/inputtext';
     FloatLabel,
     Button,
     TranslatePipe,
-    InputText
+    InputText,
+    AutoFocus
   ],
   templateUrl: './formulaire-creation.component.html',
   styleUrl: './formulaire-creation.component.sass'

@@ -16,7 +16,6 @@ import {Cours} from '../../cours/cours.class';
   ],
   templateUrl: './cours.component.html',
   styleUrl: './cours.component.sass'
-  // styleUrls: ['./cours.component.sass', '../../valeurs/valeur/valeur.component.sass']
 })
 export class CoursComponent {
   // input/output

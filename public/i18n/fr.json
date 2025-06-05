@@ -75,9 +75,11 @@
       "VAR20": "Var./20j",
       "VAR50": "Var./50j",
       "GESTION_PORTEFEUILLES": {
+        "PORTEFEUILLE_SANS_VALEUR": "ATTENTION ! le portefeuille n'a pas de valeur",
         "CREATION": "Création d'un portefeuille",
         "PORTEFEUILLES": "Portefeuilles",
-        "EDITER": "Editer les valeurs du portefeuille",
+        "PAR_DEFAUT": "Portefeuille par défaut",
+        "MODIFIER_VALEUR": "Modifier les valeurs du portefeuille",
         "RENOMMER": "Renommer le portefeuille",
         "SUPPRIMER": "Supprimer le portefeuille",
         "FORMULAIRE_CREATION": {
@@ -93,11 +95,13 @@
           "MODIFICATION_PORTEFEUILLE": "Modification des valeurs du portefeuille",
           "RECHERCHE": "Recherche par libellé",
           "SOURCE": "Valeurs disponibles",
-          "TARGET": "Valeurs du portefeuille"
+          "TARGET": "Valeurs du portefeuille",
+          "ENREGISTRER": "Enregistrer le portefeuille",
+          "FERMER": "Abandonner les modifications"
         },
         "IMPORT_EXPORT": {
-          "EXPORT": "Export de la configuration des portefeuilles",
-          "IMPORT": "Import de la configuration des portefeuilles"
+          "EXPORT": "Export des portefeuilles dans le presse papier",
+          "IMPORT": "Import des portefeuilles depuis le presse papier"
         }
       }
     }

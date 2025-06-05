@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
-import {Observable} from 'rxjs';
+import {Observable, of} from 'rxjs';
 import {DTOListeCours} from './dto-liste-cours.interface';
 import {DTOCoursTicker} from './dto-cours-ticker.interface';
 import {DTOCoursTickerAllege} from './dto-cours-ticker-allege.interface';
@@ -33,9 +33,13 @@ export class CoursService {
   }
 
   public chargerCoursTickersWithLimit(tickers: Array<string>, limit: number): Observable<DtoCoursAvecListeAllege[]> {
-    const liste: string = tickers.reduce((t1, t2) => t1 + ',' + t2);
-    return this.http.get<DtoCoursAvecListeAllege[]>(
-      `bourse/cours/tickers/${limit}?tickers=${liste}`
-    );
+    if (tickers.length > 0) {
+      const liste: string = tickers.reduce((t1, t2) => t1 + ',' + t2);
+      return this.http.get<DtoCoursAvecListeAllege[]>(
+        `bourse/cours/tickers/${limit}?tickers=${liste}`
+      );
+    } else {
+      return of([]);
+    }
   }
 }

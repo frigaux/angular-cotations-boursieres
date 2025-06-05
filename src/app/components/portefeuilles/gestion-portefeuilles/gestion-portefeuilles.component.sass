@@ -2,6 +2,12 @@ div.p-card-title
   display: flex
   flex-direction: row
 
+  & > div
+    margin-left: 0.5rem
+
+    span.pi-plus-circle
+      cursor: pointer
+
 app-import-export
   margin-left: 2rem
 
@@ -9,16 +15,22 @@ div.liste
   display: flex
   flex-direction: column
   margin: 1rem
+
   & > div
     display: flex
     flex-direction: row
     align-items: center
     margin: 0.5rem
+
     & > div
       margin: 0.5rem
+
+    & > div:last-child
+      color: var(--p-blue-800)
+      font-weight: bold
+
     span.pi
       cursor: pointer
+
     span.pi-trash
       color: var(--p-red-800)
-    form
-      margin: 0

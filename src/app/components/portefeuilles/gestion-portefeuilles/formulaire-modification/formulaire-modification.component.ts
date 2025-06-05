@@ -7,6 +7,7 @@ import {FormBuilder, ReactiveFormsModule, Validators} from '@angular/forms';
 import {TranslatePipe} from '@ngx-translate/core';
 import {Portefeuille} from '../portefeuille.interface';
 import {pasDeNomEnDoublonValidator} from '../pas-de-nom-en-doublon.validator';
+import {AutoFocus} from 'primeng/autofocus';
 
 @Component({
   selector: 'app-formulaire-modification',
@@ -16,7 +17,8 @@ import {pasDeNomEnDoublonValidator} from '../pas-de-nom-en-doublon.validator';
     InputText,
     NgIf,
     ReactiveFormsModule,
-    TranslatePipe
+    TranslatePipe,
+    AutoFocus
   ],
   templateUrl: './formulaire-modification.component.html',
   styleUrls: ['./formulaire-modification.component.sass', '../formulaire-creation/formulaire-creation.component.sass']

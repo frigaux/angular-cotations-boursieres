@@ -5,8 +5,10 @@
         {{ 'COMPOSANTS.PORTEFEUILLES.GESTION_PORTEFEUILLES.SELECTEUR_VALEURS.MODIFICATION_PORTEFEUILLE' | translate }}
         <span>{{portefeuilleEnEdition.nom}}</span>
       </h1>
-      <span class="pi pi-save" (click)="modifier()"></span>
-      <span class="pi pi-times-circle" (click)="this.ferme.emit()"></span>
+      <span class="pi pi-save" (click)="enregistrer()"
+            title="{{ 'COMPOSANTS.PORTEFEUILLES.GESTION_PORTEFEUILLES.SELECTEUR_VALEURS.ENREGISTRER' | translate }}"></span>
+      <span class="pi pi-times-circle" (click)="this.ferme.emit()"
+            title="{{ 'COMPOSANTS.PORTEFEUILLES.GESTION_PORTEFEUILLES.SELECTEUR_VALEURS.FERMER' | translate }}"></span>
     </ng-template>
 
     <div *ngIf="loading">

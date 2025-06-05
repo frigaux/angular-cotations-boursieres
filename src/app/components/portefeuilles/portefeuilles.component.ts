@@ -11,6 +11,7 @@ import {CoursPortefeuille} from './cours-portefeuille.class';
 import {TranslatePipe} from '@ngx-translate/core';
 import {ProgressSpinner} from 'primeng/progressspinner';
 import {CoursComponent} from './cours/cours.component';
+import {Portefeuille} from './gestion-portefeuilles/portefeuille.interface';
 
 @Component({
   selector: 'app-portefeuilles',
@@ -40,6 +41,7 @@ export class PortefeuillesComponent implements OnInit {
   date: Date | undefined;
   portefeuillesAvecCours: Array<PortefeuilleAvecCours> = [];
   currencyFormatter: Intl.NumberFormat;
+  idxPortefeuilleCourant: number = -1;
 
   // cours pour lequel afficher les courbes
   coursSelectionne: CoursPortefeuille | undefined = undefined;
@@ -55,22 +57,22 @@ export class PortefeuillesComponent implements OnInit {
 
   ngOnInit(): void {
     this.portefeuillesAvecCours = this.portefeuillesService.charger()
+      .filter(portefeuille => portefeuille.tickers.length > 0)
       .map(portefeuille => new PortefeuilleAvecCours(portefeuille));
     this.valeursService.chargerValeurs().subscribe(valeurs => {
       valeurs.forEach(valeur => this.valeurByTicker.set(valeur.ticker, valeur));
-      if (this.portefeuillesAvecCours.length === 1) {
-        this.chargerCours(this.portefeuillesAvecCours[0]);
-      } else {
-        this.loading = false;
-      }
+      this.idxPortefeuilleCourant = this.portefeuillesAvecCours.findIndex(portefeuilleAvecCours => portefeuilleAvecCours.portefeuille.parDefaut);
+      this.chargerCoursPortefeuilleCourant();
     });
   }
 
   onOpen(e: AccordionTabOpenEvent) {
-    this.chargerCours(this.portefeuillesAvecCours[e.index]);
+    this.idxPortefeuilleCourant = e.index;
+    this.chargerCoursPortefeuilleCourant();
   }
 
-  chargerCours(portefeuilleAvecCours: PortefeuilleAvecCours): void {
+  chargerCoursPortefeuilleCourant(): void {
+    const portefeuilleAvecCours: PortefeuilleAvecCours = this.portefeuillesAvecCours[this.idxPortefeuilleCourant];
     this.loading = true;
     this.coursService.chargerCoursTickersWithLimit(portefeuilleAvecCours.portefeuille.tickers, 300)
       .subscribe(liste => {

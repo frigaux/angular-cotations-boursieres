@@ -3,7 +3,7 @@ import {NgIf} from "@angular/common";
 import {ProgressBar} from "primeng/progressbar";
 import {ReactiveFormsModule} from '@angular/forms';
 import {Card} from 'primeng/card';
-import {TranslatePipe} from '@ngx-translate/core';
+import {TranslatePipe, TranslateService} from '@ngx-translate/core';
 import {Portefeuille} from './portefeuille.interface';
 import {SelecteurValeursComponent} from './selecteur-valeurs/selecteur-valeurs.component';
 import {FormulaireCreationComponent} from './formulaire-creation/formulaire-creation.component';
@@ -31,12 +31,14 @@ export class GestionPortefeuillesComponent implements OnInit {
   // chargement des cours
   loading: boolean = false;
 
-  //données pour la vue
+  // données pour la vue
   portefeuilles: Array<Portefeuille> = [];
   portefeuilleEnModification: Portefeuille | undefined;
   portefeuilleEnEdition: Portefeuille | undefined;
+  afficherCreation: boolean = false;
 
-  constructor(private portefeuillesService: PortefeuillesService) {
+  constructor(private portefeuillesService: PortefeuillesService,
+              private translateService: TranslateService) {
   }
 
   ngOnInit(): void {
@@ -46,31 +48,32 @@ export class GestionPortefeuillesComponent implements OnInit {
 
   tickers(portefeuille: Portefeuille) {
     if (portefeuille.tickers.length > 0) {
-      return '(' + portefeuille.tickers.reduce((t1, t2) => t1 + ', ' + t2) + ')';
+      return ': ' + portefeuille.tickers.reduce((t1, t2) => t1 + ', ' + t2);
     }
-    return '';
+    return '(' + this.translateService.instant('COMPOSANTS.PORTEFEUILLES.GESTION_PORTEFEUILLES.PORTEFEUILLE_SANS_VALEUR') +')';
   }
 
   creerPortefeuille(nom: string) {
-    this.portefeuilles.push({nom, tickers: []});
+    const parDefaut: boolean = this.portefeuilles.length === 0;
+    this.portefeuilles.push({nom, parDefaut, tickers: []});
     this.portefeuillesService.enregistrer(this.portefeuilles);
   }
 
-  modificationPortefeuille(idx: number) {
+  modificationNomPortefeuille(idx: number) {
     this.portefeuilleEnModification = this.portefeuilles[idx];
   }
 
-  modifierPortefeuille(nom: string) {
+  modifierNomPortefeuille(nom: string) {
     this.portefeuilleEnModification!.nom = nom;
     this.portefeuilleEnModification = undefined;
     this.portefeuillesService.enregistrer(this.portefeuilles);
   }
 
-  editionPortefeuille(idx: number) {
+  modificationValeursPortefeuille(idx: number) {
     this.portefeuilleEnEdition = this.portefeuilles[idx];
   }
 
-  editerPortefeuille(tickers: string[]) {
+  modifierValeursPortefeuille(tickers: string[]) {
     this.portefeuilleEnEdition!.tickers = tickers;
     this.portefeuillesService.enregistrer(this.portefeuilles);
     this.portefeuilleEnEdition = undefined;
@@ -78,8 +81,19 @@ export class GestionPortefeuillesComponent implements OnInit {
 
   supprimerPortefeuille(idx: number) {
     if (idx < this.portefeuilles.length) {
+      const parDefaut = this.portefeuilles[idx].parDefaut;
       this.portefeuilles.splice(idx, 1);
+      if (parDefaut && this.portefeuilles.length > 0) {
+        this.portefeuilles[0].parDefaut = true;
+      }
       this.portefeuillesService.enregistrer(this.portefeuilles);
     }
+  }
+
+  onChangeParDefaut(e: any) {
+    this.portefeuilles.forEach((portefeuille, index) => {
+      portefeuille.parDefaut = index === Number(e.target.value);
+    });
+    this.portefeuillesService.enregistrer(this.portefeuilles);
   }
 }

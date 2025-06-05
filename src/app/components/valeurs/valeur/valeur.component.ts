@@ -2,7 +2,6 @@ import {Component, effect, input, InputSignal, output} from '@angular/core';
 import {TranslateService} from '@ngx-translate/core';
 import {CoursService} from '../../../services/cours/cours.service';
 import {DatePipe, NgClass, NgIf} from '@angular/common';
-import {DTOCoursTickerAllege} from '../../../services/cours/dto-cours-ticker-allege.interface';
 import {ProgressBar} from 'primeng/progressbar';
 import {Valeur} from '../valeur.class';
 import {DetailsValeurComponent} from './details-valeur/details-valeur.component';
