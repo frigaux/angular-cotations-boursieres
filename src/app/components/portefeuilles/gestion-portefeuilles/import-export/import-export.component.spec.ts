@@ -1,4 +1,4 @@
-import {ComponentFixture, fakeAsync, TestBed, tick} from '@angular/core/testing';
+import {ComponentFixture, fakeAsync, TestBed} from '@angular/core/testing';
 
 import {ImportExportComponent} from './import-export.component';
 import {TranslateModule} from '@ngx-translate/core';
@@ -27,18 +27,17 @@ describe('ImportExportComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  describe('Given un clipboard avec des portefeuilles', () => {
+  describe('Given des portefeuilles', () => {
     beforeEach(() => {
-      spyOn(navigator.clipboard, 'readText').and.returnValue(new Promise(resolve => resolve(portefeuilles)));
-      spyOn(navigator.clipboard, 'writeText');
+      component.configurationPortefeuilles = portefeuilles;
       fixture.detectChanges();
     });
 
     it('when on importe then l\'export renvoie les portefeuilles importés', fakeAsync(() => {
-      component.importer(); // need Promise resolution
-      tick(10);
+      component.importer();
+      component.reinitialiser();
       component.exporter();
-      expect(navigator.clipboard.writeText).toHaveBeenCalledWith(portefeuilles);
+      expect(component.configurationPortefeuilles).toEqual(portefeuilles);
     }));
   });
 });

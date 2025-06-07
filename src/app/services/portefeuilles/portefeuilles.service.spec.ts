@@ -27,7 +27,7 @@ describe('PortefeuillesService', () => {
     });
 
     it('when #import then #export renvoie les portefeuilles', () => {
-      service.import(portefeuilles);
+      expect(service.import(portefeuilles)).toBeTrue();
       expect(resultatImport).toEqual(PORTEFEUILLES);
       expect(service.export()).toEqual(portefeuilles);
     });

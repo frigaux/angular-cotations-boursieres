@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {DatePipe, DecimalPipe, NgClass, NgIf, PercentPipe} from '@angular/common';
+import {DatePipe, DecimalPipe, NgIf, PercentPipe} from '@angular/common';
 import {PortefeuillesService} from '../../services/portefeuilles/portefeuilles.service';
 import {Accordion, AccordionContent, AccordionHeader, AccordionPanel, AccordionTabOpenEvent} from 'primeng/accordion';
 import {TableModule} from 'primeng/table';
@@ -11,7 +11,6 @@ import {CoursPortefeuille} from './cours-portefeuille.class';
 import {TranslatePipe} from '@ngx-translate/core';
 import {ProgressSpinner} from 'primeng/progressspinner';
 import {CoursComponent} from './cours/cours.component';
-import {Portefeuille} from './gestion-portefeuilles/portefeuille.interface';
 
 @Component({
   selector: 'app-portefeuilles',
@@ -25,7 +24,6 @@ import {Portefeuille} from './gestion-portefeuilles/portefeuille.interface';
     DecimalPipe,
     TranslatePipe,
     PercentPipe,
-    NgClass,
     DatePipe,
     ProgressSpinner,
     CoursComponent

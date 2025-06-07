@@ -37,7 +37,7 @@ export class PortefeuillesService {
     return window.localStorage.getItem(PortefeuillesService.PORTEFEUILLES) || '[]';
   }
 
-  import(json: string): void {
+  import(json: string): boolean {
     try {
       const portefeuilles: any = JSON.parse(json);
       if (portefeuilles instanceof Array) {
@@ -49,22 +49,24 @@ export class PortefeuillesService {
           window.localStorage.setItem(PortefeuillesService.PORTEFEUILLES, json);
           PortefeuillesService.OBSERVERS_IMPORT.forEach(observer => observer.next(portefeuilles));
           PortefeuillesService.OBSERVERS_UPDATE.forEach(observer => observer.next(portefeuilles));
+          return true;
         }
       }
     } catch (e) {
-      console.error(e);
+      console.log(e);
     }
+    return false;
   }
 
-  onImport(o: ((value: Array<Portefeuille>) => void)): void {
-    PortefeuillesService.OBSERVABLE_IMPORT.subscribe(o);
+  onImport(handler: ((value: Array<Portefeuille>) => void)): void {
+    PortefeuillesService.OBSERVABLE_IMPORT.subscribe(handler);
   }
 
   /**
    * Enregistrements et imports.
-   * @param o lambda avec les portefeuilles en paramètre
+   * @param handler lambda avec les portefeuilles en paramètre
    */
-  onUpdate(o: ((value: Array<Portefeuille>) => void)): void {
-    PortefeuillesService.OBSERVABLE_UPDATE.subscribe(o);
+  onUpdate(handler: ((value: Array<Portefeuille>) => void)): void {
+    PortefeuillesService.OBSERVABLE_UPDATE.subscribe(handler);
   }
 }

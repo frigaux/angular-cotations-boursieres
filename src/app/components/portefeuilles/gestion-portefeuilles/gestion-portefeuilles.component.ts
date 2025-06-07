@@ -11,6 +11,7 @@ import {FormulaireModificationComponent} from './formulaire-modification/formula
 import {ImportExportComponent} from './import-export/import-export.component';
 import {PortefeuillesService} from '../../../services/portefeuilles/portefeuilles.service';
 
+// TODO : configuration des alertes du portefeuille
 @Component({
   selector: 'app-gestion-portefeuilles',
   imports: [

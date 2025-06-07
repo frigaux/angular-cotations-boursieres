@@ -100,8 +100,9 @@
           "FERMER": "Abandonner les modifications"
         },
         "IMPORT_EXPORT": {
-          "EXPORT": "Export des portefeuilles dans le presse papier",
-          "IMPORT": "Import des portefeuilles depuis le presse papier"
+          "IMPORT_EXPORT": "Import/export des portefeuilles",
+          "EXPORT": "Export",
+          "IMPORT": "Import"
         }
       }
     }

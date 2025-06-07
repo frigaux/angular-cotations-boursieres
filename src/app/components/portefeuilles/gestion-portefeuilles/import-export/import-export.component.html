@@ -1,6 +1,13 @@
-<div>
-  <span class="pi pi-file-export" (click)="exporter()"
-             title="{{ 'COMPOSANTS.PORTEFEUILLES.GESTION_PORTEFEUILLES.IMPORT_EXPORT.EXPORT' | translate }}"></span>
-  <span class="pi pi-file-import" (click)="importer()"
-        title="{{ 'COMPOSANTS.PORTEFEUILLES.GESTION_PORTEFEUILLES.IMPORT_EXPORT.IMPORT' | translate }}"></span>
-</div>
+<span class="pi pi-sync" (click)="visible = true"
+      title="{{ 'COMPOSANTS.PORTEFEUILLES.GESTION_PORTEFEUILLES.IMPORT_EXPORT.IMPORT_EXPORT' | translate }}"></span>
+
+<p-dialog header="{{ 'COMPOSANTS.PORTEFEUILLES.GESTION_PORTEFEUILLES.IMPORT_EXPORT.IMPORT_EXPORT' | translate }}"
+          [modal]="true" (onShow)="reinitialiser()" [(visible)]="visible">
+  <textarea rows="10" cols="50" pTextarea [(ngModel)]="configurationPortefeuilles" [ngClass]="{'error': importEchoue}"></textarea>
+  <div>
+    <p-button type="button" (click)="exporter()"
+              label="{{ 'COMPOSANTS.PORTEFEUILLES.GESTION_PORTEFEUILLES.IMPORT_EXPORT.EXPORT' | translate }}"/>
+    <p-button type="button" (click)="importer()"
+              label="{{ 'COMPOSANTS.PORTEFEUILLES.GESTION_PORTEFEUILLES.IMPORT_EXPORT.IMPORT' | translate }}"/>
+  </div>
+</p-dialog>
