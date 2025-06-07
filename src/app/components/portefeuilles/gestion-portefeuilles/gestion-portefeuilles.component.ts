@@ -11,7 +11,10 @@ import {FormulaireModificationComponent} from './formulaire-modification/formula
 import {ImportExportComponent} from './import-export/import-export.component';
 import {PortefeuillesService} from '../../../services/portefeuilles/portefeuilles.service';
 
-// TODO : configuration des alertes du portefeuille
+// TODO : remove effect( sur les input
+// TODO : boite de dialogue pour le formulaire de modification + sélecteur de valeurs
+// TODO : boite de confirmation de suppression
+// TODO : boite de dialogue pour la configuration des alertes du portefeuille
 @Component({
   selector: 'app-gestion-portefeuilles',
   imports: [

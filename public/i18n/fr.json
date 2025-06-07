@@ -87,8 +87,9 @@
           "CREER": "Créer"
         },
         "FORMULAIRE_MODIFICATION": {
+          "MODIFICATION_NOM": "Modification du nom du portefeuille",
           "NOM": "Nouveau nom du portefeuille",
-          "MODIFIER": "Modifier le portefeuille",
+          "MODIFIER": "Modifier",
           "ANNULER": "Annuler"
         },
         "SELECTEUR_VALEURS": {

@@ -1,17 +1,23 @@
-<form *ngIf="portefeuilleEnModification" [formGroup]="formulaireModificationPortefeuille"
-      (ngSubmit)="modifierPortefeuille()">
-  <div>
-    <p-floatlabel>
-      <input pInputText [pAutoFocus]="true" id="nom" formControlName="champNom" autocomplete="off"/>
-      <label for="nom">{{ 'COMPOSANTS.PORTEFEUILLES.GESTION_PORTEFEUILLES.FORMULAIRE_MODIFICATION.NOM' | translate }}</label>
-    </p-floatlabel>
-  </div>
-  <div>
-    <p-button label="{{ 'COMPOSANTS.PORTEFEUILLES.GESTION_PORTEFEUILLES.FORMULAIRE_MODIFICATION.MODIFIER' | translate }} {{this.portefeuilleEnModification.nom}}"
-              type="submit" severity="danger"/>
-  </div>
-  <div>
-    <p-button label="{{ 'COMPOSANTS.PORTEFEUILLES.GESTION_PORTEFEUILLES.FORMULAIRE_MODIFICATION.ANNULER' | translate }}"
-              (onClick)="this.annule.emit()" type="reset" severity="warn"/>
-  </div>
-</form>
+<p-dialog [header]="titre" [modal]="true" [visible]="portefeuilleEnModification !== undefined" closable="false">
+  <form *ngIf="portefeuilleEnModification !== undefined" [formGroup]="formulaireModificationPortefeuille"
+        (ngSubmit)="modifierNomPortefeuille()">
+    <div>
+      <p-floatlabel>
+        <input pInputText [pAutoFocus]="true" id="nom" formControlName="champNom" autocomplete="off"/>
+        <label for="nom">
+          {{ 'COMPOSANTS.PORTEFEUILLES.GESTION_PORTEFEUILLES.FORMULAIRE_MODIFICATION.NOM' | translate }}
+        </label>
+      </p-floatlabel>
+    </div>
+    <div>
+      <p-button
+        label="{{ 'COMPOSANTS.PORTEFEUILLES.GESTION_PORTEFEUILLES.FORMULAIRE_MODIFICATION.MODIFIER' | translate }}"
+        type="submit" severity="danger"/>
+    </div>
+    <div>
+      <p-button
+        label="{{ 'COMPOSANTS.PORTEFEUILLES.GESTION_PORTEFEUILLES.FORMULAIRE_MODIFICATION.ANNULER' | translate }}"
+        (onClick)="this.annule.emit()" type="reset" severity="warn"/>
+    </div>
+  </form>
+</p-dialog>

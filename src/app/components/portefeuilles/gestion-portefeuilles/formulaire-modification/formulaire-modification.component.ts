@@ -1,13 +1,14 @@
-import {Component, effect, inject, input, InputSignal, OnInit, output} from '@angular/core';
+import {Component, inject, input, InputSignal, output} from '@angular/core';
 import {Button} from 'primeng/button';
 import {FloatLabel} from 'primeng/floatlabel';
 import {InputText} from 'primeng/inputtext';
 import {NgIf} from '@angular/common';
 import {FormBuilder, ReactiveFormsModule, Validators} from '@angular/forms';
-import {TranslatePipe} from '@ngx-translate/core';
+import {TranslatePipe, TranslateService} from '@ngx-translate/core';
 import {Portefeuille} from '../portefeuille.interface';
 import {pasDeNomEnDoublonValidator} from '../pas-de-nom-en-doublon.validator';
 import {AutoFocus} from 'primeng/autofocus';
+import {Dialog} from 'primeng/dialog';
 
 @Component({
   selector: 'app-formulaire-modification',
@@ -18,18 +19,21 @@ import {AutoFocus} from 'primeng/autofocus';
     NgIf,
     ReactiveFormsModule,
     TranslatePipe,
-    AutoFocus
+    AutoFocus,
+    Dialog
   ],
   templateUrl: './formulaire-modification.component.html',
   styleUrls: ['./formulaire-modification.component.sass', '../formulaire-creation/formulaire-creation.component.sass']
 })
-export class FormulaireModificationComponent implements OnInit {
+export class FormulaireModificationComponent {
   // injections
   private formBuilder = inject(FormBuilder);
 
   // input/output
-  portefeuilles: InputSignal<Array<Portefeuille> | undefined> = input();
-  portefeuille: InputSignal<Portefeuille | undefined> = input();
+  portefeuilles: InputSignal<Array<Portefeuille> | undefined> = input(undefined,
+    {transform: o => this.intercepteurPortefeuilles(o)});
+  portefeuille: InputSignal<Portefeuille | undefined> = input(undefined,
+    {transform: o => this.intercepteurPortefeuille(o)});
   modifie = output<string>();
   annule = output();
 
@@ -40,24 +44,29 @@ export class FormulaireModificationComponent implements OnInit {
 
   //données pour la vue
   portefeuilleEnModification: Portefeuille | undefined;
+  titre: string | undefined;
 
-  constructor() {
-    effect(() => {
-      this.portefeuilleEnModification = this.portefeuille();
-      if (this.portefeuilleEnModification) {
-        this.formulaireModificationPortefeuille.get('champNom')?.setValue(this.portefeuilleEnModification.nom);
-      }
-    });
+  constructor(private translateService: TranslateService) {
   }
 
-  ngOnInit(): void {
-    const portefeuilles = this.portefeuilles();
+  intercepteurPortefeuilles(portefeuilles: Portefeuille[] | undefined) {
     if (portefeuilles) {
       this.formulaireModificationPortefeuille.get('champNom')?.addValidators(pasDeNomEnDoublonValidator(portefeuilles));
     }
+    return portefeuilles;
   }
 
-  modifierPortefeuille() {
+  intercepteurPortefeuille(portefeuille: Portefeuille | undefined) {
+    this.portefeuilleEnModification = portefeuille;
+    if (this.portefeuilleEnModification) {
+      this.titre = this.translateService.instant('COMPOSANTS.PORTEFEUILLES.GESTION_PORTEFEUILLES.FORMULAIRE_MODIFICATION.MODIFICATION_NOM')
+        + ' ' + this.portefeuilleEnModification.nom;
+      this.formulaireModificationPortefeuille.get('champNom')?.setValue(this.portefeuilleEnModification.nom);
+    }
+    return portefeuille;
+  }
+
+  modifierNomPortefeuille() {
     this.formulaireModificationPortefeuille.get('champNom')?.updateValueAndValidity();
     if (this.formulaireModificationPortefeuille.valid && this.formulaireModificationPortefeuille.value.champNom) {
       this.modifie.emit(this.formulaireModificationPortefeuille.value.champNom);
