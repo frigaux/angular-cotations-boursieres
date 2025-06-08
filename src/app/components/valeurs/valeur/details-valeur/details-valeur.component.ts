@@ -1,4 +1,4 @@
-import {Component, effect, input, InputSignal} from '@angular/core';
+import {Component, input, InputSignal} from '@angular/core';
 import {Timeline} from "primeng/timeline";
 import {Cours} from '../../../cours/cours.class';
 import {TranslatePipe, TranslateService} from '@ngx-translate/core';
@@ -20,34 +20,36 @@ import {Fieldset} from 'primeng/fieldset';
 })
 export class DetailsValeurComponent {
   // input/output
-  cours: InputSignal<Cours | undefined> = input<Cours>();
+  cours: InputSignal<Cours | undefined> = input(undefined,
+    {transform: o => this.intercepteurCours(o)});
 
   // données pour la vue
   timelineItems: any[] = [];
   croissant: boolean = true;
 
   // privé
-  private currencyFormatter : Intl.NumberFormat;
+  private currencyFormatter: Intl.NumberFormat;
 
   constructor(private translateService: TranslateService) {
     this.currencyFormatter = new Intl.NumberFormat('fr-FR', {style: 'currency', currency: 'EUR'});
-    effect(() => {
-      this.timelineItems = [];
-      const cours = this.cours();
-      if (cours) {
-        this.addItem(translateService, 'MINIMUM', cours!.plusBas);
-        if (cours!.ouverture < cours!.cloture) {
-          this.croissant = true;
-          this.addItem(translateService, 'OUVERTURE', cours!.ouverture);
-          this.addItem(translateService, 'CLOTURE', cours!.cloture);
-        } else {
-          this.croissant = false;
-          this.addItem(translateService, 'CLOTURE', cours!.cloture);
-          this.addItem(translateService, 'OUVERTURE', cours!.ouverture);
-        }
-        this.addItem(translateService, 'MAXIMUM', cours!.plusHaut);
+  }
+
+  private intercepteurCours(cours: Cours | undefined) {
+    this.timelineItems = [];
+    if (cours) {
+      this.addItem(this.translateService, 'MINIMUM', cours!.plusBas);
+      if (cours!.ouverture < cours!.cloture) {
+        this.croissant = true;
+        this.addItem(this.translateService, 'OUVERTURE', cours!.ouverture);
+        this.addItem(this.translateService, 'CLOTURE', cours!.cloture);
+      } else {
+        this.croissant = false;
+        this.addItem(this.translateService, 'CLOTURE', cours!.cloture);
+        this.addItem(this.translateService, 'OUVERTURE', cours!.ouverture);
       }
-    });
+      this.addItem(this.translateService, 'MAXIMUM', cours!.plusHaut);
+    }
+    return cours;
   }
 
   addItem(translateService: TranslateService, keyTranslate: string, cours: number): void {

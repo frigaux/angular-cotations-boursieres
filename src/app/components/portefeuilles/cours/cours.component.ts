@@ -1,4 +1,4 @@
-import {Component, effect, input, InputSignal, output} from '@angular/core';
+import {Component, input, InputSignal, output} from '@angular/core';
 import {CoursPortefeuille} from '../cours-portefeuille.class';
 import {DatePipe} from '@angular/common';
 import {Panel} from 'primeng/panel';
@@ -17,22 +17,17 @@ import {Cours} from '../../cours/cours.class';
 })
 export class CoursComponent {
   // input/output
-  cours: InputSignal<CoursPortefeuille | undefined> = input();
+  cours: InputSignal<CoursPortefeuille | undefined> = input(undefined,
+    {transform: o => this.intercepteurCoursPortefeuille(o)});
   ferme = output<void>();
 
   // données pour la vue
   coursVue: Cours | undefined;
 
-  constructor() {
-    effect(() => {
-      this.initChart();
-    });
-  }
-
-  private initChart() {
-    const cours: CoursPortefeuille | undefined = this.cours();
-    if (cours) {
-      this.coursVue = Cours.fromCoursPortefeuille(cours);
+  private intercepteurCoursPortefeuille(coursPortefeuille: CoursPortefeuille | undefined) {
+    if (coursPortefeuille) {
+      this.coursVue = Cours.fromCoursPortefeuille(coursPortefeuille);
     }
+    return coursPortefeuille;
   }
 }

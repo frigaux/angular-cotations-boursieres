@@ -1,4 +1,4 @@
-import {Component, effect, input, InputSignal, output} from '@angular/core';
+import {Component, input, InputSignal, output} from '@angular/core';
 import {NgIf} from "@angular/common";
 import {PickList} from "primeng/picklist";
 import {DTOValeur} from '../../../../services/valeurs/dto-valeur.interface';
@@ -25,7 +25,8 @@ export class SelecteurValeursComponent {
   loading: boolean = true;
 
   // input/output
-  portefeuille: InputSignal<Portefeuille | undefined> = input();
+  portefeuille: InputSignal<Portefeuille | undefined> = input(undefined,
+    {transform: o => this.intercepteurPortefeuille(o)});
   ferme = output<void>();
   modifie = output<string[]>();
 
@@ -35,20 +36,22 @@ export class SelecteurValeursComponent {
   valeursTarget: DTOValeur[] = [];
 
   constructor(private valeursService: ValeursService) {
-    effect(() => {
-      this.initPicklist();
-    });
   }
 
-  initPicklist(): void {
-    this.portefeuilleEnEdition = this.portefeuille();
-    if (this.portefeuilleEnEdition) {
-      this.valeursService.chargerValeurs().subscribe(valeurs => {
-        this.valeursSource = valeurs.filter(valeur => !this.portefeuilleEnEdition!.tickers.includes(valeur.ticker));
-        this.valeursTarget = valeurs.filter(valeur => this.portefeuilleEnEdition!.tickers.includes(valeur.ticker));
-        this.loading = false;
-      });
+  private intercepteurPortefeuille(portefeuille: Portefeuille | undefined) {
+    if (portefeuille) {
+      this.initPicklist(portefeuille);
     }
+    return portefeuille;
+  }
+
+  initPicklist(portefeuille: Portefeuille): void {
+    this.portefeuilleEnEdition = portefeuille;
+    this.valeursService.chargerValeurs().subscribe(valeurs => {
+      this.valeursSource = valeurs.filter(valeur => !this.portefeuilleEnEdition!.tickers.includes(valeur.ticker));
+      this.valeursTarget = valeurs.filter(valeur => this.portefeuilleEnEdition!.tickers.includes(valeur.ticker));
+      this.loading = false;
+    });
   }
 
   enregistrer() {

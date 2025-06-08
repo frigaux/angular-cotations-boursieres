@@ -1,4 +1,4 @@
-import {Component, effect, input, InputSignal, output} from '@angular/core';
+import {Component, input, InputSignal, output} from '@angular/core';
 import {TranslateService} from '@ngx-translate/core';
 import {CoursService} from '../../../services/cours/cours.service';
 import {DatePipe, NgIf} from '@angular/common';
@@ -24,7 +24,8 @@ import {Drawer} from 'primeng/drawer';
 })
 export class ValeurComponent {
   // input/output
-  valeur: InputSignal<Valeur | undefined> = input();
+  valeur: InputSignal<Valeur | undefined> = input(undefined,
+    {transform: o => this.intercepteurValeur(o)});
   ferme = output<void>();
 
   // chargement des cours
@@ -34,21 +35,22 @@ export class ValeurComponent {
   cours: Cours | undefined;
 
   constructor(private translateService: TranslateService, private coursService: CoursService) {
-    effect(() => {
-      this.initChart();
-    });
   }
 
-  initChart() {
-    const valeur: Valeur | undefined = this.valeur();
+  private intercepteurValeur(valeur: Valeur | undefined) {
     if (valeur) {
-      this.loading = true;
-      this.coursService.chargerCoursTicker(valeur.ticker).subscribe(dto => {
-        this.coursService.chargerCoursTickerWithLimit(valeur.ticker, 300).subscribe(coursAlleges => {
-          this.cours = Cours.fromDTOCoursTicker(valeur.ticker, valeur.libelle, dto, coursAlleges);
-          this.loading = false;
-        })
-      });
+      this.initChart(valeur);
     }
+    return valeur;
+  }
+
+  initChart(valeur: Valeur) {
+    this.loading = true;
+    this.coursService.chargerCoursTicker(valeur.ticker).subscribe(dto => {
+      this.coursService.chargerCoursTickerWithLimit(valeur.ticker, 300).subscribe(coursAlleges => {
+        this.cours = Cours.fromDTOCoursTicker(valeur.ticker, valeur.libelle, dto, coursAlleges);
+        this.loading = false;
+      })
+    });
   }
 }

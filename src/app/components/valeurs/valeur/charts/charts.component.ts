@@ -1,4 +1,4 @@
-import {Component, effect, input, InputSignal} from '@angular/core';
+import {Component, input, InputSignal} from '@angular/core';
 import {Cours} from '../../../cours/cours.class';
 import {TranslatePipe, TranslateService} from '@ngx-translate/core';
 import {DatePipe} from '@angular/common';
@@ -20,7 +20,8 @@ import {FormsModule} from '@angular/forms';
 })
 export class ChartsComponent {
   // input/output
-  cours: InputSignal<Cours | undefined> = input();
+  cours: InputSignal<Cours | undefined> = input(undefined,
+    {transform: o => this.intercepteurCours(o)});
 
   // données pour la vue
   // https://www.chartjs.org/
@@ -30,32 +31,35 @@ export class ChartsComponent {
   periodeSelectionnee: number = 50;
 
   constructor(private translateService: TranslateService, public datepipe: DatePipe) {
-    effect(() => {
-      this.initChart();
-    });
+  }
+
+  private intercepteurCours(cours: Cours | undefined) {
+    if (cours) {
+      this.initChart(cours);
+    }
+    return cours;
   }
 
   clickPeriode(): void {
-    this.displayChart();
-  }
-
-  initChart() {
     const cours: Cours | undefined = this.cours();
     if (cours) {
-      this.periodes = [];
-      for (const periode of [50, 100, 150, 200, 250, 300]) {
-        this.periodes.push(periode);
-        this.periodeSelectionnee = periode;
-        if (cours.coursAlleges.length <= periode) {
-          break;
-        }
-      }
-      this.displayChart();
+      this.displayChart(cours);
     }
   }
 
-  displayChart() {
-    const cours: Cours | undefined = this.cours();
+  initChart(cours: Cours) {
+    this.periodes = [];
+    for (const periode of [50, 100, 150, 200, 250, 300]) {
+      this.periodes.push(periode);
+      this.periodeSelectionnee = periode;
+      if (cours.coursAlleges.length <= periode) {
+        break;
+      }
+    }
+    this.displayChart(cours);
+  }
+
+  displayChart(cours: Cours) {
     // const listeCours: DTOCoursTickerAllege[] | undefined = this.coursLight();
     if (cours && cours.coursAlleges.length <= cours.moyennesMobiles.length) {
       const labels: string[] = [];

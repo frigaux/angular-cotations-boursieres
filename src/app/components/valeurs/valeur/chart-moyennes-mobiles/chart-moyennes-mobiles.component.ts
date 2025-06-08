@@ -1,4 +1,4 @@
-import {Component, effect, input, InputSignal} from '@angular/core';
+import {Component, input, InputSignal} from '@angular/core';
 import {TranslateService} from '@ngx-translate/core';
 import {UIChart} from 'primeng/chart';
 import {Cours} from '../../../cours/cours.class';
@@ -13,32 +13,34 @@ import {Cours} from '../../../cours/cours.class';
 })
 export class ChartMoyennesMobilesComponent {
   // input/output
-  cours: InputSignal<Cours | undefined> = input();
+  cours: InputSignal<Cours | undefined> = input(undefined,
+    {transform: o => this.intercepteurCours(o)});
 
   // https://www.chartjs.org/
   data: any;
   options: any;
 
   constructor(private translateService: TranslateService) {
-    effect(() => {
-      this.initChart();
-    });
   }
 
-  initChart() {
-    const cours: Cours | undefined = this.cours();
+  private intercepteurCours(cours: Cours | undefined) {
     if (cours) {
-      const labels: string[] = [];
-      const data: number[] = [];
-      for (let i = cours.moyennesMobiles.length - 1; i >= 0; i--) {
-        labels.push(`${i + 1}`);
-        data.push(cours.moyennesMobiles[i]);
-      }
-
-      this.data = this.wrapData(labels, cours, data);
-
-      this.options = this.wrapOptions();
+      this.initChart(cours);
     }
+    return cours;
+  }
+
+  initChart(cours: Cours) {
+    const labels: string[] = [];
+    const data: number[] = [];
+    for (let i = cours.moyennesMobiles.length - 1; i >= 0; i--) {
+      labels.push(`${i + 1}`);
+      data.push(cours.moyennesMobiles[i]);
+    }
+
+    this.data = this.wrapData(labels, cours, data);
+
+    this.options = this.wrapOptions();
   }
 
   private wrapOptions() {
@@ -61,7 +63,7 @@ export class ChartMoyennesMobilesComponent {
       plugins: {
         tooltip: {
           callbacks: {
-            title: function(context: any) {
+            title: function (context: any) {
               return `MM${context[0].label}`;
             },
             label: function (context: any) {

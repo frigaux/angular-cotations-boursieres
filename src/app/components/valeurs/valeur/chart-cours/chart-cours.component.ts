@@ -1,4 +1,4 @@
-import {Component, effect, input, InputSignal} from '@angular/core';
+import {Component, input, InputSignal} from '@angular/core';
 import {TranslateService} from '@ngx-translate/core';
 import {UIChart} from 'primeng/chart';
 import {Cours} from '../../../cours/cours.class';
@@ -15,33 +15,36 @@ import {DatePipe} from '@angular/common';
 })
 export class ChartCoursComponent {
   // input/output
-  cours: InputSignal<Cours | undefined> = input();
+  cours: InputSignal<Cours | undefined> = input(undefined,
+    {transform: o => this.intercepteurCours(o)});
 
   // https://www.chartjs.org/
   data: any;
   options: any;
 
-  constructor(private translateService: TranslateService, public datepipe: DatePipe) {console.log('constructor');
-    effect(() => {
-      this.initChart();
-    });
+  constructor(private translateService: TranslateService, public datepipe: DatePipe) {
+    console.log('constructor');
   }
 
-  initChart() {console.log('initChart');
-    const cours: Cours | undefined = this.cours();
+  private intercepteurCours(cours: Cours | undefined) {
     if (cours) {
-      const labels: string[] = [];
-      const data: number[] = [];
-      const coursAlleges = cours.coursAlleges;
-      for (let i = coursAlleges.length - 1; i >= 0; i--) {
-        labels.push(this.datepipe.transform(coursAlleges[i].date, 'dd/MM/yyyy')!);
-        data.push(coursAlleges[i].cloture);
-      }
-
-      this.data = this.wrapData(cours.libelle, labels, data);
-
-      this.options = this.wrapOptions();
+      this.initChart(cours);
     }
+    return cours;
+  }
+
+  initChart(cours: Cours) {
+    const labels: string[] = [];
+    const data: number[] = [];
+    const coursAlleges = cours.coursAlleges;
+    for (let i = coursAlleges.length - 1; i >= 0; i--) {
+      labels.push(this.datepipe.transform(coursAlleges[i].date, 'dd/MM/yyyy')!);
+      data.push(coursAlleges[i].cloture);
+    }
+
+    this.data = this.wrapData(cours.libelle, labels, data);
+
+    this.options = this.wrapOptions();
   }
 
   private wrapOptions() {
