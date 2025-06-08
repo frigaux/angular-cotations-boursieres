@@ -1,6 +1,6 @@
 import {Component, effect, input, InputSignal, output} from '@angular/core';
 import {CoursPortefeuille} from '../cours-portefeuille.class';
-import {DatePipe, NgClass, NgIf} from '@angular/common';
+import {DatePipe} from '@angular/common';
 import {Panel} from 'primeng/panel';
 import {ChartsComponent} from '../../valeurs/valeur/charts/charts.component';
 import {Cours} from '../../cours/cours.class';
@@ -9,9 +9,7 @@ import {Cours} from '../../cours/cours.class';
   selector: 'app-cours',
   imports: [
     DatePipe,
-    NgIf,
     Panel,
-    NgClass,
     ChartsComponent
   ],
   templateUrl: './cours.component.html',

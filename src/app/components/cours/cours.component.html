@@ -51,13 +51,9 @@
             <tr>
               <td>
                 <span class="pi pi-chart-line"
-                      [ngClass]="{
-                      'positive': (cours.cloture >= cours.ouverture),
-                      'negative': (cours.cloture < cours.ouverture)
-                    }"
+                      [class]="cours.classeVariation()"
                       (mouseenter)="coursSelectionne = cours"></span>
                 {{ cours.libelle }}
-                <span class="pi pi-exclamation-triangle" *ngIf="cours.alerte"></span>
               </td>
               <td>{{ currencyFormatter.format(cours.cloture) }}</td>
               <td>{{ currencyFormatter.format(cours.ouverture) }}</td>

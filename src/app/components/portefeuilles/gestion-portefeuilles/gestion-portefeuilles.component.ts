@@ -12,7 +12,7 @@ import {ImportExportComponent} from './import-export/import-export.component';
 import {PortefeuillesService} from '../../../services/portefeuilles/portefeuilles.service';
 
 // TODO : remove effect( sur les input
-// TODO : boite de dialogue pour le formulaire de modification + sélecteur de valeurs
+// TODO : boite de dialogue pour sélecteur de valeurs
 // TODO : boite de confirmation de suppression
 // TODO : boite de dialogue pour la configuration des alertes du portefeuille
 @Component({

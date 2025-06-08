@@ -1,7 +1,7 @@
 import {Component, effect, input, InputSignal, output} from '@angular/core';
 import {TranslateService} from '@ngx-translate/core';
 import {CoursService} from '../../../services/cours/cours.service';
-import {DatePipe, NgClass, NgIf} from '@angular/common';
+import {DatePipe, NgIf} from '@angular/common';
 import {ProgressBar} from 'primeng/progressbar';
 import {Valeur} from '../valeur.class';
 import {DetailsValeurComponent} from './details-valeur/details-valeur.component';
@@ -15,7 +15,6 @@ import {Drawer} from 'primeng/drawer';
     NgIf,
     ProgressBar,
     DetailsValeurComponent,
-    NgClass,
     ChartsComponent,
     DatePipe,
     Drawer
