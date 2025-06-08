@@ -10,8 +10,10 @@ import {FormulaireCreationComponent} from './formulaire-creation/formulaire-crea
 import {FormulaireModificationComponent} from './formulaire-modification/formulaire-modification.component';
 import {ImportExportComponent} from './import-export/import-export.component';
 import {PortefeuillesService} from '../../../services/portefeuilles/portefeuilles.service';
+import {ConfirmDialog} from 'primeng/confirmdialog';
+import {ConfirmationService} from 'primeng/api';
 
-// TODO : boite de dialogue pour sélecteur de valeurs
+// TODO : veille sur @Component et providers
 // TODO : boite de confirmation de suppression
 // TODO : boite de dialogue pour la configuration des alertes du portefeuille
 @Component({
@@ -25,8 +27,10 @@ import {PortefeuillesService} from '../../../services/portefeuilles/portefeuille
     SelecteurValeursComponent,
     FormulaireCreationComponent,
     FormulaireModificationComponent,
-    ImportExportComponent
+    ImportExportComponent,
+    ConfirmDialog
   ],
+  providers: [ConfirmationService],
   templateUrl: './gestion-portefeuilles.component.html',
   styleUrl: './gestion-portefeuilles.component.sass'
 })
@@ -36,12 +40,13 @@ export class GestionPortefeuillesComponent implements OnInit {
 
   // données pour la vue
   portefeuilles: Array<Portefeuille> = [];
-  portefeuilleEnModification: Portefeuille | undefined;
+  portefeuilleNomEnModification: Portefeuille | undefined;
   portefeuilleValeursEnModification: Portefeuille | undefined;
   afficherCreation: boolean = false;
 
   constructor(private portefeuillesService: PortefeuillesService,
-              private translateService: TranslateService) {
+              private translateService: TranslateService,
+              private confirmationService: ConfirmationService) {
   }
 
   ngOnInit(): void {
@@ -53,7 +58,7 @@ export class GestionPortefeuillesComponent implements OnInit {
     if (portefeuille.tickers.length > 0) {
       return ': ' + portefeuille.tickers.reduce((t1, t2) => t1 + ', ' + t2);
     }
-    return '(' + this.translateService.instant('COMPOSANTS.PORTEFEUILLES.GESTION_PORTEFEUILLES.PORTEFEUILLE_SANS_VALEUR') +')';
+    return '(' + this.translateService.instant('COMPOSANTS.PORTEFEUILLES.GESTION_PORTEFEUILLES.PORTEFEUILLE_SANS_VALEUR') + ')';
   }
 
   creerPortefeuille(nom: string) {
@@ -63,16 +68,20 @@ export class GestionPortefeuillesComponent implements OnInit {
   }
 
   modificationNomPortefeuille(idx: number) {
-    this.portefeuilleEnModification = this.portefeuilles[idx];
+    this.portefeuilleNomEnModification = this.portefeuilles[idx];
   }
 
   modifierNomPortefeuille(nom: string) {
-    this.portefeuilleEnModification!.nom = nom;
-    this.portefeuilleEnModification = undefined;
+    this.portefeuilleNomEnModification!.nom = nom;
+    this.portefeuilleNomEnModification = undefined;
     this.portefeuillesService.enregistrer(this.portefeuilles);
   }
 
-  modificationValeursPortefeuille(idx: number) {
+  editionAlertesPortefeuille(idx: number) {
+
+  }
+
+  associationValeursPortefeuille(idx: number) {
     this.portefeuilleValeursEnModification = this.portefeuilles[idx];
   }
 
@@ -82,15 +91,31 @@ export class GestionPortefeuillesComponent implements OnInit {
     this.portefeuilleValeursEnModification = undefined;
   }
 
-  supprimerPortefeuille(idx: number) {
-    if (idx < this.portefeuilles.length) {
-      const parDefaut = this.portefeuilles[idx].parDefaut;
-      this.portefeuilles.splice(idx, 1);
-      if (parDefaut && this.portefeuilles.length > 0) {
-        this.portefeuilles[0].parDefaut = true;
+  supprimerPortefeuille(event: Event, idx: number) {
+    this.confirmationService.confirm({
+      target: event.target as EventTarget,
+      header: this.translateService.instant('COMPOSANTS.PORTEFEUILLES.GESTION_PORTEFEUILLES.CONFIRMATION_SUPPRESSION', {'nom': this.portefeuilles[idx].nom}),
+      closable: false,
+      closeOnEscape: true,
+      rejectButtonProps: {
+        label: this.translateService.instant('COMPOSANTS.COMMUN.ANNULER'),
+        severity: 'warn'
+      },
+      acceptButtonProps: {
+        label: this.translateService.instant('COMPOSANTS.COMMUN.SUPPRIMER'),
+        severity: 'danger'
+      },
+      accept: () => {
+        if (idx < this.portefeuilles.length) {
+          const parDefaut = this.portefeuilles[idx].parDefaut;
+          this.portefeuilles.splice(idx, 1);
+          if (parDefaut && this.portefeuilles.length > 0) {
+            this.portefeuilles[0].parDefaut = true;
+          }
+          this.portefeuillesService.enregistrer(this.portefeuilles);
+        }
       }
-      this.portefeuillesService.enregistrer(this.portefeuilles);
-    }
+    });
   }
 
   onChangeParDefaut(e: any) {

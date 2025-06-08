@@ -74,7 +74,7 @@ describe('GestionPortefeuillesComponent', () => {
 
     it('when #editerPortefeuille then le portefeuille est bien modifié', () => {
       fixture.detectChanges(); // appelle le ngOnInit
-      component.modificationValeursPortefeuille(0);
+      component.associationValeursPortefeuille(0);
       component.modifierValeursPortefeuille([]);
       const expected: Array<Portefeuille> = clonePORTEFEUILLES()
       expected[0].tickers = [];

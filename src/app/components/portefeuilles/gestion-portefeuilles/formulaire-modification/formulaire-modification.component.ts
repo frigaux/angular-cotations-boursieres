@@ -35,7 +35,7 @@ export class FormulaireModificationComponent {
   portefeuille: InputSignal<Portefeuille | undefined> = input(undefined,
     {transform: o => this.intercepteurPortefeuille(o)});
   modifie = output<string>();
-  annule = output();
+  annule = output<void>();
 
   // formulaires
   formulaireModificationPortefeuille = this.formBuilder.group({
@@ -59,8 +59,7 @@ export class FormulaireModificationComponent {
   intercepteurPortefeuille(portefeuille: Portefeuille | undefined) {
     this.portefeuilleEnModification = portefeuille;
     if (this.portefeuilleEnModification) {
-      this.titre = this.translateService.instant('COMPOSANTS.PORTEFEUILLES.GESTION_PORTEFEUILLES.FORMULAIRE_MODIFICATION.MODIFICATION_NOM')
-        + ' ' + this.portefeuilleEnModification.nom;
+      this.titre = this.translateService.instant('COMPOSANTS.PORTEFEUILLES.GESTION_PORTEFEUILLES.FORMULAIRE_MODIFICATION.MODIFICATION_NOM', {'nom': this.portefeuilleEnModification.nom});
       this.formulaireModificationPortefeuille.get('champNom')?.setValue(this.portefeuilleEnModification.nom);
     }
     return portefeuille;

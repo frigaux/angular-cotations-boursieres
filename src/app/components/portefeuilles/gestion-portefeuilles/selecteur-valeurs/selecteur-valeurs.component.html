@@ -21,11 +21,11 @@
       </p-picklist>
       <div class="buttons">
         <p-button
-          label="{{ 'COMPOSANTS.PORTEFEUILLES.GESTION_PORTEFEUILLES.SELECTEUR_VALEURS.ENREGISTRER' | translate }}"
-          type="button" severity="danger" (click)="modifierValeursPortefeuille()" />
-        <p-button
           label="{{ 'COMPOSANTS.PORTEFEUILLES.GESTION_PORTEFEUILLES.SELECTEUR_VALEURS.FERMER' | translate }}"
           (onClick)="this.annule.emit()" type="reset" severity="warn"/>
+        <p-button
+          label="{{ 'COMPOSANTS.PORTEFEUILLES.GESTION_PORTEFEUILLES.SELECTEUR_VALEURS.ENREGISTRER' | translate }}"
+          type="button" severity="danger" (click)="modifierValeursPortefeuille()" />
       </div>
     </div>
 }

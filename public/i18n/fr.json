@@ -8,6 +8,10 @@
     "GESTION_PORTEFEUILLES": "Gestion des portefeuilles"
   },
   "COMPOSANTS": {
+    "COMMUN": {
+      "ANNULER": "Annuler",
+      "SUPPRIMER": "Supprimer"
+    },
     "AUTHENTIFICATION": {
       "REUSSIE": "Authentification réussie !"
     },
@@ -79,21 +83,23 @@
         "CREATION": "Création d'un portefeuille",
         "PORTEFEUILLES": "Portefeuilles",
         "PAR_DEFAUT": "Portefeuille par défaut",
-        "MODIFIER_VALEUR": "Modifier les valeurs du portefeuille",
+        "ASSOCIER_VALEUR": "Associer des valeurs du portefeuille",
+        "EDITER_ALERTES": "Editer les alertes du portefeuille",
         "RENOMMER": "Renommer le portefeuille",
         "SUPPRIMER": "Supprimer le portefeuille",
+        "CONFIRMATION_SUPPRESSION": "Confirmez-vous la suppression du portefeuille {{nom}} ?",
         "FORMULAIRE_CREATION": {
           "NOM": "Nom du portefeuille",
           "CREER": "Créer"
         },
         "FORMULAIRE_MODIFICATION": {
-          "MODIFICATION_NOM": "Modification du nom du portefeuille",
+          "MODIFICATION_NOM": "Modification du nom du portefeuille {{nom}}",
           "NOM": "Nouveau nom du portefeuille",
           "MODIFIER": "Modifier",
           "ANNULER": "Annuler"
         },
         "SELECTEUR_VALEURS": {
-          "MODIFICATION_PORTEFEUILLE": "Modification des valeurs du portefeuille",
+          "MODIFICATION_PORTEFEUILLE": "Modification des valeurs du portefeuille {{nom}}",
           "RECHERCHE": "Recherche par libellé",
           "SOURCE": "Valeurs disponibles",
           "TARGET": "Valeurs du portefeuille",

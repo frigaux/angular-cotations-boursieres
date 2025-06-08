@@ -24,10 +24,11 @@
     <app-import-export></app-import-export>
   </div>
 
-  <app-formulaire-modification [portefeuilles]="portefeuilles" [portefeuille]="portefeuilleEnModification"
-                               (annule)="this.portefeuilleEnModification = undefined"
+  <app-formulaire-modification [portefeuilles]="portefeuilles" [portefeuille]="portefeuilleNomEnModification"
+                               (annule)="this.portefeuilleNomEnModification = undefined"
                                (modifie)="modifierNomPortefeuille($event)"></app-formulaire-modification>
 
+  <p-confirmdialog />
   <div class="liste">
     @for (portefeuille of portefeuilles; track portefeuille.nom; let idx = $index) {
       <div>
@@ -36,11 +37,13 @@
                  title="{{ 'COMPOSANTS.PORTEFEUILLES.GESTION_PORTEFEUILLES.PAR_DEFAUT' | translate }}"
                  (change)="onChangeParDefaut($event)">
         </div>
-        <div><span class="pi pi-cog" (click)="modificationValeursPortefeuille(idx)"
-                   title="{{ 'COMPOSANTS.PORTEFEUILLES.GESTION_PORTEFEUILLES.MODIFIER_VALEUR' | translate }}"></span></div>
+        <div><span class="pi pi-link" (click)="associationValeursPortefeuille(idx)"
+                   title="{{ 'COMPOSANTS.PORTEFEUILLES.GESTION_PORTEFEUILLES.ASSOCIER_VALEUR' | translate }}"></span></div>
+        <div><span class="pi pi-bell" (click)="editionAlertesPortefeuille(idx)"
+                   title="{{ 'COMPOSANTS.PORTEFEUILLES.GESTION_PORTEFEUILLES.EDITER_ALERTES' | translate }}"></span></div>
         <div><span class="pi pi-pencil" (click)="modificationNomPortefeuille(idx)"
                    title="{{ 'COMPOSANTS.PORTEFEUILLES.GESTION_PORTEFEUILLES.RENOMMER' | translate }}"></span></div>
-        <div><span class="pi pi-trash" (click)="supprimerPortefeuille(idx)"
+        <div><span class="pi pi-trash" (click)="supprimerPortefeuille($event, idx)"
                    title="{{ 'COMPOSANTS.PORTEFEUILLES.GESTION_PORTEFEUILLES.SUPPRIMER' | translate }}"></span></div>
         <div>
           {{ portefeuille.nom }} {{ tickers(portefeuille) }}
