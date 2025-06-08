@@ -2,8 +2,8 @@
   <p-progressbar mode="indeterminate" [style]="{'height': '10px'}"/>
 </div>
 
-<app-selecteur-valeurs [portefeuille]="portefeuilleEnEdition"
-                       (ferme)="this.portefeuilleEnEdition = undefined"
+<app-selecteur-valeurs [portefeuille]="portefeuilleValeursEnModification"
+                       (annule)="this.portefeuilleValeursEnModification = undefined"
                        (modifie)="modifierValeursPortefeuille($event)"></app-selecteur-valeurs>
 
 <p-card *ngIf="afficherCreation || this.portefeuilles.length === 0">

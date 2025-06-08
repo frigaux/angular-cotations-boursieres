@@ -37,7 +37,7 @@ export class GestionPortefeuillesComponent implements OnInit {
   // données pour la vue
   portefeuilles: Array<Portefeuille> = [];
   portefeuilleEnModification: Portefeuille | undefined;
-  portefeuilleEnEdition: Portefeuille | undefined;
+  portefeuilleValeursEnModification: Portefeuille | undefined;
   afficherCreation: boolean = false;
 
   constructor(private portefeuillesService: PortefeuillesService,
@@ -73,13 +73,13 @@ export class GestionPortefeuillesComponent implements OnInit {
   }
 
   modificationValeursPortefeuille(idx: number) {
-    this.portefeuilleEnEdition = this.portefeuilles[idx];
+    this.portefeuilleValeursEnModification = this.portefeuilles[idx];
   }
 
   modifierValeursPortefeuille(tickers: string[]) {
-    this.portefeuilleEnEdition!.tickers = tickers;
+    this.portefeuilleValeursEnModification!.tickers = tickers;
     this.portefeuillesService.enregistrer(this.portefeuilles);
-    this.portefeuilleEnEdition = undefined;
+    this.portefeuilleValeursEnModification = undefined;
   }
 
   supprimerPortefeuille(idx: number) {

@@ -1,16 +1,5 @@
-@if (portefeuilleEnEdition !== undefined) {
-  <p-panel>
-    <ng-template #header>
-      <h1>
-        {{ 'COMPOSANTS.PORTEFEUILLES.GESTION_PORTEFEUILLES.SELECTEUR_VALEURS.MODIFICATION_PORTEFEUILLE' | translate }}
-        <span>{{portefeuilleEnEdition.nom}}</span>
-      </h1>
-      <span class="pi pi-save" (click)="enregistrer()"
-            title="{{ 'COMPOSANTS.PORTEFEUILLES.GESTION_PORTEFEUILLES.SELECTEUR_VALEURS.ENREGISTRER' | translate }}"></span>
-      <span class="pi pi-times-circle" (click)="this.ferme.emit()"
-            title="{{ 'COMPOSANTS.PORTEFEUILLES.GESTION_PORTEFEUILLES.SELECTEUR_VALEURS.FERMER' | translate }}"></span>
-    </ng-template>
-
+<p-dialog [header]="titre" [modal]="true" [visible]="portefeuilleEnModification !== undefined" closable="false">
+  @if (portefeuilleEnModification !== undefined) {
     <div *ngIf="loading">
       <p-progressbar mode="indeterminate" [style]="{'height': '10px'}"/>
     </div>
@@ -30,6 +19,14 @@
           {{ valeur.libelle }}
         </ng-template>
       </p-picklist>
+      <div class="buttons">
+        <p-button
+          label="{{ 'COMPOSANTS.PORTEFEUILLES.GESTION_PORTEFEUILLES.SELECTEUR_VALEURS.ENREGISTRER' | translate }}"
+          type="button" severity="danger" (click)="modifierValeursPortefeuille()" />
+        <p-button
+          label="{{ 'COMPOSANTS.PORTEFEUILLES.GESTION_PORTEFEUILLES.SELECTEUR_VALEURS.FERMER' | translate }}"
+          (onClick)="this.annule.emit()" type="reset" severity="warn"/>
+      </div>
     </div>
-  </p-panel>
 }
+</p-dialog>

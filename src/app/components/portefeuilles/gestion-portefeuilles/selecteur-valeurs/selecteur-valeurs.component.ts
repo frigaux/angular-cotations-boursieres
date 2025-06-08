@@ -4,9 +4,10 @@ import {PickList} from "primeng/picklist";
 import {DTOValeur} from '../../../../services/valeurs/dto-valeur.interface';
 import {ValeursService} from '../../../../services/valeurs/valeurs.service';
 import {ProgressBar} from 'primeng/progressbar';
-import {TranslatePipe} from '@ngx-translate/core';
+import {TranslatePipe, TranslateService} from '@ngx-translate/core';
 import {Portefeuille} from '../portefeuille.interface';
-import {Panel} from 'primeng/panel';
+import {Dialog} from 'primeng/dialog';
+import {Button} from 'primeng/button';
 
 @Component({
   selector: 'app-selecteur-valeurs',
@@ -15,7 +16,8 @@ import {Panel} from 'primeng/panel';
     PickList,
     ProgressBar,
     TranslatePipe,
-    Panel
+    Dialog,
+    Button
   ],
   templateUrl: './selecteur-valeurs.component.html',
   styleUrl: './selecteur-valeurs.component.sass'
@@ -27,34 +29,38 @@ export class SelecteurValeursComponent {
   // input/output
   portefeuille: InputSignal<Portefeuille | undefined> = input(undefined,
     {transform: o => this.intercepteurPortefeuille(o)});
-  ferme = output<void>();
   modifie = output<string[]>();
+  annule = output<void>();
 
   // données pour la vue
-  portefeuilleEnEdition: Portefeuille | undefined;
+  portefeuilleEnModification: Portefeuille | undefined;
+  titre: string | undefined;
   valeursSource: DTOValeur[] = [];
   valeursTarget: DTOValeur[] = [];
 
-  constructor(private valeursService: ValeursService) {
+  constructor(private valeursService: ValeursService,
+              private translateService: TranslateService) {
   }
 
   private intercepteurPortefeuille(portefeuille: Portefeuille | undefined) {
-    if (portefeuille) {
-      this.initPicklist(portefeuille);
+    this.portefeuilleEnModification = portefeuille;
+    if (this.portefeuilleEnModification) {
+      this.titre = this.translateService.instant('COMPOSANTS.PORTEFEUILLES.GESTION_PORTEFEUILLES.SELECTEUR_VALEURS.MODIFICATION_PORTEFEUILLE')
+        + ' ' + this.portefeuilleEnModification.nom;
+      this.initPicklist(this.portefeuilleEnModification);
     }
     return portefeuille;
   }
 
   initPicklist(portefeuille: Portefeuille): void {
-    this.portefeuilleEnEdition = portefeuille;
     this.valeursService.chargerValeurs().subscribe(valeurs => {
-      this.valeursSource = valeurs.filter(valeur => !this.portefeuilleEnEdition!.tickers.includes(valeur.ticker));
-      this.valeursTarget = valeurs.filter(valeur => this.portefeuilleEnEdition!.tickers.includes(valeur.ticker));
+      this.valeursSource = valeurs.filter(valeur => !portefeuille!.tickers.includes(valeur.ticker));
+      this.valeursTarget = valeurs.filter(valeur => portefeuille!.tickers.includes(valeur.ticker));
       this.loading = false;
     });
   }
 
-  enregistrer() {
+  modifierValeursPortefeuille() {
     this.modifie.emit(this.valeursTarget.map(valeur => valeur.ticker));
   }
 }
