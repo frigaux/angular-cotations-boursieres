@@ -10,7 +10,6 @@ import {FormulaireCreationComponent} from './formulaire-creation/formulaire-crea
 import {FormulaireModificationComponent} from './formulaire-modification/formulaire-modification.component';
 import {ImportExportComponent} from './import-export/import-export.component';
 import {PortefeuillesService} from '../../../services/portefeuilles/portefeuilles.service';
-import {ConfirmDialog} from 'primeng/confirmdialog';
 import {ConfirmationService} from 'primeng/api';
 import {EditeurAlertesComponent} from './editeur-alertes/editeur-alertes.component';
 import {Alerte} from './alerte.interface';
@@ -29,10 +28,9 @@ import {Alerte} from './alerte.interface';
     FormulaireCreationComponent,
     FormulaireModificationComponent,
     ImportExportComponent,
-    ConfirmDialog,
     EditeurAlertesComponent
   ],
-  providers: [ConfirmationService],
+  // providers: [ConfirmationService],
   templateUrl: './gestion-portefeuilles.component.html',
   styleUrl: './gestion-portefeuilles.component.sass'
 })
@@ -85,7 +83,7 @@ export class GestionPortefeuillesComponent implements OnInit {
   }
 
   editerAlertesPortefeuille(alertes: Alerte[]) {
-
+    // TODO
   }
 
   associationValeursPortefeuille(idx: number) {

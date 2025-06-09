@@ -1,10 +1,35 @@
 <p-dialog [header]="titre" [modal]="true" [visible]="portefeuilleEnModification !== undefined" closable="false">
   @if (portefeuilleEnModification !== undefined) {
-    <div *ngIf="loading">
-      <p-progressbar mode="indeterminate" [style]="{'height': '10px'}"/>
+    <div class="boutons">
+      <p-button
+        label="{{ 'COMPOSANTS.PORTEFEUILLES.GESTION_PORTEFEUILLES.EDITEUR_ALERTES.AJOUT' | translate }}"
+        (onClick)="ajouterAlerte()" type="button"/>
     </div>
 
-    <div *ngIf="!loading">
+    <div class="formulaire" [formGroup]="formulaire">
+      <div formArrayName="noms" *ngFor="let nom of noms.controls; index as idx">
+        <div>
+          <p-floatlabel>
+            <input pInputText [pAutoFocus]="true" id="{{idx}}" autocomplete="off" [formControlName]="idx"/>
+            <label for="{{idx}}">
+              {{ 'COMPOSANTS.PORTEFEUILLES.GESTION_PORTEFEUILLES.EDITEUR_ALERTES.NOM' | translate }}
+            </label>
+          </p-floatlabel>
+          <span class="pi pi-wrench" (click)="editionAlertes(idx)"
+                title="{{ 'COMPOSANTS.PORTEFEUILLES.GESTION_PORTEFEUILLES.EDITEUR_ALERTES.EDITER_CONDITION' | translate }}"></span>
+          <span class="pi pi-trash" (click)="suppressionAlerte($event, idx)"
+                title="{{ 'COMPOSANTS.PORTEFEUILLES.GESTION_PORTEFEUILLES.EDITEUR_ALERTES.SUPPRIMER' | translate }}"></span>
+        </div>
+      </div>
+    </div>
+
+    <div class="boutons">
+      <p-button
+        label="{{ 'COMPOSANTS.COMMUN.ABANDONNER' | translate }}"
+        (onClick)="this.abandon.emit()" type="reset" severity="warn"/>
+      <p-button
+        label="{{ 'COMPOSANTS.COMMUN.ENREGISTRER' | translate }}"
+        type="button" severity="danger" (click)="editerAlertesPortefeuille()"/>
     </div>
   }
 </p-dialog>

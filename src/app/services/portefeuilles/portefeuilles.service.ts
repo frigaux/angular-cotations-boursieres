@@ -44,7 +44,8 @@ export class PortefeuillesService {
         const error = portefeuilles.find(portefeuille =>
           !portefeuille.hasOwnProperty('nom')
           || !portefeuille.hasOwnProperty('parDefaut')
-          || !portefeuille.hasOwnProperty('tickers'));
+          || !portefeuille.hasOwnProperty('tickers')
+          || !portefeuille.hasOwnProperty('alertes'));
         if (!error) {
           window.localStorage.setItem(PortefeuillesService.PORTEFEUILLES, json);
           PortefeuillesService.OBSERVERS_IMPORT.forEach(observer => observer.next(portefeuilles));

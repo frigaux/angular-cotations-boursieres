@@ -30,7 +30,7 @@ export class SelecteurValeursComponent {
   portefeuille: InputSignal<Portefeuille | undefined> = input(undefined,
     {transform: o => this.intercepteurPortefeuille(o)});
   modifie = output<string[]>();
-  annule = output<void>();
+  abandon = output<void>();
 
   // données pour la vue
   portefeuilleEnModification: Portefeuille | undefined;

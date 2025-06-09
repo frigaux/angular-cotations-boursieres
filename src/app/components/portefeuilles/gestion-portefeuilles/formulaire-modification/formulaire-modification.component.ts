@@ -35,7 +35,7 @@ export class FormulaireModificationComponent {
   portefeuille: InputSignal<Portefeuille | undefined> = input(undefined,
     {transform: o => this.intercepteurPortefeuille(o)});
   modifie = output<string>();
-  annule = output<void>();
+  abandon = output<void>();
 
   // formulaires
   formulaireModificationPortefeuille = this.formBuilder.group({

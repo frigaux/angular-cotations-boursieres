@@ -5,12 +5,15 @@ import {FooterComponent} from "./components/footer/footer.component";
 import {TranslateService} from "@ngx-translate/core";
 import translationsFR from "../../public/i18n/fr.json";
 import {Title} from '@angular/platform-browser';
+import {ConfirmDialog} from 'primeng/confirmdialog';
+import {ConfirmationService} from 'primeng/api';
 
 // TODO : courbes des MMxx glissantes
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, HeaderComponent, FooterComponent],
+  imports: [RouterOutlet, HeaderComponent, FooterComponent, ConfirmDialog],
+  providers: [ConfirmationService],
   templateUrl: './app.component.html',
   styleUrl: './app.component.sass'
 })

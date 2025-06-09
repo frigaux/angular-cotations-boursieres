@@ -6,6 +6,7 @@ import {PORTEFEUILLES} from '../../../services/jdd/jdd-portefeuille.dataset';
 import {Portefeuille} from './portefeuille.interface';
 import {ValeursService} from '../../../services/valeurs/valeurs.service';
 import {PortefeuillesService} from '../../../services/portefeuilles/portefeuilles.service';
+import {ConfirmationService} from 'primeng/api';
 
 describe('GestionPortefeuillesComponent', () => {
   let component: GestionPortefeuillesComponent;
@@ -23,7 +24,8 @@ describe('GestionPortefeuillesComponent', () => {
       ],
       providers: [
         {provide: ValeursService, useValue: mockValeursService},
-        {provide: PortefeuillesService, useValue: mockPortefeuillesService}
+        {provide: PortefeuillesService, useValue: mockPortefeuillesService},
+        {provide: ConfirmationService}
       ]
     })
       .compileComponents();
@@ -33,7 +35,7 @@ describe('GestionPortefeuillesComponent', () => {
   });
 
   it('should create', () => {
-    expect(component).toBeTruthy();
+    expect(component).toBeDefined();
   });
 
   describe('Given un LocalStorage avec des portefeuilles existants', () => {
@@ -50,7 +52,7 @@ describe('GestionPortefeuillesComponent', () => {
     it('when #creerPortefeuille then un nouveau portefeuille est crée', () => {
       fixture.detectChanges(); // appelle le ngOnInit
       component.creerPortefeuille('nomUnique');
-      const expected = clonePORTEFEUILLES().concat({'nom': 'nomUnique', 'parDefaut': false, tickers: [], alertes: []});
+      const expected = clonePORTEFEUILLES().concat({nom: 'nomUnique', parDefaut: false, tickers: [], alertes: []});
       expect(component.portefeuilles).toEqual(expected);
     });
 

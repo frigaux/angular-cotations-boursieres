@@ -1,0 +1,33 @@
+div.formulaire
+  & > div > div
+    display: flex
+    flex-direction: row
+    align-items: center
+    margin: 2rem 0 0 1rem
+
+    span.pi
+      cursor: pointer
+      margin: 0 0 0 1rem
+      font-size: 2rem
+
+    span.pi-trash
+      color: var(--p-red-800)
+
+    input
+      &.ng-invalid.ng-touched, &.ng-invalid.ng-dirty
+        border-color: var(--p-red-800)
+
+      &.ng-valid
+        border-color: var(--p-green-800)
+
+div.boutons
+  p-button
+    margin-left: 0.5rem
+
+div.boutons:first-child
+  margin: 0.5rem
+
+div.boutons:last-child
+  margin: 2rem 0.5rem 0.5rem 0.5rem
+  text-align: center
+

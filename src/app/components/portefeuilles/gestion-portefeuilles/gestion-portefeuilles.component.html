@@ -3,15 +3,15 @@
 </div>
 
 <app-formulaire-modification [portefeuilles]="portefeuilles" [portefeuille]="portefeuilleNomEnModification"
-                             (annule)="portefeuilleNomEnModification = undefined"
+                             (abandon)="portefeuilleNomEnModification = undefined"
                              (modifie)="modifierNomPortefeuille($event)"></app-formulaire-modification>
 
 <app-selecteur-valeurs [portefeuille]="portefeuilleValeursEnModification"
-                       (annule)="portefeuilleValeursEnModification = undefined"
+                       (abandon)="portefeuilleValeursEnModification = undefined"
                        (modifie)="modifierValeursPortefeuille($event)"></app-selecteur-valeurs>
 
 <app-editeur-alertes [portefeuille]="portefeuilleAlertesEnModification"
-                       (annule)="portefeuilleAlertesEnModification = undefined"
+                       (abandon)="portefeuilleAlertesEnModification = undefined"
                        (modifie)="editerAlertesPortefeuille($event)"></app-editeur-alertes>
 
 <p-card *ngIf="afficherCreation || this.portefeuilles.length === 0">
@@ -32,7 +32,6 @@
     <app-import-export></app-import-export>
   </div>
 
-  <p-confirmdialog/>
   <div class="liste">
     @for (portefeuille of portefeuilles; track portefeuille.nom; let idx = $index) {
       <div>

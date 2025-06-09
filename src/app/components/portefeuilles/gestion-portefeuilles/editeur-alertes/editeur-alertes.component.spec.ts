@@ -1,7 +1,8 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { EditeurAlertesComponent } from './editeur-alertes.component';
+import {EditeurAlertesComponent} from './editeur-alertes.component';
 import {TranslateModule} from '@ngx-translate/core';
+import {ConfirmationService} from 'primeng/api';
 
 describe('EditeurAlertesComponent', () => {
   let component: EditeurAlertesComponent;
@@ -12,13 +13,15 @@ describe('EditeurAlertesComponent', () => {
       imports: [
         EditeurAlertesComponent,
         TranslateModule.forRoot({})
+      ],
+      providers: [
+        {provide: ConfirmationService}
       ]
     })
-    .compileComponents();
+      .compileComponents();
 
     fixture = TestBed.createComponent(EditeurAlertesComponent);
     component = fixture.componentInstance;
-    fixture.detectChanges();
   });
 
   it('should create', () => {

@@ -11,12 +11,12 @@
     </div>
     <div>
       <p-button
-        label="{{ 'COMPOSANTS.PORTEFEUILLES.GESTION_PORTEFEUILLES.FORMULAIRE_MODIFICATION.ANNULER' | translate }}"
-        (onClick)="this.annule.emit()" type="reset" severity="warn"/>
+        label="{{ 'COMPOSANTS.COMMUN.ANNULER' | translate }}"
+        (onClick)="this.abandon.emit()" type="reset" severity="warn"/>
     </div>
     <div>
       <p-button
-        label="{{ 'COMPOSANTS.PORTEFEUILLES.GESTION_PORTEFEUILLES.FORMULAIRE_MODIFICATION.MODIFIER' | translate }}"
+        label="{{ 'COMPOSANTS.PORTEFEUILLES.GESTION_PORTEFEUILLES.FORMULAIRE_MODIFICATION.RENOMMER' | translate }}"
         type="submit" severity="danger"/>
     </div>
   </form>

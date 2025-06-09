@@ -10,7 +10,9 @@
   "COMPOSANTS": {
     "COMMUN": {
       "ANNULER": "Annuler",
-      "SUPPRIMER": "Supprimer"
+      "SUPPRIMER": "Supprimer",
+      "ENREGISTRER": "Enregistrer les modifications",
+      "ABANDONNER": "Abandonner les modifications"
     },
     "AUTHENTIFICATION": {
       "REUSSIE": "Authentification réussie !"
@@ -90,24 +92,26 @@
         "CONFIRMATION_SUPPRESSION": "Confirmez-vous la suppression du portefeuille {{nom}} ?",
         "FORMULAIRE_CREATION": {
           "NOM": "Nom du portefeuille",
-          "CREER": "Créer"
+          "CREER": "Créer le portefeuille"
         },
         "FORMULAIRE_MODIFICATION": {
           "MODIFICATION_NOM": "Modification du nom du portefeuille {{nom}}",
           "NOM": "Nouveau nom du portefeuille",
-          "MODIFIER": "Modifier",
-          "ANNULER": "Annuler"
+          "RENOMMER": "Renommer le portefeuille"
         },
         "SELECTEUR_VALEURS": {
           "MODIFICATION_PORTEFEUILLE": "Modification des valeurs du portefeuille {{nom}}",
           "RECHERCHE": "Recherche par libellé",
           "SOURCE": "Valeurs disponibles",
-          "TARGET": "Valeurs du portefeuille",
-          "ENREGISTRER": "Enregistrer le portefeuille",
-          "FERMER": "Abandonner les modifications"
+          "TARGET": "Valeurs du portefeuille"
         },
         "EDITEUR_ALERTES": {
-          "MODIFICATION_PORTEFEUILLE": "Modification des alertes du portefeuille {{nom}}"
+          "MODIFICATION_PORTEFEUILLE": "Modification des alertes du portefeuille {{nom}}",
+          "AJOUT": "Ajout d'une alerte",
+          "NOM": "Nom de l'alerte",
+          "EDITER_CONDITION": "Edition de la condition de lancement de l'alerte",
+          "SUPPRIMER": "Supprimer l'alerte",
+          "CONFIRMATION_SUPPRESSION": "Confirmez-vous la suppression de l'alerte {{nom}} ?"
         },
         "IMPORT_EXPORT": {
           "IMPORT_EXPORT": "Import/export des portefeuilles",
