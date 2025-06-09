@@ -50,7 +50,7 @@ describe('GestionPortefeuillesComponent', () => {
     it('when #creerPortefeuille then un nouveau portefeuille est crée', () => {
       fixture.detectChanges(); // appelle le ngOnInit
       component.creerPortefeuille('nomUnique');
-      const expected = clonePORTEFEUILLES().concat({'nom': 'nomUnique', 'parDefaut': false, tickers: []});
+      const expected = clonePORTEFEUILLES().concat({'nom': 'nomUnique', 'parDefaut': false, tickers: [], alertes: []});
       expect(component.portefeuilles).toEqual(expected);
     });
 
@@ -78,6 +78,15 @@ describe('GestionPortefeuillesComponent', () => {
       component.modifierValeursPortefeuille([]);
       const expected: Array<Portefeuille> = clonePORTEFEUILLES()
       expected[0].tickers = [];
+      expect(component.portefeuilles).toEqual(expected);
+    });
+
+    it('when #changerParDefaut then le portefeuille par défaut est bien modifié', () => {
+      fixture.detectChanges(); // appelle le ngOnInit
+      component.changerParDefaut(1);
+      const expected: Array<Portefeuille> = clonePORTEFEUILLES()
+      expected[0].parDefaut = false;
+      expected[1].parDefaut = true;
       expect(component.portefeuilles).toEqual(expected);
     });
   });

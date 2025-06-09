@@ -2,9 +2,17 @@
   <p-progressbar mode="indeterminate" [style]="{'height': '10px'}"/>
 </div>
 
+<app-formulaire-modification [portefeuilles]="portefeuilles" [portefeuille]="portefeuilleNomEnModification"
+                             (annule)="portefeuilleNomEnModification = undefined"
+                             (modifie)="modifierNomPortefeuille($event)"></app-formulaire-modification>
+
 <app-selecteur-valeurs [portefeuille]="portefeuilleValeursEnModification"
-                       (annule)="this.portefeuilleValeursEnModification = undefined"
+                       (annule)="portefeuilleValeursEnModification = undefined"
                        (modifie)="modifierValeursPortefeuille($event)"></app-selecteur-valeurs>
+
+<app-editeur-alertes [portefeuille]="portefeuilleAlertesEnModification"
+                       (annule)="portefeuilleAlertesEnModification = undefined"
+                       (modifie)="editerAlertesPortefeuille($event)"></app-editeur-alertes>
 
 <p-card *ngIf="afficherCreation || this.portefeuilles.length === 0">
   <div class="p-card-title">
@@ -24,26 +32,24 @@
     <app-import-export></app-import-export>
   </div>
 
-  <app-formulaire-modification [portefeuilles]="portefeuilles" [portefeuille]="portefeuilleNomEnModification"
-                               (annule)="this.portefeuilleNomEnModification = undefined"
-                               (modifie)="modifierNomPortefeuille($event)"></app-formulaire-modification>
-
-  <p-confirmdialog />
+  <p-confirmdialog/>
   <div class="liste">
     @for (portefeuille of portefeuilles; track portefeuille.nom; let idx = $index) {
       <div>
         <div>
           <input type="radio" name="idxPortefeuilleParDefaut" [value]="idx" [checked]="portefeuille.parDefaut"
                  title="{{ 'COMPOSANTS.PORTEFEUILLES.GESTION_PORTEFEUILLES.PAR_DEFAUT' | translate }}"
-                 (change)="onChangeParDefaut($event)">
+                 (change)="changerParDefaut(idx)">
         </div>
         <div><span class="pi pi-link" (click)="associationValeursPortefeuille(idx)"
-                   title="{{ 'COMPOSANTS.PORTEFEUILLES.GESTION_PORTEFEUILLES.ASSOCIER_VALEUR' | translate }}"></span></div>
+                   title="{{ 'COMPOSANTS.PORTEFEUILLES.GESTION_PORTEFEUILLES.ASSOCIER_VALEUR' | translate }}"></span>
+        </div>
         <div><span class="pi pi-bell" (click)="editionAlertesPortefeuille(idx)"
-                   title="{{ 'COMPOSANTS.PORTEFEUILLES.GESTION_PORTEFEUILLES.EDITER_ALERTES' | translate }}"></span></div>
+                   title="{{ 'COMPOSANTS.PORTEFEUILLES.GESTION_PORTEFEUILLES.EDITER_ALERTES' | translate }}"></span>
+        </div>
         <div><span class="pi pi-pencil" (click)="modificationNomPortefeuille(idx)"
                    title="{{ 'COMPOSANTS.PORTEFEUILLES.GESTION_PORTEFEUILLES.RENOMMER' | translate }}"></span></div>
-        <div><span class="pi pi-trash" (click)="supprimerPortefeuille($event, idx)"
+        <div><span class="pi pi-trash" (click)="suppressionPortefeuille($event, idx)"
                    title="{{ 'COMPOSANTS.PORTEFEUILLES.GESTION_PORTEFEUILLES.SUPPRIMER' | translate }}"></span></div>
         <div>
           {{ portefeuille.nom }} {{ tickers(portefeuille) }}

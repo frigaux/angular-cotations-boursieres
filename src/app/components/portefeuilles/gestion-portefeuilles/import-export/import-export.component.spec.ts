@@ -24,7 +24,7 @@ describe('ImportExportComponent', () => {
   });
 
   it('should create', () => {
-    expect(component).toBeTruthy();
+    expect(component).toBeDefined();
   });
 
   describe('Given des portefeuilles', () => {

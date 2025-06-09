@@ -1,0 +1,10 @@
+<p-dialog [header]="titre" [modal]="true" [visible]="portefeuilleEnModification !== undefined" closable="false">
+  @if (portefeuilleEnModification !== undefined) {
+    <div *ngIf="loading">
+      <p-progressbar mode="indeterminate" [style]="{'height': '10px'}"/>
+    </div>
+
+    <div *ngIf="!loading">
+    </div>
+  }
+</p-dialog>

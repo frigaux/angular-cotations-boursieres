@@ -106,6 +106,9 @@
           "ENREGISTRER": "Enregistrer le portefeuille",
           "FERMER": "Abandonner les modifications"
         },
+        "EDITEUR_ALERTES": {
+          "MODIFICATION_PORTEFEUILLE": "Modification des alertes du portefeuille {{nom}}"
+        },
         "IMPORT_EXPORT": {
           "IMPORT_EXPORT": "Import/export des portefeuilles",
           "EXPORT": "Export",
