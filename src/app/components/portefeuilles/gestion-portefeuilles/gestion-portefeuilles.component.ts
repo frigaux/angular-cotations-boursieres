@@ -82,8 +82,10 @@ export class GestionPortefeuillesComponent implements OnInit {
     this.portefeuilleAlertesEnModification = this.portefeuilles[idx];
   }
 
-  editerAlertesPortefeuille(alertes: Alerte[]) {
-    // TODO
+  modifierAlertesPortefeuille(alertes: Alerte[]) {
+    this.portefeuilleAlertesEnModification!.alertes = alertes;
+    this.portefeuilleAlertesEnModification = undefined;
+    this.portefeuillesService.enregistrer(this.portefeuilles);
   }
 
   associationValeursPortefeuille(idx: number) {

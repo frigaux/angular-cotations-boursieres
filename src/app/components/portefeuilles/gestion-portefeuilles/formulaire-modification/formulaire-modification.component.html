@@ -1,9 +1,9 @@
 <p-dialog [header]="titre" [modal]="true" [visible]="portefeuilleEnModification !== undefined" closable="false">
-  <form *ngIf="portefeuilleEnModification !== undefined" [formGroup]="formulaireModificationPortefeuille"
+  <form *ngIf="portefeuilleEnModification !== undefined" [formGroup]="formulaire"
         (ngSubmit)="modifierNomPortefeuille()">
     <div>
       <p-floatlabel>
-        <input pInputText [pAutoFocus]="true" id="nom" formControlName="champNom" autocomplete="off"/>
+        <input pInputText [pAutoFocus]="true" id="nom" formControlName="nom" autocomplete="off"/>
         <label for="nom">
           {{ 'COMPOSANTS.PORTEFEUILLES.GESTION_PORTEFEUILLES.FORMULAIRE_MODIFICATION.NOM' | translate }}
         </label>

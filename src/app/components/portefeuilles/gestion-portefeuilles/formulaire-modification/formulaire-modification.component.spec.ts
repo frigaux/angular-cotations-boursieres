@@ -39,19 +39,19 @@ describe('FormulaireModificationComponent', () => {
     });
 
     it('when #modifierPortefeuille sans nom then il n\'y a pas de modification du portefeuille', () => {
-      component.formulaireModificationPortefeuille.get('champNom')?.setValue('');
+      component.formulaire.get('nom')?.setValue('');
       component.modifierNomPortefeuille();
       expect(component.modifie.emit).toHaveBeenCalledTimes(0);
     });
 
     it('when #modifierPortefeuille avec un nom en doublon then il n\'y a pas de modification du portefeuille', () => {
-      component.formulaireModificationPortefeuille.get('champNom')?.setValue(PORTEFEUILLES[0].nom);
+      component.formulaire.get('nom')?.setValue(PORTEFEUILLES[0].nom);
       component.modifierNomPortefeuille();
       expect(component.modifie.emit).toHaveBeenCalledTimes(0);
     });
 
     it('when #modifierPortefeuille avec un nom unique then il y a modification du portefeuille', () => {
-      component.formulaireModificationPortefeuille.get('champNom')?.setValue('nomUnique');
+      component.formulaire.get('nom')?.setValue('nomUnique');
       component.modifierNomPortefeuille();
       expect(component.modifie.emit).toHaveBeenCalledWith('nomUnique');
     });

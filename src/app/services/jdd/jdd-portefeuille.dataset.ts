@@ -5,6 +5,6 @@ export const PORTEFEUILLE: Array<Portefeuille> = [
 ];
 
 export const PORTEFEUILLES: Array<Portefeuille> = [
-  {nom: 'Spéculation', parDefaut: true, tickers: ['GLE', 'BNP'], alertes: []},
+  {nom: 'Spéculation', parDefaut: true, tickers: ['GLE', 'BNP'], alertes: [{nom: 'MM-5-10', condition: ''}]},
   {nom: 'CAC40', parDefaut: false, tickers: [], alertes: []}
 ];

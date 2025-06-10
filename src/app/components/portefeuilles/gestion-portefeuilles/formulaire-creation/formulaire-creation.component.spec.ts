@@ -34,19 +34,19 @@ describe('FormulaireCreationComponent', () => {
     });
 
     it('when #creerPortefeuille sans nom then il n\'y a pas de création d\'un nouveau portefeuille', () => {
-      component.formulaireCreationPortefeuille.get('champNom')?.setValue('');
+      component.formulaire.get('nom')?.setValue('');
       component.creerPortefeuille();
       expect(component.cree.emit).toHaveBeenCalledTimes(0);
     });
 
     it('when #creerPortefeuille avec un nom en doublon then il n\'y a pas de création d\'un nouveau portefeuille', () => {
-      component.formulaireCreationPortefeuille.get('champNom')?.setValue(PORTEFEUILLES[0].nom);
+      component.formulaire.get('nom')?.setValue(PORTEFEUILLES[0].nom);
       component.creerPortefeuille();
       expect(component.cree.emit).toHaveBeenCalledTimes(0);
     });
 
     it('when #creerPortefeuille avec un nom unique then il y a création d\'un nouveau portefeuille', () => {
-      component.formulaireCreationPortefeuille.get('champNom')?.setValue('nomUnique');
+      component.formulaire.get('nom')?.setValue('nomUnique');
       component.creerPortefeuille();
       expect(component.cree.emit).toHaveBeenCalledWith('nomUnique');
     });

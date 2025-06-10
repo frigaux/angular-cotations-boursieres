@@ -30,22 +30,22 @@ export class FormulaireCreationComponent implements OnInit {
   cree = output<string>();
 
   // formulaires
-  formulaireCreationPortefeuille = this.formBuilder.group({
-    champNom: ['', [Validators.required]]
+  formulaire = this.formBuilder.group({
+    nom: ['', [Validators.required]]
   });
 
   ngOnInit(): void {
     const portefeuilles = this.portefeuilles();
     if (portefeuilles) {
-      this.formulaireCreationPortefeuille.get('champNom')?.addValidators(pasDeNomEnDoublonValidator(portefeuilles));
+      this.formulaire.get('nom')?.addValidators(pasDeNomEnDoublonValidator(portefeuilles));
     }
   }
 
   creerPortefeuille() {
     // au second submit du même nom, il faut s'assurer que l'on ne crée pas un doublon
-    this.formulaireCreationPortefeuille.get('champNom')?.updateValueAndValidity();
-    if (this.formulaireCreationPortefeuille.valid && this.formulaireCreationPortefeuille.value.champNom) {
-      this.cree.emit(this.formulaireCreationPortefeuille.value.champNom);
+    this.formulaire.get('nom')?.updateValueAndValidity();
+    if (this.formulaire.valid && this.formulaire.value.nom) {
+      this.cree.emit(this.formulaire.value.nom);
     }
   }
 }

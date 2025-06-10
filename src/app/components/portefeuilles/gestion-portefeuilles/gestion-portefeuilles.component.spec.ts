@@ -11,7 +11,7 @@ import {ConfirmationService} from 'primeng/api';
 describe('GestionPortefeuillesComponent', () => {
   let component: GestionPortefeuillesComponent;
   let fixture: ComponentFixture<GestionPortefeuillesComponent>;
-  const clonePORTEFEUILLES: Function = () => JSON.parse(JSON.stringify(PORTEFEUILLES))
+  const clonePORTEFEUILLES: Function = () => JSON.parse(JSON.stringify(PORTEFEUILLES));
 
   const mockValeursService = jasmine.createSpyObj('ValeursService', ['chargerValeurs']);
   const mockPortefeuillesService = jasmine.createSpyObj('PortefeuillesService', ['charger', 'onImport', 'enregistrer']);

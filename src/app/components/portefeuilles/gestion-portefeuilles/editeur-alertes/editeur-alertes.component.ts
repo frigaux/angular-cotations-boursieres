@@ -10,6 +10,7 @@ import {FormArray, FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Val
 import {AutoFocus} from 'primeng/autofocus';
 import {ConfirmationService} from 'primeng/api';
 import {NgForOf} from '@angular/common';
+import {EditeurConditionAlerteComponent} from './editeur-condition-alerte/editeur-condition-alerte.component';
 
 @Component({
   selector: 'app-editeur-alertes',
@@ -21,7 +22,8 @@ import {NgForOf} from '@angular/common';
     InputText,
     ReactiveFormsModule,
     AutoFocus,
-    NgForOf
+    NgForOf,
+    EditeurConditionAlerteComponent
   ],
   // providers: [ConfirmationService],
   templateUrl: './editeur-alertes.component.html',
@@ -40,6 +42,7 @@ export class EditeurAlertesComponent {
   portefeuilleEnModification: Portefeuille | undefined;
   titre: string | undefined;
   alertes: Alerte[] = [];
+  alerteEnModification: Alerte | undefined;
 
   // formulaire
   noms: FormArray<FormControl<unknown>> = this.formBuilder.array([]);
@@ -68,7 +71,7 @@ export class EditeurAlertesComponent {
   }
 
   editionAlertes(idx: number) {
-    // TODO
+    this.alerteEnModification = this.alertes[idx];
   }
 
   suppressionAlerte(event: Event, idx: number) {
@@ -98,11 +101,15 @@ export class EditeurAlertesComponent {
     }
   }
 
-  editerAlertesPortefeuille() {
+  modifierAlertesPortefeuille() {
     this.alertes.forEach((alerte, index) => {
       alerte.nom = this.noms.at(index).value as string;
     });
     this.modifie.emit(this.alertes);
   }
 
+  modifierConditionAlerte(condition: string) {
+    this.alerteEnModification!.condition = condition;
+    this.alerteEnModification = undefined;
+  }
 }

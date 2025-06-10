@@ -38,8 +38,8 @@ export class FormulaireModificationComponent {
   abandon = output<void>();
 
   // formulaires
-  formulaireModificationPortefeuille = this.formBuilder.group({
-    champNom: ['', [Validators.required]]
+  formulaire = this.formBuilder.group({
+    nom: ['', [Validators.required]]
   });
 
   //données pour la vue
@@ -51,7 +51,7 @@ export class FormulaireModificationComponent {
 
   intercepteurPortefeuilles(portefeuilles: Portefeuille[] | undefined) {
     if (portefeuilles) {
-      this.formulaireModificationPortefeuille.get('champNom')?.addValidators(pasDeNomEnDoublonValidator(portefeuilles));
+      this.formulaire.get('nom')?.addValidators(pasDeNomEnDoublonValidator(portefeuilles));
     }
     return portefeuilles;
   }
@@ -60,15 +60,15 @@ export class FormulaireModificationComponent {
     this.portefeuilleEnModification = portefeuille;
     if (this.portefeuilleEnModification) {
       this.titre = this.translateService.instant('COMPOSANTS.PORTEFEUILLES.GESTION_PORTEFEUILLES.FORMULAIRE_MODIFICATION.MODIFICATION_NOM', {'nom': this.portefeuilleEnModification.nom});
-      this.formulaireModificationPortefeuille.get('champNom')?.setValue(this.portefeuilleEnModification.nom);
+      this.formulaire.get('nom')?.setValue(this.portefeuilleEnModification.nom);
     }
     return portefeuille;
   }
 
   modifierNomPortefeuille() {
-    this.formulaireModificationPortefeuille.get('champNom')?.updateValueAndValidity();
-    if (this.formulaireModificationPortefeuille.valid && this.formulaireModificationPortefeuille.value.champNom) {
-      this.modifie.emit(this.formulaireModificationPortefeuille.value.champNom);
+    this.formulaire.get('nom')?.updateValueAndValidity();
+    if (this.formulaire.valid && this.formulaire.value.nom) {
+      this.modifie.emit(this.formulaire.value.nom);
     }
   }
 }

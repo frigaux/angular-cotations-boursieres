@@ -85,7 +85,7 @@
         "CREATION": "Création d'un portefeuille",
         "PORTEFEUILLES": "Portefeuilles",
         "PAR_DEFAUT": "Portefeuille par défaut",
-        "ASSOCIER_VALEUR": "Associer des valeurs du portefeuille",
+        "ASSOCIER_VALEUR": "Associer des valeurs au portefeuille",
         "EDITER_ALERTES": "Editer les alertes du portefeuille",
         "RENOMMER": "Renommer le portefeuille",
         "SUPPRIMER": "Supprimer le portefeuille",
@@ -111,7 +111,19 @@
           "NOM": "Nom de l'alerte",
           "EDITER_CONDITION": "Edition de la condition de lancement de l'alerte",
           "SUPPRIMER": "Supprimer l'alerte",
-          "CONFIRMATION_SUPPRESSION": "Confirmez-vous la suppression de l'alerte {{nom}} ?"
+          "CONFIRMATION_SUPPRESSION": "Confirmez-vous la suppression de l'alerte {{nom}} ?",
+          "EDITEUR_CONDITION_ALERTE": {
+            "MODIFICATION_CONDITION": "Modification de la condition de l'alerte {{nom}}",
+            "DOCUMENTATION": "Comment écrire une condition ?",
+            "DOCUMENTATION_OPERATEURS": "Une condition est une expression utilisant des opérateurs :",
+            "DOCUMENTATION_OPERATEURS_COMPARAISON": "de comparaison : ==, !=, <, >, <=, >=,",
+            "DOCUMENTATION_OPERATEURS_ARITHMETIQUES": "arithmétiques : %, +, -, /, *,",
+            "DOCUMENTATION_OPERATEURS_LOGIQUES": "et logiques : &&, ||, !.",
+            "DOCUMENTATION_OPERANDES": "Ces opérateurs peuvent s'appliquent sur les cours (Cx) et moyennes mobiles (Mx).",
+            "DOCUMENTATION_EXEMPLE": "Par exemple : C1 < M5 && C1 < M10",
+            "CONDITION": "Condition",
+            "MODIFIER": "Modifier la condition de l'alerte"
+          }
         },
         "IMPORT_EXPORT": {
           "IMPORT_EXPORT": "Import/export des portefeuilles",

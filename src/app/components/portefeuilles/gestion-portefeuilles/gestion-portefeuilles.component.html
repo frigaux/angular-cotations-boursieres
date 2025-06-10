@@ -12,7 +12,7 @@
 
 <app-editeur-alertes [portefeuille]="portefeuilleAlertesEnModification"
                        (abandon)="portefeuilleAlertesEnModification = undefined"
-                       (modifie)="editerAlertesPortefeuille($event)"></app-editeur-alertes>
+                       (modifie)="modifierAlertesPortefeuille($event)"></app-editeur-alertes>
 
 <p-card *ngIf="afficherCreation || this.portefeuilles.length === 0">
   <div class="p-card-title">
