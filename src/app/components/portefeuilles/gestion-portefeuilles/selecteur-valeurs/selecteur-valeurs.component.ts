@@ -5,7 +5,7 @@ import {DTOValeur} from '../../../../services/valeurs/dto-valeur.interface';
 import {ValeursService} from '../../../../services/valeurs/valeurs.service';
 import {ProgressBar} from 'primeng/progressbar';
 import {TranslatePipe, TranslateService} from '@ngx-translate/core';
-import {Portefeuille} from '../portefeuille.interface';
+import {DTOPortefeuille} from '../dto-portefeuille.interface';
 import {Dialog} from 'primeng/dialog';
 import {Button} from 'primeng/button';
 
@@ -27,13 +27,13 @@ export class SelecteurValeursComponent {
   loading: boolean = true;
 
   // input/output
-  portefeuille: InputSignal<Portefeuille | undefined> = input(undefined,
+  portefeuille: InputSignal<DTOPortefeuille | undefined> = input(undefined,
     {transform: o => this.intercepteurPortefeuille(o)});
   modifie = output<string[]>();
   abandon = output<void>();
 
   // données pour la vue
-  portefeuilleEnModification: Portefeuille | undefined;
+  portefeuilleEnModification: DTOPortefeuille | undefined;
   titre: string | undefined;
   valeursSource: DTOValeur[] = [];
   valeursTarget: DTOValeur[] = [];
@@ -42,7 +42,7 @@ export class SelecteurValeursComponent {
               private translateService: TranslateService) {
   }
 
-  private intercepteurPortefeuille(portefeuille: Portefeuille | undefined) {
+  private intercepteurPortefeuille(portefeuille: DTOPortefeuille | undefined) {
     this.portefeuilleEnModification = portefeuille;
     if (this.portefeuilleEnModification) {
       this.titre = this.translateService.instant('COMPOSANTS.PORTEFEUILLES.GESTION_PORTEFEUILLES.SELECTEUR_VALEURS.MODIFICATION_PORTEFEUILLE', {'nom': this.portefeuilleEnModification.nom});
@@ -51,7 +51,7 @@ export class SelecteurValeursComponent {
     return portefeuille;
   }
 
-  initPicklist(portefeuille: Portefeuille): void {
+  initPicklist(portefeuille: DTOPortefeuille): void {
     this.valeursService.chargerValeurs().subscribe(valeurs => {
       this.valeursSource = valeurs.filter(valeur => !portefeuille!.tickers.includes(valeur.ticker));
       this.valeursTarget = valeurs.filter(valeur => portefeuille!.tickers.includes(valeur.ticker));

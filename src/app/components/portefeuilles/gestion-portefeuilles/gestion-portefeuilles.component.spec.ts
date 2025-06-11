@@ -3,7 +3,7 @@ import {ComponentFixture, TestBed} from '@angular/core/testing';
 import {GestionPortefeuillesComponent} from './gestion-portefeuilles.component';
 import {TranslateModule} from '@ngx-translate/core';
 import {PORTEFEUILLES} from '../../../services/jdd/jdd-portefeuille.dataset';
-import {Portefeuille} from './portefeuille.interface';
+import {DTOPortefeuille} from './dto-portefeuille.interface';
 import {ValeursService} from '../../../services/valeurs/valeurs.service';
 import {PortefeuillesService} from '../../../services/portefeuilles/portefeuilles.service';
 import {ConfirmationService} from 'primeng/api';
@@ -60,7 +60,7 @@ describe('GestionPortefeuillesComponent', () => {
       fixture.detectChanges(); // appelle le ngOnInit
       component.modificationNomPortefeuille(0);
       component.modifierNomPortefeuille('nomUnique');
-      const expected: Array<Portefeuille> = clonePORTEFEUILLES();
+      const expected: Array<DTOPortefeuille> = clonePORTEFEUILLES();
       expected[0].nom = 'nomUnique';
       expect(component.portefeuilles).toEqual(expected);
     });
@@ -68,7 +68,7 @@ describe('GestionPortefeuillesComponent', () => {
     it('when #supprimerPortefeuille then le portefeuille est bien supprimé', () => {
       fixture.detectChanges(); // appelle le ngOnInit
       component.supprimerPortefeuille(0);
-      const expected: Array<Portefeuille> = clonePORTEFEUILLES()
+      const expected: Array<DTOPortefeuille> = clonePORTEFEUILLES()
       expected.splice(0, 1);
       expected[0].parDefaut = true;
       expect(component.portefeuilles).toEqual(expected);
@@ -78,7 +78,7 @@ describe('GestionPortefeuillesComponent', () => {
       fixture.detectChanges(); // appelle le ngOnInit
       component.associationValeursPortefeuille(0);
       component.modifierValeursPortefeuille([]);
-      const expected: Array<Portefeuille> = clonePORTEFEUILLES()
+      const expected: Array<DTOPortefeuille> = clonePORTEFEUILLES()
       expected[0].tickers = [];
       expect(component.portefeuilles).toEqual(expected);
     });
@@ -86,7 +86,7 @@ describe('GestionPortefeuillesComponent', () => {
     it('when #changerParDefaut then le portefeuille par défaut est bien modifié', () => {
       fixture.detectChanges(); // appelle le ngOnInit
       component.changerParDefaut(1);
-      const expected: Array<Portefeuille> = clonePORTEFEUILLES()
+      const expected: Array<DTOPortefeuille> = clonePORTEFEUILLES()
       expected[0].parDefaut = false;
       expected[1].parDefaut = true;
       expect(component.portefeuilles).toEqual(expected);

@@ -1,6 +1,6 @@
 import {PortefeuillesService} from './portefeuilles.service';
 import {PORTEFEUILLES} from '../jdd/jdd-portefeuille.dataset';
-import {Portefeuille} from '../../components/portefeuilles/gestion-portefeuilles/portefeuille.interface';
+import {DTOPortefeuille} from '../../components/portefeuilles/gestion-portefeuilles/dto-portefeuille.interface';
 
 describe('PortefeuillesService', () => {
   let service: PortefeuillesService;
@@ -19,7 +19,7 @@ describe('PortefeuillesService', () => {
   });
 
   describe('Given des portefeuilles', () => {
-    let resultatImport: Portefeuille[] = [];
+    let resultatImport: DTOPortefeuille[] = [];
     const portefeuilles = JSON.stringify(PORTEFEUILLES);
 
     beforeEach(() => {

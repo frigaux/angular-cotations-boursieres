@@ -1,8 +1,8 @@
 import {Component, inject, input, InputSignal, output} from '@angular/core';
 import {Dialog} from 'primeng/dialog';
 import {TranslatePipe, TranslateService} from '@ngx-translate/core';
-import {Portefeuille} from '../portefeuille.interface';
-import {Alerte} from '../alerte.interface';
+import {DTOPortefeuille} from '../dto-portefeuille.interface';
+import {DTOAlerte} from '../dto-alerte.interface';
 import {Button} from 'primeng/button';
 import {FloatLabel} from 'primeng/floatlabel';
 import {InputText} from 'primeng/inputtext';
@@ -33,16 +33,16 @@ export class EditeurAlertesComponent {
   private formBuilder = inject(FormBuilder);
 
   // input/output
-  portefeuille: InputSignal<Portefeuille | undefined> = input(undefined,
+  portefeuille: InputSignal<DTOPortefeuille | undefined> = input(undefined,
     {transform: o => this.intercepteurPortefeuille(o)});
-  modifie = output<Alerte[]>();
+  modifie = output<DTOAlerte[]>();
   abandon = output<void>();
 
   // données pour la vue
-  portefeuilleEnModification: Portefeuille | undefined;
+  portefeuilleEnModification: DTOPortefeuille | undefined;
   titre: string | undefined;
-  alertes: Alerte[] = [];
-  alerteEnModification: Alerte | undefined;
+  alertes: DTOAlerte[] = [];
+  alerteEnModification: DTOAlerte | undefined;
 
   // formulaire
   noms: FormArray<FormControl<unknown>> = this.formBuilder.array([]);
@@ -54,7 +54,7 @@ export class EditeurAlertesComponent {
               private confirmationService: ConfirmationService) {
   }
 
-  private intercepteurPortefeuille(portefeuille: Portefeuille | undefined) {
+  private intercepteurPortefeuille(portefeuille: DTOPortefeuille | undefined) {
     this.portefeuilleEnModification = portefeuille;
     if (this.portefeuilleEnModification) {
       this.titre = this.translateService.instant('COMPOSANTS.PORTEFEUILLES.GESTION_PORTEFEUILLES.EDITEUR_ALERTES.MODIFICATION_PORTEFEUILLE', {'nom': this.portefeuilleEnModification.nom});

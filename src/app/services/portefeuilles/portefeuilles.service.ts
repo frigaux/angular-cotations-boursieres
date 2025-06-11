@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {Portefeuille} from '../../components/portefeuilles/gestion-portefeuilles/portefeuille.interface';
+import {DTOPortefeuille} from '../../components/portefeuilles/gestion-portefeuilles/dto-portefeuille.interface';
 import {Observable, Subscriber} from 'rxjs';
 
 @Injectable({
@@ -7,16 +7,16 @@ import {Observable, Subscriber} from 'rxjs';
 })
 export class PortefeuillesService {
   private static readonly PORTEFEUILLES: string = 'portefeuilles';
-  private static readonly OBSERVERS_IMPORT: Array<Subscriber<Array<Portefeuille>>> = [];
-  private static readonly OBSERVERS_UPDATE: Array<Subscriber<Array<Portefeuille>>> = [];
-  private static readonly OBSERVABLE_IMPORT: Observable<Array<Portefeuille>> = new Observable(observer => {
+  private static readonly OBSERVERS_IMPORT: Array<Subscriber<Array<DTOPortefeuille>>> = [];
+  private static readonly OBSERVERS_UPDATE: Array<Subscriber<Array<DTOPortefeuille>>> = [];
+  private static readonly OBSERVABLE_IMPORT: Observable<Array<DTOPortefeuille>> = new Observable(observer => {
     PortefeuillesService.OBSERVERS_IMPORT.push(observer);
   });
-  private static readonly OBSERVABLE_UPDATE: Observable<Array<Portefeuille>> = new Observable(observer => {
+  private static readonly OBSERVABLE_UPDATE: Observable<Array<DTOPortefeuille>> = new Observable(observer => {
     PortefeuillesService.OBSERVERS_UPDATE.push(observer);
   });
 
-  charger(): Array<Portefeuille> {
+  charger(): Array<DTOPortefeuille> {
     const json = window.localStorage.getItem(PortefeuillesService.PORTEFEUILLES);
     if (json) {
       try {
@@ -28,7 +28,7 @@ export class PortefeuillesService {
     return [];
   }
 
-  enregistrer(portefeuilles: Array<Portefeuille>): void {
+  enregistrer(portefeuilles: Array<DTOPortefeuille>): void {
     window.localStorage.setItem(PortefeuillesService.PORTEFEUILLES, JSON.stringify(portefeuilles));
     PortefeuillesService.OBSERVERS_UPDATE.forEach(observer => observer.next(portefeuilles));
   }
@@ -59,7 +59,7 @@ export class PortefeuillesService {
     return false;
   }
 
-  onImport(handler: ((value: Array<Portefeuille>) => void)): void {
+  onImport(handler: ((value: Array<DTOPortefeuille>) => void)): void {
     PortefeuillesService.OBSERVABLE_IMPORT.subscribe(handler);
   }
 
@@ -67,7 +67,7 @@ export class PortefeuillesService {
    * Enregistrements et imports.
    * @param handler lambda avec les portefeuilles en paramètre
    */
-  onUpdate(handler: ((value: Array<Portefeuille>) => void)): void {
+  onUpdate(handler: ((value: Array<DTOPortefeuille>) => void)): void {
     PortefeuillesService.OBSERVABLE_UPDATE.subscribe(handler);
   }
 }

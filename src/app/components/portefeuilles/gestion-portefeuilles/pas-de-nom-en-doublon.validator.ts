@@ -1,7 +1,7 @@
 import {AbstractControl, ValidationErrors, ValidatorFn} from '@angular/forms';
-import {Portefeuille} from './portefeuille.interface';
+import {DTOPortefeuille} from './dto-portefeuille.interface';
 
-export function pasDeNomEnDoublonValidator(portefeuilles: Array<Portefeuille>): ValidatorFn {
+export function pasDeNomEnDoublonValidator(portefeuilles: Array<DTOPortefeuille>): ValidatorFn {
   return (control: AbstractControl): ValidationErrors | null => {
     const isDuplicate = portefeuilles.find(
       portefeuille => portefeuille.nom.localeCompare(control.value, undefined, {sensitivity: 'base'}) === 0

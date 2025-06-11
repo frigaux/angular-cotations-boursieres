@@ -1,4 +1,4 @@
-export interface Alerte {
+export interface DTOAlerte {
   nom: string;
   condition: string;
 }

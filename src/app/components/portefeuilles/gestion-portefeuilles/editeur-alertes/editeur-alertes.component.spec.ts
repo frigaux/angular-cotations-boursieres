@@ -4,7 +4,7 @@ import {EditeurAlertesComponent} from './editeur-alertes.component';
 import {TranslateModule} from '@ngx-translate/core';
 import {ConfirmationService} from 'primeng/api';
 import {PORTEFEUILLES} from '../../../../services/jdd/jdd-portefeuille.dataset';
-import {Alerte} from '../alerte.interface';
+import {DTOAlerte} from '../dto-alerte.interface';
 import {provideAnimations} from '@angular/platform-browser/animations';
 
 describe('EditeurAlertesComponent', () => {
@@ -56,7 +56,7 @@ describe('EditeurAlertesComponent', () => {
     it('when #supprimerAlerte then l\'alerte est bien supprimée', () => {
       fixture.detectChanges();
       component.supprimerAlerte(0);
-      const expected: Array<Alerte> = clonePORTEFEUILLES()[0].alertes;
+      const expected: Array<DTOAlerte> = clonePORTEFEUILLES()[0].alertes;
       expected.splice(0, 1);
       expect(component.alertes).toEqual(expected);
     });

@@ -71,8 +71,8 @@
     "PORTEFEUILLES": {
       "PORTEFEUILLES_DATE": "Portefeuilles à la date du",
       "LIBELLE": "Libellé",
+      "ALERTES": "Alertes",
       "CLOTURE": "Clôture",
-      "VOLUME": "Volume échangé",
       "MM5": "MM5",
       "MM20": "MM20",
       "MM50": "MM50",

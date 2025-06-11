@@ -4,7 +4,7 @@ import {ProgressBar} from "primeng/progressbar";
 import {ReactiveFormsModule} from '@angular/forms';
 import {Card} from 'primeng/card';
 import {TranslatePipe, TranslateService} from '@ngx-translate/core';
-import {Portefeuille} from './portefeuille.interface';
+import {DTOPortefeuille} from './dto-portefeuille.interface';
 import {SelecteurValeursComponent} from './selecteur-valeurs/selecteur-valeurs.component';
 import {FormulaireCreationComponent} from './formulaire-creation/formulaire-creation.component';
 import {FormulaireModificationComponent} from './formulaire-modification/formulaire-modification.component';
@@ -12,7 +12,7 @@ import {ImportExportComponent} from './import-export/import-export.component';
 import {PortefeuillesService} from '../../../services/portefeuilles/portefeuilles.service';
 import {ConfirmationService} from 'primeng/api';
 import {EditeurAlertesComponent} from './editeur-alertes/editeur-alertes.component';
-import {Alerte} from './alerte.interface';
+import {DTOAlerte} from './dto-alerte.interface';
 
 // TODO : veille sur @Component et providers
 // TODO : boite de dialogue pour la configuration des alertes du portefeuille
@@ -39,10 +39,10 @@ export class GestionPortefeuillesComponent implements OnInit {
   loading: boolean = false;
 
   // données pour la vue
-  portefeuilles: Array<Portefeuille> = [];
-  portefeuilleNomEnModification: Portefeuille | undefined;
-  portefeuilleValeursEnModification: Portefeuille | undefined;
-  portefeuilleAlertesEnModification: Portefeuille | undefined;
+  portefeuilles: Array<DTOPortefeuille> = [];
+  portefeuilleNomEnModification: DTOPortefeuille | undefined;
+  portefeuilleValeursEnModification: DTOPortefeuille | undefined;
+  portefeuilleAlertesEnModification: DTOPortefeuille | undefined;
   afficherCreation: boolean = false;
 
   constructor(private portefeuillesService: PortefeuillesService,
@@ -55,7 +55,7 @@ export class GestionPortefeuillesComponent implements OnInit {
     this.portefeuillesService.onImport(portefeuilles => this.portefeuilles = portefeuilles);
   }
 
-  tickers(portefeuille: Portefeuille) {
+  tickers(portefeuille: DTOPortefeuille) {
     if (portefeuille.tickers.length > 0) {
       return ': ' + portefeuille.tickers.reduce((t1, t2) => t1 + ', ' + t2);
     }
@@ -82,7 +82,7 @@ export class GestionPortefeuillesComponent implements OnInit {
     this.portefeuilleAlertesEnModification = this.portefeuilles[idx];
   }
 
-  modifierAlertesPortefeuille(alertes: Alerte[]) {
+  modifierAlertesPortefeuille(alertes: DTOAlerte[]) {
     this.portefeuilleAlertesEnModification!.alertes = alertes;
     this.portefeuilleAlertesEnModification = undefined;
     this.portefeuillesService.enregistrer(this.portefeuilles);

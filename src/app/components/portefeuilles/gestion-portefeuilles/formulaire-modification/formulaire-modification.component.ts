@@ -5,7 +5,7 @@ import {InputText} from 'primeng/inputtext';
 import {NgIf} from '@angular/common';
 import {FormBuilder, ReactiveFormsModule, Validators} from '@angular/forms';
 import {TranslatePipe, TranslateService} from '@ngx-translate/core';
-import {Portefeuille} from '../portefeuille.interface';
+import {DTOPortefeuille} from '../dto-portefeuille.interface';
 import {pasDeNomEnDoublonValidator} from '../pas-de-nom-en-doublon.validator';
 import {AutoFocus} from 'primeng/autofocus';
 import {Dialog} from 'primeng/dialog';
@@ -30,9 +30,9 @@ export class FormulaireModificationComponent {
   private formBuilder = inject(FormBuilder);
 
   // input/output
-  portefeuilles: InputSignal<Array<Portefeuille> | undefined> = input(undefined,
+  portefeuilles: InputSignal<Array<DTOPortefeuille> | undefined> = input(undefined,
     {transform: o => this.intercepteurPortefeuilles(o)});
-  portefeuille: InputSignal<Portefeuille | undefined> = input(undefined,
+  portefeuille: InputSignal<DTOPortefeuille | undefined> = input(undefined,
     {transform: o => this.intercepteurPortefeuille(o)});
   modifie = output<string>();
   abandon = output<void>();
@@ -43,20 +43,20 @@ export class FormulaireModificationComponent {
   });
 
   //données pour la vue
-  portefeuilleEnModification: Portefeuille | undefined;
+  portefeuilleEnModification: DTOPortefeuille | undefined;
   titre: string | undefined;
 
   constructor(private translateService: TranslateService) {
   }
 
-  intercepteurPortefeuilles(portefeuilles: Portefeuille[] | undefined) {
+  intercepteurPortefeuilles(portefeuilles: DTOPortefeuille[] | undefined) {
     if (portefeuilles) {
       this.formulaire.get('nom')?.addValidators(pasDeNomEnDoublonValidator(portefeuilles));
     }
     return portefeuilles;
   }
 
-  intercepteurPortefeuille(portefeuille: Portefeuille | undefined) {
+  intercepteurPortefeuille(portefeuille: DTOPortefeuille | undefined) {
     this.portefeuilleEnModification = portefeuille;
     if (this.portefeuilleEnModification) {
       this.titre = this.translateService.instant('COMPOSANTS.PORTEFEUILLES.GESTION_PORTEFEUILLES.FORMULAIRE_MODIFICATION.MODIFICATION_NOM', {'nom': this.portefeuilleEnModification.nom});

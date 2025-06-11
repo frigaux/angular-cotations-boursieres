@@ -7,7 +7,7 @@ import {InputText} from 'primeng/inputtext';
 import {NgIf} from '@angular/common';
 import {TranslatePipe, TranslateService} from '@ngx-translate/core';
 import {AutoFocus} from 'primeng/autofocus';
-import {Alerte} from '../../alerte.interface';
+import {DTOAlerte} from '../../dto-alerte.interface';
 import {Card} from 'primeng/card';
 
 @Component({
@@ -32,7 +32,7 @@ export class EditeurConditionAlerteComponent {
   private formBuilder = inject(FormBuilder);
 
   // input/output
-  alerte: InputSignal<Alerte | undefined> = input(undefined,
+  alerte: InputSignal<DTOAlerte | undefined> = input(undefined,
     {transform: o => this.intercepteurAlerte(o)});
   modifie = output<string>();
   abandon = output<void>();
@@ -43,14 +43,14 @@ export class EditeurConditionAlerteComponent {
   });
 
   //données pour la vue
-  alerteEnModification: Alerte | undefined;
+  alerteEnModification: DTOAlerte | undefined;
   titre: string | undefined;
   erreur: string | undefined;
 
   constructor(private translateService: TranslateService) {
   }
 
-  intercepteurAlerte(alerte: Alerte | undefined) {
+  intercepteurAlerte(alerte: DTOAlerte | undefined) {
     this.alerteEnModification = alerte;
     if (this.alerteEnModification) {
       this.titre = this.translateService.instant('COMPOSANTS.PORTEFEUILLES.GESTION_PORTEFEUILLES.EDITEUR_ALERTES.EDITEUR_CONDITION_ALERTE.MODIFICATION_CONDITION', {'nom': this.alerteEnModification.nom});
@@ -69,10 +69,10 @@ export class EditeurConditionAlerteComponent {
   private validerCondition() {
     const condition = this.formulaire.value.condition!
       .replaceAll(/C(\d+)/g, (match, token) => {
-        return `C[${token}]`;
+        return `C[${token-1}]`;
       })
       .replaceAll(/M(\d+)/g, (match, token) => {
-        return `M[${token}]`;
+        return `M[${token-1}]`;
       });
     try {
       new Function(

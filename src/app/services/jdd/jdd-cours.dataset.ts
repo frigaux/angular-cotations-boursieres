@@ -101,4 +101,4 @@ export const LISTE_COURS_AVEC_LISTE_ALLEGEE: DtoCoursAvecListeAllege[] = [
   }
 ];
 
-export const COURS_PORTEFEUILLE = new CoursPortefeuille('Societe Generale', LISTE_COURS_AVEC_LISTE_ALLEGEE[0]);
+export const COURS_PORTEFEUILLE = new CoursPortefeuille('Societe Generale', LISTE_COURS_AVEC_LISTE_ALLEGEE[0], []);

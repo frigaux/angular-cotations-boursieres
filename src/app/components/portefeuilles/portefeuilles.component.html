@@ -5,6 +5,10 @@
   {{ date | date: 'dd/MM/yyyy' }}
 </h1>
 
+<div *ngIf="loading">
+  <p-progressbar mode="indeterminate" [style]="{'height': '10px'}"/>
+</div>
+
 <p-accordion *ngIf="!loading" value="{{idxPortefeuilleCourant}}" (onOpen)="onOpen($event)">
   @for (portefeuilleAvecCours of portefeuillesAvecCours; track portefeuilleAvecCours.portefeuille.nom; let i = $index) {
     <p-accordion-panel value="{{i}}">
@@ -23,11 +27,10 @@
                 <p-sortIcon field="libelle"/>
               </th>
               <th>
-                {{ 'COMPOSANTS.PORTEFEUILLES.CLOTURE' | translate }}
+                {{ 'COMPOSANTS.PORTEFEUILLES.ALERTES' | translate }}
               </th>
-              <th pSortableColumn="volume">
-                {{ 'COMPOSANTS.PORTEFEUILLES.VOLUME' | translate }}
-                <p-sortIcon field="volume"/>
+              <th>
+                {{ 'COMPOSANTS.PORTEFEUILLES.CLOTURE' | translate }}
               </th>
               <th pSortableColumn="var1">
                 {{ 'COMPOSANTS.PORTEFEUILLES.VAR1' | translate }}
@@ -63,10 +66,10 @@
                       [class]="classeVariation(cours.var1)"
                       (mouseenter)="coursSelectionne = cours"></span>
                 {{ cours.libelle }}
-<!--                <span class="pi pi-exclamation-triangle" *ngIf="cours.alerte"></span>-->
+                <!--                <span class="pi pi-exclamation-triangle" *ngIf="cours.alerte"></span>-->
               </td>
+              <td>{{ cours.alertes | json }}</td>
               <td>{{ currencyFormatter.format(cours.cloture) }}</td>
-              <td>{{ cours.volume | number }}</td>
               <td [class]="classeVariation(cours.var1)">
                 {{ cours.var1 | percent:'1.0-2' }}
               </td>

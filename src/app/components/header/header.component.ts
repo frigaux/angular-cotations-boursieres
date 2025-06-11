@@ -5,7 +5,7 @@ import {Menubar} from 'primeng/menubar';
 import {CommonModule} from '@angular/common';
 import {TranslateService} from '@ngx-translate/core';
 import {PortefeuillesService} from '../../services/portefeuilles/portefeuilles.service';
-import {Portefeuille} from '../portefeuilles/gestion-portefeuilles/portefeuille.interface';
+import {DTOPortefeuille} from '../portefeuilles/gestion-portefeuilles/dto-portefeuille.interface';
 
 @Component({
   selector: 'app-header',
@@ -21,7 +21,7 @@ export class HeaderComponent {
     this.makeItems(translateService, portefeuillesService.charger());
   }
 
-  private makeItems(translateService: TranslateService, portefeuilles: Array<Portefeuille>) {
+  private makeItems(translateService: TranslateService, portefeuilles: Array<DTOPortefeuille>) {
     this.items = [
       {
         label: translateService.instant('COMPOSANTS.HEADER.VALEURS'),
@@ -34,7 +34,7 @@ export class HeaderComponent {
         icon: 'pi pi-list'
       }
     ];
-    const portefeuilleParDefaut: Portefeuille | undefined = portefeuilles.find(portefeuille => portefeuille.parDefaut);
+    const portefeuilleParDefaut: DTOPortefeuille | undefined = portefeuilles.find(portefeuille => portefeuille.parDefaut);
     if (portefeuilleParDefaut && portefeuilleParDefaut.tickers.length > 0) {
       this.items.push({
         label: translateService.instant('COMPOSANTS.HEADER.PORTEFEUILLES'),

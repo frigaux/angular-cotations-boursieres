@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {DatePipe, DecimalPipe, NgIf, PercentPipe} from '@angular/common';
+import {DatePipe, JsonPipe, NgIf, PercentPipe} from '@angular/common';
 import {PortefeuillesService} from '../../services/portefeuilles/portefeuilles.service';
 import {Accordion, AccordionContent, AccordionHeader, AccordionPanel, AccordionTabOpenEvent} from 'primeng/accordion';
 import {TableModule} from 'primeng/table';
@@ -11,6 +11,8 @@ import {CoursPortefeuille} from './cours-portefeuille.class';
 import {TranslatePipe} from '@ngx-translate/core';
 import {ProgressSpinner} from 'primeng/progressspinner';
 import {CoursComponent} from './cours/cours.component';
+import {ProgressBar} from 'primeng/progressbar';
+import {DTOAlerte} from './gestion-portefeuilles/dto-alerte.interface';
 
 @Component({
   selector: 'app-portefeuilles',
@@ -21,12 +23,13 @@ import {CoursComponent} from './cours/cours.component';
     AccordionHeader,
     AccordionPanel,
     TableModule,
-    DecimalPipe,
     TranslatePipe,
     PercentPipe,
     DatePipe,
     ProgressSpinner,
-    CoursComponent
+    CoursComponent,
+    ProgressBar,
+    JsonPipe
   ],
   templateUrl: './portefeuilles.component.html',
   styleUrl: './portefeuilles.component.sass'
@@ -77,7 +80,7 @@ export class PortefeuillesComponent implements OnInit {
         this.date = liste.length > 0 ? liste[0].date : undefined;
         portefeuilleAvecCours.cours = liste.map(dto => {
           const libelle: string = this.valeurByTicker.get(dto.ticker)!.libelle;
-          return new CoursPortefeuille(libelle, dto);
+          return new CoursPortefeuille(libelle, dto, portefeuilleAvecCours.alertes);
         });
         this.loading = false;
       })
