@@ -59,18 +59,14 @@ export class EditeurConditionAlerteComponent {
     return alerte;
   }
 
-  editerConditionAlerte() {
-    if (this.validerCondition()) {
-      this.formulaire.get('condition')?.updateValueAndValidity();
-      if (this.formulaire.valid && this.formulaire.value.condition) {
-        this.modifie.emit(this.formulaire.value.condition);
-      }
+  modifierConditionAlerte() {
+    this.formulaire.get('condition')?.updateValueAndValidity();
+    if (this.formulaire.valid && this.formulaire.value.condition && this.validerCondition()) {
+      this.modifie.emit(this.formulaire.value.condition);
     }
   }
 
   private validerCondition() {
-    const C: number[] = Array.from({ length: 300 }, (v, i) => i);
-    const M: number[] = Array.from({ length: 300 }, (v, i) => i);
     const condition = this.formulaire.value.condition!
       .replaceAll(/C(\d+)/g, (match, token) => {
         return `C[${token}]`;
@@ -79,8 +75,11 @@ export class EditeurConditionAlerteComponent {
         return `M[${token}]`;
       });
     try {
-      // TODO : https://esbuild.github.io/link/direct-eval
-      eval(condition);
+      new Function(
+        'const C = Array.from({ length: 300 }, (v, i) => i);'
+        + 'const M = Array.from({ length: 300 }, (v, i) => i);'
+        + 'return ' + condition + ';'
+      );
     } catch (e: unknown) {
       this.erreur = (e as SyntaxError).message;
       return false;

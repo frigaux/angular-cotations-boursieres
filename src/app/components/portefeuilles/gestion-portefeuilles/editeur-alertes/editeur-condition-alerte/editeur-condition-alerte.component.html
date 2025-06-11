@@ -24,7 +24,7 @@
     <span>{{erreur}}</span>
   </div>
   <form *ngIf="alerteEnModification !== undefined" [formGroup]="formulaire"
-        (ngSubmit)="editerConditionAlerte()">
+        (ngSubmit)="modifierConditionAlerte()">
     <p-floatlabel>
       <input pInputText [pAutoFocus]="true" id="condition" formControlName="condition" autocomplete="off" size="30"/>
       <label for="condition">
