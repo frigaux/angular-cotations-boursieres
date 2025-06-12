@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {DatePipe, NgIf, PercentPipe} from '@angular/common';
+import {DatePipe, NgClass, NgIf, PercentPipe} from '@angular/common';
 import {PortefeuillesService} from '../../services/portefeuilles/portefeuilles.service';
 import {Accordion, AccordionContent, AccordionHeader, AccordionPanel, AccordionTabOpenEvent} from 'primeng/accordion';
 import {TableModule} from 'primeng/table';
@@ -14,6 +14,7 @@ import {CoursComponent} from './cours/cours.component';
 import {ProgressBar} from 'primeng/progressbar';
 import {AlertesComponent} from './alertes/alertes.component';
 
+// TODO : locale 'fr' manquante pour les pipes currency et percent
 @Component({
   selector: 'app-portefeuilles',
   imports: [
@@ -29,7 +30,8 @@ import {AlertesComponent} from './alertes/alertes.component';
     ProgressSpinner,
     CoursComponent,
     ProgressBar,
-    AlertesComponent
+    AlertesComponent,
+    NgClass
   ],
   templateUrl: './portefeuilles.component.html',
   styleUrl: './portefeuilles.component.sass'

@@ -1,100 +1,104 @@
-<app-cours [cours]="coursSelectionne" (ferme)="coursSelectionne = undefined"></app-cours>
-
-<h1>{{ 'COMPOSANTS.PORTEFEUILLES.PORTEFEUILLES_DATE' | translate }}
-  <p-progress-spinner *ngIf="date === undefined" strokeWidth="8" [style]="{ width: '25px', height: '25px' }"/>
+<h3>{{ 'COMPOSANTS.PORTEFEUILLES.PORTEFEUILLES_DATE' | translate }}
+  <p-progress-spinner *ngIf="date === undefined" strokeWidth="6" [style]="{ width: '20px', height: '20px' }"/>
   {{ date | date: 'dd/MM/yyyy' }}
-</h1>
+</h3>
 
 <div *ngIf="loading">
   <p-progressbar mode="indeterminate" [style]="{'height': '10px'}"/>
 </div>
 
-<p-accordion *ngIf="!loading" value="{{idxPortefeuilleCourant}}" (onOpen)="onOpen($event)">
-  @for (portefeuilleAvecCours of portefeuillesAvecCours; track portefeuilleAvecCours.portefeuille.nom; let i = $index) {
-    <p-accordion-panel value="{{i}}">
-      <p-accordion-header>{{ portefeuilleAvecCours.portefeuille.nom }}</p-accordion-header>
-      <p-accordion-content>
-        <p-table
-          sortField="libelle"
-          [scrollable]="true" scrollHeight="50vh"
-          [style]="{ margin: '1rem' }"
-          [value]="portefeuilleAvecCours.cours"
-          [loading]="loading">
-          <ng-template #header>
-            <tr>
-              <th pSortableColumn="libelle">
-                {{ 'COMPOSANTS.PORTEFEUILLES.LIBELLE' | translate }}
-                <p-sortIcon field="libelle"/>
-              </th>
-              <th>
-                {{ 'COMPOSANTS.PORTEFEUILLES.ALERTES' | translate }}
-              </th>
-              <th>
-                {{ 'COMPOSANTS.PORTEFEUILLES.CLOTURE' | translate }}
-              </th>
-              <th pSortableColumn="var1">
-                {{ 'COMPOSANTS.PORTEFEUILLES.VAR1' | translate }}
-                <p-sortIcon field="var1"/>
-              </th>
-              <th pSortableColumn="var5">
-                {{ 'COMPOSANTS.PORTEFEUILLES.VAR5' | translate }}
-                <p-sortIcon field="var5"/>
-              </th>
-              <th pSortableColumn="var20">
-                {{ 'COMPOSANTS.PORTEFEUILLES.VAR20' | translate }}
-                <p-sortIcon field="var20"/>
-              </th>
-              <th pSortableColumn="var50">
-                {{ 'COMPOSANTS.PORTEFEUILLES.VAR50' | translate }}
-                <p-sortIcon field="var50"/>
-              </th>
-              <th>
-                {{ 'COMPOSANTS.PORTEFEUILLES.MM5' | translate }}
-              </th>
-              <th>
-                {{ 'COMPOSANTS.PORTEFEUILLES.MM20' | translate }}
-              </th>
-              <th>
-                {{ 'COMPOSANTS.PORTEFEUILLES.MM50' | translate }}
-              </th>
-            </tr>
-          </ng-template>
-          <ng-template #body let-cours>
-            <tr>
-              <td>
+<div class="conteneur" [ngClass]="{'avec-details': coursSelectionne !== undefined}">
+  <p-accordion *ngIf="!loading" value="{{idxPortefeuilleCourant}}" (onOpen)="onOpen($event)">
+    @for (portefeuilleAvecCours of portefeuillesAvecCours; track portefeuilleAvecCours.portefeuille.nom; let
+      i = $index) {
+      <p-accordion-panel value="{{i}}">
+        <p-accordion-header>{{ portefeuilleAvecCours.portefeuille.nom }}</p-accordion-header>
+        <p-accordion-content>
+          <p-table
+            sortField="libelle"
+            [scrollable]="true" scrollHeight="50vh"
+            [style]="{ margin: '1rem' }"
+            [value]="portefeuilleAvecCours.cours"
+            [loading]="loading">
+            <ng-template #header>
+              <tr>
+                <th pSortableColumn="libelle">
+                  {{ 'COMPOSANTS.PORTEFEUILLES.LIBELLE' | translate }}
+                  <p-sortIcon field="libelle"/>
+                </th>
+                <th>
+                  {{ 'COMPOSANTS.PORTEFEUILLES.ALERTES' | translate }}
+                </th>
+                <th>
+                  {{ 'COMPOSANTS.PORTEFEUILLES.CLOTURE' | translate }}
+                </th>
+                <th pSortableColumn="var1">
+                  {{ 'COMPOSANTS.PORTEFEUILLES.VAR1' | translate }}
+                  <p-sortIcon field="var1"/>
+                </th>
+                <th pSortableColumn="var5">
+                  {{ 'COMPOSANTS.PORTEFEUILLES.VAR5' | translate }}
+                  <p-sortIcon field="var5"/>
+                </th>
+                <th pSortableColumn="var20">
+                  {{ 'COMPOSANTS.PORTEFEUILLES.VAR20' | translate }}
+                  <p-sortIcon field="var20"/>
+                </th>
+                <th pSortableColumn="var50">
+                  {{ 'COMPOSANTS.PORTEFEUILLES.VAR50' | translate }}
+                  <p-sortIcon field="var50"/>
+                </th>
+                <th>
+                  {{ 'COMPOSANTS.PORTEFEUILLES.MM5' | translate }}
+                </th>
+                <th>
+                  {{ 'COMPOSANTS.PORTEFEUILLES.MM20' | translate }}
+                </th>
+                <th>
+                  {{ 'COMPOSANTS.PORTEFEUILLES.MM50' | translate }}
+                </th>
+              </tr>
+            </ng-template>
+            <ng-template #body let-cours>
+              <tr>
+                <td>
                 <span class="pi pi-chart-line"
                       [class]="classeCssVariation(cours.var1)"
                       (mouseenter)="coursSelectionne = cours"></span>
-                {{ cours.libelle }}
-                <!--                <span class="pi pi-exclamation-triangle" *ngIf="cours.alerte"></span>-->
-              </td>
-              <td><app-alertes [alertes]="cours.alertes"></app-alertes></td>
-              <td>{{ currencyFormatter.format(cours.cloture) }}</td>
-              <td [class]="classeCssVariation(cours.var1)">
-                {{ cours.var1 | percent:'1.2-2' }}
-              </td>
-              <td [class]="classeCssVariation(cours.var5)">
-                {{ cours.var5 | percent:'1.2-2' }}
-              </td>
-              <td [class]="classeCssVariation(cours.var20)">
-                {{ cours.var20 | percent:'1.2-2' }}
-              </td>
-              <td [class]="classeCssVariation(cours.var50)">
-                {{ cours.var50 | percent:'1.2-2' }}
-              </td>
-              <td [class]="classeCssMM(cours, cours.mm5)">
-                {{ currencyFormatter.format(cours.mm5) }}
-              </td>
-              <td [class]="classeCssMM(cours, cours.mm20)">
-                {{ currencyFormatter.format(cours.mm20) }}
-              </td>
-              <td [class]="classeCssMM(cours, cours.mm50)">
-                {{ currencyFormatter.format(cours.mm50) }}
-              </td>
-            </tr>
-          </ng-template>
-        </p-table>
-      </p-accordion-content>
-    </p-accordion-panel>
-  }
-</p-accordion>
+                  {{ cours.libelle }}
+                </td>
+                <td>
+                  <app-alertes [alertes]="cours.alertes"></app-alertes>
+                </td>
+                <td>{{ currencyFormatter.format(cours.cloture) }}</td>
+                <td [class]="classeCssVariation(cours.var1)">
+                  {{ cours.var1 | percent:'1.2-2' }}
+                </td>
+                <td [class]="classeCssVariation(cours.var5)">
+                  {{ cours.var5 | percent:'1.2-2' }}
+                </td>
+                <td [class]="classeCssVariation(cours.var20)">
+                  {{ cours.var20 | percent:'1.2-2' }}
+                </td>
+                <td [class]="classeCssVariation(cours.var50)">
+                  {{ cours.var50 | percent:'1.2-2' }}
+                </td>
+                <td [class]="classeCssMM(cours, cours.mm5)">
+                  {{ currencyFormatter.format(cours.mm5) }}
+                </td>
+                <td [class]="classeCssMM(cours, cours.mm20)">
+                  {{ currencyFormatter.format(cours.mm20) }}
+                </td>
+                <td [class]="classeCssMM(cours, cours.mm50)">
+                  {{ currencyFormatter.format(cours.mm50) }}
+                </td>
+              </tr>
+            </ng-template>
+          </p-table>
+        </p-accordion-content>
+      </p-accordion-panel>
+    }
+  </p-accordion>
+
+  <app-cours [cours]="coursSelectionne" (ferme)="coursSelectionne = undefined"></app-cours>
+</div>

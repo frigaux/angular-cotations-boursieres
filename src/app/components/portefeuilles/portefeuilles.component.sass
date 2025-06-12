@@ -1,5 +1,6 @@
-.p-accordion
-  display: block
+div.conteneur
+  display: flex
+  flex-direction: row
 
   .pi-chart-line
     font-size: 0.85rem
@@ -12,28 +13,46 @@
   .pi-chart-line.negative
     color: red
 
-  .pi-exclamation-triangle
-    font-size: 1.15rem
-    color: var(--p-red-500)
+  &.avec-details
+    app-cours
+      width: 80%
 
-  p-table
-    td
-      &.positive
-        color: green
+    p-accordion
+      width: 20%
 
-      &.negative
-        color: red
+      p-table
+        tr
+          th:nth-child(1), td:nth-child(1)
+            width: 100%
 
-    tr
-      th:nth-child(1)
-        width: 15%
+          th:nth-child(n+2), td:nth-child(n+2)
+            display: none
 
-      th:nth-child(2)
-        width: 15%
+  &:not(.avec-details)
+    app-cours
+      display: none
 
-      th:nth-child(n+3)
-        width: 8.75%
-        text-align: right
+    p-accordion
+      width: 100%
 
-      td:nth-child(n+3)
-        text-align: right
+      p-table
+        td
+          &.positive
+            color: green
+
+          &.negative
+            color: red
+
+        tr
+          th:nth-child(1)
+            width: 15%
+
+          th:nth-child(2)
+            width: 15%
+
+          th:nth-child(n+3)
+            width: 8.75%
+            text-align: right
+
+          td:nth-child(n+3)
+            text-align: right

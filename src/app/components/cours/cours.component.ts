@@ -12,6 +12,7 @@ import {ProgressSpinner} from 'primeng/progressspinner';
 import {Cours} from './cours.class';
 import {DetailsComponent} from './details/details.component';
 import {DatePipe, DecimalPipe, NgClass, NgIf} from '@angular/common';
+import {ProgressBar} from 'primeng/progressbar';
 
 @Component({
   selector: 'app-cours',
@@ -27,7 +28,8 @@ import {DatePipe, DecimalPipe, NgClass, NgIf} from '@angular/common';
     DecimalPipe,
     DatePipe,
     NgIf,
-    NgClass
+    NgClass,
+    ProgressBar
   ],
   templateUrl: './cours.component.html',
   styleUrl: './cours.component.sass'

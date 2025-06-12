@@ -15,7 +15,6 @@ import {EditeurAlertesComponent} from './editeur-alertes/editeur-alertes.compone
 import {DTOAlerte} from './dto-alerte.interface';
 
 // TODO : veille sur @Component et providers
-// TODO : boite de dialogue pour la configuration des alertes du portefeuille
 @Component({
   selector: 'app-gestion-portefeuilles',
   imports: [
