@@ -11,7 +11,7 @@ import {Accordion, AccordionContent, AccordionHeader, AccordionPanel} from 'prim
 import {ProgressSpinner} from 'primeng/progressspinner';
 import {Cours} from './cours.class';
 import {DetailsComponent} from './details/details.component';
-import {DatePipe, DecimalPipe, NgIf} from '@angular/common';
+import {DatePipe, DecimalPipe, NgClass, NgIf} from '@angular/common';
 
 @Component({
   selector: 'app-cours',
@@ -26,7 +26,8 @@ import {DatePipe, DecimalPipe, NgIf} from '@angular/common';
     DetailsComponent,
     DecimalPipe,
     DatePipe,
-    NgIf
+    NgIf,
+    NgClass
   ],
   templateUrl: './cours.component.html',
   styleUrl: './cours.component.sass'

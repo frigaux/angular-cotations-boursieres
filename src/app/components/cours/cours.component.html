@@ -1,69 +1,71 @@
-<app-details [cours]="coursSelectionne" (ferme)="coursSelectionne = undefined"></app-details>
-
-<h1>{{ 'COMPOSANTS.COURS.MARCHES_DATE' | translate }}
+<h3>{{ 'COMPOSANTS.COURS.MARCHES_DATE' | translate }}
   <p-progress-spinner *ngIf="date === undefined" strokeWidth="8" [style]="{ width: '25px', height: '25px' }"/>
   {{ date | date: 'dd/MM/yyyy' }}
-</h1>
+</h3>
 
-<p-accordion>
-  @for (marche of marches; track marche.libelle; let i = $index) {
-    <p-accordion-panel value="{{i}}">
-      <p-accordion-header>{{ marche.libelle }}</p-accordion-header>
-      <p-accordion-content>
-        <p-table
-          sortField="libelle"
-          [scrollable]="true" scrollHeight="50vh"
-          [style]="{ margin: '1rem' }"
-          [value]="marche.cours"
-          [loading]="loading">
-          <ng-template #header>
-            <tr>
-              <th pSortableColumn="libelle">
-                {{ 'COMPOSANTS.COURS.LIBELLE' | translate }}
-                <p-sortIcon field="libelle"/>
-                <p-columnFilter type="text" field="libelle" matchMode="contains" display="menu"
-                                [showMatchModes]="false"
-                                [showOperator]="false" [showAddButton]="false"/>
-              </th>
-              <th pSortableColumn="cloture">
-                {{ 'COMPOSANTS.COURS.CLOTURE' | translate }}
-                <p-sortIcon field="cloture"/>
-              </th>
-              <th pSortableColumn="ouverture">
-                {{ 'COMPOSANTS.COURS.OUVERTURE' | translate }}
-                <p-sortIcon field="ouverture"/>
-              </th>
-              <th pSortableColumn="plusBas">
-                {{ 'COMPOSANTS.COURS.PLUSBAS' | translate }}
-                <p-sortIcon field="plusBas"/>
-              </th>
-              <th pSortableColumn="plusHaut">
-                {{ 'COMPOSANTS.COURS.PLUSHAUT' | translate }}
-                <p-sortIcon field="plusHaut"/>
-              </th>
-              <th pSortableColumn="volume">
-                {{ 'COMPOSANTS.COURS.VOLUME' | translate }}
-                <p-sortIcon field="volume"/>
-              </th>
-            </tr>
-          </ng-template>
-          <ng-template #body let-cours>
-            <tr>
-              <td>
+<div class="conteneur" [ngClass]="{'avec-details': coursSelectionne !== undefined}">
+  <p-accordion>
+    @for (marche of marches; track marche.libelle; let i = $index) {
+      <p-accordion-panel value="{{i}}">
+        <p-accordion-header>{{ marche.libelle }}</p-accordion-header>
+        <p-accordion-content>
+          <p-table
+            sortField="libelle"
+            [scrollable]="true" scrollHeight="50vh"
+            [style]="{ margin: '1rem' }"
+            [value]="marche.cours"
+            [loading]="loading">
+            <ng-template #header>
+              <tr>
+                <th pSortableColumn="libelle">
+                  {{ 'COMPOSANTS.COURS.LIBELLE' | translate }}
+                  <p-sortIcon field="libelle"/>
+                  <p-columnFilter type="text" field="libelle" matchMode="contains" display="menu"
+                                  [showMatchModes]="false"
+                                  [showOperator]="false" [showAddButton]="false"/>
+                </th>
+                <th pSortableColumn="cloture">
+                  {{ 'COMPOSANTS.COURS.CLOTURE' | translate }}
+                  <p-sortIcon field="cloture"/>
+                </th>
+                <th pSortableColumn="ouverture">
+                  {{ 'COMPOSANTS.COURS.OUVERTURE' | translate }}
+                  <p-sortIcon field="ouverture"/>
+                </th>
+                <th pSortableColumn="plusBas">
+                  {{ 'COMPOSANTS.COURS.PLUSBAS' | translate }}
+                  <p-sortIcon field="plusBas"/>
+                </th>
+                <th pSortableColumn="plusHaut">
+                  {{ 'COMPOSANTS.COURS.PLUSHAUT' | translate }}
+                  <p-sortIcon field="plusHaut"/>
+                </th>
+                <th pSortableColumn="volume">
+                  {{ 'COMPOSANTS.COURS.VOLUME' | translate }}
+                  <p-sortIcon field="volume"/>
+                </th>
+              </tr>
+            </ng-template>
+            <ng-template #body let-cours>
+              <tr>
+                <td>
                 <span class="pi pi-chart-line"
                       [class]="cours.classeVariation()"
                       (mouseenter)="coursSelectionne = cours"></span>
-                {{ cours.libelle }}
-              </td>
-              <td>{{ currencyFormatter.format(cours.cloture) }}</td>
-              <td>{{ currencyFormatter.format(cours.ouverture) }}</td>
-              <td>{{ currencyFormatter.format(cours.plusBas) }}</td>
-              <td>{{ currencyFormatter.format(cours.plusHaut) }}</td>
-              <td>{{ cours.volume | number }}</td>
-            </tr>
-          </ng-template>
-        </p-table>
-      </p-accordion-content>
-    </p-accordion-panel>
-  }
-</p-accordion>
+                  {{ cours.libelle }}
+                </td>
+                <td>{{ currencyFormatter.format(cours.cloture) }}</td>
+                <td>{{ currencyFormatter.format(cours.ouverture) }}</td>
+                <td>{{ currencyFormatter.format(cours.plusBas) }}</td>
+                <td>{{ currencyFormatter.format(cours.plusHaut) }}</td>
+                <td>{{ cours.volume | number }}</td>
+              </tr>
+            </ng-template>
+          </p-table>
+        </p-accordion-content>
+      </p-accordion-panel>
+    }
+  </p-accordion>
+
+  <app-details [cours]="coursSelectionne" (ferme)="coursSelectionne = undefined"></app-details>
+</div>

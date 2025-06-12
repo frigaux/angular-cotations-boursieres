@@ -1,32 +1,6 @@
-.p-accordion
-  display: block
-
-  p-table
-    tr
-      th:nth-child(1)
-        width: 20%
-
-      th:nth-child(2)
-        width: 16%
-
-      th:nth-child(3)
-        width: 16%
-
-      th:nth-child(4)
-        width: 16%
-
-      th:nth-child(5)
-        width: 16%
-
-      th:nth-child(6)
-        width: 16%
-
-      th:nth-child(n+2)
-        text-align: right
-
-      td:nth-child(n+2)
-        text-align: right
-
+div.conteneur
+  display: flex
+  flex-direction: row
 
   .pi-chart-line
     font-size: 0.85rem
@@ -37,3 +11,52 @@
 
   .pi-chart-line.negative
     color: var(--p-red-500)
+
+  &.avec-details
+    app-details
+      width: 80%
+
+    .p-accordion
+      width: 20%
+
+      p-table
+        tr
+          th:nth-child(1), td:nth-child(1)
+            width: 100%
+
+          th:nth-child(n+2), td:nth-child(n+2)
+            display: none
+
+  &:not(.avec-details)
+    app-details
+      display: none
+
+    .p-accordion
+      width: 100%
+
+      p-table
+        tr
+          th:nth-child(1)
+            width: 20%
+
+          th:nth-child(2)
+            width: 16%
+
+          th:nth-child(3)
+            width: 16%
+
+          th:nth-child(4)
+            width: 16%
+
+          th:nth-child(5)
+            width: 16%
+
+          th:nth-child(6)
+            width: 16%
+
+          th:nth-child(n+2)
+            text-align: right
+
+          td:nth-child(n+2)
+            text-align: right
+
