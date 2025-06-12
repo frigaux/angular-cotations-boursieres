@@ -4,6 +4,7 @@
   .pi-chart-line
     font-size: 0.85rem
     cursor: pointer
+    margin-right: 0.5rem
 
   .pi-chart-line.positive
     color: green
@@ -22,3 +23,17 @@
 
       &.negative
         color: red
+
+    tr
+      th:nth-child(1)
+        width: 15%
+
+      th:nth-child(2)
+        width: 15%
+
+      th:nth-child(n+3)
+        width: 8.75%
+        text-align: right
+
+      td:nth-child(n+3)
+        text-align: right

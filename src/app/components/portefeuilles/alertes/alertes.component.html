@@ -1,0 +1,3 @@
+@for (alerte of alertesVue; track alerte.nom; let i = $index) {
+  <span *ngIf="alerte.evaluation">{{ alerte.nom }}</span>
+}

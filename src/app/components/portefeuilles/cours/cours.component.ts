@@ -25,9 +25,7 @@ export class CoursComponent {
   coursVue: Cours | undefined;
 
   private intercepteurCoursPortefeuille(coursPortefeuille: CoursPortefeuille | undefined) {
-    if (coursPortefeuille) {
-      this.coursVue = Cours.fromCoursPortefeuille(coursPortefeuille);
-    }
+    this.coursVue = coursPortefeuille ? Cours.fromCoursPortefeuille(coursPortefeuille) : undefined;
     return coursPortefeuille;
   }
 }

@@ -63,32 +63,32 @@
             <tr>
               <td>
                 <span class="pi pi-chart-line"
-                      [class]="classeVariation(cours.var1)"
+                      [class]="classeCssVariation(cours.var1)"
                       (mouseenter)="coursSelectionne = cours"></span>
                 {{ cours.libelle }}
                 <!--                <span class="pi pi-exclamation-triangle" *ngIf="cours.alerte"></span>-->
               </td>
-              <td>{{ cours.alertes | json }}</td>
+              <td><app-alertes [alertes]="cours.alertes"></app-alertes></td>
               <td>{{ currencyFormatter.format(cours.cloture) }}</td>
-              <td [class]="classeVariation(cours.var1)">
-                {{ cours.var1 | percent:'1.0-2' }}
+              <td [class]="classeCssVariation(cours.var1)">
+                {{ cours.var1 | percent:'1.2-2' }}
               </td>
-              <td [class]="classeVariation(cours.var5)">
-                {{ cours.var5 | percent:'1.0-2' }}
+              <td [class]="classeCssVariation(cours.var5)">
+                {{ cours.var5 | percent:'1.2-2' }}
               </td>
-              <td [class]="classeVariation(cours.var20)">
-                {{ cours.var20 | percent:'1.0-2' }}
+              <td [class]="classeCssVariation(cours.var20)">
+                {{ cours.var20 | percent:'1.2-2' }}
               </td>
-              <td [class]="classeVariation(cours.var50)">
-                {{ cours.var50 | percent:'1.0-2' }}
+              <td [class]="classeCssVariation(cours.var50)">
+                {{ cours.var50 | percent:'1.2-2' }}
               </td>
-              <td [class]="classeMM(cours, cours.mm5)">
+              <td [class]="classeCssMM(cours, cours.mm5)">
                 {{ currencyFormatter.format(cours.mm5) }}
               </td>
-              <td [class]="classeMM(cours, cours.mm20)">
+              <td [class]="classeCssMM(cours, cours.mm20)">
                 {{ currencyFormatter.format(cours.mm20) }}
               </td>
-              <td [class]="classeMM(cours, cours.mm50)">
+              <td [class]="classeCssMM(cours, cours.mm50)">
                 {{ currencyFormatter.format(cours.mm50) }}
               </td>
             </tr>

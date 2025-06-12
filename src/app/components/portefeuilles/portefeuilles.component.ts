@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {DatePipe, JsonPipe, NgIf, PercentPipe} from '@angular/common';
+import {DatePipe, NgIf, PercentPipe} from '@angular/common';
 import {PortefeuillesService} from '../../services/portefeuilles/portefeuilles.service';
 import {Accordion, AccordionContent, AccordionHeader, AccordionPanel, AccordionTabOpenEvent} from 'primeng/accordion';
 import {TableModule} from 'primeng/table';
@@ -12,7 +12,7 @@ import {TranslatePipe} from '@ngx-translate/core';
 import {ProgressSpinner} from 'primeng/progressspinner';
 import {CoursComponent} from './cours/cours.component';
 import {ProgressBar} from 'primeng/progressbar';
-import {DTOAlerte} from './gestion-portefeuilles/dto-alerte.interface';
+import {AlertesComponent} from './alertes/alertes.component';
 
 @Component({
   selector: 'app-portefeuilles',
@@ -29,7 +29,7 @@ import {DTOAlerte} from './gestion-portefeuilles/dto-alerte.interface';
     ProgressSpinner,
     CoursComponent,
     ProgressBar,
-    JsonPipe
+    AlertesComponent
   ],
   templateUrl: './portefeuilles.component.html',
   styleUrl: './portefeuilles.component.sass'
@@ -86,11 +86,11 @@ export class PortefeuillesComponent implements OnInit {
       })
   }
 
-  classeVariation(variation: number): string {
+  classeCssVariation(variation: number): string {
     return variation >= 0 ? 'positive' : 'negative';
   }
 
-  classeMM(cours: CoursPortefeuille, mm: number) {
+  classeCssMM(cours: CoursPortefeuille, mm: number) {
     return cours.cloture >= mm ? 'positive' : 'negative';
   }
 }
