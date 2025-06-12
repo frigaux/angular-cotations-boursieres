@@ -2,12 +2,16 @@
       title="{{ 'COMPOSANTS.PORTEFEUILLES.GESTION_PORTEFEUILLES.IMPORT_EXPORT.IMPORT_EXPORT' | translate }}"></span>
 
 <p-dialog header="{{ 'COMPOSANTS.PORTEFEUILLES.GESTION_PORTEFEUILLES.IMPORT_EXPORT.IMPORT_EXPORT' | translate }}"
-          [modal]="true" (onShow)="reinitialiser()" [(visible)]="visible">
+          [modal]="true" (onShow)="reinitialiserVue()" [(visible)]="visible">
   <textarea rows="10" cols="50" pTextarea [(ngModel)]="configurationPortefeuilles" [ngClass]="{'error': importEchoue}"></textarea>
   <div>
     <p-button type="button" (click)="exporter()"
-              label="{{ 'COMPOSANTS.PORTEFEUILLES.GESTION_PORTEFEUILLES.IMPORT_EXPORT.EXPORT' | translate }}"/>
-    <p-button type="button" (click)="importer()"
-              label="{{ 'COMPOSANTS.PORTEFEUILLES.GESTION_PORTEFEUILLES.IMPORT_EXPORT.IMPORT' | translate }}"/>
+              label="{{ 'COMPOSANTS.PORTEFEUILLES.GESTION_PORTEFEUILLES.IMPORT_EXPORT.EXPORTER' | translate }}"/>
+    <p-button type="button" (click)="importer()" severity="warn"
+              label="{{ 'COMPOSANTS.PORTEFEUILLES.GESTION_PORTEFEUILLES.IMPORT_EXPORT.IMPORTER' | translate }}"/>
+    <p-button type="button" (click)="exemple()"
+              label="{{ 'COMPOSANTS.PORTEFEUILLES.GESTION_PORTEFEUILLES.IMPORT_EXPORT.EXEMPLE' | translate }}"/>
+    <p-button type="button" (click)="toutSupprimer()" severity="danger"
+              label="{{ 'COMPOSANTS.PORTEFEUILLES.GESTION_PORTEFEUILLES.IMPORT_EXPORT.TOUT_SUPPRIMER' | translate }}"/>
   </div>
 </p-dialog>

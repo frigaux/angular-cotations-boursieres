@@ -35,7 +35,7 @@ describe('ImportExportComponent', () => {
 
     it('when on importe then l\'export renvoie les portefeuilles importés', fakeAsync(() => {
       component.importer();
-      component.reinitialiser();
+      component.reinitialiserVue();
       component.exporter();
       expect(component.configurationPortefeuilles).toEqual(portefeuilles);
     }));

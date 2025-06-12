@@ -127,8 +127,10 @@
         },
         "IMPORT_EXPORT": {
           "IMPORT_EXPORT": "Import/export des portefeuilles",
-          "EXPORT": "Export",
-          "IMPORT": "Import"
+          "EXPORTER": "Exporter",
+          "IMPORTER": "Importer",
+          "EXEMPLE": "Exemple",
+          "TOUT_SUPPRIMER": "Supprimer tous les portefeuilles"
         }
       }
     }
