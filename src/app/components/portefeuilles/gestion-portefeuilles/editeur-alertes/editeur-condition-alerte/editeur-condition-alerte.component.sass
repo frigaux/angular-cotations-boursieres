@@ -16,6 +16,7 @@ p-dialog
     display: flex
     flex-direction: row
     align-items: center
+    margin: 0.5rem
 
     span.pi-exclamation-circle
       color: red
@@ -27,9 +28,12 @@ p-dialog
 
 form
   display: flex
-  flex-direction: row
+  flex-direction: column
   margin-top: 2rem
+  align-items: end
 
-  p-floatlabel, p-button
-    margin-left: 0.5rem
+  div.boutons
+    margin: 0.5rem 0 0 0
 
+    p-button
+      margin: 0 0 0 0.5rem

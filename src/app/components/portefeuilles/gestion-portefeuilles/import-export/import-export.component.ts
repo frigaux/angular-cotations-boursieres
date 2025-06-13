@@ -53,7 +53,10 @@ export class ImportExportComponent {
       '      "nom": "Spéculation",\n' +
       '      "parDefaut": true,\n' +
       '      "tickers": ["CA", "GLE", "BNP", "DSY", "SGO", "SAN", "SK", "STMPA"],\n' +
-      '      "alertes": []\n' +
+      '      "alertes": [{"nom": "Remontée", "condition": "M20 > M10 && M10 > M5 && C2 < (0.98 * C1)"}, {\n' +
+      '        "nom": "Chute",\n' +
+      '        "condition": "M20 < M10 && M10 < M5 && C2 > (1.02 * C1)"\n' +
+      '      }, {"nom": "Grosse variation veille", "condition": "C2 < 0.98 * C1 || C2 > 1.02 * C1"}]\n' +
       '    }, {\n' +
       '      "nom": "Spéculation2",\n' +
       '      "parDefaut": false,\n' +
