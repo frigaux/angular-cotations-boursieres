@@ -82,6 +82,7 @@
       "VAR50": "Var./50j",
       "GESTION_PORTEFEUILLES": {
         "PORTEFEUILLE_SANS_VALEUR": "ATTENTION ! le portefeuille n'a pas de valeur",
+        "CREER": "Créer un portefeuille",
         "CREATION": "Création d'un portefeuille",
         "PORTEFEUILLES": "Portefeuilles",
         "PAR_DEFAUT": "Portefeuille par défaut",
@@ -107,7 +108,8 @@
         },
         "EDITEUR_ALERTES": {
           "MODIFICATION_PORTEFEUILLE": "Modification des alertes du portefeuille {{nom}}",
-          "AJOUT": "Ajout d'une alerte",
+          "AJOUTER": "Ajouter une alerte",
+          "AUCUNE_ALERTE": "Cliquez sur le PLUS pour ajouter une alerte",
           "NOM": "Nom de l'alerte",
           "EDITER_CONDITION": "Edition de la condition de lancement de l'alerte",
           "SUPPRIMER": "Supprimer l'alerte",
@@ -127,9 +129,10 @@
         },
         "IMPORT_EXPORT": {
           "IMPORT_EXPORT": "Import/export des portefeuilles",
+          "CONFIGURATION": "Configuration au format JSON",
           "EXPORTER": "Exporter",
           "IMPORTER": "Importer",
-          "EXEMPLE": "Exemple",
+          "EXEMPLE": "Exemple de configuration",
           "TOUT_SUPPRIMER": "Supprimer tous les portefeuilles"
         }
       }

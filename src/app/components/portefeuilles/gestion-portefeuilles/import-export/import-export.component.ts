@@ -5,6 +5,8 @@ import {Dialog} from 'primeng/dialog';
 import {FormsModule} from '@angular/forms';
 import {Button} from 'primeng/button';
 import {NgClass} from '@angular/common';
+import {IftaLabel} from 'primeng/iftalabel';
+import {Textarea} from 'primeng/textarea';
 
 @Component({
   selector: 'app-import-export',
@@ -13,7 +15,9 @@ import {NgClass} from '@angular/common';
     Dialog,
     FormsModule,
     Button,
-    NgClass
+    NgClass,
+    IftaLabel,
+    Textarea
   ],
   templateUrl: './import-export.component.html',
   styleUrl: './import-export.component.sass'
@@ -44,6 +48,7 @@ export class ImportExportComponent {
   }
 
   exemple() {
+    this.reinitialiserVue();
     this.configurationPortefeuilles = '[{\n' +
       '      "nom": "Spéculation",\n' +
       '      "parDefaut": true,\n' +

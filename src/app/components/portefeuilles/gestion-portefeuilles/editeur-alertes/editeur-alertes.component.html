@@ -4,25 +4,27 @@
 
 <p-dialog [header]="titre" [modal]="true" [visible]="portefeuilleEnModification !== undefined" closable="false">
   @if (portefeuilleEnModification !== undefined) {
-    <div class="boutons">
-      <p-button
-        label="{{ 'COMPOSANTS.PORTEFEUILLES.GESTION_PORTEFEUILLES.EDITEUR_ALERTES.AJOUT' | translate }}"
-        (onClick)="ajouterAlerte()" type="button"/>
-    </div>
+    <div class="conteneur">
+      <div class="pi pi-plus-circle" (click)="ajouterAlerte()"
+           title="{{ 'COMPOSANTS.PORTEFEUILLES.GESTION_PORTEFEUILLES.EDITEUR_ALERTES.AJOUTER' | translate }}"></div>
+      <div class="aucune-alerte" *ngIf="alertes.length === 0">
+        {{ 'COMPOSANTS.PORTEFEUILLES.GESTION_PORTEFEUILLES.EDITEUR_ALERTES.AUCUNE_ALERTE' | translate }}
+      </div>
 
-    <div class="formulaire" [formGroup]="formulaire">
-      <div formArrayName="noms" *ngFor="let nom of noms.controls; index as idx">
-        <div>
-          <p-floatlabel>
-            <input pInputText [pAutoFocus]="true" id="{{idx}}" autocomplete="off" [formControlName]="idx"/>
-            <label for="{{idx}}">
-              {{ 'COMPOSANTS.PORTEFEUILLES.GESTION_PORTEFEUILLES.EDITEUR_ALERTES.NOM' | translate }}
-            </label>
-          </p-floatlabel>
-          <span class="pi pi-wrench" (click)="editionAlertes(idx)"
-                title="{{ 'COMPOSANTS.PORTEFEUILLES.GESTION_PORTEFEUILLES.EDITEUR_ALERTES.EDITER_CONDITION' | translate }}"></span>
-          <span class="pi pi-trash" (click)="suppressionAlerte($event, idx)"
-                title="{{ 'COMPOSANTS.PORTEFEUILLES.GESTION_PORTEFEUILLES.EDITEUR_ALERTES.SUPPRIMER' | translate }}"></span>
+      <div class="formulaire" [formGroup]="formulaire">
+        <div formArrayName="noms" *ngFor="let nom of noms.controls; index as idx">
+          <div>
+            <p-floatlabel>
+              <input pInputText [pAutoFocus]="true" id="{{idx}}" autocomplete="off" [formControlName]="idx"/>
+              <label for="{{idx}}">
+                {{ 'COMPOSANTS.PORTEFEUILLES.GESTION_PORTEFEUILLES.EDITEUR_ALERTES.NOM' | translate }}
+              </label>
+            </p-floatlabel>
+            <span class="pi pi-wrench" (click)="editionAlertes(idx)"
+                  title="{{ 'COMPOSANTS.PORTEFEUILLES.GESTION_PORTEFEUILLES.EDITEUR_ALERTES.EDITER_CONDITION' | translate }}"></span>
+            <span class="pi pi-trash" (click)="suppressionAlerte($event, idx)"
+                  title="{{ 'COMPOSANTS.PORTEFEUILLES.GESTION_PORTEFEUILLES.EDITEUR_ALERTES.SUPPRIMER' | translate }}"></span>
+          </div>
         </div>
       </div>
     </div>

@@ -9,7 +9,7 @@ import {InputText} from 'primeng/inputtext';
 import {FormArray, FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms';
 import {AutoFocus} from 'primeng/autofocus';
 import {ConfirmationService} from 'primeng/api';
-import {NgForOf} from '@angular/common';
+import {NgForOf, NgIf} from '@angular/common';
 import {EditeurConditionAlerteComponent} from './editeur-condition-alerte/editeur-condition-alerte.component';
 
 @Component({
@@ -23,7 +23,8 @@ import {EditeurConditionAlerteComponent} from './editeur-condition-alerte/editeu
     ReactiveFormsModule,
     AutoFocus,
     NgForOf,
-    EditeurConditionAlerteComponent
+    EditeurConditionAlerteComponent,
+    NgIf
   ],
   // providers: [ConfirmationService],
   templateUrl: './editeur-alertes.component.html',

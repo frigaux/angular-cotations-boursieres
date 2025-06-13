@@ -3,14 +3,25 @@
 
 <p-dialog header="{{ 'COMPOSANTS.PORTEFEUILLES.GESTION_PORTEFEUILLES.IMPORT_EXPORT.IMPORT_EXPORT' | translate }}"
           [modal]="true" (onShow)="reinitialiserVue()" [(visible)]="visible">
-  <textarea rows="10" cols="50" pTextarea [(ngModel)]="configurationPortefeuilles" [ngClass]="{'error': importEchoue}"></textarea>
-  <div>
+
+  <div class="exemple" (click)="exemple()">
+    {{ 'COMPOSANTS.PORTEFEUILLES.GESTION_PORTEFEUILLES.IMPORT_EXPORT.EXEMPLE' | translate }}
+  </div>
+
+  <p-iftalabel>
+    <textarea id="json" rows="10" cols="50"
+              pTextarea [(ngModel)]="configurationPortefeuilles"
+              [ngClass]="{'error': importEchoue}"></textarea>
+    <label for="json">
+      {{ 'COMPOSANTS.PORTEFEUILLES.GESTION_PORTEFEUILLES.IMPORT_EXPORT.CONFIGURATION' | translate }}
+    </label>
+  </p-iftalabel>
+
+  <div class="buttons">
     <p-button type="button" (click)="exporter()"
               label="{{ 'COMPOSANTS.PORTEFEUILLES.GESTION_PORTEFEUILLES.IMPORT_EXPORT.EXPORTER' | translate }}"/>
     <p-button type="button" (click)="importer()" severity="warn"
               label="{{ 'COMPOSANTS.PORTEFEUILLES.GESTION_PORTEFEUILLES.IMPORT_EXPORT.IMPORTER' | translate }}"/>
-    <p-button type="button" (click)="exemple()"
-              label="{{ 'COMPOSANTS.PORTEFEUILLES.GESTION_PORTEFEUILLES.IMPORT_EXPORT.EXEMPLE' | translate }}"/>
     <p-button type="button" (click)="toutSupprimer()" severity="danger"
               label="{{ 'COMPOSANTS.PORTEFEUILLES.GESTION_PORTEFEUILLES.IMPORT_EXPORT.TOUT_SUPPRIMER' | translate }}"/>
   </div>

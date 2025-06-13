@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {DatePipe, NgClass, NgIf, PercentPipe} from '@angular/common';
+import {DatePipe, NgClass, NgIf, PercentPipe, ViewportScroller} from '@angular/common';
 import {PortefeuillesService} from '../../services/portefeuilles/portefeuilles.service';
 import {Accordion, AccordionContent, AccordionHeader, AccordionPanel, AccordionTabOpenEvent} from 'primeng/accordion';
 import {TableModule} from 'primeng/table';
@@ -54,7 +54,8 @@ export class PortefeuillesComponent implements OnInit {
 
   constructor(private portefeuillesService: PortefeuillesService,
               private valeursService: ValeursService,
-              private coursService: CoursService) {
+              private coursService: CoursService,
+              private scroller: ViewportScroller) {
     this.currencyFormatter = new Intl.NumberFormat('fr-FR', {style: 'currency', currency: 'EUR'});
   }
 
@@ -65,16 +66,17 @@ export class PortefeuillesComponent implements OnInit {
     this.valeursService.chargerValeurs().subscribe(valeurs => {
       valeurs.forEach(valeur => this.valeurByTicker.set(valeur.ticker, valeur));
       this.idxPortefeuilleCourant = this.portefeuillesAvecCours.findIndex(portefeuilleAvecCours => portefeuilleAvecCours.portefeuille.parDefaut);
-      this.chargerCoursPortefeuilleCourant();
+      this.chargerPortefeuilleCourant();
     });
   }
 
   onOpen(e: AccordionTabOpenEvent) {
+    this.coursSelectionne = undefined;
     this.idxPortefeuilleCourant = e.index;
-    this.chargerCoursPortefeuilleCourant();
+    this.chargerPortefeuilleCourant();
   }
 
-  chargerCoursPortefeuilleCourant(): void {
+  chargerPortefeuilleCourant(): void {
     const portefeuilleAvecCours: PortefeuilleAvecCours = this.portefeuillesAvecCours[this.idxPortefeuilleCourant];
     this.loading = true;
     this.coursService.chargerCoursTickersWithLimit(portefeuilleAvecCours.portefeuille.tickers, 300)
@@ -94,5 +96,10 @@ export class PortefeuillesComponent implements OnInit {
 
   classeCssMM(cours: CoursPortefeuille, mm: number) {
     return cours.cloture >= mm ? 'positive' : 'negative';
+  }
+
+  afficherCours(cours: CoursPortefeuille) {
+    this.coursSelectionne = cours;
+    this.scroller.scrollToAnchor('conteneur');
   }
 }

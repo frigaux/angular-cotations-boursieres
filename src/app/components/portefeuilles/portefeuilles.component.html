@@ -7,7 +7,7 @@
   <p-progressbar mode="indeterminate" [style]="{'height': '10px'}"/>
 </div>
 
-<div class="conteneur" [ngClass]="{'avec-details': coursSelectionne !== undefined}">
+<div id="conteneur" [ngClass]="{'avec-details': coursSelectionne !== undefined}">
   <p-accordion *ngIf="!loading" value="{{idxPortefeuilleCourant}}" (onOpen)="onOpen($event)">
     @for (portefeuilleAvecCours of portefeuillesAvecCours; track portefeuilleAvecCours.portefeuille.nom; let
       i = $index) {
@@ -64,7 +64,7 @@
                 <td>
                 <span class="pi pi-chart-line"
                       [class]="classeCssVariation(cours.var1)"
-                      (mouseenter)="coursSelectionne = cours"></span>
+                      (mouseenter)="afficherCours(cours)"></span>
                   {{ cours.libelle }}
                 </td>
                 <td>

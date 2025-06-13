@@ -1,24 +1,40 @@
-div.formulaire
-  & > div > div
-    display: flex
-    flex-direction: row
-    align-items: center
-    margin: 2rem 0 0 1rem
+div.conteneur
+  display: flex
+  flex-direction: row
+  align-items: center
 
-    span.pi
-      cursor: pointer
-      margin: 0 0 0 1rem
-      font-size: 2rem
+  div.pi-plus-circle
+    margin-left: 2rem
+    font-size: 2rem
+    cursor: pointer
 
-    span.pi-trash
-      color: var(--p-red-800)
+  div.aucune-alerte
+    margin-left: 0.5rem
 
-    input
-      &.ng-invalid.ng-touched, &.ng-invalid.ng-dirty
-        border-color: var(--p-red-800)
+  div.formulaire
+    margin-left: 0.5rem
+    border-left: 1px solid black
 
-      &.ng-valid
-        border-color: var(--p-green-800)
+    & > div > div
+      display: flex
+      flex-direction: row
+      align-items: center
+      margin: 2rem 0 0 1rem
+
+      span.pi
+        cursor: pointer
+        margin: 0 0 0 1rem
+        font-size: 2rem
+
+      span.pi-trash
+        color: var(--p-red-800)
+
+      input
+        &.ng-invalid.ng-touched, &.ng-invalid.ng-dirty
+          border-color: var(--p-red-800)
+
+        &.ng-valid
+          border-color: var(--p-green-800)
 
 div.boutons
   p-button
