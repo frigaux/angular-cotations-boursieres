@@ -11,7 +11,7 @@ import {Accordion, AccordionContent, AccordionHeader, AccordionPanel} from 'prim
 import {ProgressSpinner} from 'primeng/progressspinner';
 import {Cours} from './cours.class';
 import {DetailsComponent} from './details/details.component';
-import {DatePipe, DecimalPipe, NgClass, NgIf} from '@angular/common';
+import {CurrencyPipe, DatePipe, DecimalPipe, NgClass, NgIf} from '@angular/common';
 import {ProgressBar} from 'primeng/progressbar';
 
 @Component({
@@ -29,7 +29,8 @@ import {ProgressBar} from 'primeng/progressbar';
     DatePipe,
     NgIf,
     NgClass,
-    ProgressBar
+    ProgressBar,
+    CurrencyPipe
   ],
   templateUrl: './cours.component.html',
   styleUrl: './cours.component.sass'
@@ -41,7 +42,6 @@ export class CoursComponent implements OnInit {
   // données pour la vue
   date!: Date;
   marches: CoursMarche[] = [];
-  currencyFormatter: Intl.NumberFormat;
 
   // cours pour lequel afficher les moyennes mobiles
   coursSelectionne: Cours | undefined = undefined;
@@ -51,7 +51,6 @@ export class CoursComponent implements OnInit {
 
   constructor(private valeursService: ValeursService,
               private coursService: CoursService) {
-    this.currencyFormatter = new Intl.NumberFormat('fr-FR', {style: 'currency', currency: 'EUR'});
   }
 
   ngOnInit(): void {

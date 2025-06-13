@@ -58,10 +58,10 @@
                       (mouseenter)="coursSelectionne = cours"></span>
                   {{ cours.libelle }}
                 </td>
-                <td>{{ currencyFormatter.format(cours.cloture) }}</td>
-                <td>{{ currencyFormatter.format(cours.ouverture) }}</td>
-                <td>{{ currencyFormatter.format(cours.plusBas) }}</td>
-                <td>{{ currencyFormatter.format(cours.plusHaut) }}</td>
+                <td>{{ cours.cloture | currency:'€'}}</td>
+                <td>{{ cours.ouverture | currency:'€'}}</td>
+                <td>{{ cours.plusBas | currency:'€'}}</td>
+                <td>{{ cours.plusHaut | currency:'€'}}</td>
                 <td>{{ cours.volume | number }}</td>
               </tr>
             </ng-template>

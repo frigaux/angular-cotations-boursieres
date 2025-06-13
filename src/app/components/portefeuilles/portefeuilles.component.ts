@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {DatePipe, NgClass, NgIf, PercentPipe, ViewportScroller} from '@angular/common';
+import {CurrencyPipe, DatePipe, NgClass, NgIf, PercentPipe, ViewportScroller} from '@angular/common';
 import {PortefeuillesService} from '../../services/portefeuilles/portefeuilles.service';
 import {Accordion, AccordionContent, AccordionHeader, AccordionPanel, AccordionTabOpenEvent} from 'primeng/accordion';
 import {TableModule} from 'primeng/table';
@@ -14,7 +14,6 @@ import {CoursComponent} from './cours/cours.component';
 import {ProgressBar} from 'primeng/progressbar';
 import {AlertesComponent} from './alertes/alertes.component';
 
-// TODO : locale 'fr' manquante pour les pipes currency et percent
 @Component({
   selector: 'app-portefeuilles',
   imports: [
@@ -31,7 +30,8 @@ import {AlertesComponent} from './alertes/alertes.component';
     CoursComponent,
     ProgressBar,
     AlertesComponent,
-    NgClass
+    NgClass,
+    CurrencyPipe
   ],
   templateUrl: './portefeuilles.component.html',
   styleUrl: './portefeuilles.component.sass'
@@ -43,7 +43,6 @@ export class PortefeuillesComponent implements OnInit {
   // données pour la vue
   date: Date | undefined;
   portefeuillesAvecCours: Array<PortefeuilleAvecCours> = [];
-  currencyFormatter: Intl.NumberFormat;
   idxPortefeuilleCourant: number = -1;
 
   // cours pour lequel afficher les courbes
@@ -56,7 +55,6 @@ export class PortefeuillesComponent implements OnInit {
               private valeursService: ValeursService,
               private coursService: CoursService,
               private scroller: ViewportScroller) {
-    this.currencyFormatter = new Intl.NumberFormat('fr-FR', {style: 'currency', currency: 'EUR'});
   }
 
   ngOnInit(): void {

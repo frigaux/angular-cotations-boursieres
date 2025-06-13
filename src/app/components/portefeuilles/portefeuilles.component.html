@@ -70,7 +70,7 @@
                 <td>
                   <app-alertes [alertes]="cours.alertes"></app-alertes>
                 </td>
-                <td>{{ currencyFormatter.format(cours.cloture) }}</td>
+                <td>{{ cours.cloture | currency:'€'}}</td>
                 <td [class]="classeCssVariation(cours.var1)">
                   {{ cours.var1 | percent:'1.2-2' }}
                 </td>
@@ -84,13 +84,13 @@
                   {{ cours.var50 | percent:'1.2-2' }}
                 </td>
                 <td [class]="classeCssMM(cours, cours.mm5)">
-                  {{ currencyFormatter.format(cours.mm5) }}
+                  {{ cours.mm5 | currency:'€'}}
                 </td>
                 <td [class]="classeCssMM(cours, cours.mm20)">
-                  {{ currencyFormatter.format(cours.mm20) }}
+                  {{ cours.mm20 | currency:'€'}}
                 </td>
                 <td [class]="classeCssMM(cours, cours.mm50)">
-                  {{ currencyFormatter.format(cours.mm50) }}
+                  {{ cours.mm50 | currency:'€'}}
                 </td>
               </tr>
             </ng-template>
