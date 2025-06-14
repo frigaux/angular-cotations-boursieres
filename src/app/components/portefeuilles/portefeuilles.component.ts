@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {CurrencyPipe, DatePipe, NgClass, NgIf, PercentPipe, ViewportScroller} from '@angular/common';
+import {CurrencyPipe, DatePipe, NgClass, NgIf, PercentPipe} from '@angular/common';
 import {PortefeuillesService} from '../../services/portefeuilles/portefeuilles.service';
 import {Accordion, AccordionContent, AccordionHeader, AccordionPanel, AccordionTabOpenEvent} from 'primeng/accordion';
 import {TableModule} from 'primeng/table';
@@ -54,8 +54,7 @@ export class PortefeuillesComponent implements OnInit {
 
   constructor(private portefeuillesService: PortefeuillesService,
               private valeursService: ValeursService,
-              private coursService: CoursService,
-              private scroller: ViewportScroller) {
+              private coursService: CoursService) {
   }
 
   ngOnInit(): void {
@@ -99,6 +98,5 @@ export class PortefeuillesComponent implements OnInit {
 
   afficherCours(cours: CoursPortefeuille) {
     this.coursSelectionne = cours;
-    this.scroller.scrollToAnchor('conteneur');
   }
 }

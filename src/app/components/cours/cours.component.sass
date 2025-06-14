@@ -13,8 +13,17 @@ div.conteneur
     color: var(--p-red-500)
 
   &.avec-details
-    app-details
-      width: 80%
+    @media screen and (max-aspect-ratio: 1.85)
+      app-details
+        width: 80%
+
+    @media screen and (min-aspect-ratio: 1.85) and (max-aspect-ratio: 2)
+      app-details
+        width: 70%
+
+    @media screen and (min-aspect-ratio: 2)
+      app-details
+        width: 60%
 
     p-accordion
       width: 20%

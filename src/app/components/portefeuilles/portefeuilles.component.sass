@@ -14,8 +14,17 @@
     color: red
 
   &.avec-details
-    app-cours
-      width: 80%
+    @media screen and (max-aspect-ratio: 1.85)
+      app-cours
+        width: 80%
+
+    @media screen and (min-aspect-ratio: 1.85) and (max-aspect-ratio: 2)
+      app-cours
+        width: 70%
+
+    @media screen and (min-aspect-ratio: 2)
+      app-cours
+        width: 60%
 
     p-accordion
       width: 20%

@@ -18,7 +18,6 @@ export class PortefeuillesService {
   });
 
   constructor(private translateService: TranslateService) {
-
   }
 
   charger(): Array<DTOPortefeuille> {
