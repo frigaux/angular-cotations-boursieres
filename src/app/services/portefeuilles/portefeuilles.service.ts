@@ -1,6 +1,7 @@
 import {Injectable} from '@angular/core';
 import {DTOPortefeuille} from '../../components/portefeuilles/gestion-portefeuilles/dto-portefeuille.interface';
 import {Observable, Subscriber} from 'rxjs';
+import {TranslateService} from '@ngx-translate/core';
 
 @Injectable({
   providedIn: 'root'
@@ -15,6 +16,10 @@ export class PortefeuillesService {
   private static readonly OBSERVABLE_UPDATE: Observable<Array<DTOPortefeuille>> = new Observable(observer => {
     PortefeuillesService.OBSERVERS_UPDATE.push(observer);
   });
+
+  constructor(private translateService: TranslateService) {
+
+  }
 
   charger(): Array<DTOPortefeuille> {
     const json = window.localStorage.getItem(PortefeuillesService.PORTEFEUILLES);
@@ -63,7 +68,7 @@ export class PortefeuillesService {
     } catch (e) { // JSON mal formé
       return (e as SyntaxError).message;
     }
-    return 'Portefeuilles invalides';
+    return this.translateService.instant('SERVICES.PORTEFEUILLES.PORTEFEUILLES_INVALIDES');
   }
 
   onImport(handler: ((value: Array<DTOPortefeuille>) => void)): void {

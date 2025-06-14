@@ -144,5 +144,10 @@
       "EURO_LIST_B": "Euronext B",
       "EURO_LIST_C": "Euronext C"
     }
+  },
+  "SERVICES": {
+    "PORTEFEUILLES": {
+      "PORTEFEUILLES_INVALIDES": "Portefeuilles invalides"
+    }
   }
 }

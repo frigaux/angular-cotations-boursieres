@@ -4,30 +4,32 @@
 <p-dialog header="{{ 'COMPOSANTS.PORTEFEUILLES.GESTION_PORTEFEUILLES.IMPORT_EXPORT.IMPORT_EXPORT' | translate }}"
           [modal]="true" (onShow)="reinitialiserVue()" [(visible)]="visible">
 
-  <div class="exemple" (click)="exemple()">
-    {{ 'COMPOSANTS.PORTEFEUILLES.GESTION_PORTEFEUILLES.IMPORT_EXPORT.EXEMPLE' | translate }}
-  </div>
+  <div class="conteneur">
+    <div class="exemple" (click)="exemple()">
+      {{ 'COMPOSANTS.PORTEFEUILLES.GESTION_PORTEFEUILLES.IMPORT_EXPORT.EXEMPLE' | translate }}
+    </div>
 
-  <p-iftalabel>
+    <p-iftalabel>
     <textarea id="json" rows="10" cols="50"
               pTextarea [(ngModel)]="configurationPortefeuilles"
               [ngClass]="{'error': erreur !== undefined}"></textarea>
-    <label for="json">
-      {{ 'COMPOSANTS.PORTEFEUILLES.GESTION_PORTEFEUILLES.IMPORT_EXPORT.CONFIGURATION' | translate }}
-    </label>
-  </p-iftalabel>
+      <label for="json">
+        {{ 'COMPOSANTS.PORTEFEUILLES.GESTION_PORTEFEUILLES.IMPORT_EXPORT.CONFIGURATION' | translate }}
+      </label>
+    </p-iftalabel>
 
-  <div class="erreur" *ngIf="erreur !== undefined">
-    <span class="pi pi-exclamation-circle"></span>
-    <span>{{erreur}}</span>
-  </div>
+    <div class="erreur" *ngIf="erreur !== undefined">
+      <span class="pi pi-exclamation-circle"></span>
+      <span>{{ erreur }}</span>
+    </div>
 
-  <div class="boutons">
-    <p-button type="button" (click)="exporter()"
-              label="{{ 'COMPOSANTS.PORTEFEUILLES.GESTION_PORTEFEUILLES.IMPORT_EXPORT.EXPORTER' | translate }}"/>
-    <p-button type="button" (click)="importer()" severity="warn"
-              label="{{ 'COMPOSANTS.PORTEFEUILLES.GESTION_PORTEFEUILLES.IMPORT_EXPORT.IMPORTER' | translate }}"/>
-    <p-button type="button" (click)="toutSupprimer()" severity="danger"
-              label="{{ 'COMPOSANTS.PORTEFEUILLES.GESTION_PORTEFEUILLES.IMPORT_EXPORT.TOUT_SUPPRIMER' | translate }}"/>
+    <div class="boutons">
+      <p-button type="button" (click)="exporter()"
+                label="{{ 'COMPOSANTS.PORTEFEUILLES.GESTION_PORTEFEUILLES.IMPORT_EXPORT.EXPORTER' | translate }}"/>
+      <p-button type="button" (click)="importer()" severity="warn"
+                label="{{ 'COMPOSANTS.PORTEFEUILLES.GESTION_PORTEFEUILLES.IMPORT_EXPORT.IMPORTER' | translate }}"/>
+      <p-button type="button" (click)="toutSupprimer()" severity="danger"
+                label="{{ 'COMPOSANTS.PORTEFEUILLES.GESTION_PORTEFEUILLES.IMPORT_EXPORT.TOUT_SUPPRIMER' | translate }}"/>
+    </div>
   </div>
 </p-dialog>

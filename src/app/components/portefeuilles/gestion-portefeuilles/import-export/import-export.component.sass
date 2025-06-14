@@ -1,33 +1,36 @@
 span.pi-sync
   cursor: pointer
 
-textarea
-  &.error
-    color: red
+div.conteneur
+  margin-left: 2rem
 
-div.exemple
-  cursor: pointer
-  color: var(--p-blue-700)
-  font-size: 1.15rem
+  textarea
+    &.error
+      color: red
 
-div.erreur
-  display: flex
-  flex-direction: row
-  align-items: center
+  div.exemple
+    cursor: pointer
+    color: var(--p-blue-700)
+    font-size: 1.15rem
 
-  span.pi-exclamation-circle
-    color: red
-    font-size: 3rem
-
-  span:last-child
-    color: red
-    margin-left: 1rem
-
-div.boutons
-  width: 100%
-  text-align: center
-  margin-top: 1rem
-
-  p-button
+  div.erreur
+    display: flex
+    flex-direction: row
     align-items: center
-    margin: 0 0.5rem 0 0.5rem
+
+    span.pi-exclamation-circle
+      color: red
+      font-size: 3rem
+
+    span:last-child
+      color: red
+      margin-left: 1rem
+
+  div.boutons
+    width: 100%
+    text-align: center
+    margin-top: 1rem
+
+    p-button
+      align-items: center
+      margin: 0 0.5rem 0 0.5rem
