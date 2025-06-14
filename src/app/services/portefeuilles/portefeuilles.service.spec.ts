@@ -27,9 +27,11 @@ describe('PortefeuillesService', () => {
     });
 
     it('when #import then #export renvoie les portefeuilles', () => {
-      expect(service.import(portefeuilles)).toBeTrue();
+      expect(service.import(portefeuilles)).toBeUndefined();
       expect(resultatImport).toEqual(PORTEFEUILLES);
       expect(service.export()).toEqual(portefeuilles);
     });
   });
+
+  // TODO : manque deux tests : json invalide ou objet invalide
 });

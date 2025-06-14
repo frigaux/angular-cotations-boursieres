@@ -1,22 +1,32 @@
 span.pi-sync
   cursor: pointer
 
-p-iftalabel
-  margin: 2rem
-
 textarea
   &.error
     color: red
 
 div.exemple
   cursor: pointer
-  margin: 0 0 0 2rem
   color: var(--p-blue-700)
   font-size: 1.15rem
+
+div.erreur
+  display: flex
+  flex-direction: row
+  align-items: center
+
+  span.pi-exclamation-circle
+    color: red
+    font-size: 3rem
+
+  span:last-child
+    color: red
+    margin-left: 1rem
 
 div.boutons
   width: 100%
   text-align: center
+  margin-top: 1rem
 
   p-button
     align-items: center

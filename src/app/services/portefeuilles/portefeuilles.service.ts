@@ -20,7 +20,10 @@ export class PortefeuillesService {
     const json = window.localStorage.getItem(PortefeuillesService.PORTEFEUILLES);
     if (json) {
       try {
-        return JSON.parse(json);
+        const portefeuilles: any = JSON.parse(json);
+        if (this.validerPortefeuilles(portefeuilles)) {
+          return portefeuilles;
+        }
       } catch (e) {
         console.error(e);
       }
@@ -34,33 +37,49 @@ export class PortefeuillesService {
   }
 
   export(): string {
-    return window.localStorage.getItem(PortefeuillesService.PORTEFEUILLES) || '[]';
+    const json = window.localStorage.getItem(PortefeuillesService.PORTEFEUILLES);
+    if (json) {
+      try {
+        const portefeuilles: any = JSON.parse(json);
+        if (this.validerPortefeuilles(portefeuilles)) {
+          return json;
+        }
+      } catch (e) {
+        console.error(e);
+      }
+    }
+    return '[]';
   }
 
-  import(json: string): boolean {
+  import(json: string): string | undefined {
     try {
       const portefeuilles: any = JSON.parse(json);
-      if (portefeuilles instanceof Array) {
-        const error = portefeuilles.find(portefeuille =>
-          !portefeuille.hasOwnProperty('nom')
-          || !portefeuille.hasOwnProperty('parDefaut')
-          || !portefeuille.hasOwnProperty('tickers')
-          || !portefeuille.hasOwnProperty('alertes'));
-        if (!error) {
-          window.localStorage.setItem(PortefeuillesService.PORTEFEUILLES, json);
-          PortefeuillesService.OBSERVERS_IMPORT.forEach(observer => observer.next(portefeuilles));
-          PortefeuillesService.OBSERVERS_UPDATE.forEach(observer => observer.next(portefeuilles));
-          return true;
-        }
+      if (this.validerPortefeuilles(portefeuilles)) {
+        window.localStorage.setItem(PortefeuillesService.PORTEFEUILLES, json);
+        PortefeuillesService.OBSERVERS_IMPORT.forEach(observer => observer.next(portefeuilles));
+        PortefeuillesService.OBSERVERS_UPDATE.forEach(observer => observer.next(portefeuilles));
+        return undefined;
       }
-    } catch (e) {
-      console.log(e);
+    } catch (e) { // JSON mal formé
+      return (e as SyntaxError).message;
     }
-    return false;
+    return 'Portefeuilles invalides';
   }
 
   onImport(handler: ((value: Array<DTOPortefeuille>) => void)): void {
     PortefeuillesService.OBSERVABLE_IMPORT.subscribe(handler);
+  }
+
+  validerPortefeuilles(portefeuilles: any): boolean {
+    if (portefeuilles instanceof Array) {
+      const error = portefeuilles.find(portefeuille =>
+        !portefeuille.hasOwnProperty('nom')
+        || !portefeuille.hasOwnProperty('parDefaut')
+        || !portefeuille.hasOwnProperty('tickers')
+        || !portefeuille.hasOwnProperty('alertes'));
+      return error === undefined;
+    }
+    return false;
   }
 
   /**

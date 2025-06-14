@@ -11,11 +11,16 @@
   <p-iftalabel>
     <textarea id="json" rows="10" cols="50"
               pTextarea [(ngModel)]="configurationPortefeuilles"
-              [ngClass]="{'error': importEchoue}"></textarea>
+              [ngClass]="{'error': erreur !== undefined}"></textarea>
     <label for="json">
       {{ 'COMPOSANTS.PORTEFEUILLES.GESTION_PORTEFEUILLES.IMPORT_EXPORT.CONFIGURATION' | translate }}
     </label>
   </p-iftalabel>
+
+  <div class="erreur" *ngIf="erreur !== undefined">
+    <span class="pi pi-exclamation-circle"></span>
+    <span>{{erreur}}</span>
+  </div>
 
   <div class="boutons">
     <p-button type="button" (click)="exporter()"

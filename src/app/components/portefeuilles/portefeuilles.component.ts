@@ -14,6 +14,7 @@ import {CoursComponent} from './cours/cours.component';
 import {ProgressBar} from 'primeng/progressbar';
 import {AlertesComponent} from './alertes/alertes.component';
 
+// TODO : responsive design pour firefox 1650*1080
 @Component({
   selector: 'app-portefeuilles',
   imports: [

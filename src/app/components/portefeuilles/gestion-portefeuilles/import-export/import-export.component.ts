@@ -4,7 +4,7 @@ import {PortefeuillesService} from '../../../../services/portefeuilles/portefeui
 import {Dialog} from 'primeng/dialog';
 import {FormsModule} from '@angular/forms';
 import {Button} from 'primeng/button';
-import {NgClass} from '@angular/common';
+import {NgClass, NgIf} from '@angular/common';
 import {IftaLabel} from 'primeng/iftalabel';
 import {Textarea} from 'primeng/textarea';
 
@@ -17,7 +17,8 @@ import {Textarea} from 'primeng/textarea';
     Button,
     NgClass,
     IftaLabel,
-    Textarea
+    Textarea,
+    NgIf
   ],
   templateUrl: './import-export.component.html',
   styleUrl: './import-export.component.sass'
@@ -25,7 +26,7 @@ import {Textarea} from 'primeng/textarea';
 export class ImportExportComponent {
   visible: boolean = false;
   configurationPortefeuilles: string = '';
-  importEchoue: boolean = false;
+  erreur: string | undefined;
 
   constructor(private portefeuillesService: PortefeuillesService) {
 
@@ -33,7 +34,7 @@ export class ImportExportComponent {
 
   reinitialiserVue() {
     this.configurationPortefeuilles = '';
-    this.importEchoue = false;
+    this.erreur = undefined;
   }
 
   exporter() {
@@ -41,8 +42,8 @@ export class ImportExportComponent {
   }
 
   importer() {
-    this.importEchoue = !this.portefeuillesService.import(this.configurationPortefeuilles);
-    if (!this.importEchoue) {
+    this.erreur = this.portefeuillesService.import(this.configurationPortefeuilles);
+    if (this.erreur === undefined) {
       this.visible = false;
     }
   }
