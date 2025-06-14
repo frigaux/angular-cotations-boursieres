@@ -43,7 +43,7 @@ describe('PortefeuillesComponent', () => {
 
   describe('Given #chargerValeurs et #chargerCours renvoient des valeurs et des cours', () => {
     beforeEach(() => {
-      mockPortefeuillesService.charger.and.returnValue(PORTEFEUILLE);
+      mockPortefeuillesService.charger.and.returnValue([PORTEFEUILLE]);
       mockValeursService.chargerValeurs.and.returnValue(of([VALEUR]));
       mockCoursService.chargerCoursTickersWithLimit.and.returnValue(of(LISTE_COURS_AVEC_LISTE_ALLEGEE));
     });

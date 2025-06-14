@@ -5,7 +5,10 @@ import {TranslateModule} from '@ngx-translate/core';
 import {CoursService} from '../../../services/cours/cours.service';
 import {of} from 'rxjs';
 import {provideAnimations} from '@angular/platform-browser/animations';
-import {COURS_TICKER, LISTE_COURS_TICKER_LIGHT} from '../../../services/jdd/jdd-cours.dataset';
+import {
+  COURS_TICKER,
+  LISTE_COURS_TICKER_ALLEGE
+} from '../../../services/jdd/jdd-cours.dataset';
 import {VALEUR} from '../../../services/jdd/jdd-valeur.dataset';
 
 describe('ValeurComponent', () => {
@@ -25,7 +28,7 @@ describe('ValeurComponent', () => {
         provideAnimations()
       ]
     })
-    .compileComponents();
+      .compileComponents();
 
     fixture = TestBed.createComponent(ValeurComponent);
     component = fixture.componentInstance;
@@ -38,7 +41,7 @@ describe('ValeurComponent', () => {
   describe('Given #chargerCoursTicker et #chargerCoursTickerWithLimit renvoient des cours', () => {
     beforeEach(() => {
       mockCoursService.chargerCoursTicker.and.returnValue(of(COURS_TICKER));
-      mockCoursService.chargerCoursTickerWithLimit.and.returnValue(of(LISTE_COURS_TICKER_LIGHT));
+      mockCoursService.chargerCoursTickerWithLimit.and.returnValue(of(LISTE_COURS_TICKER_ALLEGE));
     });
 
     it('when l\'input ticker est définie then le composant <p-drawer> est rendu', () => {
