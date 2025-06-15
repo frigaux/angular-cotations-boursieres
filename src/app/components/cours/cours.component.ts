@@ -33,7 +33,7 @@ import {ProgressBar} from 'primeng/progressbar';
     CurrencyPipe
   ],
   templateUrl: './cours.component.html',
-  styleUrl: './cours.component.sass'
+  styleUrls: ['../portefeuilles/accordion-chart.sass', './cours.component.sass']
 })
 export class CoursComponent implements OnInit {
   // chargement des cours

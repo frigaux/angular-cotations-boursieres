@@ -7,7 +7,7 @@
   <p-progressbar mode="indeterminate" [style]="{'height': '10px'}"/>
 </div>
 
-<div id="conteneur" [ngClass]="{'avec-details': coursSelectionne !== undefined}">
+<div class="conteneur" [ngClass]="{'avec-details': coursSelectionne !== undefined}">
   <p-accordion *ngIf="!loading" value="{{idxPortefeuilleCourant}}" (onOpen)="onOpen($event)">
     @for (portefeuilleAvecCours of portefeuillesAvecCours; track portefeuilleAvecCours.portefeuille.nom; let
       i = $index) {

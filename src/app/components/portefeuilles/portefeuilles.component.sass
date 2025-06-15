@@ -1,42 +1,4 @@
-#conteneur
-  display: flex
-  flex-direction: row
-
-  .pi-chart-line
-    font-size: 0.85rem
-    cursor: pointer
-    margin-right: 0.5rem
-
-  .pi-chart-line.positive
-    color: green
-
-  .pi-chart-line.negative
-    color: red
-
-  &.avec-details
-    @media screen and (max-aspect-ratio: 1.85)
-      app-cours
-        width: 80%
-
-    @media screen and (min-aspect-ratio: 1.85) and (max-aspect-ratio: 2)
-      app-cours
-        width: 70%
-
-    @media screen and (min-aspect-ratio: 2)
-      app-cours
-        width: 60%
-
-    p-accordion
-      width: 20%
-
-      p-table
-        tr
-          th:nth-child(1), td:nth-child(1)
-            width: 100%
-
-          th:nth-child(n+2), td:nth-child(n+2)
-            display: none
-
+div.conteneur
   &:not(.avec-details)
     app-cours
       display: none
