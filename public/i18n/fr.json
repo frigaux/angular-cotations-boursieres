@@ -147,7 +147,14 @@
   },
   "SERVICES": {
     "PORTEFEUILLES": {
-      "PORTEFEUILLES_INVALIDES": "Portefeuilles invalides"
+      "ERREURS": {
+        "TABLEAU_REQUIS": "Tableau de portefeuille(s) attendu",
+        "NOM_REQUIS": "Attribut nom manquant",
+        "PAR_DEFAUT_REQUIS": "Attribut parDefaut manquant",
+        "TICKERS_REQUIS": "Attribut tickers manquant",
+        "ALERTES_REQUIS": "Attribut alertes manquant",
+        "UN_SEUL_PAR_DEFAUT": "Un et un seul portefeuille sélectionné par défaut"
+      }
     }
   }
 }

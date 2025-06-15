@@ -17,6 +17,8 @@ export class PortefeuillesService {
     PortefeuillesService.OBSERVERS_UPDATE.push(observer);
   });
 
+  private cleMessageErreur: string | undefined;
+
   constructor(private translateService: TranslateService) {
   }
 
@@ -63,11 +65,12 @@ export class PortefeuillesService {
         PortefeuillesService.OBSERVERS_IMPORT.forEach(observer => observer.next(portefeuilles));
         PortefeuillesService.OBSERVERS_UPDATE.forEach(observer => observer.next(portefeuilles));
         return undefined;
+      } else {
+        return this.translateService.instant(this.cleMessageErreur!);
       }
     } catch (e) { // JSON mal formé
       return (e as SyntaxError).message;
     }
-    return this.translateService.instant('SERVICES.PORTEFEUILLES.PORTEFEUILLES_INVALIDES');
   }
 
   onImport(handler: ((value: Array<DTOPortefeuille>) => void)): void {
@@ -75,15 +78,38 @@ export class PortefeuillesService {
   }
 
   validerPortefeuilles(portefeuilles: any): boolean {
+    this.cleMessageErreur = undefined;
     if (portefeuilles instanceof Array) {
-      const error = portefeuilles.find(portefeuille =>
-        !portefeuille.hasOwnProperty('nom')
-        || !portefeuille.hasOwnProperty('parDefaut')
-        || !portefeuille.hasOwnProperty('tickers')
-        || !portefeuille.hasOwnProperty('alertes'));
-      return error === undefined;
+      if (portefeuilles.find(portefeuille =>
+        !portefeuille.hasOwnProperty('nom'))) {
+        this.cleMessageErreur = 'SERVICES.PORTEFEUILLES.ERREURS.NOM_REQUIS';
+        return false;
+      }
+      if (portefeuilles.find(portefeuille =>
+        !portefeuille.hasOwnProperty('parDefaut'))) {
+        this.cleMessageErreur = 'SERVICES.PORTEFEUILLES.ERREURS.PAR_DEFAUT_REQUIS';
+        return false;
+      }
+      if (portefeuilles.find(portefeuille =>
+        !portefeuille.hasOwnProperty('tickers'))) {
+        this.cleMessageErreur = 'SERVICES.PORTEFEUILLES.ERREURS.TICKERS_REQUIS';
+        return false;
+      }
+      if (portefeuilles.find(portefeuille =>
+        !portefeuille.hasOwnProperty('alertes'))) {
+        this.cleMessageErreur = 'SERVICES.PORTEFEUILLES.ERREURS.ALERTES_REQUIS';
+        return false;
+      }
+      if (portefeuilles.length > 0
+        && portefeuilles.filter(portefeuille => portefeuille.parDefaut).length !== 1) {
+        this.cleMessageErreur = 'SERVICES.PORTEFEUILLES.ERREURS.UN_SEUL_PAR_DEFAUT';
+        return false;
+      }
+    } else {
+      this.cleMessageErreur = 'SERVICES.PORTEFEUILLES.ERREURS.TABLEAU_REQUIS';
+      return false;
     }
-    return false;
+    return true;
   }
 
   /**
