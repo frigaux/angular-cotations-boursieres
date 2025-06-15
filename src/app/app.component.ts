@@ -8,6 +8,7 @@ import {Title} from '@angular/platform-browser';
 import {ConfirmDialog} from 'primeng/confirmdialog';
 import {ConfirmationService} from 'primeng/api';
 
+// TODO : remplacer p-progressBar par p-skeleton
 // TODO : courbes des MMxx glissantes
 @Component({
   selector: 'app-root',

@@ -14,21 +14,7 @@ div.conteneur
     color: var(--p-red-500)
 
   &.avec-details
-    @media screen and (max-aspect-ratio: 1.85)
-      app-cours, app-details
-        width: 80%
-
-    @media screen and (min-aspect-ratio: 1.85) and (max-aspect-ratio: 2)
-      app-cours, app-details
-        width: 70%
-
-    @media screen and (min-aspect-ratio: 2)
-      app-cours, app-details
-        width: 60%
-
     p-accordion
-      width: 20%
-
       p-table
         tr
           th:nth-child(1), td:nth-child(1)
@@ -36,3 +22,32 @@ div.conteneur
 
           th:nth-child(n+2), td:nth-child(n+2)
             display: none
+
+    @media screen and (min-resolution: 100dpi)
+      app-cours, app-details
+        width: 70%
+
+      p-accordion
+        width: 30%
+
+    @media screen and (max-resolution: 100dpi)
+      @media screen and (max-aspect-ratio: 1.85)
+        app-cours, app-details
+          width: 80%
+
+        p-accordion
+          width: 20%
+
+      @media screen and (min-aspect-ratio: 1.85) and (max-aspect-ratio: 2)
+        app-cours, app-details
+          width: 70%
+
+        p-accordion
+          width: 30%
+
+      @media screen and (min-aspect-ratio: 2)
+        app-cours, app-details
+          width: 60%
+
+        p-accordion
+          width: 40%
