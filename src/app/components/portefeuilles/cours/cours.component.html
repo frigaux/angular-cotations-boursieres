@@ -4,6 +4,7 @@
       <h2>
         <span class="pi" [class]="coursVue!.classePictoVariation()"></span>
         {{ coursVue.libelle }} ({{ coursVue.date | date:'dd/MM/yyyy' }})
+        <app-alertes [alertes]="alertes"></app-alertes>
         <span class="pi pi-times-circle" (click)="this.ferme.emit()"></span>
       </h2>
     </ng-template>

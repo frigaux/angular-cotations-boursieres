@@ -75,6 +75,11 @@ export class EditeurAlertesComponent {
     this.alerteEnModification = this.alertes[idx];
   }
 
+  modifierConditionAlerte(condition: string) {
+    this.alerteEnModification!.condition = condition;
+    this.alerteEnModification = undefined;
+  }
+
   suppressionAlerte(event: Event, idx: number) {
     this.confirmationService.confirm({
       target: event.target as EventTarget,
@@ -107,10 +112,5 @@ export class EditeurAlertesComponent {
       alerte.nom = this.noms.at(index).value as string;
     });
     this.modifie.emit(this.alertes);
-  }
-
-  modifierConditionAlerte(condition: string) {
-    this.alerteEnModification!.condition = condition;
-    this.alerteEnModification = undefined;
   }
 }

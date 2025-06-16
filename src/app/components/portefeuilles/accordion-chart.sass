@@ -1,6 +1,5 @@
 div.conteneur
   display: flex
-  flex-direction: row
 
   .pi-chart-line
     font-size: 0.85rem
@@ -8,44 +7,66 @@ div.conteneur
     margin-right: 0.5rem
 
   .pi-chart-line.positive
-    color: var(--p-green-500)
+    color: var(--p-green-600)
 
   .pi-chart-line.negative
-    color: var(--p-red-500)
+    color: var(--p-red-600)
 
-  &.avec-details
-    p-accordion
-      p-table
-        tr
-          th:nth-child(1), td:nth-child(1)
-            width: 100%
+// mobile & tablette vertical
+@media screen and (min-resolution: 100dpi) and (orientation: portrait)
+  div.conteneur
+    flex-direction: column
 
-          th:nth-child(n+2), td:nth-child(n+2)
-            display: none
+// mobile & tablette horizontal
+@media screen and (min-resolution: 100dpi) and (orientation: landscape)
+  div.conteneur
+    flex-direction: row
 
-    @media screen and (min-resolution: 100dpi)
+    &.avec-details
       app-cours, app-details
         width: 70%
 
       p-accordion
         width: 30%
 
-    @media screen and (max-resolution: 100dpi)
-      @media screen and (max-aspect-ratio: 1.85)
+        p-table
+          tr
+            th:nth-child(-n+2), td:nth-child(-n+2)
+              width: 50%
+
+            th:nth-child(n+3), td:nth-child(n+3)
+              display: none
+
+// écran horizontal
+@media screen and (max-resolution: 100dpi) and (orientation: landscape)
+  div.conteneur
+    flex-direction: row
+
+    &.avec-details
+      p-accordion
+        p-table
+          tr
+            th:nth-child(-n+2), td:nth-child(-n+2)
+              width: 50%
+
+            th:nth-child(n+3), td:nth-child(n+3)
+              display: none
+
+      @media screen and (max-aspect-ratio: 1.8)
         app-cours, app-details
-          width: 80%
+          width: 75%
 
         p-accordion
-          width: 20%
+          width: 25%
 
-      @media screen and (min-aspect-ratio: 1.85) and (max-aspect-ratio: 2)
+      @media screen and (min-aspect-ratio: 1.8) and (max-aspect-ratio: 1.9)
         app-cours, app-details
           width: 70%
 
         p-accordion
           width: 30%
 
-      @media screen and (min-aspect-ratio: 2)
+      @media screen and (min-aspect-ratio: 1.9)
         app-cours, app-details
           width: 60%
 
