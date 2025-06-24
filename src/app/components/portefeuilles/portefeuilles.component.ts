@@ -9,10 +9,10 @@ import {DTOValeur} from '../../services/valeurs/dto-valeur.interface';
 import {PortefeuilleAvecCours} from './portefeuille-avec-cours.class';
 import {CoursPortefeuille} from './cours-portefeuille.class';
 import {TranslatePipe} from '@ngx-translate/core';
-import {ProgressSpinner} from 'primeng/progressspinner';
 import {CoursComponent} from './cours/cours.component';
-import {ProgressBar} from 'primeng/progressbar';
 import {AlertesComponent} from './alertes/alertes.component';
+import {Skeleton} from 'primeng/skeleton';
+import {LoaderComponent} from '../loader/loader.component';
 
 @Component({
   selector: 'app-portefeuilles',
@@ -26,12 +26,12 @@ import {AlertesComponent} from './alertes/alertes.component';
     TranslatePipe,
     PercentPipe,
     DatePipe,
-    ProgressSpinner,
     CoursComponent,
-    ProgressBar,
     AlertesComponent,
     NgClass,
-    CurrencyPipe
+    CurrencyPipe,
+    Skeleton,
+    LoaderComponent
   ],
   templateUrl: './portefeuilles.component.html',
   styleUrls: ['./accordion-chart.sass', './portefeuilles.component.sass']

@@ -14,7 +14,6 @@ import {ConfirmationService} from 'primeng/api';
 import {EditeurAlertesComponent} from './editeur-alertes/editeur-alertes.component';
 import {DTOAlerte} from './dto-alerte.interface';
 
-// TODO : veille sur @Component et providers
 @Component({
   selector: 'app-gestion-portefeuilles',
   imports: [

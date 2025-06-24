@@ -1,11 +1,13 @@
 <h3>{{ 'COMPOSANTS.PORTEFEUILLES.PORTEFEUILLES_DATE' | translate }}
-  <p-progress-spinner *ngIf="date === undefined" strokeWidth="6" [style]="{ width: '20px', height: '20px' }"/>
+  <p-skeleton *ngIf="date === undefined" shape="rectangle" borderRadius="0" width="6rem" height="1rem"/>
   {{ date | date: 'dd/MM/yyyy' }}
 </h3>
 
-<div *ngIf="loading">
-  <p-progressbar mode="indeterminate" [style]="{'height': '10px'}"/>
-</div>
+<app-loader [affiche]="loading" [configuration]="[
+  {marginLeft: '0', height: '2rem', width: '100%'},
+  {marginLeft: '2rem', height: '10rem', width: '100%'},
+  {marginLeft: '0', height: '2rem', width: '100%'}
+]"></app-loader>
 
 <div class="conteneur" [ngClass]="{'avec-details': coursSelectionne !== undefined}">
   <p-accordion *ngIf="!loading" value="{{idxPortefeuilleCourant}}" (onOpen)="onOpen($event)">
