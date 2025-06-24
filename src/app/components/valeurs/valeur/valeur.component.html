@@ -5,7 +5,7 @@
         <p-progressbar mode="indeterminate" [style]="{'height': '10px'}"/>
       </div>
       <div *ngIf="!loading">
-        <span class="pi" [class]="cours!.classePictoVariation()"></span>
+        <span class="pi" [class]="cours!.classeIconeVariation()"></span>
         {{ cours!.libelle }} ({{ cours!.date | date:'dd/MM/yyyy' }})
         <span class="pi pi-times-circle" (click)="this.ferme.emit()"></span>
       </div>

@@ -62,15 +62,15 @@
             <ng-template #body let-cours>
               <tr>
                 <td>
-                <span class="pi pi-chart-line"
-                      [class]="classeCssVariation(cours.var1)"
-                      (mouseenter)="afficherCours(cours)"></span>
+                  <span class="pi"
+                        [class]="classeIconeVariation(cours.var1)"
+                        (mouseenter)="afficherCours(cours)"></span>
                   {{ cours.libelle }}
                 </td>
                 <td>
                   <app-alertes [alertes]="cours.alertes"></app-alertes>
                 </td>
-                <td>{{ cours.cloture | currency:'€'}}</td>
+                <td>{{ cours.cloture | currency:'€' }}</td>
                 <td [class]="classeCssVariation(cours.var1)">
                   {{ cours.var1 | percent:'1.2-2' }}
                 </td>
@@ -84,13 +84,13 @@
                   {{ cours.var50 | percent:'1.2-2' }}
                 </td>
                 <td [class]="classeCssMM(cours, cours.mm5)">
-                  {{ cours.mm5 | currency:'€'}}
+                  {{ cours.mm5 | currency:'€' }}
                 </td>
                 <td [class]="classeCssMM(cours, cours.mm20)">
-                  {{ cours.mm20 | currency:'€'}}
+                  {{ cours.mm20 | currency:'€' }}
                 </td>
                 <td [class]="classeCssMM(cours, cours.mm50)">
-                  {{ cours.mm50 | currency:'€'}}
+                  {{ cours.mm50 | currency:'€' }}
                 </td>
               </tr>
             </ng-template>

@@ -51,11 +51,11 @@ export class ChartsComponent {
     this.periodes = [];
     for (const periode of [50, 100, 150, 200, 250, 300]) {
       this.periodes.push(periode);
-      this.periodeSelectionnee = periode;
       if (cours.coursAlleges.length <= periode) {
         break;
       }
     }
+    this.periodeSelectionnee = this.periodes[0];
     this.displayChart(cours);
   }
 

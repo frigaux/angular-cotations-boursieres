@@ -87,6 +87,16 @@ export class PortefeuillesComponent implements OnInit {
       })
   }
 
+  classeIconeVariation(variation: number): string {
+    if (variation == 0) {
+      return 'pi-arrow-circle-right';
+    } else if (variation > 0) {
+      return 'pi-arrow-circle-up';
+    } else {
+      return 'pi-arrow-circle-down';
+    }
+  }
+
   classeCssVariation(variation: number): string {
     return variation >= 0 ? 'positive' : 'negative';
   }

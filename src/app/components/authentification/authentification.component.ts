@@ -6,6 +6,7 @@ import {ProgressBar} from 'primeng/progressbar';
 import {AuthentificationService} from '../../services/authentification/authentification.service';
 import {Statut} from './statut.enum';
 import {TranslatePipe} from "@ngx-translate/core";
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-authentification',
@@ -18,7 +19,8 @@ export class AuthentificationComponent implements OnInit {
   messageErreur: string | undefined;
   enumStatut = Statut;
 
-  constructor(private authentificationService: AuthentificationService) {
+  constructor(private authentificationService: AuthentificationService,
+              private router: Router) {
   }
 
   ngOnInit(): void {
@@ -31,7 +33,10 @@ export class AuthentificationComponent implements OnInit {
         this.messageErreur = `${httpResponseError.url} => ${httpResponseError.status}`;
         this.statut = Statut.ERREUR;
       },
-      complete: () => this.statut = Statut.SUCCES
+      complete: () => {
+        this.statut = Statut.SUCCES;
+        this.router.navigate(['portefeuilles']);
+      }
     });
   }
 }

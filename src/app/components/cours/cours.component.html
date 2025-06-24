@@ -53,8 +53,8 @@
             <ng-template #body let-cours>
               <tr>
                 <td>
-                <span class="pi pi-chart-line"
-                      [class]="cours.classeVariation()"
+                <span class="pi"
+                      [class]="cours.classeIconeVariation()"
                       (mouseenter)="coursSelectionne = cours"></span>
                   {{ cours.libelle }}
                 </td>

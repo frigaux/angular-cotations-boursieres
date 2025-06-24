@@ -43,20 +43,15 @@ export class Cours {
     return new Cours(dto.date, dto.ticker, dto.libelle, dto.ouverture, dto.plusHaut, dto.plusBas, dto.cloture, dto.volume, dto.moyennesMobiles, dto.alerte, dto.coursAlleges);
   }
 
-  public classeVariation(): string {
+  public classeIconeVariation(): string {
     if (this.moyennesMobiles.length > 0) {
-      return this.moyennesMobiles[0] >= this.moyennesMobiles[1] ? 'positive' : 'negative';
-    }
-    return '';
-  }
-
-  public classePictoVariation(): string {
-    if (this.moyennesMobiles.length > 0) {
-      if (this.moyennesMobiles[0] > this.moyennesMobiles[1]) {
-        return 'pi-arrow-up';
-      } else if (this.moyennesMobiles[0] < this.moyennesMobiles[1]) {
-        return 'pi-arrow-down';
-      } else return 'pi-equals';
+      if (this.moyennesMobiles[0] == this.moyennesMobiles[1]) {
+        return 'pi-arrow-circle-right';
+      } else if (this.moyennesMobiles[0] > this.moyennesMobiles[1]) {
+        return 'pi-arrow-circle-up';
+      } else {
+        return 'pi-arrow-circle-down';
+      }
     }
     return '';
   }
