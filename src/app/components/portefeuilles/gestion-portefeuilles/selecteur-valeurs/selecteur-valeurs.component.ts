@@ -3,21 +3,21 @@ import {NgIf} from "@angular/common";
 import {PickList} from "primeng/picklist";
 import {DTOValeur} from '../../../../services/valeurs/dto-valeur.interface';
 import {ValeursService} from '../../../../services/valeurs/valeurs.service';
-import {ProgressBar} from 'primeng/progressbar';
 import {TranslatePipe, TranslateService} from '@ngx-translate/core';
 import {DTOPortefeuille} from '../dto-portefeuille.interface';
 import {Dialog} from 'primeng/dialog';
 import {Button} from 'primeng/button';
+import {LoaderComponent} from '../../../loader/loader.component';
 
 @Component({
   selector: 'app-selecteur-valeurs',
   imports: [
     NgIf,
     PickList,
-    ProgressBar,
     TranslatePipe,
     Dialog,
-    Button
+    Button,
+    LoaderComponent
   ],
   templateUrl: './selecteur-valeurs.component.html',
   styleUrl: './selecteur-valeurs.component.sass'

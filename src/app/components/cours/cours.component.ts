@@ -8,11 +8,11 @@ import {CoursMarche} from './cours-marche.class';
 import {Marche} from '../../services/valeurs/marche.enum';
 import {DTOListeCours} from '../../services/cours/dto-liste-cours.interface';
 import {Accordion, AccordionContent, AccordionHeader, AccordionPanel} from 'primeng/accordion';
-import {ProgressSpinner} from 'primeng/progressspinner';
 import {Cours} from './cours.class';
 import {DetailsComponent} from './details/details.component';
 import {CurrencyPipe, DatePipe, DecimalPipe, NgClass, NgIf} from '@angular/common';
-import {ProgressBar} from 'primeng/progressbar';
+import {Skeleton} from 'primeng/skeleton';
+import {LoaderComponent} from '../loader/loader.component';
 
 @Component({
   selector: 'app-cours',
@@ -23,14 +23,14 @@ import {ProgressBar} from 'primeng/progressbar';
     AccordionPanel,
     AccordionHeader,
     AccordionContent,
-    ProgressSpinner,
     DetailsComponent,
     DecimalPipe,
     DatePipe,
     NgIf,
     NgClass,
-    ProgressBar,
-    CurrencyPipe
+    CurrencyPipe,
+    Skeleton,
+    LoaderComponent
   ],
   templateUrl: './cours.component.html',
   styleUrls: ['../portefeuilles/accordion-chart.sass', './cours.component.sass']

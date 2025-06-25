@@ -1,7 +1,3 @@
-<div *ngIf="loading">
-  <p-progressbar mode="indeterminate" [style]="{'height': '10px'}"/>
-</div>
-
 <app-formulaire-modification [portefeuilles]="portefeuilles" [portefeuille]="portefeuilleNomEnModification"
                              (abandon)="portefeuilleNomEnModification = undefined"
                              (modifie)="modifierNomPortefeuille($event)"></app-formulaire-modification>

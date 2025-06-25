@@ -9,11 +9,21 @@ import {ValeurComponent} from './valeur/valeur.component';
 import {ValeurMarche} from './valeur-marche.class';
 import {DTOValeur} from '../../services/valeurs/dto-valeur.interface';
 import {Accordion, AccordionContent, AccordionHeader, AccordionPanel} from 'primeng/accordion';
-import {ProgressBar} from 'primeng/progressbar';
+import {LoaderComponent} from '../loader/loader.component';
 
 @Component({
   selector: 'app-valeurs',
-  imports: [TableModule, CommonModule, TranslatePipe, ValeurComponent, Accordion, AccordionContent, AccordionHeader, AccordionPanel, ProgressBar],
+  imports: [
+    TableModule,
+    CommonModule,
+    TranslatePipe,
+    ValeurComponent,
+    Accordion,
+    AccordionContent,
+    AccordionHeader,
+    AccordionPanel,
+    LoaderComponent
+  ],
   templateUrl: './valeurs.component.html',
   styleUrl: './valeurs.component.sass'
 })

@@ -1,8 +1,10 @@
 <app-valeur [valeur]="valeurSelectionnee" (ferme)="valeurSelectionnee = undefined"></app-valeur>
 
-<div *ngIf="loading">
-  <p-progressbar mode="indeterminate" [style]="{'height': '10px'}"/>
-</div>
+<app-loader [affiche]="loading" [configuration]="[
+  {marginLeft: '0', height: '2.5rem', width: '100%'},
+  {marginLeft: '0', height: '2.5rem', width: '100%'},
+  {marginLeft: '0', height: '2.5rem', width: '100%'}
+]"></app-loader>
 
 <p-accordion>
   @for (marche of marches; track marche.libelle; let i = $index) {

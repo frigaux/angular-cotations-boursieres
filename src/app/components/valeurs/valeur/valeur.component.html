@@ -1,9 +1,10 @@
 <p-drawer [visible]="valeur() !== undefined" position="full">
   <ng-template #headless>
     <h1>
-      <div *ngIf="loading">
-        <p-progressbar mode="indeterminate" [style]="{'height': '10px'}"/>
-      </div>
+      <app-loader [affiche]="loading" [configuration]="[
+        {marginLeft: '0', height: '2.5rem', width: '100%'},
+        {marginLeft: '15vw', height: '80vh', width: '70vw'}
+      ]"></app-loader>
       <div *ngIf="!loading">
         <span class="pi" [class]="cours!.classeIconeVariation()"></span>
         {{ cours!.libelle }} ({{ cours!.date | date:'dd/MM/yyyy' }})

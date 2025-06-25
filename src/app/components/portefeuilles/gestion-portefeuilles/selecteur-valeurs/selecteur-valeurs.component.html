@@ -1,8 +1,9 @@
 <p-dialog [header]="titre" [modal]="true" [visible]="portefeuilleEnModification !== undefined" closable="false">
   @if (portefeuilleEnModification !== undefined) {
-    <div *ngIf="loading">
-      <p-progressbar mode="indeterminate" [style]="{'height': '10px'}"/>
-    </div>
+    <app-loader [affiche]="loading" [configuration]="[
+      {marginLeft: '0', height: '20rem', width: '40rem'},
+      {marginLeft: '10rem', height: '2rem', width: '30rem'}
+    ]"></app-loader>
 
     <div *ngIf="!loading">
       <div class="header-picklist">

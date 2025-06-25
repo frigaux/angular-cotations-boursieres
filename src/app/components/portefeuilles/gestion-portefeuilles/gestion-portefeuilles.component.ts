@@ -1,6 +1,5 @@
 import {Component, OnInit} from '@angular/core';
 import {NgIf} from "@angular/common";
-import {ProgressBar} from "primeng/progressbar";
 import {ReactiveFormsModule} from '@angular/forms';
 import {Card} from 'primeng/card';
 import {TranslatePipe, TranslateService} from '@ngx-translate/core';
@@ -18,7 +17,6 @@ import {DTOAlerte} from './dto-alerte.interface';
   selector: 'app-gestion-portefeuilles',
   imports: [
     NgIf,
-    ProgressBar,
     Card,
     ReactiveFormsModule,
     TranslatePipe,
@@ -33,9 +31,6 @@ import {DTOAlerte} from './dto-alerte.interface';
   styleUrl: './gestion-portefeuilles.component.sass'
 })
 export class GestionPortefeuillesComponent implements OnInit {
-  // chargement des cours
-  loading: boolean = false;
-
   // données pour la vue
   portefeuilles: Array<DTOPortefeuille> = [];
   portefeuilleNomEnModification: DTOPortefeuille | undefined;

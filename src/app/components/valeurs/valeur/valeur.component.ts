@@ -2,22 +2,22 @@ import {Component, input, InputSignal, output} from '@angular/core';
 import {TranslateService} from '@ngx-translate/core';
 import {CoursService} from '../../../services/cours/cours.service';
 import {DatePipe, NgIf} from '@angular/common';
-import {ProgressBar} from 'primeng/progressbar';
 import {Valeur} from '../valeur.class';
 import {DetailsValeurComponent} from './details-valeur/details-valeur.component';
 import {Cours} from '../../cours/cours.class';
 import {ChartsComponent} from './charts/charts.component';
 import {Drawer} from 'primeng/drawer';
+import {LoaderComponent} from '../../loader/loader.component';
 
 @Component({
   selector: 'app-valeur',
   imports: [
     NgIf,
-    ProgressBar,
     DetailsValeurComponent,
     ChartsComponent,
     DatePipe,
-    Drawer
+    Drawer,
+    LoaderComponent
   ],
   templateUrl: './valeur.component.html',
   styleUrl: './valeur.component.sass'
