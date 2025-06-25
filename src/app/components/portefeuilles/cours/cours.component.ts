@@ -20,17 +20,17 @@ import {Alerte} from '../alerte.class';
 })
 export class CoursComponent {
   // input/output
-  cours: InputSignal<CoursPortefeuille | undefined> = input(undefined,
-    {transform: o => this.intercepteurCoursPortefeuille(o)});
+  inputCours: InputSignal<CoursPortefeuille | undefined> = input(undefined,
+    {transform: o => this.intercepteurCoursPortefeuille(o), alias: 'cours'});
   ferme = output<void>();
 
   // données pour la vue
   alertes: Alerte[] | undefined;
-  coursVue: Cours | undefined;
+  cours: Cours | undefined;
 
   private intercepteurCoursPortefeuille(coursPortefeuille: CoursPortefeuille | undefined) {
     this.alertes = coursPortefeuille?.alertes;
-    this.coursVue = coursPortefeuille ? Cours.fromCoursPortefeuille(coursPortefeuille) : undefined;
+    this.cours = coursPortefeuille ? Cours.fromCoursPortefeuille(coursPortefeuille) : undefined;
     return coursPortefeuille;
   }
 }

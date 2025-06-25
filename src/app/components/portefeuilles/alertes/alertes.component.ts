@@ -12,15 +12,15 @@ import {NgIf} from '@angular/common';
 })
 export class AlertesComponent {
   // input/output
-  alertes: InputSignal<Alerte[] | undefined> = input(undefined,
-    {transform: o => this.intercepteurAlerte(o)});
+  inputAlertes: InputSignal<Alerte[] | undefined> = input([],
+    {transform: o => this.intercepteurAlerte(o), alias: 'alertes'});
 
   // données pour la vue
-  alertesVue: Alerte[] | undefined;
+  alertes: Alerte[] | undefined;
 
   private intercepteurAlerte(alertes: Alerte[] | undefined) {
     if (alertes) {
-      this.alertesVue = alertes;
+      this.alertes = alertes;
     }
     return alertes;
   }
