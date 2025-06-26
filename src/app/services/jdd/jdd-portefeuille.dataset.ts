@@ -10,7 +10,7 @@ export const PORTEFEUILLE: DTOPortefeuille = {
       nom: 'Chute',
       condition: 'M20 < M10 && M10 < M5 && C2 > (1.02 * C1)'
     },
-    {nom: 'Grosse variation veille', condition: 'C2 < 0.98 * C1 || C2 > 1.02 * C1'}
+    {nom: 'Choc', condition: 'C2 < 0.98 * C1 || C2 > 1.02 * C1'}
   ]
 };
 

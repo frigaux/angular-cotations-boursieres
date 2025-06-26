@@ -91,6 +91,16 @@ export class GestionPortefeuillesComponent implements OnInit {
     this.portefeuilleValeursEnModification = undefined;
   }
 
+  monterPortefeuille(idx: number) {
+    [this.portefeuilles[idx], this.portefeuilles[idx - 1]] = [this.portefeuilles[idx - 1], this.portefeuilles[idx]];
+    this.portefeuillesService.enregistrer(this.portefeuilles);
+  }
+
+  descendrePortefeuille(idx: number) {
+    [this.portefeuilles[idx], this.portefeuilles[idx + 1]] = [this.portefeuilles[idx + 1], this.portefeuilles[idx]];
+    this.portefeuillesService.enregistrer(this.portefeuilles);
+  }
+
   suppressionPortefeuille(event: Event, idx: number) {
     this.confirmationService.confirm({
       target: event.target as EventTarget,

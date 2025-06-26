@@ -89,6 +89,8 @@
         "ASSOCIER_VALEUR": "Associer des valeurs au portefeuille",
         "EDITER_ALERTES": "Editer les alertes du portefeuille",
         "RENOMMER": "Renommer le portefeuille",
+        "MONTER": "Monter le portefeuille dans la liste",
+        "DESCENDRE": "Descendre le portefeuille dans la liste",
         "SUPPRIMER": "Supprimer le portefeuille",
         "CONFIRMATION_SUPPRESSION": "Confirmez-vous la suppression du portefeuille {{nom}} ?",
         "FORMULAIRE_CREATION": {

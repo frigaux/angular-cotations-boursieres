@@ -43,9 +43,17 @@
                    title="{{ 'COMPOSANTS.PORTEFEUILLES.GESTION_PORTEFEUILLES.EDITER_ALERTES' | translate }}"></span>
         </div>
         <div><span class="pi pi-pencil" (click)="modificationNomPortefeuille(idx)"
-                   title="{{ 'COMPOSANTS.PORTEFEUILLES.GESTION_PORTEFEUILLES.RENOMMER' | translate }}"></span></div>
+                   title="{{ 'COMPOSANTS.PORTEFEUILLES.GESTION_PORTEFEUILLES.RENOMMER' | translate }}"></span>
+        </div>
+        <div><span *ngIf="idx != 0" class="pi pi-arrow-up" (click)="monterPortefeuille(idx)"
+                   title="{{ 'COMPOSANTS.PORTEFEUILLES.GESTION_PORTEFEUILLES.MONTER' | translate }}"></span>
+        </div>
+        <div><span *ngIf="idx < portefeuilles.length - 1" class="pi pi-arrow-down" (click)="descendrePortefeuille(idx)"
+                   title="{{ 'COMPOSANTS.PORTEFEUILLES.GESTION_PORTEFEUILLES.DESCENDRE' | translate }}"></span>
+        </div>
         <div><span class="pi pi-trash" (click)="suppressionPortefeuille($event, idx)"
-                   title="{{ 'COMPOSANTS.PORTEFEUILLES.GESTION_PORTEFEUILLES.SUPPRIMER' | translate }}"></span></div>
+                   title="{{ 'COMPOSANTS.PORTEFEUILLES.GESTION_PORTEFEUILLES.SUPPRIMER' | translate }}"></span>
+        </div>
         <div>
           {{ portefeuille.nom }} {{ tickers(portefeuille) }}
         </div>

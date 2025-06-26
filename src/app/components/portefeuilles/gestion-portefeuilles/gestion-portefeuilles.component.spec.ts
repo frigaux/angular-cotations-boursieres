@@ -56,12 +56,21 @@ describe('GestionPortefeuillesComponent', () => {
       expect(component.portefeuilles).toEqual(expected);
     });
 
-    it('when #modifierPortefeuille then le portefeuille est modifié', () => {
+    it('when #modifierNomPortefeuille then le portefeuille est modifié', () => {
       fixture.detectChanges(); // appelle le ngOnInit
       component.modificationNomPortefeuille(0);
       component.modifierNomPortefeuille('nomUnique');
       const expected: Array<DTOPortefeuille> = clonePORTEFEUILLES();
       expected[0].nom = 'nomUnique';
+      expect(component.portefeuilles).toEqual(expected);
+    });
+
+    it('when #modifierAlertesPortefeuille then les alertes du portefeuille sont bien modifiées', () => {
+      fixture.detectChanges(); // appelle le ngOnInit
+      component.editionAlertesPortefeuille(1);
+      component.modifierAlertesPortefeuille(clonePORTEFEUILLES()[0].alertes);
+      const expected: Array<DTOPortefeuille> = clonePORTEFEUILLES();
+      expected[1].alertes = expected[0].alertes;
       expect(component.portefeuilles).toEqual(expected);
     });
 
@@ -74,7 +83,7 @@ describe('GestionPortefeuillesComponent', () => {
       expect(component.portefeuilles).toEqual(expected);
     });
 
-    it('when #editerPortefeuille then le portefeuille est bien modifié', () => {
+    it('when #modifierValeursPortefeuille then le portefeuille est bien modifié', () => {
       fixture.detectChanges(); // appelle le ngOnInit
       component.associationValeursPortefeuille(0);
       component.modifierValeursPortefeuille([]);
@@ -90,6 +99,13 @@ describe('GestionPortefeuillesComponent', () => {
       expected[0].parDefaut = false;
       expected[1].parDefaut = true;
       expect(component.portefeuilles).toEqual(expected);
+    });
+
+    it('when #monterPortefeuille puis #descendrePortefeuille then l\'ordre des portefeuilles est inchangé', () => {
+      fixture.detectChanges(); // appelle le ngOnInit
+      component.monterPortefeuille(1);
+      component.descendrePortefeuille(0);
+      expect(component.portefeuilles).toEqual(clonePORTEFEUILLES());
     });
   });
 });
