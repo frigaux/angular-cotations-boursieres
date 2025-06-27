@@ -7,6 +7,7 @@ import {AuthentificationService} from '../../services/authentification/authentif
 import {Statut} from './statut.enum';
 import {TranslatePipe} from "@ngx-translate/core";
 import {Router} from '@angular/router';
+import {PortefeuillesService} from '../../services/portefeuilles/portefeuilles.service';
 
 @Component({
   selector: 'app-authentification',
@@ -20,6 +21,7 @@ export class AuthentificationComponent implements OnInit {
   enumStatut = Statut;
 
   constructor(private authentificationService: AuthentificationService,
+              private portefeuillesService: PortefeuillesService,
               private router: Router) {
   }
 
@@ -35,7 +37,9 @@ export class AuthentificationComponent implements OnInit {
       },
       complete: () => {
         this.statut = Statut.SUCCES;
-        this.router.navigate(['portefeuilles']);
+        if (this.portefeuillesService.auMoinsUnPortefeuilleCorrectementConfigure()) {
+          this.router.navigate(['portefeuilles']);
+        }
       }
     });
   }

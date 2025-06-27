@@ -1,8 +1,9 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { HeaderComponent } from './header.component';
+import {HeaderComponent} from './header.component';
 import {TranslateModule} from '@ngx-translate/core';
 import {PORTEFEUILLES} from '../../services/jdd/jdd-portefeuille.dataset';
+import {PortefeuillesService} from '../../services/portefeuilles/portefeuilles.service';
 
 describe('HeaderComponent', () => {
   let component: HeaderComponent;
@@ -10,18 +11,20 @@ describe('HeaderComponent', () => {
 
   const clonePORTEFEUILLES: Function = () => JSON.parse(JSON.stringify(PORTEFEUILLES));
 
-  const mockPortefeuillesService = jasmine.createSpyObj('PortefeuillesService', ['charger']);
+  let service: PortefeuillesService;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [
         HeaderComponent,
         TranslateModule.forRoot({})
-      ]
+      ],
+      providers: [PortefeuillesService]
     });
 
     fixture = TestBed.createComponent(HeaderComponent);
     component = fixture.componentInstance;
+    service = TestBed.inject(PortefeuillesService);
   });
 
   it('should create', () => {
@@ -29,7 +32,7 @@ describe('HeaderComponent', () => {
   });
 
   it('should have <p-menubar>', () => {
-    mockPortefeuillesService.charger.and.returnValue(clonePORTEFEUILLES());
+    service.enregistrer(clonePORTEFEUILLES());
     const element: HTMLElement = fixture.nativeElement;
     const el = element.querySelector('p-menubar');
     expect(el).toBeTruthy();

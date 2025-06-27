@@ -7,6 +7,8 @@ import {TranslateModule} from '@ngx-translate/core';
 describe('PortefeuillesService', () => {
   let service: PortefeuillesService;
 
+  const clonePORTEFEUILLES: Function = () => JSON.parse(JSON.stringify(PORTEFEUILLES));
+
   beforeEach(() => {
     TestBed.configureTestingModule(
       {
@@ -23,8 +25,13 @@ describe('PortefeuillesService', () => {
   });
 
   it('Given des portefeuilles when #enregistrer then #charger renvoie les portefeuilles', () => {
-    service.enregistrer(PORTEFEUILLES);
+    service.enregistrer(clonePORTEFEUILLES());
     expect(service.charger()).toEqual(PORTEFEUILLES);
+  });
+
+  it('Given des portefeuilles when #enregistrer then #auMoinsUnPortefeuilleCorrectementConfigure renvoie true', () => {
+    service.enregistrer(clonePORTEFEUILLES());
+    expect(service.auMoinsUnPortefeuilleCorrectementConfigure()).toEqual(true);
   });
 
   describe('Given #onImport', () => {

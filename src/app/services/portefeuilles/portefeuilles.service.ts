@@ -22,7 +22,7 @@ export class PortefeuillesService {
   constructor(private translateService: TranslateService) {
   }
 
-  charger(): Array<DTOPortefeuille> {
+  public charger(): Array<DTOPortefeuille> {
     const json = window.localStorage.getItem(PortefeuillesService.PORTEFEUILLES);
     if (json) {
       try {
@@ -37,12 +37,12 @@ export class PortefeuillesService {
     return [];
   }
 
-  enregistrer(portefeuilles: Array<DTOPortefeuille>): void {
+  public enregistrer(portefeuilles: Array<DTOPortefeuille>): void {
     window.localStorage.setItem(PortefeuillesService.PORTEFEUILLES, JSON.stringify(portefeuilles));
     PortefeuillesService.OBSERVERS_UPDATE.forEach(observer => observer.next(portefeuilles));
   }
 
-  export(): string {
+  public export(): string {
     const json = window.localStorage.getItem(PortefeuillesService.PORTEFEUILLES);
     if (json) {
       try {
@@ -57,7 +57,7 @@ export class PortefeuillesService {
     return '[]';
   }
 
-  import(json: string): string | undefined {
+  public import(json: string): string | undefined {
     try {
       const portefeuilles: any = JSON.parse(json);
       if (this.validerPortefeuilles(portefeuilles)) {
@@ -73,11 +73,19 @@ export class PortefeuillesService {
     }
   }
 
-  onImport(handler: ((value: Array<DTOPortefeuille>) => void)): void {
+  public onImport(handler: ((value: Array<DTOPortefeuille>) => void)): void {
     PortefeuillesService.OBSERVABLE_IMPORT.subscribe(handler);
   }
 
-  validerPortefeuilles(portefeuilles: any): boolean {
+  /**
+   * Enregistrements et imports.
+   * @param handler lambda avec les portefeuilles en paramètre
+   */
+  public onUpdate(handler: ((value: Array<DTOPortefeuille>) => void)): void {
+    PortefeuillesService.OBSERVABLE_UPDATE.subscribe(handler);
+  }
+
+  private validerPortefeuilles(portefeuilles: any): boolean {
     this.cleMessageErreur = undefined;
     if (portefeuilles instanceof Array) {
       if (portefeuilles.find(portefeuille =>
@@ -112,11 +120,9 @@ export class PortefeuillesService {
     return true;
   }
 
-  /**
-   * Enregistrements et imports.
-   * @param handler lambda avec les portefeuilles en paramètre
-   */
-  onUpdate(handler: ((value: Array<DTOPortefeuille>) => void)): void {
-    PortefeuillesService.OBSERVABLE_UPDATE.subscribe(handler);
+  public auMoinsUnPortefeuilleCorrectementConfigure(): boolean {
+    const portefeuilleParDefaut: DTOPortefeuille | undefined = this.charger()
+      .find(portefeuille => portefeuille.parDefaut);
+    return portefeuilleParDefaut !== undefined && portefeuilleParDefaut.tickers.length > 0;
   }
 }

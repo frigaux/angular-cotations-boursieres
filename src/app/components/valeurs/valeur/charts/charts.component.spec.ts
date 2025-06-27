@@ -29,6 +29,7 @@ describe('ChartsComponent', () => {
     const element: HTMLElement = fixture.nativeElement;
     fixture.componentRef.setInput('cours', COURS_CROISSANT);
     fixture.detectChanges();
+    component.clickPeriode();
     const elChart = element.querySelector('p-chart');
     expect(elChart).toBeTruthy();
   });

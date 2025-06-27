@@ -17,11 +17,11 @@ export class HeaderComponent {
   items: MenuItem[] = [];
 
   constructor(private translateService: TranslateService, private portefeuillesService: PortefeuillesService) {
-    portefeuillesService.onUpdate(portefeuilles => this.makeItems(translateService, portefeuilles))
-    this.makeItems(translateService, portefeuillesService.charger());
+    portefeuillesService.onUpdate(portefeuilles => this.makeItems(translateService))
+    this.makeItems(translateService);
   }
 
-  private makeItems(translateService: TranslateService, portefeuilles: Array<DTOPortefeuille>) {
+  private makeItems(translateService: TranslateService) {
     this.items = [
       {
         label: translateService.instant('COMPOSANTS.HEADER.VALEURS'),
@@ -34,8 +34,7 @@ export class HeaderComponent {
         icon: 'pi pi-list'
       }
     ];
-    const portefeuilleParDefaut: DTOPortefeuille | undefined = portefeuilles.find(portefeuille => portefeuille.parDefaut);
-    if (portefeuilleParDefaut && portefeuilleParDefaut.tickers.length > 0) {
+    if (this.portefeuillesService.auMoinsUnPortefeuilleCorrectementConfigure()) {
       this.items.push({
         label: translateService.instant('COMPOSANTS.HEADER.PORTEFEUILLES'),
         routerLink: 'portefeuilles',
