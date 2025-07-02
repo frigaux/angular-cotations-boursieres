@@ -87,7 +87,7 @@ describe('httpResponseInterceptor', () => {
       error: (error) => {
         expect(error).toBeInstanceOf(HttpErrorResponse);
         expect(error.status).toBe(404);
-        expect(router.navigate).toHaveBeenCalledWith(['/erreur-technique']);
+        expect(router.navigate).toHaveBeenCalledWith(['/erreur-technique'], {queryParams: {message: error.message}});
         done();
       }
     });

@@ -1,6 +1,7 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { ErreurTechniqueComponent } from './erreur-technique.component';
+import {ErreurTechniqueComponent} from './erreur-technique.component';
+import {ActivatedRoute} from '@angular/router';
 
 describe('ErreurTechniqueComponent', () => {
   let component: ErreurTechniqueComponent;
@@ -8,7 +9,12 @@ describe('ErreurTechniqueComponent', () => {
 
   beforeEach(async () => {
     TestBed.configureTestingModule({
-      imports: [ErreurTechniqueComponent]
+      imports: [ErreurTechniqueComponent],
+      providers: [{
+        provide: ActivatedRoute, useValue: {
+          snapshot: {queryParams: { message: 'message'}}
+        }
+      }]
     });
 
     fixture = TestBed.createComponent(ErreurTechniqueComponent);

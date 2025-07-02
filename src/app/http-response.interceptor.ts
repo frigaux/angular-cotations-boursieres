@@ -16,7 +16,9 @@ export const httpResponseInterceptor: HttpInterceptorFn = (req, next) => {
             router.navigate(['/authentification']);
             break;
           default:
-            router.navigate(['/erreur-technique']);
+            router.navigate(['/erreur-technique'], {
+              queryParams: {message: `${error.message}`}
+            });
         }
       }
       return throwError(() => error);

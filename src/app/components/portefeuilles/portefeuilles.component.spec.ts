@@ -26,6 +26,7 @@ describe('PortefeuillesComponent', () => {
         TranslateModule.forRoot({})
       ],
       providers: [
+        // {provide: PortefeuillesService, useValue: {charger: function() {return [PORTEFEUILLE];}}},
         {provide: PortefeuillesService, useValue: mockPortefeuillesService},
         {provide: ValeursService, useValue: mockValeursService},
         {provide: CoursService, useValue: mockCoursService},
