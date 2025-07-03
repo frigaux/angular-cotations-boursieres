@@ -27,8 +27,11 @@ div.liste
     margin: 0.5rem
 
     & > div
+      display: flex
       margin: 0.5rem
-      min-width: var(--p-icon-size)
+
+    & > div:not(:last-child)
+      width: var(--p-icon-size)
 
     & > div:last-child
       color: var(--p-blue-800)
