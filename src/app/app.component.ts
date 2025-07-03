@@ -7,6 +7,7 @@ import translationsFR from "../../public/i18n/fr.json";
 import {Title} from '@angular/platform-browser';
 import {ConfirmDialog} from 'primeng/confirmdialog';
 import {ConfirmationService} from 'primeng/api';
+import {StatusBar} from '@capacitor/status-bar';
 
 // TODO : courbes des MMxx glissantes
 @Component({
@@ -19,16 +20,25 @@ import {ConfirmationService} from 'primeng/api';
 })
 export class AppComponent {
   constructor(private translateService: TranslateService, private router: Router, private titleService: Title) {
+    this.configurationTraduction();
+    StatusBar.hide();
+  }
+
+  private configurationTraduction() {
     this.translateService.setTranslation('fr', translationsFR);
     this.translateService.addLangs(['fr']);
     this.translateService.setDefaultLang('fr');
     this.translateService.use('fr');
-    router.events.subscribe((event: any) => {
+    this.traductionTitrePageDeLaRoute();
+  }
+
+  private traductionTitrePageDeLaRoute() {
+    this.router.events.subscribe((event: any) => {
       if (event instanceof NavigationEnd) {
         const translateKey = event.url.substring(1)
           .replaceAll('-', '_')
           .toUpperCase();
-        titleService.setTitle(translateService.instant(`ROUTER.${translateKey}`));
+        this.titleService.setTitle(this.translateService.instant(`ROUTER.${translateKey}`));
       }
     });
   }
