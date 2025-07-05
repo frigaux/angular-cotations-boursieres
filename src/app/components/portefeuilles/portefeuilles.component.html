@@ -12,7 +12,7 @@
 ]"></app-loader>
 
 <div class="conteneur" [ngClass]="{'avec-details': coursSelectionne !== undefined}">
-  <p-accordion *ngIf="!loading" value="{{idxPortefeuilleCourant}}" (onOpen)="onOpen($event)">
+  <p-accordion *ngIf="!loading" value="{{idxPortefeuilleCourant}}" (onOpen)="onOpenAccordion($event)">
     @for (portefeuilleAvecCours of portefeuillesAvecCours; track portefeuilleAvecCours.portefeuille.nom; let
       i = $index) {
       <p-accordion-panel value="{{i}}">
@@ -64,11 +64,10 @@
               </tr>
             </ng-template>
             <ng-template #body let-cours>
-              <tr>
+              <tr (click)="basculerAffichageCours(cours)">
                 <td>
                   <span class="pi"
-                        [class]="classeIconeVariation(cours.var1)"
-                        (mouseenter)="afficherCours(cours)"></span>
+                        [class]="classeIconeVariation(cours.var1)"></span>
                   {{ cours.libelle }}
                 </td>
                 <td>

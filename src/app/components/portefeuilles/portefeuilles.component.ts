@@ -67,7 +67,7 @@ export class PortefeuillesComponent implements OnInit {
     });
   }
 
-  onOpen(e: AccordionTabOpenEvent) {
+  onOpenAccordion(e: AccordionTabOpenEvent) {
     this.coursSelectionne = undefined;
     this.idxPortefeuilleCourant = e.index;
     this.chargerPortefeuilleCourant();
@@ -105,7 +105,11 @@ export class PortefeuillesComponent implements OnInit {
     return cours.cloture >= mm ? 'positive' : 'negative';
   }
 
-  afficherCours(cours: CoursPortefeuille) {
-    this.coursSelectionne = cours;
+  basculerAffichageCours(cours: CoursPortefeuille) {
+    if (this.coursSelectionne === undefined || this.coursSelectionne.ticker !== cours.ticker) {
+      this.coursSelectionne = cours;
+    } else {
+      this.coursSelectionne = undefined;
+    }
   }
 }

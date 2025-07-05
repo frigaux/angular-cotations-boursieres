@@ -87,4 +87,12 @@ export class CoursComponent implements OnInit {
       this.marches.push(new CoursMarche(marche, this.translateService, cours));
     });
   }
+
+  basculerAffichageCours(cours: Cours) {
+    if (this.coursSelectionne === undefined || this.coursSelectionne.ticker !== cours.ticker) {
+      this.coursSelectionne = cours;
+    } else {
+      this.coursSelectionne = undefined;
+    }
+  }
 }

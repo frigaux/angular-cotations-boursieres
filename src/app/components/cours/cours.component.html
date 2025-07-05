@@ -53,11 +53,10 @@
               </tr>
             </ng-template>
             <ng-template #body let-cours>
-              <tr>
+              <tr (click)="basculerAffichageCours(cours)">
                 <td>
                 <span class="pi"
-                      [class]="cours.classeIconeVariation()"
-                      (mouseenter)="coursSelectionne = cours"></span>
+                      [class]="cours.classeIconeVariation()"></span>
                   {{ cours.libelle }}
                 </td>
                 <td>{{ cours.cloture | currency:'€'}}</td>
