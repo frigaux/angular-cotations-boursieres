@@ -21,6 +21,7 @@ import {StatusBar} from '@capacitor/status-bar';
 export class AppComponent {
   constructor(private translateService: TranslateService, private router: Router, private titleService: Title) {
     this.configurationTraduction();
+    this.fontSizeRoot();
     StatusBar.hide();
   }
 
@@ -41,5 +42,13 @@ export class AppComponent {
         this.titleService.setTitle(this.translateService.instant(`ROUTER.${translateKey}`));
       }
     });
+  }
+
+  private fontSizeRoot() {
+    if (window.devicePixelRatio > 2.5) {
+      document.querySelector('html')!.style.fontSize = 'x-small';
+    } else if (window.devicePixelRatio > 2) {
+      document.querySelector('html')!.style.fontSize = 'small';
+    }
   }
 }

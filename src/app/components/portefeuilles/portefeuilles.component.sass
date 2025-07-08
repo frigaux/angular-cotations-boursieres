@@ -16,14 +16,31 @@ div.conteneur
 
         tr
           th:nth-child(1)
-            width: 15%
+            width: 20%
 
           th:nth-child(2)
-            width: 15%
+            width: 16%
 
           th:nth-child(n+3)
-            width: 8.75%
+            width: 8%
             text-align: right
 
           td:nth-child(n+3)
             text-align: right
+
+// tablette vertical
+@media screen and (min-resolution: 100dpi) and (orientation: portrait)
+    p-accordion
+      p-table
+        tr
+          th:nth-child(1), td:nth-child(1)
+            width: 30%
+
+          th:nth-child(2), td:nth-child(2)
+            width: 25%
+
+          th:nth-child(3), th:nth-child(9), th:nth-child(10), td:nth-child(3), td:nth-child(9), td:nth-child(10)
+            width: 15%
+
+          th:nth-child(n+4):nth-child(-n+8), td:nth-child(n+4):nth-child(-n+8)
+            display: none

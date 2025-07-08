@@ -24,12 +24,24 @@ div.conteneur
     td
       cursor: pointer
 
-// mobile & tablette vertical
+// tablette vertical
 @media screen and (min-resolution: 100dpi) and (orientation: portrait)
   div.conteneur
     flex-direction: column
 
-// mobile & tablette horizontal
+@media screen and (orientation: landscape)
+  div.conteneur
+    &.avec-details
+      p-accordion
+        p-table
+          tr
+            th:nth-child(-n+2), td:nth-child(-n+2)
+              width: 50%
+
+            th:nth-child(n+3), td:nth-child(n+3)
+              display: none
+
+// tablette horizontal
 @media screen and (min-resolution: 100dpi) and (orientation: landscape)
   div.conteneur
     flex-direction: row
@@ -41,29 +53,12 @@ div.conteneur
       p-accordion
         width: 30%
 
-        p-table
-          tr
-            th:nth-child(-n+2), td:nth-child(-n+2)
-              width: 50%
-
-            th:nth-child(n+3), td:nth-child(n+3)
-              display: none
-
 // écran horizontal
 @media screen and (max-resolution: 100dpi) and (orientation: landscape)
   div.conteneur
     flex-direction: row
 
     &.avec-details
-      p-accordion
-        p-table
-          tr
-            th:nth-child(-n+2), td:nth-child(-n+2)
-              width: 50%
-
-            th:nth-child(n+3), td:nth-child(n+3)
-              display: none
-
       @media screen and (max-aspect-ratio: 1.8)
         app-cours, app-details
           width: 75%

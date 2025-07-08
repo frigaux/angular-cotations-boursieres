@@ -32,3 +32,16 @@ div.conteneur
           td:nth-child(n+2)
             text-align: right
 
+// tablette vertical
+@media screen and (min-resolution: 100dpi) and (orientation: portrait)
+  p-accordion
+    p-table
+      tr
+        th:nth-child(1), td:nth-child(1)
+          width: 60%
+
+        th:nth-child(2), td:nth-child(2)
+          width: 45%
+
+        th:nth-child(n+3), td:nth-child(n+3)
+          display: none

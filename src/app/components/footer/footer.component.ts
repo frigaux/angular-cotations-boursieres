@@ -1,6 +1,9 @@
 import {Component} from '@angular/core';
 
-// TODO : faire fonctionner la version portrait + la version mobile ? ou bloquer les mobiles via supports-screens dans le manifest ?
+// TODO : essayer avec les media query de changer la font-size sur root
+// TODO : colonne des alertes : indiquer la condition pour chaque alerte
+// TODO : gestion du portefeuille afficher les détails de chaque portefeuille : condition ...
+// TODO : colonnes à configuration dynamique selon media et orientation
 @Component({
   selector: 'app-footer',
   imports: [],
@@ -10,13 +13,15 @@ import {Component} from '@angular/core';
 export class FooterComponent {
   navigator: Navigator;
   screen: Screen;
+  devicePixelRatio: number;
 
   constructor() {
     this.screen = window.screen;
     this.navigator = window.navigator;
+    this.devicePixelRatio = window.devicePixelRatio;
   }
 
   telechargerApk() {
-    window.open('app-debug.apk');
+    window.open('/apk/app-debug.apk');
   }
 }
