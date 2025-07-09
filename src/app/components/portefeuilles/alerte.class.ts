@@ -1,9 +1,11 @@
+import {DTOAlerte} from './gestion-portefeuilles/dto-alerte.interface';
+
 export class Alerte {
-  nom: string;
+  alerte: DTOAlerte;
   evaluation: boolean;
 
-  constructor(private nom_: string, private evaluation_: boolean) {
-    this.nom = nom_;
+  constructor(private alerte_: DTOAlerte, private evaluation_: boolean) {
+    this.alerte = alerte_;
     this.evaluation = evaluation_;
   }
 }

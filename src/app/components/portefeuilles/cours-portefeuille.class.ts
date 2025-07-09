@@ -1,6 +1,7 @@
 import {DtoCoursAvecListeAllege} from '../../services/cours/dto-cours-avec-liste-allege.interface';
 import {DTOCoursTickerAllege} from '../../services/cours/dto-cours-ticker-allege.interface';
 import {Alerte} from './alerte.class';
+import {DTOAlerte} from './gestion-portefeuilles/dto-alerte.interface';
 
 export class CoursPortefeuille {
   date: Date;
@@ -24,7 +25,7 @@ export class CoursPortefeuille {
   alertes: Alerte[];
 
   constructor(private libelle_: string, private dto: DtoCoursAvecListeAllege,
-              private alertes_: { nom: string; evaluer: Function }[]) {
+              private alertes_: { alerte: DTOAlerte, evaluer: Function }[]) {
     this.date = dto.cours[0].date;
     this.ticker = dto.ticker;
     this.libelle = libelle_;
@@ -54,9 +55,9 @@ export class CoursPortefeuille {
     }
   }
 
-  private evaluerAlertes(alertes: { nom: string; evaluer: Function }[]): Alerte[] {
-    return alertes.map(alerte =>
-      new Alerte(alerte.nom, alerte.evaluer(this.coursAlleges, this.moyennesMobiles))
+  private evaluerAlertes(alertes: { alerte: DTOAlerte, evaluer: Function }[]): Alerte[] {
+    return alertes.map(dto =>
+      new Alerte(dto.alerte, dto.evaluer(this.coursAlleges, this.moyennesMobiles))
     );
   }
 }

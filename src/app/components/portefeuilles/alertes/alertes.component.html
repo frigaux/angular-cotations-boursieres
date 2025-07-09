@@ -1,3 +1,3 @@
-@for (alerte of alertes; track alerte.nom; let i = $index) {
-  <span *ngIf="alerte.evaluation">{{ alerte.nom }}</span>
+@for (dto of alertes; track dto.alerte.nom) {
+  <span *ngIf="dto.evaluation" title="{{ dto.alerte.condition }}">{{ dto.alerte.nom }}</span>
 }
