@@ -19,28 +19,50 @@ div.conteneur
             width: 20%
 
           th:nth-child(2)
-            width: 16%
+            width: 12%
 
-          th:nth-child(n+3)
+          th:nth-child(3), th:nth-child(n+8)
             width: 8%
+            text-align: right
+
+          th:nth-child(n+4):nth-child(-n+7)
+            width: 9%
             text-align: right
 
           td:nth-child(n+3)
             text-align: right
 
-// tablette vertical
-@media screen and (min-resolution: 100dpi) and (orientation: portrait)
-    p-accordion
-      p-table
-        tr
-          th:nth-child(1), td:nth-child(1)
-            width: 30%
+// tablettes orientation verticale
+@media screen and (max-resolution: 250dpi) and (orientation: portrait)
+  p-accordion
+    p-table
+      tr
+        th:nth-child(1)
+          width: 30%
 
-          th:nth-child(2), td:nth-child(2)
-            width: 25%
+        th:nth-child(2)
+          width: 25%
 
-          th:nth-child(3), th:nth-child(9), th:nth-child(10), td:nth-child(3), td:nth-child(9), td:nth-child(10)
-            width: 15%
+        th:nth-child(3), th:nth-child(9), th:nth-child(10)
+          width: 15%
 
-          th:nth-child(n+4):nth-child(-n+8), td:nth-child(n+4):nth-child(-n+8)
-            display: none
+        th:nth-child(n+4):nth-child(-n+8), td:nth-child(n+4):nth-child(-n+8)
+          display: none
+
+
+// mobiles orientation verticale
+@media screen and (min-resolution: 250dpi) and (orientation: portrait)
+  p-accordion
+    p-table
+      tr
+        th:nth-child(1)
+          width: 30%
+
+        th:nth-child(2)
+          width: 25%
+
+        th:nth-child(n+9)
+          width: 15%
+
+        th:nth-child(n+3):nth-child(-n+8), td:nth-child(n+3):nth-child(-n+8)
+          display: none

@@ -1,8 +1,8 @@
 <div>
-  <span class="userAgent">{{ navigator.userAgent }}</span>
-  <span class="resolution">
-    {{ `${screen.width}(${screen.availWidth})x${screen.height}(${screen.availHeight}) ;
-     devicePixelRatio = ${devicePixelRatio}` }}
-  </span>
+  <span *ngIf="afficherDetails">{{ navigator.userAgent }}</span>
+  <span *ngIf="afficherDetails">{{ `${screen.width}(${screen.availWidth})x${screen.height}(${screen.availHeight})` }}</span>
+  <span *ngIf="afficherDetails">{{ `dpr = ${devicePixelRatio}` }}</span>
+
+  <span class="pi pi-info-circle" *ngIf="!afficherDetails" (click)="afficherDetails = true"></span>
   <span class="pi pi-android" (click)="telechargerApk()"></span>
 </div>
