@@ -81,7 +81,6 @@
       "VAR20": "Var/20j",
       "VAR50": "Var/50j",
       "GESTION_PORTEFEUILLES": {
-        "PORTEFEUILLE_SANS_VALEUR": "ATTENTION ! le portefeuille n'a pas de valeur",
         "CREER": "Créer un portefeuille",
         "CREATION": "Création d'un portefeuille",
         "PORTEFEUILLES": "Portefeuilles",
@@ -93,6 +92,12 @@
         "DESCENDRE": "Descendre le portefeuille dans la liste",
         "SUPPRIMER": "Supprimer le portefeuille",
         "CONFIRMATION_SUPPRESSION": "Confirmez-vous la suppression du portefeuille {{nom}} ?",
+        "PORTEFEUILLE": {
+          "VALEURS": "Valeurs",
+          "PORTEFEUILLE_SANS_VALEUR": "ATTENTION ! le portefeuille n'a pas de valeur",
+          "ALERTES": "Alertes",
+          "PORTEFEUILLE_SANS_ALERTE": "ATTENTION ! le portefeuille n'a pas d'alerte"
+        },
         "FORMULAIRE_CREATION": {
           "NOM": "Nom du portefeuille",
           "CREER": "Créer le portefeuille"

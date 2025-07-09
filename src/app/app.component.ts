@@ -8,6 +8,7 @@ import {Title} from '@angular/platform-browser';
 import {ConfirmDialog} from 'primeng/confirmdialog';
 import {ConfirmationService} from 'primeng/api';
 import {StatusBar} from '@capacitor/status-bar';
+import {Capacitor} from '@capacitor/core';
 
 // TODO : courbes des MMxx glissantes
 @Component({
@@ -21,7 +22,9 @@ import {StatusBar} from '@capacitor/status-bar';
 export class AppComponent {
   constructor(private translateService: TranslateService, private router: Router, private titleService: Title) {
     this.configurationTraduction();
-    StatusBar.hide();
+    if (Capacitor.isNativePlatform()) {
+      StatusBar.hide();
+    }
   }
 
   private configurationTraduction() {

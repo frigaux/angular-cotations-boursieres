@@ -20,25 +20,24 @@ div.liste
   flex-direction: column
   margin: 1rem
 
-  & > div
+  div.ligne
     display: flex
     flex-direction: row
     align-items: center
     margin: 0.5rem
+    flex: none
 
     & > div
-      display: flex
       margin: 0.5rem
-
-    & > div:not(:last-child)
       width: var(--p-icon-size)
 
-    & > div:last-child
-      color: var(--p-blue-800)
-      font-weight: bold
+      span.pi
+        cursor: pointer
 
-    span.pi
-      cursor: pointer
+      span.pi-trash
+        color: var(--p-red-800)
 
-    span.pi-trash
-      color: var(--p-red-800)
+    & > app-portefeuille
+      margin-left: 2rem
+      padding-left: 1rem
+      border-left: 1px solid black

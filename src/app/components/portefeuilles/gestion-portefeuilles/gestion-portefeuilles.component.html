@@ -7,8 +7,8 @@
                        (modifie)="modifierValeursPortefeuille($event)"></app-selecteur-valeurs>
 
 <app-editeur-alertes [portefeuille]="portefeuilleAlertesEnModification"
-                       (abandon)="portefeuilleAlertesEnModification = undefined"
-                       (modifie)="modifierAlertesPortefeuille($event)"></app-editeur-alertes>
+                     (abandon)="portefeuilleAlertesEnModification = undefined"
+                     (modifie)="modifierAlertesPortefeuille($event)"></app-editeur-alertes>
 
 <p-card *ngIf="afficherCreation || this.portefeuilles.length === 0">
   <div class="p-card-title">
@@ -30,7 +30,7 @@
 
   <div class="liste">
     @for (portefeuille of portefeuilles; track portefeuille.nom; let idx = $index) {
-      <div>
+      <div class="ligne">
         <div>
           <input type="radio" name="idxPortefeuilleParDefaut" [value]="idx" [checked]="portefeuille.parDefaut"
                  title="{{ 'COMPOSANTS.PORTEFEUILLES.GESTION_PORTEFEUILLES.PAR_DEFAUT' | translate }}"
@@ -54,9 +54,7 @@
         <div><span class="pi pi-trash" (click)="suppressionPortefeuille($event, idx)"
                    title="{{ 'COMPOSANTS.PORTEFEUILLES.GESTION_PORTEFEUILLES.SUPPRIMER' | translate }}"></span>
         </div>
-        <div>
-          {{ portefeuille.nom }} {{ tickers(portefeuille) }}
-        </div>
+        <app-portefeuille [portefeuille]="portefeuille"></app-portefeuille>
       </div>
     }
   </div>

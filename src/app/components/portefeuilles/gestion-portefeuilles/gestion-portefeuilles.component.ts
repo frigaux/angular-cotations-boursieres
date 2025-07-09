@@ -12,6 +12,7 @@ import {PortefeuillesService} from '../../../services/portefeuilles/portefeuille
 import {ConfirmationService} from 'primeng/api';
 import {EditeurAlertesComponent} from './editeur-alertes/editeur-alertes.component';
 import {DTOAlerte} from './dto-alerte.interface';
+import {PortefeuilleComponent} from './portefeuille/portefeuille.component';
 
 @Component({
   selector: 'app-gestion-portefeuilles',
@@ -24,7 +25,8 @@ import {DTOAlerte} from './dto-alerte.interface';
     FormulaireCreationComponent,
     FormulaireModificationComponent,
     ImportExportComponent,
-    EditeurAlertesComponent
+    EditeurAlertesComponent,
+    PortefeuilleComponent
   ],
   // providers: [ConfirmationService],
   templateUrl: './gestion-portefeuilles.component.html',
@@ -46,13 +48,6 @@ export class GestionPortefeuillesComponent implements OnInit {
   ngOnInit(): void {
     this.portefeuilles = this.portefeuillesService.charger();
     this.portefeuillesService.onImport(portefeuilles => this.portefeuilles = portefeuilles);
-  }
-
-  tickers(portefeuille: DTOPortefeuille) {
-    if (portefeuille.tickers.length > 0) {
-      return ': ' + portefeuille.tickers.reduce((t1, t2) => t1 + ', ' + t2);
-    }
-    return '(' + this.translateService.instant('COMPOSANTS.PORTEFEUILLES.GESTION_PORTEFEUILLES.PORTEFEUILLE_SANS_VALEUR') + ')';
   }
 
   creerPortefeuille(nom: string) {
