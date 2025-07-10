@@ -1,7 +1,7 @@
 import {Component, input, InputSignal} from '@angular/core';
 import {Cours} from '../../../cours/cours.class';
 import {TranslatePipe, TranslateService} from '@ngx-translate/core';
-import {DatePipe} from '@angular/common';
+import {DatePipe, PercentPipe} from '@angular/common';
 import {UIChart} from 'primeng/chart';
 import {RadioButton} from 'primeng/radiobutton';
 import {FormsModule} from '@angular/forms';
@@ -14,14 +14,16 @@ import {FormsModule} from '@angular/forms';
     FormsModule,
     TranslatePipe
   ],
-  providers: [DatePipe],
+  providers: [DatePipe, PercentPipe],
   templateUrl: './charts.component.html',
   styleUrl: './charts.component.sass'
 })
 export class ChartsComponent {
   // input/output
-  cours: InputSignal<Cours | undefined> = input(undefined,
-    {transform: o => this.intercepteurCours(o)});
+  inputCours: InputSignal<Cours | undefined> = input(undefined,
+    {transform: o => this.intercepteurCours(o), alias: 'cours'});
+
+  cours: Cours | undefined;
 
   // données pour la vue
   // https://www.chartjs.org/
@@ -30,47 +32,45 @@ export class ChartsComponent {
   periodes: number[] = [];
   periodeSelectionnee: number = 50;
 
-  constructor(private translateService: TranslateService, public datepipe: DatePipe) {
+  constructor(private translateService: TranslateService, private datepipe: DatePipe, private percentPipe: PercentPipe) {
   }
 
   private intercepteurCours(cours: Cours | undefined) {
-    if (cours) {
-      this.initChart(cours);
-    }
+    this.cours = cours;
+    this.initChart();
     return cours;
   }
 
   clickPeriode(): void {
-    const cours: Cours | undefined = this.cours();
-    if (cours) {
-      this.displayChart(cours);
-    }
+    this.displayChart();
   }
 
-  initChart(cours: Cours) {
-    this.periodes = [];
-    for (const periode of [50, 100, 150, 200, 250, 300]) {
-      this.periodes.push(periode);
-      if (cours.coursAlleges.length <= periode) {
-        break;
+  initChart() {
+    if (this.cours) {
+      this.periodes = [];
+      for (const periode of [50, 100, 150, 200, 250, 300]) {
+        this.periodes.push(periode);
+        if (this.cours.coursAlleges.length <= periode) {
+          break;
+        }
       }
+      this.periodeSelectionnee = this.periodes[0];
+      this.displayChart();
     }
-    this.periodeSelectionnee = this.periodes[0];
-    this.displayChart(cours);
   }
 
-  displayChart(cours: Cours) {
+  displayChart() {
     // const listeCours: DTOCoursTickerAllege[] | undefined = this.coursLight();
-    if (cours && cours.coursAlleges.length <= cours.moyennesMobiles.length) {
+    if (this.cours && this.cours.coursAlleges.length <= this.cours.moyennesMobiles.length) {
       const labels: string[] = [];
       const dataCours: number[] = [];
       const dataMM: number[] = [];
-      const coursAlleges = cours.coursAlleges;
-      const surplus = cours.moyennesMobiles.length - coursAlleges.length;
+      const coursAlleges = this.cours.coursAlleges;
+      const surplus = this.cours.moyennesMobiles.length - coursAlleges.length;
       for (let i = Math.min(coursAlleges.length, this.periodeSelectionnee) - 1; i >= 0; i--) {
         labels.push(this.datepipe.transform(coursAlleges[i].date, 'dd/MM/yyyy')!);
         dataCours.push(coursAlleges[i].cloture);
-        dataMM.push(cours.moyennesMobiles[i + surplus]);
+        dataMM.push(this.cours.moyennesMobiles[i + surplus]);
       }
 
       this.data = this.wrapData(labels, dataCours, dataMM);
@@ -80,6 +80,10 @@ export class ChartsComponent {
   }
 
   private wrapOptions() {
+    const formatPercent: Function = (value: number) => this.percentPipe.transform(value, '1.2-2');
+    const numberFormat = new Intl.NumberFormat('fr-FR', {style: 'currency', currency: 'EUR'});
+    const formatCurrency: Function = (value: number) => numberFormat.format(value);
+    const cloture: number = this.cours!.cloture;
     return {
       scales: {
         x: {
@@ -90,7 +94,7 @@ export class ChartsComponent {
         y: {
           ticks: {
             callback: function (value: number) {
-              return new Intl.NumberFormat('fr-FR', {style: 'currency', currency: 'EUR'}).format(value);
+              return formatCurrency(value);
             }
           }
         }
@@ -107,7 +111,7 @@ export class ChartsComponent {
               }
             },
             label: function (context: any) {
-              return new Intl.NumberFormat('fr-FR', {style: 'currency', currency: 'EUR'}).format(context.parsed.y);
+              return `${formatCurrency(context.parsed.y)} (${formatPercent(1 - (cloture / context.raw))})`;
             }
           }
         }
