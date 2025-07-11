@@ -1,7 +1,6 @@
 import {Component} from '@angular/core';
 import {NgIf} from '@angular/common';
 
-// TODO : colonne des alertes : indiquer la condition pour chaque alerte
 // TODO : colonnes à configuration dynamique selon media et orientation
 @Component({
   selector: 'app-footer',

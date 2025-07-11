@@ -9,9 +9,6 @@ div.p-card-title
   & > div
     margin-left: 0.5rem
 
-    span.pi-plus-circle
-      cursor: pointer
-
 app-import-export
   margin-left: 0.5rem
 
@@ -23,19 +20,22 @@ div.liste
   div.ligne
     display: flex
     flex-direction: row
+    flex: none
     align-items: center
     margin: 0.5rem
-    flex: none
+
+    span.pi-trash
+      color: var(--p-red-800)
 
     & > div
       margin: 0.5rem
-      width: var(--p-icon-size)
 
-      span.pi
-        cursor: pointer
+    & > div.colonne
+      display: flex
+      flex-direction: column
 
-      span.pi-trash
-        color: var(--p-red-800)
+      & > div
+        margin: 0.1rem 0 0.1rem 0
 
     & > app-portefeuille
       margin-left: 2rem

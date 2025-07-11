@@ -24,9 +24,11 @@ import {LoaderComponent} from '../../loader/loader.component';
 })
 export class ValeurComponent {
   // input/output
-  valeur: InputSignal<Valeur | undefined> = input(undefined,
-    {transform: o => this.intercepteurValeur(o)});
+  inputValeur: InputSignal<Valeur | undefined> = input(undefined,
+    {transform: o => this.intercepteurValeur(o), alias: 'valeur'});
   ferme = output<void>();
+
+  valeur: Valeur | undefined;
 
   // chargement des cours
   loading: boolean = true;
@@ -38,19 +40,21 @@ export class ValeurComponent {
   }
 
   private intercepteurValeur(valeur: Valeur | undefined) {
-    if (valeur) {
-      this.initChart(valeur);
-    }
+    this.valeur = valeur;
+    this.initChart();
     return valeur;
   }
 
-  initChart(valeur: Valeur) {
-    this.loading = true;
-    this.coursService.chargerCoursTicker(valeur.ticker).subscribe(dto => {
-      this.coursService.chargerCoursTickerWithLimit(valeur.ticker, 300).subscribe(coursAlleges => {
-        this.cours = Cours.fromDTOCoursTicker(valeur.ticker, valeur.libelle, dto, coursAlleges);
-        this.loading = false;
-      })
-    });
+  initChart() {
+    if (this.valeur) {
+      const valeur = this.valeur;
+      this.loading = true;
+      this.coursService.chargerCoursTicker(valeur.ticker).subscribe(dto => {
+        this.coursService.chargerCoursTickerWithLimit(valeur.ticker, 300).subscribe(coursAlleges => {
+          this.cours = Cours.fromDTOCoursTicker(valeur.ticker, valeur.libelle, dto, coursAlleges);
+          this.loading = false;
+        })
+      });
+    }
   }
 }
