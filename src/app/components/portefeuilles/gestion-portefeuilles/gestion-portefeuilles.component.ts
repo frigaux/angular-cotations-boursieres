@@ -54,6 +54,7 @@ export class GestionPortefeuillesComponent implements OnInit {
     const parDefaut: boolean = this.portefeuilles.length === 0;
     this.portefeuilles.push({nom, parDefaut, tickers: [], alertes: []});
     this.portefeuillesService.enregistrer(this.portefeuilles);
+    this.afficherCreation = false;
   }
 
   modificationNomPortefeuille(idx: number) {
