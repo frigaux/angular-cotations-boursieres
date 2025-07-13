@@ -35,27 +35,20 @@ div.conteneur
       p-accordion
         p-table
           tr
-            th:nth-child(-n+2)
+            th:nth-child(-n+2), td:nth-child(-n+2)
               width: 50%
 
             th:nth-child(n+3), td:nth-child(n+3)
               display: none
 
-      @media screen and (max-aspect-ratio: 1.8)
-        app-cours, app-details
-          width: 75%
-
-        p-accordion
-          width: 25%
-
-      @media screen and (min-aspect-ratio: 1.8) and (max-aspect-ratio: 1.9)
+      @media screen and (max-aspect-ratio: 2.1)
         app-cours, app-details
           width: 70%
 
         p-accordion
           width: 30%
 
-      @media screen and (min-aspect-ratio: 1.9)
+      @media screen and (min-aspect-ratio: 2.1)
         app-cours, app-details
           width: 60%
 

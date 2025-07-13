@@ -5,10 +5,6 @@
           [modal]="true" (onShow)="reinitialiserVue()" [(visible)]="visible">
 
   <div class="conteneur">
-    <div class="exemple" (click)="exemple()">
-      {{ 'COMPOSANTS.PORTEFEUILLES.GESTION_PORTEFEUILLES.IMPORT_EXPORT.EXEMPLE' | translate }}
-    </div>
-
     <p-iftalabel>
     <textarea id="json" rows="10" cols="80"
               pTextarea [(ngModel)]="configurationPortefeuilles"
@@ -17,6 +13,10 @@
         {{ 'COMPOSANTS.PORTEFEUILLES.GESTION_PORTEFEUILLES.IMPORT_EXPORT.CONFIGURATION' | translate }}
       </label>
     </p-iftalabel>
+
+    <div class="exemple" (click)="exemple()">
+      {{ 'COMPOSANTS.PORTEFEUILLES.GESTION_PORTEFEUILLES.IMPORT_EXPORT.EXEMPLE' | translate }}
+    </div>
 
     <div class="erreur" *ngIf="erreur !== undefined">
       <span class="pi pi-exclamation-circle"></span>

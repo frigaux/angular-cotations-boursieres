@@ -11,20 +11,18 @@
                      (modifie)="modifierAlertesPortefeuille($event)"></app-editeur-alertes>
 
 <p-card *ngIf="afficherCreation || this.portefeuilles.length === 0">
-  <div class="p-card-title">
-    {{ 'COMPOSANTS.PORTEFEUILLES.GESTION_PORTEFEUILLES.CREATION' | translate }}
-  </div>
+  <h3>{{ 'COMPOSANTS.PORTEFEUILLES.GESTION_PORTEFEUILLES.CREATION' | translate }}</h3>
 
   <app-formulaire-creation [portefeuilles]="portefeuilles" (cree)="creerPortefeuille($event)"></app-formulaire-creation>
 </p-card>
 
 <p-card *ngIf="portefeuilles.length != 0">
-  <div class="p-card-title">
-    {{ 'COMPOSANTS.PORTEFEUILLES.GESTION_PORTEFEUILLES.PORTEFEUILLES' | translate }}
-    <div>
-      <span class="pi pi-plus-circle" (click)="afficherCreation = true"
-            title="{{ 'COMPOSANTS.PORTEFEUILLES.GESTION_PORTEFEUILLES.CREER' | translate }}"></span>
-    </div>
+  <div class="titre">
+    <span>
+      {{ 'COMPOSANTS.PORTEFEUILLES.GESTION_PORTEFEUILLES.PORTEFEUILLES' | translate }}
+    </span>
+    <span class="pi pi-plus-circle" (click)="afficherCreation = true"
+          title="{{ 'COMPOSANTS.PORTEFEUILLES.GESTION_PORTEFEUILLES.CREER' | translate }}"></span>
     <app-import-export></app-import-export>
   </div>
 
@@ -51,7 +49,8 @@
           <div><span *ngIf="idx != 0" class="pi pi-arrow-up" (click)="monterPortefeuille(idx)"
                      title="{{ 'COMPOSANTS.PORTEFEUILLES.GESTION_PORTEFEUILLES.MONTER' | translate }}"></span>
           </div>
-          <div><span *ngIf="idx < portefeuilles.length - 1" class="pi pi-arrow-down" (click)="descendrePortefeuille(idx)"
+          <div><span *ngIf="idx < portefeuilles.length - 1" class="pi pi-arrow-down"
+                     (click)="descendrePortefeuille(idx)"
                      title="{{ 'COMPOSANTS.PORTEFEUILLES.GESTION_PORTEFEUILLES.DESCENDRE' | translate }}"></span>
           </div>
         </div>
