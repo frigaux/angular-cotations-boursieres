@@ -1,5 +1,5 @@
 import {AbstractControl, ValidationErrors, ValidatorFn} from '@angular/forms';
-import {DTOPortefeuille} from './dto-portefeuille.interface';
+import {DTOPortefeuille} from '../../../services/portefeuilles/dto-portefeuille.interface';
 
 export function pasDeNomEnDoublonValidator(portefeuilles: Array<DTOPortefeuille>): ValidatorFn {
   return (control: AbstractControl): ValidationErrors | null => {

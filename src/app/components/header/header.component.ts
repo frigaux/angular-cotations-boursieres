@@ -5,7 +5,7 @@ import {Menubar} from 'primeng/menubar';
 import {CommonModule} from '@angular/common';
 import {TranslateService} from '@ngx-translate/core';
 import {PortefeuillesService} from '../../services/portefeuilles/portefeuilles.service';
-import {DTOPortefeuille} from '../portefeuilles/gestion-portefeuilles/dto-portefeuille.interface';
+import {DTOPortefeuille} from '../../services/portefeuilles/dto-portefeuille.interface';
 
 @Component({
   selector: 'app-header',
@@ -31,20 +31,25 @@ export class HeaderComponent {
       {
         label: translateService.instant('COMPOSANTS.HEADER.COURS'),
         routerLink: 'cours',
-        icon: 'pi pi-list'
+        icon: 'pi pi-chart-line'
       }
     ];
     if (this.portefeuillesService.auMoinsUnPortefeuilleCorrectementConfigure()) {
       this.items.push({
         label: translateService.instant('COMPOSANTS.HEADER.PORTEFEUILLES'),
         routerLink: 'portefeuilles',
-        icon: 'pi pi-chart-line'
+        icon: 'pi pi-book'
       });
     }
     this.items.push({
       label: translateService.instant('COMPOSANTS.HEADER.GESTION_PORTEFEUILLES'),
       routerLink: 'gestion-portefeuilles',
-      icon: 'pi pi-chart-line'
+      icon: 'pi pi-wrench'
+    });
+    this.items.push({
+      label: translateService.instant('COMPOSANTS.HEADER.GESTION_TABLEAUX'),
+      routerLink: 'gestion-tableaux',
+      icon: 'pi pi-wrench'
     });
   }
 }

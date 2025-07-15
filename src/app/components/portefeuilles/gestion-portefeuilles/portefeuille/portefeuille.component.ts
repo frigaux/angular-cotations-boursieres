@@ -1,5 +1,5 @@
 import {Component, input, InputSignal} from '@angular/core';
-import {DTOPortefeuille} from '../dto-portefeuille.interface';
+import {DTOPortefeuille} from '../../../../services/portefeuilles/dto-portefeuille.interface';
 import {TranslatePipe} from '@ngx-translate/core';
 import {NgIf} from '@angular/common';
 

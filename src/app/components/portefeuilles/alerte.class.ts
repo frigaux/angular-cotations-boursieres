@@ -1,4 +1,4 @@
-import {DTOAlerte} from './gestion-portefeuilles/dto-alerte.interface';
+import {DTOAlerte} from '../../services/portefeuilles/dto-alerte.interface';
 
 export class Alerte {
   alerte: DTOAlerte;

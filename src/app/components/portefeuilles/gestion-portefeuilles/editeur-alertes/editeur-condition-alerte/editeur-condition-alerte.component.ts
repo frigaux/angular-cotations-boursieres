@@ -7,7 +7,7 @@ import {InputText} from 'primeng/inputtext';
 import {NgIf} from '@angular/common';
 import {TranslatePipe, TranslateService} from '@ngx-translate/core';
 import {AutoFocus} from 'primeng/autofocus';
-import {DTOAlerte} from '../../dto-alerte.interface';
+import {DTOAlerte} from '../../../../../services/portefeuilles/dto-alerte.interface';
 import {Card} from 'primeng/card';
 
 @Component({

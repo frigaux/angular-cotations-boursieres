@@ -1,6 +1,6 @@
 import {PortefeuillesService} from './portefeuilles.service';
 import {PORTEFEUILLES} from '../jdd/jdd-portefeuille.dataset';
-import {DTOPortefeuille} from '../../components/portefeuilles/gestion-portefeuilles/dto-portefeuille.interface';
+import {DTOPortefeuille} from './dto-portefeuille.interface';
 import {TestBed} from '@angular/core/testing';
 import {TranslateModule} from '@ngx-translate/core';
 

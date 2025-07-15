@@ -5,7 +5,7 @@ import {InputText} from 'primeng/inputtext';
 import {NgIf} from '@angular/common';
 import {FormBuilder, ReactiveFormsModule, Validators} from '@angular/forms';
 import {TranslatePipe, TranslateService} from '@ngx-translate/core';
-import {DTOPortefeuille} from '../dto-portefeuille.interface';
+import {DTOPortefeuille} from '../../../../services/portefeuilles/dto-portefeuille.interface';
 import {pasDeNomEnDoublonValidator} from '../pas-de-nom-en-doublon.validator';
 import {AutoFocus} from 'primeng/autofocus';
 import {Dialog} from 'primeng/dialog';

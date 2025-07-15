@@ -1,0 +1,15 @@
+export enum TypeColonnePortefeuille {
+  DATE,
+  MARCHE,
+  TICKER,
+  LIBELLE,
+  OUVERTURE,
+  PLUS_HAUT,
+  PLUS_BAS,
+  CLOTURE,
+  VOLUME,
+  ALERTES,
+  COURS,
+  MOYENNE_MOBILE,
+  VARIATION
+}

@@ -4,7 +4,7 @@ import {EditeurAlertesComponent} from './editeur-alertes.component';
 import {TranslateModule} from '@ngx-translate/core';
 import {ConfirmationService} from 'primeng/api';
 import {PORTEFEUILLES} from '../../../../services/jdd/jdd-portefeuille.dataset';
-import {DTOAlerte} from '../dto-alerte.interface';
+import {DTOAlerte} from '../../../../services/portefeuilles/dto-alerte.interface';
 import {provideAnimations} from '@angular/platform-browser/animations';
 
 describe('EditeurAlertesComponent', () => {

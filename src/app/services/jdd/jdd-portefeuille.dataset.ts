@@ -1,4 +1,4 @@
-import {DTOPortefeuille} from '../../components/portefeuilles/gestion-portefeuilles/dto-portefeuille.interface';
+import {DTOPortefeuille} from '../portefeuilles/dto-portefeuille.interface';
 
 export const PORTEFEUILLE: DTOPortefeuille = {
   nom: 'Spéculation',

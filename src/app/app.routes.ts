@@ -9,6 +9,7 @@ import {CoursComponent} from './components/cours/cours.component';
 import {
   GestionPortefeuillesComponent
 } from './components/portefeuilles/gestion-portefeuilles/gestion-portefeuilles.component';
+import {GestionTableauxComponent} from './components/gestion-tableaux/gestion-tableaux.component';
 
 export const routes: Routes = [
   {
@@ -37,6 +38,11 @@ export const routes: Routes = [
   {
     path: 'gestion-portefeuilles',
     component: GestionPortefeuillesComponent,
+    canActivate: [authentificationGuard]
+  },
+  {
+    path: 'gestion-tableaux',
+    component: GestionTableauxComponent,
     canActivate: [authentificationGuard]
   },
   {path: '**', redirectTo: '/authentification'}

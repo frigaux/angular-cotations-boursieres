@@ -3,7 +3,7 @@ import {FormBuilder, ReactiveFormsModule, Validators} from '@angular/forms';
 import {FloatLabel} from 'primeng/floatlabel';
 import {Button} from 'primeng/button';
 import {TranslatePipe} from '@ngx-translate/core';
-import {DTOPortefeuille} from '../dto-portefeuille.interface';
+import {DTOPortefeuille} from '../../../../services/portefeuilles/dto-portefeuille.interface';
 import {pasDeNomEnDoublonValidator} from '../pas-de-nom-en-doublon.validator';
 import {InputText} from 'primeng/inputtext';
 import {AutoFocus} from 'primeng/autofocus';

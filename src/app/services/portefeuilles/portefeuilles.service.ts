@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {DTOPortefeuille} from '../../components/portefeuilles/gestion-portefeuilles/dto-portefeuille.interface';
+import {DTOPortefeuille} from './dto-portefeuille.interface';
 import {Observable, Subscriber} from 'rxjs';
 import {TranslateService} from '@ngx-translate/core';
 
@@ -17,6 +17,7 @@ export class PortefeuillesService {
     PortefeuillesService.OBSERVERS_UPDATE.push(observer);
   });
 
+  // TODO : ? + move DTO
   private cleMessageErreur: string | undefined;
 
   constructor(private translateService: TranslateService) {

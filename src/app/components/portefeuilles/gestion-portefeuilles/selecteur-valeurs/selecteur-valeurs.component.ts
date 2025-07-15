@@ -4,7 +4,7 @@ import {PickList} from "primeng/picklist";
 import {DTOValeur} from '../../../../services/valeurs/dto-valeur.interface';
 import {ValeursService} from '../../../../services/valeurs/valeurs.service';
 import {TranslatePipe, TranslateService} from '@ngx-translate/core';
-import {DTOPortefeuille} from '../dto-portefeuille.interface';
+import {DTOPortefeuille} from '../../../../services/portefeuilles/dto-portefeuille.interface';
 import {Dialog} from 'primeng/dialog';
 import {Button} from 'primeng/button';
 import {LoaderComponent} from '../../../loader/loader.component';

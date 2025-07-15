@@ -80,8 +80,7 @@ export class PortefeuillesComponent implements OnInit {
       .subscribe(liste => {
         this.date = liste.length > 0 ? liste[0].date : undefined;
         portefeuilleAvecCours.cours = liste.map(dto => {
-          const libelle: string = this.valeurByTicker.get(dto.ticker)!.libelle;
-          return new CoursPortefeuille(libelle, dto, portefeuilleAvecCours.alertes);
+          return new CoursPortefeuille(this.valeurByTicker.get(dto.ticker)!, dto, portefeuilleAvecCours.alertes);
         });
         this.loading = false;
       })

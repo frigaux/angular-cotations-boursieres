@@ -5,7 +5,8 @@
     "VALEURS": "Liste des valeurs",
     "COURS": "Cotation des valeurs",
     "PORTEFEUILLES": "Portefeuilles",
-    "GESTION_PORTEFEUILLES": "Gestion des portefeuilles"
+    "GESTION_PORTEFEUILLES": "Gestion des portefeuilles",
+    "GESTION_TABLEAUX": "Gestion des tableaux"
   },
   "COMPOSANTS": {
     "COMMUN": {
@@ -21,7 +22,8 @@
       "VALEURS": "Valeurs",
       "COURS": "Cours",
       "PORTEFEUILLES": "Portefeuilles",
-      "GESTION_PORTEFEUILLES": "Gestion des portefeuilles"
+      "GESTION_PORTEFEUILLES": "Gestion des portefeuilles",
+      "GESTION_TABLEAUX": "Gestion des tableaux"
     },
     "VALEURS": {
       "LIBELLE": "Libellé",
@@ -161,6 +163,18 @@
         "TICKERS_REQUIS": "Attribut tickers manquant",
         "ALERTES_REQUIS": "Attribut alertes manquant",
         "UN_SEUL_PAR_DEFAUT": "Un et un seul portefeuille sélectionné par défaut"
+      }
+    },
+    "TABLEAUX": {
+      "PORTEFEUILLE": {
+        "ERREURS": {
+          "COLONNES_PAYSAGE_REQUIS": "Colonnes du format paysage manquantes",
+          "COLONNES_PAYSAGE_TOTAL_LARGEUR": "Le total des largeurs des colonnes au format paysage doit faire 100%",
+          "COLONNES_PAYSAGE_UNIQUES": "Les colonnes au format paysage doivent être uniques",
+          "COLONNES_PORTRAIT_REQUIS": "Colonnes du format portrait manquantes",
+          "COLONNES_PORTRAIT_TOTAL_LARGEUR": "Le total des largeurs des colonnes au format portrait doit faire 100%",
+          "COLONNES_PORTRAIT_UNIQUES": "Les colonnes au format portrait doivent être uniques"
+        }
       }
     }
   }

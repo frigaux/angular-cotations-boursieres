@@ -3,7 +3,7 @@ import {NgIf} from "@angular/common";
 import {ReactiveFormsModule} from '@angular/forms';
 import {Card} from 'primeng/card';
 import {TranslatePipe, TranslateService} from '@ngx-translate/core';
-import {DTOPortefeuille} from './dto-portefeuille.interface';
+import {DTOPortefeuille} from '../../../services/portefeuilles/dto-portefeuille.interface';
 import {SelecteurValeursComponent} from './selecteur-valeurs/selecteur-valeurs.component';
 import {FormulaireCreationComponent} from './formulaire-creation/formulaire-creation.component';
 import {FormulaireModificationComponent} from './formulaire-modification/formulaire-modification.component';
@@ -11,7 +11,7 @@ import {ImportExportComponent} from './import-export/import-export.component';
 import {PortefeuillesService} from '../../../services/portefeuilles/portefeuilles.service';
 import {ConfirmationService} from 'primeng/api';
 import {EditeurAlertesComponent} from './editeur-alertes/editeur-alertes.component';
-import {DTOAlerte} from './dto-alerte.interface';
+import {DTOAlerte} from '../../../services/portefeuilles/dto-alerte.interface';
 import {PortefeuilleComponent} from './portefeuille/portefeuille.component';
 
 @Component({

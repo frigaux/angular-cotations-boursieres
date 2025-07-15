@@ -1,6 +1,6 @@
-import {DTOPortefeuille} from './gestion-portefeuilles/dto-portefeuille.interface';
+import {DTOPortefeuille} from '../../services/portefeuilles/dto-portefeuille.interface';
 import {CoursPortefeuille} from './cours-portefeuille.class';
-import {DTOAlerte} from './gestion-portefeuilles/dto-alerte.interface';
+import {DTOAlerte} from '../../services/portefeuilles/dto-alerte.interface';
 
 export class PortefeuilleAvecCours {
   portefeuille: DTOPortefeuille;

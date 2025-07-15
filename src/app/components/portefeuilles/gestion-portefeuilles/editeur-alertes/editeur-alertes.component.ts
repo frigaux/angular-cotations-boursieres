@@ -1,8 +1,8 @@
 import {Component, inject, input, InputSignal, output} from '@angular/core';
 import {Dialog} from 'primeng/dialog';
 import {TranslatePipe, TranslateService} from '@ngx-translate/core';
-import {DTOPortefeuille} from '../dto-portefeuille.interface';
-import {DTOAlerte} from '../dto-alerte.interface';
+import {DTOPortefeuille} from '../../../../services/portefeuilles/dto-portefeuille.interface';
+import {DTOAlerte} from '../../../../services/portefeuilles/dto-alerte.interface';
 import {Button} from 'primeng/button';
 import {FloatLabel} from 'primeng/floatlabel';
 import {InputText} from 'primeng/inputtext';

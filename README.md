@@ -101,13 +101,25 @@ Ajout des lignes suivantes dans les styles du fichier angular.json :
 npm install @ngx-translate/core
 ```
 
+## Ajout de Capacitor
+```
+ng add @capacitor/angular
+npm run build
+npm i @capacitor/android
+npx cap add android
+npm install @capacitor/status-bar
+npx cap sync
+```
+
 ## Scripts dans package.json
 ```
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
+    "buildAndroid": "ng build && npx cap sync",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "coverage": "ng test --no-watch --code-coverage",
+    "continuous-integration": "ng test --no-watch --no-progress --browsers=ChromeHeadless",
     "lint": "ng lint"
 ```

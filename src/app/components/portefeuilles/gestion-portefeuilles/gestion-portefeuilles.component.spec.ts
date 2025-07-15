@@ -3,7 +3,7 @@ import {ComponentFixture, TestBed} from '@angular/core/testing';
 import {GestionPortefeuillesComponent} from './gestion-portefeuilles.component';
 import {TranslateModule} from '@ngx-translate/core';
 import {PORTEFEUILLES} from '../../../services/jdd/jdd-portefeuille.dataset';
-import {DTOPortefeuille} from './dto-portefeuille.interface';
+import {DTOPortefeuille} from '../../../services/portefeuilles/dto-portefeuille.interface';
 import {ValeursService} from '../../../services/valeurs/valeurs.service';
 import {PortefeuillesService} from '../../../services/portefeuilles/portefeuilles.service';
 import {ConfirmationService} from 'primeng/api';

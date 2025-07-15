@@ -4,6 +4,7 @@ import {DTOListeCours} from '../cours/dto-liste-cours.interface';
 import {Cours} from '../../components/cours/cours.class';
 import {DtoCoursAvecListeAllege} from '../cours/dto-cours-avec-liste-allege.interface';
 import {CoursPortefeuille} from '../../components/portefeuilles/cours-portefeuille.class';
+import {VALEUR} from './jdd-valeur.dataset';
 
 export const LISTE_COURS: DTOListeCours = {
   "date": new Date("2025-05-09"),
@@ -101,4 +102,4 @@ export const LISTE_COURS_AVEC_LISTE_ALLEGEE: DtoCoursAvecListeAllege[] = [
   }
 ];
 
-export const COURS_PORTEFEUILLE = new CoursPortefeuille('Societe Generale', LISTE_COURS_AVEC_LISTE_ALLEGEE[0], []);
+export const COURS_PORTEFEUILLE = new CoursPortefeuille(VALEUR, LISTE_COURS_AVEC_LISTE_ALLEGEE[0], []);
