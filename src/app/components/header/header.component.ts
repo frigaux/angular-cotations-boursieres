@@ -5,7 +5,6 @@ import {Menubar} from 'primeng/menubar';
 import {CommonModule} from '@angular/common';
 import {TranslateService} from '@ngx-translate/core';
 import {PortefeuillesService} from '../../services/portefeuilles/portefeuilles.service';
-import {DTOPortefeuille} from '../../services/portefeuilles/dto-portefeuille.interface';
 
 @Component({
   selector: 'app-header',

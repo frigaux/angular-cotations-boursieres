@@ -2,7 +2,7 @@ import {ComponentFixture, TestBed} from '@angular/core/testing';
 
 import {FormulaireCreationComponent} from './formulaire-creation.component';
 import {TranslateModule} from '@ngx-translate/core';
-import {PORTEFEUILLES} from '../../../../services/jdd/jdd-portefeuille.dataset';
+import {PORTEFEUILLES} from '../../../../services/jdd/jdd-portefeuilles.dataset';
 
 describe('FormulaireCreationComponent', () => {
   let component: FormulaireCreationComponent;

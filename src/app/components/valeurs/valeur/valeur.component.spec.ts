@@ -9,7 +9,7 @@ import {
   COURS_TICKER,
   LISTE_COURS_TICKER_ALLEGE
 } from '../../../services/jdd/jdd-cours.dataset';
-import {VALEUR} from '../../../services/jdd/jdd-valeur.dataset';
+import {VALEUR} from '../../../services/jdd/jdd-valeurs.dataset';
 
 describe('ValeurComponent', () => {
   let component: ValeurComponent;

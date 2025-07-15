@@ -4,7 +4,7 @@ import {DTOListeCours} from '../cours/dto-liste-cours.interface';
 import {Cours} from '../../components/cours/cours.class';
 import {DtoCoursAvecListeAllege} from '../cours/dto-cours-avec-liste-allege.interface';
 import {CoursPortefeuille} from '../../components/portefeuilles/cours-portefeuille.class';
-import {VALEUR} from './jdd-valeur.dataset';
+import {VALEUR} from './jdd-valeurs.dataset';
 
 export const LISTE_COURS: DTOListeCours = {
   "date": new Date("2025-05-09"),

@@ -2,7 +2,7 @@ import {ComponentFixture, TestBed} from '@angular/core/testing';
 
 import {EditeurConditionAlerteComponent} from './editeur-condition-alerte.component';
 import {TranslateModule} from '@ngx-translate/core';
-import {PORTEFEUILLES} from '../../../../../services/jdd/jdd-portefeuille.dataset';
+import {PORTEFEUILLES} from '../../../../../services/jdd/jdd-portefeuilles.dataset';
 import {provideAnimations} from '@angular/platform-browser/animations';
 
 describe('EditeurConditionAlerteComponent', () => {

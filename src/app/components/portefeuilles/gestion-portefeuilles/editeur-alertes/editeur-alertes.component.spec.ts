@@ -3,7 +3,7 @@ import {ComponentFixture, TestBed} from '@angular/core/testing';
 import {EditeurAlertesComponent} from './editeur-alertes.component';
 import {TranslateModule} from '@ngx-translate/core';
 import {ConfirmationService} from 'primeng/api';
-import {PORTEFEUILLES} from '../../../../services/jdd/jdd-portefeuille.dataset';
+import {PORTEFEUILLES} from '../../../../services/jdd/jdd-portefeuilles.dataset';
 import {DTOAlerte} from '../../../../services/portefeuilles/dto-alerte.interface';
 import {provideAnimations} from '@angular/platform-browser/animations';
 

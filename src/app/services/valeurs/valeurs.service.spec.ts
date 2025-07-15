@@ -6,7 +6,7 @@ import {HttpTestingController, provideHttpClientTesting} from '@angular/common/h
 import {firstValueFrom} from 'rxjs';
 import {DTOValeur} from './dto-valeur.interface';
 import {RouterModule} from '@angular/router';
-import {VALEURS} from '../jdd/jdd-valeur.dataset';
+import {VALEURS} from '../jdd/jdd-valeurs.dataset';
 
 describe('ValeursService', () => {
   let valeursService: ValeursService;

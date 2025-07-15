@@ -6,7 +6,7 @@ import {of} from 'rxjs';
 import {TranslateModule} from '@ngx-translate/core';
 import {CoursService} from '../../services/cours/cours.service';
 import {provideAnimations} from '@angular/platform-browser/animations';
-import {VALEURS} from '../../services/jdd/jdd-valeur.dataset';
+import {VALEURS} from '../../services/jdd/jdd-valeurs.dataset';
 
 describe('ValeursComponent', () => {
   let component: ValeursComponent;

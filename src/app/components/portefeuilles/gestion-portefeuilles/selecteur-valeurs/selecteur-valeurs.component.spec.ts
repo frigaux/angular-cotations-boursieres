@@ -4,9 +4,9 @@ import { SelecteurValeursComponent } from './selecteur-valeurs.component';
 import {TranslateModule} from '@ngx-translate/core';
 import {ValeursService} from '../../../../services/valeurs/valeurs.service';
 import {of} from 'rxjs';
-import {VALEURS} from '../../../../services/jdd/jdd-valeur.dataset';
+import {VALEURS} from '../../../../services/jdd/jdd-valeurs.dataset';
 import {COURS_CROISSANT} from '../../../../services/jdd/jdd-cours.dataset';
-import {PORTEFEUILLES} from '../../../../services/jdd/jdd-portefeuille.dataset';
+import {PORTEFEUILLES} from '../../../../services/jdd/jdd-portefeuilles.dataset';
 import {provideAnimations} from '@angular/platform-browser/animations';
 
 describe('SelecteurValeursComponent', () => {

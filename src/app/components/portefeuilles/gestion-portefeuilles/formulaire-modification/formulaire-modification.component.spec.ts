@@ -2,7 +2,7 @@ import {ComponentFixture, TestBed} from '@angular/core/testing';
 
 import {FormulaireModificationComponent} from './formulaire-modification.component';
 import {TranslateModule} from '@ngx-translate/core';
-import {PORTEFEUILLE, PORTEFEUILLES} from '../../../../services/jdd/jdd-portefeuille.dataset';
+import {PORTEFEUILLE, PORTEFEUILLES} from '../../../../services/jdd/jdd-portefeuilles.dataset';
 import {provideAnimations} from '@angular/platform-browser/animations';
 
 describe('FormulaireModificationComponent', () => {

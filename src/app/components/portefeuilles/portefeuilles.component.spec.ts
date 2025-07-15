@@ -5,10 +5,10 @@ import {TranslateModule} from '@ngx-translate/core';
 import {ValeursService} from '../../services/valeurs/valeurs.service';
 import {CoursService} from '../../services/cours/cours.service';
 import {of} from 'rxjs';
-import {VALEUR} from '../../services/jdd/jdd-valeur.dataset';
+import {VALEUR} from '../../services/jdd/jdd-valeurs.dataset';
 import {LISTE_COURS_AVEC_LISTE_ALLEGEE} from '../../services/jdd/jdd-cours.dataset';
 import {PortefeuillesService} from '../../services/portefeuilles/portefeuilles.service';
-import {PORTEFEUILLE} from '../../services/jdd/jdd-portefeuille.dataset';
+import {PORTEFEUILLE} from '../../services/jdd/jdd-portefeuilles.dataset';
 import {provideAnimations} from '@angular/platform-browser/animations';
 
 describe('PortefeuillesComponent', () => {

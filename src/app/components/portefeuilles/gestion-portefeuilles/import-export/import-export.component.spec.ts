@@ -2,7 +2,7 @@ import {ComponentFixture, fakeAsync, TestBed} from '@angular/core/testing';
 
 import {ImportExportComponent} from './import-export.component';
 import {TranslateModule} from '@ngx-translate/core';
-import {PORTEFEUILLES} from '../../../../services/jdd/jdd-portefeuille.dataset';
+import {PORTEFEUILLES} from '../../../../services/jdd/jdd-portefeuilles.dataset';
 
 describe('ImportExportComponent', () => {
   let component: ImportExportComponent;
