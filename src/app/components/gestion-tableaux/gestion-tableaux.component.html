@@ -1,1 +1,7 @@
-<p>gestion-tableaux works!</p>
+@if (tableaux) {
+  <h3>Portefeuilles</h3>
+  <h4>Paysage</h4>
+  <app-tableau [colonnes]="tableaux.portefeuille.colonnesPaysage"></app-tableau>
+  <h4>Portrait</h4>
+  <app-tableau [colonnes]="tableaux.portefeuille.colonnesPortrait"></app-tableau>
+}

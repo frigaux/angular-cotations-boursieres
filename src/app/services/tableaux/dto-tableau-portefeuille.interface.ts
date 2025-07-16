@@ -1,6 +1,7 @@
-import {DTOColonnePortefeuille} from './dto-colonne-portefeuille.interface';
+import {DTOColonne} from './dto-colonne-portefeuille.interface';
+import {TypeColonnePortefeuille} from './type-colonne-portefeuille.enum';
 
-export interface DTOTableauPortefeuille {
-  colonnesPaysage: DTOColonnePortefeuille[];
-  colonnesPortrait: DTOColonnePortefeuille[];
+export interface DTOTableau<T extends TypeColonnePortefeuille> {
+  colonnesPaysage: DTOColonne<T>[];
+  colonnesPortrait: DTOColonne<T>[];
 }

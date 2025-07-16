@@ -1,8 +1,8 @@
 import {Injectable} from '@angular/core';
 import {DTOTableaux} from './dto-tableaux.interface';
 import {TranslateService} from '@ngx-translate/core';
-import {DTOTableauPortefeuille} from './dto-tableau-portefeuille.interface';
-import {DTOColonnePortefeuille} from './dto-colonne-portefeuille.interface';
+import {DTOTableau} from './dto-tableau-portefeuille.interface';
+import {DTOColonne} from './dto-colonne-portefeuille.interface';
 import {TypeColonnePortefeuille} from './type-colonne-portefeuille.enum';
 import {CoursPortefeuille} from '../../components/portefeuilles/cours-portefeuille.class';
 import {CurrencyPipe, DatePipe, DecimalPipe, PercentPipe} from '@angular/common';
@@ -13,6 +13,13 @@ import {CurrencyPipe, DatePipe, DecimalPipe, PercentPipe} from '@angular/common'
 export class TableauxService {
   private static readonly TABLEAUX: string = 'tableaux';
   private cleMessageErreur?: string;
+
+  private static readonly CONFIGURATION_INITIALE: DTOTableaux = {
+    portefeuille : {
+      colonnesPaysage: [],
+      colonnesPortrait: []
+    }
+  };
 
   constructor(private translateService: TranslateService,
               private datePipe: DatePipe,
@@ -34,7 +41,7 @@ export class TableauxService {
         console.error(e);
       }
     }
-    return {};
+    return TableauxService.CONFIGURATION_INITIALE;
   }
 
   public enregistrer(tableaux: DTOTableaux): void {
@@ -53,7 +60,7 @@ export class TableauxService {
         console.error(e);
       }
     }
-    return '{}';
+    return JSON.stringify(TableauxService.CONFIGURATION_INITIALE);
   }
 
   public import(json: string): string | undefined {
@@ -70,14 +77,14 @@ export class TableauxService {
     }
   }
 
-  public colonneAvecParametre(colonne: DTOColonnePortefeuille) {
+  public colonneAvecParametre<T extends TypeColonnePortefeuille>(colonne: DTOColonne<T>) {
     const type = colonne.type;
     return type === TypeColonnePortefeuille.COURS
       || type === TypeColonnePortefeuille.MOYENNE_MOBILE
       || type === TypeColonnePortefeuille.VARIATION;
   }
 
-  public valeurPourUnCours(colonne: DTOColonnePortefeuille): Function {
+  public valeurPourUnCours<T extends TypeColonnePortefeuille>(colonne: DTOColonne<T>): Function {
     switch (colonne.type) {
       case TypeColonnePortefeuille.DATE:
         return (cours: CoursPortefeuille) => this.datePipe.transform(cours.date, 'dd/MM/yyyy');
@@ -111,7 +118,7 @@ export class TableauxService {
   private validerTableaux(tableaux: DTOTableaux): boolean {
     this.cleMessageErreur = undefined;
     if (tableaux.portefeuille) {
-      const portefeuille: DTOTableauPortefeuille = tableaux.portefeuille;
+      const portefeuille: DTOTableau<any> = tableaux.portefeuille;
       if (!(portefeuille.colonnesPaysage instanceof Array)) {
         this.cleMessageErreur = 'SERVICES.TABLEAUX.PORTEFEUILLE.ERREURS.COLONNES_PAYSAGE_REQUIS';
         return false;
@@ -140,11 +147,11 @@ export class TableauxService {
     return true;
   }
 
-  private validerLargeurs(colonnes: DTOColonnePortefeuille[]) {
+  private validerLargeurs<T extends TypeColonnePortefeuille>(colonnes: DTOColonne<T>[]) {
     return 100 === colonnes.reduce((accumulator, colonne) => accumulator + colonne.largeur, 0);
   }
 
-  private uniciteColonnes(colonnes: DTOColonnePortefeuille[]) {
+  private uniciteColonnes<T extends TypeColonnePortefeuille>(colonnes: DTOColonne<T>[]) {
     const types: Set<TypeColonnePortefeuille> = new Set();
     for (const colonne of colonnes) {
       if (!this.colonneAvecParametre(colonne)) {

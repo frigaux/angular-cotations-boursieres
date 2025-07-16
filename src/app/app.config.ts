@@ -11,6 +11,7 @@ import {httpRequestInterceptor} from './http-request.interceptor';
 import {httpResponseInterceptor} from './http-response.interceptor';
 import {provideTranslateService} from "@ngx-translate/core";
 import {definePreset} from '@primeng/themes';
+import {CurrencyPipe, DatePipe, DecimalPipe, PercentPipe} from '@angular/common';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -43,6 +44,7 @@ export const appConfig: ApplicationConfig = {
           }
         })
       }
-    })
+    }),
+    CurrencyPipe, DatePipe, DecimalPipe, PercentPipe
   ]
 };
