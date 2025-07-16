@@ -1,7 +1,6 @@
 import {Component} from '@angular/core';
 import {NgIf} from '@angular/common';
 
-// TODO : colonnes à configuration dynamique selon media et orientation
 @Component({
   selector: 'app-footer',
   imports: [

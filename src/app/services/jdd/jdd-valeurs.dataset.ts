@@ -5,7 +5,7 @@ export const VALEUR: DTOValeur = {
   "ticker": "GLE",
   "marche": Marche.EURO_LIST_A,
   "libelle": "Societe Generale"
-}
+};
 
 export const VALEURS: DTOValeur[] = [
   {

@@ -48,18 +48,18 @@ describe('PortefeuillesService', () => {
       expect(resultatImport).toEqual(undefined);
     });
 
-    it('when #import un portefeuille invalide then #export renvoie les portefeuilles', () => {
-      expect(service.import("{\"nom_\": \"CAC40\", \"parDefaut\": true, \"tickers\": [], \"alertes\": []}"))
+    it('when #import un portefeuille invalide then on récupère un message d\'erreur', () => {
+      expect(service.import('{"nom_": "CAC40", "parDefaut": true, "tickers": [], "alertes": []}'))
         .toBe('SERVICES.PORTEFEUILLES.ERREURS.TABLEAU_REQUIS');
-      expect(service.import("[{\"nom_\": \"CAC40\", \"parDefaut\": true, \"tickers\": [], \"alertes\": []}]"))
+      expect(service.import('[{"nom_": "CAC40", "parDefaut": true, "tickers": [], "alertes": []}]'))
         .toBe('SERVICES.PORTEFEUILLES.ERREURS.NOM_REQUIS');
-      expect(service.import("[{\"nom\": \"CAC40\", \"parDefaut_\": true, \"tickers\": [], \"alertes\": []}]"))
+      expect(service.import('[{"nom": "CAC40", "parDefaut_": true, "tickers": [], "alertes": []}]'))
         .toBe('SERVICES.PORTEFEUILLES.ERREURS.PAR_DEFAUT_REQUIS');
-      expect(service.import("[{\"nom\": \"CAC40\", \"parDefaut\": true, \"tickers_\": [], \"alertes\": []}]"))
+      expect(service.import('[{"nom": "CAC40", "parDefaut": true, "tickers_": [], "alertes": []}]'))
         .toBe('SERVICES.PORTEFEUILLES.ERREURS.TICKERS_REQUIS');
-      expect(service.import("[{\"nom\": \"CAC40\", \"parDefaut\": true, \"tickers\": [], \"alertes_\": []}]"))
+      expect(service.import('[{"nom": "CAC40", "parDefaut": true, "tickers": [], "alertes_": []}]'))
         .toBe('SERVICES.PORTEFEUILLES.ERREURS.ALERTES_REQUIS');
-      expect(service.import("[{\"nom\": \"CAC40\", \"parDefaut\": false, \"tickers\": [], \"alertes\": []}]"))
+      expect(service.import('[{"nom": "CAC40", "parDefaut": false, "tickers": [], "alertes": []}]'))
         .toBe('SERVICES.PORTEFEUILLES.ERREURS.UN_SEUL_PAR_DEFAUT');
       expect(resultatImport).toEqual(undefined);
     });

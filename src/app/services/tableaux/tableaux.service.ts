@@ -77,12 +77,12 @@ export class TableauxService {
       || type === TypeColonnePortefeuille.VARIATION;
   }
 
-  public valeur(colonne: DTOColonnePortefeuille): Function {
+  public valeurPourUnCours(colonne: DTOColonnePortefeuille): Function {
     switch (colonne.type) {
       case TypeColonnePortefeuille.DATE:
         return (cours: CoursPortefeuille) => this.datePipe.transform(cours.date, 'dd/MM/yyyy');
       case TypeColonnePortefeuille.MARCHE:
-        return (cours: CoursPortefeuille) => this.translateService.instant('ENUMERATIONS.MARCHE.' + cours.marche);
+        return (cours: CoursPortefeuille) => this.translateService.instant(`ENUMERATIONS.MARCHE.${cours.marche}`);
       case TypeColonnePortefeuille.TICKER:
         return (cours: CoursPortefeuille) => cours.ticker;
       case TypeColonnePortefeuille.LIBELLE:
@@ -92,7 +92,7 @@ export class TableauxService {
       case TypeColonnePortefeuille.PLUS_HAUT:
         return (cours: CoursPortefeuille) => this.currencyPipe.transform(cours.plusHaut, '€');
       case TypeColonnePortefeuille.PLUS_BAS:
-        return (cours: CoursPortefeuille) => this.currencyPipe.transform(cours.plusHaut, '€');
+        return (cours: CoursPortefeuille) => this.currencyPipe.transform(cours.plusBas, '€');
       case TypeColonnePortefeuille.CLOTURE:
         return (cours: CoursPortefeuille) => this.currencyPipe.transform(cours.cloture, '€');
       case TypeColonnePortefeuille.VOLUME:
