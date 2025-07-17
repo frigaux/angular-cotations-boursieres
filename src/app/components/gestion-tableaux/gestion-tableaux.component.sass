@@ -1,0 +1,13 @@
+.tableau
+  display: flex
+
+  .paysage, .portrait
+    margin: 0.5rem
+
+@media screen and (orientation: portrait)
+  .tableau
+    flex-direction: column
+
+@media screen and (orientation: landscape)
+  .tableau
+    flex-direction: row

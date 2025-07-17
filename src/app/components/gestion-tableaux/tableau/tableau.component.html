@@ -1,3 +1,40 @@
 @if (colonnes) {
-
+  <div>
+    <span class="pi pi-plus-circle"
+          (click)="ajouterColonne()">{{ 'COMPOSANTS.GESTION_TABLEAUX.TABLEAU.AJOUTER_COLONNE' | translate }}</span>
+    @for (colonne of colonnes; track identity) {
+      <div class="colonne">
+        <span>
+          <p-floatlabel>
+            <input pInputText [pAutoFocus]="true" [(ngModel)]="colonne.nom" autocomplete="off" size="5"/>
+            <label>{{ 'COMPOSANTS.GESTION_TABLEAUX.TABLEAU.NOM_COLONNE' | translate }}</label>
+          </p-floatlabel>
+        </span>
+        <span>
+          <p-floatlabel>
+              <p-select [(ngModel)]="colonne.type" [options]="typesDisponiblesColonne(colonne)" class="w-full"/>
+              <label>{{ 'COMPOSANTS.GESTION_TABLEAUX.TABLEAU.TYPE_COLONNE' | translate }}</label>
+          </p-floatlabel>
+        </span>
+        <span>
+          <p-floatlabel>
+            <input pInputText [(ngModel)]="colonne.parametre" autocomplete="off" size="3"/>
+            <label>{{ 'COMPOSANTS.GESTION_TABLEAUX.TABLEAU.PARAMETRE_COLONNE' | translate }}</label>
+          </p-floatlabel>
+        </span>
+        <span>
+          <p-floatlabel>
+            <p-toggleswitch [(ngModel)]="colonne.tri"/>
+            <label>{{ 'COMPOSANTS.GESTION_TABLEAUX.TABLEAU.TRI_COLONNE' | translate }}</label>
+          </p-floatlabel>
+        </span>
+        <span>
+          <p-floatlabel>
+            <input pInputText [(ngModel)]="colonne.largeur" autocomplete="off" size="3"/>
+            <label>{{ 'COMPOSANTS.GESTION_TABLEAUX.TABLEAU.LARGEUR_COLONNE' | translate }}</label>
+          </p-floatlabel>
+        </span>
+      </div>
+    }
+  </div>
 }

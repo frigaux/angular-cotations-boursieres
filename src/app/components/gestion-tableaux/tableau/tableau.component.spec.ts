@@ -1,6 +1,8 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { TableauComponent } from './tableau.component';
+import {TableauComponent} from './tableau.component';
+import {TranslateModule} from '@ngx-translate/core';
+import {CurrencyPipe, DatePipe, DecimalPipe, PercentPipe} from '@angular/common';
 
 describe('TableauComponent', () => {
   let component: TableauComponent;
@@ -8,9 +10,18 @@ describe('TableauComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [TableauComponent]
+      imports: [
+        TableauComponent,
+        TranslateModule.forRoot({})
+      ],
+      providers: [
+        DatePipe,
+        PercentPipe,
+        CurrencyPipe,
+        DecimalPipe
+      ]
     })
-    .compileComponents();
+      .compileComponents();
 
     fixture = TestBed.createComponent(TableauComponent);
     component = fixture.componentInstance;

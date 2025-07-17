@@ -6,6 +6,7 @@ import {DTOColonne} from './dto-colonne-portefeuille.interface';
 import {TypeColonnePortefeuille} from './type-colonne-portefeuille.enum';
 import {CoursPortefeuille} from '../../components/portefeuilles/cours-portefeuille.class';
 import {CurrencyPipe, DatePipe, DecimalPipe, PercentPipe} from '@angular/common';
+import {TypeColonneCours} from './type-colonne-cours.enum';
 
 @Injectable({
   providedIn: 'root'
@@ -77,14 +78,14 @@ export class TableauxService {
     }
   }
 
-  public colonneAvecParametre<T extends TypeColonnePortefeuille>(colonne: DTOColonne<T>) {
+  public colonneAvecParametre<T extends TypeColonnePortefeuille | TypeColonneCours>(colonne: DTOColonne<T>) {
     const type = colonne.type;
     return type === TypeColonnePortefeuille.COURS
       || type === TypeColonnePortefeuille.MOYENNE_MOBILE
       || type === TypeColonnePortefeuille.VARIATION;
   }
 
-  public valeurPourUnCours<T extends TypeColonnePortefeuille>(colonne: DTOColonne<T>): Function {
+  public valeurPourUnCours<T extends TypeColonnePortefeuille | TypeColonneCours>(colonne: DTOColonne<T>): Function {
     switch (colonne.type) {
       case TypeColonnePortefeuille.DATE:
         return (cours: CoursPortefeuille) => this.datePipe.transform(cours.date, 'dd/MM/yyyy');
@@ -112,9 +113,12 @@ export class TableauxService {
         return (cours: CoursPortefeuille) => this.currencyPipe.transform(cours.moyennesMobiles[colonne.parametre! - 1], '€');
       case TypeColonnePortefeuille.VARIATION:
         return (cours: CoursPortefeuille) => this.percentPipe.transform(cours.calculerVariation2(colonne.parametre!), '1.2-2');
+      default:
+        throw new Error(`Colonne non gérée ${colonne.type}`);
     }
   }
 
+  // TODO : unicité nom colonne + jour number + largeur number
   private validerTableaux(tableaux: DTOTableaux): boolean {
     this.cleMessageErreur = undefined;
     if (tableaux.portefeuille) {
@@ -147,12 +151,12 @@ export class TableauxService {
     return true;
   }
 
-  private validerLargeurs<T extends TypeColonnePortefeuille>(colonnes: DTOColonne<T>[]) {
+  private validerLargeurs<T extends TypeColonnePortefeuille | TypeColonneCours>(colonnes: DTOColonne<T>[]) {
     return 100 === colonnes.reduce((accumulator, colonne) => accumulator + colonne.largeur, 0);
   }
 
-  private uniciteColonnes<T extends TypeColonnePortefeuille>(colonnes: DTOColonne<T>[]) {
-    const types: Set<TypeColonnePortefeuille> = new Set();
+  private uniciteColonnes<T extends TypeColonnePortefeuille | TypeColonneCours>(colonnes: DTOColonne<T>[]) {
+    const types: Set<TypeColonnePortefeuille | TypeColonneCours> = new Set();
     for (const colonne of colonnes) {
       if (!this.colonneAvecParametre(colonne)) {
         if (types.has(colonne.type)) {

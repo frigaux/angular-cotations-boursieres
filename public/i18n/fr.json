@@ -145,6 +145,16 @@
           "TOUT_SUPPRIMER": "Supprimer tous les portefeuilles"
         }
       }
+    },
+    "GESTION_TABLEAUX": {
+      "TABLEAU": {
+        "AJOUTER_COLONNE": "Ajouter une colonne",
+        "NOM_COLONNE": "Nom",
+        "TYPE_COLONNE": "Type",
+        "PARAMETRE_COLONNE": "Jour",
+        "TRI_COLONNE": "Tri",
+        "LARGEUR_COLONNE": "Largeur"
+      }
     }
   },
   "ENUMERATIONS": {
