@@ -3,13 +3,13 @@ import {DTOCoursTickerAllege} from '../../services/cours/dto-cours-ticker-allege
 import {Alerte} from './alerte.class';
 import {DTOAlerte} from '../../services/portefeuilles/dto-alerte.interface';
 import {DTOValeur} from '../../services/valeurs/dto-valeur.interface';
-import {Marche} from '../../services/valeurs/marche.enum';
+import {Marches} from '../../services/valeurs/marches.enum';
 
 export class CoursPortefeuille {
   date: Date;
   ticker: string;
   libelle: string;
-  marche: Marche;
+  marche: Marches;
   ouverture: number;
   plusHaut: number;
   plusBas: number;

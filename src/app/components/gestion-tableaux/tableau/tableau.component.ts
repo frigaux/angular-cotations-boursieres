@@ -53,7 +53,6 @@ export class TableauComponent implements OnInit {
 
   private intercepteurTypeColonnes(typeColonnes: TypesColonnes | undefined) {
     this.typeColonnes = typeColonnes;
-    console.log(typeColonnes, TypesColonnes[typeColonnes!]);
     if (typeColonnes !== undefined) {
       switch (typeColonnes as TypesColonnes) {
         case TypesColonnes.PORTEFEUILLE:
@@ -71,7 +70,7 @@ export class TableauComponent implements OnInit {
             this.construireTypeColonne(TypesColonnesPortefeuille.COURS),
             this.construireTypeColonne(TypesColonnesPortefeuille.MOYENNE_MOBILE),
             this.construireTypeColonne(TypesColonnesPortefeuille.VARIATION)
-          ];console.log(this.typesColonnes);
+          ];
           break;
         case TypesColonnes.COURS:
           this.typesColonnes = [];

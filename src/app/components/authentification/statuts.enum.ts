@@ -1,3 +1,3 @@
-export enum Statut {
+export enum Statuts {
     AUTHENTIFICATION, SUCCES, ERREUR
 }

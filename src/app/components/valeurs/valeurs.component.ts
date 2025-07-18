@@ -4,7 +4,7 @@ import {TableModule} from 'primeng/table';
 import {CommonModule} from '@angular/common';
 import {TranslatePipe, TranslateService} from '@ngx-translate/core';
 import {Valeur} from './valeur.class';
-import {Marche} from '../../services/valeurs/marche.enum';
+import {Marches} from '../../services/valeurs/marches.enum';
 import {ValeurComponent} from './valeur/valeur.component';
 import {ValeurMarche} from './valeur-marche.class';
 import {DTOValeur} from '../../services/valeurs/dto-valeur.interface';
@@ -50,7 +50,7 @@ export class ValeursComponent implements OnInit {
   }
 
   mapValeurs(valeurs: DTOValeur[]): void {
-    const valeurByMarche = new Map<Marche, DTOValeur[]>();
+    const valeurByMarche = new Map<Marches, DTOValeur[]>();
     valeurs.forEach(valeur => {
       if (!valeurByMarche.has(valeur.marche)) {
         valeurByMarche.set(valeur.marche, []);

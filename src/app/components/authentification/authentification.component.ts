@@ -4,7 +4,7 @@ import {NgSwitch, NgSwitchCase} from '@angular/common';
 import {Dialog} from 'primeng/dialog';
 import {ProgressBar} from 'primeng/progressbar';
 import {AuthentificationService} from '../../services/authentification/authentification.service';
-import {Statut} from './statut.enum';
+import {Statuts} from './statuts.enum';
 import {TranslatePipe} from "@ngx-translate/core";
 import {Router} from '@angular/router';
 import {PortefeuillesService} from '../../services/portefeuilles/portefeuilles.service';
@@ -16,9 +16,9 @@ import {PortefeuillesService} from '../../services/portefeuilles/portefeuilles.s
   styleUrl: './authentification.component.sass'
 })
 export class AuthentificationComponent implements OnInit {
-  statut: Statut = Statut.AUTHENTIFICATION;
+  statut: Statuts = Statuts.AUTHENTIFICATION;
   messageErreur: string | undefined;
-  enumStatut = Statut;
+  enumStatut = Statuts;
 
   constructor(private authentificationService: AuthentificationService,
               private portefeuillesService: PortefeuillesService,
@@ -33,10 +33,10 @@ export class AuthentificationComponent implements OnInit {
     this.authentificationService.authentifier().subscribe({
       error: httpResponseError => {
         this.messageErreur = `${httpResponseError.url} => ${httpResponseError.status}`;
-        this.statut = Statut.ERREUR;
+        this.statut = Statuts.ERREUR;
       },
       complete: () => {
-        this.statut = Statut.SUCCES;
+        this.statut = Statuts.SUCCES;
         if (this.portefeuillesService.auMoinsUnPortefeuilleCorrectementConfigure()) {
           this.router.navigate(['portefeuilles']);
         }

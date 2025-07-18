@@ -5,7 +5,7 @@ import {ValeursService} from '../../services/valeurs/valeurs.service';
 import {CoursService} from '../../services/cours/cours.service';
 import {DTOValeur} from '../../services/valeurs/dto-valeur.interface';
 import {CoursMarche} from './cours-marche.class';
-import {Marche} from '../../services/valeurs/marche.enum';
+import {Marches} from '../../services/valeurs/marches.enum';
 import {DTOListeCours} from '../../services/cours/dto-liste-cours.interface';
 import {Accordion, AccordionContent, AccordionHeader, AccordionPanel} from 'primeng/accordion';
 import {Cours} from './cours.class';
@@ -71,7 +71,7 @@ export class CoursComponent implements OnInit {
 
   private mapCours(liste: DTOListeCours, valeurByTicker: Map<string, DTOValeur>) {
     this.date = liste.date;
-    const coursByMarche = new Map<Marche, Cours[]>();
+    const coursByMarche = new Map<Marches, Cours[]>();
 
     liste.cours.map(dto => {
       const valeur = valeurByTicker.get(dto.ticker);

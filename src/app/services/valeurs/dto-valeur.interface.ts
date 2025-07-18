@@ -1,7 +1,7 @@
-import {Marche} from './marche.enum';
+import {Marches} from './marches.enum';
 
 export interface DTOValeur {
   ticker: string;
-  marche: Marche;
+  marche: Marches;
   libelle: string;
 }
