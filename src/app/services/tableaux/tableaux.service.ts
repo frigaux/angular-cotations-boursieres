@@ -78,8 +78,7 @@ export class TableauxService {
     }
   }
 
-  public colonneAvecParametre<T extends TypesColonnesPortefeuille | TypesColonnesCours>(colonne: DTOColonne<T>) {
-    const type = colonne.type;
+  public typeAvecParametre<T extends TypesColonnesPortefeuille | TypesColonnesCours>(type: T) {
     return type === TypesColonnesPortefeuille.COURS
       || type === TypesColonnesPortefeuille.MOYENNE_MOBILE
       || type === TypesColonnesPortefeuille.VARIATION;
@@ -118,7 +117,7 @@ export class TableauxService {
     }
   }
 
-  // TODO : unicité nom colonne + ordre + jour number + largeur number
+  // TODO : unicité nom colonne + ordre valide + jour number + largeur number + paramètre requis + paramètre > 0
   private validerTableaux(tableaux: DTOTableaux): boolean {
     this.cleMessageErreur = undefined;
     if (tableaux.portefeuille) {
@@ -158,7 +157,7 @@ export class TableauxService {
   private uniciteColonnes<T extends TypesColonnesPortefeuille | TypesColonnesCours>(colonnes: DTOColonne<T>[]) {
     const types: Set<TypesColonnesPortefeuille | TypesColonnesCours> = new Set();
     for (const colonne of colonnes) {
-      if (!this.colonneAvecParametre(colonne)) {
+      if (!this.typeAvecParametre(colonne.type)) {
         if (types.has(colonne.type)) {
           return false;
         } else {

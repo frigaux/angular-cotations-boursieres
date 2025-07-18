@@ -12,6 +12,7 @@ import {Select} from 'primeng/select';
 import {ToggleSwitch} from 'primeng/toggleswitch';
 import {TypesColonnes} from '../../../services/tableaux/types-colonnes.enum.ts';
 import {TypeColonne} from './type-colonne.class';
+import {ColonneDecoree} from './colonne-decoree.class';
 
 @Component({
   selector: 'app-tableau',
@@ -35,10 +36,14 @@ export class TableauComponent implements OnInit {
   inputTypeColonnes: InputSignal<TypesColonnes | undefined> = input(undefined,
     {transform: o => this.intercepteurTypeColonnes(o), alias: 'typeColonnes'});
 
-  // données pour la vue
-  protected colonnes: DTOColonne<TypesColonnesPortefeuille | TypesColonnesCours>[] = [];
-
+  private colonnes: DTOColonne<TypesColonnesPortefeuille | TypesColonnesCours>[] = [];
   private typeColonnes?: TypesColonnes;
+
+
+  // données pour la vue
+  protected colonnesDecorees: ColonneDecoree[] = [];
+
+  // privé
   private typesColonnes: TypeColonne[] = [];
   private typesDisponibles: TypeColonne[] = [];
 
@@ -81,18 +86,23 @@ export class TableauComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.construireTypesDisponibles();
+    this.decorerColonnes();
   }
 
-  ajouterColonne() {
+  protected ajouterColonne() {
     this.colonnes.push({
       nom: '',
       type: this.typesDisponibles[0].type,
+      parametre: this.tableauxService.typeAvecParametre(this.typesDisponibles[0].type) ? 1 : undefined,
       tri: false,
-      largeur: this.calculerLargeurDisponible(),
-      ordre: this.colonnes.length
+      largeur: this.calculerLargeurDisponible()
     });
-    this.construireTypesDisponibles();
+    this.decorerColonnes();
+  }
+
+  protected onChangeTypecolonne(colonne: DTOColonne<TypesColonnesPortefeuille | TypesColonnesCours>) {
+    colonne.parametre = this.tableauxService.typeAvecParametre(colonne.type) ? 1 : undefined;
+    this.decorerColonnes();
   }
 
   private construireTypeColonne(type: TypesColonnesPortefeuille | TypesColonnesCours): TypeColonne {
@@ -108,18 +118,24 @@ export class TableauComponent implements OnInit {
     }
   }
 
-  private construireTypesDisponibles(): void {
-    const typesUtilises = this.colonnes
-      .filter(colonne => !this.tableauxService.colonneAvecParametre(colonne))
-      .map(colonne => colonne.type);
-    this.typesDisponibles = this.typesColonnes.filter(typeColonne => !typesUtilises.includes(typeColonne.type));
-  }
-
   private calculerLargeurDisponible(): number {
     return 100 - this.colonnes.reduce((accumulator, colonne) => accumulator + colonne.largeur, 0);
   }
 
-  typesDisponiblesColonne(colonne: DTOColonne<TypesColonnesPortefeuille | TypesColonnesCours>): TypeColonne[] {
-    return this.typesDisponibles; //.concat(colonne.type);
+  private construireTypesDisponibles(): void {
+    const typesUtilises = this.colonnes
+      .filter(colonne => !this.tableauxService.typeAvecParametre(colonne.type))
+      .map(colonne => colonne.type);
+    this.typesDisponibles = this.typesColonnes.filter(typeColonne => !typesUtilises.includes(typeColonne.type));
+  }
+
+  private decorerColonnes() {
+    this.construireTypesDisponibles();
+    let i = 0;
+    this.colonnesDecorees = this.colonnes.map(colonne => {
+      const typesDisponibles = this.typesDisponibles
+        .concat(this.typesColonnes.filter(typeColonne => typeColonne.type === colonne.type));
+      return new ColonneDecoree(i++, colonne, typesDisponibles);
+    })
   }
 }

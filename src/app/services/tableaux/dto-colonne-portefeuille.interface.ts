@@ -7,5 +7,4 @@ export interface DTOColonne<T extends TypesColonnesPortefeuille | TypesColonnesC
   parametre?: number;
   tri: boolean;
   largeur: number;
-  ordre: number;
 }
