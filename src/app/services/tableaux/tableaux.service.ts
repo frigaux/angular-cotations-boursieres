@@ -3,10 +3,10 @@ import {DTOTableaux} from './dto-tableaux.interface';
 import {TranslateService} from '@ngx-translate/core';
 import {DTOTableau} from './dto-tableau-portefeuille.interface';
 import {DTOColonne} from './dto-colonne-portefeuille.interface';
-import {TypeColonnePortefeuille} from './type-colonne-portefeuille.enum';
+import {TypesColonnesPortefeuille} from './types-colonnes-portefeuille.enum';
 import {CoursPortefeuille} from '../../components/portefeuilles/cours-portefeuille.class';
 import {CurrencyPipe, DatePipe, DecimalPipe, PercentPipe} from '@angular/common';
-import {TypeColonneCours} from './type-colonne-cours.enum';
+import {TypesColonnesCours} from './types-colonnes-cours.enum';
 
 @Injectable({
   providedIn: 'root'
@@ -78,47 +78,47 @@ export class TableauxService {
     }
   }
 
-  public colonneAvecParametre<T extends TypeColonnePortefeuille | TypeColonneCours>(colonne: DTOColonne<T>) {
+  public colonneAvecParametre<T extends TypesColonnesPortefeuille | TypesColonnesCours>(colonne: DTOColonne<T>) {
     const type = colonne.type;
-    return type === TypeColonnePortefeuille.COURS
-      || type === TypeColonnePortefeuille.MOYENNE_MOBILE
-      || type === TypeColonnePortefeuille.VARIATION;
+    return type === TypesColonnesPortefeuille.COURS
+      || type === TypesColonnesPortefeuille.MOYENNE_MOBILE
+      || type === TypesColonnesPortefeuille.VARIATION;
   }
 
-  public valeurPourUnCours<T extends TypeColonnePortefeuille | TypeColonneCours>(colonne: DTOColonne<T>): Function {
+  public valeurPourUnCours<T extends TypesColonnesPortefeuille | TypesColonnesCours>(colonne: DTOColonne<T>): Function {
     switch (colonne.type) {
-      case TypeColonnePortefeuille.DATE:
+      case TypesColonnesPortefeuille.DATE:
         return (cours: CoursPortefeuille) => this.datePipe.transform(cours.date, 'dd/MM/yyyy');
-      case TypeColonnePortefeuille.MARCHE:
+      case TypesColonnesPortefeuille.MARCHE:
         return (cours: CoursPortefeuille) => this.translateService.instant(`ENUMERATIONS.MARCHE.${cours.marche}`);
-      case TypeColonnePortefeuille.TICKER:
+      case TypesColonnesPortefeuille.TICKER:
         return (cours: CoursPortefeuille) => cours.ticker;
-      case TypeColonnePortefeuille.LIBELLE:
+      case TypesColonnesPortefeuille.LIBELLE:
         return (cours: CoursPortefeuille) => cours.libelle;
-      case TypeColonnePortefeuille.OUVERTURE:
+      case TypesColonnesPortefeuille.OUVERTURE:
         return (cours: CoursPortefeuille) => this.currencyPipe.transform(cours.ouverture, '€');
-      case TypeColonnePortefeuille.PLUS_HAUT:
+      case TypesColonnesPortefeuille.PLUS_HAUT:
         return (cours: CoursPortefeuille) => this.currencyPipe.transform(cours.plusHaut, '€');
-      case TypeColonnePortefeuille.PLUS_BAS:
+      case TypesColonnesPortefeuille.PLUS_BAS:
         return (cours: CoursPortefeuille) => this.currencyPipe.transform(cours.plusBas, '€');
-      case TypeColonnePortefeuille.CLOTURE:
+      case TypesColonnesPortefeuille.CLOTURE:
         return (cours: CoursPortefeuille) => this.currencyPipe.transform(cours.cloture, '€');
-      case TypeColonnePortefeuille.VOLUME:
+      case TypesColonnesPortefeuille.VOLUME:
         return (cours: CoursPortefeuille) => this.decimalPipe.transform(cours.volume);
-      case TypeColonnePortefeuille.ALERTES:
+      case TypesColonnesPortefeuille.ALERTES:
         return (cours: CoursPortefeuille) => cours.alertes;
-      case TypeColonnePortefeuille.COURS:
+      case TypesColonnesPortefeuille.COURS:
         return (cours: CoursPortefeuille) => this.currencyPipe.transform(cours.coursAlleges[colonne.parametre! - 1].cloture, '€');
-      case TypeColonnePortefeuille.MOYENNE_MOBILE:
+      case TypesColonnesPortefeuille.MOYENNE_MOBILE:
         return (cours: CoursPortefeuille) => this.currencyPipe.transform(cours.moyennesMobiles[colonne.parametre! - 1], '€');
-      case TypeColonnePortefeuille.VARIATION:
+      case TypesColonnesPortefeuille.VARIATION:
         return (cours: CoursPortefeuille) => this.percentPipe.transform(cours.calculerVariation2(colonne.parametre!), '1.2-2');
       default:
         throw new Error(`Colonne non gérée ${colonne.type}`);
     }
   }
 
-  // TODO : unicité nom colonne + jour number + largeur number
+  // TODO : unicité nom colonne + ordre + jour number + largeur number
   private validerTableaux(tableaux: DTOTableaux): boolean {
     this.cleMessageErreur = undefined;
     if (tableaux.portefeuille) {
@@ -151,12 +151,12 @@ export class TableauxService {
     return true;
   }
 
-  private validerLargeurs<T extends TypeColonnePortefeuille | TypeColonneCours>(colonnes: DTOColonne<T>[]) {
+  private validerLargeurs<T extends TypesColonnesPortefeuille | TypesColonnesCours>(colonnes: DTOColonne<T>[]) {
     return 100 === colonnes.reduce((accumulator, colonne) => accumulator + colonne.largeur, 0);
   }
 
-  private uniciteColonnes<T extends TypeColonnePortefeuille | TypeColonneCours>(colonnes: DTOColonne<T>[]) {
-    const types: Set<TypeColonnePortefeuille | TypeColonneCours> = new Set();
+  private uniciteColonnes<T extends TypesColonnesPortefeuille | TypesColonnesCours>(colonnes: DTOColonne<T>[]) {
+    const types: Set<TypesColonnesPortefeuille | TypesColonnesCours> = new Set();
     for (const colonne of colonnes) {
       if (!this.colonneAvecParametre(colonne)) {
         if (types.has(colonne.type)) {

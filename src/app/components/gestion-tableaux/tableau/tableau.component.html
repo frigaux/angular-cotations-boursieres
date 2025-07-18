@@ -2,7 +2,7 @@
   <div>
     <span class="pi pi-plus-circle"
           (click)="ajouterColonne()">{{ 'COMPOSANTS.GESTION_TABLEAUX.TABLEAU.AJOUTER_COLONNE' | translate }}</span>
-    @for (colonne of colonnes; track identity) {
+    @for (colonne of colonnes; track colonne.ordre) {
       <div class="colonne">
         <span>
           <p-floatlabel>

@@ -28,8 +28,8 @@ export class CoursPortefeuille {
   var50: number | undefined;
   alertes: Alerte[];
 
-  constructor(private valeur: DTOValeur, private dto: DtoCoursAvecListeAllege,
-              private alertes_: { alerte: DTOAlerte, evaluer: Function }[]) {
+  constructor(valeur: DTOValeur, dto: DtoCoursAvecListeAllege,
+              alertes: { alerte: DTOAlerte, evaluer: Function }[]) {
     this.date = dto.cours[0].date;
     this.ticker = dto.ticker;
     this.libelle = valeur.libelle;
@@ -49,7 +49,7 @@ export class CoursPortefeuille {
     this.var5 = this.calculerVariation(dto, 5);
     this.var20 = this.calculerVariation(dto, 20);
     this.var50 = this.calculerVariation(dto, 50);
-    this.alertes = this.evaluerAlertes(alertes_);
+    this.alertes = this.evaluerAlertes(alertes);
   }
 
   // TODO : remove !

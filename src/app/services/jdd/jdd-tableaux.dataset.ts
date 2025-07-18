@@ -1,115 +1,130 @@
 import {DTOTableaux} from '../tableaux/dto-tableaux.interface';
-import {TypeColonnePortefeuille} from '../tableaux/type-colonne-portefeuille.enum';
+import {TypesColonnesPortefeuille} from '../tableaux/types-colonnes-portefeuille.enum';
 import {DTOColonne} from '../tableaux/dto-colonne-portefeuille.interface';
 
 // Orientation paysage
-export const COLONNE_DATE_20: DTOColonne<TypeColonnePortefeuille> = {
+export const COLONNE_DATE_20: DTOColonne<TypesColonnesPortefeuille> = {
   nom: 'Date',
-  type: TypeColonnePortefeuille.DATE,
+  type: TypesColonnesPortefeuille.DATE,
   tri: true,
-  largeur: 20
+  largeur: 20,
+  ordre: 0
 };
 
-export const COLONNE_MARCHE_20: DTOColonne<TypeColonnePortefeuille> = {
+export const COLONNE_MARCHE_20: DTOColonne<TypesColonnesPortefeuille> = {
   nom: 'Marché',
-  type: TypeColonnePortefeuille.MARCHE,
+  type: TypesColonnesPortefeuille.MARCHE,
   tri: true,
-  largeur: 20
+  largeur: 20,
+  ordre: 1
 };
 
-export const COLONNE_TICKER_20: DTOColonne<TypeColonnePortefeuille> = {
+export const COLONNE_TICKER_20: DTOColonne<TypesColonnesPortefeuille> = {
   nom: 'Ticker',
-  type: TypeColonnePortefeuille.TICKER,
+  type: TypesColonnesPortefeuille.TICKER,
   tri: true,
-  largeur: 20
+  largeur: 20,
+  ordre: 2
 };
 
-export const COLONNE_LIBELLE_40: DTOColonne<TypeColonnePortefeuille> = {
+export const COLONNE_LIBELLE_40: DTOColonne<TypesColonnesPortefeuille> = {
   nom: 'Libellé',
-  type: TypeColonnePortefeuille.LIBELLE,
+  type: TypesColonnesPortefeuille.LIBELLE,
   tri: true,
-  largeur: 40
+  largeur: 40,
+  ordre: 3
 };
 
-export const COLONNE_OUVERTURE_20: DTOColonne<TypeColonnePortefeuille> = {
+export const COLONNE_OUVERTURE_20: DTOColonne<TypesColonnesPortefeuille> = {
   nom: 'Ouverture',
-  type: TypeColonnePortefeuille.OUVERTURE,
+  type: TypesColonnesPortefeuille.OUVERTURE,
   tri: false,
-  largeur: 20
+  largeur: 20,
+  ordre: 4
 };
 
-export const COLONNE_PLUS_HAUT_20: DTOColonne<TypeColonnePortefeuille> = {
+export const COLONNE_PLUS_HAUT_20: DTOColonne<TypesColonnesPortefeuille> = {
   nom: 'Plus haut',
-  type: TypeColonnePortefeuille.PLUS_HAUT,
+  type: TypesColonnesPortefeuille.PLUS_HAUT,
   tri: false,
-  largeur: 20
+  largeur: 20,
+  ordre: 5
 };
 
-export const COLONNE_PLUS_BAS_20: DTOColonne<TypeColonnePortefeuille> = {
+export const COLONNE_PLUS_BAS_20: DTOColonne<TypesColonnesPortefeuille> = {
   nom: 'Plus bas',
-  type: TypeColonnePortefeuille.PLUS_BAS,
+  type: TypesColonnesPortefeuille.PLUS_BAS,
   tri: false,
-  largeur: 20
+  largeur: 20,
+  ordre: 6
 };
 
-export const COLONNE_CLOTURE_20: DTOColonne<TypeColonnePortefeuille> = {
+export const COLONNE_CLOTURE_20: DTOColonne<TypesColonnesPortefeuille> = {
   nom: 'Clôture',
-  type: TypeColonnePortefeuille.CLOTURE,
+  type: TypesColonnesPortefeuille.CLOTURE,
   tri: false,
-  largeur: 20
+  largeur: 20,
+  ordre: 7
 };
 
-export const COLONNE_VOLUME_20: DTOColonne<TypeColonnePortefeuille> = {
+export const COLONNE_VOLUME_20: DTOColonne<TypesColonnesPortefeuille> = {
   nom: 'Clôture',
-  type: TypeColonnePortefeuille.VOLUME,
+  type: TypesColonnesPortefeuille.VOLUME,
   tri: false,
-  largeur: 20
+  largeur: 20,
+  ordre: 8
 };
 
-export const COLONNE_ALERTES_20: DTOColonne<TypeColonnePortefeuille> = {
+export const COLONNE_ALERTES_20: DTOColonne<TypesColonnesPortefeuille> = {
   nom: 'Alertes',
-  type: TypeColonnePortefeuille.ALERTES,
+  type: TypesColonnesPortefeuille.ALERTES,
   tri: false,
-  largeur: 20
+  largeur: 20,
+  ordre: 9
 };
 
-export const COLONNE_COURS_20: DTOColonne<TypeColonnePortefeuille> = {
+export const COLONNE_COURS_20: DTOColonne<TypesColonnesPortefeuille> = {
   nom: 'Cours',
-  type: TypeColonnePortefeuille.COURS,
+  type: TypesColonnesPortefeuille.COURS,
   parametre: 1,
   tri: false,
-  largeur: 20
+  largeur: 20,
+  ordre: 10
 };
 
-export const COLONNE_MOYENNE_MOBILE_20: DTOColonne<TypeColonnePortefeuille> = {
+export const COLONNE_MOYENNE_MOBILE_20: DTOColonne<TypesColonnesPortefeuille> = {
   nom: 'Alertes',
-  type: TypeColonnePortefeuille.MOYENNE_MOBILE,
+  type: TypesColonnesPortefeuille.MOYENNE_MOBILE,
   parametre: 1,
   tri: false,
-  largeur: 20
+  largeur: 20,
+  ordre: 11
 };
 
-export const COLONNE_VARIATION_20: DTOColonne<TypeColonnePortefeuille> = {
+export const COLONNE_VARIATION_20: DTOColonne<TypesColonnesPortefeuille> = {
   nom: 'Var/1j',
-  type: TypeColonnePortefeuille.VARIATION,
+  type: TypesColonnesPortefeuille.VARIATION,
   parametre: 1,
   tri: true,
-  largeur: 20
+  largeur: 20,
+  ordre: 12
 };
 
 // Orientation portrait
-export const COLONNE_LIBELLE_50: DTOColonne<TypeColonnePortefeuille> = {
+export const COLONNE_LIBELLE_50: DTOColonne<TypesColonnesPortefeuille> = {
   nom: 'Libellé',
-  type: TypeColonnePortefeuille.LIBELLE,
+  type: TypesColonnesPortefeuille.LIBELLE,
   tri: true,
-  largeur: 50
+  largeur: 50,
+  ordre: 0
 };
 
-export const COLONNE_ALERTES_50: DTOColonne<TypeColonnePortefeuille> = {
+export const COLONNE_ALERTES_50: DTOColonne<TypesColonnesPortefeuille> = {
   nom: 'Alertes',
-  type: TypeColonnePortefeuille.ALERTES,
+  type: TypesColonnesPortefeuille.ALERTES,
   tri: false,
-  largeur: 50
+  largeur: 50,
+  ordre: 1
 };
 
 export const TABLEAUX: DTOTableaux = {

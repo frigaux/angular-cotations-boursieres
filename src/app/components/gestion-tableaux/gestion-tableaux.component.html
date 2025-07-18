@@ -3,11 +3,13 @@
   <div class="tableau">
     <div class="paysage">
       <h4>Paysage</h4>
-      <app-tableau [colonnes]="tableaux.portefeuille.colonnesPaysage" [typesColonnes]="typeColonnesPortefeuille"></app-tableau>
+      <app-tableau [colonnes]="tableaux.portefeuille.colonnesPaysage"
+                   [typeColonnes]="TypesColonnes.PORTEFEUILLE"></app-tableau>
     </div>
     <div class="portrait">
       <h4>Portrait</h4>
-      <app-tableau [colonnes]="tableaux.portefeuille.colonnesPortrait" [typesColonnes]="typeColonnesPortefeuille"></app-tableau>
+      <app-tableau [colonnes]="tableaux.portefeuille.colonnesPortrait"
+                   [typeColonnes]="TypesColonnes.PORTEFEUILLE"></app-tableau>
     </div>
   </div>
 }

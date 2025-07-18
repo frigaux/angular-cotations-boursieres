@@ -1,4 +1,4 @@
-export enum TypeColonnePortefeuille {
+export enum TypesColonnesPortefeuille {
   DATE,
   MARCHE,
   TICKER,

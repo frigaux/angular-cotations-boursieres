@@ -162,6 +162,23 @@
       "EURO_LIST_A": "Euronext A",
       "EURO_LIST_B": "Euronext B",
       "EURO_LIST_C": "Euronext C"
+    },
+    "COLONNES": {
+      "PORTEFEUILLE": {
+        "DATE": "date",
+        "MARCHE": "marché",
+        "TICKER": "ticker",
+        "LIBELLE": "libellé",
+        "OUVERTURE": "ouverture",
+        "PLUS_HAUT": "plus haut",
+        "PLUS_BAS": "plus bas",
+        "CLOTURE": "clotûre",
+        "VOLUME": "volume",
+        "ALERTES": "alertes",
+        "COURS": "cours pour un jour",
+        "MOYENNE_MOBILE": "moyenne mobile sur x jours",
+        "VARIATION": "variation sur x jours"
+      }
     }
   },
   "SERVICES": {
