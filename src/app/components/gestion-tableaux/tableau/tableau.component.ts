@@ -13,6 +13,7 @@ import {ToggleSwitch} from 'primeng/toggleswitch';
 import {TypesColonnes} from '../../../services/tableaux/types-colonnes.enum.ts';
 import {TypeColonne} from './type-colonne.class';
 import {ColonneDecoree} from './colonne-decoree.class';
+import {CdkDrag, CdkDragDrop, CdkDropList, moveItemInArray} from '@angular/cdk/drag-drop';
 
 @Component({
   selector: 'app-tableau',
@@ -24,7 +25,9 @@ import {ColonneDecoree} from './colonne-decoree.class';
     AutoFocus,
     FormsModule,
     Select,
-    ToggleSwitch
+    ToggleSwitch,
+    CdkDropList,
+    CdkDrag
   ],
   templateUrl: './tableau.component.html',
   styleUrl: './tableau.component.sass'
@@ -41,7 +44,7 @@ export class TableauComponent implements OnInit {
 
 
   // données pour la vue
-  protected colonnesDecorees: ColonneDecoree[] = [];
+  colonnesDecorees: ColonneDecoree[] = [];
 
   // privé
   private typesColonnes: TypeColonne[] = [];
@@ -89,7 +92,7 @@ export class TableauComponent implements OnInit {
     this.decorerColonnes();
   }
 
-  protected ajouterColonne() {
+  ajouterColonne() {
     this.colonnes.push({
       nom: '',
       type: this.typesDisponibles[0].type,
@@ -97,6 +100,16 @@ export class TableauComponent implements OnInit {
       tri: false,
       largeur: this.calculerLargeurDisponible()
     });
+    this.decorerColonnes();
+  }
+
+  supprimerColonne(colonne: DTOColonne<TypesColonnesPortefeuille | TypesColonnesCours>) {
+    this.colonnes.splice(this.colonnes.indexOf(colonne), 1);
+    this.decorerColonnes();
+  }
+
+  dropColonne(event: CdkDragDrop<string[]>) {
+    moveItemInArray(this.colonnes, event.previousIndex, event.currentIndex);
     this.decorerColonnes();
   }
 

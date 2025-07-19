@@ -14,6 +14,7 @@ import {EditeurAlertesComponent} from './editeur-alertes/editeur-alertes.compone
 import {DTOAlerte} from '../../../services/portefeuilles/dto-alerte.interface';
 import {PortefeuilleComponent} from './portefeuille/portefeuille.component';
 
+// TODO : drag & drop
 @Component({
   selector: 'app-gestion-portefeuilles',
   imports: [
@@ -28,7 +29,6 @@ import {PortefeuilleComponent} from './portefeuille/portefeuille.component';
     EditeurAlertesComponent,
     PortefeuilleComponent
   ],
-  // providers: [ConfirmationService],
   templateUrl: './gestion-portefeuilles.component.html',
   styleUrl: './gestion-portefeuilles.component.sass'
 })

@@ -2,8 +2,11 @@
   <div>
     <span class="pi pi-plus-circle"
           (click)="ajouterColonne()">{{ 'COMPOSANTS.GESTION_TABLEAUX.TABLEAU.AJOUTER_COLONNE' | translate }}</span>
+  </div>
+  <div cdkDropList class="liste" (cdkDropListDropped)="dropColonne($event)">
     @for (deco of colonnesDecorees; track deco.id) {
-      <div class="colonne">
+      <div cdkDrag class="element">
+        <span class="pi pi-trash" (click)="supprimerColonne(deco.colonne)"></span>
         <span>
           <p-floatlabel>
             <input pInputText [pAutoFocus]="true" [(ngModel)]="deco.colonne.nom" autocomplete="off"/>

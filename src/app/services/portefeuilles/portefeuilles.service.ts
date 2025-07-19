@@ -17,7 +17,6 @@ export class PortefeuillesService {
     PortefeuillesService.OBSERVERS_UPDATE.push(observer);
   });
 
-  // TODO : ? + move DTO
   private cleMessageErreur: string | undefined;
 
   constructor(private translateService: TranslateService) {

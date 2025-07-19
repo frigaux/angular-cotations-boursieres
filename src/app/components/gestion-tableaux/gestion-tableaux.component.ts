@@ -13,7 +13,7 @@ import {TypesColonnes} from '../../services/tableaux/types-colonnes.enum.ts';
   styleUrl: './gestion-tableaux.component.sass'
 })
 export class GestionTableauxComponent implements OnInit {
-  protected tableaux?: DTOTableaux;
+  tableaux?: DTOTableaux;
 
   constructor(private tableauxService: TableauxService) {
   }

@@ -110,6 +110,11 @@ npx cap add android
 npm install @capacitor/status-bar
 npx cap sync
 ```
+## Ajout du drag and drop
+https://angular.dev/guide/drag-drop
+```
+ng add @angular/cdk
+```
 
 ## Scripts dans package.json
 ```
