@@ -13,8 +13,8 @@ import {ConfirmationService} from 'primeng/api';
 import {EditeurAlertesComponent} from './editeur-alertes/editeur-alertes.component';
 import {DTOAlerte} from '../../../services/portefeuilles/dto-alerte.interface';
 import {PortefeuilleComponent} from './portefeuille/portefeuille.component';
+import {CdkDrag, CdkDragDrop, CdkDropList, moveItemInArray} from '@angular/cdk/drag-drop';
 
-// TODO : drag & drop
 @Component({
   selector: 'app-gestion-portefeuilles',
   imports: [
@@ -27,7 +27,9 @@ import {PortefeuilleComponent} from './portefeuille/portefeuille.component';
     FormulaireModificationComponent,
     ImportExportComponent,
     EditeurAlertesComponent,
-    PortefeuilleComponent
+    PortefeuilleComponent,
+    CdkDropList,
+    CdkDrag
   ],
   templateUrl: './gestion-portefeuilles.component.html',
   styleUrl: './gestion-portefeuilles.component.sass'
@@ -87,13 +89,8 @@ export class GestionPortefeuillesComponent implements OnInit {
     this.portefeuilleValeursEnModification = undefined;
   }
 
-  monterPortefeuille(idx: number) {
-    [this.portefeuilles[idx], this.portefeuilles[idx - 1]] = [this.portefeuilles[idx - 1], this.portefeuilles[idx]];
-    this.portefeuillesService.enregistrer(this.portefeuilles);
-  }
-
-  descendrePortefeuille(idx: number) {
-    [this.portefeuilles[idx], this.portefeuilles[idx + 1]] = [this.portefeuilles[idx + 1], this.portefeuilles[idx]];
+  dropColonne(event: CdkDragDrop<string[]>) {
+    moveItemInArray(this.portefeuilles, event.previousIndex, event.currentIndex);
     this.portefeuillesService.enregistrer(this.portefeuilles);
   }
 

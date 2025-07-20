@@ -26,9 +26,9 @@
     <app-import-export></app-import-export>
   </div>
 
-  <div class="liste">
+  <div cdkDropList class="liste" (cdkDropListDropped)="dropColonne($event)">
     @for (portefeuille of portefeuilles; track portefeuille.nom; let idx = $index) {
-      <div class="ligne">
+      <div cdkDrag class="ligne">
         <div>
           <input type="radio" name="idxPortefeuilleParDefaut" [value]="idx" [checked]="portefeuille.parDefaut"
                  title="{{ 'COMPOSANTS.PORTEFEUILLES.GESTION_PORTEFEUILLES.PAR_DEFAUT' | translate }}"
@@ -43,15 +43,6 @@
           </div>
           <div><span class="pi pi-pencil" (click)="modificationNomPortefeuille(idx)"
                      title="{{ 'COMPOSANTS.PORTEFEUILLES.GESTION_PORTEFEUILLES.RENOMMER' | translate }}"></span>
-          </div>
-        </div>
-        <div class="colonne">
-          <div><span *ngIf="idx != 0" class="pi pi-arrow-up" (click)="monterPortefeuille(idx)"
-                     title="{{ 'COMPOSANTS.PORTEFEUILLES.GESTION_PORTEFEUILLES.MONTER' | translate }}"></span>
-          </div>
-          <div><span *ngIf="idx < portefeuilles.length - 1" class="pi pi-arrow-down"
-                     (click)="descendrePortefeuille(idx)"
-                     title="{{ 'COMPOSANTS.PORTEFEUILLES.GESTION_PORTEFEUILLES.DESCENDRE' | translate }}"></span>
           </div>
         </div>
         <div><span class="pi pi-trash" (click)="suppressionPortefeuille($event, idx)"

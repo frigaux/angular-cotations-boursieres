@@ -51,5 +51,11 @@ describe('TableauComponent', () => {
       component.ajouterColonne();
       expect(component.colonnesDecorees).toHaveSize(TABLEAUX.portefeuille.colonnesPaysage.length + 1)
     });
+
+    it('when #supprimerColonne then une colonne est supprimée', () => {
+      fixture.detectChanges(); // appelle le ngOnInit
+      component.supprimerColonne(component.colonnesDecorees[0].colonne);
+      expect(component.colonnesDecorees).toHaveSize(TABLEAUX.portefeuille.colonnesPaysage.length - 1)
+    });
   });
 });

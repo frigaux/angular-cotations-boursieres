@@ -100,12 +100,5 @@ describe('GestionPortefeuillesComponent', () => {
       expected[1].parDefaut = true;
       expect(component.portefeuilles).toEqual(expected);
     });
-
-    it('when #monterPortefeuille puis #descendrePortefeuille then l\'ordre des portefeuilles est inchangé', () => {
-      fixture.detectChanges(); // appelle le ngOnInit
-      component.monterPortefeuille(1);
-      component.descendrePortefeuille(0);
-      expect(component.portefeuilles).toEqual(clonePORTEFEUILLES());
-    });
   });
 });
