@@ -9,6 +9,7 @@ import {ConfirmDialog} from 'primeng/confirmdialog';
 import {ConfirmationService} from 'primeng/api';
 import {StatusBar} from '@capacitor/status-bar';
 import {Capacitor} from '@capacitor/core';
+import { ScreenOrientation } from '@capacitor/screen-orientation';
 
 // TODO : courbes des MMxx glissantes
 @Component({
@@ -22,7 +23,12 @@ import {Capacitor} from '@capacitor/core';
 export class AppComponent {
   constructor(private translateService: TranslateService, private router: Router, private titleService: Title) {
     this.configurationTraduction();
+    this.configurationAndroid();
+  }
+
+  private configurationAndroid() {
     if (Capacitor.isNativePlatform()) {
+      ScreenOrientation.lock({orientation: 'landscape'});
       StatusBar.hide();
     }
   }
