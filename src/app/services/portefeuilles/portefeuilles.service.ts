@@ -38,8 +38,10 @@ export class PortefeuillesService {
   }
 
   public enregistrer(portefeuilles: Array<DTOPortefeuille>): void {
-    window.localStorage.setItem(PortefeuillesService.PORTEFEUILLES, JSON.stringify(portefeuilles));
-    PortefeuillesService.OBSERVERS_UPDATE.forEach(observer => observer.next(portefeuilles));
+    if (this.validerPortefeuilles(portefeuilles)) {
+      window.localStorage.setItem(PortefeuillesService.PORTEFEUILLES, JSON.stringify(portefeuilles));
+      PortefeuillesService.OBSERVERS_UPDATE.forEach(observer => observer.next(portefeuilles));
+    }
   }
 
   public export(): string {

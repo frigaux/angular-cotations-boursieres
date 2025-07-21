@@ -23,7 +23,6 @@ export class ChartCoursComponent {
   options: any;
 
   constructor(private translateService: TranslateService, public datepipe: DatePipe) {
-    console.log('constructor');
   }
 
   private intercepteurCours(cours: Cours | undefined) {

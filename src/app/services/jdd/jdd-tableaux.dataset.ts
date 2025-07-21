@@ -105,16 +105,16 @@ export const COLONNE_LIBELLE_50: DTOColonne<TypesColonnesPortefeuille> = {
   largeur: 50
 };
 
-export const COLONNE_ALERTES_50: DTOColonne<TypesColonnesPortefeuille> = {
+export const COLONNE_ALERTES_30: DTOColonne<TypesColonnesPortefeuille> = {
   nom: 'Alertes',
   type: TypesColonnesPortefeuille.ALERTES,
   tri: false,
-  largeur: 50
+  largeur: 30
 };
 
 export const TABLEAUX: DTOTableaux = {
   portefeuille: {
     colonnesPaysage: [COLONNE_LIBELLE_40, COLONNE_ALERTES_20, COLONNE_CLOTURE_20, COLONNE_VARIATION_20],
-    colonnesPortrait: [COLONNE_LIBELLE_50, COLONNE_ALERTES_50]
+    colonnesPortrait: [COLONNE_LIBELLE_50, COLONNE_ALERTES_30, COLONNE_VARIATION_20]
   }
 };

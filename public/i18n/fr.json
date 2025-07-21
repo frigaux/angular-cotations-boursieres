@@ -193,12 +193,22 @@
     "TABLEAUX": {
       "PORTEFEUILLE": {
         "ERREURS": {
-          "COLONNES_PAYSAGE_REQUIS": "Colonnes du format paysage manquantes",
-          "COLONNES_PAYSAGE_TOTAL_LARGEUR": "Le total des largeurs des colonnes au format paysage doit faire 100%",
-          "COLONNES_PAYSAGE_UNIQUES": "Les colonnes au format paysage doivent être uniques",
-          "COLONNES_PORTRAIT_REQUIS": "Colonnes du format portrait manquantes",
-          "COLONNES_PORTRAIT_TOTAL_LARGEUR": "Le total des largeurs des colonnes au format portrait doit faire 100%",
-          "COLONNES_PORTRAIT_UNIQUES": "Les colonnes au format portrait doivent être uniques"
+          "COLONNES_PAYSAGE": {
+            "REQUIS": "Colonnes du format paysage manquantes",
+            "TOTAL_LARGEUR": "Le total des largeurs des colonnes au format paysage doit faire 100%",
+            "UNICITE_TYPE": "Les types des colonnes au format paysage doivent être uniques",
+            "NOM_DOUBLON": "Doublon dans le nom des colonnes au format paysage",
+            "LARGEUR_INVALIDE": "La largeur des colonnes au format paysage doit être un entier positif",
+            "PARAMETRE_INVALIDE": "Le jour des colonnes au format paysage doit être un entier positif"
+          },
+          "COLONNES_PORTRAIT": {
+            "REQUIS": "Colonnes du format portrait manquantes",
+            "TOTAL_LARGEUR": "Le total des largeurs des colonnes au format portrait doit faire 100%",
+            "UNICITE_TYPE": "Les types des colonnes au format portrait doivent être uniques",
+            "NOM_DOUBLON": "Doublon dans le nom des colonnes au format portrait",
+            "LARGEUR_INVALIDE": "La largeur des colonnes au format portrait doit être un entier positif",
+            "PARAMETRE_INVALIDE": "Le jour des colonnes au format portrait doit être un entier positif"
+          }
         }
       }
     }
