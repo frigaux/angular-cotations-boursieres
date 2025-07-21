@@ -9,7 +9,7 @@
         <span class="pi pi-trash" (click)="supprimerColonne(deco.colonne)"></span>
         <span>
           <p-floatlabel>
-            <input pInputText [pAutoFocus]="true" [(ngModel)]="deco.colonne.nom" autocomplete="off"/>
+            <input pInputText [pAutoFocus]="true" [(ngModel)]="deco.colonne.nom" autocomplete="off" required [appPasDeNomEnDoublon]="colonnes"/>
             <label>{{ 'COMPOSANTS.GESTION_TABLEAUX.TABLEAU.NOM_COLONNE' | translate }}</label>
           </p-floatlabel>
         </span>
@@ -17,14 +17,14 @@
           <p-floatlabel>
               <p-select [(ngModel)]="deco.colonne.type" [options]="deco.typesDisponibles"
                         (onChange)="onChangeTypecolonne(deco.colonne)"
-                        optionLabel="libelle" optionValue="type"/>
+                        optionLabel="libelle" optionValue="type" required/>
               <label>{{ 'COMPOSANTS.GESTION_TABLEAUX.TABLEAU.TYPE_COLONNE' | translate }}</label>
           </p-floatlabel>
         </span>
         <span>
           @if (deco.colonne.parametre !== undefined) {
             <p-floatlabel>
-              <input pInputText [(ngModel)]="deco.colonne.parametre" autocomplete="off"/>
+              <input pInputText [(ngModel)]="deco.colonne.parametre" autocomplete="off" required appEntierPositif/>
               <label>{{ 'COMPOSANTS.GESTION_TABLEAUX.TABLEAU.PARAMETRE_COLONNE' | translate }}</label>
             </p-floatlabel>
           }
@@ -37,7 +37,7 @@
         </span>
         <span>
           <p-floatlabel>
-            <input pInputText [(ngModel)]="deco.colonne.largeur" autocomplete="off"/>
+            <input pInputText [(ngModel)]="deco.colonne.largeur" autocomplete="off" required appEntierPositif/>
             <label>{{ 'COMPOSANTS.GESTION_TABLEAUX.TABLEAU.LARGEUR_COLONNE' | translate }}</label>
           </p-floatlabel>
         </span>

@@ -14,6 +14,8 @@ import {TypesColonnes} from '../../../services/tableaux/types-colonnes.enum.ts';
 import {TypeColonne} from './type-colonne.class';
 import {ColonneDecoree} from './colonne-decoree.class';
 import {CdkDrag, CdkDragDrop, CdkDropList, moveItemInArray} from '@angular/cdk/drag-drop';
+import {PasDeNomEnDoubleValidatorDirective} from './validators/pas-de-nom-en-double-validator.directive';
+import {EntierPositifValidatorDirective} from './validators/entier-positif-validator.directive';
 
 @Component({
   selector: 'app-tableau',
@@ -27,7 +29,9 @@ import {CdkDrag, CdkDragDrop, CdkDropList, moveItemInArray} from '@angular/cdk/d
     Select,
     ToggleSwitch,
     CdkDropList,
-    CdkDrag
+    CdkDrag,
+    PasDeNomEnDoubleValidatorDirective,
+    EntierPositifValidatorDirective
   ],
   templateUrl: './tableau.component.html',
   styleUrl: './tableau.component.sass'
@@ -39,7 +43,7 @@ export class TableauComponent implements OnInit {
   inputTypeColonnes: InputSignal<TypesColonnes | undefined> = input(undefined,
     {transform: o => this.intercepteurTypeColonnes(o), alias: 'typeColonnes'});
 
-  private colonnes: DTOColonne<TypesColonnesPortefeuille | TypesColonnesCours>[] = [];
+  protected colonnes: DTOColonne<TypesColonnesPortefeuille | TypesColonnesCours>[] = [];
   private typeColonnes?: TypesColonnes;
 
 

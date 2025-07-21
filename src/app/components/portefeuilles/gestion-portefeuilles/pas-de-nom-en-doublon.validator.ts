@@ -6,6 +6,6 @@ export function pasDeNomEnDoublonValidator(portefeuilles: Array<DTOPortefeuille>
     const isDuplicate = portefeuilles.find(
       portefeuille => portefeuille.nom.localeCompare(control.value, undefined, {sensitivity: 'base'}) === 0
     ) !== undefined;
-    return isDuplicate ? {duplicateValue: {value: control.value}} : null;
+    return isDuplicate ? {doublon: {nom: control.value}} : null;
   };
 }

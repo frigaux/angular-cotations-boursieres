@@ -18,6 +18,6 @@ describe('pasDeNomEnDoublonValidator', () => {
 
   it('Given un validator initialisé when on valide un nom de portefeuille déjà existant then le validator renvoie une erreur', () => {
     control.setValue(PORTEFEUILLES[0].nom);
-    expect(validator(control)).toEqual({duplicateValue: {value: control.value}});
+    expect(validator(control)).toEqual({doublon: {nom: control.value}});
   });
 });

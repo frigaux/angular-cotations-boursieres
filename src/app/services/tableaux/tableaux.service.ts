@@ -117,7 +117,7 @@ export class TableauxService {
     }
   }
 
-  // TODO : unicité nom colonne + ordre valide + jour number + largeur number + paramètre requis + paramètre > 0
+  // TODO : unicité nom colonne + largeur number + paramètre number requis + paramètre > 0
   private validerTableaux(tableaux: DTOTableaux): boolean {
     this.cleMessageErreur = undefined;
     if (tableaux.portefeuille) {
