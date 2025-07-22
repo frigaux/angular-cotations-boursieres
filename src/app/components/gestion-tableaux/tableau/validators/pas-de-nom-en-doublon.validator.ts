@@ -1,13 +1,17 @@
 import {AbstractControl, ValidationErrors, ValidatorFn} from '@angular/forms';
-import {DTOColonne} from '../../../../services/tableaux/dto-colonne-portefeuille.interface';
-import {TypesColonnesPortefeuille} from '../../../../services/tableaux/types-colonnes-portefeuille.enum';
-import {TypesColonnesCours} from '../../../../services/tableaux/types-colonnes-cours.enum';
+import {ValidatorInput} from './validator-input.interface';
 
-export function pasDeNomEnDoublonValidator(colonnes: DTOColonne<TypesColonnesPortefeuille | TypesColonnesCours>[]): ValidatorFn {
-  return (control: AbstractControl): ValidationErrors | null => {
-    const isDuplicate = colonnes.find(
-      colonne => colonne.nom.localeCompare(control.value, undefined, {sensitivity: 'base'}) === 0
-    ) !== undefined;
-    return isDuplicate ? {doublon: {nom: control.value}} : null;
+export function pasDeNomEnDoublonValidator(input: ValidatorInput | undefined): ValidatorFn {
+  return (parametres: AbstractControl): ValidationErrors | null => {
+    if (input === undefined) {
+      return null;
+    } else {
+      const isDuplicate = input.colonnes
+        .filter(c => c !== input.colonne)
+        .find(
+          colonne => colonne.nom.localeCompare(parametres.value, undefined, {sensitivity: 'base'}) === 0
+        ) !== undefined;
+      return isDuplicate ? {doublon: {nom: parametres.value}} : null;
+    }
   };
 }

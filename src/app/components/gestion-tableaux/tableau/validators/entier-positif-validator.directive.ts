@@ -9,7 +9,7 @@ export class EntierPositifValidatorDirective implements Validator {
   validate(control: AbstractControl): ValidationErrors | null {
     const value = Number(control.value);
     return isNaN(value) || value < 1
-      ? {erreur: {valeur: value}}
+      ? {entierPositif: {valeur: value}}
       : null;
   }
 }

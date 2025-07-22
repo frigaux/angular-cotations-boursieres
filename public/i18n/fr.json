@@ -145,6 +145,10 @@
       }
     },
     "GESTION_TABLEAUX": {
+      "TABLEAUX": "Tableaux",
+      "ENREGISTRER": "Enregistrer les tableaux",
+      "PAYSAGE": "Paysage",
+      "PORTRAIT": "Portrait",
       "TABLEAU": {
         "AJOUTER_COLONNE": "Ajouter une colonne",
         "NOM_COLONNE": "Nom",
@@ -195,6 +199,7 @@
         "ERREURS": {
           "COLONNES_PAYSAGE": {
             "REQUIS": "Colonnes du format paysage manquantes",
+            "NOM_REQUIS": "Le nom des colonnes au format paysage est requis",
             "TOTAL_LARGEUR": "Le total des largeurs des colonnes au format paysage doit faire 100%",
             "UNICITE_TYPE": "Les types des colonnes au format paysage doivent être uniques",
             "NOM_DOUBLON": "Doublon dans le nom des colonnes au format paysage",
@@ -203,6 +208,7 @@
           },
           "COLONNES_PORTRAIT": {
             "REQUIS": "Colonnes du format portrait manquantes",
+            "NOM_REQUIS": "Le nom des colonnes au format portrait est requis",
             "TOTAL_LARGEUR": "Le total des largeurs des colonnes au format portrait doit faire 100%",
             "UNICITE_TYPE": "Les types des colonnes au format portrait doivent être uniques",
             "NOM_DOUBLON": "Doublon dans le nom des colonnes au format portrait",

@@ -3,9 +3,7 @@ import {TestBed} from '@angular/core/testing';
 import {TABLEAUX} from '../../../../services/jdd/jdd-tableaux.dataset';
 import {FormControl} from '@angular/forms';
 import {input} from '@angular/core';
-import {DTOColonne} from '../../../../services/tableaux/dto-colonne-portefeuille.interface';
-import {TypesColonnesPortefeuille} from '../../../../services/tableaux/types-colonnes-portefeuille.enum';
-import {TypesColonnesCours} from '../../../../services/tableaux/types-colonnes-cours.enum';
+import {ValidatorInput} from './validator-input.interface';
 
 describe('PasDeNomEnDoubleValidatorDirective', () => {
   let validator: PasDeNomEnDoubleValidatorDirective;
@@ -15,7 +13,7 @@ describe('PasDeNomEnDoubleValidatorDirective', () => {
     control = new FormControl();
     TestBed.runInInjectionContext(() => {
       validator = new PasDeNomEnDoubleValidatorDirective();
-      validator.colonnes = input<DTOColonne<TypesColonnesPortefeuille | TypesColonnesCours>[]>(TABLEAUX.portefeuille.colonnesPaysage);
+      validator.parametres = input<ValidatorInput | undefined>({colonnes: TABLEAUX.portefeuille.colonnesPaysage, colonne: TABLEAUX.portefeuille.colonnesPaysage[0]});
     });
   });
 
@@ -25,7 +23,7 @@ describe('PasDeNomEnDoubleValidatorDirective', () => {
   });
 
   it('Given un validator initialisé when on valide un nom de colonne déjà existant then le validator renvoie une erreur', () => {
-    control.setValue(TABLEAUX.portefeuille.colonnesPaysage[0].nom);
+    control.setValue(TABLEAUX.portefeuille.colonnesPaysage[1].nom);
     expect(validator.validate(control)).toEqual({doublon: {nom: control.value}});
   });
 });

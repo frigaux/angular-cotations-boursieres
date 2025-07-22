@@ -7,7 +7,7 @@ describe('pasDeNomEnDoublonValidator', () => {
   let control: FormControl;
 
   beforeEach(() => {
-    validator = pasDeNomEnDoublonValidator(TABLEAUX.portefeuille.colonnesPaysage);
+    validator = pasDeNomEnDoublonValidator({colonnes: TABLEAUX.portefeuille.colonnesPaysage, colonne: TABLEAUX.portefeuille.colonnesPaysage[0]});
     control = new FormControl();
   });
 
@@ -17,7 +17,7 @@ describe('pasDeNomEnDoublonValidator', () => {
   });
 
   it('Given un validator initialisé when on valide un nom de colonne déjà existant then le validator renvoie une erreur', () => {
-    control.setValue(TABLEAUX.portefeuille.colonnesPaysage[0].nom);
+    control.setValue(TABLEAUX.portefeuille.colonnesPaysage[1].nom);
     expect(validator(control)).toEqual({doublon: {nom: control.value}});
   });
 });

@@ -15,7 +15,8 @@ export class TableauxService {
   private static readonly TABLEAUX: string = 'tableaux';
   private cleMessageErreur?: string;
 
-  private static readonly CONFIGURATION_INITIALE: DTOTableaux = {
+  // TODO : DESKTOP, MOBILE, TABLETTE avec DESKTOP par défaut
+  private static readonly CONFIGURATION_INITIALE_DESKTOP: DTOTableaux = {
     portefeuille: {
       colonnesPaysage: [],
       colonnesPortrait: []
@@ -42,7 +43,7 @@ export class TableauxService {
         console.error(e);
       }
     }
-    return TableauxService.CONFIGURATION_INITIALE;
+    return TableauxService.CONFIGURATION_INITIALE_DESKTOP;
   }
 
   public enregistrer(tableaux: DTOTableaux): string | undefined {
@@ -66,7 +67,7 @@ export class TableauxService {
         console.error(e);
       }
     }
-    return JSON.stringify(TableauxService.CONFIGURATION_INITIALE);
+    return JSON.stringify(TableauxService.CONFIGURATION_INITIALE_DESKTOP);
   }
 
   public import(json: string): string | undefined {
@@ -131,6 +132,10 @@ export class TableauxService {
         this.cleMessageErreur = 'SERVICES.TABLEAUX.PORTEFEUILLE.ERREURS.COLONNES_PAYSAGE.REQUIS';
         return false;
       }
+      if (!this.validerNom(portefeuille.colonnesPaysage)) {
+        this.cleMessageErreur = 'SERVICES.TABLEAUX.PORTEFEUILLE.ERREURS.COLONNES_PAYSAGE.NOM_REQUIS';
+        return false;
+      }
       if (!this.uniciteNom(portefeuille.colonnesPaysage)) {
         this.cleMessageErreur = 'SERVICES.TABLEAUX.PORTEFEUILLE.ERREURS.COLONNES_PAYSAGE.NOM_DOUBLON';
         return false;
@@ -151,8 +156,13 @@ export class TableauxService {
         this.cleMessageErreur = 'SERVICES.TABLEAUX.PORTEFEUILLE.ERREURS.COLONNES_PAYSAGE.UNICITE_TYPE';
         return false;
       }
+
       if (!(portefeuille.colonnesPortrait instanceof Array)) {
         this.cleMessageErreur = 'SERVICES.TABLEAUX.PORTEFEUILLE.ERREURS.COLONNES_PORTRAIT.REQUIS';
+        return false;
+      }
+      if (!this.validerNom(portefeuille.colonnesPortrait)) {
+        this.cleMessageErreur = 'SERVICES.TABLEAUX.PORTEFEUILLE.ERREURS.COLONNES_PORTRAIT.NOM_REQUIS';
         return false;
       }
       if (!this.uniciteNom(portefeuille.colonnesPortrait)) {
@@ -195,6 +205,12 @@ export class TableauxService {
       }
     }
     return true;
+  }
+
+  private validerNom<T extends TypesColonnesPortefeuille | TypesColonnesCours>(colonnes: DTOColonne<T>[]): boolean {
+    return colonnes.find(colonne =>
+      typeof colonne.nom !== "string" || colonne.nom.length === 0
+    ) === undefined;
   }
 
   private uniciteNom<T extends TypesColonnesPortefeuille | TypesColonnesCours>(colonnes: DTOColonne<T>[]) {

@@ -20,6 +20,6 @@ describe('EntierPositifValidatorDirective', () => {
 
   it('Given un validator initialisé when on valide un parametre invalide then le validator renvoie une erreur', () => {
     control.setValue(0);
-    expect(validator.validate(control)).toEqual({erreur: {valeur: control.value}});
+    expect(validator.validate(control)).toEqual({entierPositif: {valeur: control.value}});
   });
 });

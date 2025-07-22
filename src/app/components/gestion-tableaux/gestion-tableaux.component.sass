@@ -1,3 +1,24 @@
+.pi
+  cursor: pointer
+
+div.titre
+  display: flex
+  flex-direction: row
+
+  & > span:nth-child(1), & > span:nth-child(3)
+    font-size: 1.25rem
+
+  & > span:nth-child(2), & > span:nth-child(3), & > app-import-export
+    margin-left: 1.5rem
+
+  .pi-exclamation-circle
+    color: var(--p-red-800)
+    cursor: pointer
+
+  .pi-exclamation-circle::before
+    margin-right: 0.5rem
+
+
 .tableau
   display: flex
 

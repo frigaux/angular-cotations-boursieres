@@ -9,7 +9,8 @@
         <span class="pi pi-trash" (click)="supprimerColonne(deco.colonne)"></span>
         <span>
           <p-floatlabel>
-            <input pInputText [pAutoFocus]="true" [(ngModel)]="deco.colonne.nom" autocomplete="off" required [appPasDeNomEnDoublon]="colonnes"/>
+            <input pInputText [pAutoFocus]="true" [(ngModel)]="deco.colonne.nom" autocomplete="off" required
+                   [appPasDeNomEnDoublon]="{colonnes, colonne: deco.colonne}"/>
             <label>{{ 'COMPOSANTS.GESTION_TABLEAUX.TABLEAU.NOM_COLONNE' | translate }}</label>
           </p-floatlabel>
         </span>
@@ -24,7 +25,8 @@
         <span>
           @if (deco.colonne.parametre !== undefined) {
             <p-floatlabel>
-              <input pInputText [(ngModel)]="deco.colonne.parametre" autocomplete="off" required appEntierPositif/>
+              <input pInputText [(ngModel)]="deco.colonne.parametre" autocomplete="off" required appEntierPositif
+                     type="number"/>
               <label>{{ 'COMPOSANTS.GESTION_TABLEAUX.TABLEAU.PARAMETRE_COLONNE' | translate }}</label>
             </p-floatlabel>
           }
@@ -37,7 +39,8 @@
         </span>
         <span>
           <p-floatlabel>
-            <input pInputText [(ngModel)]="deco.colonne.largeur" autocomplete="off" required appEntierPositif/>
+            <input pInputText [(ngModel)]="deco.colonne.largeur" autocomplete="off" required appEntierPositif
+                   type="number"/>
             <label>{{ 'COMPOSANTS.GESTION_TABLEAUX.TABLEAU.LARGEUR_COLONNE' | translate }}</label>
           </p-floatlabel>
         </span>
