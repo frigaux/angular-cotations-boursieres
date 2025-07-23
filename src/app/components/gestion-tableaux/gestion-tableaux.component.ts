@@ -6,6 +6,8 @@ import {TypesColonnes} from '../../services/tableaux/types-colonnes.enum.ts';
 import {TranslatePipe} from '@ngx-translate/core';
 import {Card} from 'primeng/card';
 import {NgIf} from '@angular/common';
+import {ImportExportComponent} from './import-export/import-export.component';
+import {DTOColonne} from '../../services/tableaux/dto-colonne-portefeuille.interface';
 
 @Component({
   selector: 'app-gestion-tableaux',
@@ -13,7 +15,8 @@ import {NgIf} from '@angular/common';
     TableauComponent,
     TranslatePipe,
     Card,
-    NgIf
+    NgIf,
+    ImportExportComponent
   ],
   templateUrl: './gestion-tableaux.component.html',
   styleUrl: './gestion-tableaux.component.sass'
@@ -29,6 +32,7 @@ export class GestionTableauxComponent implements OnInit {
 
   ngOnInit(): void {
     this.tableaux = this.tableauxService.charger();
+    this.tableauxService.onImport(tableaux => this.tableaux = tableaux);
   }
 
   enregistrer() {

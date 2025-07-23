@@ -1,4 +1,4 @@
-import {Component, input, InputSignal, OnInit} from '@angular/core';
+import {Component, input, InputSignal} from '@angular/core';
 import {DTOColonne} from '../../../services/tableaux/dto-colonne-portefeuille.interface';
 import {TypesColonnesPortefeuille} from '../../../services/tableaux/types-colonnes-portefeuille.enum';
 import {TranslatePipe, TranslateService} from '@ngx-translate/core';
@@ -17,6 +17,7 @@ import {CdkDrag, CdkDragDrop, CdkDropList, moveItemInArray} from '@angular/cdk/d
 import {PasDeNomEnDoubleValidatorDirective} from './validators/pas-de-nom-en-double-validator.directive';
 import {EntierPositifValidatorDirective} from './validators/entier-positif-validator.directive';
 
+// TODO : renommer en configuration tableau
 @Component({
   selector: 'app-tableau',
   imports: [
@@ -36,12 +37,13 @@ import {EntierPositifValidatorDirective} from './validators/entier-positif-valid
   templateUrl: './tableau.component.html',
   styleUrl: './tableau.component.sass'
 })
-export class TableauComponent implements OnInit {
+export class TableauComponent {
   // input/output
-  inputColonnes: InputSignal<DTOColonne<TypesColonnesPortefeuille | TypesColonnesCours>[] | undefined> = input(undefined,
-    {transform: o => this.intercepteurColonnes(o), alias: 'colonnes'});
-  inputTypeColonnes: InputSignal<TypesColonnes | undefined> = input(undefined,
-    {transform: o => this.intercepteurTypeColonnes(o), alias: 'typeColonnes'});
+  inputConfiguration: InputSignal<{
+    colonnes: DTOColonne<TypesColonnesPortefeuille | TypesColonnesCours>[],
+    type: TypesColonnes
+  } | undefined> = input(undefined,
+    {transform: o => this.intercepteurColonnes(o), alias: 'configuration'});
 
   protected colonnes: DTOColonne<TypesColonnesPortefeuille | TypesColonnesCours>[] = [];
   private typeColonnes?: TypesColonnes;
@@ -58,15 +60,15 @@ export class TableauComponent implements OnInit {
               private translateService: TranslateService) {
   }
 
-  private intercepteurColonnes<T extends TypesColonnesPortefeuille | TypesColonnesCours>(colonnes: DTOColonne<T>[] | undefined) {
-    this.colonnes = colonnes || [];
-    return colonnes;
-  }
-
-  private intercepteurTypeColonnes(typeColonnes: TypesColonnes | undefined) {
-    this.typeColonnes = typeColonnes;
-    if (typeColonnes !== undefined) {
-      switch (typeColonnes as TypesColonnes) {
+  private intercepteurColonnes<T extends TypesColonnesPortefeuille | TypesColonnesCours>
+  (colonnes: {
+    colonnes: DTOColonne<TypesColonnesPortefeuille | TypesColonnesCours>[],
+    type: TypesColonnes
+  } | undefined) {
+    this.colonnes = colonnes?.colonnes || [];
+    this.typeColonnes = colonnes?.type;
+    if (this.typeColonnes !== undefined) {
+      switch (this.typeColonnes as TypesColonnes) {
         case TypesColonnes.PORTEFEUILLE:
           this.typesColonnes = [
             this.construireTypeColonne(TypesColonnesPortefeuille.DATE),
@@ -89,11 +91,8 @@ export class TableauComponent implements OnInit {
           break;
       }
     }
-    return typeColonnes;
-  }
-
-  ngOnInit(): void {
     this.decorerColonnes();
+    return colonnes;
   }
 
   ajouterColonne() {

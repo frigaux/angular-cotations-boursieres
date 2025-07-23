@@ -61,16 +61,21 @@
     .pi
       font-size: xxx-large
 
-  app-import-export
-    .pi-exclamation-circle
-      font-size: xxx-large
+  app-gestion-portefeuilles
+    app-import-export
+      .pi-exclamation-circle::before
+        font-size: large
 
   .pi-times-circle
     font-size: xx-large
 
   app-gestion-tableaux
-    .pi-save, .pi-exclamation-circle::before
-      font-size: x-large
+    .pi-save, .pi-exclamation-circle::before, .pi-sync
+      font-size: large
+
+    app-import-export
+      .pi-exclamation-circle::before
+        font-size: large
 
   app-tableau
     .pi-trash

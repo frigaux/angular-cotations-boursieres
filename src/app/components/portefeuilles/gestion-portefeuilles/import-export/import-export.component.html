@@ -5,22 +5,21 @@
           [modal]="true" (onShow)="reinitialiserVue()" [(visible)]="visible">
 
   <div class="conteneur">
-    <p-iftalabel>
-    <textarea id="json" rows="10" cols="80"
-              pTextarea [(ngModel)]="configurationPortefeuilles"
-              [ngClass]="{'error': erreur !== undefined}"></textarea>
+    <p-floatlabel>
+      <textarea id="json" rows="10" cols="80"
+                pTextarea [(ngModel)]="configurationPortefeuilles"
+                [ngClass]="{'error': erreur !== undefined}"></textarea>
       <label for="json">
         {{ 'COMPOSANTS.PORTEFEUILLES.GESTION_PORTEFEUILLES.IMPORT_EXPORT.CONFIGURATION' | translate }}
       </label>
-    </p-iftalabel>
+    </p-floatlabel>
 
     <div class="exemple" (click)="exemple()">
       {{ 'COMPOSANTS.PORTEFEUILLES.GESTION_PORTEFEUILLES.IMPORT_EXPORT.EXEMPLE' | translate }}
     </div>
 
     <div class="erreur" *ngIf="erreur !== undefined">
-      <span class="pi pi-exclamation-circle"></span>
-      <span>{{ erreur }}</span>
+      <span class="pi pi-exclamation-circle">{{ erreur }}</span>
     </div>
 
     <div class="boutons">

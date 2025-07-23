@@ -37,8 +37,10 @@ describe('TableauComponent', () => {
 
   describe('Given des colonnes et typeColonnes en inputs', () => {
     beforeEach(() => {
-      fixture.componentRef.setInput('colonnes', cloneTABLEAUX().portefeuille.colonnesPaysage);
-      fixture.componentRef.setInput('typeColonnes', TypesColonnes.PORTEFEUILLE);
+      fixture.componentRef.setInput('configuration', {
+        colonnes: cloneTABLEAUX().portefeuille.colonnesPaysage,
+        type: TypesColonnes.PORTEFEUILLE
+      });
     });
 
     it('when #ngOnInit then les tableaux sont affichés', () => {

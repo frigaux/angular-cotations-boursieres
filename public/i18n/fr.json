@@ -145,7 +145,7 @@
       }
     },
     "GESTION_TABLEAUX": {
-      "TABLEAUX": "Tableaux",
+      "TABLEAUX": "Configuration des colonnes des tableaux",
       "ENREGISTRER": "Enregistrer les tableaux",
       "PAYSAGE": "Paysage",
       "PORTRAIT": "Portrait",
@@ -156,6 +156,15 @@
         "PARAMETRE_COLONNE": "Jour",
         "TRI_COLONNE": "Tri",
         "LARGEUR_COLONNE": "Largeur"
+      },
+      "IMPORT_EXPORT": {
+        "IMPORT_EXPORT": "Import/export de la configuration des colonnes des tableaux",
+        "CONFIGURATION": "Configuration au format JSON",
+        "EXPORTER": "Exporter",
+        "IMPORTER": "Importer",
+        "EXEMPLE_DESKTOP": "Exemple desktop",
+        "EXEMPLE_MOBILE": "Exemple mobile",
+        "EXEMPLE_TABLETTE": "Exemple tablette"
       }
     }
   },

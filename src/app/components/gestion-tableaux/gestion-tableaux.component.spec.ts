@@ -12,7 +12,7 @@ describe('GestionTableauxComponent', () => {
 
   const cloneTABLEAUX: Function = () => JSON.parse(JSON.stringify(TABLEAUX));
 
-  const mockTableauxService = jasmine.createSpyObj('TableauxService', ['charger', 'typeAvecParametre']);
+  const mockTableauxService = jasmine.createSpyObj('TableauxService', ['charger', 'typeAvecParametre', 'onImport', 'enregistrer']);
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
@@ -42,6 +42,7 @@ describe('GestionTableauxComponent', () => {
     beforeEach(() => {
       mockTableauxService.charger.and.returnValue(cloneTABLEAUX());
       mockTableauxService.typeAvecParametre.and.returnValue(true);
+      mockTableauxService.enregistrer.and.returnValue(undefined);
     });
 
     it('when #ngOnInit then les tableaux sont chargés', () => {
@@ -49,6 +50,8 @@ describe('GestionTableauxComponent', () => {
       fixture.detectChanges(); // appelle le ngOnInit
       expect(component).toBeDefined();
       expect(component.tableaux).toEqual(TABLEAUX);
+      component.enregistrer();
+      expect(component.erreur).toBeUndefined();
     });
   });
 });

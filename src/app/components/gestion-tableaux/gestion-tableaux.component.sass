@@ -1,9 +1,21 @@
-.pi
-  cursor: pointer
+div.erreur
+  margin: 1rem
+
+  span
+    font-size: 1.25rem
+
+  .pi-exclamation-circle
+    color: var(--p-red-800)
+
+  .pi-exclamation-circle::before
+    margin-right: 0.5rem
 
 div.titre
   display: flex
   flex-direction: row
+
+  .pi
+    cursor: pointer
 
   & > span:nth-child(1), & > span:nth-child(3)
     font-size: 1.25rem
@@ -11,16 +23,12 @@ div.titre
   & > span:nth-child(2), & > span:nth-child(3), & > app-import-export
     margin-left: 1.5rem
 
-  .pi-exclamation-circle
-    color: var(--p-red-800)
-    cursor: pointer
-
-  .pi-exclamation-circle::before
-    margin-right: 0.5rem
-
 
 .tableau
   display: flex
+
+  .pi
+    cursor: pointer
 
   .paysage, .portrait
     margin: 0.5rem

@@ -7,19 +7,310 @@ import {TypesColonnesPortefeuille} from './types-colonnes-portefeuille.enum';
 import {CoursPortefeuille} from '../../components/portefeuilles/cours-portefeuille.class';
 import {CurrencyPipe, DatePipe, DecimalPipe, PercentPipe} from '@angular/common';
 import {TypesColonnesCours} from './types-colonnes-cours.enum';
+import {Observable, Subscriber} from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class TableauxService {
   private static readonly TABLEAUX: string = 'tableaux';
+  private static readonly OBSERVERS_IMPORT: Array<Subscriber<DTOTableaux>> = [];
+  private static readonly OBSERVABLE_IMPORT: Observable<DTOTableaux> = new Observable(observer => {
+    TableauxService.OBSERVERS_IMPORT.push(observer);
+  });
+
   private cleMessageErreur?: string;
 
-  // TODO : DESKTOP, MOBILE, TABLETTE avec DESKTOP par défaut
-  private static readonly CONFIGURATION_INITIALE_DESKTOP: DTOTableaux = {
-    portefeuille: {
-      colonnesPaysage: [],
-      colonnesPortrait: []
+  public static readonly CONFIGURATION_INITIALE: {
+    DESKTOP: DTOTableaux,
+    MOBILE: DTOTableaux,
+    TABLETTE: DTOTableaux
+  } = {
+    DESKTOP: {
+      portefeuille: {
+        colonnesPaysage: [
+          {
+            nom: 'Libellé',
+            type: TypesColonnesPortefeuille.LIBELLE,
+            tri: true,
+            largeur: 20
+          },
+          {
+            nom: 'Alertes',
+            type: TypesColonnesPortefeuille.ALERTES,
+            tri: false,
+            largeur: 17
+          },
+          {
+            nom: 'Clôture',
+            type: TypesColonnesPortefeuille.CLOTURE,
+            tri: false,
+            largeur: 9
+          },
+          {
+            nom: 'Var./Préc.',
+            type: TypesColonnesPortefeuille.VARIATION,
+            parametre: 1,
+            tri: true,
+            largeur: 9
+          },
+          {
+            nom: 'Var./5j',
+            type: TypesColonnesPortefeuille.VARIATION,
+            parametre: 5,
+            tri: true,
+            largeur: 9
+          },
+          {
+            nom: 'MM5j',
+            type: TypesColonnesPortefeuille.MOYENNE_MOBILE,
+            parametre: 5,
+            tri: false,
+            largeur: 9
+          },
+          {
+            nom: 'MM20j',
+            type: TypesColonnesPortefeuille.MOYENNE_MOBILE,
+            parametre: 20,
+            tri: false,
+            largeur: 9
+          },
+          {
+            nom: 'MM50j',
+            type: TypesColonnesPortefeuille.MOYENNE_MOBILE,
+            parametre: 50,
+            tri: false,
+            largeur: 9
+          },
+          {
+            nom: 'MM100j',
+            type: TypesColonnesPortefeuille.MOYENNE_MOBILE,
+            parametre: 100,
+            tri: false,
+            largeur: 9
+          }
+        ],
+        colonnesPortrait: [
+          {
+            nom: 'Libellé',
+            type: TypesColonnesPortefeuille.LIBELLE,
+            tri: true,
+            largeur: 30
+          },
+          {
+            nom: 'Alertes',
+            type: TypesColonnesPortefeuille.ALERTES,
+            tri: false,
+            largeur: 25
+          },
+          {
+            nom: 'Clôture',
+            type: TypesColonnesPortefeuille.CLOTURE,
+            tri: false,
+            largeur: 15
+          },
+          {
+            nom: 'Var./Préc.',
+            type: TypesColonnesPortefeuille.VARIATION,
+            parametre: 1,
+            tri: true,
+            largeur: 15
+          },
+          {
+            nom: 'MM5j',
+            type: TypesColonnesPortefeuille.MOYENNE_MOBILE,
+            parametre: 5,
+            tri: false,
+            largeur: 15
+          }
+        ]
+      }
+    },
+    MOBILE: {
+      portefeuille: {
+        colonnesPaysage: [
+          {
+            nom: 'Libellé',
+            type: TypesColonnesPortefeuille.LIBELLE,
+            tri: true,
+            largeur: 25
+          },
+          {
+            nom: 'Alertes',
+            type: TypesColonnesPortefeuille.ALERTES,
+            tri: false,
+            largeur: 20
+          },
+          {
+            nom: 'Clôture',
+            type: TypesColonnesPortefeuille.CLOTURE,
+            tri: false,
+            largeur: 11
+          },
+          {
+            nom: 'Var./Préc.',
+            type: TypesColonnesPortefeuille.VARIATION,
+            parametre: 1,
+            tri: true,
+            largeur: 11
+          },
+          {
+            nom: 'MM5j',
+            type: TypesColonnesPortefeuille.MOYENNE_MOBILE,
+            parametre: 5,
+            tri: false,
+            largeur: 11
+          },
+          {
+            nom: 'MM20j',
+            type: TypesColonnesPortefeuille.MOYENNE_MOBILE,
+            parametre: 20,
+            tri: false,
+            largeur: 11
+          },
+          {
+            nom: 'MM50j',
+            type: TypesColonnesPortefeuille.MOYENNE_MOBILE,
+            parametre: 50,
+            tri: false,
+            largeur: 11
+          }
+        ],
+        colonnesPortrait: [
+          {
+            nom: 'Libellé',
+            type: TypesColonnesPortefeuille.LIBELLE,
+            tri: true,
+            largeur: 30
+          },
+          {
+            nom: 'Alertes',
+            type: TypesColonnesPortefeuille.ALERTES,
+            tri: false,
+            largeur: 25
+          },
+          {
+            nom: 'Clôture',
+            type: TypesColonnesPortefeuille.CLOTURE,
+            tri: false,
+            largeur: 15
+          },
+          {
+            nom: 'Var./Préc.',
+            type: TypesColonnesPortefeuille.VARIATION,
+            parametre: 1,
+            tri: true,
+            largeur: 15
+          },
+          {
+            nom: 'MM5j',
+            type: TypesColonnesPortefeuille.MOYENNE_MOBILE,
+            parametre: 5,
+            tri: false,
+            largeur: 15
+          }
+        ]
+      }
+    },
+    TABLETTE: {
+      portefeuille: {
+        colonnesPaysage: [
+          {
+            nom: 'Libellé',
+            type: TypesColonnesPortefeuille.LIBELLE,
+            tri: true,
+            largeur: 20
+          },
+          {
+            nom: 'Alertes',
+            type: TypesColonnesPortefeuille.ALERTES,
+            tri: false,
+            largeur: 17
+          },
+          {
+            nom: 'Clôture',
+            type: TypesColonnesPortefeuille.CLOTURE,
+            tri: false,
+            largeur: 9
+          },
+          {
+            nom: 'Var./Préc.',
+            type: TypesColonnesPortefeuille.VARIATION,
+            parametre: 1,
+            tri: true,
+            largeur: 9
+          },
+          {
+            nom: 'Var./5j',
+            type: TypesColonnesPortefeuille.VARIATION,
+            parametre: 5,
+            tri: true,
+            largeur: 9
+          },
+          {
+            nom: 'MM5j',
+            type: TypesColonnesPortefeuille.MOYENNE_MOBILE,
+            parametre: 5,
+            tri: false,
+            largeur: 9
+          },
+          {
+            nom: 'MM20j',
+            type: TypesColonnesPortefeuille.MOYENNE_MOBILE,
+            parametre: 20,
+            tri: false,
+            largeur: 9
+          },
+          {
+            nom: 'MM50j',
+            type: TypesColonnesPortefeuille.MOYENNE_MOBILE,
+            parametre: 50,
+            tri: false,
+            largeur: 9
+          },
+          {
+            nom: 'MM100j',
+            type: TypesColonnesPortefeuille.MOYENNE_MOBILE,
+            parametre: 100,
+            tri: false,
+            largeur: 9
+          }
+        ],
+        colonnesPortrait: [
+          {
+            nom: 'Libellé',
+            type: TypesColonnesPortefeuille.LIBELLE,
+            tri: true,
+            largeur: 30
+          },
+          {
+            nom: 'Alertes',
+            type: TypesColonnesPortefeuille.ALERTES,
+            tri: false,
+            largeur: 25
+          },
+          {
+            nom: 'Clôture',
+            type: TypesColonnesPortefeuille.CLOTURE,
+            tri: false,
+            largeur: 15
+          },
+          {
+            nom: 'Var./Préc.',
+            type: TypesColonnesPortefeuille.VARIATION,
+            parametre: 1,
+            tri: true,
+            largeur: 15
+          },
+          {
+            nom: 'MM5j',
+            type: TypesColonnesPortefeuille.MOYENNE_MOBILE,
+            parametre: 5,
+            tri: false,
+            largeur: 15
+          }
+        ]
+      }
     }
   };
 
@@ -43,7 +334,7 @@ export class TableauxService {
         console.error(e);
       }
     }
-    return TableauxService.CONFIGURATION_INITIALE_DESKTOP;
+    return TableauxService.CONFIGURATION_INITIALE['DESKTOP'];
   }
 
   public enregistrer(tableaux: DTOTableaux): string | undefined {
@@ -67,7 +358,7 @@ export class TableauxService {
         console.error(e);
       }
     }
-    return JSON.stringify(TableauxService.CONFIGURATION_INITIALE_DESKTOP);
+    return JSON.stringify(TableauxService.CONFIGURATION_INITIALE['DESKTOP']);
   }
 
   public import(json: string): string | undefined {
@@ -75,6 +366,7 @@ export class TableauxService {
       const tableaux: any = JSON.parse(json);
       if (this.validerTableaux(tableaux)) {
         window.localStorage.setItem(TableauxService.TABLEAUX, json);
+        TableauxService.OBSERVERS_IMPORT.forEach(observer => observer.next(tableaux));
         return undefined;
       } else {
         return this.translateService.instant(this.cleMessageErreur!);
@@ -82,6 +374,10 @@ export class TableauxService {
     } catch (e) { // JSON mal formé
       return (e as SyntaxError).message;
     }
+  }
+
+  public onImport(handler: ((value: DTOTableaux) => void)): void {
+    TableauxService.OBSERVABLE_IMPORT.subscribe(handler);
   }
 
   public typeAvecParametre<T extends TypesColonnesPortefeuille | TypesColonnesCours>(type: T) {

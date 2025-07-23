@@ -3,6 +3,7 @@ import {DTOPortefeuille} from '../../../../services/portefeuilles/dto-portefeuil
 import {TranslatePipe} from '@ngx-translate/core';
 import {NgIf} from '@angular/common';
 
+// TODO : configuration portefeuille
 @Component({
   selector: 'app-portefeuille',
   imports: [

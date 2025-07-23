@@ -4,19 +4,19 @@
       <span>{{ 'COMPOSANTS.GESTION_TABLEAUX.TABLEAUX' | translate }}</span>
       <span class="pi pi-save" (click)="enregistrer()"
             title="{{ 'COMPOSANTS.GESTION_TABLEAUX.ENREGISTRER' | translate }}"></span>
-      <span class="pi pi-exclamation-circle" *ngIf="erreur !== undefined">{{ erreur }}</span>
-      <!--    <app-import-export></app-import-export>-->
+      <app-import-export></app-import-export>
+    </div>
+    <div class="erreur" *ngIf="erreur !== undefined">
+      <span class="pi pi-exclamation-circle">{{ erreur }}</span>
     </div>
     <div class="tableau">
       <div class="paysage">
         <h4>{{ 'COMPOSANTS.GESTION_TABLEAUX.PAYSAGE' | translate }}</h4>
-        <app-tableau [colonnes]="tableaux.portefeuille.colonnesPaysage"
-                     [typeColonnes]="TypesColonnes.PORTEFEUILLE"></app-tableau>
+        <app-tableau [configuration]="{colonnes: tableaux.portefeuille.colonnesPaysage, type: TypesColonnes.PORTEFEUILLE}"></app-tableau>
       </div>
       <div class="portrait">
         <h4>{{ 'COMPOSANTS.GESTION_TABLEAUX.PORTRAIT' | translate }}</h4>
-        <app-tableau [colonnes]="tableaux.portefeuille.colonnesPortrait"
-                     [typeColonnes]="TypesColonnes.PORTEFEUILLE"></app-tableau>
+        <app-tableau [configuration]="{colonnes: tableaux.portefeuille.colonnesPortrait, type: TypesColonnes.PORTEFEUILLE}"></app-tableau>
       </div>
     </div>
   </p-card>

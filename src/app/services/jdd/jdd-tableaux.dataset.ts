@@ -82,7 +82,7 @@ export const COLONNE_COURS_20: DTOColonne<TypesColonnesPortefeuille> = {
 };
 
 export const COLONNE_MOYENNE_MOBILE_20: DTOColonne<TypesColonnesPortefeuille> = {
-  nom: 'Alertes',
+  nom: 'MM1',
   type: TypesColonnesPortefeuille.MOYENNE_MOBILE,
   parametre: 1,
   tri: false,
