@@ -38,7 +38,7 @@ export class ImportExportComponent {
   }
 
   exporter() {
-    this.configurationPortefeuilles = this.portefeuillesService.export();
+    this.configurationPortefeuilles = JSON.stringify(this.portefeuillesService.charger(), null, 2);
   }
 
   importer() {

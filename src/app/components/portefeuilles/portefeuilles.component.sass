@@ -21,15 +21,16 @@ div.conteneur
           th:nth-child(2)
             width: 12%
 
-          th:nth-child(3), th:nth-child(n+8)
+          th:nth-child(3)
             width: 8%
-            text-align: right
 
-          th:nth-child(n+4):nth-child(-n+7)
-            width: 9%
-            text-align: right
+          th:nth-child(4), :nth-child(5)
+            width: 10%
 
-          td:nth-child(n+3)
+          th:nth-child(n+6)
+            width: 8%
+
+          th:nth-child(n+3), td:nth-child(n+3)
             text-align: right
 
 // tablettes orientation verticale
@@ -56,13 +57,13 @@ div.conteneur
     p-table
       tr
         th:nth-child(1)
-          width: 30%
+          width: 40%
 
         th:nth-child(2)
-          width: 25%
+          width: 40%
 
-        th:nth-child(n+9)
-          width: 15%
+        th:nth-child(3)
+          width: 20%
 
-        th:nth-child(n+3):nth-child(-n+8), td:nth-child(n+3):nth-child(-n+8)
+        th:nth-child(n+4), td:nth-child(n+4)
           display: none

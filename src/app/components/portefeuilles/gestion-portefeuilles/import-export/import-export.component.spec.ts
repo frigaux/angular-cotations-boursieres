@@ -8,7 +8,7 @@ describe('ImportExportComponent', () => {
   let component: ImportExportComponent;
   let fixture: ComponentFixture<ImportExportComponent>;
 
-  const portefeuilles = JSON.stringify(PORTEFEUILLES);
+  const portefeuilles = JSON.stringify(PORTEFEUILLES, null, 2);
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({

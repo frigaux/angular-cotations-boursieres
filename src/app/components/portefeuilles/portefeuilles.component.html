@@ -44,14 +44,6 @@
                   {{ 'COMPOSANTS.PORTEFEUILLES.VAR5' | translate }}
                   <p-sortIcon field="var5"/>
                 </th>
-                <th pSortableColumn="var20">
-                  {{ 'COMPOSANTS.PORTEFEUILLES.VAR20' | translate }}
-                  <p-sortIcon field="var20"/>
-                </th>
-                <th pSortableColumn="var50">
-                  {{ 'COMPOSANTS.PORTEFEUILLES.VAR50' | translate }}
-                  <p-sortIcon field="var50"/>
-                </th>
                 <th>
                   {{ 'COMPOSANTS.PORTEFEUILLES.MM5' | translate }}
                 </th>
@@ -61,39 +53,45 @@
                 <th>
                   {{ 'COMPOSANTS.PORTEFEUILLES.MM50' | translate }}
                 </th>
+                <th>
+                  {{ 'COMPOSANTS.PORTEFEUILLES.MM100' | translate }}
+                </th>
+                <th>
+                  {{ 'COMPOSANTS.PORTEFEUILLES.MM200' | translate }}
+                </th>
               </tr>
             </ng-template>
             <ng-template #body let-cours>
               <tr (click)="basculerAffichageCours(cours)">
                 <td>
                   <span class="pi"
-                        [class]="classeIconeVariation(cours.var1)"></span>
+                        [class]="classeIconeVariation(cours.calculerVariation(1))"></span>
                   {{ cours.libelle }}
                 </td>
                 <td>
                   <app-alertes [alertes]="cours.alertes"></app-alertes>
                 </td>
                 <td>{{ cours.cloture | currency:'€' }}</td>
-                <td [class]="classeCssVariation(cours.var1)">
-                  {{ cours.var1 | percent:'1.2-2' }}
+                <td [class]="classeCssVariation(cours.calculerVariation(1))">
+                  {{ cours.calculerVariation(1) | percent:'1.2-2' }}
                 </td>
-                <td [class]="classeCssVariation(cours.var5)">
-                  {{ cours.var5 | percent:'1.2-2' }}
+                <td [class]="classeCssVariation(cours.calculerVariation(5))">
+                  {{ cours.calculerVariation(5) | percent:'1.2-2' }}
                 </td>
-                <td [class]="classeCssVariation(cours.var20)">
-                  {{ cours.var20 | percent:'1.2-2' }}
+                <td [class]="classeCssMM(cours, cours.moyennesMobiles[4])">
+                  {{ cours.moyennesMobiles[4] | currency:'€' }}
                 </td>
-                <td [class]="classeCssVariation(cours.var50)">
-                  {{ cours.var50 | percent:'1.2-2' }}
+                <td [class]="classeCssMM(cours, cours.moyennesMobiles[19])">
+                  {{ cours.moyennesMobiles[19] | currency:'€' }}
                 </td>
-                <td [class]="classeCssMM(cours, cours.mm5)">
-                  {{ cours.mm5 | currency:'€' }}
+                <td [class]="classeCssMM(cours, cours.moyennesMobiles[49])">
+                  {{ cours.moyennesMobiles[49] | currency:'€' }}
                 </td>
-                <td [class]="classeCssMM(cours, cours.mm20)">
-                  {{ cours.mm20 | currency:'€' }}
+                <td [class]="classeCssMM(cours, cours.moyennesMobiles[99])">
+                  {{ cours.moyennesMobiles[99] | currency:'€' }}
                 </td>
-                <td [class]="classeCssMM(cours, cours.mm50)">
-                  {{ cours.mm50 | currency:'€' }}
+                <td [class]="classeCssMM(cours, cours.moyennesMobiles[199])">
+                  {{ cours.moyennesMobiles[199] | currency:'€' }}
                 </td>
               </tr>
             </ng-template>

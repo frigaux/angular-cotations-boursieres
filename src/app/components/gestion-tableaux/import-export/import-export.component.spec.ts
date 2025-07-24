@@ -9,7 +9,7 @@ describe('ImportExportComponent', () => {
   let component: ImportExportComponent;
   let fixture: ComponentFixture<ImportExportComponent>;
 
-  const tableaux = JSON.stringify(TABLEAUX);
+  const tableaux = JSON.stringify(TABLEAUX, null, 2);
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({

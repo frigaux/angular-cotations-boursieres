@@ -19,39 +19,159 @@ export class PortefeuillesService {
 
   private cleMessageErreur: string | undefined;
 
-  public static readonly CONFIGURATION_INITIALE = [{
-    "nom": "Spéculation",
-    "parDefaut": true,
-    "tickers": ["CA", "SAN", "SK", "SGO", "GLE", "BNP", "DSY", "STMPA", "AC", "TTE"],
-    "alertes": [{"nom": "Remontée", "condition": "M20 > M10 && M10 > M5 && C2 < (0.98 * C1)"}, {
-      "nom": "Chute",
-      "condition": "M20 < M10 && M10 < M5 && C2 > (1.02 * C1)"
-    }, {"nom": "Choc", "condition": "C2 < 0.98 * C1 || C2 > 1.02 * C1"}]
-  }, {
-    "nom": "Spéculation2",
-    "parDefaut": false,
-    "tickers": ["PUB", "ALO", "EDEN", "WLN", "VLTSA", "FR", "OVH", "ATO", "NXI"],
-    "alertes": [{"nom": "Remontée", "condition": "M20 > M10 && M10 > M5 && C2 < (0.98 * C1)"}, {
-      "nom": "Chute",
-      "condition": "M20 < M10 && M10 < M5 && C2 > (1.02 * C1)"
-    }, {"nom": "Choc", "condition": "C2 < 0.98 * C1 || C2 > 1.02 * C1"}]
-  }, {
-    "nom": "Cac40",
-    "parDefaut": false,
-    "tickers": ["ACA", "AI", "CA", "AC", "EN", "CS", "BN", "EL", "CAP", "BNP", "BVI", "ENGI", "EDEN", "DSY", "MT", "AIR", "ERF", "RMS", "KER", "LR", "OR", "MC", "ML", "ORA", "RI", "PUB", "RNO", "SAF", "SGO", "SAN", "SU", "GLE", "STLAP", "STMPA", "TEP", "HO", "TTE", "URW", "VIE", "DG"],
-    "alertes": [{"nom": "Remontée", "condition": "M20 > M10 && M10 > M5 && C2 < (0.98 * C1)"}, {
-      "nom": "Chute",
-      "condition": "M20 < M10 && M10 < M5 && C2 > (1.02 * C1)"
-    }, {"nom": "Choc", "condition": "C2 < 0.98 * C1 || C2 > 1.02 * C1"}]
-  }, {
-    "nom": "Charles Gave",
-    "parDefaut": false,
-    "tickers": ["AC", "AI", "CAP", "BN", "RMS", "KER", "OR", "MC", "RI", "SU", "SW", "TTE"],
-    "alertes": [{"nom": "Remontée", "condition": "M20 > M10 && M10 > M5 && C2 < (0.98 * C1)"}, {
-      "nom": "Chute",
-      "condition": "M20 < M10 && M10 < M5 && C2 > (1.02 * C1)"
-    }, {"nom": "Choc", "condition": "C2 < 0.98 * C1 || C2 > 1.02 * C1"}]
-  }];
+  public static readonly CONFIGURATION_INITIALE = [
+    {
+      "nom": "Spéculation",
+      "parDefaut": true,
+      "tickers": [
+        "CA",
+        "TTE",
+        "AC",
+        "SK",
+        "SGO",
+        "GLE",
+        "BNP",
+        "ALO",
+        "STMPA"
+      ],
+      "alertes": [
+        {
+          "nom": "Remontée",
+          "condition": "M20 > M10 && M10 > M5 && C2 < (0.98 * C1)"
+        },
+        {
+          "nom": "Chute",
+          "condition": "M20 < M10 && M10 < M5 && C2 > (1.02 * C1)"
+        },
+        {
+          "nom": "Choc",
+          "condition": "C2 < 0.98 * C1 || C2 > 1.02 * C1"
+        }
+      ]
+    },
+    {
+      "nom": "Spéculation2",
+      "parDefaut": false,
+      "tickers": [
+        "SAN",
+        "PUB",
+        "EDEN",
+        "WLN",
+        "VLTSA",
+        "FR",
+        "DSY",
+        "OVH",
+        "ATO",
+        "NXI"
+      ],
+      "alertes": [
+        {
+          "nom": "Remontée",
+          "condition": "M20 > M10 && M10 > M5 && C2 < (0.98 * C1)"
+        },
+        {
+          "nom": "Chute",
+          "condition": "M20 < M10 && M10 < M5 && C2 > (1.02 * C1)"
+        },
+        {
+          "nom": "Choc",
+          "condition": "C2 < 0.98 * C1 || C2 > 1.02 * C1"
+        }
+      ]
+    },
+    {
+      "nom": "Cac40",
+      "parDefaut": false,
+      "tickers": [
+        "ACA",
+        "AI",
+        "CA",
+        "AC",
+        "EN",
+        "CS",
+        "BN",
+        "EL",
+        "CAP",
+        "BNP",
+        "BVI",
+        "ENGI",
+        "EDEN",
+        "DSY",
+        "MT",
+        "AIR",
+        "ERF",
+        "RMS",
+        "KER",
+        "LR",
+        "OR",
+        "MC",
+        "ML",
+        "ORA",
+        "RI",
+        "PUB",
+        "RNO",
+        "SAF",
+        "SGO",
+        "SAN",
+        "SU",
+        "GLE",
+        "STLAP",
+        "STMPA",
+        "TEP",
+        "HO",
+        "TTE",
+        "URW",
+        "VIE",
+        "DG"
+      ],
+      "alertes": [
+        {
+          "nom": "Remontée",
+          "condition": "M20 > M10 && M10 > M5 && C2 < (0.98 * C1)"
+        },
+        {
+          "nom": "Chute",
+          "condition": "M20 < M10 && M10 < M5 && C2 > (1.02 * C1)"
+        },
+        {
+          "nom": "Choc",
+          "condition": "C2 < 0.98 * C1 || C2 > 1.02 * C1"
+        }
+      ]
+    },
+    {
+      "nom": "Charles Gave",
+      "parDefaut": false,
+      "tickers": [
+        "AC",
+        "AI",
+        "CAP",
+        "BN",
+        "RMS",
+        "KER",
+        "OR",
+        "MC",
+        "RI",
+        "SU",
+        "SW",
+        "TTE"
+      ],
+      "alertes": [
+        {
+          "nom": "Remontée",
+          "condition": "M20 > M10 && M10 > M5 && C2 < (0.98 * C1)"
+        },
+        {
+          "nom": "Chute",
+          "condition": "M20 < M10 && M10 < M5 && C2 > (1.02 * C1)"
+        },
+        {
+          "nom": "Choc",
+          "condition": "C2 < 0.98 * C1 || C2 > 1.02 * C1"
+        }
+      ]
+    }
+  ];
 
   constructor(private translateService: TranslateService) {
   }
@@ -71,33 +191,21 @@ export class PortefeuillesService {
     return [];
   }
 
-  public enregistrer(portefeuilles: Array<DTOPortefeuille>): void {
+  public enregistrer(portefeuilles: Array<DTOPortefeuille>): string | undefined {
     if (this.validerPortefeuilles(portefeuilles)) {
       window.localStorage.setItem(PortefeuillesService.PORTEFEUILLES, JSON.stringify(portefeuilles));
       PortefeuillesService.OBSERVERS_UPDATE.forEach(observer => observer.next(portefeuilles));
+      return undefined;
+    } else {
+      return this.translateService.instant(this.cleMessageErreur!);
     }
-  }
-
-  public export(): string {
-    const json = window.localStorage.getItem(PortefeuillesService.PORTEFEUILLES);
-    if (json) {
-      try {
-        const portefeuilles: any = JSON.parse(json);
-        if (this.validerPortefeuilles(portefeuilles)) {
-          return json;
-        }
-      } catch (e) {
-        console.error(e);
-      }
-    }
-    return '[]';
   }
 
   public import(json: string): string | undefined {
     try {
       const portefeuilles: any = JSON.parse(json);
       if (this.validerPortefeuilles(portefeuilles)) {
-        window.localStorage.setItem(PortefeuillesService.PORTEFEUILLES, json);
+        window.localStorage.setItem(PortefeuillesService.PORTEFEUILLES, JSON.stringify(portefeuilles));
         PortefeuillesService.OBSERVERS_IMPORT.forEach(observer => observer.next(portefeuilles));
         PortefeuillesService.OBSERVERS_UPDATE.forEach(observer => observer.next(portefeuilles));
         return undefined;

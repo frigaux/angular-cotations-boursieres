@@ -4,7 +4,8 @@ import {TableauxService} from './tableaux.service';
 import {TranslateModule} from '@ngx-translate/core';
 import {CurrencyPipe, DatePipe, DecimalPipe, PercentPipe} from '@angular/common';
 import {
-  COLONNE_ALERTES_20, COLONNE_ALERTES_30,
+  COLONNE_ALERTES_20,
+  COLONNE_ALERTES_30,
   COLONNE_CLOTURE_20,
   COLONNE_COURS_20,
   COLONNE_DATE_20,
@@ -23,6 +24,7 @@ import {
 import {COURS_PORTEFEUILLE} from '../jdd/jdd-cours.dataset';
 import {TypesColonnesPortefeuille} from './types-colonnes-portefeuille.enum';
 import {DTOColonne} from './dto-colonne-portefeuille.interface';
+import {DTOTableaux} from './dto-tableaux.interface';
 
 describe('TableauxService', () => {
   let service: TableauxService;
@@ -53,12 +55,6 @@ describe('TableauxService', () => {
     expect(service.charger()).toEqual(TABLEAUX);
   });
 
-  it('Given des tableaux when #import then #export renvoie les tableaux', () => {
-    const tableaux: string = JSON.stringify(TABLEAUX);
-    expect(service.import(tableaux)).toBeUndefined();
-    expect(service.export()).toEqual(tableaux);
-  });
-
   it('Given une colonne et un cours when #valeurPourUnCours sur la colonne then la fonction renvoie bien la valeur', () => {
     expect(service.valeurPourUnCours(COLONNE_DATE_20)(COURS_PORTEFEUILLE)).toBe('09/05/2025');
     expect(service.valeurPourUnCours(COLONNE_MARCHE_20)(COURS_PORTEFEUILLE)).toBe(`ENUMERATIONS.MARCHE.${COURS_PORTEFEUILLE.marche}`);
@@ -75,55 +71,103 @@ describe('TableauxService', () => {
     expect(service.valeurPourUnCours(COLONNE_VARIATION_20)(COURS_PORTEFEUILLE)).toBe('1.16%');
   });
 
-  it('Given des tableaux invalides when #import then on récupère un message d\'erreur', () => {
-    expect(service.import(JSON.stringify({portefeuille: {}})))
-      .toBe('SERVICES.TABLEAUX.PORTEFEUILLE.ERREURS.COLONNES_PAYSAGE.REQUIS');
 
-    expect(service.import(JSON.stringify({portefeuille: {colonnesPaysage: [COLONNE_LIBELLE_40, COLONNE_LIBELLE_40, COLONNE_CLOTURE_20]}})))
-      .toBe('SERVICES.TABLEAUX.PORTEFEUILLE.ERREURS.COLONNES_PAYSAGE.NOM_DOUBLON');
+  describe('Given #onImport', () => {
+    let resultatImport: DTOTableaux | undefined;
+    const tableaux: string = JSON.stringify(TABLEAUX);
 
-    const largeurInvalidePaysage: DTOColonne<TypesColonnesPortefeuille> = JSON.parse(JSON.stringify(COLONNE_LIBELLE_40));
-    largeurInvalidePaysage.largeur = 0;
-    expect(service.import(JSON.stringify({portefeuille: {colonnesPaysage: [largeurInvalidePaysage, COLONNE_ALERTES_20, COLONNE_CLOTURE_20, COLONNE_VARIATION_20]}})))
-      .toBe('SERVICES.TABLEAUX.PORTEFEUILLE.ERREURS.COLONNES_PAYSAGE.LARGEUR_INVALIDE');
+    beforeEach(() => {
+      resultatImport = undefined;
+      service.onImport(tableaux => resultatImport = tableaux);
+    });
 
-    const parametreInvalidePaysage: DTOColonne<TypesColonnesPortefeuille> = JSON.parse(JSON.stringify(COLONNE_VARIATION_20));
-    parametreInvalidePaysage.parametre = undefined;
-    expect(service.import(JSON.stringify({portefeuille: {colonnesPaysage: [COLONNE_LIBELLE_40, COLONNE_ALERTES_20, COLONNE_CLOTURE_20, parametreInvalidePaysage]}})))
-      .toBe('SERVICES.TABLEAUX.PORTEFEUILLE.ERREURS.COLONNES_PAYSAGE.PARAMETRE_INVALIDE');
+    it('when #import du format non JSON then #onImport renvoie undefined', () => {
+      expect(service.import("+ nimp (")).toBeDefined();
+      expect(resultatImport).toEqual(undefined);
+    });
 
-    expect(service.import(JSON.stringify({portefeuille: {colonnesPaysage: [COLONNE_LIBELLE_40]}})))
-      .toBe('SERVICES.TABLEAUX.PORTEFEUILLE.ERREURS.COLONNES_PAYSAGE.TOTAL_LARGEUR');
+    it('when #import des tableaux invalides then on récupère un message d\'erreur', () => {
+      expect(service.import(JSON.stringify({portefeuille: {}})))
+        .toBe('SERVICES.TABLEAUX.PORTEFEUILLE.ERREURS.COLONNES_PAYSAGE.REQUIS');
 
-    const typeDoublonPaysage: DTOColonne<TypesColonnesPortefeuille> = JSON.parse(JSON.stringify(COLONNE_LIBELLE_40));
-    typeDoublonPaysage.nom = 'Libellé2';
-    expect(service.import(JSON.stringify({portefeuille: {colonnesPaysage: [COLONNE_LIBELLE_40, typeDoublonPaysage, COLONNE_CLOTURE_20]}})))
-      .toBe('SERVICES.TABLEAUX.PORTEFEUILLE.ERREURS.COLONNES_PAYSAGE.UNICITE_TYPE');
+      expect(service.import(JSON.stringify({portefeuille: {colonnesPaysage: [COLONNE_LIBELLE_40, COLONNE_LIBELLE_40, COLONNE_CLOTURE_20]}})))
+        .toBe('SERVICES.TABLEAUX.PORTEFEUILLE.ERREURS.COLONNES_PAYSAGE.NOM_DOUBLON');
+
+      const largeurInvalidePaysage: DTOColonne<TypesColonnesPortefeuille> = JSON.parse(JSON.stringify(COLONNE_LIBELLE_40));
+      largeurInvalidePaysage.largeur = 0;
+      expect(service.import(JSON.stringify({portefeuille: {colonnesPaysage: [largeurInvalidePaysage, COLONNE_ALERTES_20, COLONNE_CLOTURE_20, COLONNE_VARIATION_20]}})))
+        .toBe('SERVICES.TABLEAUX.PORTEFEUILLE.ERREURS.COLONNES_PAYSAGE.LARGEUR_INVALIDE');
+
+      const parametreInvalidePaysage: DTOColonne<TypesColonnesPortefeuille> = JSON.parse(JSON.stringify(COLONNE_VARIATION_20));
+      parametreInvalidePaysage.parametre = undefined;
+      expect(service.import(JSON.stringify({portefeuille: {colonnesPaysage: [COLONNE_LIBELLE_40, COLONNE_ALERTES_20, COLONNE_CLOTURE_20, parametreInvalidePaysage]}})))
+        .toBe('SERVICES.TABLEAUX.PORTEFEUILLE.ERREURS.COLONNES_PAYSAGE.PARAMETRE_INVALIDE');
+
+      expect(service.import(JSON.stringify({portefeuille: {colonnesPaysage: [COLONNE_LIBELLE_40]}})))
+        .toBe('SERVICES.TABLEAUX.PORTEFEUILLE.ERREURS.COLONNES_PAYSAGE.TOTAL_LARGEUR');
+
+      const typeDoublonPaysage: DTOColonne<TypesColonnesPortefeuille> = JSON.parse(JSON.stringify(COLONNE_LIBELLE_40));
+      typeDoublonPaysage.nom = 'Libellé2';
+      expect(service.import(JSON.stringify({portefeuille: {colonnesPaysage: [COLONNE_LIBELLE_40, typeDoublonPaysage, COLONNE_CLOTURE_20]}})))
+        .toBe('SERVICES.TABLEAUX.PORTEFEUILLE.ERREURS.COLONNES_PAYSAGE.UNICITE_TYPE');
 
 
+      expect(service.import(JSON.stringify({portefeuille: {colonnesPaysage: [COLONNE_LIBELLE_40, COLONNE_ALERTES_20, COLONNE_CLOTURE_20, COLONNE_VARIATION_20]}})))
+        .toBe('SERVICES.TABLEAUX.PORTEFEUILLE.ERREURS.COLONNES_PORTRAIT.REQUIS');
 
-    expect(service.import(JSON.stringify({portefeuille: {colonnesPaysage: [COLONNE_LIBELLE_40, COLONNE_ALERTES_20, COLONNE_CLOTURE_20, COLONNE_VARIATION_20]}})))
-      .toBe('SERVICES.TABLEAUX.PORTEFEUILLE.ERREURS.COLONNES_PORTRAIT.REQUIS');
+      expect(service.import(JSON.stringify({
+        portefeuille: {
+          colonnesPaysage: [COLONNE_LIBELLE_40, COLONNE_ALERTES_20, COLONNE_CLOTURE_20, COLONNE_VARIATION_20],
+          colonnesPortrait: [COLONNE_LIBELLE_50, COLONNE_LIBELLE_50]
+        }
+      })))
+        .toBe('SERVICES.TABLEAUX.PORTEFEUILLE.ERREURS.COLONNES_PORTRAIT.NOM_DOUBLON');
 
-    expect(service.import(JSON.stringify({portefeuille: {colonnesPaysage: [COLONNE_LIBELLE_40, COLONNE_ALERTES_20, COLONNE_CLOTURE_20, COLONNE_VARIATION_20], colonnesPortrait: [COLONNE_LIBELLE_50, COLONNE_LIBELLE_50]}})))
-      .toBe('SERVICES.TABLEAUX.PORTEFEUILLE.ERREURS.COLONNES_PORTRAIT.NOM_DOUBLON');
+      const largeurInvalidePortrait: DTOColonne<TypesColonnesPortefeuille> = JSON.parse(JSON.stringify(COLONNE_ALERTES_30));
+      largeurInvalidePortrait.largeur = 0;
+      expect(service.import(JSON.stringify({
+        portefeuille: {
+          colonnesPaysage: [COLONNE_LIBELLE_40, COLONNE_ALERTES_20, COLONNE_CLOTURE_20, COLONNE_VARIATION_20],
+          colonnesPortrait: [COLONNE_LIBELLE_50, largeurInvalidePortrait, COLONNE_VARIATION_20]
+        }
+      })))
+        .toBe('SERVICES.TABLEAUX.PORTEFEUILLE.ERREURS.COLONNES_PORTRAIT.LARGEUR_INVALIDE');
 
-    const largeurInvalidePortrait: DTOColonne<TypesColonnesPortefeuille> = JSON.parse(JSON.stringify(COLONNE_ALERTES_30));
-    largeurInvalidePortrait.largeur = 0;
-    expect(service.import(JSON.stringify({portefeuille: {colonnesPaysage: [COLONNE_LIBELLE_40, COLONNE_ALERTES_20, COLONNE_CLOTURE_20, COLONNE_VARIATION_20], colonnesPortrait: [COLONNE_LIBELLE_50, largeurInvalidePortrait, COLONNE_VARIATION_20]}})))
-      .toBe('SERVICES.TABLEAUX.PORTEFEUILLE.ERREURS.COLONNES_PORTRAIT.LARGEUR_INVALIDE');
+      const parametreInvalidePortrait: DTOColonne<TypesColonnesPortefeuille> = JSON.parse(JSON.stringify(COLONNE_VARIATION_20));
+      parametreInvalidePortrait.parametre = undefined;
+      expect(service.import(JSON.stringify({
+        portefeuille: {
+          colonnesPaysage: [COLONNE_LIBELLE_40, COLONNE_ALERTES_20, COLONNE_CLOTURE_20, COLONNE_VARIATION_20],
+          colonnesPortrait: [COLONNE_LIBELLE_50, COLONNE_ALERTES_30, parametreInvalidePortrait]
+        }
+      })))
+        .toBe('SERVICES.TABLEAUX.PORTEFEUILLE.ERREURS.COLONNES_PORTRAIT.PARAMETRE_INVALIDE');
 
-    const parametreInvalidePortrait: DTOColonne<TypesColonnesPortefeuille> = JSON.parse(JSON.stringify(COLONNE_VARIATION_20));
-    parametreInvalidePortrait.parametre = undefined;
-    expect(service.import(JSON.stringify({portefeuille: {colonnesPaysage: [COLONNE_LIBELLE_40, COLONNE_ALERTES_20, COLONNE_CLOTURE_20, COLONNE_VARIATION_20], colonnesPortrait: [COLONNE_LIBELLE_50, COLONNE_ALERTES_30, parametreInvalidePortrait]}})))
-      .toBe('SERVICES.TABLEAUX.PORTEFEUILLE.ERREURS.COLONNES_PORTRAIT.PARAMETRE_INVALIDE');
+      expect(service.import(JSON.stringify({
+        portefeuille: {
+          colonnesPaysage: [COLONNE_LIBELLE_40, COLONNE_ALERTES_20, COLONNE_CLOTURE_20, COLONNE_VARIATION_20],
+          colonnesPortrait: [COLONNE_LIBELLE_50]
+        }
+      })))
+        .toBe('SERVICES.TABLEAUX.PORTEFEUILLE.ERREURS.COLONNES_PORTRAIT.TOTAL_LARGEUR');
 
-    expect(service.import(JSON.stringify({portefeuille: {colonnesPaysage: [COLONNE_LIBELLE_40, COLONNE_ALERTES_20, COLONNE_CLOTURE_20, COLONNE_VARIATION_20], colonnesPortrait: [COLONNE_LIBELLE_50]}})))
-      .toBe('SERVICES.TABLEAUX.PORTEFEUILLE.ERREURS.COLONNES_PORTRAIT.TOTAL_LARGEUR');
+      const typeDoublonPortrait: DTOColonne<TypesColonnesPortefeuille> = JSON.parse(JSON.stringify(COLONNE_LIBELLE_50));
+      typeDoublonPortrait.nom = 'Libellé2';
+      expect(service.import(JSON.stringify({
+        portefeuille: {
+          colonnesPaysage: [COLONNE_LIBELLE_40, COLONNE_ALERTES_20, COLONNE_CLOTURE_20, COLONNE_VARIATION_20],
+          colonnesPortrait: [COLONNE_LIBELLE_50, typeDoublonPortrait]
+        }
+      })))
+        .toBe('SERVICES.TABLEAUX.PORTEFEUILLE.ERREURS.COLONNES_PORTRAIT.UNICITE_TYPE');
 
-    const typeDoublonPortrait: DTOColonne<TypesColonnesPortefeuille> = JSON.parse(JSON.stringify(COLONNE_LIBELLE_50));
-    typeDoublonPortrait.nom = 'Libellé2';
-    expect(service.import(JSON.stringify({portefeuille: {colonnesPaysage: [COLONNE_LIBELLE_40, COLONNE_ALERTES_20, COLONNE_CLOTURE_20, COLONNE_VARIATION_20], colonnesPortrait: [COLONNE_LIBELLE_50, typeDoublonPortrait]}})))
-      .toBe('SERVICES.TABLEAUX.PORTEFEUILLE.ERREURS.COLONNES_PORTRAIT.UNICITE_TYPE');
+      expect(resultatImport).toEqual(undefined);
+    });
+
+    it('when #import des tableaux valides then #charger renvoie les tableaux', () => {
+      expect(service.import(tableaux)).toBeUndefined();
+      expect(resultatImport).toEqual(TABLEAUX);
+      expect(service.charger()).toEqual(TABLEAUX);
+    });
   });
 });

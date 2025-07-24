@@ -18,14 +18,6 @@ export class CoursPortefeuille {
   moyennesMobiles: number[];
   alerte: boolean;
   coursAlleges: DTOCoursTickerAllege[];
-  // TODO : remove !
-  mm5: number | undefined;
-  mm20: number | undefined;
-  mm50: number | undefined;
-  var1: number | undefined;
-  var5: number | undefined;
-  var20: number | undefined;
-  var50: number | undefined;
   alertes: Alerte[];
 
   constructor(valeur: DTOValeur, dto: DtoCoursAvecListeAllege,
@@ -42,27 +34,10 @@ export class CoursPortefeuille {
     this.moyennesMobiles = dto.moyennesMobiles;
     this.alerte = dto.alerte;
     this.coursAlleges = dto.cours;
-    this.mm5 = dto.moyennesMobiles[4];
-    this.mm20 = dto.moyennesMobiles[19];
-    this.mm50 = dto.moyennesMobiles[49];
-    this.var1 = this.calculerVariation(dto, 1);
-    this.var5 = this.calculerVariation(dto, 5);
-    this.var20 = this.calculerVariation(dto, 20);
-    this.var50 = this.calculerVariation(dto, 50);
     this.alertes = this.evaluerAlertes(alertes);
   }
 
-  // TODO : remove !
-  private calculerVariation(dto: DtoCoursAvecListeAllege, jours: number) {
-    if (dto.cours.length > jours) {
-      return (dto.cours[0].cloture / dto.cours[jours].cloture) - 1;
-    } else {
-      return undefined;
-    }
-  }
-
-  // TODO : renommmer !
-  public calculerVariation2(jours: number) {
+  public calculerVariation(jours: number) {
     if (this.coursAlleges.length > jours) {
       return (this.coursAlleges[0].cloture / this.coursAlleges[jours].cloture) - 1;
     } else {

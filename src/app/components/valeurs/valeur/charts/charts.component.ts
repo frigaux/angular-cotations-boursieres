@@ -51,10 +51,10 @@ export class ChartsComponent {
       for (const periode of [50, 100, 150, 200, 250, 300]) {
         this.periodes.push(periode);
         if (this.cours.coursAlleges.length <= periode) {
+          this.periodeSelectionnee = periode;
           break;
         }
       }
-      this.periodeSelectionnee = this.periodes[0];
       this.displayChart();
     }
   }
@@ -111,7 +111,7 @@ export class ChartsComponent {
               }
             },
             label: function (context: any) {
-              return `${formatCurrency(context.parsed.y)} (${formatPercent(1 - (cloture / context.raw))})`;
+              return `${formatCurrency(context.parsed.y)} (${formatPercent((cloture / context.raw) - 1)})`;
             }
           }
         }

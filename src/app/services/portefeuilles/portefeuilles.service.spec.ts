@@ -43,7 +43,7 @@ describe('PortefeuillesService', () => {
       service.onImport(portefeuilles => resultatImport = portefeuilles);
     });
 
-    it('when #import du format non JSON then #export renvoie les portefeuilles', () => {
+    it('when #import du format non JSON then #onImport renvoie undefined', () => {
       expect(service.import("+ nimp (")).toBeDefined();
       expect(resultatImport).toEqual(undefined);
     });
@@ -67,7 +67,7 @@ describe('PortefeuillesService', () => {
     it('when #import des portefeuilles valides then #export renvoie les portefeuilles', () => {
       expect(service.import(portefeuilles)).toBeUndefined();
       expect(resultatImport).toEqual(PORTEFEUILLES);
-      expect(service.export()).toEqual(portefeuilles);
+      expect(service.charger()).toEqual(PORTEFEUILLES);
     });
   });
 });

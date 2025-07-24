@@ -39,7 +39,7 @@ export class ImportExportComponent {
   }
 
   exporter() {
-    this.configurationTableaux = this.tableauxService.export();
+    this.configurationTableaux = JSON.stringify(this.tableauxService.charger(), null, 2);
   }
 
   importer() {

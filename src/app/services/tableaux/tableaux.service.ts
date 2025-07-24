@@ -346,26 +346,11 @@ export class TableauxService {
     }
   }
 
-  public export(): string {
-    const json = window.localStorage.getItem(TableauxService.TABLEAUX);
-    if (json) {
-      try {
-        const tableaux: any = JSON.parse(json);
-        if (this.validerTableaux(tableaux)) {
-          return json;
-        }
-      } catch (e) {
-        console.error(e);
-      }
-    }
-    return JSON.stringify(TableauxService.CONFIGURATION_INITIALE['DESKTOP']);
-  }
-
   public import(json: string): string | undefined {
     try {
       const tableaux: any = JSON.parse(json);
       if (this.validerTableaux(tableaux)) {
-        window.localStorage.setItem(TableauxService.TABLEAUX, json);
+        window.localStorage.setItem(TableauxService.TABLEAUX, JSON.stringify(tableaux));
         TableauxService.OBSERVERS_IMPORT.forEach(observer => observer.next(tableaux));
         return undefined;
       } else {
@@ -413,7 +398,7 @@ export class TableauxService {
       case TypesColonnesPortefeuille.MOYENNE_MOBILE:
         return (cours: CoursPortefeuille) => this.currencyPipe.transform(cours.moyennesMobiles[colonne.parametre! - 1], '€');
       case TypesColonnesPortefeuille.VARIATION:
-        return (cours: CoursPortefeuille) => this.percentPipe.transform(cours.calculerVariation2(colonne.parametre!), '1.2-2');
+        return (cours: CoursPortefeuille) => this.percentPipe.transform(cours.calculerVariation(colonne.parametre!), '1.2-2');
       default:
         throw new Error(`Colonne non gérée ${colonne.type}`);
     }
