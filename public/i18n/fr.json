@@ -193,6 +193,20 @@
     }
   },
   "SERVICES": {
+    "VALEURS": {
+      "ERREURS": {
+        "ACHATS": {
+          "TICKER_REQUIS": "Attribut ticker manquant",
+          "ACHATS_REQUIS": "Attribut achats manquant",
+          "ACHAT": {
+            "DATE_REQUIS": "Attribut date manquant",
+            "QUANTITE_REQUISE": "Attribut quantite manquant",
+            "PRIX_REQUIS": "Attribut prix manquant",
+            "REVENDU_REQUIS": "Attribut revendu manquant"
+          }
+        }
+      }
+    },
     "PORTEFEUILLES": {
       "ERREURS": {
         "TABLEAU_REQUIS": "Tableau de portefeuille(s) attendu",

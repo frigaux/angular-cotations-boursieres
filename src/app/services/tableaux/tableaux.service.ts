@@ -321,7 +321,6 @@ export class TableauxService {
               private decimalPipe: DecimalPipe) {
   }
 
-
   public charger(): DTOTableaux {
     const json = window.localStorage.getItem(TableauxService.TABLEAUX);
     if (json) {
@@ -507,7 +506,7 @@ export class TableauxService {
 
   private validerLargeurs<T extends TypesColonnesPortefeuille | TypesColonnesCours>(colonnes: DTOColonne<T>[]): boolean {
     return colonnes.find(colonne =>
-      isNaN(colonne.largeur) || colonne.largeur < 1
+      colonne.largeur === undefined || isNaN(colonne.largeur) || colonne.largeur < 1
     ) === undefined;
   }
 

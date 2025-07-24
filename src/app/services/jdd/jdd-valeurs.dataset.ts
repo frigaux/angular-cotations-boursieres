@@ -1,5 +1,6 @@
 import {Marches} from '../valeurs/marches.enum';
 import {DTOValeur} from '../valeurs/dto-valeur.interface';
+import {AchatsTicker} from '../valeurs/achats-ticker.interface';
 
 export const VALEUR: DTOValeur = {
   "ticker": "GLE",
@@ -19,3 +20,35 @@ export const VALEURS: DTOValeur[] = [
     "libelle": "Bnp Paribas"
   }
 ];
+
+export const ACHATS: Array<AchatsTicker> = [
+  {
+    "ticker": "GLE",
+    "achats":
+      [
+        {
+          "date": new Date("2025-05-09"),
+          "quantite": 10,
+          "prix": 46.23,
+          "revendu": false
+        },
+        {
+          "date": new Date("2025-05-08"),
+          "quantite": 20,
+          "prix": 45.7,
+          "revendu": false
+        }
+      ]
+  },
+  {
+    "ticker": "BNP",
+    "achats":
+      [
+        {
+          "date": new Date("2025-05-09"),
+          "quantite": 10,
+          "prix": 70.87,
+          "revendu": false
+        }
+      ]
+  }];

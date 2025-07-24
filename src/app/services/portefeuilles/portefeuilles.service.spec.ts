@@ -30,7 +30,7 @@ describe('PortefeuillesService', () => {
   });
 
   it('Given des portefeuilles when #enregistrer then #auMoinsUnPortefeuilleCorrectementConfigure renvoie true', () => {
-    service.enregistrer(clonePORTEFEUILLES());
+    expect(service.enregistrer(clonePORTEFEUILLES())).toBeUndefined();
     expect(service.auMoinsUnPortefeuilleCorrectementConfigure()).toEqual(true);
   });
 
