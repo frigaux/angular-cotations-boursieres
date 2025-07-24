@@ -1,21 +1,21 @@
 import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import {TableauComponent} from './tableau.component';
+import {ConfigurationTableauComponent} from './configuration-tableau.component';
 import {TranslateModule} from '@ngx-translate/core';
 import {CurrencyPipe, DatePipe, DecimalPipe, PercentPipe} from '@angular/common';
 import {TABLEAUX} from '../../../services/jdd/jdd-tableaux.dataset';
 import {TypesColonnes} from '../../../services/tableaux/types-colonnes.enum.ts';
 
-describe('TableauComponent', () => {
-  let component: TableauComponent;
-  let fixture: ComponentFixture<TableauComponent>;
+describe('ConfigurationTableauComponent', () => {
+  let component: ConfigurationTableauComponent;
+  let fixture: ComponentFixture<ConfigurationTableauComponent>;
 
   const cloneTABLEAUX: Function = () => JSON.parse(JSON.stringify(TABLEAUX));
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [
-        TableauComponent,
+        ConfigurationTableauComponent,
         TranslateModule.forRoot({})
       ],
       providers: [
@@ -27,7 +27,7 @@ describe('TableauComponent', () => {
     })
       .compileComponents();
 
-    fixture = TestBed.createComponent(TableauComponent);
+    fixture = TestBed.createComponent(ConfigurationTableauComponent);
     component = fixture.componentInstance;
   });
 

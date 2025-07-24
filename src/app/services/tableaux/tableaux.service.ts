@@ -419,7 +419,6 @@ export class TableauxService {
     }
   }
 
-  // TODO : unicité nom colonne + largeur number + paramètre number requis + paramètre > 0
   private validerTableaux(tableaux: DTOTableaux): boolean {
     this.cleMessageErreur = undefined;
     if (tableaux.portefeuille) {

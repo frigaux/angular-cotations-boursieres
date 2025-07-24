@@ -17,9 +17,8 @@ import {CdkDrag, CdkDragDrop, CdkDropList, moveItemInArray} from '@angular/cdk/d
 import {PasDeNomEnDoubleValidatorDirective} from './validators/pas-de-nom-en-double-validator.directive';
 import {EntierPositifValidatorDirective} from './validators/entier-positif-validator.directive';
 
-// TODO : renommer en configuration tableau
 @Component({
-  selector: 'app-tableau',
+  selector: 'app-configuration-tableau',
   imports: [
     TranslatePipe,
     FloatLabel,
@@ -34,10 +33,10 @@ import {EntierPositifValidatorDirective} from './validators/entier-positif-valid
     PasDeNomEnDoubleValidatorDirective,
     EntierPositifValidatorDirective
   ],
-  templateUrl: './tableau.component.html',
-  styleUrl: './tableau.component.sass'
+  templateUrl: './configuration-tableau.component.html',
+  styleUrl: './configuration-tableau.component.sass'
 })
-export class TableauComponent {
+export class ConfigurationTableauComponent {
   // input/output
   inputConfiguration: InputSignal<{
     colonnes: DTOColonne<TypesColonnesPortefeuille | TypesColonnesCours>[],
