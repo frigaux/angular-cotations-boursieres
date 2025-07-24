@@ -7,7 +7,6 @@ import {TranslatePipe} from '@ngx-translate/core';
 import {Card} from 'primeng/card';
 import {NgIf} from '@angular/common';
 import {ImportExportComponent} from './import-export/import-export.component';
-import {DTOColonne} from '../../services/tableaux/dto-colonne-portefeuille.interface';
 
 @Component({
   selector: 'app-gestion-tableaux',

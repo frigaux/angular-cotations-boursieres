@@ -3,17 +3,16 @@ import {DTOPortefeuille} from '../../../../services/portefeuilles/dto-portefeuil
 import {TranslatePipe} from '@ngx-translate/core';
 import {NgIf} from '@angular/common';
 
-// TODO : renommer configuration portefeuille
 @Component({
-  selector: 'app-portefeuille',
+  selector: 'app-configuration-portefeuille',
   imports: [
     TranslatePipe,
     NgIf
   ],
-  templateUrl: './portefeuille.component.html',
-  styleUrl: './portefeuille.component.sass'
+  templateUrl: './configuration-portefeuille.component.html',
+  styleUrl: './configuration-portefeuille.component.sass'
 })
-export class PortefeuilleComponent {
+export class ConfigurationPortefeuilleComponent {
   // input/output
   inputPortefeuille: InputSignal<DTOPortefeuille | undefined> = input(undefined,
     {transform: o => this.intercepteurPortefeuille(o), alias: 'portefeuille'});

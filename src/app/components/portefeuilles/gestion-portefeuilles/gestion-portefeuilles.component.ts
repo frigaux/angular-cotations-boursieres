@@ -12,7 +12,7 @@ import {PortefeuillesService} from '../../../services/portefeuilles/portefeuille
 import {ConfirmationService} from 'primeng/api';
 import {EditeurAlertesComponent} from './editeur-alertes/editeur-alertes.component';
 import {DTOAlerte} from '../../../services/portefeuilles/dto-alerte.interface';
-import {PortefeuilleComponent} from './portefeuille/portefeuille.component';
+import {ConfigurationPortefeuilleComponent} from './portefeuille/configuration-portefeuille.component';
 import {CdkDrag, CdkDragDrop, CdkDropList, moveItemInArray} from '@angular/cdk/drag-drop';
 
 @Component({
@@ -27,7 +27,7 @@ import {CdkDrag, CdkDragDrop, CdkDropList, moveItemInArray} from '@angular/cdk/d
     FormulaireModificationComponent,
     ImportExportComponent,
     EditeurAlertesComponent,
-    PortefeuilleComponent,
+    ConfigurationPortefeuilleComponent,
     CdkDropList,
     CdkDrag
   ],
