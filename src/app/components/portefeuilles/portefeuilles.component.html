@@ -65,18 +65,18 @@
               <tr (click)="basculerAffichageCours(cours)">
                 <td>
                   <span class="pi"
-                        [class]="classeIconeVariation(cours.calculerVariation(1))"></span>
+                        [class]="classeIconeVariation(cours.var1)"></span>
                   {{ cours.libelle }}
                 </td>
                 <td>
                   <app-alertes [alertes]="cours.alertes"></app-alertes>
                 </td>
                 <td>{{ cours.cloture | currency:'€' }}</td>
-                <td [class]="classeCssVariation(cours.calculerVariation(1))">
-                  {{ cours.calculerVariation(1) | percent:'1.2-2' }}
+                <td [class]="classeCssVariation(cours.var1)">
+                  {{ cours.var1 | percent:'1.2-2' }}
                 </td>
-                <td [class]="classeCssVariation(cours.calculerVariation(5))">
-                  {{ cours.calculerVariation(5) | percent:'1.2-2' }}
+                <td [class]="classeCssVariation(cours.var5)">
+                  {{ cours.var5 | percent:'1.2-2' }}
                 </td>
                 <td [class]="classeCssMM(cours, cours.moyennesMobiles[4])">
                   {{ cours.moyennesMobiles[4] | currency:'€' }}

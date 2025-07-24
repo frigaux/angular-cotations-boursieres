@@ -35,6 +35,8 @@ export class CoursPortefeuille {
     this.alerte = dto.alerte;
     this.coursAlleges = dto.cours;
     this.alertes = this.evaluerAlertes(alertes);
+    Object.assign(this, { var1: this.calculerVariation(1) });
+    Object.assign(this, { var5: this.calculerVariation(5) });
   }
 
   public calculerVariation(jours: number) {
