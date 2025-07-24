@@ -5,7 +5,7 @@ import {DatePipe, NgIf} from '@angular/common';
 import {Valeur} from '../valeur.class';
 import {DetailsValeurComponent} from './details-valeur/details-valeur.component';
 import {Cours} from '../../cours/cours.class';
-import {ChartsComponent} from './charts/charts.component';
+import {ChartsComponent} from '../../cours/charts/charts.component';
 import {Drawer} from 'primeng/drawer';
 import {LoaderComponent} from '../../loader/loader.component';
 

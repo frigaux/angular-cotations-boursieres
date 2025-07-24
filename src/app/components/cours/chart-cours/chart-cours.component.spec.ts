@@ -1,23 +1,23 @@
 import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import {ChartsComponent} from './charts.component';
+import {ChartCoursComponent} from './chart-cours.component';
 import {TranslateModule} from '@ngx-translate/core';
-import {COURS_CROISSANT} from '../../../../services/jdd/jdd-cours.dataset';
+import {COURS_CROISSANT} from '../../../services/jdd/jdd-cours.dataset';
 
-describe('ChartsComponent', () => {
-  let component: ChartsComponent;
-  let fixture: ComponentFixture<ChartsComponent>;
+describe('ChartCoursComponent', () => {
+  let component: ChartCoursComponent;
+  let fixture: ComponentFixture<ChartCoursComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [
-        ChartsComponent,
+        ChartCoursComponent,
         TranslateModule.forRoot({})
       ]
     })
       .compileComponents();
 
-    fixture = TestBed.createComponent(ChartsComponent);
+    fixture = TestBed.createComponent(ChartCoursComponent);
     component = fixture.componentInstance;
   });
 
@@ -29,7 +29,6 @@ describe('ChartsComponent', () => {
     const element: HTMLElement = fixture.nativeElement;
     fixture.componentRef.setInput('cours', COURS_CROISSANT);
     fixture.detectChanges();
-    component.clickPeriode();
     const elChart = element.querySelector('p-chart');
     expect(elChart).toBeTruthy();
   });

@@ -2,7 +2,7 @@ import {Component, input, InputSignal, output} from '@angular/core';
 import {CoursPortefeuille} from '../cours-portefeuille.class';
 import {DatePipe} from '@angular/common';
 import {Panel} from 'primeng/panel';
-import {ChartsComponent} from '../../valeurs/valeur/charts/charts.component';
+import {ChartsComponent} from '../../cours/charts/charts.component';
 import {Cours} from '../../cours/cours.class';
 import {AlertesComponent} from '../alertes/alertes.component';
 import {Alerte} from '../alerte.class';

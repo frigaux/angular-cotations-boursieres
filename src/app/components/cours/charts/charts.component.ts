@@ -1,5 +1,5 @@
 import {Component, input, InputSignal} from '@angular/core';
-import {Cours} from '../../../cours/cours.class';
+import {Cours} from '../cours.class';
 import {TranslatePipe, TranslateService} from '@ngx-translate/core';
 import {DatePipe, PercentPipe} from '@angular/common';
 import {UIChart} from 'primeng/chart';
