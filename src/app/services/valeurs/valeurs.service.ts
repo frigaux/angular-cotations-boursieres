@@ -1,16 +1,21 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {DTOValeur} from './dto-valeur.interface';
-import {Observable} from 'rxjs';
+import {Observable, Subscriber} from 'rxjs';
 import {TranslateService} from '@ngx-translate/core';
 import {AchatsTicker} from './achats-ticker.interface';
 import {Achat} from './achat.interface';
+import {DTOTableaux} from '../tableaux/dto-tableaux.interface';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ValeursService {
   private static readonly ACHATS: string = 'achats';
+  private static readonly OBSERVERS_IMPORT: Array<Subscriber<Array<AchatsTicker>>> = [];
+  private static readonly OBSERVABLE_IMPORT: Observable<Array<AchatsTicker>> = new Observable(observer => {
+    ValeursService.OBSERVERS_IMPORT.push(observer);
+  });
 
   private cleMessageErreur: string | undefined;
 
@@ -57,6 +62,7 @@ export class ValeursService {
       const achatsTickers: any = JSON.parse(json, ValeursService.reviverAchatsTicker);
       if (this.validerAchats(achatsTickers)) {
         window.localStorage.setItem(ValeursService.ACHATS, JSON.stringify(achatsTickers));
+        ValeursService.OBSERVERS_IMPORT.forEach(observer => observer.next(achatsTickers));
         return undefined;
       } else {
         return this.translateService.instant(this.cleMessageErreur!);
@@ -64,6 +70,10 @@ export class ValeursService {
     } catch (e) { // JSON mal formé
       return (e as SyntaxError).message;
     }
+  }
+
+  public onImport(handler: ((value: Array<AchatsTicker>) => void)): void {
+    ValeursService.OBSERVABLE_IMPORT.subscribe(handler);
   }
 
   public chargerAchatsTicker(ticker: string): Array<Achat> {

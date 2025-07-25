@@ -8,6 +8,7 @@ import {AchatDecore} from './achat-decore.class';
 import {InputText} from 'primeng/inputtext';
 import {DatePicker} from 'primeng/datepicker';
 import {NgIf} from '@angular/common';
+import {ImportExportComponent} from './import-export/import-export.component';
 
 @Component({
   selector: 'app-achats',
@@ -17,7 +18,8 @@ import {NgIf} from '@angular/common';
     ToggleSwitch,
     InputText,
     DatePicker,
-    NgIf
+    NgIf,
+    ImportExportComponent
   ],
   templateUrl: './achats.component.html',
   styleUrl: './achats.component.sass'
@@ -35,7 +37,6 @@ export class AchatsComponent {
   erreur?: string;
 
   constructor(private valeursService: ValeursService) {
-
   }
 
   private intercepteurTicker(ticker: string | undefined): string | undefined {
@@ -50,8 +51,10 @@ export class AchatsComponent {
   }
 
   ajouterAchat() {
+    const date = new Date();
+    date.setUTCHours(0, 0, 0, 0);
     this.achats.push({
-      date: new Date(),
+      date,
       quantite: undefined,
       prix: undefined,
       revendu: false

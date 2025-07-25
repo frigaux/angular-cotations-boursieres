@@ -62,8 +62,11 @@ describe('ValeursService', () => {
   });
 
   it('Given des achats valides when #importAchats then #chargerAchats renvoie les achats', () => {
+    let resultatImport: Array<AchatsTicker> | undefined;
+    valeursService.onImport(achatsTickers => resultatImport = achatsTickers);
     expect(valeursService.importAchats(JSON.stringify(ACHATS))).toBeUndefined();
     expect(valeursService.chargerAchats()).toEqual(ACHATS);
+    expect(resultatImport).toEqual(ACHATS);
   });
 
   it('Given des achats invalides when #importAchats then on récupère un message d\'erreur', () => {

@@ -44,11 +44,17 @@
         },
         "ACHATS": {
           "AJOUTER_ACHAT": "Ajouter un achat",
-          "ENREGISTRER": "Enregistrer",
+          "ENREGISTRER": "Enregistrer les achats",
           "DATE": "Date",
           "QUANTITE": "Quantite",
           "PRIX": "Prix",
-          "REVENDU": "Revendu"
+          "REVENDU": "Revendu",
+          "IMPORT_EXPORT": {
+            "IMPORT_EXPORT": "Import/export des achats",
+            "CONFIGURATION": "Configuration au format JSON",
+            "EXPORTER": "Exporter",
+            "IMPORTER": "Importer"
+          }
         }
       }
     },

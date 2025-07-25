@@ -1,15 +1,16 @@
 import {ComponentFixture, fakeAsync, TestBed} from '@angular/core/testing';
 
 import {ImportExportComponent} from './import-export.component';
+import {provideHttpClient} from '@angular/common/http';
+import {provideHttpClientTesting} from '@angular/common/http/testing';
 import {TranslateModule} from '@ngx-translate/core';
-import {CurrencyPipe, DatePipe, DecimalPipe, PercentPipe} from '@angular/common';
-import {TABLEAUX} from '../../../services/jdd/jdd-tableaux.dataset';
+import {ACHATS} from '../../../../../services/jdd/jdd-valeurs.dataset';
 
 describe('ImportExportComponent', () => {
   let component: ImportExportComponent;
   let fixture: ComponentFixture<ImportExportComponent>;
 
-  const tableaux = JSON.stringify(TABLEAUX, null, 2);
+  const achats = JSON.stringify(ACHATS, null, 2);
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
@@ -18,10 +19,8 @@ describe('ImportExportComponent', () => {
         TranslateModule.forRoot({})
       ],
       providers: [
-        DatePipe,
-        PercentPipe,
-        CurrencyPipe,
-        DecimalPipe
+        provideHttpClient(),
+        provideHttpClientTesting()
       ]
     })
       .compileComponents();
@@ -34,25 +33,17 @@ describe('ImportExportComponent', () => {
     expect(component).toBeDefined();
   });
 
-  it('when #exemple then le textarea est initialisé avec un exemple de configuration', () => {
-    component.reinitialiserVue();
-    expect(component.configurationTableaux).toEqual('');
-    fixture.detectChanges();
-    component.exemple('DESKTOP');
-    expect(component.configurationTableaux.length).toBeGreaterThan(0)
-  });
-
-  describe('Given des tableaux', () => {
+  describe('Given des achats', () => {
     beforeEach(() => {
-      component.configurationTableaux = tableaux;
+      component.achats = achats;
       fixture.detectChanges();
     });
 
-    it('when on #importer then #exporter renvoie les tableaux importés', fakeAsync(() => {
+    it('when on #importer then #exporter renvoie les achats importés', fakeAsync(() => {
       component.importer();
       component.reinitialiserVue();
       component.exporter();
-      expect(component.configurationTableaux).toEqual(tableaux);
+      expect(component.achats).toEqual(achats);
     }));
   });
 });
