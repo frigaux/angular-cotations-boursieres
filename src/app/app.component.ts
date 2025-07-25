@@ -9,7 +9,8 @@ import {ConfirmDialog} from 'primeng/confirmdialog';
 import {ConfirmationService} from 'primeng/api';
 import {StatusBar} from '@capacitor/status-bar';
 import {Capacitor} from '@capacitor/core';
-import { ScreenOrientation } from '@capacitor/screen-orientation';
+import {ScreenOrientation} from '@capacitor/screen-orientation';
+import {PrimeNG} from 'primeng/config';
 
 // TODO : courbes des MMxx glissantes
 @Component({
@@ -21,7 +22,8 @@ import { ScreenOrientation } from '@capacitor/screen-orientation';
   styleUrl: './app.component.sass'
 })
 export class AppComponent {
-  constructor(private translateService: TranslateService, private router: Router, private titleService: Title) {
+  constructor(private translateService: TranslateService, private router: Router,
+              private titleService: Title, private primeng: PrimeNG) {
     this.configurationTraduction();
     this.configurationAndroid();
   }
@@ -38,6 +40,13 @@ export class AppComponent {
     this.translateService.addLangs(['fr']);
     this.translateService.setDefaultLang('fr');
     this.translateService.use('fr');
+    this.primeng.setTranslation({
+      dayNames:	['Dimanche', 'Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi'],
+      dayNamesShort:	['Dim', 'Lun', 'Mar', 'Mer', 'Jeu', 'Ven', 'Sam'],
+      dayNamesMin:	['Di', 'Lu', 'Ma', 'Me', 'Je', 'Ve', 'Sa'],
+      monthNames: ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre'],
+      monthNamesShort: ['Jan', 'Fev', 'Mar', 'Avr', 'Mai', 'Juin', 'Juil', 'Aout', 'Sep', 'Oct', 'Nov', 'Dec']
+    })
     this.traductionTitrePageDeLaRoute();
   }
 
