@@ -48,7 +48,6 @@ describe('GestionTableauxComponent', () => {
     it('when #ngOnInit then les tableaux sont chargés', () => {
       component.ngOnInit();
       fixture.detectChanges(); // appelle le ngOnInit
-      expect(component).toBeDefined();
       expect(component.tableaux).toEqual(TABLEAUX);
       component.enregistrer();
       expect(component.erreur).toBeUndefined();

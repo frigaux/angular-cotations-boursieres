@@ -1,6 +1,5 @@
 import {Component, input, InputSignal} from '@angular/core';
 import {ValeursService} from '../../../../services/valeurs/valeurs.service';
-import {AchatsTicker} from '../../../../services/valeurs/achats-ticker.interface';
 import {Achat} from '../../../../services/valeurs/achat.interface';
 import {TranslatePipe} from '@ngx-translate/core';
 import {FormsModule} from '@angular/forms';
@@ -41,10 +40,8 @@ export class AchatsComponent {
 
   private intercepteurTicker(ticker: string | undefined): string | undefined {
     this.ticker = ticker;
-    const achatsTicker: AchatsTicker | undefined = this.valeursService.chargerAchats()
-      .find(achats => achats.ticker === ticker);
-    if (achatsTicker) {
-      this.achats = achatsTicker.achats;
+    if (ticker) {
+      this.achats = this.valeursService.chargerAchatsTicker(ticker);
     } else {
       this.achats = [];
     }
@@ -76,18 +73,7 @@ export class AchatsComponent {
 
   enregistrerAchats() {
     if (this.ticker) {
-      const achatsTickers = this.valeursService.chargerAchats();
-      const achatsTicker: AchatsTicker | undefined = achatsTickers
-        .find(achats => achats.ticker === this.ticker);
-      if (achatsTicker) {
-        achatsTicker.achats = this.achats;
-      } else {
-        achatsTickers.push({
-          ticker: this.ticker,
-          achats: this.achats
-        })
-      }
-      this.erreur = this.valeursService.enregistrerAchats(achatsTickers);
+      this.erreur = this.valeursService.enregistrerAchatsTicker(this.ticker, this.achats);
       // TODO : confirmation UX
     }
   }

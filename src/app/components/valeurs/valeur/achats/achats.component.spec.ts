@@ -12,7 +12,7 @@ describe('AchatsComponent', () => {
 
   const cloneACHATS: Function = () => JSON.parse(JSON.stringify(ACHATS), ValeursService.reviverAchatsTicker);
 
-  const mockValeursService = jasmine.createSpyObj('ValeursService', ['chargerAchats', 'enregistrerAchats']);
+  const mockValeursService = jasmine.createSpyObj('ValeursService', ['chargerAchatsTicker', 'enregistrerAchatsTicker']);
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
@@ -28,7 +28,6 @@ describe('AchatsComponent', () => {
 
     fixture = TestBed.createComponent(AchatsComponent);
     component = fixture.componentInstance;
-    fixture.detectChanges();
   });
 
   it('should create', () => {
@@ -40,8 +39,8 @@ describe('AchatsComponent', () => {
 
     beforeEach(() => {
       achatsTickers = cloneACHATS();
-      mockValeursService.chargerAchats.and.returnValue(achatsTickers);
-      mockValeursService.enregistrerAchats.and.returnValue(undefined);
+      mockValeursService.chargerAchatsTicker.and.returnValue(achatsTickers[0].achats);
+      mockValeursService.enregistrerAchatsTicker.and.returnValue(undefined);
       fixture.componentRef.setInput('ticker', achatsTickers[0].ticker);
     });
 

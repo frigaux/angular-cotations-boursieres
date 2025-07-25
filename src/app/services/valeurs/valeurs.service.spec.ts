@@ -8,6 +8,7 @@ import {DTOValeur} from './dto-valeur.interface';
 import {RouterModule} from '@angular/router';
 import {ACHATS, VALEURS} from '../jdd/jdd-valeurs.dataset';
 import {TranslateModule} from '@ngx-translate/core';
+import {AchatsTicker} from './achats-ticker.interface';
 
 describe('ValeursService', () => {
   let valeursService: ValeursService;
@@ -51,6 +52,13 @@ describe('ValeursService', () => {
   it('Given des achats when #enregistrerAchats then #chargerAchats renvoie les achats', () => {
     expect(valeursService.enregistrerAchats(cloneACHATS())).toBeUndefined();
     expect(valeursService.chargerAchats()).toEqual(ACHATS);
+  });
+
+  it('Given des achats when #enregistrerAchatsTicker then #chargerAchatsTicker renvoie les achats', () => {
+    const achatsTicker: AchatsTicker = cloneACHATS()[0];
+    expect(valeursService.enregistrerAchatsTicker(achatsTicker.ticker, achatsTicker.achats)).toBeUndefined();
+    expect(valeursService.chargerAchatsTicker(achatsTicker.ticker)).toEqual(achatsTicker.achats);
+    expect(valeursService.chargerAchatsTicker('AC')).toHaveSize(0);
   });
 
   it('Given des achats valides when #importAchats then #chargerAchats renvoie les achats', () => {

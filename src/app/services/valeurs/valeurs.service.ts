@@ -4,6 +4,7 @@ import {DTOValeur} from './dto-valeur.interface';
 import {Observable} from 'rxjs';
 import {TranslateService} from '@ngx-translate/core';
 import {AchatsTicker} from './achats-ticker.interface';
+import {Achat} from './achat.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -62,6 +63,43 @@ export class ValeursService {
       }
     } catch (e) { // JSON mal formé
       return (e as SyntaxError).message;
+    }
+  }
+
+  public chargerAchatsTicker(ticker: string): Array<Achat> {
+    const json = window.localStorage.getItem(ValeursService.ACHATS);
+    if (json) {
+      try {
+        const achatsTicker: any = JSON.parse(json, ValeursService.reviverAchatsTicker);
+        if (this.validerAchats(achatsTicker)) {
+          const achatsTicker: AchatsTicker | undefined = this.chargerAchats()
+            .find(achats => achats.ticker === ticker);
+          return achatsTicker?.achats || [];
+        }
+      } catch (e) {
+        console.error(e);
+      }
+    }
+    return [];
+  }
+
+  public enregistrerAchatsTicker(ticker: string, achats: Array<Achat>): string | undefined {
+    const achatsTickers = this.chargerAchats();
+    const achatsTicker: AchatsTicker | undefined = achatsTickers
+      .find(achats => achats.ticker === ticker);
+    if (achatsTicker) {
+      achatsTicker.achats = achats;
+    } else {
+      achatsTickers.push({
+        ticker: ticker,
+        achats: achats
+      })
+    }
+    if (this.validerAchats(achatsTickers)) {
+      window.localStorage.setItem(ValeursService.ACHATS, JSON.stringify(achatsTickers));
+      return undefined;
+    } else {
+      return this.translateService.instant(this.cleMessageErreur!);
     }
   }
 
