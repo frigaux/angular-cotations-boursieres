@@ -4,6 +4,8 @@ import {DetailsValeurComponent} from './details-valeur.component';
 import {TranslateModule} from '@ngx-translate/core';
 import {provideAnimations} from '@angular/platform-browser/animations';
 import {COURS_CROISSANT, COURS_DECROISSANT} from '../../../../services/jdd/jdd-cours.dataset';
+import {HttpTestingController, provideHttpClientTesting} from '@angular/common/http/testing';
+import {provideHttpClient} from '@angular/common/http';
 
 describe('DetailsValeurComponent', () => {
   let component: DetailsValeurComponent;
@@ -16,7 +18,9 @@ describe('DetailsValeurComponent', () => {
         TranslateModule.forRoot({})
       ],
       providers: [
-        provideAnimations()
+        provideAnimations(),
+        provideHttpClient(),
+        provideHttpClientTesting()
       ]
     })
       .compileComponents();

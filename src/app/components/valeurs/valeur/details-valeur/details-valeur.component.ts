@@ -4,6 +4,7 @@ import {Cours} from '../../../cours/cours.class';
 import {TranslatePipe, TranslateService} from '@ngx-translate/core';
 import {DatePipe, DecimalPipe, NgClass} from '@angular/common';
 import {Fieldset} from 'primeng/fieldset';
+import {AchatsComponent} from '../achats/achats.component';
 
 @Component({
   selector: 'app-details-valeur',
@@ -13,15 +14,17 @@ import {Fieldset} from 'primeng/fieldset';
     Fieldset,
     TranslatePipe,
     DecimalPipe,
-    DatePipe
+    DatePipe,
+    AchatsComponent
   ],
   templateUrl: './details-valeur.component.html',
   styleUrl: './details-valeur.component.sass'
 })
 export class DetailsValeurComponent {
   // input/output
-  cours: InputSignal<Cours | undefined> = input(undefined,
-    {transform: o => this.intercepteurCours(o)});
+  inputCours: InputSignal<Cours | undefined> = input(undefined,
+    {transform: o => this.intercepteurCours(o), alias: 'cours'});
+  cours?: Cours;
 
   // données pour la vue
   timelineItems: any[] = [];
@@ -35,6 +38,7 @@ export class DetailsValeurComponent {
   }
 
   private intercepteurCours(cours: Cours | undefined) {
+    this.cours = cours;
     this.timelineItems = [];
     if (cours) {
       this.addItem(this.translateService, 'MINIMUM', cours!.plusBas);

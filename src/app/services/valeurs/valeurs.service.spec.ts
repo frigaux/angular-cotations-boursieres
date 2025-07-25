@@ -8,13 +8,12 @@ import {DTOValeur} from './dto-valeur.interface';
 import {RouterModule} from '@angular/router';
 import {ACHATS, VALEURS} from '../jdd/jdd-valeurs.dataset';
 import {TranslateModule} from '@ngx-translate/core';
-import {PORTEFEUILLES} from '../jdd/jdd-portefeuilles.dataset';
 
 describe('ValeursService', () => {
   let valeursService: ValeursService;
   let httpTesting: HttpTestingController;
 
-  const cloneACHATS: Function = () => JSON.parse(JSON.stringify(ACHATS), valeursService.reviverAchatsTicker);
+  const cloneACHATS: Function = () => JSON.parse(JSON.stringify(ACHATS), ValeursService.reviverAchatsTicker);
 
   beforeEach(() => {
     TestBed.configureTestingModule({
@@ -49,30 +48,30 @@ describe('ValeursService', () => {
     httpTesting.verify();
   });
 
-  it('Given des achats when #enregistrer then #charger renvoie les achats', () => {
-    expect(valeursService.enregistrer(cloneACHATS())).toBeUndefined();
-    expect(valeursService.charger()).toEqual(ACHATS);
+  it('Given des achats when #enregistrerAchats then #chargerAchats renvoie les achats', () => {
+    expect(valeursService.enregistrerAchats(cloneACHATS())).toBeUndefined();
+    expect(valeursService.chargerAchats()).toEqual(ACHATS);
   });
 
-  it('Given des achats valides when #import then #charger renvoie les achats', () => {
-    expect(valeursService.import(JSON.stringify(ACHATS))).toBeUndefined();
-    expect(valeursService.charger()).toEqual(ACHATS);
+  it('Given des achats valides when #importAchats then #chargerAchats renvoie les achats', () => {
+    expect(valeursService.importAchats(JSON.stringify(ACHATS))).toBeUndefined();
+    expect(valeursService.chargerAchats()).toEqual(ACHATS);
   });
 
-  it('Given des achats invalides when #import then on récupère un message d\'erreur', () => {
-    expect(valeursService.import('[{}]'))
+  it('Given des achats invalides when #importAchats then on récupère un message d\'erreur', () => {
+    expect(valeursService.importAchats('[{}]'))
       .toBe('SERVICES.VALEURS.ERREURS.ACHATS.TICKER_REQUIS');
-    expect(valeursService.import('[{"ticker": "GLE"}]'))
+    expect(valeursService.importAchats('[{"ticker": "GLE"}]'))
       .toBe('SERVICES.VALEURS.ERREURS.ACHATS.ACHATS_REQUIS');
-    expect(valeursService.import('[{"ticker": "GLE", "achats":[]}]'))
+    expect(valeursService.importAchats('[{"ticker": "GLE", "achats":[]}]'))
       .toBeUndefined();
-    expect(valeursService.import('[{"ticker": "GLE", "achats":[{"date": "2025-07-24T16:33:33.048Z"}]}]'))
+    expect(valeursService.importAchats('[{"ticker": "GLE", "achats":[{"date": "2025-07-24T16:33:33.048Z"}]}]'))
       .toBe('SERVICES.VALEURS.ERREURS.ACHATS.ACHAT.QUANTITE_REQUISE');
-    expect(valeursService.import('[{"ticker": "GLE", "achats":[{"date": "2025-07-24T16:33:33.048Z", "quantite": 10}]}]'))
+    expect(valeursService.importAchats('[{"ticker": "GLE", "achats":[{"date": "2025-07-24T16:33:33.048Z", "quantite": 10}]}]'))
       .toBe('SERVICES.VALEURS.ERREURS.ACHATS.ACHAT.PRIX_REQUIS');
-    expect(valeursService.import('[{"ticker": "GLE", "achats":[{"date": "2025-07-24T16:33:33.048Z", "quantite": 10, "prix": 1.2}]}]'))
+    expect(valeursService.importAchats('[{"ticker": "GLE", "achats":[{"date": "2025-07-24T16:33:33.048Z", "quantite": 10, "prix": 1.2}]}]'))
       .toBe('SERVICES.VALEURS.ERREURS.ACHATS.ACHAT.REVENDU_REQUIS');
-    expect(valeursService.import('[{"ticker": "GLE", "achats":[{"quantite": 10, "prix": 1.2, "revendu": false}]}]'))
+    expect(valeursService.importAchats('[{"ticker": "GLE", "achats":[{"quantite": 10, "prix": 1.2, "revendu": false}]}]'))
       .toBe('SERVICES.VALEURS.ERREURS.ACHATS.ACHAT.DATE_REQUIS');
   });
 });

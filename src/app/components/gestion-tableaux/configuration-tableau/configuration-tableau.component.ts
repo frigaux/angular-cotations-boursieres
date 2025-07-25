@@ -44,14 +44,12 @@ export class ConfigurationTableauComponent {
   } | undefined> = input(undefined,
     {transform: o => this.intercepteurColonnes(o), alias: 'configuration'});
 
-  protected colonnes: DTOColonne<TypesColonnesPortefeuille | TypesColonnesCours>[] = [];
-  private typeColonnes?: TypesColonnes;
-
-
   // données pour la vue
+  protected colonnes: DTOColonne<TypesColonnesPortefeuille | TypesColonnesCours>[] = [];
   colonnesDecorees: ColonneDecoree[] = [];
 
   // privé
+  private typeColonnes?: TypesColonnes;
   private typesColonnes: TypeColonne[] = [];
   private typesDisponibles: TypeColonne[] = [];
 

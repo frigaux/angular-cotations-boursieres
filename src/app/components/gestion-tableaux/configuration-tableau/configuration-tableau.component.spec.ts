@@ -5,6 +5,9 @@ import {TranslateModule} from '@ngx-translate/core';
 import {CurrencyPipe, DatePipe, DecimalPipe, PercentPipe} from '@angular/common';
 import {TABLEAUX} from '../../../services/jdd/jdd-tableaux.dataset';
 import {TypesColonnes} from '../../../services/tableaux/types-colonnes.enum.ts';
+import {DTOColonne} from '../../../services/tableaux/dto-colonne-portefeuille.interface';
+import {TypesColonnesPortefeuille} from '../../../services/tableaux/types-colonnes-portefeuille.enum';
+import {TypesColonnesCours} from '../../../services/tableaux/types-colonnes-cours.enum';
 
 describe('ConfigurationTableauComponent', () => {
   let component: ConfigurationTableauComponent;
@@ -36,16 +39,18 @@ describe('ConfigurationTableauComponent', () => {
   });
 
   describe('Given des colonnes et typeColonnes en inputs', () => {
+    let colonnes: DTOColonne<TypesColonnesPortefeuille | TypesColonnesCours>[];
     beforeEach(() => {
+      colonnes = cloneTABLEAUX().portefeuille.colonnesPaysage;
       fixture.componentRef.setInput('configuration', {
-        colonnes: cloneTABLEAUX().portefeuille.colonnesPaysage,
+        colonnes,
         type: TypesColonnes.PORTEFEUILLE
       });
     });
 
     it('when #ngOnInit then les tableaux sont affichés', () => {
       fixture.detectChanges(); // appelle le ngOnInit
-      expect(component.colonnesDecorees).toHaveSize(TABLEAUX.portefeuille.colonnesPaysage.length)
+      expect(component.colonnesDecorees).toHaveSize(colonnes.length)
     });
 
     it('when #ajouterColonne then une nouvelle colonne est crée', () => {
@@ -56,7 +61,7 @@ describe('ConfigurationTableauComponent', () => {
 
     it('when #supprimerColonne then une colonne est supprimée', () => {
       fixture.detectChanges(); // appelle le ngOnInit
-      component.supprimerColonne(component.colonnesDecorees[0].colonne);
+      component.supprimerColonne(colonnes[0]);
       expect(component.colonnesDecorees).toHaveSize(TABLEAUX.portefeuille.colonnesPaysage.length - 1)
     });
   });

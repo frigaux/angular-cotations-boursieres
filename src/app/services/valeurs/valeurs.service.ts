@@ -23,15 +23,15 @@ export class ValeursService {
     );
   }
 
-  public reviverAchatsTicker(this: any, key: string, value: any): any {
+  public static reviverAchatsTicker(this: any, key: string, value: any): any {
     return key === 'date' ? new Date(value) : value;
   };
 
-  public charger(): Array<AchatsTicker> {
+  public chargerAchats(): Array<AchatsTicker> {
     const json = window.localStorage.getItem(ValeursService.ACHATS);
     if (json) {
       try {
-        const achatsTicker: any = JSON.parse(json, this.reviverAchatsTicker);
+        const achatsTicker: any = JSON.parse(json, ValeursService.reviverAchatsTicker);
         if (this.validerAchats(achatsTicker)) {
           return achatsTicker;
         }
@@ -42,7 +42,7 @@ export class ValeursService {
     return [];
   }
 
-  public enregistrer(achatsTickers: Array<AchatsTicker>): string | undefined {
+  public enregistrerAchats(achatsTickers: Array<AchatsTicker>): string | undefined {
     if (this.validerAchats(achatsTickers)) {
       window.localStorage.setItem(ValeursService.ACHATS, JSON.stringify(achatsTickers));
       return undefined;
@@ -51,9 +51,9 @@ export class ValeursService {
     }
   }
 
-  public import(json: string): string | undefined {
+  public importAchats(json: string): string | undefined {
     try {
-      const achatsTickers: any = JSON.parse(json, this.reviverAchatsTicker);
+      const achatsTickers: any = JSON.parse(json, ValeursService.reviverAchatsTicker);
       if (this.validerAchats(achatsTickers)) {
         window.localStorage.setItem(ValeursService.ACHATS, JSON.stringify(achatsTickers));
         return undefined;

@@ -49,7 +49,7 @@ export class ChartMoyennesMobilesComponent {
         x: {
           title: {
             display: true,
-            text: this.translateService.instant('COMPOSANTS.VALEURS.VALEUR.CHART_MOYENNES_MOBILES.NB_JOURS_CALCUL')
+            text: this.translateService.instant('COMPOSANTS.COURS.CHART_MOYENNES_MOBILES.NB_JOURS_CALCUL')
           }
         },
         y: {

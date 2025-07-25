@@ -1,0 +1,48 @@
+@if (ticker) {
+  <div class="titre">
+  <span class="pi pi-plus-circle"
+        (click)="ajouterAchat()">{{ 'COMPOSANTS.VALEURS.VALEUR.ACHATS.AJOUTER_ACHAT' | translate }}</span>
+    <span class="pi pi-save" (click)="enregistrerAchats()"
+          title="{{ 'COMPOSANTS.VALEURS.VALEUR.ACHATS.ENREGISTRER' | translate }}"></span>
+    <!--  <app-import-export></app-import-export>-->
+  </div>
+  <div class="erreur" *ngIf="erreur !== undefined">
+    <span class="pi pi-exclamation-circle">{{ erreur }}</span>
+  </div>
+  <div class="liste">
+    <div class="entetes">
+      <span></span>
+      <span>{{ 'COMPOSANTS.VALEURS.VALEUR.ACHATS.DATE' | translate }}</span>
+      <span>{{ 'COMPOSANTS.VALEURS.VALEUR.ACHATS.PRIX' | translate }}</span>
+      <span>{{ 'COMPOSANTS.VALEURS.VALEUR.ACHATS.QUANTITE' | translate }}</span>
+      <span>{{ 'COMPOSANTS.VALEURS.VALEUR.ACHATS.REVENDU' | translate }}</span>
+    </div>
+    <div class="entetes" *ngIf="achatsDecores.length === 0">
+      <span></span>
+      <span>-</span>
+      <span>-</span>
+      <span>-</span>
+      <span>-</span>
+    </div>
+    @for (achatDecore of achatsDecores; track achatDecore.id) {
+      <div class="element">
+        <span class="pi pi-trash" (click)="supprimerAchat(achatDecore.achat)"></span>
+        <span>
+        <p-datepicker [(ngModel)]="achatDecore.achat.date" size="small" showIcon iconDisplay="input"
+                      [inputStyle]="{'width': '8rem'}"/>
+      </span>
+        <span>
+          <input pInputText [(ngModel)]="achatDecore.achat.prix" autocomplete="off" required type="number"
+                 pSize="small"/>
+      </span>
+        <span>
+          <input pInputText [(ngModel)]="achatDecore.achat.quantite" autocomplete="off" required type="number"
+                 pSize="small"/>
+      </span>
+        <span>
+          <p-toggleswitch [(ngModel)]="achatDecore.achat.revendu"/>
+      </span>
+      </div>
+    }
+  </div>
+}

@@ -38,7 +38,7 @@ describe('GestionTableauxComponent', () => {
     expect(component).toBeDefined();
   });
 
-  describe('Given un LocalStorage avec des tableaux existants', () => {
+  describe('Given des tableaux existants', () => {
     beforeEach(() => {
       mockTableauxService.charger.and.returnValue(cloneTABLEAUX());
       mockTableauxService.typeAvecParametre.and.returnValue(true);

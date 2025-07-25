@@ -1,6 +1,6 @@
 export interface Achat {
   date: Date;
-  quantite: number;
-  prix: number;
+  quantite?: number;
+  prix?: number;
   revendu: boolean;
 }

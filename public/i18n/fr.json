@@ -39,18 +39,16 @@
           "MINIMUM": "minimum",
           "OUVERTURE": "ouverture",
           "CLOTURE": "clôture",
-          "MAXIMUM": "maximum"
+          "MAXIMUM": "maximum",
+          "ACHATS": "Achats : {{valeur}}"
         },
-        "CHART_MOYENNES_MOBILES": {
-          "NB_JOURS_CALCUL": "Nombre de jours de cotations utilisés pour le calcul de la moyenne mobile"
-        },
-        "CHART_COURS": {
-          "CLOTURE": "Cours à la clôture"
-        },
-        "CHARTS": {
-          "JOURS": "Nombre de jours affichés",
-          "COURS": "Cours à la clôture",
-          "MOYENNES_MOBILES": "Moyennes mobiles au "
+        "ACHATS": {
+          "AJOUTER_ACHAT": "Ajouter un achat",
+          "ENREGISTRER": "Enregistrer",
+          "DATE": "Date",
+          "QUANTITE": "Quantite",
+          "PRIX": "Prix",
+          "REVENDU": "Revendu"
         }
       }
     },
@@ -68,6 +66,17 @@
       "MOYENNES_MOBILES": {
         "NB_JOURS_CALCUL": "Nombre de jours de cotations utilisés pour le calcul de la moyenne mobile",
         "JOURS": "jours"
+      },
+      "CHART_MOYENNES_MOBILES": {
+        "NB_JOURS_CALCUL": "Nombre de jours de cotations utilisés pour le calcul de la moyenne mobile"
+      },
+      "CHART_COURS": {
+        "CLOTURE": "Cours à la clôture"
+      },
+      "CHARTS": {
+        "JOURS": "Nombre de jours affichés",
+        "COURS": "Cours à la clôture",
+        "MOYENNES_MOBILES": "Moyennes mobiles au "
       }
     },
     "PORTEFEUILLES": {

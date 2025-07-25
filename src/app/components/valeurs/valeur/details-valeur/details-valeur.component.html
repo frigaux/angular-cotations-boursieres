@@ -1,23 +1,23 @@
-@if (cours() !== undefined && timelineItems) {
+@if (cours !== undefined && timelineItems) {
   <div>
     <div>
-      <p-fieldset legend="{{ 'COMPOSANTS.VALEURS.VALEUR.DETAILS_VALEUR.DETAILS' | translate }} {{ cours()!.date | date:'dd/MM/yyyy' }}">
+      <p-fieldset legend="{{ 'COMPOSANTS.VALEURS.VALEUR.DETAILS_VALEUR.DETAILS' | translate }} {{ cours.date | date:'dd/MM/yyyy' }}">
         <div>
           <label>{{ 'COMPOSANTS.VALEURS.VALEUR.DETAILS_VALEUR.LIBELLE' | translate }}</label>
-          <span>{{ cours()!.libelle }}</span>
+          <span>{{ cours.libelle }}</span>
         </div>
         <div>
           <label>{{ 'COMPOSANTS.VALEURS.VALEUR.DETAILS_VALEUR.TICKER' | translate }}</label>
-          <span>{{ cours()!.ticker }}</span>
+          <span>{{ cours.ticker }}</span>
         </div>
         <div>
           <label>{{ 'COMPOSANTS.VALEURS.VALEUR.DETAILS_VALEUR.VOLUME' | translate }}</label>
-          <span>{{ cours()!.volume | number }}</span>
+          <span>{{ cours.volume | number }}</span>
         </div>
       </p-fieldset>
     </div>
     <div>
-      <p-fieldset legend="{{ 'COMPOSANTS.VALEURS.VALEUR.DETAILS_VALEUR.COURS' | translate }} {{ cours()!.date | date:'dd/MM/yyyy' }}">
+      <p-fieldset legend="{{ 'COMPOSANTS.VALEURS.VALEUR.DETAILS_VALEUR.COURS' | translate }} {{ cours.date | date:'dd/MM/yyyy' }}">
         <p-timeline [value]="timelineItems" [ngClass]="croissant?'croissant':'decroissant'">
           <ng-template #opposite let-item>
             {{ item.libelle }}
@@ -26,6 +26,11 @@
             {{ item.cours }}
           </ng-template>
         </p-timeline>
+      </p-fieldset>
+    </div>
+    <div>
+      <p-fieldset legend="{{ 'COMPOSANTS.VALEURS.VALEUR.DETAILS_VALEUR.ACHATS' | translate : { valeur: cours.libelle } }}">
+        <app-achats [ticker]="cours.ticker"></app-achats>
       </p-fieldset>
     </div>
   </div>

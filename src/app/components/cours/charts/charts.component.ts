@@ -124,12 +124,12 @@ export class ChartsComponent {
       labels,
       datasets: [
         {
-          label: this.translateService.instant('COMPOSANTS.VALEURS.VALEUR.CHARTS.COURS'),
+          label: this.translateService.instant('COMPOSANTS.COURS.CHARTS.COURS'),
           data: dataCours,
           tension: 0.4
         },
         {
-          label: this.translateService.instant('COMPOSANTS.VALEURS.VALEUR.CHARTS.MOYENNES_MOBILES') + labels[labels.length - 1],
+          label: this.translateService.instant('COMPOSANTS.COURS.CHARTS.MOYENNES_MOBILES') + labels[labels.length - 1],
           data: dataMM,
           tension: 0.4
         }

@@ -52,7 +52,7 @@ export class ChartCoursComponent {
         x: {
           title: {
             display: true,
-            text: this.translateService.instant('COMPOSANTS.VALEURS.VALEUR.CHART_COURS.CLOTURE')
+            text: this.translateService.instant('COMPOSANTS.COURS.CHART_COURS.CLOTURE')
           }
         },
         y: {

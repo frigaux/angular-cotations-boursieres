@@ -1,6 +1,6 @@
 @if (cours !== undefined && data) {
   <div>
-    <label>{{ 'COMPOSANTS.VALEURS.VALEUR.CHARTS.JOURS' | translate }}</label>
+    <label>{{ 'COMPOSANTS.COURS.CHARTS.JOURS' | translate }}</label>
     @for (periode of periodes; track periode) {
       <p-radiobutton name="rb" value="{{periode}}" [(ngModel)]="periodeSelectionnee" inputId="rb{{periode}}" (onClick)="clickPeriode()"/>
       <label for="rb{{periode}}">{{ periode }}</label>

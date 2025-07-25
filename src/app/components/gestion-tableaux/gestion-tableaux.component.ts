@@ -24,7 +24,7 @@ export class GestionTableauxComponent implements OnInit {
   // données pour la vue
   tableaux?: DTOTableaux;
   protected readonly TypesColonnes = TypesColonnes;
-  erreur: string | undefined;
+  erreur?: string;
 
   constructor(private tableauxService: TableauxService) {
   }
@@ -36,5 +36,6 @@ export class GestionTableauxComponent implements OnInit {
 
   enregistrer() {
     this.erreur = this.tableauxService.enregistrer(this.tableaux!);
+    // TODO : confirmation UX
   }
 }

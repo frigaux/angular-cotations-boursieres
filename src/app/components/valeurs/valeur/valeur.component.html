@@ -13,8 +13,8 @@
         </div>
       </h1>
       <div *ngIf="!loading" class="content">
-        <app-charts [cours]="cours"></app-charts>
         <app-details-valeur [cours]="cours"></app-details-valeur>
+        <app-charts [cours]="cours"></app-charts>
       </div>
     </ng-template>
   </p-drawer>
