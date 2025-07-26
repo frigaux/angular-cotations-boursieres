@@ -1,5 +1,5 @@
 export interface DTOCoursTickerAllege {
-  date: Date;
+  date: string; // ISO 8601 : yyyy-MM-dd
   cloture: number;
   volume: number;
   alerte: boolean;

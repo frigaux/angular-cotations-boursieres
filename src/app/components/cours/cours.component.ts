@@ -40,7 +40,7 @@ export class CoursComponent implements OnInit {
   loading: boolean = true;
 
   // données pour la vue
-  date!: Date;
+  date!: string;
   marches: CoursMarche[] = [];
 
   // cours pour lequel afficher les moyennes mobiles

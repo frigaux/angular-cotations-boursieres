@@ -27,13 +27,13 @@ export const ACHATS: Array<AchatsTicker> = [
     "achats":
       [
         {
-          "date": new Date("2025-05-09"),
+          "date": "2025-05-09",
           "quantite": 10,
           "prix": 46.23,
           "revendu": false
         },
         {
-          "date": new Date("2025-05-08"),
+          "date": "2025-05-08",
           "quantite": 20,
           "prix": 45.7,
           "revendu": false
@@ -45,7 +45,7 @@ export const ACHATS: Array<AchatsTicker> = [
     "achats":
       [
         {
-          "date": new Date("2025-05-09"),
+          "date": "2025-05-09",
           "quantite": 10,
           "prix": 70.87,
           "revendu": false

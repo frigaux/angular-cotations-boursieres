@@ -4,7 +4,7 @@ import {DTOCoursTickerAllege} from '../../services/cours/dto-cours-ticker-allege
 import {CoursPortefeuille} from '../portefeuilles/cours-portefeuille.class';
 
 export class Cours {
-  date: Date;
+  date: string; // ISO 8601 : yyyy-MM-dd
   ticker: string;
   libelle: string;
   ouverture: number;
@@ -16,7 +16,7 @@ export class Cours {
   alerte: boolean;
   coursAlleges: DTOCoursTickerAllege[];
 
-  constructor(date: Date, ticker: string, libelle: string, ouverture: number, plusHaut: number, plusBas: number,
+  constructor(date: string, ticker: string, libelle: string, ouverture: number, plusHaut: number, plusBas: number,
               cloture: number, volume: number, moyennesMobiles: number[], alerte: boolean, coursAlleges: DTOCoursTickerAllege[]) {
     this.date = date;
     this.ticker = ticker;
@@ -31,7 +31,7 @@ export class Cours {
     this.coursAlleges = coursAlleges;
   }
 
-  public static fromDTOCours(date: Date, libelle: string, dto: DTOCours) {
+  public static fromDTOCours(date: string, libelle: string, dto: DTOCours) {
     return new Cours(date, dto.ticker, libelle, dto.ouverture, dto.plusHaut, dto.plusBas, dto.cloture, dto.volume, dto.moyennesMobiles, dto.alerte, []);
   }
 

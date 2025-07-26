@@ -5,12 +5,13 @@ import {ValeursService} from '../../../../services/valeurs/valeurs.service';
 import {TranslateModule} from '@ngx-translate/core';
 import {ACHATS} from '../../../../services/jdd/jdd-valeurs.dataset';
 import {AchatsTicker} from '../../../../services/valeurs/achats-ticker.interface';
+import {DatePipe} from '@angular/common';
 
 describe('AchatsComponent', () => {
   let component: AchatsComponent;
   let fixture: ComponentFixture<AchatsComponent>;
 
-  const cloneACHATS: Function = () => JSON.parse(JSON.stringify(ACHATS), ValeursService.reviverAchatsTicker);
+  const cloneACHATS: Function = () => JSON.parse(JSON.stringify(ACHATS));
 
   const mockValeursService = jasmine.createSpyObj('ValeursService', ['chargerAchatsTicker', 'enregistrerAchatsTicker']);
 
@@ -21,7 +22,8 @@ describe('AchatsComponent', () => {
         TranslateModule.forRoot({})
       ],
       providers: [
-        {provide: ValeursService, useValue: mockValeursService}
+        {provide: ValeursService, useValue: mockValeursService},
+        DatePipe
       ]
     })
       .compileComponents();

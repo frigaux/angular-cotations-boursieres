@@ -41,7 +41,7 @@ export class PortefeuillesComponent implements OnInit {
   loading: boolean = true;
 
   // données pour la vue
-  date: Date | undefined;
+  date?: string;
   portefeuillesAvecCours: Array<PortefeuilleAvecCours> = [];
   idxPortefeuilleCourant: number = -1;
 

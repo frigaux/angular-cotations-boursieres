@@ -6,6 +6,7 @@ import {provideAnimations} from '@angular/platform-browser/animations';
 import {COURS_CROISSANT, COURS_DECROISSANT} from '../../../../services/jdd/jdd-cours.dataset';
 import {HttpTestingController, provideHttpClientTesting} from '@angular/common/http/testing';
 import {provideHttpClient} from '@angular/common/http';
+import {DatePipe} from '@angular/common';
 
 describe('DetailsValeurComponent', () => {
   let component: DetailsValeurComponent;
@@ -20,7 +21,8 @@ describe('DetailsValeurComponent', () => {
       providers: [
         provideAnimations(),
         provideHttpClient(),
-        provideHttpClientTesting()
+        provideHttpClientTesting(),
+        DatePipe
       ]
     })
       .compileComponents();

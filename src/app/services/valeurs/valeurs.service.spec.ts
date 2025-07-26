@@ -14,7 +14,7 @@ describe('ValeursService', () => {
   let valeursService: ValeursService;
   let httpTesting: HttpTestingController;
 
-  const cloneACHATS: Function = () => JSON.parse(JSON.stringify(ACHATS), ValeursService.reviverAchatsTicker);
+  const cloneACHATS: Function = () => JSON.parse(JSON.stringify(ACHATS));
 
   beforeEach(() => {
     TestBed.configureTestingModule({

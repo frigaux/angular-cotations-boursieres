@@ -5,7 +5,6 @@ import {Observable, Subscriber} from 'rxjs';
 import {TranslateService} from '@ngx-translate/core';
 import {AchatsTicker} from './achats-ticker.interface';
 import {Achat} from './achat.interface';
-import {DTOTableaux} from '../tableaux/dto-tableaux.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -29,15 +28,11 @@ export class ValeursService {
     );
   }
 
-  public static reviverAchatsTicker(this: any, key: string, value: any): any {
-    return key === 'date' ? new Date(value) : value;
-  };
-
   public chargerAchats(): Array<AchatsTicker> {
     const json = window.localStorage.getItem(ValeursService.ACHATS);
     if (json) {
       try {
-        const achatsTicker: any = JSON.parse(json, ValeursService.reviverAchatsTicker);
+        const achatsTicker: any = JSON.parse(json);
         if (this.validerAchats(achatsTicker)) {
           return achatsTicker;
         }
@@ -59,7 +54,7 @@ export class ValeursService {
 
   public importAchats(json: string): string | undefined {
     try {
-      const achatsTickers: any = JSON.parse(json, ValeursService.reviverAchatsTicker);
+      const achatsTickers: any = JSON.parse(json);
       if (this.validerAchats(achatsTickers)) {
         window.localStorage.setItem(ValeursService.ACHATS, JSON.stringify(achatsTickers));
         ValeursService.OBSERVERS_IMPORT.forEach(observer => observer.next(achatsTickers));
@@ -80,7 +75,7 @@ export class ValeursService {
     const json = window.localStorage.getItem(ValeursService.ACHATS);
     if (json) {
       try {
-        const achatsTicker: any = JSON.parse(json, ValeursService.reviverAchatsTicker);
+        const achatsTicker: any = JSON.parse(json);
         if (this.validerAchats(achatsTicker)) {
           const achatsTicker: AchatsTicker | undefined = this.chargerAchats()
             .find(achats => achats.ticker === ticker);
@@ -125,7 +120,7 @@ export class ValeursService {
         return false;
       }
       for (const achat of achatsTicker.achats) {
-        if (!(achat.date instanceof Date)) {
+        if (isNaN(Date.parse(achat.date))) {
           this.cleMessageErreur = 'SERVICES.VALEURS.ERREURS.ACHATS.ACHAT.DATE_REQUIS';
           return false;
         }

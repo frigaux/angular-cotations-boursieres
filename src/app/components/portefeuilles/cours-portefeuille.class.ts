@@ -6,7 +6,7 @@ import {DTOValeur} from '../../services/valeurs/dto-valeur.interface';
 import {Marches} from '../../services/valeurs/marches.enum';
 
 export class CoursPortefeuille {
-  date: Date;
+  date: string; // ISO 8601 : yyyy-MM-dd
   ticker: string;
   libelle: string;
   marche: Marches;

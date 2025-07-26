@@ -1,4 +1,4 @@
-import {Component, input, InputSignal} from '@angular/core';
+import {Component, input, InputSignal, OnInit} from '@angular/core';
 import {ValeursService} from '../../../../services/valeurs/valeurs.service';
 import {Achat} from '../../../../services/valeurs/achat.interface';
 import {TranslatePipe} from '@ngx-translate/core';
@@ -7,7 +7,7 @@ import {ToggleSwitch} from 'primeng/toggleswitch';
 import {AchatDecore} from './achat-decore.class';
 import {InputText} from 'primeng/inputtext';
 import {DatePicker} from 'primeng/datepicker';
-import {NgIf} from '@angular/common';
+import {DatePipe, NgIf} from '@angular/common';
 import {ImportExportComponent} from './import-export/import-export.component';
 
 @Component({
@@ -24,7 +24,7 @@ import {ImportExportComponent} from './import-export/import-export.component';
   templateUrl: './achats.component.html',
   styleUrl: './achats.component.sass'
 })
-export class AchatsComponent {
+export class AchatsComponent implements OnInit {
   // input/output
   inputTicker: InputSignal<string | undefined> = input(undefined,
     {transform: o => this.intercepteurTicker(o), alias: 'ticker'});
@@ -36,25 +36,31 @@ export class AchatsComponent {
   achatsDecores: AchatDecore[] = [];
   erreur?: string;
 
-  constructor(private valeursService: ValeursService) {
+  constructor(private valeursService: ValeursService, private datepipe: DatePipe) {
+  }
+
+  ngOnInit(): void {
+    this.valeursService.onImport(achatsTickers => this.construireVue());
   }
 
   private intercepteurTicker(ticker: string | undefined): string | undefined {
     this.ticker = ticker;
-    if (ticker) {
-      this.achats = this.valeursService.chargerAchatsTicker(ticker);
+    this.construireVue();
+    return ticker;
+  }
+
+  private construireVue() {
+    if (this.ticker) {
+      this.achats = this.valeursService.chargerAchatsTicker(this.ticker);
     } else {
       this.achats = [];
     }
     this.decorerAchats();
-    return ticker;
   }
 
   ajouterAchat() {
-    const date = new Date();
-    date.setUTCHours(0, 0, 0, 0);
     this.achats.push({
-      date,
+      date: this.datepipe.transform(new Date(), 'yyyy-MM-dd')!,
       quantite: undefined,
       prix: undefined,
       revendu: false
@@ -65,8 +71,8 @@ export class AchatsComponent {
   private decorerAchats() {
     let i = 0;
     this.achatsDecores = this.achats
-      .sort((a1, a2) => a1.date.getTime() - a2.date.getTime())
-      .map(achat => new AchatDecore(i++, achat));
+      .sort((a1, a2) => new Date(a1.date).getTime() - new Date(a2.date).getTime())
+      .map(achat => new AchatDecore(i++, new Date(achat.date), achat));
   }
 
   supprimerAchat(achat: Achat) {
@@ -79,5 +85,9 @@ export class AchatsComponent {
       this.erreur = this.valeursService.enregistrerAchatsTicker(this.ticker, this.achats);
       // TODO : confirmation UX
     }
+  }
+
+  onSelectDate(achatDecore: AchatDecore) {
+    achatDecore.achat.date = this.datepipe.transform(achatDecore.date, 'yyyy-MM-dd')!;
   }
 }
