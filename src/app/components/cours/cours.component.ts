@@ -1,4 +1,4 @@
-import {Component, inject, OnInit} from '@angular/core';
+import {Component, inject, OnInit, viewChild} from '@angular/core';
 import {TableModule} from 'primeng/table';
 import {TranslatePipe, TranslateService} from '@ngx-translate/core';
 import {ValeursService} from '../../services/valeurs/valeurs.service';
@@ -10,9 +10,11 @@ import {DTOListeCours} from '../../services/cours/dto-liste-cours.interface';
 import {Accordion, AccordionContent, AccordionHeader, AccordionPanel} from 'primeng/accordion';
 import {Cours} from './cours.class';
 import {DetailsComponent} from './details/details.component';
-import {CurrencyPipe, DatePipe, DecimalPipe, NgClass, NgIf} from '@angular/common';
+import {CurrencyPipe, DatePipe, NgClass, NgIf, PercentPipe} from '@angular/common';
 import {Skeleton} from 'primeng/skeleton';
 import {LoaderComponent} from '../loader/loader.component';
+import {CoursPortefeuille} from '../portefeuilles/cours-portefeuille.class';
+import {AjoutAuPortefeuilleComponent} from './ajout-au-portefeuille/ajout-au-portefeuille.component';
 
 @Component({
   selector: 'app-cours',
@@ -24,18 +26,21 @@ import {LoaderComponent} from '../loader/loader.component';
     AccordionHeader,
     AccordionContent,
     DetailsComponent,
-    DecimalPipe,
     DatePipe,
     NgIf,
     NgClass,
     CurrencyPipe,
     Skeleton,
-    LoaderComponent
+    LoaderComponent,
+    PercentPipe,
+    AjoutAuPortefeuilleComponent
   ],
   templateUrl: './cours.component.html',
   styleUrls: ['../portefeuilles/accordion-chart.sass', './cours.component.sass']
 })
 export class CoursComponent implements OnInit {
+  private ajout = viewChild(AjoutAuPortefeuilleComponent);
+
   // chargement des cours
   loading: boolean = true;
 
@@ -94,5 +99,17 @@ export class CoursComponent implements OnInit {
     } else {
       this.coursSelectionne = undefined;
     }
+  }
+
+  classeCssVariation(variation: number): string {
+    return variation >= 0 ? 'positive' : 'negative';
+  }
+
+  classeCssMM(cours: CoursPortefeuille, mm: number) {
+    return cours.cloture >= mm ? 'positive' : 'negative';
+  }
+
+  ajouterAuPortefeuille(event: MouseEvent, cours: Cours) {
+    this.ajout()?.afficher(event, cours.ticker);
   }
 }

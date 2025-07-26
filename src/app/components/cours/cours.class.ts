@@ -15,6 +15,7 @@ export class Cours {
   moyennesMobiles: number[];
   alerte: boolean;
   coursAlleges: DTOCoursTickerAllege[];
+  var1?: number;
 
   constructor(date: string, ticker: string, libelle: string, ouverture: number, plusHaut: number, plusBas: number,
               cloture: number, volume: number, moyennesMobiles: number[], alerte: boolean, coursAlleges: DTOCoursTickerAllege[]) {
@@ -29,6 +30,9 @@ export class Cours {
     this.moyennesMobiles = moyennesMobiles;
     this.alerte = alerte;
     this.coursAlleges = coursAlleges;
+    if (moyennesMobiles.length > 1) {
+      this.var1 = (cloture / (moyennesMobiles[1] * 2 - cloture)) - 1;
+    }
   }
 
   public static fromDTOCours(date: string, libelle: string, dto: DTOCours) {

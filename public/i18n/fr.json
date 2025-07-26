@@ -60,12 +60,13 @@
     },
     "COURS": {
       "MARCHES_DATE": "Marchés à la date du",
+      "AJOUTER_AU_PORTEFEUILLE": "Ajouter la valeur dans un portefeuille",
       "LIBELLE": "Libellé",
-      "OUVERTURE": "Ouverture",
       "CLOTURE": "Clôture",
-      "PLUSBAS": "Plus bas",
-      "PLUSHAUT": "Plus haut",
-      "VOLUME": "Volume échangé",
+      "VAR1": "Var/1j",
+      "MM5": "MM5",
+      "MM20": "MM20",
+      "MM50": "MM50",
       "DETAILS": {
         "COURBE": "Courbe des moyennes mobiles"
       },

@@ -13,7 +13,7 @@ describe('AchatsComponent', () => {
 
   const cloneACHATS: Function = () => JSON.parse(JSON.stringify(ACHATS));
 
-  const mockValeursService = jasmine.createSpyObj('ValeursService', ['chargerAchatsTicker', 'enregistrerAchatsTicker']);
+  const mockValeursService = jasmine.createSpyObj('ValeursService', ['chargerAchatsTicker', 'enregistrerAchatsTicker', 'onImport']);
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({

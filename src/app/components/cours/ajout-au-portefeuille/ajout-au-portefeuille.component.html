@@ -1,0 +1,7 @@
+<p-popover>
+  <div class="ajout-au-portefeuille">
+    <p-select [options]="portefeuilles" [(ngModel)]="portefeuille" optionLabel="nom"></p-select>
+    <span class="pi pi-plus-circle"
+          (click)="ajouterAuPortefeuille()"></span>
+  </div>
+</p-popover>

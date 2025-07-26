@@ -9,6 +9,8 @@
   {marginLeft: '0', height: '2.5rem', width: '100%'}
 ]"></app-loader>
 
+<app-ajout-au-portefeuille></app-ajout-au-portefeuille>
+
 <div class="conteneur" [ngClass]="{'avec-details': coursSelectionne !== undefined}">
   <p-accordion>
     @for (marche of marches; track marche.libelle; let i = $index) {
@@ -34,36 +36,43 @@
                   {{ 'COMPOSANTS.COURS.CLOTURE' | translate }}
                   <p-sortIcon field="cloture"/>
                 </th>
-                <th pSortableColumn="ouverture">
-                  {{ 'COMPOSANTS.COURS.OUVERTURE' | translate }}
-                  <p-sortIcon field="ouverture"/>
+                <th pSortableColumn="var1">
+                  {{ 'COMPOSANTS.COURS.VAR1' | translate }}
+                  <p-sortIcon field="var1"/>
                 </th>
                 <th pSortableColumn="plusBas">
-                  {{ 'COMPOSANTS.COURS.PLUSBAS' | translate }}
-                  <p-sortIcon field="plusBas"/>
+                  {{ 'COMPOSANTS.COURS.MM5' | translate }}
                 </th>
                 <th pSortableColumn="plusHaut">
-                  {{ 'COMPOSANTS.COURS.PLUSHAUT' | translate }}
-                  <p-sortIcon field="plusHaut"/>
+                  {{ 'COMPOSANTS.COURS.MM20' | translate }}
                 </th>
                 <th pSortableColumn="volume">
-                  {{ 'COMPOSANTS.COURS.VOLUME' | translate }}
-                  <p-sortIcon field="volume"/>
+                  {{ 'COMPOSANTS.COURS.MM50' | translate }}
                 </th>
               </tr>
             </ng-template>
             <ng-template #body let-cours>
               <tr (click)="basculerAffichageCours(cours)">
                 <td>
-                <span class="pi"
-                      [class]="cours.classeIconeVariation()"></span>
+                  <span class="pi"
+                        [class]="cours.classeIconeVariation()"></span>
+                  <span class="pi pi-file-plus" (click)="ajouterAuPortefeuille($event, cours)"
+                        title="{{ 'COMPOSANTS.COURS.AJOUTER_AU_PORTEFEUILLE' | translate }}"></span>
                   {{ cours.libelle }}
                 </td>
-                <td>{{ cours.cloture | currency:'€'}}</td>
-                <td>{{ cours.ouverture | currency:'€'}}</td>
-                <td>{{ cours.plusBas | currency:'€'}}</td>
-                <td>{{ cours.plusHaut | currency:'€'}}</td>
-                <td>{{ cours.volume | number }}</td>
+                <td>{{ cours.cloture | currency:'€' }}</td>
+                <td [class]="classeCssVariation(cours.var1)">
+                  {{ cours.var1 | percent:'1.2-2' }}
+                </td>
+                <td [class]="classeCssMM(cours, cours.moyennesMobiles[4])">
+                  {{ cours.moyennesMobiles[4] | currency:'€' }}
+                </td>
+                <td [class]="classeCssMM(cours, cours.moyennesMobiles[19])">
+                  {{ cours.moyennesMobiles[19] | currency:'€' }}
+                </td>
+                <td [class]="classeCssMM(cours, cours.moyennesMobiles[49])">
+                  {{ cours.moyennesMobiles[49] | currency:'€' }}
+                </td>
               </tr>
             </ng-template>
           </p-table>
