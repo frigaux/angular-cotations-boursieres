@@ -52,13 +52,13 @@
               </tr>
             </ng-template>
             <ng-template #body let-cours>
-              <tr (click)="basculerAffichageCours(cours)">
+              <tr>
                 <td>
                   <span class="pi"
                         [class]="cours.classeIconeVariation()"></span>
                   <span class="pi pi-file-plus" (click)="afficherAjout($event, cours)"
                         title="{{ 'COMPOSANTS.COURS.AJOUTER_AU_PORTEFEUILLE' | translate }}"></span>
-                  {{ cours.libelle }}
+                  <span (click)="basculerAffichageCours(cours)">{{ cours.libelle }}</span>
                 </td>
                 <td>{{ cours.cloture | currency:'€' }}</td>
                 <td [class]="classeCssVariation(cours.var1)">
