@@ -10,6 +10,9 @@ import {
   LISTE_COURS_TICKER_ALLEGE
 } from '../../../services/jdd/jdd-cours.dataset';
 import {VALEUR} from '../../../services/jdd/jdd-valeurs.dataset';
+import {provideHttpClient} from '@angular/common/http';
+import {provideHttpClientTesting} from '@angular/common/http/testing';
+import {DatePipe} from '@angular/common';
 
 describe('ValeurComponent', () => {
   let component: ValeurComponent;
@@ -25,7 +28,10 @@ describe('ValeurComponent', () => {
       ],
       providers: [
         {provide: CoursService, useValue: mockCoursService},
-        provideAnimations()
+        provideAnimations(),
+        provideHttpClient(),
+        provideHttpClientTesting(),
+        DatePipe
       ]
     })
       .compileComponents();

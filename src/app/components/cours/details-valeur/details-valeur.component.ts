@@ -11,10 +11,10 @@ import {Cours} from '../cours.class';
     TranslatePipe,
     ChartMoyennesMobilesComponent,
   ],
-  templateUrl: './details.component.html',
-  styleUrl: './details.component.sass'
+  templateUrl: './details-valeur.component.html',
+  styleUrl: './details-valeur.component.sass'
 })
-export class DetailsComponent {
+export class DetailsValeurComponent {
   // input/output
   cours: InputSignal<Cours | undefined> = input();
   ferme = output<void>();
