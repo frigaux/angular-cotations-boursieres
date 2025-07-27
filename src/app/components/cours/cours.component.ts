@@ -39,7 +39,7 @@ import {AjoutAuPortefeuilleComponent} from './ajout-au-portefeuille/ajout-au-por
   styleUrls: ['../portefeuilles/accordion-chart.sass', './cours.component.sass']
 })
 export class CoursComponent implements OnInit {
-  private ajout = viewChild(AjoutAuPortefeuilleComponent);
+  private ajoutAuPortefeuille = viewChild(AjoutAuPortefeuilleComponent);
 
   // chargement des cours
   loading: boolean = true;
@@ -109,7 +109,7 @@ export class CoursComponent implements OnInit {
     return cours.cloture >= mm ? 'positive' : 'negative';
   }
 
-  ajouterAuPortefeuille(event: MouseEvent, cours: Cours) {
-    this.ajout()?.afficher(event, cours.ticker);
+  afficherAjout(event: MouseEvent, cours: Cours) {
+    this.ajoutAuPortefeuille()?.afficher(event, cours.ticker);
   }
 }

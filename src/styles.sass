@@ -8,6 +8,7 @@
   --p-content-border-color: var(--p-gray-400) !important
   --p-card-shadow: 0 1px 2px 1px var(--p-gray-500) !important
   --p-form-field-border-color: var(--p-gray-400) !important
+  --p-popover-border-color: var(--p-gray-400) !important
   font-family: system-ui
 
   // https://angular.dev/guide/drag-drop#transfer-draggable-elements-between-lists
@@ -45,13 +46,30 @@
     .pi
       font-size: medium
 
+  .valeur
+    .pi-arrow-circle-up, .pi-arrow-circle-down, .pi-arrow-circle-right
+      font-size: x-large
+
+  app-achats
+    .pi-plus-circle, .pi-save, .pi-sync, .pi-exclamation-circle, .pi-trash
+      font-size: large
+
+  app-cours
+    .pi-arrow-circle-up, .pi-arrow-circle-down, .pi-arrow-circle-right, .pi-file-plus
+      font-size: large
+
+  app-portefeuilles
+    p-accordion
+      .pi-arrow-circle-up, .pi-arrow-circle-down, .pi-arrow-circle-right, .pi-file-plus
+        font-size: large
+
+    app-cours
+      .pi-arrow-circle-up, .pi-arrow-circle-down, .pi-arrow-circle-right, .pi-file-plus
+        font-size: x-large
+
   app-gestion-portefeuilles
     .pi
       font-size: x-large
-
-  app-cours, app-portefeuilles
-    .pi-arrow-circle-up, .pi-arrow-circle-down, .pi-arrow-circle-right
-      font-size: small
 
   app-editeur-alertes
     .pi
@@ -63,18 +81,18 @@
 
   app-gestion-portefeuilles
     app-import-export
-      .pi-exclamation-circle::before
+      .pi-exclamation-circle
         font-size: large
 
   .pi-times-circle
     font-size: xx-large
 
   app-gestion-tableaux
-    .pi-save, .pi-exclamation-circle::before, .pi-sync
+    .pi-save, .pi-exclamation-circle, .pi-sync, .pi-plus-circle, .pi-trash
       font-size: large
 
     app-import-export
-      .pi-exclamation-circle::before
+      .pi-exclamation-circle
         font-size: large
 
   app-tableau
