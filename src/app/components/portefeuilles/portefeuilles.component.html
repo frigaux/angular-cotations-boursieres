@@ -36,13 +36,13 @@
                 <th>
                   {{ 'COMPOSANTS.PORTEFEUILLES.CLOTURE' | translate }}
                 </th>
-                <th pSortableColumn="var1">
-                  {{ 'COMPOSANTS.PORTEFEUILLES.VAR1' | translate }}
-                  <p-sortIcon field="var1"/>
-                </th>
                 <th pSortableColumn="varAchats">
                   {{ 'COMPOSANTS.PORTEFEUILLES.VAR_ACHATS' | translate }}
                   <p-sortIcon field="varAchats"/>
+                </th>
+                <th pSortableColumn="var1">
+                  {{ 'COMPOSANTS.PORTEFEUILLES.VAR1' | translate }}
+                  <p-sortIcon field="var1"/>
                 </th>
                 <th>
                   {{ 'COMPOSANTS.PORTEFEUILLES.MM5' | translate }}
@@ -73,11 +73,11 @@
                   <app-alertes [alertes]="cours.alertes"></app-alertes>
                 </td>
                 <td>{{ cours.cloture | currency:'€' }}</td>
-                <td [class]="classeCssVariation(cours.var1)">
-                  {{ cours.var1 | percent:'1.2-2' }}
-                </td>
                 <td [class]="classeCssVariation(cours.varAchats)">
                   {{ cours.varAchats | percent:'1.2-2' }}
+                </td>
+                <td [class]="classeCssVariation(cours.var1)">
+                  {{ cours.var1 | percent:'1.2-2' }}
                 </td>
                 <td [class]="classeCssMM(cours, cours.moyennesMobiles[4])">
                   {{ cours.moyennesMobiles[4] | currency:'€' }}
