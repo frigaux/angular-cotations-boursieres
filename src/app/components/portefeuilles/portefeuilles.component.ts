@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, viewChild} from '@angular/core';
 import {CurrencyPipe, DatePipe, NgClass, NgIf, PercentPipe} from '@angular/common';
 import {PortefeuillesService} from '../../services/portefeuilles/portefeuilles.service';
 import {Accordion, AccordionContent, AccordionHeader, AccordionPanel, AccordionTabOpenEvent} from 'primeng/accordion';
@@ -15,6 +15,8 @@ import {Skeleton} from 'primeng/skeleton';
 import {LoaderComponent} from '../loader/loader.component';
 import {Achat} from '../../services/valeurs/achat.interface';
 import {DtoCoursAvecListeAllege} from '../../services/cours/dto-cours-avec-liste-allege.interface';
+import {AchatValeurComponent} from './achat-valeur/achat-valeur.component';
+import {Cours} from '../cours/cours.class';
 
 @Component({
   selector: 'app-portefeuilles',
@@ -33,12 +35,15 @@ import {DtoCoursAvecListeAllege} from '../../services/cours/dto-cours-avec-liste
     NgClass,
     CurrencyPipe,
     Skeleton,
-    LoaderComponent
+    LoaderComponent,
+    AchatValeurComponent
   ],
   templateUrl: './portefeuilles.component.html',
   styleUrls: ['./accordion-chart.sass', './portefeuilles.component.sass']
 })
 export class PortefeuillesComponent implements OnInit {
+  private achatValeur = viewChild(AchatValeurComponent);
+
   // chargement des valeurs et cours
   loading: boolean = true;
 
@@ -114,7 +119,7 @@ export class PortefeuillesComponent implements OnInit {
     }
   }
 
-  public calculerVariationAchats(dto: DtoCoursAvecListeAllege): number | undefined {
+  calculerVariationAchats(dto: DtoCoursAvecListeAllege): number | undefined {
     const achats: Array<Achat> = this.valeursService.chargerAchatsTicker(dto.ticker);
     if (achats.length === 0) {
       return undefined;
@@ -129,5 +134,9 @@ export class PortefeuillesComponent implements OnInit {
       totalPrix += achat.prix * achat.quantite;
     }
     return (dto.cloture / (totalPrix / totalQuantites)) - 1;
+  }
+
+  afficherAchatValeur(event: MouseEvent, cours: Cours) {
+    this.achatValeur()?.afficher(event, cours.ticker);
   }
 }

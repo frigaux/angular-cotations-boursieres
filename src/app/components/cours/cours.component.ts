@@ -109,7 +109,7 @@ export class CoursComponent implements OnInit {
     return cours.cloture >= mm ? 'positive' : 'negative';
   }
 
-  afficherAjout(event: MouseEvent, cours: Cours) {
+  afficherAjoutAuPortefeuille(event: MouseEvent, cours: Cours) {
     this.ajoutAuPortefeuille()?.afficher(event, cours.ticker);
   }
 }

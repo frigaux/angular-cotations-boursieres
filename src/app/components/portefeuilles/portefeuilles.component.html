@@ -11,6 +11,8 @@
   {marginLeft: '0', height: '2rem', width: '100%'}
 ]"></app-loader>
 
+<app-achat-valeur></app-achat-valeur>
+
 <div class="conteneur" [ngClass]="{'avec-details': coursSelectionne !== undefined}">
   <p-accordion *ngIf="!loading" value="{{idxPortefeuilleCourant}}" (onOpen)="onOpenAccordion($event)">
     @for (portefeuilleAvecCours of portefeuillesAvecCours; track portefeuilleAvecCours.portefeuille.nom; let
@@ -62,12 +64,12 @@
               </tr>
             </ng-template>
             <ng-template #body let-cours>
-              <tr (click)="basculerAffichageCours(cours)">
+              <tr>
                 <td>
                   <span class="pi"
                         [class]="classeIconeVariation(cours.var1)"></span>
-                  <span class="pi pi-shopping-bag"></span>
-                  <span>{{ cours.libelle }}</span>
+                  <span class="pi pi-shopping-bag" (click)="afficherAchatValeur($event, cours)"></span>
+                  <span (click)="basculerAffichageCours(cours)">{{ cours.libelle }}</span>
                 </td>
                 <td>
                   <app-alertes [alertes]="cours.alertes"></app-alertes>
