@@ -8,17 +8,17 @@ import {AlertesComponent} from '../alertes/alertes.component';
 import {Alerte} from '../alerte.class';
 
 @Component({
-  selector: 'app-cours',
+  selector: 'app-details-valeur',
   imports: [
     DatePipe,
     Panel,
     ChartsComponent,
     AlertesComponent
   ],
-  templateUrl: './cours.component.html',
-  styleUrl: './cours.component.sass'
+  templateUrl: './details-valeur.component.html',
+  styleUrl: './details-valeur.component.sass'
 })
-export class CoursComponent {
+export class DetailsValeurComponent {
   // input/output
   inputCours: InputSignal<CoursPortefeuille | undefined> = input(undefined,
     {transform: o => this.intercepteurCoursPortefeuille(o), alias: 'cours'});

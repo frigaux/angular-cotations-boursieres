@@ -9,7 +9,7 @@ import {DTOValeur} from '../../services/valeurs/dto-valeur.interface';
 import {PortefeuilleAvecCours} from './portefeuille-avec-cours.class';
 import {CoursPortefeuille} from './cours-portefeuille.class';
 import {TranslatePipe} from '@ngx-translate/core';
-import {CoursComponent} from './cours/cours.component';
+import {DetailsValeurComponent} from './details-valeur/details-valeur.component';
 import {AlertesComponent} from './alertes/alertes.component';
 import {Skeleton} from 'primeng/skeleton';
 import {LoaderComponent} from '../loader/loader.component';
@@ -28,7 +28,7 @@ import {DtoCoursAvecListeAllege} from '../../services/cours/dto-cours-avec-liste
     TranslatePipe,
     PercentPipe,
     DatePipe,
-    CoursComponent,
+    DetailsValeurComponent,
     AlertesComponent,
     NgClass,
     CurrencyPipe,

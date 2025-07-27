@@ -5,7 +5,7 @@ import {ChartMoyennesMobilesComponent} from '../chart-moyennes-mobiles/chart-moy
 import {Cours} from '../cours.class';
 
 @Component({
-  selector: 'app-details',
+  selector: 'app-details-valeur',
   imports: [
     Panel,
     TranslatePipe,
