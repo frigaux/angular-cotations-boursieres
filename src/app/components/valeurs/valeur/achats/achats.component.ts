@@ -61,8 +61,8 @@ export class AchatsComponent implements OnInit {
   ajouterAchat() {
     this.achats.push({
       date: this.datepipe.transform(new Date(), 'yyyy-MM-dd')!,
-      quantite: undefined,
-      prix: undefined,
+      quantite: 0,
+      prix: 0,
       revendu: false
     });
     this.decorerAchats();

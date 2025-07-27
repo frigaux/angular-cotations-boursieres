@@ -13,6 +13,8 @@ import {CoursComponent} from './cours/cours.component';
 import {AlertesComponent} from './alertes/alertes.component';
 import {Skeleton} from 'primeng/skeleton';
 import {LoaderComponent} from '../loader/loader.component';
+import {Achat} from '../../services/valeurs/achat.interface';
+import {DtoCoursAvecListeAllege} from '../../services/cours/dto-cours-avec-liste-allege.interface';
 
 @Component({
   selector: 'app-portefeuilles',
@@ -80,7 +82,7 @@ export class PortefeuillesComponent implements OnInit {
       .subscribe(liste => {
         this.date = liste.length > 0 ? liste[0].date : undefined;
         portefeuilleAvecCours.cours = liste.map(dto => {
-          return new CoursPortefeuille(this.valeurByTicker.get(dto.ticker)!, dto, portefeuilleAvecCours.alertes);
+          return new CoursPortefeuille(this.valeurByTicker.get(dto.ticker)!, dto, portefeuilleAvecCours.alertes, this.calculerVariationAchats(dto));
         });
         this.loading = false;
       })
@@ -110,5 +112,22 @@ export class PortefeuillesComponent implements OnInit {
     } else {
       this.coursSelectionne = undefined;
     }
+  }
+
+  public calculerVariationAchats(dto: DtoCoursAvecListeAllege): number | undefined {
+    const achats: Array<Achat> = this.valeursService.chargerAchatsTicker(dto.ticker);
+    if (achats.length === 0) {
+      return undefined;
+    }
+    if (achats.length === 1) {
+      return (dto.cloture / achats[0].prix) - 1;
+    }
+    let totalQuantites = 0;
+    let totalPrix = 0;
+    for (const achat of achats) {
+      totalQuantites += achat.quantite;
+      totalPrix += achat.prix * achat.quantite;
+    }
+    return (dto.cloture / (totalPrix / totalQuantites)) - 1;
   }
 }

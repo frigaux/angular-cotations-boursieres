@@ -19,9 +19,11 @@ export class CoursPortefeuille {
   alerte: boolean;
   coursAlleges: DTOCoursTickerAllege[];
   alertes: Alerte[];
+  varAchats?: number;
 
   constructor(valeur: DTOValeur, dto: DtoCoursAvecListeAllege,
-              alertes: { alerte: DTOAlerte, evaluer: Function }[]) {
+              alertes: { alerte: DTOAlerte, evaluer: Function }[],
+              varAchats: number | undefined) {
     this.date = dto.cours[0].date;
     this.ticker = dto.ticker;
     this.libelle = valeur.libelle;
@@ -35,8 +37,10 @@ export class CoursPortefeuille {
     this.alerte = dto.alerte;
     this.coursAlleges = dto.cours;
     this.alertes = this.evaluerAlertes(alertes);
-    Object.assign(this, { var1: this.calculerVariation(1) });
-    Object.assign(this, { var5: this.calculerVariation(5) });
+    this.varAchats = varAchats;
+
+    Object.assign(this, {var1: this.calculerVariation(1)});
+    Object.assign(this, {var5: this.calculerVariation(5)});
   }
 
   public calculerVariation(jours: number) {
