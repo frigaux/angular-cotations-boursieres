@@ -12,7 +12,6 @@ import {Capacitor} from '@capacitor/core';
 import {ScreenOrientation} from '@capacitor/screen-orientation';
 import {PrimeNG} from 'primeng/config';
 
-// TODO : vue portefeuille : accès aux achats
 @Component({
   selector: 'app-root',
   standalone: true,

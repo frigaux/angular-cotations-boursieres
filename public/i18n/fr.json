@@ -45,6 +45,7 @@
         "ACHATS": {
           "AJOUTER_ACHAT": "Ajouter un achat",
           "ENREGISTRER": "Enregistrer les achats",
+          "ENREGISTREMENT_REUSSI": "Enregistrement réussi",
           "DATE": "Date",
           "QUANTITE": "Quantite",
           "PRIX": "Prix",
@@ -103,6 +104,11 @@
       "MM50": "MM50",
       "MM100": "MM100",
       "MM200": "MM200",
+      "ACTIONS_VALEUR": {
+        "SUPPRIMER_DU_PORTEFEUILLE": "Supprimer la valeur du portefeuille",
+        "ACHATS": "Achats de la valeur",
+        "ACHATS_VALEUR": "Achats de la valeur {{nom}}"
+      },
       "GESTION_PORTEFEUILLES": {
         "CREER": "Créer un portefeuille",
         "CREATION": "Création d'un portefeuille",
@@ -168,6 +174,7 @@
     "GESTION_TABLEAUX": {
       "TABLEAUX": "Configuration des colonnes des tableaux",
       "ENREGISTRER": "Enregistrer les tableaux",
+      "ENREGISTREMENT_REUSSI": "Enregistrement réussi",
       "PAYSAGE": "Paysage",
       "PORTRAIT": "Portrait",
       "TABLEAU": {

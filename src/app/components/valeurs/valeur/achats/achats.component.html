@@ -1,10 +1,11 @@
 @if (valeur) {
-  <div class="titre">
+  <div class="boutons">
     <span class="pi pi-plus-circle" (click)="ajouterAchat()"
           title="{{ 'COMPOSANTS.VALEURS.VALEUR.ACHATS.AJOUTER_ACHAT' | translate }}"></span>
     <span class="pi pi-save" (click)="enregistrerAchats()"
           title="{{ 'COMPOSANTS.VALEURS.VALEUR.ACHATS.ENREGISTRER' | translate }}"></span>
     <app-import-export></app-import-export>
+    <span class="message">{{succes}}</span>
   </div>
   <div class="erreur" *ngIf="erreur !== undefined">
     <span class="pi pi-exclamation-circle">{{ erreur }}</span>

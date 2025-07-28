@@ -3,7 +3,7 @@ import {TableauxService} from '../../services/tableaux/tableaux.service';
 import {DTOTableaux} from '../../services/tableaux/dto-tableaux.interface';
 import {ConfigurationTableauComponent} from './configuration-tableau/configuration-tableau.component';
 import {TypesColonnes} from '../../services/tableaux/types-colonnes.enum.ts';
-import {TranslatePipe} from '@ngx-translate/core';
+import {TranslatePipe, TranslateService} from '@ngx-translate/core';
 import {Card} from 'primeng/card';
 import {NgIf} from '@angular/common';
 import {ImportExportComponent} from './import-export/import-export.component';
@@ -25,8 +25,10 @@ export class GestionTableauxComponent implements OnInit {
   tableaux?: DTOTableaux;
   protected readonly TypesColonnes = TypesColonnes;
   erreur?: string;
+  succes?: string;
 
-  constructor(private tableauxService: TableauxService) {
+  constructor(private translateService: TranslateService,
+              private tableauxService: TableauxService) {
   }
 
   ngOnInit(): void {
@@ -36,6 +38,9 @@ export class GestionTableauxComponent implements OnInit {
 
   enregistrer() {
     this.erreur = this.tableauxService.enregistrer(this.tableaux!);
-    // TODO : confirmation UX
+    if (this.erreur === undefined) {
+      this.succes = this.translateService.instant('COMPOSANTS.GESTION_TABLEAUX.ENREGISTREMENT_REUSSI');
+      setTimeout(() => this.succes = undefined, 2000);
+    }
   }
 }

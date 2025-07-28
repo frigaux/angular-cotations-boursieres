@@ -1,7 +1,7 @@
 import {Component, input, InputSignal, OnInit} from '@angular/core';
 import {ValeursService} from '../../../../services/valeurs/valeurs.service';
 import {Achat} from '../../../../services/valeurs/achat.interface';
-import {TranslatePipe} from '@ngx-translate/core';
+import {TranslatePipe, TranslateService} from '@ngx-translate/core';
 import {FormsModule} from '@angular/forms';
 import {ToggleSwitch} from 'primeng/toggleswitch';
 import {AchatDecore} from './achat-decore.class';
@@ -9,6 +9,7 @@ import {InputText} from 'primeng/inputtext';
 import {DatePicker} from 'primeng/datepicker';
 import {DatePipe, NgIf} from '@angular/common';
 import {ImportExportComponent} from './import-export/import-export.component';
+import {Message} from 'primeng/message';
 
 @Component({
   selector: 'app-achats',
@@ -19,31 +20,38 @@ import {ImportExportComponent} from './import-export/import-export.component';
     InputText,
     DatePicker,
     NgIf,
-    ImportExportComponent
+    ImportExportComponent,
+    Message
   ],
   templateUrl: './achats.component.html',
   styleUrl: './achats.component.sass'
 })
 export class AchatsComponent implements OnInit {
   // input/output
-  inputValeur: InputSignal<{ticker: string, cloture: number} | undefined> = input(undefined,
+  inputValeur: InputSignal<{ ticker: string, cloture: number } | undefined> = input(undefined,
     {transform: o => this.intercepteurTicker(o), alias: 'valeur'});
-  valeur?: {ticker: string, cloture: number};
+  valeur?: { ticker: string, cloture: number };
 
   private achats: Array<Achat> = [];
 
   // données pour la vue
   achatsDecores: AchatDecore[] = [];
   erreur?: string;
+  succes?: string;
 
-  constructor(private valeursService: ValeursService, private datepipe: DatePipe) {
+  constructor(private translateService: TranslateService,
+              private valeursService: ValeursService,
+              private datepipe: DatePipe) {
   }
 
   ngOnInit(): void {
     this.valeursService.onImport(achatsTickers => this.construireVue());
   }
 
-  private intercepteurTicker(valeur: {ticker: string, cloture: number} | undefined): {ticker: string, cloture: number} | undefined {
+  private intercepteurTicker(valeur: { ticker: string, cloture: number } | undefined): {
+    ticker: string,
+    cloture: number
+  } | undefined {
     this.valeur = valeur;
     this.construireVue();
     return valeur;
@@ -85,7 +93,10 @@ export class AchatsComponent implements OnInit {
   enregistrerAchats() {
     if (this.valeur) {
       this.erreur = this.valeursService.enregistrerAchatsTicker(this.valeur.ticker, this.achats);
-      // TODO : confirmation UX
+      if (this.erreur === undefined) {
+        this.succes = this.translateService.instant('COMPOSANTS.VALEURS.VALEUR.ACHATS.ENREGISTREMENT_REUSSI');
+        setTimeout(() => this.succes = undefined, 2000);
+      }
     }
   }
 

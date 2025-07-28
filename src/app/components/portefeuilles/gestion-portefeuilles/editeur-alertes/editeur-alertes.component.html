@@ -1,14 +1,14 @@
 <app-editeur-condition-alerte [alerte]="alerteEnModification"
-                     (abandon)="alerteEnModification = undefined"
-                     (modifie)="modifierConditionAlerte($event)"></app-editeur-condition-alerte>
+                              (abandon)="alerteEnModification = undefined"
+                              (modifie)="modifierConditionAlerte($event)"></app-editeur-condition-alerte>
 
 <p-dialog [header]="titre" [modal]="true" [visible]="portefeuilleEnModification !== undefined" closable="false">
   @if (portefeuilleEnModification !== undefined) {
     <div class="conteneur">
       <div class="pi pi-plus-circle" (click)="ajouterAlerte()"
            title="{{ 'COMPOSANTS.PORTEFEUILLES.GESTION_PORTEFEUILLES.EDITEUR_ALERTES.AJOUTER' | translate }}"></div>
-      <div class="aucune-alerte" *ngIf="alertes.length === 0">
-        {{ 'COMPOSANTS.PORTEFEUILLES.GESTION_PORTEFEUILLES.EDITEUR_ALERTES.AUCUNE_ALERTE' | translate }}
+      <div class="pi pi-arrow-left"
+           *ngIf="alertes.length === 0">{{ 'COMPOSANTS.PORTEFEUILLES.GESTION_PORTEFEUILLES.EDITEUR_ALERTES.AUCUNE_ALERTE' | translate }}
       </div>
 
       <div class="formulaire" [formGroup]="formulaire">

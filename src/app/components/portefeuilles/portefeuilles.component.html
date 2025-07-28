@@ -13,97 +13,99 @@
 
 <app-achat-valeur></app-achat-valeur>
 
-<div class="conteneur" [ngClass]="{'avec-details': coursSelectionne !== undefined}">
-  <p-accordion *ngIf="!loading" value="{{idxPortefeuilleCourant}}" (onOpen)="onOpenAccordion($event)">
-    @for (portefeuilleAvecCours of portefeuillesAvecCours; track portefeuilleAvecCours.portefeuille.nom; let
-      i = $index) {
-      <p-accordion-panel value="{{i}}">
-        <p-accordion-header>{{ portefeuilleAvecCours.portefeuille.nom }}</p-accordion-header>
-        <p-accordion-content>
-          <p-table
-            sortField="libelle"
-            [scrollable]="true" scrollHeight="calc(100vh - 20rem)"
-            [style]="{ margin: '1rem' }"
-            [value]="portefeuilleAvecCours.cours"
-            [loading]="loading">
-            <ng-template #header>
-              <tr>
-                <th pSortableColumn="libelle">
-                  {{ 'COMPOSANTS.PORTEFEUILLES.LIBELLE' | translate }}
-                  <p-sortIcon field="libelle"/>
-                </th>
-                <th>
-                  {{ 'COMPOSANTS.PORTEFEUILLES.ALERTES' | translate }}
-                </th>
-                <th>
-                  {{ 'COMPOSANTS.PORTEFEUILLES.CLOTURE' | translate }}
-                </th>
-                <th pSortableColumn="varAchats">
-                  {{ 'COMPOSANTS.PORTEFEUILLES.VAR_ACHATS' | translate }}
-                  <p-sortIcon field="varAchats"/>
-                </th>
-                <th pSortableColumn="var1">
-                  {{ 'COMPOSANTS.PORTEFEUILLES.VAR1' | translate }}
-                  <p-sortIcon field="var1"/>
-                </th>
-                <th>
-                  {{ 'COMPOSANTS.PORTEFEUILLES.MM5' | translate }}
-                </th>
-                <th>
-                  {{ 'COMPOSANTS.PORTEFEUILLES.MM20' | translate }}
-                </th>
-                <th>
-                  {{ 'COMPOSANTS.PORTEFEUILLES.MM50' | translate }}
-                </th>
-                <th>
-                  {{ 'COMPOSANTS.PORTEFEUILLES.MM100' | translate }}
-                </th>
-                <th>
-                  {{ 'COMPOSANTS.PORTEFEUILLES.MM200' | translate }}
-                </th>
-              </tr>
-            </ng-template>
-            <ng-template #body let-cours>
-              <tr>
-                <td>
+@if (portefeuillesAvecCours) {
+  <div class="conteneur" [ngClass]="{'avec-details': coursSelectionne !== undefined}">
+    <p-accordion *ngIf="!loading" value="{{idxPortefeuilleCourant}}" (onOpen)="onOpenAccordion($event)">
+      @for (portefeuilleAvecCours of portefeuillesAvecCours; track portefeuilleAvecCours.portefeuille.nom; let
+        i = $index) {
+        <p-accordion-panel value="{{i}}">
+          <p-accordion-header>{{ portefeuilleAvecCours.portefeuille.nom }}</p-accordion-header>
+          <p-accordion-content>
+            <p-table
+              sortField="libelle"
+              [scrollable]="true" scrollHeight="calc(100vh - 20rem)"
+              [style]="{ margin: '1rem' }"
+              [value]="portefeuilleAvecCours.cours"
+              [loading]="loading">
+              <ng-template #header>
+                <tr>
+                  <th pSortableColumn="libelle">
+                    {{ 'COMPOSANTS.PORTEFEUILLES.LIBELLE' | translate }}
+                    <p-sortIcon field="libelle"/>
+                  </th>
+                  <th>
+                    {{ 'COMPOSANTS.PORTEFEUILLES.ALERTES' | translate }}
+                  </th>
+                  <th>
+                    {{ 'COMPOSANTS.PORTEFEUILLES.CLOTURE' | translate }}
+                  </th>
+                  <th pSortableColumn="varAchats">
+                    {{ 'COMPOSANTS.PORTEFEUILLES.VAR_ACHATS' | translate }}
+                    <p-sortIcon field="varAchats"/>
+                  </th>
+                  <th pSortableColumn="var1">
+                    {{ 'COMPOSANTS.PORTEFEUILLES.VAR1' | translate }}
+                    <p-sortIcon field="var1"/>
+                  </th>
+                  <th>
+                    {{ 'COMPOSANTS.PORTEFEUILLES.MM5' | translate }}
+                  </th>
+                  <th>
+                    {{ 'COMPOSANTS.PORTEFEUILLES.MM20' | translate }}
+                  </th>
+                  <th>
+                    {{ 'COMPOSANTS.PORTEFEUILLES.MM50' | translate }}
+                  </th>
+                  <th>
+                    {{ 'COMPOSANTS.PORTEFEUILLES.MM100' | translate }}
+                  </th>
+                  <th>
+                    {{ 'COMPOSANTS.PORTEFEUILLES.MM200' | translate }}
+                  </th>
+                </tr>
+              </ng-template>
+              <ng-template #body let-cours>
+                <tr>
+                  <td>
                   <span class="pi"
                         [class]="classeIconeVariation(cours.var1)"
-                        (click)="afficherActions($event, cours)"
+                        (click)="afficherActions($event, cours, portefeuilleAvecCours.portefeuille)"
                         title="{{ 'COMPOSANTS.PORTEFEUILLES.ACTIONS' | translate }}"></span>
-                  <span (click)="basculerAffichageCours(cours)">{{ cours.libelle }}</span>
-                </td>
-                <td>
-                  <app-alertes [alertes]="cours.alertes"></app-alertes>
-                </td>
-                <td>{{ cours.cloture | currency:'€' }}</td>
-                <td [class]="classeCssVariation(cours.varAchats)">
-                  {{ cours.varAchats | percent:'1.2-2' }}
-                </td>
-                <td [class]="classeCssVariation(cours.var1)">
-                  {{ cours.var1 | percent:'1.2-2' }}
-                </td>
-                <td [class]="classeCssMM(cours, cours.moyennesMobiles[4])">
-                  {{ cours.moyennesMobiles[4] | currency:'€' }}
-                </td>
-                <td [class]="classeCssMM(cours, cours.moyennesMobiles[19])">
-                  {{ cours.moyennesMobiles[19] | currency:'€' }}
-                </td>
-                <td [class]="classeCssMM(cours, cours.moyennesMobiles[49])">
-                  {{ cours.moyennesMobiles[49] | currency:'€' }}
-                </td>
-                <td [class]="classeCssMM(cours, cours.moyennesMobiles[99])">
-                  {{ cours.moyennesMobiles[99] | currency:'€' }}
-                </td>
-                <td [class]="classeCssMM(cours, cours.moyennesMobiles[199])">
-                  {{ cours.moyennesMobiles[199] | currency:'€' }}
-                </td>
-              </tr>
-            </ng-template>
-          </p-table>
-        </p-accordion-content>
-      </p-accordion-panel>
-    }
-  </p-accordion>
+                    <span (click)="basculerAffichageCours(cours)">{{ cours.libelle }}</span>
+                  </td>
+                  <td>
+                    <app-alertes [alertes]="cours.alertes"></app-alertes>
+                  </td>
+                  <td>{{ cours.cloture | currency:'€' }}</td>
+                  <td [class]="classeCssVariation(cours.varAchats)">
+                    {{ cours.varAchats | percent:'1.2-2' }}
+                  </td>
+                  <td [class]="classeCssVariation(cours.var1)">
+                    {{ cours.var1 | percent:'1.2-2' }}
+                  </td>
+                  <td [class]="classeCssMM(cours, cours.moyennesMobiles[4])">
+                    {{ cours.moyennesMobiles[4] | currency:'€' }}
+                  </td>
+                  <td [class]="classeCssMM(cours, cours.moyennesMobiles[19])">
+                    {{ cours.moyennesMobiles[19] | currency:'€' }}
+                  </td>
+                  <td [class]="classeCssMM(cours, cours.moyennesMobiles[49])">
+                    {{ cours.moyennesMobiles[49] | currency:'€' }}
+                  </td>
+                  <td [class]="classeCssMM(cours, cours.moyennesMobiles[99])">
+                    {{ cours.moyennesMobiles[99] | currency:'€' }}
+                  </td>
+                  <td [class]="classeCssMM(cours, cours.moyennesMobiles[199])">
+                    {{ cours.moyennesMobiles[199] | currency:'€' }}
+                  </td>
+                </tr>
+              </ng-template>
+            </p-table>
+          </p-accordion-content>
+        </p-accordion-panel>
+      }
+    </p-accordion>
 
-  <app-details-valeur [cours]="coursSelectionne" (ferme)="coursSelectionne = undefined"></app-details-valeur>
-</div>
+    <app-details-valeur [cours]="coursSelectionne" (ferme)="coursSelectionne = undefined"></app-details-valeur>
+  </div>
+}

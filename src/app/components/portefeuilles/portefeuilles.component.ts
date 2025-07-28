@@ -15,8 +15,9 @@ import {Skeleton} from 'primeng/skeleton';
 import {LoaderComponent} from '../loader/loader.component';
 import {Achat} from '../../services/valeurs/achat.interface';
 import {DtoCoursAvecListeAllege} from '../../services/cours/dto-cours-avec-liste-allege.interface';
-import {AchatValeurComponent} from './achat-valeur/achat-valeur.component';
+import {ActionsValeurComponent} from './actions-valeur/actions-valeur.component';
 import {Cours} from '../cours/cours.class';
+import {DTOPortefeuille} from '../../services/portefeuilles/dto-portefeuille.interface';
 
 @Component({
   selector: 'app-portefeuilles',
@@ -36,13 +37,13 @@ import {Cours} from '../cours/cours.class';
     CurrencyPipe,
     Skeleton,
     LoaderComponent,
-    AchatValeurComponent
+    ActionsValeurComponent
   ],
   templateUrl: './portefeuilles.component.html',
   styleUrls: ['./accordion-chart.sass', './portefeuilles.component.sass']
 })
 export class PortefeuillesComponent implements OnInit {
-  private achatValeur = viewChild(AchatValeurComponent);
+  private actionsValeur = viewChild(ActionsValeurComponent);
 
   // chargement des valeurs et cours
   loading: boolean = true;
@@ -61,16 +62,17 @@ export class PortefeuillesComponent implements OnInit {
   constructor(private portefeuillesService: PortefeuillesService,
               private valeursService: ValeursService,
               private coursService: CoursService) {
+    portefeuillesService.onUpdate(portefeuilles => this.chargerPortefeuilleCourant());
+    valeursService.onImport(achatsTickers => this.chargerPortefeuilleCourant());
+    valeursService.onUpdate(achatsTickers => this.chargerPortefeuilleCourant());
   }
 
   ngOnInit(): void {
-    this.portefeuillesAvecCours = this.portefeuillesService.charger()
-      .filter(portefeuille => portefeuille.tickers.length > 0)
-      .map(portefeuille => new PortefeuilleAvecCours(portefeuille));
     this.valeursService.chargerValeurs().subscribe(valeurs => {
       valeurs.forEach(valeur => this.valeurByTicker.set(valeur.ticker, valeur));
-      this.idxPortefeuilleCourant = this.portefeuillesAvecCours
-        .findIndex(portefeuilleAvecCours => portefeuilleAvecCours.portefeuille.parDefaut);
+      this.idxPortefeuilleCourant = this.portefeuillesService.charger()
+        .filter(portefeuille => portefeuille.tickers.length > 0)
+        .findIndex(portefeuille => portefeuille.parDefaut);
       if (this.idxPortefeuilleCourant === -1) {
         this.idxPortefeuilleCourant = 0;
       }
@@ -85,6 +87,9 @@ export class PortefeuillesComponent implements OnInit {
   }
 
   chargerPortefeuilleCourant(): void {
+    this.portefeuillesAvecCours = this.portefeuillesService.charger()
+      .filter(portefeuille => portefeuille.tickers.length > 0)
+      .map(portefeuille => new PortefeuilleAvecCours(portefeuille));
     const portefeuilleAvecCours: PortefeuilleAvecCours = this.portefeuillesAvecCours[this.idxPortefeuilleCourant];
     this.loading = true;
     this.coursService.chargerCoursTickersWithLimit(portefeuilleAvecCours.portefeuille.tickers, 300)
@@ -141,7 +146,7 @@ export class PortefeuillesComponent implements OnInit {
     return (dto.cloture / (totalPrix / totalQuantites)) - 1;
   }
 
-  afficherActions(event: MouseEvent, cours: Cours) {
-    this.achatValeur()?.afficher(event, cours);
+  afficherActions(event: MouseEvent, cours: Cours, portefeuille: DTOPortefeuille) {
+    this.actionsValeur()?.afficher(event, cours, portefeuille);
   }
 }

@@ -1,0 +1,29 @@
+<p-popover>
+  @if (cours) {
+    <div class="actions-valeur">
+      @if (portefeuille && portefeuille.tickers.length > 1) {
+        <div>
+        <span class="pi pi-minus-circle"
+              (click)="supprimerDuPortefeuille()">{{ 'COMPOSANTS.PORTEFEUILLES.ACTIONS_VALEUR.SUPPRIMER_DU_PORTEFEUILLE' | translate }}</span>
+        </div>
+      }
+      <div>
+        <span class="pi pi-shopping-bag"
+              (click)="achats()">{{ 'COMPOSANTS.PORTEFEUILLES.ACTIONS_VALEUR.ACHATS' | translate }}</span>
+      </div>
+    </div>
+  }
+</p-popover>
+
+
+<p-panel *ngIf="achatsVisible">
+  <ng-template #header>
+    <div class="titre">
+      <span>{{ titre }}</span>
+      <span class="pi pi-times-circle" (click)="achatsVisible=false"></span>
+    </div>
+  </ng-template>
+  @if (cours) {
+    <app-achats [valeur]="{ticker: cours.ticker, cloture: cours.cloture}"></app-achats>
+  }
+</p-panel>

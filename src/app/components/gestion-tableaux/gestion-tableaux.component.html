@@ -1,10 +1,11 @@
 @if (tableaux) {
   <p-card>
-    <div class="titre">
+    <div class="boutons">
       <span>{{ 'COMPOSANTS.GESTION_TABLEAUX.TABLEAUX' | translate }}</span>
       <span class="pi pi-save" (click)="enregistrer()"
             title="{{ 'COMPOSANTS.GESTION_TABLEAUX.ENREGISTRER' | translate }}"></span>
       <app-import-export></app-import-export>
+      <span class="message">{{succes}}</span>
     </div>
     <div class="erreur" *ngIf="erreur !== undefined">
       <span class="pi pi-exclamation-circle">{{ erreur }}</span>

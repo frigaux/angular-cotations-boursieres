@@ -41,7 +41,7 @@ export class EditeurAlertesComponent {
 
   // données pour la vue
   portefeuilleEnModification: DTOPortefeuille | undefined;
-  titre: string | undefined;
+  titre?: string;
   alertes: DTOAlerte[] = [];
   alerteEnModification: DTOAlerte | undefined;
 
