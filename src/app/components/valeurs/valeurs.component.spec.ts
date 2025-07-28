@@ -7,6 +7,7 @@ import {TranslateModule} from '@ngx-translate/core';
 import {CoursService} from '../../services/cours/cours.service';
 import {provideAnimations} from '@angular/platform-browser/animations';
 import {VALEURS} from '../../services/jdd/jdd-valeurs.dataset';
+import {Valeur} from './valeur.class';
 
 describe('ValeursComponent', () => {
   let component: ValeursComponent;
@@ -43,6 +44,8 @@ describe('ValeursComponent', () => {
   });
 
   describe('Given #chargerValeurs renvoie des valeurs', () => {
+    const valeur: Valeur = new Valeur(VALEURS[0], '');
+
     beforeEach(() => {
       mockValeursService.chargerValeurs.and.returnValue(of(VALEURS));
     });
@@ -51,6 +54,8 @@ describe('ValeursComponent', () => {
       fixture.detectChanges(); // appelle le ngOnInit
       expect(component).toBeDefined();
       expect(component.loading).toBeFalse();
+      component.basculerAffichageValeur(valeur);
+      expect(component.valeurSelectionnee).toEqual(valeur);
     });
   });
 });

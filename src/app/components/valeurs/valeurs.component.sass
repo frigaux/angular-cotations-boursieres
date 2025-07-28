@@ -1,12 +1,16 @@
-.p-accordion
-  width: 100%
+div.conteneur
+  p-accordion
+    p-table
+      tr
+        td
+          cursor: pointer
 
-tr
-  th:first-child
-    width: 60%
+  &:not(.avec-details)
+    p-accordion
+      p-table
+        tr
+          th:first-child
+            width: 60%
 
-  th:last-child
-    width: 40%
-
-  td
-    cursor: pointer
+          th:last-child
+            width: 40%

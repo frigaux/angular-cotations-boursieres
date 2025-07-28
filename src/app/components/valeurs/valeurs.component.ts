@@ -5,11 +5,12 @@ import {CommonModule} from '@angular/common';
 import {TranslatePipe, TranslateService} from '@ngx-translate/core';
 import {Valeur} from './valeur.class';
 import {Marches} from '../../services/valeurs/marches.enum';
-import {ValeurComponent} from './valeur/valeur.component';
+import {DetailsValeurComponent} from './details-valeur/details-valeur.component';
 import {ValeurMarche} from './valeur-marche.class';
 import {DTOValeur} from '../../services/valeurs/dto-valeur.interface';
 import {Accordion, AccordionContent, AccordionHeader, AccordionPanel} from 'primeng/accordion';
 import {LoaderComponent} from '../loader/loader.component';
+import {CoursPortefeuille} from '../portefeuilles/cours-portefeuille.class';
 
 @Component({
   selector: 'app-valeurs',
@@ -17,7 +18,7 @@ import {LoaderComponent} from '../loader/loader.component';
     TableModule,
     CommonModule,
     TranslatePipe,
-    ValeurComponent,
+    DetailsValeurComponent,
     Accordion,
     AccordionContent,
     AccordionHeader,
@@ -25,7 +26,7 @@ import {LoaderComponent} from '../loader/loader.component';
     LoaderComponent
   ],
   templateUrl: './valeurs.component.html',
-  styleUrl: './valeurs.component.sass'
+  styleUrls: ['../portefeuilles/accordion-chart.sass', './valeurs.component.sass']
 })
 export class ValeursComponent implements OnInit {
   // chargement des valeurs
@@ -60,5 +61,13 @@ export class ValeursComponent implements OnInit {
     valeurByMarche.forEach((valeurs, marche) => {
       this.marches.push(new ValeurMarche(marche, this.translateService, valeurs));
     });
+  }
+
+  basculerAffichageValeur(valeur: Valeur) {
+    if (this.valeurSelectionnee === undefined || this.valeurSelectionnee.ticker !== valeur.ticker) {
+      this.valeurSelectionnee = valeur;
+    } else {
+      this.valeurSelectionnee = undefined;
+    }
   }
 }

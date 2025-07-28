@@ -1,6 +1,6 @@
 import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import {DetailsValeurComponent} from './details-valeur.component';
+import {EncartsValeurComponent} from './encarts-valeur.component';
 import {TranslateModule} from '@ngx-translate/core';
 import {provideAnimations} from '@angular/platform-browser/animations';
 import {COURS_CROISSANT, COURS_DECROISSANT} from '../../../../services/jdd/jdd-cours.dataset';
@@ -8,14 +8,14 @@ import {HttpTestingController, provideHttpClientTesting} from '@angular/common/h
 import {provideHttpClient} from '@angular/common/http';
 import {DatePipe} from '@angular/common';
 
-describe('DetailsValeurComponent', () => {
-  let component: DetailsValeurComponent;
-  let fixture: ComponentFixture<DetailsValeurComponent>;
+describe('EncartsValeurComponent', () => {
+  let component: EncartsValeurComponent;
+  let fixture: ComponentFixture<EncartsValeurComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [
-        DetailsValeurComponent,
+        EncartsValeurComponent,
         TranslateModule.forRoot({})
       ],
       providers: [
@@ -27,7 +27,7 @@ describe('DetailsValeurComponent', () => {
     })
       .compileComponents();
 
-    fixture = TestBed.createComponent(DetailsValeurComponent);
+    fixture = TestBed.createComponent(EncartsValeurComponent);
     component = fixture.componentInstance;
   });
 

@@ -1,29 +1,26 @@
 import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import {ValeurComponent} from './valeur.component';
+import {DetailsValeurComponent} from './details-valeur.component';
 import {TranslateModule} from '@ngx-translate/core';
 import {CoursService} from '../../../services/cours/cours.service';
 import {of} from 'rxjs';
 import {provideAnimations} from '@angular/platform-browser/animations';
-import {
-  COURS_TICKER,
-  LISTE_COURS_TICKER_ALLEGE
-} from '../../../services/jdd/jdd-cours.dataset';
+import {COURS_TICKER, LISTE_COURS_TICKER_ALLEGE} from '../../../services/jdd/jdd-cours.dataset';
 import {VALEUR} from '../../../services/jdd/jdd-valeurs.dataset';
 import {provideHttpClient} from '@angular/common/http';
 import {provideHttpClientTesting} from '@angular/common/http/testing';
 import {DatePipe} from '@angular/common';
 
-describe('ValeurComponent', () => {
-  let component: ValeurComponent;
-  let fixture: ComponentFixture<ValeurComponent>;
+describe('DetailsValeurComponent', () => {
+  let component: DetailsValeurComponent;
+  let fixture: ComponentFixture<DetailsValeurComponent>;
 
   const mockCoursService = jasmine.createSpyObj('CoursService', ['chargerCoursTicker', 'chargerCoursTickerWithLimit']);
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [
-        ValeurComponent,
+        DetailsValeurComponent,
         TranslateModule.forRoot({})
       ],
       providers: [
@@ -36,7 +33,7 @@ describe('ValeurComponent', () => {
     })
       .compileComponents();
 
-    fixture = TestBed.createComponent(ValeurComponent);
+    fixture = TestBed.createComponent(DetailsValeurComponent);
     component = fixture.componentInstance;
   });
 
@@ -50,13 +47,11 @@ describe('ValeurComponent', () => {
       mockCoursService.chargerCoursTickerWithLimit.and.returnValue(of(LISTE_COURS_TICKER_ALLEGE));
     });
 
-    it('when l\'input ticker est définie then le composant <p-drawer> est rendu', () => {
+    it('when l\'input ticker est définie then le composant <p-panel> est rendu', () => {
       const element: HTMLElement = fixture.nativeElement;
       fixture.componentRef.setInput('valeur', VALEUR);
       fixture.detectChanges();
-      // TODO : le p-drawer est affiché dans le rapport généré par karma :/
-      const el = element.querySelector('p-drawer');
-      expect(el).toBeTruthy();
+      expect(component.cours).toBeDefined();
     });
   });
 });

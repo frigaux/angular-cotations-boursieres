@@ -5,7 +5,7 @@ import {COURS_CROISSANT} from '../../../services/jdd/jdd-cours.dataset';
 import {TranslateModule} from '@ngx-translate/core';
 import {provideAnimations} from '@angular/platform-browser/animations';
 
-describe('DetailsComponent', () => {
+describe('DetailsValeurComponent', () => {
   let component: DetailsValeurComponent;
   let fixture: ComponentFixture<DetailsValeurComponent>;
 

@@ -1,48 +1,50 @@
-<app-valeur [valeur]="valeurSelectionnee" (ferme)="valeurSelectionnee = undefined"></app-valeur>
-
 <app-loader [affiche]="loading" [configuration]="[
   {marginLeft: '0', height: '2.5rem', width: '100%'},
   {marginLeft: '0', height: '2.5rem', width: '100%'},
   {marginLeft: '0', height: '2.5rem', width: '100%'}
 ]"></app-loader>
 
-<p-accordion>
-  @for (marche of marches; track marche.libelle; let i = $index) {
-    <p-accordion-panel value="{{i}}">
-      <p-accordion-header>{{ marche.libelle }}</p-accordion-header>
-      <p-accordion-content>
-        <p-table
-          sortField="libelle"
-          [scrollable]="true" scrollHeight="calc(100vh - 20rem)"
-          [style]="{ margin: '1rem' }"
-          [value]="marche.valeurs"
-          [loading]="loading">
-          <ng-template #header>
-            <tr>
-              <th pSortableColumn="libelle">
-                {{ 'COMPOSANTS.VALEURS.LIBELLE' | translate }}
-                <p-sortIcon field="libelle"/>
-                <p-columnFilter type="text" field="libelle" matchMode="contains" display="menu"
-                                [showMatchModes]="false"
-                                [showOperator]="false" [showAddButton]="false"/>
-              </th>
-              <th pSortableColumn="ticker">
-                {{ 'COMPOSANTS.VALEURS.TICKER' | translate }}
-                <p-sortIcon field="ticker"/>
-                <p-columnFilter type="text" field="ticker" matchMode="contains" display="menu"
-                                [showMatchModes]="false"
-                                [showOperator]="false" [showAddButton]="false"/>
-              </th>
-            </tr>
-          </ng-template>
-          <ng-template #body let-valeur>
-            <tr (click)="valeurSelectionnee = valeur">
-              <td>{{ valeur.libelle }}</td>
-              <td>{{ valeur.ticker }}</td>
-            </tr>
-          </ng-template>
-        </p-table>
-      </p-accordion-content>
-    </p-accordion-panel>
-  }
-</p-accordion>
+<div class="conteneur" [ngClass]="{'avec-details': valeurSelectionnee !== undefined}">
+  <p-accordion>
+    @for (marche of marches; track marche.libelle; let i = $index) {
+      <p-accordion-panel value="{{i}}">
+        <p-accordion-header>{{ marche.libelle }}</p-accordion-header>
+        <p-accordion-content>
+          <p-table
+            sortField="libelle"
+            [scrollable]="true" scrollHeight="calc(100vh - 20rem)"
+            [style]="{ margin: '1rem' }"
+            [value]="marche.valeurs"
+            [loading]="loading">
+            <ng-template #header>
+              <tr>
+                <th pSortableColumn="libelle">
+                  {{ 'COMPOSANTS.VALEURS.LIBELLE' | translate }}
+                  <p-sortIcon field="libelle"/>
+                  <p-columnFilter type="text" field="libelle" matchMode="contains" display="menu"
+                                  [showMatchModes]="false"
+                                  [showOperator]="false" [showAddButton]="false"/>
+                </th>
+                <th pSortableColumn="ticker">
+                  {{ 'COMPOSANTS.VALEURS.TICKER' | translate }}
+                  <p-sortIcon field="ticker"/>
+                  <p-columnFilter type="text" field="ticker" matchMode="contains" display="menu"
+                                  [showMatchModes]="false"
+                                  [showOperator]="false" [showAddButton]="false"/>
+                </th>
+              </tr>
+            </ng-template>
+            <ng-template #body let-valeur>
+              <tr (click)="basculerAffichageValeur(valeur)">
+                <td>{{ valeur.libelle }}</td>
+                <td>{{ valeur.ticker }}</td>
+              </tr>
+            </ng-template>
+          </p-table>
+        </p-accordion-content>
+      </p-accordion-panel>
+    }
+  </p-accordion>
+
+  <app-details-valeur [valeur]="valeurSelectionnee" (ferme)="valeurSelectionnee = undefined"></app-details-valeur>
+</div>

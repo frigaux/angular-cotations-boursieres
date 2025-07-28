@@ -7,7 +7,7 @@ import {Fieldset} from 'primeng/fieldset';
 import {AchatsComponent} from '../achats/achats.component';
 
 @Component({
-  selector: 'app-details-valeur',
+  selector: 'app-encarts-valeur',
   imports: [
     Timeline,
     NgClass,
@@ -17,10 +17,10 @@ import {AchatsComponent} from '../achats/achats.component';
     DatePipe,
     AchatsComponent
   ],
-  templateUrl: './details-valeur.component.html',
-  styleUrl: './details-valeur.component.sass'
+  templateUrl: './encarts-valeur.component.html',
+  styleUrl: './encarts-valeur.component.sass'
 })
-export class DetailsValeurComponent {
+export class EncartsValeurComponent {
   // input/output
   inputCours: InputSignal<Cours | undefined> = input(undefined,
     {transform: o => this.intercepteurCours(o), alias: 'cours'});

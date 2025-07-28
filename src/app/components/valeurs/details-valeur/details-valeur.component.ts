@@ -3,27 +3,26 @@ import {TranslateService} from '@ngx-translate/core';
 import {CoursService} from '../../../services/cours/cours.service';
 import {DatePipe, NgIf} from '@angular/common';
 import {Valeur} from '../valeur.class';
-import {DetailsValeurComponent} from './details-valeur/details-valeur.component';
+import {EncartsValeurComponent} from './encarts-valeur/encarts-valeur.component';
 import {Cours} from '../../cours/cours.class';
 import {ChartsComponent} from '../../cours/charts/charts.component';
-import {Drawer} from 'primeng/drawer';
 import {LoaderComponent} from '../../loader/loader.component';
+import {Panel} from 'primeng/panel';
 
-// TODO : p-drawer présente des anomalies
 @Component({
-  selector: 'app-valeur',
+  selector: 'app-details-valeur',
   imports: [
     NgIf,
-    DetailsValeurComponent,
+    EncartsValeurComponent,
     ChartsComponent,
     DatePipe,
-    Drawer,
-    LoaderComponent
+    LoaderComponent,
+    Panel
   ],
-  templateUrl: './valeur.component.html',
-  styleUrl: './valeur.component.sass'
+  templateUrl: './details-valeur.component.html',
+  styleUrl: './details-valeur.component.sass'
 })
-export class ValeurComponent {
+export class DetailsValeurComponent {
   // input/output
   inputValeur: InputSignal<Valeur | undefined> = input(undefined,
     {transform: o => this.intercepteurValeur(o), alias: 'valeur'});

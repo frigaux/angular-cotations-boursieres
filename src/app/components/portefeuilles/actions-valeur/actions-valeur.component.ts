@@ -4,7 +4,7 @@ import {Cours} from '../../cours/cours.class';
 import {TranslatePipe, TranslateService} from '@ngx-translate/core';
 import {PortefeuillesService} from '../../../services/portefeuilles/portefeuilles.service';
 import {DTOPortefeuille} from '../../../services/portefeuilles/dto-portefeuille.interface';
-import {AchatsComponent} from '../../valeurs/valeur/achats/achats.component';
+import {AchatsComponent} from '../../valeurs/details-valeur/achats/achats.component';
 import {Panel} from 'primeng/panel';
 import {NgIf} from '@angular/common';
 

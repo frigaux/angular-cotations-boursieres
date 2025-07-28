@@ -8,7 +8,7 @@ import {COURS_PORTEFEUILLE} from '../../../services/jdd/jdd-cours.dataset';
 import {PORTEFEUILLES} from '../../../services/jdd/jdd-portefeuilles.dataset';
 import {PortefeuillesService} from '../../../services/portefeuilles/portefeuilles.service';
 
-describe('AchatValeurComponent', () => {
+describe('ActionsValeurComponent', () => {
   let component: ActionsValeurComponent;
   let fixture: ComponentFixture<ActionsValeurComponent>;
 
