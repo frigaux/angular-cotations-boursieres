@@ -1,7 +1,7 @@
 @if (cours() !== undefined) {
   <p-panel>
     <ng-template #header>
-      <h2>{{ 'COMPOSANTS.COURS.DETAILS.COURBE' | translate }}</h2>
+      <h2>{{ 'COMPOSANTS.COURS.DETAILS_VALEUR.COURBE' | translate }}</h2>
       <span class="pi pi-times-circle" (click)="this.ferme.emit()"></span>
     </ng-template>
     <app-chart-moyennes-mobiles [cours]="cours()"></app-chart-moyennes-mobiles>

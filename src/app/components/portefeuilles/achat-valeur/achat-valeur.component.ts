@@ -1,6 +1,7 @@
 import {Component, viewChild} from '@angular/core';
 import {Popover} from "primeng/popover";
 import {AchatsComponent} from '../../valeurs/valeur/achats/achats.component';
+import {Cours} from '../../cours/cours.class';
 
 @Component({
   selector: 'app-achat-valeur',
@@ -14,10 +15,10 @@ import {AchatsComponent} from '../../valeurs/valeur/achats/achats.component';
 export class AchatValeurComponent {
   private popover = viewChild(Popover);
 
-  ticker?: string;
+  cours?: Cours;
 
-  afficher(event: MouseEvent, ticker: string) {
-    this.ticker = ticker;
+  afficher(event: MouseEvent, cours: Cours) {
+    this.cours = cours;
     this.popover()?.toggle(event);
   }
 }

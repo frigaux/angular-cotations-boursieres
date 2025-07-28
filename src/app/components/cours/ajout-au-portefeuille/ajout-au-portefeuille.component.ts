@@ -4,13 +4,15 @@ import {PortefeuillesService} from '../../../services/portefeuilles/portefeuille
 import {Select} from 'primeng/select';
 import {DTOPortefeuille} from '../../../services/portefeuilles/dto-portefeuille.interface';
 import {FormsModule} from '@angular/forms';
+import {TranslatePipe} from '@ngx-translate/core';
 
 @Component({
   selector: 'app-ajout-au-portefeuille',
   imports: [
     Popover,
     Select,
-    FormsModule
+    FormsModule,
+    TranslatePipe
   ],
   templateUrl: './ajout-au-portefeuille.component.html',
   styleUrl: './ajout-au-portefeuille.component.sass'

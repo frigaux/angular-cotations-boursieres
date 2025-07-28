@@ -9,6 +9,7 @@ import {ChartsComponent} from '../../cours/charts/charts.component';
 import {Drawer} from 'primeng/drawer';
 import {LoaderComponent} from '../../loader/loader.component';
 
+// TODO : p-drawer présente des anomalies
 @Component({
   selector: 'app-valeur',
   imports: [

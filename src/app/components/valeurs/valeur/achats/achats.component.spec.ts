@@ -43,7 +43,7 @@ describe('AchatsComponent', () => {
       achatsTickers = cloneACHATS();
       mockValeursService.chargerAchatsTicker.and.returnValue(achatsTickers[0].achats);
       mockValeursService.enregistrerAchatsTicker.and.returnValue(undefined);
-      fixture.componentRef.setInput('ticker', achatsTickers[0].ticker);
+      fixture.componentRef.setInput('valeur', {ticker: achatsTickers[0].ticker, cloture: achatsTickers[0].achats[0].prix});
     });
 
     it('when initialisé then les achats sont chargés', () => {

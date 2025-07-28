@@ -67,8 +67,9 @@
               <tr>
                 <td>
                   <span class="pi"
-                        [class]="classeIconeVariation(cours.var1)"></span>
-                  <span class="pi pi-shopping-bag" (click)="afficherAchatValeur($event, cours)"></span>
+                        [class]="classeIconeVariation(cours.var1)"
+                        (click)="afficherActions($event, cours)"
+                        title="{{ 'COMPOSANTS.PORTEFEUILLES.ACTIONS' | translate }}"></span>
                   <span (click)="basculerAffichageCours(cours)">{{ cours.libelle }}</span>
                 </td>
                 <td>

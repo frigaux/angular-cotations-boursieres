@@ -26,9 +26,9 @@ import {ImportExportComponent} from './import-export/import-export.component';
 })
 export class AchatsComponent implements OnInit {
   // input/output
-  inputTicker: InputSignal<string | undefined> = input(undefined,
-    {transform: o => this.intercepteurTicker(o), alias: 'ticker'});
-  ticker?: string;
+  inputValeur: InputSignal<{ticker: string, cloture: number} | undefined> = input(undefined,
+    {transform: o => this.intercepteurTicker(o), alias: 'valeur'});
+  valeur?: {ticker: string, cloture: number};
 
   private achats: Array<Achat> = [];
 
@@ -43,15 +43,15 @@ export class AchatsComponent implements OnInit {
     this.valeursService.onImport(achatsTickers => this.construireVue());
   }
 
-  private intercepteurTicker(ticker: string | undefined): string | undefined {
-    this.ticker = ticker;
+  private intercepteurTicker(valeur: {ticker: string, cloture: number} | undefined): {ticker: string, cloture: number} | undefined {
+    this.valeur = valeur;
     this.construireVue();
-    return ticker;
+    return valeur;
   }
 
   private construireVue() {
-    if (this.ticker) {
-      this.achats = this.valeursService.chargerAchatsTicker(this.ticker);
+    if (this.valeur) {
+      this.achats = this.valeursService.chargerAchatsTicker(this.valeur.ticker);
     } else {
       this.achats = [];
     }
@@ -59,13 +59,15 @@ export class AchatsComponent implements OnInit {
   }
 
   ajouterAchat() {
-    this.achats.push({
-      date: this.datepipe.transform(new Date(), 'yyyy-MM-dd')!,
-      quantite: 0,
-      prix: 0,
-      revendu: false
-    });
-    this.decorerAchats();
+    if (this.valeur) {
+      this.achats.push({
+        date: this.datepipe.transform(new Date(), 'yyyy-MM-dd')!,
+        quantite: 1,
+        prix: this.valeur.cloture,
+        revendu: false
+      });
+      this.decorerAchats();
+    }
   }
 
   private decorerAchats() {
@@ -81,8 +83,8 @@ export class AchatsComponent implements OnInit {
   }
 
   enregistrerAchats() {
-    if (this.ticker) {
-      this.erreur = this.valeursService.enregistrerAchatsTicker(this.ticker, this.achats);
+    if (this.valeur) {
+      this.erreur = this.valeursService.enregistrerAchatsTicker(this.valeur.ticker, this.achats);
       // TODO : confirmation UX
     }
   }

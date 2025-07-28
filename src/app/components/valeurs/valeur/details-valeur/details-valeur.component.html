@@ -30,7 +30,7 @@
     </div>
     <div>
       <p-fieldset legend="{{ 'COMPOSANTS.VALEURS.VALEUR.DETAILS_VALEUR.ACHATS' | translate : { valeur: cours.libelle } }}">
-        <app-achats [ticker]="cours.ticker"></app-achats>
+        <app-achats [valeur]="{ticker: cours.ticker, cloture: cours.cloture}"></app-achats>
       </p-fieldset>
     </div>
   </div>

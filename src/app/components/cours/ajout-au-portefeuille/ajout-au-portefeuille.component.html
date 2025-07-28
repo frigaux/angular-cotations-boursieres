@@ -1,7 +1,9 @@
 <p-popover>
+  <h4>{{ 'COMPOSANTS.COURS.AJOUT_AU_PORTEFEUILLE.AJOUT_AU_PORTEFEUILLE' | translate }} :</h4>
   <div class="ajout-au-portefeuille">
     <p-select [options]="portefeuilles" [(ngModel)]="portefeuille" optionLabel="nom"></p-select>
     <span class="pi pi-plus-circle"
+          title="{{ 'COMPOSANTS.COURS.AJOUT_AU_PORTEFEUILLE.AJOUTER_AU_PORTEFEUILLE' | translate }}"
           (click)="ajouterAuPortefeuille()"></span>
   </div>
 </p-popover>

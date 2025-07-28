@@ -69,7 +69,11 @@ export class PortefeuillesComponent implements OnInit {
       .map(portefeuille => new PortefeuilleAvecCours(portefeuille));
     this.valeursService.chargerValeurs().subscribe(valeurs => {
       valeurs.forEach(valeur => this.valeurByTicker.set(valeur.ticker, valeur));
-      this.idxPortefeuilleCourant = this.portefeuillesAvecCours.findIndex(portefeuilleAvecCours => portefeuilleAvecCours.portefeuille.parDefaut);
+      this.idxPortefeuilleCourant = this.portefeuillesAvecCours
+        .findIndex(portefeuilleAvecCours => portefeuilleAvecCours.portefeuille.parDefaut);
+      if (this.idxPortefeuilleCourant === -1) {
+        this.idxPortefeuilleCourant = 0;
+      }
       this.chargerPortefeuilleCourant();
     });
   }
@@ -120,7 +124,8 @@ export class PortefeuillesComponent implements OnInit {
   }
 
   calculerVariationAchats(dto: DtoCoursAvecListeAllege): number | undefined {
-    const achats: Array<Achat> = this.valeursService.chargerAchatsTicker(dto.ticker);
+    const achats: Array<Achat> = this.valeursService.chargerAchatsTicker(dto.ticker)
+      .filter(achat => !achat.revendu);
     if (achats.length === 0) {
       return undefined;
     }
@@ -136,7 +141,7 @@ export class PortefeuillesComponent implements OnInit {
     return (dto.cloture / (totalPrix / totalQuantites)) - 1;
   }
 
-  afficherAchatValeur(event: MouseEvent, cours: Cours) {
-    this.achatValeur()?.afficher(event, cours.ticker);
+  afficherActions(event: MouseEvent, cours: Cours) {
+    this.achatValeur()?.afficher(event, cours);
   }
 }

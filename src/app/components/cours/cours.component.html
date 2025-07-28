@@ -55,8 +55,8 @@
               <tr>
                 <td>
                   <span class="pi"
-                        [class]="cours.classeIconeVariation()"></span>
-                  <span class="pi pi-file-plus" (click)="afficherAjoutAuPortefeuille($event, cours)"
+                        [class]="cours.classeIconeVariation()"
+                        (click)="afficherAjoutAuPortefeuille($event, cours)"
                         title="{{ 'COMPOSANTS.COURS.AJOUTER_AU_PORTEFEUILLE' | translate }}"></span>
                   <span (click)="basculerAffichageCours(cours)">{{ cours.libelle }}</span>
                 </td>

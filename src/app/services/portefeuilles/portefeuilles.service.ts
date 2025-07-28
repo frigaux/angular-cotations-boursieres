@@ -265,8 +265,8 @@ export class PortefeuillesService {
   }
 
   public auMoinsUnPortefeuilleCorrectementConfigure(): boolean {
-    const portefeuilleParDefaut: DTOPortefeuille | undefined = this.charger()
-      .find(portefeuille => portefeuille.parDefaut);
-    return portefeuilleParDefaut !== undefined && portefeuilleParDefaut.tickers.length > 0;
+    const portefeuilleAvecAuMoinsUneValeur: DTOPortefeuille | undefined = this.charger()
+      .find(portefeuille => portefeuille.tickers.length > 0);
+    return portefeuilleAvecAuMoinsUneValeur !== undefined;
   }
 }

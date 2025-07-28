@@ -67,8 +67,12 @@
       "MM5": "MM5",
       "MM20": "MM20",
       "MM50": "MM50",
-      "DETAILS": {
+      "DETAILS_VALEUR": {
         "COURBE": "Courbe des moyennes mobiles"
+      },
+      "AJOUT_AU_PORTEFEUILLE": {
+        "AJOUT_AU_PORTEFEUILLE": "Ajout de la valeur au portefeuille",
+        "AJOUTER_AU_PORTEFEUILLE": "Ajouter la valeur au portefeuille"
       },
       "MOYENNES_MOBILES": {
         "NB_JOURS_CALCUL": "Nombre de jours de cotations utilisés pour le calcul de la moyenne mobile",
@@ -88,6 +92,7 @@
     },
     "PORTEFEUILLES": {
       "PORTEFEUILLES_DATE": "Portefeuilles à la date du",
+      "ACTIONS": "Actions sur la valeur",
       "LIBELLE": "Libellé",
       "ALERTES": "Alertes",
       "CLOTURE": "Clôture",

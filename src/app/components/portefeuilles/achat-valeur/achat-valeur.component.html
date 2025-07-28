@@ -1,7 +1,7 @@
 <p-popover>
-  @if (ticker) {
+  @if (cours) {
     <div class="achat-valeur">
-      <app-achats [ticker]="ticker"></app-achats>
+      <app-achats [valeur]="{ticker: cours.ticker, cloture: cours.cloture}"></app-achats>
     </div>
   }
 </p-popover>
