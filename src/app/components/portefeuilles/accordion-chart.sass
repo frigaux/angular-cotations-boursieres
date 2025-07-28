@@ -18,6 +18,13 @@ div.conteneur
   .pi-arrow-circle-down
     color: var(--p-red-600)
 
+  &:not(.avec-details)
+    app-details-valeur
+      display: none
+
+    p-accordion
+      width: 100%
+
 // orientation verticale
 @media screen and (orientation: portrait)
   div.conteneur
