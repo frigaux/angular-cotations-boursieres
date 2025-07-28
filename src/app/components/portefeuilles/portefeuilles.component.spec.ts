@@ -15,8 +15,8 @@ describe('PortefeuillesComponent', () => {
   let component: PortefeuillesComponent;
   let fixture: ComponentFixture<PortefeuillesComponent>;
 
-  const mockPortefeuillesService = jasmine.createSpyObj('PortefeuillesService', ['charger']);
-  const mockValeursService = jasmine.createSpyObj('ValeursService', ['chargerValeurs', 'chargerAchatsTicker']);
+  const mockPortefeuillesService = jasmine.createSpyObj('PortefeuillesService', ['charger', 'onUpdate']);
+  const mockValeursService = jasmine.createSpyObj('ValeursService', ['chargerValeurs', 'chargerAchatsTicker', 'onImport', 'onUpdate']);
   const mockCoursService = jasmine.createSpyObj('CoursService', ['chargerCoursTickersWithLimit']);
 
   beforeEach(async () => {

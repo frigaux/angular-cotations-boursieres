@@ -9,7 +9,6 @@ import {InputText} from 'primeng/inputtext';
 import {DatePicker} from 'primeng/datepicker';
 import {DatePipe, NgIf} from '@angular/common';
 import {ImportExportComponent} from './import-export/import-export.component';
-import {Message} from 'primeng/message';
 
 @Component({
   selector: 'app-achats',
@@ -20,8 +19,7 @@ import {Message} from 'primeng/message';
     InputText,
     DatePicker,
     NgIf,
-    ImportExportComponent,
-    Message
+    ImportExportComponent
   ],
   templateUrl: './achats.component.html',
   styleUrl: './achats.component.sass'

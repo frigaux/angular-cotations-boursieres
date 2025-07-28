@@ -44,8 +44,8 @@ export class ActionsValeurComponent {
   supprimerDuPortefeuille() {
     const portefeuilles = this.portefeuillesService.charger();
     const portefeuille = portefeuilles.find(p => p.nom === this.portefeuille?.nom);
-    if (portefeuille) {
-      portefeuille.tickers = portefeuille.tickers.filter(ticker => ticker !== this.cours?.ticker);
+    if (portefeuille && this.cours) {
+      portefeuille.tickers.splice(portefeuille.tickers.indexOf(this.cours.ticker), 1);
       this.portefeuillesService.enregistrer(portefeuilles);
     }
     this.popover()?.hide();
