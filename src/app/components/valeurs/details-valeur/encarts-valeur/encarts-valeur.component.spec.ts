@@ -7,6 +7,7 @@ import {COURS_CROISSANT, COURS_DECROISSANT} from '../../../../services/jdd/jdd-c
 import {HttpTestingController, provideHttpClientTesting} from '@angular/common/http/testing';
 import {provideHttpClient} from '@angular/common/http';
 import {DatePipe} from '@angular/common';
+import {ConfirmationService} from 'primeng/api';
 
 describe('EncartsValeurComponent', () => {
   let component: EncartsValeurComponent;
@@ -22,6 +23,7 @@ describe('EncartsValeurComponent', () => {
         provideAnimations(),
         provideHttpClient(),
         provideHttpClientTesting(),
+        ConfirmationService,
         DatePipe
       ]
     })
@@ -41,7 +43,7 @@ describe('EncartsValeurComponent', () => {
     fixture.detectChanges();
     const el = element.querySelector('p-timeline');
     expect(el).toBeTruthy();
-    expect(component.timelineItems[1].libelle).toBe('COMPOSANTS.VALEURS.VALEUR.DETAILS_VALEUR.OUVERTURE');
+    expect(component.timelineItems[1].libelle).toBe('COMPOSANTS.VALEURS.DETAILS_VALEUR.ENCARTS_VALEUR.OUVERTURE');
   });
 
   it('Given un cours décroissant when la timeline est construite then le composant <p-timeline> est rendue décroissante', () => {
@@ -50,6 +52,6 @@ describe('EncartsValeurComponent', () => {
     fixture.detectChanges();
     const el = element.querySelector('p-timeline');
     expect(el).toBeTruthy();
-    expect(component.timelineItems[1].libelle).toBe('COMPOSANTS.VALEURS.VALEUR.DETAILS_VALEUR.CLOTURE');
+    expect(component.timelineItems[1].libelle).toBe('COMPOSANTS.VALEURS.DETAILS_VALEUR.ENCARTS_VALEUR.CLOTURE');
   });
 });

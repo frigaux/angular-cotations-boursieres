@@ -4,7 +4,7 @@ import {Cours} from '../../../cours/cours.class';
 import {TranslatePipe, TranslateService} from '@ngx-translate/core';
 import {DatePipe, DecimalPipe, NgClass} from '@angular/common';
 import {Fieldset} from 'primeng/fieldset';
-import {AchatsComponent} from '../achats/achats.component';
+import {AchatsValeurComponent} from '../achats-valeur/achats-valeur.component';
 
 @Component({
   selector: 'app-encarts-valeur',
@@ -15,7 +15,7 @@ import {AchatsComponent} from '../achats/achats.component';
     TranslatePipe,
     DecimalPipe,
     DatePipe,
-    AchatsComponent
+    AchatsValeurComponent
   ],
   templateUrl: './encarts-valeur.component.html',
   styleUrl: './encarts-valeur.component.sass'
@@ -58,7 +58,7 @@ export class EncartsValeurComponent {
 
   addItem(translateService: TranslateService, keyTranslate: string, cours: number): void {
     this.timelineItems.push({
-      libelle: translateService.instant(`COMPOSANTS.VALEURS.VALEUR.DETAILS_VALEUR.${keyTranslate}`),
+      libelle: translateService.instant(`COMPOSANTS.VALEURS.DETAILS_VALEUR.ENCARTS_VALEUR.${keyTranslate}`),
       cours: this.currencyFormatter.format(cours)
     });
   }

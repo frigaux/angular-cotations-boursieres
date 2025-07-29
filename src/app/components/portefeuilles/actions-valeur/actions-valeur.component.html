@@ -3,8 +3,8 @@
     <div class="actions-valeur">
       @if (portefeuille && portefeuille.tickers.length > 1) {
         <div>
-        <span class="pi pi-minus-circle"
-              (click)="supprimerDuPortefeuille()">{{ 'COMPOSANTS.PORTEFEUILLES.ACTIONS_VALEUR.SUPPRIMER_DU_PORTEFEUILLE' | translate }}</span>
+          <span class="pi pi-minus-circle"
+                (click)="suppressionDuPortefeuille($event)">{{ 'COMPOSANTS.PORTEFEUILLES.ACTIONS_VALEUR.SUPPRIMER_DU_PORTEFEUILLE' | translate }}</span>
         </div>
       }
       <div>
@@ -24,6 +24,6 @@
     </div>
   </ng-template>
   @if (cours) {
-    <app-achats [valeur]="{ticker: cours.ticker, cloture: cours.cloture}"></app-achats>
+    <app-achats-valeur [valeur]="{ticker: cours.ticker, cloture: cours.cloture}"></app-achats-valeur>
   }
 </p-panel>

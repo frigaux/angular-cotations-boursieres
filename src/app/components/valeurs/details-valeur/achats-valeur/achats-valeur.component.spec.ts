@@ -1,15 +1,16 @@
 import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import {AchatsComponent} from './achats.component';
+import {AchatsValeurComponent} from './achats-valeur.component';
 import {ValeursService} from '../../../../services/valeurs/valeurs.service';
 import {TranslateModule} from '@ngx-translate/core';
 import {ACHATS} from '../../../../services/jdd/jdd-valeurs.dataset';
 import {AchatsTicker} from '../../../../services/valeurs/achats-ticker.interface';
 import {DatePipe} from '@angular/common';
+import {ConfirmationService} from 'primeng/api';
 
 describe('AchatsComponent', () => {
-  let component: AchatsComponent;
-  let fixture: ComponentFixture<AchatsComponent>;
+  let component: AchatsValeurComponent;
+  let fixture: ComponentFixture<AchatsValeurComponent>;
 
   const cloneACHATS: Function = () => JSON.parse(JSON.stringify(ACHATS));
 
@@ -18,17 +19,18 @@ describe('AchatsComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [
-        AchatsComponent,
+        AchatsValeurComponent,
         TranslateModule.forRoot({})
       ],
       providers: [
         {provide: ValeursService, useValue: mockValeursService},
+        ConfirmationService,
         DatePipe
       ]
     })
       .compileComponents();
 
-    fixture = TestBed.createComponent(AchatsComponent);
+    fixture = TestBed.createComponent(AchatsValeurComponent);
     component = fixture.componentInstance;
   });
 

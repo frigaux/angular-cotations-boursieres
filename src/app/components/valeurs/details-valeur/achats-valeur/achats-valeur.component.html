@@ -1,9 +1,9 @@
 @if (valeur) {
   <div class="boutons">
     <span class="pi pi-plus-circle" (click)="ajouterAchat()"
-          title="{{ 'COMPOSANTS.VALEURS.VALEUR.ACHATS.AJOUTER_ACHAT' | translate }}"></span>
+          title="{{ 'COMPOSANTS.VALEURS.DETAILS_VALEUR.ACHATS_VALEUR.AJOUTER_ACHAT' | translate }}"></span>
     <span class="pi pi-save" (click)="enregistrerAchats()"
-          title="{{ 'COMPOSANTS.VALEURS.VALEUR.ACHATS.ENREGISTRER' | translate }}"></span>
+          title="{{ 'COMPOSANTS.VALEURS.DETAILS_VALEUR.ACHATS_VALEUR.ENREGISTRER' | translate }}"></span>
     <app-import-export></app-import-export>
     <span class="message">{{succes}}</span>
   </div>
@@ -13,14 +13,14 @@
   <div class="liste" *ngIf="achatsDecores.length > 0">
     <div class="entetes">
       <span></span>
-      <span>{{ 'COMPOSANTS.VALEURS.VALEUR.ACHATS.DATE' | translate }}</span>
-      <span>{{ 'COMPOSANTS.VALEURS.VALEUR.ACHATS.PRIX' | translate }}</span>
-      <span>{{ 'COMPOSANTS.VALEURS.VALEUR.ACHATS.QUANTITE' | translate }}</span>
-      <span>{{ 'COMPOSANTS.VALEURS.VALEUR.ACHATS.REVENDU' | translate }}</span>
+      <span>{{ 'COMPOSANTS.VALEURS.DETAILS_VALEUR.ACHATS_VALEUR.DATE' | translate }}</span>
+      <span>{{ 'COMPOSANTS.VALEURS.DETAILS_VALEUR.ACHATS_VALEUR.PRIX' | translate }}</span>
+      <span>{{ 'COMPOSANTS.VALEURS.DETAILS_VALEUR.ACHATS_VALEUR.QUANTITE' | translate }}</span>
+      <span>{{ 'COMPOSANTS.VALEURS.DETAILS_VALEUR.ACHATS_VALEUR.REVENDU' | translate }}</span>
     </div>
     @for (achatDecore of achatsDecores; track achatDecore.id) {
       <div class="element">
-        <span class="pi pi-trash" (click)="supprimerAchat(achatDecore.achat)"></span>
+        <span class="pi pi-trash" (click)="suppressionAchat($event, achatDecore.achat)"></span>
         <span>
         <p-datepicker [(ngModel)]="achatDecore.date" dateFormat="dd/mm/yy"
                       size="small" showIcon iconDisplay="input"

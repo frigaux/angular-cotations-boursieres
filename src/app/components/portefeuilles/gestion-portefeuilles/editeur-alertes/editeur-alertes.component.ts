@@ -8,9 +8,10 @@ import {FloatLabel} from 'primeng/floatlabel';
 import {InputText} from 'primeng/inputtext';
 import {FormArray, FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms';
 import {AutoFocus} from 'primeng/autofocus';
-import {ConfirmationService} from 'primeng/api';
 import {NgForOf, NgIf} from '@angular/common';
 import {EditeurConditionAlerteComponent} from './editeur-condition-alerte/editeur-condition-alerte.component';
+import {DialogueService} from '../../../../services/dialogue/dialogue.service';
+import {ConfirmationService} from 'primeng/api';
 
 @Component({
   selector: 'app-editeur-alertes',
@@ -26,7 +27,6 @@ import {EditeurConditionAlerteComponent} from './editeur-condition-alerte/editeu
     EditeurConditionAlerteComponent,
     NgIf
   ],
-  // providers: [ConfirmationService],
   templateUrl: './editeur-alertes.component.html',
   styleUrl: './editeur-alertes.component.sass'
 })
@@ -52,7 +52,8 @@ export class EditeurAlertesComponent {
   });
 
   constructor(private translateService: TranslateService,
-              private confirmationService: ConfirmationService) {
+              private confirmationService: ConfirmationService,
+              private dialogueService: DialogueService) {
   }
 
   private intercepteurPortefeuille(portefeuille: DTOPortefeuille | undefined) {
@@ -81,23 +82,14 @@ export class EditeurAlertesComponent {
   }
 
   suppressionAlerte(event: Event, idx: number) {
-    this.confirmationService.confirm({
-      target: event.target as EventTarget,
-      header: this.translateService.instant('COMPOSANTS.PORTEFEUILLES.GESTION_PORTEFEUILLES.EDITEUR_ALERTES.CONFIRMATION_SUPPRESSION', {'nom': this.noms.at(idx).value}),
-      closable: false,
-      closeOnEscape: true,
-      rejectButtonProps: {
-        label: this.translateService.instant('COMPOSANTS.COMMUN.ANNULER'),
-        severity: 'warn'
-      },
-      acceptButtonProps: {
-        label: this.translateService.instant('COMPOSANTS.COMMUN.SUPPRIMER'),
-        severity: 'danger'
-      },
-      accept: () => {
+    this.dialogueService.confirmationSuppression(
+      this.confirmationService,
+      event,
+      this.translateService.instant('COMPOSANTS.PORTEFEUILLES.GESTION_PORTEFEUILLES.EDITEUR_ALERTES.CONFIRMATION_SUPPRESSION', {'nom': this.noms.at(idx).value}),
+      () => {
         this.supprimerAlerte(idx);
       }
-    });
+    );
   }
 
   supprimerAlerte(idx: number) {

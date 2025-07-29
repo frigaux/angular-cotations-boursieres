@@ -10,6 +10,7 @@ import {LISTE_COURS_AVEC_LISTE_ALLEGEE} from '../../services/jdd/jdd-cours.datas
 import {PortefeuillesService} from '../../services/portefeuilles/portefeuilles.service';
 import {PORTEFEUILLE} from '../../services/jdd/jdd-portefeuilles.dataset';
 import {provideAnimations} from '@angular/platform-browser/animations';
+import {ConfirmationService} from 'primeng/api';
 
 describe('PortefeuillesComponent', () => {
   let component: PortefeuillesComponent;
@@ -30,6 +31,7 @@ describe('PortefeuillesComponent', () => {
         {provide: PortefeuillesService, useValue: mockPortefeuillesService},
         {provide: ValeursService, useValue: mockValeursService},
         {provide: CoursService, useValue: mockCoursService},
+        ConfirmationService,
         provideAnimations()
       ]
     });

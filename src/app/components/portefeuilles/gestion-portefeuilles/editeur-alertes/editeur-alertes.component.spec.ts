@@ -19,7 +19,7 @@ describe('EditeurAlertesComponent', () => {
         TranslateModule.forRoot({})
       ],
       providers: [
-        {provide: ConfirmationService},
+        ConfirmationService,
         provideAnimations()
       ]
     })

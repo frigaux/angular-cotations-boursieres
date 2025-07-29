@@ -10,6 +10,7 @@ import {VALEUR} from '../../../services/jdd/jdd-valeurs.dataset';
 import {provideHttpClient} from '@angular/common/http';
 import {provideHttpClientTesting} from '@angular/common/http/testing';
 import {DatePipe} from '@angular/common';
+import {ConfirmationService} from 'primeng/api';
 
 describe('DetailsValeurComponent', () => {
   let component: DetailsValeurComponent;
@@ -28,6 +29,7 @@ describe('DetailsValeurComponent', () => {
         provideAnimations(),
         provideHttpClient(),
         provideHttpClientTesting(),
+        ConfirmationService,
         DatePipe
       ]
     })

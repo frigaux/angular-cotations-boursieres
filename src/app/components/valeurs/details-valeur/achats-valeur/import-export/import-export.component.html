@@ -1,7 +1,7 @@
 <span class="pi pi-sync" (click)="visible = true"
-      title="{{ 'COMPOSANTS.VALEURS.VALEUR.ACHATS.IMPORT_EXPORT.IMPORT_EXPORT' | translate }}"></span>
+      title="{{ 'COMPOSANTS.VALEURS.DETAILS_VALEUR.ACHATS_VALEUR.IMPORT_EXPORT.IMPORT_EXPORT' | translate }}"></span>
 
-<p-dialog header="{{ 'COMPOSANTS.VALEURS.VALEUR.ACHATS.IMPORT_EXPORT.IMPORT_EXPORT' | translate }}"
+<p-dialog header="{{ 'COMPOSANTS.VALEURS.DETAILS_VALEUR.ACHATS_VALEUR.IMPORT_EXPORT.IMPORT_EXPORT' | translate }}"
           [modal]="true" (onShow)="reinitialiserVue()" [(visible)]="visible">
 
   <div class="conteneur">
@@ -10,7 +10,7 @@
                 pTextarea [(ngModel)]="achats"
                 [ngClass]="{'error': erreur !== undefined}"></textarea>
       <label for="json">
-        {{ 'COMPOSANTS.VALEURS.VALEUR.ACHATS.IMPORT_EXPORT.CONFIGURATION' | translate }}
+        {{ 'COMPOSANTS.VALEURS.DETAILS_VALEUR.ACHATS_VALEUR.IMPORT_EXPORT.CONFIGURATION' | translate }}
       </label>
     </p-floatlabel>
 
@@ -20,9 +20,9 @@
 
     <div class="boutons">
       <p-button type="button" (click)="exporter()"
-                label="{{ 'COMPOSANTS.VALEURS.VALEUR.ACHATS.IMPORT_EXPORT.EXPORTER' | translate }}"/>
+                label="{{ 'COMPOSANTS.VALEURS.DETAILS_VALEUR.ACHATS_VALEUR.IMPORT_EXPORT.EXPORTER' | translate }}"/>
       <p-button type="button" (click)="importer()" severity="warn"
-                label="{{ 'COMPOSANTS.VALEURS.VALEUR.ACHATS.IMPORT_EXPORT.IMPORTER' | translate }}"/>
+                label="{{ 'COMPOSANTS.VALEURS.DETAILS_VALEUR.ACHATS_VALEUR.IMPORT_EXPORT.IMPORTER' | translate }}"/>
     </div>
   </div>
 </p-dialog>

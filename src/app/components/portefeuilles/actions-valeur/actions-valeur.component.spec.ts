@@ -7,6 +7,7 @@ import {Cours} from '../../cours/cours.class';
 import {COURS_PORTEFEUILLE} from '../../../services/jdd/jdd-cours.dataset';
 import {PORTEFEUILLES} from '../../../services/jdd/jdd-portefeuilles.dataset';
 import {PortefeuillesService} from '../../../services/portefeuilles/portefeuilles.service';
+import {ConfirmationService} from 'primeng/api';
 
 describe('ActionsValeurComponent', () => {
   let component: ActionsValeurComponent;
@@ -22,7 +23,8 @@ describe('ActionsValeurComponent', () => {
         TranslateModule.forRoot({})
       ],
       providers: [
-        {provide: PortefeuillesService, useValue: mockPortefeuillesService}
+        {provide: PortefeuillesService, useValue: mockPortefeuillesService},
+        ConfirmationService
       ]
     })
       .compileComponents();

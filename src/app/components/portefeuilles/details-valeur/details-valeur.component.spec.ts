@@ -4,6 +4,7 @@ import {DetailsValeurComponent} from './details-valeur.component';
 import {COURS_PORTEFEUILLE} from '../../../services/jdd/jdd-cours.dataset';
 import {TranslateModule} from '@ngx-translate/core';
 import {provideAnimations} from '@angular/platform-browser/animations';
+import {ConfirmationService} from 'primeng/api';
 
 describe('DetailsValeurComponent', () => {
   let component: DetailsValeurComponent;
@@ -16,7 +17,8 @@ describe('DetailsValeurComponent', () => {
         TranslateModule.forRoot({})
       ],
       providers: [
-        provideAnimations()
+        provideAnimations(),
+        ConfirmationService
       ]
     })
       .compileComponents();

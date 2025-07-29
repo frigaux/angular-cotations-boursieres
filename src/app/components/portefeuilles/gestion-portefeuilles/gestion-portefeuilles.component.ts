@@ -9,11 +9,12 @@ import {FormulaireCreationComponent} from './formulaire-creation/formulaire-crea
 import {FormulaireModificationComponent} from './formulaire-modification/formulaire-modification.component';
 import {ImportExportComponent} from './import-export/import-export.component';
 import {PortefeuillesService} from '../../../services/portefeuilles/portefeuilles.service';
-import {ConfirmationService} from 'primeng/api';
 import {EditeurAlertesComponent} from './editeur-alertes/editeur-alertes.component';
 import {DTOAlerte} from '../../../services/portefeuilles/dto-alerte.interface';
 import {ConfigurationPortefeuilleComponent} from './portefeuille/configuration-portefeuille.component';
 import {CdkDrag, CdkDragDrop, CdkDropList, moveItemInArray} from '@angular/cdk/drag-drop';
+import {DialogueService} from '../../../services/dialogue/dialogue.service';
+import {ConfirmationService} from 'primeng/api';
 
 @Component({
   selector: 'app-gestion-portefeuilles',
@@ -44,7 +45,8 @@ export class GestionPortefeuillesComponent implements OnInit {
 
   constructor(private portefeuillesService: PortefeuillesService,
               private translateService: TranslateService,
-              private confirmationService: ConfirmationService) {
+              private confirmationService: ConfirmationService,
+              private dialogueService: DialogueService) {
   }
 
   ngOnInit(): void {
@@ -95,23 +97,14 @@ export class GestionPortefeuillesComponent implements OnInit {
   }
 
   suppressionPortefeuille(event: Event, idx: number) {
-    this.confirmationService.confirm({
-      target: event.target as EventTarget,
-      header: this.translateService.instant('COMPOSANTS.PORTEFEUILLES.GESTION_PORTEFEUILLES.CONFIRMATION_SUPPRESSION', {'nom': this.portefeuilles[idx].nom}),
-      closable: false,
-      closeOnEscape: true,
-      rejectButtonProps: {
-        label: this.translateService.instant('COMPOSANTS.COMMUN.ANNULER'),
-        severity: 'warn'
-      },
-      acceptButtonProps: {
-        label: this.translateService.instant('COMPOSANTS.COMMUN.SUPPRIMER'),
-        severity: 'danger'
-      },
-      accept: () => {
+    this.dialogueService.confirmationSuppression(
+      this.confirmationService,
+      event,
+      this.translateService.instant('COMPOSANTS.PORTEFEUILLES.GESTION_PORTEFEUILLES.CONFIRMATION_SUPPRESSION', {'nom': this.portefeuilles[idx].nom}),
+      () => {
         this.supprimerPortefeuille(idx);
       }
-    });
+    );
   }
 
   supprimerPortefeuille(idx: number) {

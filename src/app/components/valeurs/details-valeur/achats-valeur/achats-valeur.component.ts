@@ -9,9 +9,11 @@ import {InputText} from 'primeng/inputtext';
 import {DatePicker} from 'primeng/datepicker';
 import {DatePipe, NgIf} from '@angular/common';
 import {ImportExportComponent} from './import-export/import-export.component';
+import {ConfirmationService} from 'primeng/api';
+import {DialogueService} from '../../../../services/dialogue/dialogue.service';
 
 @Component({
-  selector: 'app-achats',
+  selector: 'app-achats-valeur',
   imports: [
     TranslatePipe,
     FormsModule,
@@ -21,10 +23,10 @@ import {ImportExportComponent} from './import-export/import-export.component';
     NgIf,
     ImportExportComponent
   ],
-  templateUrl: './achats.component.html',
-  styleUrl: './achats.component.sass'
+  templateUrl: './achats-valeur.component.html',
+  styleUrl: './achats-valeur.component.sass'
 })
-export class AchatsComponent implements OnInit {
+export class AchatsValeurComponent implements OnInit {
   // input/output
   inputValeur: InputSignal<{ ticker: string, cloture: number } | undefined> = input(undefined,
     {transform: o => this.intercepteurTicker(o), alias: 'valeur'});
@@ -39,6 +41,8 @@ export class AchatsComponent implements OnInit {
 
   constructor(private translateService: TranslateService,
               private valeursService: ValeursService,
+              private confirmationService: ConfirmationService,
+              private dialogueService: DialogueService,
               private datepipe: DatePipe) {
   }
 
@@ -83,6 +87,17 @@ export class AchatsComponent implements OnInit {
       .map(achat => new AchatDecore(i++, new Date(achat.date), achat));
   }
 
+  suppressionAchat(event: Event, achat: Achat) {
+    this.dialogueService.confirmationSuppression(
+      this.confirmationService,
+      event,
+      this.translateService.instant('COMPOSANTS.VALEURS.DETAILS_VALEUR.ACHATS_VALEUR.CONFIRMATION_SUPPRESSION'),
+      () => {
+        this.supprimerAchat(achat);
+      }
+    );
+  }
+
   supprimerAchat(achat: Achat) {
     this.achats.splice(this.achats.indexOf(achat), 1);
     this.decorerAchats();
@@ -92,7 +107,7 @@ export class AchatsComponent implements OnInit {
     if (this.valeur) {
       this.erreur = this.valeursService.enregistrerAchatsTicker(this.valeur.ticker, this.achats);
       if (this.erreur === undefined) {
-        this.succes = this.translateService.instant('COMPOSANTS.VALEURS.VALEUR.ACHATS.ENREGISTREMENT_REUSSI');
+        this.succes = this.translateService.instant('COMPOSANTS.VALEURS.DETAILS_VALEUR.ACHATS_VALEUR.ENREGISTREMENT_REUSSI');
         setTimeout(() => this.succes = undefined, 2000);
       }
     }

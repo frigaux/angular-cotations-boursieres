@@ -29,8 +29,24 @@
       "LIBELLE": "Libellé",
       "MARCHE": "Marché",
       "TICKER": "Ticker",
-      "VALEUR": {
-        "DETAILS_VALEUR": {
+      "DETAILS_VALEUR": {
+        "ACHATS_VALEUR": {
+          "AJOUTER_ACHAT": "Ajouter un achat",
+          "ENREGISTRER": "Enregistrer les achats",
+          "ENREGISTREMENT_REUSSI": "Enregistrement réussi",
+          "DATE": "Date",
+          "QUANTITE": "Quantite",
+          "PRIX": "Prix",
+          "REVENDU": "Revendu",
+          "CONFIRMATION_SUPPRESSION": "Confirmez-vous la suppression de l'achat ?",
+          "IMPORT_EXPORT": {
+            "IMPORT_EXPORT": "Import/export des achats",
+            "CONFIGURATION": "Configuration au format JSON",
+            "EXPORTER": "Exporter",
+            "IMPORTER": "Importer"
+          }
+        },
+        "ENCARTS_VALEUR": {
           "DETAILS": "Détails au",
           "LIBELLE": "Libellé",
           "TICKER": "Ticker",
@@ -41,21 +57,6 @@
           "CLOTURE": "clôture",
           "MAXIMUM": "maximum",
           "ACHATS": "Achats : {{valeur}}"
-        },
-        "ACHATS": {
-          "AJOUTER_ACHAT": "Ajouter un achat",
-          "ENREGISTRER": "Enregistrer les achats",
-          "ENREGISTREMENT_REUSSI": "Enregistrement réussi",
-          "DATE": "Date",
-          "QUANTITE": "Quantite",
-          "PRIX": "Prix",
-          "REVENDU": "Revendu",
-          "IMPORT_EXPORT": {
-            "IMPORT_EXPORT": "Import/export des achats",
-            "CONFIGURATION": "Configuration au format JSON",
-            "EXPORTER": "Exporter",
-            "IMPORTER": "Importer"
-          }
         }
       }
     },
@@ -68,27 +69,23 @@
       "MM5": "MM5",
       "MM20": "MM20",
       "MM50": "MM50",
-      "DETAILS_VALEUR": {
-        "COURBE": "Courbe des moyennes mobiles"
-      },
       "AJOUT_AU_PORTEFEUILLE": {
         "AJOUT_AU_PORTEFEUILLE": "Ajout de la valeur au portefeuille",
         "AJOUTER_AU_PORTEFEUILLE": "Ajouter la valeur au portefeuille"
       },
-      "MOYENNES_MOBILES": {
-        "NB_JOURS_CALCUL": "Nombre de jours de cotations utilisés pour le calcul de la moyenne mobile",
-        "JOURS": "jours"
+      "CHART_COURS": {
+        "CLOTURE": "Cours à la clôture"
       },
       "CHART_MOYENNES_MOBILES": {
         "NB_JOURS_CALCUL": "Nombre de jours de cotations utilisés pour le calcul de la moyenne mobile"
-      },
-      "CHART_COURS": {
-        "CLOTURE": "Cours à la clôture"
       },
       "CHARTS": {
         "JOURS": "Nombre de jours affichés",
         "COURS": "Cours à la clôture",
         "MOYENNES_MOBILES": "Moyennes mobiles au "
+      },
+      "DETAILS_VALEUR": {
+        "COURBE": "Courbe des moyennes mobiles"
       }
     },
     "PORTEFEUILLES": {
@@ -107,7 +104,8 @@
       "ACTIONS_VALEUR": {
         "SUPPRIMER_DU_PORTEFEUILLE": "Supprimer la valeur du portefeuille",
         "ACHATS": "Achats de la valeur",
-        "ACHATS_VALEUR": "Achats de la valeur {{nom}}"
+        "ACHATS_VALEUR": "Achats de la valeur {{nom}}",
+        "CONFIRMATION_SUPPRESSION": "Confirmez-vous la suppression de la valeur {{valeur}} du portefeuille {{nomPortefeuille}} ?"
       },
       "GESTION_PORTEFEUILLES": {
         "CREER": "Créer un portefeuille",
@@ -119,27 +117,6 @@
         "RENOMMER": "Renommer le portefeuille",
         "SUPPRIMER": "Supprimer le portefeuille",
         "CONFIRMATION_SUPPRESSION": "Confirmez-vous la suppression du portefeuille {{nom}} ?",
-        "PORTEFEUILLE": {
-          "VALEURS": "Valeurs",
-          "PORTEFEUILLE_SANS_VALEUR": "ATTENTION ! le portefeuille n'a pas de valeur",
-          "ALERTES": "Alertes",
-          "PORTEFEUILLE_SANS_ALERTE": "ATTENTION ! le portefeuille n'a pas d'alerte"
-        },
-        "FORMULAIRE_CREATION": {
-          "NOM": "Nom du portefeuille",
-          "CREER": "Créer le portefeuille"
-        },
-        "FORMULAIRE_MODIFICATION": {
-          "MODIFICATION_NOM": "Modification du nom du portefeuille {{nom}}",
-          "NOM": "Nouveau nom du portefeuille",
-          "RENOMMER": "Renommer le portefeuille"
-        },
-        "SELECTEUR_VALEURS": {
-          "MODIFICATION_PORTEFEUILLE": "Modification des valeurs du portefeuille {{nom}}",
-          "RECHERCHE": "Recherche par libellé",
-          "SOURCE": "Valeurs disponibles",
-          "TARGET": "Valeurs du portefeuille"
-        },
         "EDITEUR_ALERTES": {
           "MODIFICATION_PORTEFEUILLE": "Modification des alertes du portefeuille {{nom}}",
           "AJOUTER": "Ajouter une alerte",
@@ -161,6 +138,15 @@
             "MODIFIER": "Modifier la condition de l'alerte"
           }
         },
+        "FORMULAIRE_CREATION": {
+          "NOM": "Nom du portefeuille",
+          "CREER": "Créer le portefeuille"
+        },
+        "FORMULAIRE_MODIFICATION": {
+          "MODIFICATION_NOM": "Modification du nom du portefeuille {{nom}}",
+          "NOM": "Nouveau nom du portefeuille",
+          "RENOMMER": "Renommer le portefeuille"
+        },
         "IMPORT_EXPORT": {
           "IMPORT_EXPORT": "Import/export des portefeuilles",
           "CONFIGURATION": "Configuration au format JSON",
@@ -168,6 +154,18 @@
           "IMPORTER": "Importer",
           "EXEMPLE": "Exemple de configuration",
           "TOUT_SUPPRIMER": "Supprimer tous les portefeuilles"
+        },
+        "PORTEFEUILLE": {
+          "VALEURS": "Valeurs",
+          "PORTEFEUILLE_SANS_VALEUR": "ATTENTION ! le portefeuille n'a pas de valeur",
+          "ALERTES": "Alertes",
+          "PORTEFEUILLE_SANS_ALERTE": "ATTENTION ! le portefeuille n'a pas d'alerte"
+        },
+        "SELECTEUR_VALEURS": {
+          "MODIFICATION_PORTEFEUILLE": "Modification des valeurs du portefeuille {{nom}}",
+          "RECHERCHE": "Recherche par libellé",
+          "SOURCE": "Valeurs disponibles",
+          "TARGET": "Valeurs du portefeuille"
         }
       }
     },

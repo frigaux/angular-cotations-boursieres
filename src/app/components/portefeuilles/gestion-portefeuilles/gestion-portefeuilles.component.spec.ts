@@ -25,7 +25,7 @@ describe('GestionPortefeuillesComponent', () => {
       providers: [
         {provide: ValeursService, useValue: mockValeursService},
         {provide: PortefeuillesService, useValue: mockPortefeuillesService},
-        {provide: ConfirmationService}
+        ConfirmationService
       ]
     })
       .compileComponents();
