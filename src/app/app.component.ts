@@ -11,6 +11,7 @@ import {StatusBar} from '@capacitor/status-bar';
 import {Capacitor} from '@capacitor/core';
 import {ScreenOrientation} from '@capacitor/screen-orientation';
 import {PrimeNG} from 'primeng/config';
+import {PickList} from 'primeng/picklist';
 
 @Component({
   selector: 'app-root',
@@ -25,6 +26,14 @@ export class AppComponent {
               private titleService: Title, private primeng: PrimeNG) {
     this.configurationTraduction();
     this.configurationAndroid();
+    this.fixPrimeNgPickList();
+  }
+
+  private fixPrimeNgPickList() {
+    PickList.prototype.triggerChangeDetection = function () {
+      this.selectedItemsSource = [...this.selectedItemsSource];
+      this.selectedItemsTarget = [...this.selectedItemsTarget];
+    }
   }
 
   private configurationAndroid() {
@@ -40,9 +49,9 @@ export class AppComponent {
     this.translateService.setDefaultLang('fr');
     this.translateService.use('fr');
     this.primeng.setTranslation({
-      dayNames:	['Dimanche', 'Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi'],
-      dayNamesShort:	['Dim', 'Lun', 'Mar', 'Mer', 'Jeu', 'Ven', 'Sam'],
-      dayNamesMin:	['Di', 'Lu', 'Ma', 'Me', 'Je', 'Ve', 'Sa'],
+      dayNames: ['Dimanche', 'Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi'],
+      dayNamesShort: ['Dim', 'Lun', 'Mar', 'Mer', 'Jeu', 'Ven', 'Sam'],
+      dayNamesMin: ['Di', 'Lu', 'Ma', 'Me', 'Je', 'Ve', 'Sa'],
       monthNames: ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre'],
       monthNamesShort: ['Jan', 'Fev', 'Mar', 'Avr', 'Mai', 'Juin', 'Juil', 'Aout', 'Sep', 'Oct', 'Nov', 'Dec']
     })
