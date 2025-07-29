@@ -1,0 +1,14 @@
+@if (achatsValeursDecores) {
+  @for (achatsValeurDecores of achatsValeursDecores; track achatsValeurDecores.id) {
+    <div class="valeur">
+      <div>{{achatsValeurDecores.valeur.libelle}}</div>
+      <div class="achats">
+      @for (achatDecore of achatsValeurDecores.achatsDecores; track achatDecore.id) {
+        <div>
+          <span>{{achatDecore.achat.date}}</span>
+        </div>
+      }
+      </div>
+    </div>
+  }
+}

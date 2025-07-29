@@ -10,6 +10,7 @@ import {
   GestionPortefeuillesComponent
 } from './components/portefeuilles/gestion-portefeuilles/gestion-portefeuilles.component';
 import {GestionTableauxComponent} from './components/gestion-tableaux/gestion-tableaux.component';
+import {AchatsValeursComponent} from './components/achats-valeurs/achats-valeurs.component';
 
 export const routes: Routes = [
   {
@@ -28,6 +29,11 @@ export const routes: Routes = [
   {
     path: 'cours',
     component: CoursComponent,
+    canActivate: [authentificationGuard]
+  },
+  {
+    path: 'achats-valeurs',
+    component: AchatsValeursComponent,
     canActivate: [authentificationGuard]
   },
   {

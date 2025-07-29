@@ -4,6 +4,7 @@
     "ERREUR_TECHNIQUE": "Erreur technique",
     "VALEURS": "Liste des valeurs",
     "COURS": "Cotation des valeurs",
+    "ACHATS_VALEURS": "Achats de valeurs",
     "PORTEFEUILLES": "Portefeuilles",
     "GESTION_PORTEFEUILLES": "Gestion des portefeuilles",
     "GESTION_TABLEAUX": "Gestion des tableaux"
@@ -21,6 +22,7 @@
     "HEADER": {
       "VALEURS": "Valeurs",
       "COURS": "Cours",
+      "ACHATS_VALEURS": "Achats",
       "PORTEFEUILLES": "Portefeuilles",
       "GESTION_PORTEFEUILLES": "Gestion des portefeuilles",
       "GESTION_TABLEAUX": "Gestion des tableaux"

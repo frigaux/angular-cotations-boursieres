@@ -31,6 +31,11 @@ export class HeaderComponent {
         label: translateService.instant('COMPOSANTS.HEADER.COURS'),
         routerLink: 'cours',
         icon: 'pi pi-chart-line'
+      },
+      {
+        label: translateService.instant('COMPOSANTS.HEADER.ACHATS_VALEURS'),
+        routerLink: 'achats-valeurs',
+        icon: 'pi pi-shopping-bag'
       }
     ];
     if (this.portefeuillesService.auMoinsUnPortefeuilleCorrectementConfigure()) {
