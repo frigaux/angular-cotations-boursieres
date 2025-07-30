@@ -87,7 +87,7 @@
         "MOYENNES_MOBILES": "Moyennes mobiles au "
       },
       "DETAILS_VALEUR": {
-        "COURBE": "Courbe des moyennes mobiles"
+        "COURBE": "Courbe des moyennes mobiles - {{valeur}} ({{ticker}})"
       }
     },
     "PORTEFEUILLES": {
@@ -103,6 +103,9 @@
       "MM50": "MM50",
       "MM100": "MM100",
       "MM200": "MM200",
+      "DETAILS_VALEUR": {
+        "TITRE": "{{valeur}} ({{ticker}}, {{marche}}, {{date}})"
+      },
       "ACTIONS_VALEUR": {
         "SUPPRIMER_DU_PORTEFEUILLE": "Supprimer la valeur du portefeuille",
         "ACHATS": "Achats de la valeur",

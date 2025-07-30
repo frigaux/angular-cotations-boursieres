@@ -16,6 +16,18 @@ import {Cours} from '../cours.class';
 })
 export class DetailsValeurComponent {
   // input/output
-  cours: InputSignal<Cours | undefined> = input();
+  inmutCours: InputSignal<Cours | undefined> = input(undefined,
+    {transform: o => this.intercepteurCours(o), alias: 'cours'});
   ferme = output<void>();
+
+  cours?: Cours;
+
+  private intercepteurCours(cours: Cours | undefined) {
+    this.cours = cours;
+    return cours;
+  }
+
+  boursorama() {
+    window.open(`https://www.boursorama.com/cours/1rP${this.cours?.ticker}/`);
+  }
 }

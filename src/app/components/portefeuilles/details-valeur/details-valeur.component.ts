@@ -6,6 +6,7 @@ import {ChartsComponent} from '../../cours/charts/charts.component';
 import {Cours} from '../../cours/cours.class';
 import {AlertesComponent} from '../alertes/alertes.component';
 import {Alerte} from '../alerte.class';
+import {TranslatePipe} from '@ngx-translate/core';
 
 @Component({
   selector: 'app-details-valeur',
@@ -13,7 +14,8 @@ import {Alerte} from '../alerte.class';
     DatePipe,
     Panel,
     ChartsComponent,
-    AlertesComponent
+    AlertesComponent,
+    TranslatePipe
   ],
   templateUrl: './details-valeur.component.html',
   styleUrl: './details-valeur.component.sass'
@@ -26,11 +28,17 @@ export class DetailsValeurComponent {
 
   // données pour la vue
   alertes: Alerte[] | undefined;
+  coursPortefeuille?: CoursPortefeuille;
   cours: Cours | undefined;
 
   private intercepteurCoursPortefeuille(coursPortefeuille: CoursPortefeuille | undefined) {
+    this.coursPortefeuille = coursPortefeuille;
     this.alertes = coursPortefeuille?.alertes;
     this.cours = coursPortefeuille ? Cours.fromCoursPortefeuille(coursPortefeuille) : undefined;
     return coursPortefeuille;
+  }
+
+  boursorama() {
+    window.open(`https://www.boursorama.com/cours/1rP${this.cours?.ticker}/`);
   }
 }

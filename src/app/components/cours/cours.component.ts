@@ -16,6 +16,7 @@ import {LoaderComponent} from '../loader/loader.component';
 import {CoursPortefeuille} from '../portefeuilles/cours-portefeuille.class';
 import {AjoutAuPortefeuilleComponent} from './ajout-au-portefeuille/ajout-au-portefeuille.component';
 
+// TODO : gérer des filtres sur les MM des cours
 @Component({
   selector: 'app-cours',
   imports: [
