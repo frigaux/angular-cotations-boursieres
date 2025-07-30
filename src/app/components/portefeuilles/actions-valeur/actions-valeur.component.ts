@@ -10,7 +10,6 @@ import {NgIf} from '@angular/common';
 import {ConfirmationService} from 'primeng/api';
 import {DialogueService} from '../../../services/dialogue/dialogue.service';
 
-// TODO : demander confirmation suppression
 @Component({
   selector: 'app-achat-valeur',
   imports: [

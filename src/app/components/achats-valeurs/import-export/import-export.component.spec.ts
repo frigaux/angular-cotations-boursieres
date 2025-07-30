@@ -4,7 +4,7 @@ import {ImportExportComponent} from './import-export.component';
 import {provideHttpClient} from '@angular/common/http';
 import {provideHttpClientTesting} from '@angular/common/http/testing';
 import {TranslateModule} from '@ngx-translate/core';
-import {ACHATS} from '../../../../../services/jdd/jdd-valeurs.dataset';
+import {ACHATS} from '../../../services/jdd/jdd-valeurs.dataset';
 
 describe('ImportExportComponent', () => {
   let component: ImportExportComponent;

@@ -90,6 +90,17 @@
         "COURBE": "Courbe des moyennes mobiles - {{valeur}} ({{ticker}})"
       }
     },
+    "ACHATS_VALEURS": {
+      "TITRE": "Liste des achats de valeurs",
+      "VALEUR": "Valeur",
+      "DATE": "Date",
+      "PRIX": "Prix",
+      "QUANTITE": "Quantité",
+      "TOTAL": "Total",
+      "REVENDU": "Revendu",
+      "TOTAL_NON_REVENDU": "Total non revendu",
+      "CONFIRMATION_SUPPRESSION": "Confirmez-vous la suppression de l'achat ?"
+    },
     "PORTEFEUILLES": {
       "PORTEFEUILLES_DATE": "Portefeuilles à la date du",
       "ACTIONS": "Actions sur la valeur",

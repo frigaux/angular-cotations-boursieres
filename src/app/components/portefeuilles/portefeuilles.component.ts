@@ -63,8 +63,8 @@ export class PortefeuillesComponent implements OnInit {
               private valeursService: ValeursService,
               private coursService: CoursService) {
     portefeuillesService.onUpdate(portefeuilles => this.chargerPortefeuilleCourant());
-    valeursService.onImport(achatsTickers => this.chargerPortefeuilleCourant());
-    valeursService.onUpdate(achatsTickers => this.chargerPortefeuilleCourant());
+    valeursService.onImportAchats(achatsTickers => this.chargerPortefeuilleCourant());
+    valeursService.onUpdateAchats(achatsTickers => this.chargerPortefeuilleCourant());
   }
 
   ngOnInit(): void {

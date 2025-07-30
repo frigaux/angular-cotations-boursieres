@@ -8,13 +8,13 @@ import {AchatsTicker} from '../../../../services/valeurs/achats-ticker.interface
 import {DatePipe} from '@angular/common';
 import {ConfirmationService} from 'primeng/api';
 
-describe('AchatsComponent', () => {
+describe('AchatsValeurComponent', () => {
   let component: AchatsValeurComponent;
   let fixture: ComponentFixture<AchatsValeurComponent>;
 
   const cloneACHATS: Function = () => JSON.parse(JSON.stringify(ACHATS));
 
-  const mockValeursService = jasmine.createSpyObj('ValeursService', ['chargerAchatsTicker', 'enregistrerAchatsTicker', 'onImport']);
+  const mockValeursService = jasmine.createSpyObj('ValeursService', ['chargerAchatsTicker', 'enregistrerAchatsTicker', 'onImportAchats']);
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({

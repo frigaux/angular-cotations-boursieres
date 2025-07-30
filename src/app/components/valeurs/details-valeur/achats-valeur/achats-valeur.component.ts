@@ -8,7 +8,6 @@ import {AchatDecore} from './achat-decore.class';
 import {InputText} from 'primeng/inputtext';
 import {DatePicker} from 'primeng/datepicker';
 import {DatePipe, NgIf} from '@angular/common';
-import {ImportExportComponent} from './import-export/import-export.component';
 import {ConfirmationService} from 'primeng/api';
 import {DialogueService} from '../../../../services/dialogue/dialogue.service';
 
@@ -20,8 +19,7 @@ import {DialogueService} from '../../../../services/dialogue/dialogue.service';
     ToggleSwitch,
     InputText,
     DatePicker,
-    NgIf,
-    ImportExportComponent
+    NgIf
   ],
   templateUrl: './achats-valeur.component.html',
   styleUrl: './achats-valeur.component.sass'
@@ -47,7 +45,7 @@ export class AchatsValeurComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.valeursService.onImport(achatsTickers => this.construireVue());
+    this.valeursService.onImportAchats(achatsTickers => this.construireVue());
   }
 
   private intercepteurTicker(valeur: { ticker: string, cloture: number } | undefined): {

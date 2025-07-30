@@ -11,13 +11,13 @@ import {Achat} from './achat.interface';
 })
 export class ValeursService {
   private static readonly ACHATS: string = 'achats';
-  private static readonly OBSERVERS_IMPORT: Array<Subscriber<Array<AchatsTicker>>> = [];
-  private static readonly OBSERVERS_UPDATE: Array<Subscriber<Array<AchatsTicker>>> = [];
-  private static readonly OBSERVABLE_IMPORT: Observable<Array<AchatsTicker>> = new Observable(observer => {
-    ValeursService.OBSERVERS_IMPORT.push(observer);
+  private static readonly OBSERVERS_IMPORT_ACHATS: Array<Subscriber<Array<AchatsTicker>>> = [];
+  private static readonly OBSERVERS_UPDATE_ACHATS: Array<Subscriber<Array<AchatsTicker>>> = [];
+  private static readonly OBSERVABLE_IMPORT_ACHATS: Observable<Array<AchatsTicker>> = new Observable(observer => {
+    ValeursService.OBSERVERS_IMPORT_ACHATS.push(observer);
   });
-  private static readonly OBSERVABLE_UPDATE: Observable<Array<AchatsTicker>> = new Observable(observer => {
-    ValeursService.OBSERVERS_UPDATE.push(observer);
+  private static readonly OBSERVABLE_UPDATE_ACHATS: Observable<Array<AchatsTicker>> = new Observable(observer => {
+    ValeursService.OBSERVERS_UPDATE_ACHATS.push(observer);
   });
 
   private cleMessageErreur: string | undefined;
@@ -50,7 +50,7 @@ export class ValeursService {
   public enregistrerAchats(achatsTickers: Array<AchatsTicker>): string | undefined {
     if (this.validerAchats(achatsTickers)) {
       window.localStorage.setItem(ValeursService.ACHATS, JSON.stringify(achatsTickers));
-      ValeursService.OBSERVERS_UPDATE.forEach(observer => observer.next(achatsTickers));
+      ValeursService.OBSERVERS_UPDATE_ACHATS.forEach(observer => observer.next(achatsTickers));
       return undefined;
     } else {
       return this.translateService.instant(this.cleMessageErreur!);
@@ -62,7 +62,7 @@ export class ValeursService {
       const achatsTickers: any = JSON.parse(json);
       if (this.validerAchats(achatsTickers)) {
         window.localStorage.setItem(ValeursService.ACHATS, JSON.stringify(achatsTickers));
-        ValeursService.OBSERVERS_IMPORT.forEach(observer => observer.next(achatsTickers));
+        ValeursService.OBSERVERS_IMPORT_ACHATS.forEach(observer => observer.next(achatsTickers));
         return undefined;
       } else {
         return this.translateService.instant(this.cleMessageErreur!);
@@ -72,8 +72,8 @@ export class ValeursService {
     }
   }
 
-  public onImport(handler: ((value: Array<AchatsTicker>) => void)): void {
-    ValeursService.OBSERVABLE_IMPORT.subscribe(handler);
+  public onImportAchats(handler: ((value: Array<AchatsTicker>) => void)): void {
+    ValeursService.OBSERVABLE_IMPORT_ACHATS.subscribe(handler);
   }
 
   public chargerAchatsTicker(ticker: string): Array<Achat> {
@@ -107,15 +107,15 @@ export class ValeursService {
     }
     if (this.validerAchats(achatsTickers)) {
       window.localStorage.setItem(ValeursService.ACHATS, JSON.stringify(achatsTickers));
-      ValeursService.OBSERVERS_UPDATE.forEach(observer => observer.next(achatsTickers));
+      ValeursService.OBSERVERS_UPDATE_ACHATS.forEach(observer => observer.next(achatsTickers));
       return undefined;
     } else {
       return this.translateService.instant(this.cleMessageErreur!);
     }
   }
 
-  public onUpdate(handler: ((value: Array<AchatsTicker>) => void)): void {
-    ValeursService.OBSERVABLE_UPDATE.subscribe(handler);
+  public onUpdateAchats(handler: ((value: Array<AchatsTicker>) => void)): void {
+    ValeursService.OBSERVABLE_UPDATE_ACHATS.subscribe(handler);
   }
 
   private validerAchats(achatsTickers: Array<AchatsTicker>): boolean {

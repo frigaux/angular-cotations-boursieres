@@ -6,7 +6,7 @@ import {NgClass, NgIf} from "@angular/common";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {Textarea} from "primeng/textarea";
 import {TranslatePipe} from "@ngx-translate/core";
-import {ValeursService} from '../../../../../services/valeurs/valeurs.service';
+import {ValeursService} from '../../../services/valeurs/valeurs.service';
 
 @Component({
   selector: 'app-import-export',
@@ -22,7 +22,7 @@ import {ValeursService} from '../../../../../services/valeurs/valeurs.service';
     NgClass
   ],
   templateUrl: './import-export.component.html',
-  styleUrls: ['../../../../portefeuilles/gestion-portefeuilles/import-export/import-export.component.sass', './import-export.component.sass']
+  styleUrls: ['../../portefeuilles/gestion-portefeuilles/import-export/import-export.component.sass', './import-export.component.sass']
 })
 export class ImportExportComponent {
   visible: boolean = false;
