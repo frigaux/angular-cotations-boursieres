@@ -30,4 +30,8 @@ export class DetailsValeurComponent {
   boursorama() {
     window.open(`https://www.boursorama.com/cours/1rP${this.cours?.ticker}/`);
   }
+
+  abcBourse() {
+    window.open(`https://www.abcbourse.com/cotation/${this.cours?.ticker}p`);
+  }
 }

@@ -87,7 +87,9 @@
         "MOYENNES_MOBILES": "Moyennes mobiles au "
       },
       "DETAILS_VALEUR": {
-        "COURBE": "Courbe des moyennes mobiles - {{valeur}} ({{ticker}})"
+        "COURBE": "Courbe des moyennes mobiles - {{valeur}} ({{ticker}})",
+        "ABCBOURSE": "Lien vers ABCBourse",
+        "BOURSORAMA": "Lien vers Boursorama"
       }
     },
     "ACHATS_VALEURS": {
@@ -115,7 +117,9 @@
       "MM100": "MM100",
       "MM200": "MM200",
       "DETAILS_VALEUR": {
-        "TITRE": "{{valeur}} ({{ticker}}, {{marche}}, {{date}})"
+        "TITRE": "{{valeur}} ({{ticker}}, {{marche}}, {{date}})",
+        "ABCBOURSE": "Lien vers ABCBourse",
+        "BOURSORAMA": "Lien vers Boursorama"
       },
       "ACTIONS_VALEUR": {
         "SUPPRIMER_DU_PORTEFEUILLE": "Supprimer la valeur du portefeuille",

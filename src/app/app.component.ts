@@ -13,6 +13,8 @@ import {ScreenOrientation} from '@capacitor/screen-orientation';
 import {PrimeNG} from 'primeng/config';
 import {PickList} from 'primeng/picklist';
 
+// TODO : récupérer les actus : https://www.abcbourse.com/marches/actualites-des-marches_0 ; DlType=all&DateActu=2025-07-31
+// TODO : cours de séance actualisé toutes les 5 minutes : https://www.abcbourse.com/download/telechargement_intraday
 @Component({
   selector: 'app-root',
   standalone: true,

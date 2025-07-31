@@ -1,8 +1,16 @@
 @if (cours !== undefined) {
   <p-panel>
     <ng-template #header>
-      <h2>{{ 'COMPOSANTS.COURS.DETAILS_VALEUR.COURBE' | translate : {valeur: cours.libelle, ticker: cours.ticker} }}</h2>
-      <span class="pi pi-external-link" (click)="boursorama()"></span>
+      <h2>{{
+          'COMPOSANTS.COURS.DETAILS_VALEUR.COURBE' | translate : {
+            valeur: cours.libelle,
+            ticker: cours.ticker
+          }
+        }}</h2>
+      <span class="pi pi-external-link" (click)="abcBourse()"
+            title="{{ 'COMPOSANTS.COURS.DETAILS_VALEUR.ABCBOURSE' | translate}}"></span>
+      <span class="pi pi-external-link" (click)="boursorama()"
+            title="{{ 'COMPOSANTS.COURS.DETAILS_VALEUR.BOURSORAMA' | translate}}"></span>
       <span class="pi pi-times-circle" (click)="this.ferme.emit()"></span>
     </ng-template>
     <app-chart-moyennes-mobiles [cours]="cours"></app-chart-moyennes-mobiles>

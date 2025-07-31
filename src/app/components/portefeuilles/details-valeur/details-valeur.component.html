@@ -13,7 +13,10 @@
         }}
         <app-alertes [alertes]="alertes"></app-alertes>
       </h2>
-      <span class="pi pi-external-link" (click)="boursorama()"></span>
+      <span class="pi pi-external-link" (click)="abcBourse()"
+            title="{{ 'COMPOSANTS.PORTEFEUILLES.DETAILS_VALEUR.ABCBOURSE' | translate}}"></span>
+      <span class="pi pi-external-link" (click)="boursorama()"
+            title="{{ 'COMPOSANTS.PORTEFEUILLES.DETAILS_VALEUR.BOURSORAMA' | translate}}"></span>
       <span class="pi pi-times-circle" (click)="this.ferme.emit()"></span>
     </ng-template>
     <app-charts [cours]="cours"></app-charts>
