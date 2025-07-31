@@ -9,12 +9,15 @@ import {DTOListeCours} from './dto-liste-cours.interface';
 import {DTOCoursTicker} from './dto-cours-ticker.interface';
 import {DTOCoursTickerAllege} from './dto-cours-ticker-allege.interface';
 import {
-  LISTE_COURS,
   COURS_TICKER,
-  LISTE_COURS_TICKER_ALLEGE,
-  LISTE_COURS_AVEC_LISTE_ALLEGEE
+  FILTRES,
+  LISTE_COURS,
+  LISTE_COURS_AVEC_LISTE_ALLEGEE,
+  LISTE_COURS_TICKER_ALLEGE
 } from '../jdd/jdd-cours.dataset';
-import {DtoCoursAvecListeAllege} from './dto-cours-avec-liste-allege.interface';
+import {DTOCoursAvecListeAllege} from './dto-cours-avec-liste-allege.interface';
+import {TranslateModule} from '@ngx-translate/core';
+import {DTOFiltre} from './dto-filtre.interface';
 
 describe('CoursService', () => {
   let coursService: CoursService;
@@ -25,7 +28,8 @@ describe('CoursService', () => {
       imports: [
         RouterModule.forRoot(
           []
-        )
+        ),
+        TranslateModule.forRoot({})
       ],
       providers: [
         CoursService,
@@ -82,7 +86,7 @@ describe('CoursService', () => {
 
   it('when #chargerCoursTickersWithLimit appelé sans ticker then doit renvoyer un tableau vide', async () => {
     // création d'une promesse sur l'observable qui fait la requête HTTP de récupération des cours
-    const promiseCours: Promise<DtoCoursAvecListeAllege[]> = firstValueFrom(coursService.chargerCoursTickersWithLimit([], 4));
+    const promiseCours: Promise<DTOCoursAvecListeAllege[]> = firstValueFrom(coursService.chargerCoursTickersWithLimit([], 4));
     expect(await promiseCours).toEqual([]);
     // vérification qu'il n'y a pas de requêtes en attente
     httpTesting.verify();
@@ -90,7 +94,7 @@ describe('CoursService', () => {
 
   it('#chargerCoursTickersWithLimit doit renvoyer les n derniers cours pour les tickers', async () => {
     // création d'une promesse sur l'observable qui fait la requête HTTP de récupération des cours
-    const promiseCours: Promise<DtoCoursAvecListeAllege[]> = firstValueFrom(coursService.chargerCoursTickersWithLimit(['GLE','BNP'], 4));
+    const promiseCours: Promise<DTOCoursAvecListeAllege[]> = firstValueFrom(coursService.chargerCoursTickersWithLimit(['GLE', 'BNP'], 4));
     // bouchonnage de la ressource HTTP
     httpTesting.expectOne({
       method: 'GET',
@@ -99,5 +103,26 @@ describe('CoursService', () => {
     expect(await promiseCours).toEqual(LISTE_COURS_AVEC_LISTE_ALLEGEE);
     // vérification qu'il n'y a pas de requêtes en attente
     httpTesting.verify();
+  });
+
+  describe('Given #onImport', () => {
+    let resultatImport: DTOFiltre[] | undefined;
+    const filtres = JSON.stringify(FILTRES);
+
+    beforeEach(() => {
+      resultatImport = undefined;
+      coursService.onImportFiltres(filtres => resultatImport = filtres);
+    });
+
+    it('when #import du format non JSON then #onImport renvoie undefined', () => {
+      expect(coursService.importFiltres("+ nimp (")).toBeDefined();
+      expect(resultatImport).toEqual(undefined);
+    });
+
+    it('when #import des filtres valides then #charger renvoie les filtres', () => {
+      expect(coursService.importFiltres(filtres)).toBeUndefined();
+      expect(resultatImport).toEqual(FILTRES);
+      expect(coursService.chargerFiltres()).toEqual(FILTRES);
+    });
   });
 });

@@ -1,6 +1,6 @@
 import {DTOCoursTickerAllege} from './dto-cours-ticker-allege.interface';
 
-export interface DtoCoursAvecListeAllege {
+export interface DTOCoursAvecListeAllege {
   date: string; // ISO 8601 : yyyy-MM-dd
   ticker: string;
   ouverture: number;

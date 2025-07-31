@@ -1,6 +1,6 @@
 import {Component, input, InputSignal, OnInit} from '@angular/core';
 import {ValeursService} from '../../../../services/valeurs/valeurs.service';
-import {Achat} from '../../../../services/valeurs/achat.interface';
+import {DTOAchat} from '../../../../services/valeurs/dto-achat.interface';
 import {TranslatePipe, TranslateService} from '@ngx-translate/core';
 import {FormsModule} from '@angular/forms';
 import {ToggleSwitch} from 'primeng/toggleswitch';
@@ -30,7 +30,7 @@ export class AchatsValeurComponent implements OnInit {
     {transform: o => this.intercepteurTicker(o), alias: 'valeur'});
   valeur?: { ticker: string, cloture: number };
 
-  private achats: Array<Achat> = [];
+  private achats: Array<DTOAchat> = [];
 
   // données pour la vue
   achatsDecores: AchatDecore[] = [];
@@ -85,7 +85,7 @@ export class AchatsValeurComponent implements OnInit {
       .map(achat => new AchatDecore(i++, new Date(achat.date), achat));
   }
 
-  suppressionAchat(event: Event, achat: Achat) {
+  suppressionAchat(event: Event, achat: DTOAchat) {
     this.dialogueService.confirmationSuppression(
       this.confirmationService,
       event,
@@ -96,7 +96,7 @@ export class AchatsValeurComponent implements OnInit {
     );
   }
 
-  supprimerAchat(achat: Achat) {
+  supprimerAchat(achat: DTOAchat) {
     this.achats.splice(this.achats.indexOf(achat), 1);
     this.decorerAchats();
   }

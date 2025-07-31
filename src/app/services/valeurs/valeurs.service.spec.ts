@@ -8,7 +8,7 @@ import {DTOValeur} from './dto-valeur.interface';
 import {RouterModule} from '@angular/router';
 import {ACHATS, VALEURS} from '../jdd/jdd-valeurs.dataset';
 import {TranslateModule} from '@ngx-translate/core';
-import {AchatsTicker} from './achats-ticker.interface';
+import {DTOAchatsTicker} from './dto-achats-ticker.interface';
 
 describe('ValeursService', () => {
   let valeursService: ValeursService;
@@ -55,14 +55,14 @@ describe('ValeursService', () => {
   });
 
   it('Given des achats when #enregistrerAchatsTicker then #chargerAchatsTicker renvoie les achats', () => {
-    const achatsTicker: AchatsTicker = cloneACHATS()[0];
+    const achatsTicker: DTOAchatsTicker = cloneACHATS()[0];
     expect(valeursService.enregistrerAchatsTicker(achatsTicker.ticker, achatsTicker.achats)).toBeUndefined();
     expect(valeursService.chargerAchatsTicker(achatsTicker.ticker)).toEqual(achatsTicker.achats);
     expect(valeursService.chargerAchatsTicker('AC')).toHaveSize(0);
   });
 
   it('Given des achats valides when #importAchats then #chargerAchats renvoie les achats', () => {
-    let resultatImport: Array<AchatsTicker> | undefined;
+    let resultatImport: Array<DTOAchatsTicker> | undefined;
     valeursService.onImportAchats(achatsTickers => resultatImport = achatsTickers);
     expect(valeursService.importAchats(JSON.stringify(ACHATS))).toBeUndefined();
     expect(valeursService.chargerAchats()).toEqual(ACHATS);

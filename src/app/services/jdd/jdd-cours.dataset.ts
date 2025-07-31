@@ -2,9 +2,10 @@ import {DTOCoursTicker} from "../cours/dto-cours-ticker.interface";
 import {DTOCoursTickerAllege} from '../cours/dto-cours-ticker-allege.interface';
 import {DTOListeCours} from '../cours/dto-liste-cours.interface';
 import {Cours} from '../../components/cours/cours.class';
-import {DtoCoursAvecListeAllege} from '../cours/dto-cours-avec-liste-allege.interface';
+import {DTOCoursAvecListeAllege} from '../cours/dto-cours-avec-liste-allege.interface';
 import {CoursPortefeuille} from '../../components/portefeuilles/cours-portefeuille.class';
 import {VALEUR} from './jdd-valeurs.dataset';
+import {DTOFiltre} from '../cours/dto-filtre.interface';
 
 export const LISTE_COURS: DTOListeCours = {
   "date": "2025-05-09",
@@ -84,7 +85,7 @@ export const COURS_DECROISSANT: Cours = Cours.fromDTOCoursTicker("GLE", "Societe
     "alerte": true
   }, LISTE_COURS_TICKER_ALLEGE);
 
-export const LISTE_COURS_AVEC_LISTE_ALLEGEE: DtoCoursAvecListeAllege[] = [
+export const LISTE_COURS_AVEC_LISTE_ALLEGEE: DTOCoursAvecListeAllege[] = [
   {
     "date": "2025-05-09",
     "ticker": "GLE",
@@ -103,3 +104,14 @@ export const LISTE_COURS_AVEC_LISTE_ALLEGEE: DtoCoursAvecListeAllege[] = [
 ];
 
 export const COURS_PORTEFEUILLE = new CoursPortefeuille(VALEUR, LISTE_COURS_AVEC_LISTE_ALLEGEE[0], [], undefined);
+
+export const FILTRES: DTOFiltre[] = [
+  {
+    "nom": "Remontée",
+    "condition": "M20 > M10 && M10 > M5 && M5 < M1"
+  },
+  {
+    "nom": "Chute",
+    "condition": "M20 < M10 && M10 < M5 && M5 > M1"
+  }
+]

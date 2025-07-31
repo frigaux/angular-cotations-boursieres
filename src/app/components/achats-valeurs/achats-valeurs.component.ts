@@ -1,12 +1,12 @@
 import {Component, OnInit} from '@angular/core';
 import {ValeursService} from '../../services/valeurs/valeurs.service';
-import {AchatsTicker} from '../../services/valeurs/achats-ticker.interface';
+import {DTOAchatsTicker} from '../../services/valeurs/dto-achats-ticker.interface';
 import {DTOValeur} from '../../services/valeurs/dto-valeur.interface';
 import {AchatsValeurDecores} from './achats-valeur-decores.class';
 import {AchatDecore} from '../valeurs/details-valeur/achats-valeur/achat-decore.class';
 import {CurrencyPipe, DatePipe, DecimalPipe, NgIf} from '@angular/common';
 import {TranslatePipe, TranslateService} from '@ngx-translate/core';
-import {Achat} from '../../services/valeurs/achat.interface';
+import {DTOAchat} from '../../services/valeurs/dto-achat.interface';
 import {ConfirmationService} from 'primeng/api';
 import {DialogueService} from '../../services/dialogue/dialogue.service';
 import {LoaderComponent} from '../loader/loader.component';
@@ -36,7 +36,7 @@ export class AchatsValeursComponent implements OnInit {
   totalQuantite?: number;
 
   private valeurByTicker?: Map<string, DTOValeur>;
-  private achatsTickers?: Array<AchatsTicker>;
+  private achatsTickers?: Array<DTOAchatsTicker>;
 
   constructor(private translateService: TranslateService,
               private valeursService: ValeursService,
@@ -87,7 +87,7 @@ export class AchatsValeursComponent implements OnInit {
     });
   }
 
-  suppressionAchat(event: MouseEvent, achatsTicker: AchatsTicker, achat: Achat) {
+  suppressionAchat(event: MouseEvent, achatsTicker: DTOAchatsTicker, achat: DTOAchat) {
     this.dialogueService.confirmationSuppression(
       this.confirmationService,
       event,
@@ -98,7 +98,7 @@ export class AchatsValeursComponent implements OnInit {
     );
   }
 
-  supprimerAchat(achatsTicker: AchatsTicker, achat: Achat) {
+  supprimerAchat(achatsTicker: DTOAchatsTicker, achat: DTOAchat) {
     achatsTicker.achats.splice(achatsTicker.achats.indexOf(achat), 1);
     this.valeursService.enregistrerAchatsTicker(achatsTicker.ticker, achatsTicker.achats)
     this.construireVue();

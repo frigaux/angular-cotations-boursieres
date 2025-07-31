@@ -13,8 +13,8 @@ import {DetailsValeurComponent} from './details-valeur/details-valeur.component'
 import {AlertesComponent} from './alertes/alertes.component';
 import {Skeleton} from 'primeng/skeleton';
 import {LoaderComponent} from '../loader/loader.component';
-import {Achat} from '../../services/valeurs/achat.interface';
-import {DtoCoursAvecListeAllege} from '../../services/cours/dto-cours-avec-liste-allege.interface';
+import {DTOAchat} from '../../services/valeurs/dto-achat.interface';
+import {DTOCoursAvecListeAllege} from '../../services/cours/dto-cours-avec-liste-allege.interface';
 import {ActionsValeurComponent} from './actions-valeur/actions-valeur.component';
 import {Cours} from '../cours/cours.class';
 import {DTOPortefeuille} from '../../services/portefeuilles/dto-portefeuille.interface';
@@ -128,8 +128,8 @@ export class PortefeuillesComponent implements OnInit {
     }
   }
 
-  calculerVariationAchats(dto: DtoCoursAvecListeAllege): number | undefined {
-    const achats: Array<Achat> = this.valeursService.chargerAchatsTicker(dto.ticker)
+  calculerVariationAchats(dto: DTOCoursAvecListeAllege): number | undefined {
+    const achats: Array<DTOAchat> = this.valeursService.chargerAchatsTicker(dto.ticker)
       .filter(achat => !achat.revendu);
     if (achats.length === 0) {
       return undefined;

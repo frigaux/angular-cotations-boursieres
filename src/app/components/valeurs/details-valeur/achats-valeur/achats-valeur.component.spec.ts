@@ -4,7 +4,7 @@ import {AchatsValeurComponent} from './achats-valeur.component';
 import {ValeursService} from '../../../../services/valeurs/valeurs.service';
 import {TranslateModule} from '@ngx-translate/core';
 import {ACHATS} from '../../../../services/jdd/jdd-valeurs.dataset';
-import {AchatsTicker} from '../../../../services/valeurs/achats-ticker.interface';
+import {DTOAchatsTicker} from '../../../../services/valeurs/dto-achats-ticker.interface';
 import {DatePipe} from '@angular/common';
 import {ConfirmationService} from 'primeng/api';
 
@@ -39,7 +39,7 @@ describe('AchatsValeurComponent', () => {
   });
 
   describe('Given des achats existants et un ticker en input', () => {
-    let achatsTickers: Array<AchatsTicker>;
+    let achatsTickers: Array<DTOAchatsTicker>;
 
     beforeEach(() => {
       achatsTickers = cloneACHATS();

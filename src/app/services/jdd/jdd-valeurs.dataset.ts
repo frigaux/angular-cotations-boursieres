@@ -1,6 +1,6 @@
 import {Marches} from '../valeurs/marches.enum';
 import {DTOValeur} from '../valeurs/dto-valeur.interface';
-import {AchatsTicker} from '../valeurs/achats-ticker.interface';
+import {DTOAchatsTicker} from '../valeurs/dto-achats-ticker.interface';
 
 export const VALEUR: DTOValeur = {
   "ticker": "GLE",
@@ -21,7 +21,7 @@ export const VALEURS: DTOValeur[] = [
   }
 ];
 
-export const ACHATS: Array<AchatsTicker> = [
+export const ACHATS: Array<DTOAchatsTicker> = [
   {
     "ticker": "GLE",
     "achats":

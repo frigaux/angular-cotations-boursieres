@@ -1,4 +1,4 @@
-import {DtoCoursAvecListeAllege} from '../../services/cours/dto-cours-avec-liste-allege.interface';
+import {DTOCoursAvecListeAllege} from '../../services/cours/dto-cours-avec-liste-allege.interface';
 import {DTOCoursTickerAllege} from '../../services/cours/dto-cours-ticker-allege.interface';
 import {Alerte} from './alerte.class';
 import {DTOAlerte} from '../../services/portefeuilles/dto-alerte.interface';
@@ -21,7 +21,7 @@ export class CoursPortefeuille {
   alertes: Alerte[];
   varAchats?: number;
 
-  constructor(valeur: DTOValeur, dto: DtoCoursAvecListeAllege,
+  constructor(valeur: DTOValeur, dto: DTOCoursAvecListeAllege,
               alertes: { alerte: DTOAlerte, evaluer: Function }[],
               varAchats: number | undefined) {
     this.date = dto.cours[0].date;

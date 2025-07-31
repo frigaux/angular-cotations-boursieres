@@ -64,7 +64,7 @@ describe('PortefeuillesService', () => {
       expect(resultatImport).toEqual(undefined);
     });
 
-    it('when #import des portefeuilles valides then #export renvoie les portefeuilles', () => {
+    it('when #import des portefeuilles valides then #charger renvoie les portefeuilles', () => {
       expect(service.import(portefeuilles)).toBeUndefined();
       expect(resultatImport).toEqual(PORTEFEUILLES);
       expect(service.charger()).toEqual(PORTEFEUILLES);
