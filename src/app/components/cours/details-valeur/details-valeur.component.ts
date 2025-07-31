@@ -19,6 +19,8 @@ export class DetailsValeurComponent {
   inmutCours: InputSignal<Cours | undefined> = input(undefined,
     {transform: o => this.intercepteurCours(o), alias: 'cours'});
   ferme = output<void>();
+  precedent=output<void>();
+  suivant = output<void>();
 
   cours?: Cours;
 

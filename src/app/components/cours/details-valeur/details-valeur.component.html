@@ -7,6 +7,10 @@
             ticker: cours.ticker
           }
         }}</h2>
+      <span class="pi pi-caret-left" (click)="this.precedent.emit()"
+            title="{{ 'COMPOSANTS.COURS.DETAILS_VALEUR.VALEUR_PRECEDENTE' | translate}}"></span>
+      <span class="pi pi-caret-right" (click)="this.suivant.emit()"
+            title="{{ 'COMPOSANTS.COURS.DETAILS_VALEUR.VALEUR_SUIVANTE' | translate}}"></span>
       <span class="pi pi-external-link" (click)="abcBourse()"
             title="{{ 'COMPOSANTS.COURS.DETAILS_VALEUR.ABCBOURSE' | translate}}"></span>
       <span class="pi pi-external-link" (click)="boursorama()"

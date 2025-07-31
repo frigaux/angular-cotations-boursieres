@@ -19,6 +19,7 @@
         <p-accordion-content>
           <p-table
             sortField="libelle"
+            (sortFunction)="trierColonne($event, marche)" [customSort]="true"
             [scrollable]="true" scrollHeight="calc(100vh - 20rem)"
             [style]="{ margin: '1rem' }"
             [value]="marche.cours"
@@ -81,5 +82,6 @@
     }
   </p-accordion>
 
-  <app-details-valeur [cours]="coursSelectionne" (ferme)="coursSelectionne = undefined"></app-details-valeur>
+  <app-details-valeur [cours]="coursSelectionne" (ferme)="coursSelectionne = undefined"
+                      (precedent)="valeurPrecedente()" (suivant)="valeurSuivante()"></app-details-valeur>
 </div>

@@ -15,6 +15,7 @@ import {Skeleton} from 'primeng/skeleton';
 import {LoaderComponent} from '../loader/loader.component';
 import {CoursPortefeuille} from '../portefeuilles/cours-portefeuille.class';
 import {AjoutAuPortefeuilleComponent} from './ajout-au-portefeuille/ajout-au-portefeuille.component';
+import {SortEvent} from 'primeng/api';
 
 // TODO : gérer des filtres sur les MM des cours
 @Component({
@@ -112,5 +113,46 @@ export class CoursComponent implements OnInit {
 
   afficherAjoutAuPortefeuille(event: MouseEvent, cours: Cours) {
     this.ajoutAuPortefeuille()?.afficher(event, cours.ticker);
+  }
+
+  // on procède à un tri "manuel" des données affichées dans le p-table
+  // en tri automatique les données ne sont pas mises à jour par p-table :/
+  trierColonne(event: SortEvent, marche: CoursMarche) {
+    marche.cours.sort((c1, c2) => {
+      switch (event.field) {
+        case 'libelle' :
+          return event.order! * c1.libelle.localeCompare(c2.libelle);
+        case 'cloture' :
+          return event.order! * (c1.cloture - c2.cloture);
+        case 'var1' :
+          return c1.var1 !== undefined && c2.var1 !== undefined ? event.order! * (c1.var1 - c2.var1) : 0;
+        default:
+          return 0;
+      }
+    });
+  }
+
+  private marcheSelectionne() {
+    return this.marches.find(marche => marche.cours.indexOf(this.coursSelectionne!) !== -1);
+  }
+
+  valeurPrecedente() {
+    const marcheSelectionne: CoursMarche | undefined = this.marcheSelectionne();
+    if (marcheSelectionne) {
+      const idxCours = marcheSelectionne.cours.indexOf(this.coursSelectionne!);
+      if (idxCours > 0) {
+        this.coursSelectionne = marcheSelectionne.cours[idxCours - 1];
+      }
+    }
+  }
+
+  valeurSuivante() {
+    const marcheSelectionne: CoursMarche | undefined = this.marcheSelectionne();
+    if (marcheSelectionne) {
+      const idxCours = marcheSelectionne.cours.indexOf(this.coursSelectionne!);
+      if (idxCours !== -1 && idxCours + 1 < marcheSelectionne.cours.length) {
+        this.coursSelectionne = marcheSelectionne.cours[idxCours + 1];
+      }
+    }
   }
 }

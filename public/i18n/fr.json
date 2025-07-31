@@ -89,7 +89,9 @@
       "DETAILS_VALEUR": {
         "COURBE": "Courbe des moyennes mobiles - {{valeur}} ({{ticker}})",
         "ABCBOURSE": "Lien vers ABCBourse",
-        "BOURSORAMA": "Lien vers Boursorama"
+        "BOURSORAMA": "Lien vers Boursorama",
+        "VALEUR_PRECEDENTE": "Valeur précédente",
+        "VALEUR_SUIVANTE": "Valeur suivante"
       }
     },
     "ACHATS_VALEURS": {
