@@ -5,6 +5,9 @@ div.conteneur
         span
           cursor: pointer
 
+      th:nth-child(n+3), td:nth-child(n+3)
+        text-align: right
+
   &:not(.avec-details)
     p-accordion
       p-table
@@ -31,9 +34,6 @@ div.conteneur
           th:nth-child(n+6)
             width: 8%
 
-          th:nth-child(n+3), td:nth-child(n+3)
-            text-align: right
-
 // tablettes orientation verticale
 @media screen and (max-resolution: 250dpi) and (orientation: portrait)
   p-accordion
@@ -45,10 +45,10 @@ div.conteneur
         th:nth-child(2)
           width: 25%
 
-        th:nth-child(3), th:nth-child(9), th:nth-child(10)
+        th:nth-child(3), th:nth-child(4), th:nth-child(5)
           width: 15%
 
-        th:nth-child(n+4):nth-child(-n+8), td:nth-child(n+4):nth-child(-n+8)
+        th:nth-child(n+6), td:nth-child(n+6)
           display: none
 
 

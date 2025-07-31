@@ -33,13 +33,13 @@
                                   [showMatchModes]="false"
                                   [showOperator]="false" [showAddButton]="false"/>
                 </th>
-                <th pSortableColumn="cloture">
-                  {{ 'COMPOSANTS.COURS.CLOTURE' | translate }}
-                  <p-sortIcon field="cloture"/>
-                </th>
                 <th pSortableColumn="var1">
                   {{ 'COMPOSANTS.COURS.VAR1' | translate }}
                   <p-sortIcon field="var1"/>
+                </th>
+                <th pSortableColumn="cloture">
+                  {{ 'COMPOSANTS.COURS.CLOTURE' | translate }}
+                  <p-sortIcon field="cloture"/>
                 </th>
                 <th pSortableColumn="plusBas">
                   {{ 'COMPOSANTS.COURS.MM5' | translate }}
@@ -61,10 +61,10 @@
                         title="{{ 'COMPOSANTS.COURS.AJOUTER_AU_PORTEFEUILLE' | translate }}"></span>
                   <span (click)="basculerAffichageCours(cours)">{{ cours.libelle }}</span>
                 </td>
-                <td>{{ cours.cloture | currency:'€' }}</td>
                 <td [class]="classeCssVariation(cours.var1)">
                   {{ cours.var1 | percent:'1.2-2' }}
                 </td>
+                <td>{{ cours.cloture | currency:'€' }}</td>
                 <td [class]="classeCssMM(cours, cours.moyennesMobiles[4])">
                   {{ cours.moyennesMobiles[4] | currency:'€' }}
                 </td>
