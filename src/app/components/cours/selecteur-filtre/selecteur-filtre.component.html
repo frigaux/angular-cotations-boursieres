@@ -1,1 +1,4 @@
-<p>selecteur-filtre works!</p>
+<app-editeur-filtres [visible]="editeurVisible" (visibleChange)="editeurVisible = $event"></app-editeur-filtres>
+
+<span class="pi pi-filter" (click)="editeurVisible = true"
+      title="{{ 'COMPOSANTS.COURS.SELECTEUR_FILTRE.EDITER_FILTRE' | translate }}"></span>

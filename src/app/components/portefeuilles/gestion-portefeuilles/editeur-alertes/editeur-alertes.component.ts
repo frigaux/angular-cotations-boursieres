@@ -72,7 +72,7 @@ export class EditeurAlertesComponent {
     this.noms.push(this.formBuilder.control('', [Validators.required]));
   }
 
-  editionAlertes(idx: number) {
+  editionAlerte(idx: number) {
     this.alerteEnModification = this.alertes[idx];
   }
 
@@ -100,6 +100,7 @@ export class EditeurAlertesComponent {
   }
 
   modifierAlertesPortefeuille() {
+    // TODO : validation des alertes
     this.alertes.forEach((alerte, index) => {
       alerte.nom = this.noms.at(index).value as string;
     });

@@ -24,7 +24,6 @@ describe('EditeurConditionAlerteComponent', () => {
 
     fixture = TestBed.createComponent(EditeurConditionAlerteComponent);
     component = fixture.componentInstance;
-    fixture.detectChanges();
   });
 
   it('should create', () => {

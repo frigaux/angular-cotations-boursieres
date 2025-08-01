@@ -8,13 +8,14 @@ import {of} from 'rxjs';
 import {provideAnimations} from '@angular/platform-browser/animations';
 import {VALEUR} from '../../services/jdd/jdd-valeurs.dataset';
 import {LISTE_COURS} from '../../services/jdd/jdd-cours.dataset';
+import {ConfirmationService} from 'primeng/api';
 
 describe('CoursComponent', () => {
   let component: CoursComponent;
   let fixture: ComponentFixture<CoursComponent>;
 
   const mockValeursService = jasmine.createSpyObj('ValeursService', ['chargerValeurs']);
-  const mockCoursService = jasmine.createSpyObj('CoursService', ['chargerCours']);
+  const mockCoursService = jasmine.createSpyObj('CoursService', ['chargerCours', 'chargerFiltres']);
 
   beforeEach(async () => {
     TestBed.configureTestingModule({
@@ -25,7 +26,8 @@ describe('CoursComponent', () => {
       providers: [
         {provide: ValeursService, useValue: mockValeursService},
         {provide: CoursService, useValue: mockCoursService},
-        provideAnimations()
+        provideAnimations(),
+        ConfirmationService
       ]
     });
 

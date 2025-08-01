@@ -53,9 +53,9 @@ describe('EditeurAlertesComponent', () => {
       expect(component.alertes).toEqual(expected);
     });
 
-    it('when #editionAlertes puis #modifierConditionAlerte then la condition de l\'alerte est bien modifiée', () => {
+    it('when #editionAlerte puis #modifierConditionAlerte then la condition de l\'alerte est bien modifiée', () => {
       fixture.detectChanges();
-      component.editionAlertes(0);
+      component.editionAlerte(0);
       const expected = 'M20 < M10';
       component.modifierConditionAlerte(expected);
       expect(component.alertes[0].condition).toEqual(expected);

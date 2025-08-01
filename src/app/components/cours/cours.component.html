@@ -1,6 +1,7 @@
-<h3>{{ 'COMPOSANTS.COURS.MARCHES_DATE' | translate }}
-  <p-skeleton *ngIf="date === undefined" shape="rectangle" borderRadius="0" width="6rem" height="1rem"/>
-  {{ date | date: 'dd/MM/yyyy' }}
+<h3>
+  <span *ngIf="date">{{ 'COMPOSANTS.COURS.MARCHES_DATE' | translate: {jour : date | date: 'dd/MM/yyyy'} }}</span>
+  <p-skeleton *ngIf="date === undefined" shape="rectangle" borderRadius="0" width="17rem" height="1.5rem"/>
+  <app-selecteur-filtre></app-selecteur-filtre>
 </h3>
 
 <app-loader [affiche]="loading" [configuration]="[

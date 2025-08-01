@@ -1,0 +1,43 @@
+<p-dialog [header]="titre" [modal]="true" [visible]="filtre !== undefined" closable="false">
+  <div class="documentation">
+    <span class="pi pi-question-circle"></span>
+    <p-card
+      header="{{ 'COMPOSANTS.COURS.EDITEUR_FILTRES.EDITEUR_CONDITION_FILTRE.DOCUMENTATION' | translate }}">
+      <P>
+        {{ 'COMPOSANTS.COURS.EDITEUR_FILTRES.EDITEUR_CONDITION_FILTRE.DOCUMENTATION_OPERATEURS' | translate }}
+      </P>
+      <UL>
+        <LI>{{ 'COMPOSANTS.COURS.EDITEUR_FILTRES.EDITEUR_CONDITION_FILTRE.DOCUMENTATION_OPERATEURS_COMPARAISON' | translate }}</LI>
+        <LI>{{ 'COMPOSANTS.COURS.EDITEUR_FILTRES.EDITEUR_CONDITION_FILTRE.DOCUMENTATION_OPERATEURS_ARITHMETIQUES' | translate }}</LI>
+        <LI>{{ 'COMPOSANTS.COURS.EDITEUR_FILTRES.EDITEUR_CONDITION_FILTRE.DOCUMENTATION_OPERATEURS_LOGIQUES' | translate }}</LI>
+      </UL>
+      <P>
+        {{ 'COMPOSANTS.COURS.EDITEUR_FILTRES.EDITEUR_CONDITION_FILTRE.DOCUMENTATION_OPERANDES' | translate }}
+      </P>
+      <P>
+        {{ 'COMPOSANTS.COURS.EDITEUR_FILTRES.EDITEUR_CONDITION_FILTRE.DOCUMENTATION_EXEMPLE' | translate }}
+      </P>
+    </p-card>
+  </div>
+  <div class="erreur" *ngIf="erreur !== undefined">
+    <span class="pi pi-exclamation-circle"></span>
+    <span>{{erreur}}</span>
+  </div>
+  <form *ngIf="filtre !== undefined" [formGroup]="formulaire"
+        (ngSubmit)="modifierConditionFiltre()">
+    <p-floatlabel>
+      <input pInputText [pAutoFocus]="true" id="condition" formControlName="condition" autocomplete="off" size="60"/>
+      <label for="condition">
+        {{ 'COMPOSANTS.COURS.EDITEUR_FILTRES.EDITEUR_CONDITION_FILTRE.CONDITION' | translate }}
+      </label>
+    </p-floatlabel>
+    <div class="boutons">
+      <p-button
+        label="{{ 'COMPOSANTS.COMMUN.ANNULER' | translate }}"
+        (onClick)="this.abandon.emit()" type="reset" severity="warn"/>
+      <p-button
+        label="{{ 'COMPOSANTS.COURS.EDITEUR_FILTRES.EDITEUR_CONDITION_FILTRE.MODIFIER' | translate }}"
+        type="submit" severity="danger"/>
+    </div>
+  </form>
+</p-dialog>

@@ -16,6 +16,7 @@ import {LoaderComponent} from '../loader/loader.component';
 import {CoursPortefeuille} from '../portefeuilles/cours-portefeuille.class';
 import {AjoutAuPortefeuilleComponent} from './ajout-au-portefeuille/ajout-au-portefeuille.component';
 import {SortEvent} from 'primeng/api';
+import {SelecteurFiltreComponent} from './selecteur-filtre/selecteur-filtre.component';
 
 // TODO : gérer des filtres sur les MM des cours
 @Component({
@@ -35,7 +36,8 @@ import {SortEvent} from 'primeng/api';
     Skeleton,
     LoaderComponent,
     PercentPipe,
-    AjoutAuPortefeuilleComponent
+    AjoutAuPortefeuilleComponent,
+    SelecteurFiltreComponent
   ],
   templateUrl: './cours.component.html',
   styleUrls: ['../portefeuilles/accordion-chart.sass', './cours.component.sass']

@@ -63,7 +63,7 @@
       }
     },
     "COURS": {
-      "MARCHES_DATE": "Marchés à la date du",
+      "MARCHES_DATE": "Marchés à la date du {{jour}}",
       "AJOUTER_AU_PORTEFEUILLE": "Ajouter la valeur dans un portefeuille",
       "LIBELLE": "Libellé",
       "CLOTURE": "Clôture",
@@ -92,6 +92,30 @@
         "BOURSORAMA": "Lien vers Boursorama",
         "VALEUR_PRECEDENTE": "Valeur précédente",
         "VALEUR_SUIVANTE": "Valeur suivante"
+      },
+      "SELECTEUR_FILTRE": {
+        "EDITER_FILTRE": "Editer filtres"
+      },
+      "EDITEUR_FILTRES": {
+        "MODIFICATION_FILTRES": "Modification des filtres",
+        "AJOUTER": "Ajouter un filtre",
+        "AUCUN_FILTRE": "Cliquez sur le PLUS pour ajouter un filtre",
+        "NOM": "Nom du filtre",
+        "EDITER_CONDITION": "Edition de la condition du filtre",
+        "SUPPRIMER": "Supprimer le filtre",
+        "CONFIRMATION_SUPPRESSION": "Confirmez-vous la suppression du filtre {{nom}} ?",
+        "EDITEUR_CONDITION_FILTRE": {
+          "MODIFICATION_CONDITION": "Modification de la condition du filtre {{nom}}",
+          "DOCUMENTATION": "Comment écrire une condition ?",
+          "DOCUMENTATION_OPERATEURS": "Une condition est une expression utilisant des opérateurs :",
+          "DOCUMENTATION_OPERATEURS_COMPARAISON": "de comparaison : ==, !=, <, >, <=, >=,",
+          "DOCUMENTATION_OPERATEURS_ARITHMETIQUES": "arithmétiques : %, +, -, /, *,",
+          "DOCUMENTATION_OPERATEURS_LOGIQUES": "et logiques : &&, ||, !.",
+          "DOCUMENTATION_OPERANDES": "Ces opérateurs peuvent s'appliquent sur les moyennes mobiles (Mx).",
+          "DOCUMENTATION_EXEMPLE": "Par exemple : M50 < M20 && M20 < M10",
+          "CONDITION": "Condition",
+          "MODIFIER": "Modifier la condition du filtre"
+        }
       }
     },
     "ACHATS_VALEURS": {

@@ -1,0 +1,40 @@
+<app-editeur-condition-filtre [filtre]="filtreEnModification"
+                              (abandon)="filtreEnModification = undefined"
+                              (modifie)="modifierConditionFiltre($event)"></app-editeur-condition-filtre>
+
+<p-dialog [header]="'COMPOSANTS.COURS.EDITEUR_FILTRES.MODIFICATION_FILTRES' | translate" [modal]="true"
+          [visible]="visible" closable="false">
+  <div class="conteneur">
+    <div class="pi pi-plus-circle" (click)="ajouterFiltre()"
+         title="{{ 'COMPOSANTS.COURS.EDITEUR_FILTRES.AJOUTER' | translate }}"></div>
+    <div class="pi pi-arrow-left"
+         *ngIf="filtres.length === 0">{{ 'COMPOSANTS.COURS.EDITEUR_FILTRES.AUCUN_FILTRE' | translate }}
+    </div>
+
+    <div class="formulaire" [formGroup]="formulaire">
+      <div formArrayName="noms" *ngFor="let nom of noms.controls; index as idx">
+        <div>
+          <p-floatlabel>
+            <input pInputText [pAutoFocus]="true" id="{{idx}}" autocomplete="off" [formControlName]="idx"/>
+            <label for="{{idx}}">
+              {{ 'COMPOSANTS.COURS.EDITEUR_FILTRES.NOM' | translate }}
+            </label>
+          </p-floatlabel>
+          <span class="pi pi-wrench" (click)="editionFiltre(idx)"
+                title="{{ 'COMPOSANTS.COURS.EDITEUR_FILTRES.EDITER_CONDITION' | translate }}"></span>
+          <span class="pi pi-trash" (click)="suppressionFiltre($event, idx)"
+                title="{{ 'COMPOSANTS.COURS.EDITEUR_FILTRES.SUPPRIMER' | translate }}"></span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="boutons">
+    <p-button
+      label="{{ 'COMPOSANTS.COMMUN.ABANDONNER' | translate }}"
+      (onClick)="abandonner()" type="reset" severity="warn"/>
+    <p-button
+      label="{{ 'COMPOSANTS.COMMUN.ENREGISTRER' | translate }}"
+      type="button" severity="danger" (click)="modifierFiltresPortefeuille()"/>
+  </div>
+</p-dialog>
