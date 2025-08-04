@@ -71,10 +71,8 @@ describe('EditeurAlertesComponent', () => {
 
     it('when #modifierAlertesPortefeuille then il y a édition des alertes du portefeuille', () => {
       fixture.detectChanges();
-      component.ajouterAlerte();
-      const expected = clonePORTEFEUILLES()[0].alertes.concat({nom: '', condition: ''});
       component.modifierAlertesPortefeuille();
-      expect(component.modifie.emit).toHaveBeenCalledWith(expected);
+      expect(component.modifie.emit).toHaveBeenCalledWith(clonePORTEFEUILLES()[0].alertes);
     });
   });
 });

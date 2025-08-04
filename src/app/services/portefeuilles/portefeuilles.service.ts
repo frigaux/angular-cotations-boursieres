@@ -252,6 +252,12 @@ export class PortefeuillesService {
         this.cleMessageErreur = 'SERVICES.PORTEFEUILLES.ERREURS.ALERTES_REQUIS';
         return false;
       }
+      for (const portefeuille of portefeuilles) {
+        if (this.validerAlertes(portefeuille.alertes) !== undefined) {
+          this.cleMessageErreur = 'SERVICES.PORTEFEUILLES.ERREURS.ALERTES_INVALIDES';
+          return false;
+        }
+      }
       if (portefeuilles.length > 0
         && portefeuilles.filter(portefeuille => portefeuille.parDefaut).length !== 1) {
         this.cleMessageErreur = 'SERVICES.PORTEFEUILLES.ERREURS.UN_SEUL_PAR_DEFAUT';
@@ -268,5 +274,45 @@ export class PortefeuillesService {
     const portefeuilleAvecAuMoinsUneValeur: DTOPortefeuille | undefined = this.charger()
       .find(portefeuille => portefeuille.tickers.length > 0);
     return portefeuilleAvecAuMoinsUneValeur !== undefined;
+  }
+
+  public validerAlertes(alertes: any): string | undefined {
+    this.cleMessageErreur = undefined;
+    if (alertes instanceof Array) {
+      for (const alerte of alertes) {
+        if (!alerte.hasOwnProperty('nom') || alerte.nom.length === 0) {
+          return this.translateService.instant('SERVICES.PORTEFEUILLES.ERREURS.ALERTES.NOM_REQUIS');
+        }
+        if (!alerte.hasOwnProperty('condition') || alerte.condition.length === 0) {
+          return this.translateService.instant('SERVICES.PORTEFEUILLES.ERREURS.ALERTES.CONDITION_REQUISE');
+        }
+        if (this.validerCondition(alerte.condition) !== undefined) {
+          return this.translateService.instant('SERVICES.PORTEFEUILLES.ERREURS.ALERTES.CONDITION_INVALIDE');
+        }
+      }
+    } else {
+      return this.translateService.instant('SERVICES.COURS.ERREURS.ALERTES_REQUIS');
+    }
+    return undefined;
+  }
+
+  public validerCondition(condition: string): string | undefined {
+    const conditionAvecSubstitution = condition
+      .replaceAll(/C(\d+)/g, (match, token) => {
+        return `C[${token - 1}]`;
+      })
+      .replaceAll(/M(\d+)/g, (match, token) => {
+        return `M[${token - 1}]`;
+      });
+    try {
+      new Function(
+        'const C = Array.from({ length: 300 }, (v, i) => i);'
+        + 'const M = Array.from({ length: 300 }, (v, i) => i);'
+        + 'return ' + conditionAvecSubstitution + ';'
+      );
+    } catch (e: unknown) {
+      return (e as SyntaxError).message;
+    }
+    return undefined;
   }
 }

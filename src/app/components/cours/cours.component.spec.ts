@@ -7,7 +7,7 @@ import {ValeursService} from '../../services/valeurs/valeurs.service';
 import {of} from 'rxjs';
 import {provideAnimations} from '@angular/platform-browser/animations';
 import {VALEUR} from '../../services/jdd/jdd-valeurs.dataset';
-import {LISTE_COURS} from '../../services/jdd/jdd-cours.dataset';
+import {FILTRES, LISTE_COURS} from '../../services/jdd/jdd-cours.dataset';
 import {ConfirmationService} from 'primeng/api';
 
 describe('CoursComponent', () => {
@@ -15,7 +15,8 @@ describe('CoursComponent', () => {
   let fixture: ComponentFixture<CoursComponent>;
 
   const mockValeursService = jasmine.createSpyObj('ValeursService', ['chargerValeurs']);
-  const mockCoursService = jasmine.createSpyObj('CoursService', ['chargerCours', 'chargerFiltres']);
+  const mockCoursService = jasmine.createSpyObj('CoursService', ['chargerCours', 'chargerFiltres',
+    'onImportFiltres', 'onUpdateFiltres']);
 
   beforeEach(async () => {
     TestBed.configureTestingModule({
@@ -48,6 +49,7 @@ describe('CoursComponent', () => {
   describe('Given #chargerValeurs et #chargerCours renvoient des valeurs et des cours', () => {
     beforeEach(() => {
       mockValeursService.chargerValeurs.and.returnValue(of([VALEUR]));
+      mockCoursService.chargerFiltres.and.returnValue(FILTRES);
       mockCoursService.chargerCours.and.returnValue(of(LISTE_COURS));
     });
 

@@ -4,6 +4,8 @@ import {EditeurConditionFiltreComponent} from './editeur-condition-filtre.compon
 import {TranslateModule} from '@ngx-translate/core';
 import {FILTRES} from '../../../../services/jdd/jdd-cours.dataset';
 import {provideAnimations} from '@angular/platform-browser/animations';
+import {provideHttpClient} from '@angular/common/http';
+import {provideHttpClientTesting} from '@angular/common/http/testing';
 
 describe('EditeurConditionFiltreComponent', () => {
   let component: EditeurConditionFiltreComponent;
@@ -18,7 +20,9 @@ describe('EditeurConditionFiltreComponent', () => {
         TranslateModule.forRoot({})
       ],
       providers: [
-        provideAnimations()
+        provideAnimations(),
+        provideHttpClient(),
+        provideHttpClientTesting()
       ]
     })
       .compileComponents();

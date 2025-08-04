@@ -4,11 +4,17 @@
 
 <p-dialog [header]="'COMPOSANTS.COURS.EDITEUR_FILTRES.MODIFICATION_FILTRES' | translate" [modal]="true"
           [visible]="visible" closable="false">
+  <div class="erreur" *ngIf="erreur !== undefined">
+    <span class="pi pi-exclamation-circle"></span>
+    <span>{{erreur}}</span>
+  </div>
+
   <div class="conteneur">
     <div class="pi pi-plus-circle" (click)="ajouterFiltre()"
          title="{{ 'COMPOSANTS.COURS.EDITEUR_FILTRES.AJOUTER' | translate }}"></div>
     <div class="pi pi-arrow-left"
-         *ngIf="filtres.length === 0">{{ 'COMPOSANTS.COURS.EDITEUR_FILTRES.AUCUN_FILTRE' | translate }}
+         *ngIf="filtres.length === 0">
+      <span>{{ 'COMPOSANTS.COURS.EDITEUR_FILTRES.AUCUN_FILTRE' | translate }}</span>
     </div>
 
     <div class="formulaire" [formGroup]="formulaire">

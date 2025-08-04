@@ -9,6 +9,7 @@ import {AutoFocus} from 'primeng/autofocus';
 import {Button} from 'primeng/button';
 import {NgIf} from '@angular/common';
 import {InputText} from 'primeng/inputtext';
+import {CoursService} from '../../../../services/cours/cours.service';
 
 @Component({
   selector: 'app-editeur-condition-filtre',
@@ -46,7 +47,8 @@ export class EditeurConditionFiltreComponent {
   titre: string | undefined;
   erreur: string | undefined;
 
-  constructor(private translateService: TranslateService) {
+  constructor(private translateService: TranslateService,
+              private coursService: CoursService) {
   }
 
   intercepteurAlerte(filtre: DTOFiltre | undefined) {
@@ -60,26 +62,12 @@ export class EditeurConditionFiltreComponent {
 
   modifierConditionFiltre() {
     this.formulaire.get('condition')?.updateValueAndValidity();
-    if (this.formulaire.valid && this.formulaire.value.condition && this.validerCondition()) {
-      this.modifie.emit(this.formulaire.value.condition);
+    if (this.formulaire.valid && this.formulaire.value.condition) {
+      this.erreur = this.coursService.validerCondition(this.formulaire.value.condition);
+      if (this.erreur === undefined) {
+        this.modifie.emit(this.formulaire.value.condition);
+      }
     }
   }
 
-  private validerCondition() {
-    const condition = this.formulaire.value.condition!
-      .replaceAll(/M(\d+)/g, (match, token) => {
-        return `M[${token - 1}]`;
-      });
-    try {
-      new Function(
-        'const M = Array.from({ length: 300 }, (v, i) => i);'
-        + 'return ' + condition + ';'
-      );
-    } catch (e: unknown) {
-      this.erreur = (e as SyntaxError).message;
-      return false;
-    }
-    this.erreur = undefined;
-    return true;
-  }
 }

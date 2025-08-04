@@ -1,4 +1,8 @@
 <app-editeur-filtres [visible]="editeurVisible" (visibleChange)="editeurVisible = $event"></app-editeur-filtres>
 
-<span class="pi pi-filter" (click)="editeurVisible = true"
+<span class="pi pi-cog" (click)="editeurVisible = true"
       title="{{ 'COMPOSANTS.COURS.SELECTEUR_FILTRE.EDITER_FILTRE' | translate }}"></span>
+
+@for (filtreDecore of filtresDecores; track filtreDecore.id) {
+  <span class="pi pi-filter">{{ filtreDecore.filtre.nom }}</span>
+}

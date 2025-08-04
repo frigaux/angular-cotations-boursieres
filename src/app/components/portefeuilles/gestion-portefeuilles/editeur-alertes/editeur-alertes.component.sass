@@ -1,9 +1,28 @@
+div.erreur
+  display: flex
+  flex-direction: row
+  align-items: center
+  margin: 0 0.5rem 0.5rem 0.5rem
+
+  span.pi-exclamation-circle
+    color: var(--p-red-600)
+
+  span:last-child
+    color: var(--p-red-600)
+    margin-left: 1rem
+
 div.conteneur
   display: flex
   flex-direction: row
   align-items: center
 
-  .pi
+  .pi-arrow-left
+    span
+      display: inline-block
+      vertical-align: middle
+      font-size: 1.25rem
+
+  .pi:not(.pi-arrow-left)
     cursor: pointer
 
   div.pi-plus-circle

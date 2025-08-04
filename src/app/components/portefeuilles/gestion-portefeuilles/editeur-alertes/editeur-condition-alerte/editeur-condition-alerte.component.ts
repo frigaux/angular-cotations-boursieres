@@ -9,6 +9,7 @@ import {TranslatePipe, TranslateService} from '@ngx-translate/core';
 import {AutoFocus} from 'primeng/autofocus';
 import {DTOAlerte} from '../../../../../services/portefeuilles/dto-alerte.interface';
 import {Card} from 'primeng/card';
+import {PortefeuillesService} from '../../../../../services/portefeuilles/portefeuilles.service';
 
 @Component({
   selector: 'app-editeur-condition-alerte',
@@ -47,7 +48,8 @@ export class EditeurConditionAlerteComponent {
   titre: string | undefined;
   erreur: string | undefined;
 
-  constructor(private translateService: TranslateService) {
+  constructor(private translateService: TranslateService,
+              private portefeuillesService: PortefeuillesService) {
   }
 
   intercepteurAlerte(alerte: DTOAlerte | undefined) {
@@ -61,30 +63,11 @@ export class EditeurConditionAlerteComponent {
 
   modifierConditionAlerte() {
     this.formulaire.get('condition')?.updateValueAndValidity();
-    if (this.formulaire.valid && this.formulaire.value.condition && this.validerCondition()) {
-      this.modifie.emit(this.formulaire.value.condition);
+    if (this.formulaire.valid && this.formulaire.value.condition) {
+      this.erreur = this.portefeuillesService.validerCondition(this.formulaire.value.condition);
+      if (this.erreur === undefined) {
+        this.modifie.emit(this.formulaire.value.condition);
+      }
     }
-  }
-
-  private validerCondition() {
-    const condition = this.formulaire.value.condition!
-      .replaceAll(/C(\d+)/g, (match, token) => {
-        return `C[${token-1}]`;
-      })
-      .replaceAll(/M(\d+)/g, (match, token) => {
-        return `M[${token-1}]`;
-      });
-    try {
-      new Function(
-        'const C = Array.from({ length: 300 }, (v, i) => i);'
-        + 'const M = Array.from({ length: 300 }, (v, i) => i);'
-        + 'return ' + condition + ';'
-      );
-    } catch (e: unknown) {
-      this.erreur = (e as SyntaxError).message;
-      return false;
-    }
-    this.erreur = undefined;
-    return true;
   }
 }

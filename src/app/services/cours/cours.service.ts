@@ -105,9 +105,43 @@ export class CoursService {
     CoursService.OBSERVABLE_UPDATE_FILTRES.subscribe(handler);
   }
 
-  private validerFiltres(filtress: Array<DTOFiltre>): boolean {
+  private validerFiltres(filtres: any): boolean {
     this.cleMessageErreur = undefined;
+    if (filtres instanceof Array) {
+      for (const filtre of filtres) {
+        if (!filtre.hasOwnProperty('nom') || filtre.nom.length === 0) {
+          this.cleMessageErreur = 'SERVICES.COURS.ERREURS.FILTRES.NOM_REQUIS';
+          return false;
+        }
+        if (!filtre.hasOwnProperty('condition') || filtre.condition.length === 0) {
+          this.cleMessageErreur = 'SERVICES.COURS.ERREURS.FILTRES.CONDITION_REQUISE';
+          return false;
+        }
+        if (this.validerCondition(filtre.condition) !== undefined) {
+          this.cleMessageErreur = 'SERVICES.COURS.ERREURS.FILTRES.CONDITION_INVALIDE';
+          return false;
+        }
+      }
+    } else {
+      this.cleMessageErreur = 'SERVICES.COURS.ERREURS.FILTRES.FILTRES_REQUIS';
+      return false;
+    }
     return true;
   }
 
+  public validerCondition(condition: string): string | undefined {
+    const conditionAvecSubstitution = condition
+      .replaceAll(/M(\d+)/g, (match, token) => {
+        return `M[${token - 1}]`;
+      });
+    try {
+      new Function(
+        'const M = Array.from({ length: 300 }, (v, i) => i);'
+        + 'return ' + conditionAvecSubstitution + ';'
+      );
+    } catch (e: unknown) {
+      return (e as SyntaxError).message;
+    }
+    return undefined;
+  }
 }

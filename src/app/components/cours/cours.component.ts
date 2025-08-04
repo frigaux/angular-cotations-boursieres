@@ -18,7 +18,6 @@ import {AjoutAuPortefeuilleComponent} from './ajout-au-portefeuille/ajout-au-por
 import {SortEvent} from 'primeng/api';
 import {SelecteurFiltreComponent} from './selecteur-filtre/selecteur-filtre.component';
 
-// TODO : gérer des filtres sur les MM des cours
 @Component({
   selector: 'app-cours',
   imports: [

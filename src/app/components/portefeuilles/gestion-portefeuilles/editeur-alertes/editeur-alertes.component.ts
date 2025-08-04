@@ -12,6 +12,7 @@ import {NgForOf, NgIf} from '@angular/common';
 import {EditeurConditionAlerteComponent} from './editeur-condition-alerte/editeur-condition-alerte.component';
 import {DialogueService} from '../../../../services/dialogue/dialogue.service';
 import {ConfirmationService} from 'primeng/api';
+import {PortefeuillesService} from '../../../../services/portefeuilles/portefeuilles.service';
 
 @Component({
   selector: 'app-editeur-alertes',
@@ -44,6 +45,7 @@ export class EditeurAlertesComponent {
   titre?: string;
   alertes: DTOAlerte[] = [];
   alerteEnModification: DTOAlerte | undefined;
+  erreur?: string;
 
   // formulaire
   noms: FormArray<FormControl<unknown>> = this.formBuilder.array([]);
@@ -53,7 +55,8 @@ export class EditeurAlertesComponent {
 
   constructor(private translateService: TranslateService,
               private confirmationService: ConfirmationService,
-              private dialogueService: DialogueService) {
+              private dialogueService: DialogueService,
+              private portefeuillesService: PortefeuillesService) {
   }
 
   private intercepteurPortefeuille(portefeuille: DTOPortefeuille | undefined) {
@@ -100,10 +103,12 @@ export class EditeurAlertesComponent {
   }
 
   modifierAlertesPortefeuille() {
-    // TODO : validation des alertes
     this.alertes.forEach((alerte, index) => {
       alerte.nom = this.noms.at(index).value as string;
     });
-    this.modifie.emit(this.alertes);
+    this.erreur = this.portefeuillesService.validerAlertes(this.alertes);
+    if (this.erreur === undefined) {
+      this.modifie.emit(this.alertes);
+    }
   }
 }

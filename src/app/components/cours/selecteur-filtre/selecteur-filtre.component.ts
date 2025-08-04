@@ -1,8 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {CoursService} from '../../../services/cours/cours.service';
-import {DTOFiltre} from '../../../services/cours/dto-filtre.interface';
 import {TranslatePipe} from '@ngx-translate/core';
 import {EditeurFiltresComponent} from '../editeur-filtres/editeur-filtres.component';
+import {FiltreDecore} from './filtre-decore.class';
 
 // TODO : afficher les filtres et les appliquer
 @Component({
@@ -17,14 +17,21 @@ import {EditeurFiltresComponent} from '../editeur-filtres/editeur-filtres.compon
 export class SelecteurFiltreComponent implements OnInit {
 
   // données pour la vue
-  filtres?: Array<DTOFiltre>;
+  filtresDecores?: FiltreDecore[];
   editeurVisible: boolean = false;
 
   constructor(private coursService: CoursService) {
-
   }
 
   ngOnInit(): void {
-    this.filtres = this.coursService.chargerFiltres();
+    this.coursService.onImportFiltres(filtres => this.decorerFiltres());
+    this.coursService.onUpdateFiltres(filtres => this.decorerFiltres());
+    this.decorerFiltres();
+  }
+
+  private decorerFiltres() {
+    let i = 0;
+    this.filtresDecores = this.coursService.chargerFiltres()
+      .map(filtre => new FiltreDecore(i++, filtre));
   }
 }

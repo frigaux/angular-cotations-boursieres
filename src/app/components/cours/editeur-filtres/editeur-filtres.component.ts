@@ -21,7 +21,7 @@ import {EditeurConditionFiltreComponent} from './editeur-condition-filtre/editeu
 import {DTOFiltre} from '../../../services/cours/dto-filtre.interface';
 import {CoursService} from '../../../services/cours/cours.service';
 
-// TOOD : import export
+// TODO : import export
 @Component({
   selector: 'app-editeur-filtres',
   imports: [
@@ -53,6 +53,7 @@ export class EditeurFiltresComponent {
   visible: boolean = false;
   filtres: DTOFiltre[] = [];
   filtreEnModification: DTOFiltre | undefined;
+  erreur?: string;
 
   // formulaire
   noms: FormArray<FormControl<unknown>> = this.formBuilder.array([]);
@@ -109,13 +110,14 @@ export class EditeurFiltresComponent {
   }
 
   modifierFiltresPortefeuille() {
-    // TODO : validation des alertes
     this.filtres.forEach((alerte, index) => {
       alerte.nom = this.noms.at(index).value as string;
     });
-    this.coursService.enregistrerFiltres(this.filtres);
-    this.visible = false;
-    this.visibleChange.emit(false);
+    this.erreur = this.coursService.enregistrerFiltres(this.filtres);
+    if (this.erreur === undefined) {
+      this.visible = false;
+      this.visibleChange.emit(false);
+    }
   }
 
   abandonner() {

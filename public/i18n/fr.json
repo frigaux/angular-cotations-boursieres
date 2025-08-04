@@ -94,7 +94,7 @@
         "VALEUR_SUIVANTE": "Valeur suivante"
       },
       "SELECTEUR_FILTRE": {
-        "EDITER_FILTRE": "Editer filtres"
+        "EDITER_FILTRE": "Editer les filtres des cours"
       },
       "EDITEUR_FILTRES": {
         "MODIFICATION_FILTRES": "Modification des filtres",
@@ -286,6 +286,12 @@
         "PAR_DEFAUT_REQUIS": "Attribut parDefaut manquant",
         "TICKERS_REQUIS": "Attribut tickers manquant",
         "ALERTES_REQUIS": "Attribut alertes manquant",
+        "ALERTES_INVALIDES": "",
+        "ALERTES": {
+          "NOM_REQUIS": "Attribut nom de l'alerte manquant",
+          "CONDITION_REQUISE": "Attribut condition de l'alerte manquante",
+          "CONDITION_INVALIDE": "Attribut condition de l'alerte invalide"
+        },
         "UN_SEUL_PAR_DEFAUT": "Un et un seul portefeuille sélectionné par défaut"
       }
     },
@@ -310,6 +316,16 @@
             "LARGEUR_INVALIDE": "La largeur des colonnes au format portrait doit être un entier positif",
             "PARAMETRE_INVALIDE": "Le jour des colonnes au format portrait doit être un entier positif"
           }
+        }
+      }
+    },
+    "COURS": {
+      "ERREURS": {
+        "FILTRES": {
+          "FILTRES_REQUIS": "Filtres attendus",
+          "NOM_REQUIS": "Attribut nom manquant",
+          "CONDITION_REQUISE": "Attribut condition manquante",
+          "CONDITION_INVALIDE": "Attribut condition invalide"
         }
       }
     }
