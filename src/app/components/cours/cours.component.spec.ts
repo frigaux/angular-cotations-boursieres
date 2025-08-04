@@ -57,7 +57,7 @@ describe('CoursComponent', () => {
       fixture.detectChanges(); // appelle le ngOnInit
       expect(component).toBeDefined();
       expect(component.loading).toBeFalse();
-      const cours = component.marches[0].cours[0];
+      const cours = component.marches![0].cours[0];
       component.basculerAffichageCours(cours);
       component.valeurSuivante();
       component.valeurPrecedente();

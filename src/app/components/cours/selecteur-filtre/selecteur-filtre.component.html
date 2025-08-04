@@ -4,5 +4,9 @@
       title="{{ 'COMPOSANTS.COURS.SELECTEUR_FILTRE.EDITER_FILTRE' | translate }}"></span>
 
 @for (filtreDecore of filtresDecores; track filtreDecore.id) {
-  <span class="pi pi-filter">{{ filtreDecore.filtre.nom }}</span>
+  <span class="pi pi-filter" title="{{filtreDecore.filtre.condition}}"
+        [ngClass]="{'actif' : filtreActif !== undefined}"
+        (click)="appliquerFiltre(filtreDecore)">
+    {{ filtreDecore.filtre.nom }}
+  </span>
 }

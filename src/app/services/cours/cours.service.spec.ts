@@ -105,7 +105,7 @@ describe('CoursService', () => {
     httpTesting.verify();
   });
 
-  describe('Given #onImport', () => {
+  describe('Given #onImportFiltres', () => {
     let resultatImport: DTOFiltre[] | undefined;
     const filtres = JSON.stringify(FILTRES);
 
@@ -114,8 +114,18 @@ describe('CoursService', () => {
       coursService.onImportFiltres(filtres => resultatImport = filtres);
     });
 
-    it('when #import du format non JSON then #onImport renvoie undefined', () => {
+    it('when #import du format non JSON then on récupère un message d\'erreur', () => {
       expect(coursService.importFiltres("+ nimp (")).toBeDefined();
+      expect(resultatImport).toEqual(undefined);
+    });
+
+    it('when #import des filtres invalides then on récupère un message d\'erreur', () => {
+      expect(coursService.importFiltres("{}")).toBe('SERVICES.COURS.ERREURS.FILTRES.FILTRES_REQUIS');
+      expect(coursService.importFiltres("[{}]")).toBe('SERVICES.COURS.ERREURS.FILTRES.NOM_REQUIS');
+      expect(coursService.importFiltres('[{"nom": ""}]')).toBe('SERVICES.COURS.ERREURS.FILTRES.NOM_REQUIS');
+      expect(coursService.importFiltres('[{"nom": "nom"}]')).toBe('SERVICES.COURS.ERREURS.FILTRES.CONDITION_REQUISE');
+      expect(coursService.importFiltres('[{"nom": "nom", "condition": ""}]')).toBe('SERVICES.COURS.ERREURS.FILTRES.CONDITION_REQUISE');
+      expect(coursService.importFiltres('[{"nom": "nom", "condition": "-+*/;"}]')).toBe('SERVICES.COURS.ERREURS.FILTRES.CONDITION_INVALIDE');
       expect(resultatImport).toEqual(undefined);
     });
 
@@ -123,6 +133,20 @@ describe('CoursService', () => {
       expect(coursService.importFiltres(filtres)).toBeUndefined();
       expect(resultatImport).toEqual(FILTRES);
       expect(coursService.chargerFiltres()).toEqual(FILTRES);
+    });
+  });
+
+  describe('Given #onUpdateFiltres', () => {
+    let resultatUpdate: DTOFiltre[] | undefined;
+
+    beforeEach(() => {
+      resultatUpdate = undefined;
+      coursService.onUpdateFiltres(filtres => resultatUpdate = filtres);
+    });
+
+    it('when #import des filtres valides then #charger renvoie les filtres', () => {
+      coursService.enregistrerFiltres(FILTRES);
+      expect(resultatUpdate).toEqual(FILTRES);
     });
   });
 });

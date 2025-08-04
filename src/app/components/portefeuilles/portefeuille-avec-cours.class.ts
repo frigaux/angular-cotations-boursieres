@@ -9,10 +9,10 @@ export class PortefeuilleAvecCours {
 
   constructor(portefeuille: DTOPortefeuille) {
     this.portefeuille = portefeuille;
-    this.alertes = portefeuille.alertes.map(this.genererFonctionsAlertes);
+    this.alertes = portefeuille.alertes.map(this.genererFonctionAlerte);
   }
 
-  private genererFonctionsAlertes(alerte: DTOAlerte): { alerte: DTOAlerte, evaluer: Function } {
+  private genererFonctionAlerte(alerte: DTOAlerte): { alerte: DTOAlerte, evaluer: Function } {
     const condition = alerte.condition
       .replaceAll(/C(\d+)/g, (match, token) => {
         return `cours[${token-1}].cloture`;

@@ -36,12 +36,15 @@ describe('SelecteurFiltreComponent', () => {
 
   describe('Given des filtres', () => {
     beforeEach(() => {
+      spyOn(component.selection, "emit");
       mockCoursService.chargerFiltres.and.returnValue(FILTRES);
     });
 
     it('when #ngOnInit then les filtres sont affichés', () => {
       fixture.detectChanges();
       expect(component.filtresDecores).toHaveSize(FILTRES.length);
+      component.appliquerFiltre(component.filtresDecores![0]);
+      expect(component.selection.emit).toHaveBeenCalledWith(component.filtresDecores![0]);
     });
   });
 });

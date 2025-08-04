@@ -17,6 +17,7 @@ import {CoursPortefeuille} from '../portefeuilles/cours-portefeuille.class';
 import {AjoutAuPortefeuilleComponent} from './ajout-au-portefeuille/ajout-au-portefeuille.component';
 import {SortEvent} from 'primeng/api';
 import {SelecteurFiltreComponent} from './selecteur-filtre/selecteur-filtre.component';
+import {FiltreDecore} from './selecteur-filtre/filtre-decore.class';
 
 @Component({
   selector: 'app-cours',
@@ -48,14 +49,17 @@ export class CoursComponent implements OnInit {
   loading: boolean = true;
 
   // données pour la vue
-  date!: string;
-  marches: CoursMarche[] = [];
+  date?: string;
+  marches?: CoursMarche[];
 
   // cours pour lequel afficher les moyennes mobiles
   coursSelectionne: Cours | undefined = undefined;
 
   // services
   private translateService = inject(TranslateService);
+  private valeurByTicker?: Map<string, DTOValeur>;
+  private liste?: DTOListeCours;
+  private filtreActif?: FiltreDecore;
 
   constructor(private valeursService: ValeursService,
               private coursService: CoursService) {
@@ -68,32 +72,45 @@ export class CoursComponent implements OnInit {
   }
 
   chargerCours(valeurs: DTOValeur[]): void {
-    const valeurByTicker = new Map<string, DTOValeur>();
-    valeurs.forEach(valeur => valeurByTicker.set(valeur.ticker, valeur));
+    this.valeurByTicker = new Map<string, DTOValeur>();
+    for (const valeur of valeurs) {
+      this.valeurByTicker.set(valeur.ticker, valeur);
+    }
 
     this.coursService.chargerCours().subscribe(liste => {
-      this.mapCours(liste, valeurByTicker);
+      this.liste = liste;
+      this.decorerCours();
       this.loading = false;
     })
   }
 
-  private mapCours(liste: DTOListeCours, valeurByTicker: Map<string, DTOValeur>) {
-    this.date = liste.date;
-    const coursByMarche = new Map<Marches, Cours[]>();
+  private decorerCours() {
+    this.marches = [];
 
-    liste.cours.map(dto => {
-      const valeur = valeurByTicker.get(dto.ticker);
-      return Cours.fromDTOCours(liste.date, valeur!.libelle, dto)
-    }).forEach(cours => {
-      const marche = valeurByTicker.get(cours.ticker)!.marche;
-      if (!coursByMarche.has(marche)) {
-        coursByMarche.set(marche, []);
-      }
-      coursByMarche.get(marche)!.push(cours);
-    });
-    coursByMarche.forEach((cours, marche) => {
-      this.marches.push(new CoursMarche(marche, this.translateService, cours));
-    });
+    if (this.liste && this.valeurByTicker) {
+      this.date = this.liste.date;
+      const coursByMarche = new Map<Marches, Cours[]>();
+
+      this.liste.cours
+        .filter(c => {
+          return !this.filtreActif || this.filtreActif.evaluer(c.moyennesMobiles);
+        })
+        .map(dto => {
+          const valeur = this.valeurByTicker!.get(dto.ticker);
+          return Cours.fromDTOCours(this.liste!.date, valeur!.libelle, dto)
+        })
+        .forEach(cours => {
+          const marche = this.valeurByTicker!.get(cours.ticker)!.marche;
+          if (!coursByMarche.has(marche)) {
+            coursByMarche.set(marche, []);
+          }
+          coursByMarche.get(marche)!.push(cours);
+        });
+
+      coursByMarche.forEach((cours, marche) => {
+        this.marches!.push(new CoursMarche(marche, this.translateService, cours));
+      });
+    }
   }
 
   basculerAffichageCours(cours: Cours) {
@@ -134,7 +151,7 @@ export class CoursComponent implements OnInit {
   }
 
   private marcheSelectionne() {
-    return this.marches.find(marche => marche.cours.indexOf(this.coursSelectionne!) !== -1);
+    return this.marches!.find(marche => marche.cours.indexOf(this.coursSelectionne!) !== -1);
   }
 
   valeurPrecedente() {
@@ -155,5 +172,10 @@ export class CoursComponent implements OnInit {
         this.coursSelectionne = marcheSelectionne.cours[idxCours + 1];
       }
     }
+  }
+
+  appliquerFiltre(filtreDecore: FiltreDecore | undefined) {
+    this.filtreActif = filtreDecore;
+    this.decorerCours();
   }
 }

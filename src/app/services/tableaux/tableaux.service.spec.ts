@@ -81,7 +81,7 @@ describe('TableauxService', () => {
       service.onImport(tableaux => resultatImport = tableaux);
     });
 
-    it('when #import du format non JSON then #onImport renvoie undefined', () => {
+    it('when #import du format non JSON then on récupère un message d\'erreur', () => {
       expect(service.import("+ nimp (")).toBeDefined();
       expect(resultatImport).toEqual(undefined);
     });
