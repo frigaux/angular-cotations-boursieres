@@ -73,6 +73,13 @@ export const COLONNE_ALERTES_20: DTOColonne<TypesColonnesPortefeuille> = {
   largeur: 20
 };
 
+export const COLONNE_VARIATION_ACHATS_20: DTOColonne<TypesColonnesPortefeuille> = {
+  nom: 'Var/Ac',
+  type: TypesColonnesPortefeuille.VARIATION_ACHATS,
+  tri: true,
+  largeur: 20
+};
+
 export const COLONNE_COURS_20: DTOColonne<TypesColonnesPortefeuille> = {
   nom: 'Cours',
   type: TypesColonnesPortefeuille.COURS,

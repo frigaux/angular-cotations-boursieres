@@ -18,6 +18,7 @@ import {
   COLONNE_PLUS_HAUT_20,
   COLONNE_TICKER_20,
   COLONNE_VARIATION_20,
+  COLONNE_VARIATION_ACHATS_20,
   COLONNE_VOLUME_20,
   TABLEAUX
 } from '../jdd/jdd-tableaux.dataset';
@@ -25,11 +26,23 @@ import {COURS_PORTEFEUILLE} from '../jdd/jdd-cours.dataset';
 import {TypesColonnesPortefeuille} from './types-colonnes-portefeuille.enum';
 import {DTOColonne} from './dto-colonne-portefeuille.interface';
 import {DTOTableaux} from './dto-tableaux.interface';
+import {provideHttpClient} from '@angular/common/http';
+import {provideHttpClientTesting} from '@angular/common/http/testing';
+import {ValeursService} from '../valeurs/valeurs.service';
+import {ACHATS} from '../jdd/jdd-valeurs.dataset';
+import {DTOAchat} from '../valeurs/dto-achat.interface';
 
 describe('TableauxService', () => {
   let service: TableauxService;
 
+  const mockValeursService = jasmine.createSpyObj('ValeursService', ['chargerAchatsTicker']);
+
   const cloneTABLEAUX: Function = () => JSON.parse(JSON.stringify(TABLEAUX));
+
+  const achats: Array<DTOAchat> = ACHATS
+    .filter(achat => achat.ticker === COURS_PORTEFEUILLE.ticker)
+    .map(achat => achat.achats)
+    .flat();
 
   beforeEach(() => {
     TestBed.configureTestingModule({
@@ -37,10 +50,13 @@ describe('TableauxService', () => {
         TranslateModule.forRoot({})
       ],
       providers: [
+        {provide: ValeursService, useValue: mockValeursService},
         DatePipe,
         PercentPipe,
         CurrencyPipe,
-        DecimalPipe
+        DecimalPipe,
+        provideHttpClient(),
+        provideHttpClientTesting()
       ]
     });
     service = TestBed.inject(TableauxService);
@@ -66,6 +82,8 @@ describe('TableauxService', () => {
     expect(service.valeurPourUnCours(COLONNE_CLOTURE_20)(COURS_PORTEFEUILLE)).toBe(`€${COURS_PORTEFEUILLE.cloture}0`);
     expect(service.valeurPourUnCours(COLONNE_VOLUME_20)(COURS_PORTEFEUILLE)).toBe('2,141,570');
     expect(service.valeurPourUnCours(COLONNE_ALERTES_20)(COURS_PORTEFEUILLE)).toEqual([]);
+    mockValeursService.chargerAchatsTicker.and.returnValue(achats);
+    expect(service.valeurPourUnCours(COLONNE_VARIATION_ACHATS_20)(COURS_PORTEFEUILLE)).toEqual('2.01%');
     expect(service.valeurPourUnCours(COLONNE_COURS_20)(COURS_PORTEFEUILLE)).toBe(`€${COURS_PORTEFEUILLE.coursAlleges[0].cloture}`);
     expect(service.valeurPourUnCours(COLONNE_MOYENNE_MOBILE_20)(COURS_PORTEFEUILLE)).toBe(`€${COURS_PORTEFEUILLE.moyennesMobiles[0]}0`);
     expect(service.valeurPourUnCours(COLONNE_VARIATION_20)(COURS_PORTEFEUILLE)).toBe('1.16%');

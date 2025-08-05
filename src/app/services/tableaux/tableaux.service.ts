@@ -8,6 +8,7 @@ import {CoursPortefeuille} from '../../components/portefeuilles/cours-portefeuil
 import {CurrencyPipe, DatePipe, DecimalPipe, PercentPipe} from '@angular/common';
 import {TypesColonnesCours} from './types-colonnes-cours.enum';
 import {Observable, Subscriber} from 'rxjs';
+import {ValeursService} from '../valeurs/valeurs.service';
 
 @Injectable({
   providedIn: 'root'
@@ -318,7 +319,8 @@ export class TableauxService {
               private datePipe: DatePipe,
               private percentPipe: PercentPipe,
               private currencyPipe: CurrencyPipe,
-              private decimalPipe: DecimalPipe) {
+              private decimalPipe: DecimalPipe,
+              private valeursService: ValeursService) {
   }
 
   public charger(): DTOTableaux {
@@ -392,6 +394,8 @@ export class TableauxService {
         return (cours: CoursPortefeuille) => this.decimalPipe.transform(cours.volume);
       case TypesColonnesPortefeuille.ALERTES:
         return (cours: CoursPortefeuille) => cours.alertes;
+      case TypesColonnesPortefeuille.VARIATION_ACHATS:
+        return (cours: CoursPortefeuille) => this.percentPipe.transform(cours.calculerVariationAchats(this.valeursService), '1.2-2');
       case TypesColonnesPortefeuille.COURS:
         return (cours: CoursPortefeuille) => this.currencyPipe.transform(cours.coursAlleges[colonne.parametre! - 1].cloture, '€');
       case TypesColonnesPortefeuille.MOYENNE_MOBILE:

@@ -4,6 +4,8 @@ import {Alerte} from './alerte.class';
 import {DTOAlerte} from '../../services/portefeuilles/dto-alerte.interface';
 import {DTOValeur} from '../../services/valeurs/dto-valeur.interface';
 import {Marches} from '../../services/valeurs/marches.enum';
+import {ValeursService} from '../../services/valeurs/valeurs.service';
+import {DTOAchat} from '../../services/valeurs/dto-achat.interface';
 
 export class CoursPortefeuille {
   date: string; // ISO 8601 : yyyy-MM-dd
@@ -55,5 +57,22 @@ export class CoursPortefeuille {
     return alertes.map(dto =>
       new Alerte(dto.alerte, dto.evaluer(this.coursAlleges, this.moyennesMobiles))
     );
+  }
+
+  calculerVariationAchats(valeursService: ValeursService) {
+    const achats: Array<DTOAchat> | undefined = valeursService.chargerAchatsTicker(this.ticker);
+    if (!achats || achats.length === 0) {
+      return undefined;
+    }
+    if (achats.length === 1) {
+      return (this.cloture / achats[0].prix) - 1;
+    }
+    let totalQuantites = 0;
+    let totalPrix = 0;
+    for (const achat of achats) {
+      totalQuantites += achat.quantite;
+      totalPrix += achat.prix * achat.quantite;
+    }
+    return (this.cloture / (totalPrix / totalQuantites)) - 1;
   }
 }

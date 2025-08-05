@@ -9,6 +9,7 @@ export enum TypesColonnesPortefeuille {
   CLOTURE,
   VOLUME,
   ALERTES,
+  VARIATION_ACHATS,
   COURS,
   MOYENNE_MOBILE,
   VARIATION

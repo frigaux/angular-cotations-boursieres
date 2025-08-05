@@ -52,6 +52,7 @@ describe('ValeursService', () => {
   it('Given des achats when #enregistrerAchats then #chargerAchats renvoie les achats', () => {
     expect(valeursService.enregistrerAchats(cloneACHATS())).toBeUndefined();
     expect(valeursService.chargerAchats()).toEqual(ACHATS);
+    expect(valeursService.chargerAchatsByTicker().get(ACHATS[0].ticker)).toEqual(ACHATS[0].achats);
   });
 
   it('Given des achats when #enregistrerAchatsTicker then #chargerAchatsTicker renvoie les achats', () => {

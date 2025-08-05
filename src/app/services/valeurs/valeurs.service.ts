@@ -47,6 +47,14 @@ export class ValeursService {
     return [];
   }
 
+  chargerAchatsByTicker(): Map<string, Array<DTOAchat>> {
+    const achatsByTicker = new Map<string, Array<DTOAchat>>();
+    for (const achat of this.chargerAchats()) {
+      achatsByTicker.set(achat.ticker, achat.achats);
+    }
+    return achatsByTicker;
+  }
+
   public enregistrerAchats(achatsTickers: Array<DTOAchatsTicker>): string | undefined {
     if (this.validerAchats(achatsTickers)) {
       window.localStorage.setItem(ValeursService.ACHATS, JSON.stringify(achatsTickers));

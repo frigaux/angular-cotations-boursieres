@@ -4,6 +4,8 @@ import {ImportExportComponent} from './import-export.component';
 import {TranslateModule} from '@ngx-translate/core';
 import {CurrencyPipe, DatePipe, DecimalPipe, PercentPipe} from '@angular/common';
 import {TABLEAUX} from '../../../services/jdd/jdd-tableaux.dataset';
+import {provideHttpClient} from '@angular/common/http';
+import {provideHttpClientTesting} from '@angular/common/http/testing';
 
 describe('ImportExportComponent', () => {
   let component: ImportExportComponent;
@@ -21,7 +23,9 @@ describe('ImportExportComponent', () => {
         DatePipe,
         PercentPipe,
         CurrencyPipe,
-        DecimalPipe
+        DecimalPipe,
+        provideHttpClient(),
+        provideHttpClientTesting()
       ]
     })
       .compileComponents();

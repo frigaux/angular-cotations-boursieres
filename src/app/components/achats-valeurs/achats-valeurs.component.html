@@ -8,20 +8,20 @@
 ]"></app-loader>
 
 @if (achatsValeursDecores) {
-  @for (achatsValeurDecores of achatsValeursDecores; track achatsValeurDecores.id) {
-    <table>
-      <thead>
-      <tr>
-        <th></th>
-        <th>{{ 'COMPOSANTS.ACHATS_VALEURS.VALEUR' | translate }}</th>
-        <th>{{ 'COMPOSANTS.ACHATS_VALEURS.DATE' | translate }}</th>
-        <th>{{ 'COMPOSANTS.ACHATS_VALEURS.PRIX' | translate }}</th>
-        <th>{{ 'COMPOSANTS.ACHATS_VALEURS.QUANTITE' | translate }}</th>
-        <th>{{ 'COMPOSANTS.ACHATS_VALEURS.TOTAL' | translate }}</th>
-        <th>{{ 'COMPOSANTS.ACHATS_VALEURS.REVENDU' | translate }}</th>
-      </tr>
-      </thead>
-      <tbody>
+  <table>
+    <thead>
+    <tr>
+      <th></th>
+      <th>{{ 'COMPOSANTS.ACHATS_VALEURS.VALEUR' | translate }}</th>
+      <th>{{ 'COMPOSANTS.ACHATS_VALEURS.DATE' | translate }}</th>
+      <th>{{ 'COMPOSANTS.ACHATS_VALEURS.PRIX' | translate }}</th>
+      <th>{{ 'COMPOSANTS.ACHATS_VALEURS.QUANTITE' | translate }}</th>
+      <th>{{ 'COMPOSANTS.ACHATS_VALEURS.TOTAL' | translate }}</th>
+      <th>{{ 'COMPOSANTS.ACHATS_VALEURS.REVENDU' | translate }}</th>
+    </tr>
+    </thead>
+    <tbody>
+      @for (achatsValeurDecores of achatsValeursDecores; track achatsValeurDecores.id) {
         @for (achatDecore of achatsValeurDecores.achatsDecores; track achatDecore.id) {
           <tr>
             <td><span class="pi pi-trash"
@@ -35,16 +35,16 @@
             <td><span class="pi pi-verified" *ngIf="achatDecore.achat.revendu"></span></td>
           </tr>
         }
-      <tr>
-        <td>{{ 'COMPOSANTS.ACHATS_VALEURS.TOTAL_NON_REVENDU' | translate }}</td>
-        <td></td>
-        <td></td>
-        <td>{{ totalPrix  | currency:'€' }}</td>
-        <td>{{ totalQuantite  | number }}</td>
-        <td></td>
-        <td></td>
-      </tr>
-      </tbody>
-    </table>
-  }
+        <tr class="totaux">
+          <td>{{ 'COMPOSANTS.ACHATS_VALEURS.TOTAL_NON_REVENDU' | translate }}</td>
+          <td></td>
+          <td></td>
+          <td>{{ totalPrix  | currency:'€' }}</td>
+          <td>{{ totalQuantite  | number }}</td>
+          <td></td>
+          <td></td>
+        </tr>
+      }
+    </tbody>
+  </table>
 }

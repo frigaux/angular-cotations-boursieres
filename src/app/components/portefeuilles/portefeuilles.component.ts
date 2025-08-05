@@ -95,8 +95,9 @@ export class PortefeuillesComponent implements OnInit {
     this.coursService.chargerCoursTickersWithLimit(portefeuilleAvecCours.portefeuille.tickers, 300)
       .subscribe(liste => {
         this.date = liste.length > 0 ? liste[0].date : undefined;
+        const achatsByTicker = this.valeursService.chargerAchatsByTicker();
         portefeuilleAvecCours.cours = liste.map(dto => {
-          return new CoursPortefeuille(this.valeurByTicker.get(dto.ticker)!, dto, portefeuilleAvecCours.alertes, this.calculerVariationAchats(dto));
+          return new CoursPortefeuille(this.valeurByTicker.get(dto.ticker)!, dto, portefeuilleAvecCours.alertes, this.calculerVariationAchats(dto, achatsByTicker));
         });
         this.loading = false;
       })
@@ -128,8 +129,9 @@ export class PortefeuillesComponent implements OnInit {
     }
   }
 
-  calculerVariationAchats(dto: DTOCoursAvecListeAllege): number | undefined {
-    const achats: Array<DTOAchat> = this.valeursService.chargerAchatsTicker(dto.ticker)
+  // TODO : à supprimer avec tableau configurable
+  calculerVariationAchats(dto: DTOCoursAvecListeAllege, achatsByTicker: Map<string, DTOAchat[]>): number | undefined {
+    const achats: Array<DTOAchat> = (achatsByTicker.get(dto.ticker) || [])
       .filter(achat => !achat.revendu);
     if (achats.length === 0) {
       return undefined;

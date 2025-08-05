@@ -8,6 +8,8 @@ import {TypesColonnes} from '../../../services/tableaux/types-colonnes.enum.ts';
 import {DTOColonne} from '../../../services/tableaux/dto-colonne-portefeuille.interface';
 import {TypesColonnesPortefeuille} from '../../../services/tableaux/types-colonnes-portefeuille.enum';
 import {TypesColonnesCours} from '../../../services/tableaux/types-colonnes-cours.enum';
+import {provideHttpClient} from '@angular/common/http';
+import {provideHttpClientTesting} from '@angular/common/http/testing';
 
 describe('ConfigurationTableauComponent', () => {
   let component: ConfigurationTableauComponent;
@@ -25,7 +27,9 @@ describe('ConfigurationTableauComponent', () => {
         DatePipe,
         PercentPipe,
         CurrencyPipe,
-        DecimalPipe
+        DecimalPipe,
+        provideHttpClient(),
+        provideHttpClientTesting()
       ]
     })
       .compileComponents();

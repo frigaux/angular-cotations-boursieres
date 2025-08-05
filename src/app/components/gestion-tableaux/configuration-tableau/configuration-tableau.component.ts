@@ -78,6 +78,7 @@ export class ConfigurationTableauComponent {
             this.construireTypeColonne(TypesColonnesPortefeuille.CLOTURE),
             this.construireTypeColonne(TypesColonnesPortefeuille.VOLUME),
             this.construireTypeColonne(TypesColonnesPortefeuille.ALERTES),
+            this.construireTypeColonne(TypesColonnesPortefeuille.VARIATION_ACHATS),
             this.construireTypeColonne(TypesColonnesPortefeuille.COURS),
             this.construireTypeColonne(TypesColonnesPortefeuille.MOYENNE_MOBILE),
             this.construireTypeColonne(TypesColonnesPortefeuille.VARIATION)
