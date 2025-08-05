@@ -13,7 +13,7 @@ export class FiltreDecore {
 
   private genererFonctionFiltre(filtre: DTOFiltre): Function {
     const condition = filtre.condition
-      .replaceAll(/M(\d+)/g, (match, token) => {
+      .replaceAll(/M(\d+)/gi, (match, token) => {
         return `moyennes[${token - 1}]`;
       });
     return new Function('moyennes', `return ${condition};`);

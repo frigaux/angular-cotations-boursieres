@@ -5,7 +5,7 @@
 
 @for (filtreDecore of filtresDecores; track filtreDecore.id) {
   <span class="pi pi-filter" title="{{filtreDecore.filtre.condition}}"
-        [ngClass]="{'actif' : filtreActif !== undefined}"
+        [ngClass]="{'actif' : filtreActif === filtreDecore}"
         (click)="appliquerFiltre(filtreDecore)">
     {{ filtreDecore.filtre.nom }}
   </span>

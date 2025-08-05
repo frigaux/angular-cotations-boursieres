@@ -24,6 +24,17 @@ export class CoursService {
 
   private cleMessageErreur: string | undefined;
 
+  public static readonly CONFIGURATION_INITIALE = [
+    {
+      "nom": "Remontée",
+      "condition": "M100 > M50 && M50 > M25 && M25 > M10 && M2 < (0.98 * M1)"
+    },
+    {
+      "nom": "Chute",
+      "condition": "M100 < M50 && M50 < M25 && M25 < M10 && M2 > (1.02 * M1)"
+    },
+  ];
+
   constructor(private http: HttpClient,
               private translateService: TranslateService) {
   }
@@ -131,7 +142,7 @@ export class CoursService {
 
   public validerCondition(condition: string): string | undefined {
     const conditionAvecSubstitution = condition
-      .replaceAll(/M(\d+)/g, (match, token) => {
+      .replaceAll(/M(\d+)/gi, (match, token) => {
         return `M[${token - 1}]`;
       });
     try {

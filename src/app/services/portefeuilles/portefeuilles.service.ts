@@ -298,10 +298,10 @@ export class PortefeuillesService {
 
   public validerCondition(condition: string): string | undefined {
     const conditionAvecSubstitution = condition
-      .replaceAll(/C(\d+)/g, (match, token) => {
+      .replaceAll(/C(\d+)/gi, (match, token) => {
         return `C[${token - 1}]`;
       })
-      .replaceAll(/M(\d+)/g, (match, token) => {
+      .replaceAll(/M(\d+)/gi, (match, token) => {
         return `M[${token - 1}]`;
       });
     try {

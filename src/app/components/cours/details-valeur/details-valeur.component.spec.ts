@@ -38,4 +38,12 @@ describe('DetailsValeurComponent', () => {
     const elChart = element.querySelector('p-chart');
     expect(elChart).toBeTruthy();
   });
+
+  it('Given un cours when #abcBourse ou #boursorama then une popup est ouverte', () => {
+    fixture.componentRef.setInput('cours', COURS_CROISSANT);
+    spyOn(window, "open");
+    component.abcBourse();
+    component.boursorama();
+    expect(window.open).toHaveBeenCalledTimes(2);
+  });
 });

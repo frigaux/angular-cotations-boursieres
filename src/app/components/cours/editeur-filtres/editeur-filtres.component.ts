@@ -21,7 +21,6 @@ import {EditeurConditionFiltreComponent} from './editeur-condition-filtre/editeu
 import {DTOFiltre} from '../../../services/cours/dto-filtre.interface';
 import {CoursService} from '../../../services/cours/cours.service';
 
-// TODO : import export
 @Component({
   selector: 'app-editeur-filtres',
   imports: [

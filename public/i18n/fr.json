@@ -115,6 +115,13 @@
           "DOCUMENTATION_EXEMPLE": "Par exemple : M50 < M20 && M20 < M10",
           "CONDITION": "Condition",
           "MODIFIER": "Modifier la condition du filtre"
+        },
+        "IMPORT_EXPORT": {
+          "IMPORT_EXPORT": "Import/export des filtres",
+          "CONFIGURATION": "Configuration au format JSON",
+          "EXPORTER": "Exporter",
+          "IMPORTER": "Importer",
+          "EXEMPLE": "Exemple de filtres"
         }
       }
     },

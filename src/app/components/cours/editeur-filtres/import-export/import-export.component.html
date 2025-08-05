@@ -1,0 +1,32 @@
+<span class="pi pi-sync" (click)="visible = true"
+      title="{{ 'COMPOSANTS.COURS.EDITEUR_FILTRES.IMPORT_EXPORT.IMPORT_EXPORT' | translate }}"></span>
+
+<p-dialog header="{{ 'COMPOSANTS.COURS.EDITEUR_FILTRES.IMPORT_EXPORT.IMPORT_EXPORT' | translate }}"
+          [modal]="true" (onShow)="reinitialiserVue()" [(visible)]="visible">
+
+  <div class="conteneur">
+    <p-floatlabel>
+      <textarea id="json" rows="10" cols="80"
+                pTextarea [(ngModel)]="filtres"
+                [ngClass]="{'error': erreur !== undefined}"></textarea>
+      <label for="json">
+        {{ 'COMPOSANTS.COURS.EDITEUR_FILTRES.IMPORT_EXPORT.CONFIGURATION' | translate }}
+      </label>
+    </p-floatlabel>
+
+    <div class="exemple" (click)="exemple()">
+      {{ 'COMPOSANTS.COURS.EDITEUR_FILTRES.IMPORT_EXPORT.EXEMPLE' | translate }}
+    </div>
+
+    <div class="erreur" *ngIf="erreur !== undefined">
+      <span class="pi pi-exclamation-circle">{{ erreur }}</span>
+    </div>
+
+    <div class="boutons">
+      <p-button type="button" (click)="exporter()"
+                label="{{ 'COMPOSANTS.COURS.EDITEUR_FILTRES.IMPORT_EXPORT.EXPORTER' | translate }}"/>
+      <p-button type="button" (click)="importer()" severity="warn"
+                label="{{ 'COMPOSANTS.COURS.EDITEUR_FILTRES.IMPORT_EXPORT.IMPORTER' | translate }}"/>
+    </div>
+  </div>
+</p-dialog>

@@ -18,6 +18,7 @@ import {AjoutAuPortefeuilleComponent} from './ajout-au-portefeuille/ajout-au-por
 import {SortEvent} from 'primeng/api';
 import {SelecteurFiltreComponent} from './selecteur-filtre/selecteur-filtre.component';
 import {FiltreDecore} from './selecteur-filtre/filtre-decore.class';
+import {ImportExportComponent} from './editeur-filtres/import-export/import-export.component';
 
 @Component({
   selector: 'app-cours',
@@ -37,7 +38,8 @@ import {FiltreDecore} from './selecteur-filtre/filtre-decore.class';
     LoaderComponent,
     PercentPipe,
     AjoutAuPortefeuilleComponent,
-    SelecteurFiltreComponent
+    SelecteurFiltreComponent,
+    ImportExportComponent
   ],
   templateUrl: './cours.component.html',
   styleUrls: ['../portefeuilles/accordion-chart.sass', './cours.component.sass']

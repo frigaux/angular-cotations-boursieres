@@ -14,10 +14,10 @@ export class PortefeuilleAvecCours {
 
   private genererFonctionAlerte(alerte: DTOAlerte): { alerte: DTOAlerte, evaluer: Function } {
     const condition = alerte.condition
-      .replaceAll(/C(\d+)/g, (match, token) => {
+      .replaceAll(/C(\d+)/gi, (match, token) => {
         return `cours[${token-1}].cloture`;
       })
-      .replaceAll(/M(\d+)/g, (match, token) => {
+      .replaceAll(/M(\d+)/gi, (match, token) => {
         return `moyennes[${token-1}]`;
       });
     return {alerte, evaluer: new Function('cours', 'moyennes', `return ${condition};`)};

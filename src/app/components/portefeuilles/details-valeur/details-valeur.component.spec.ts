@@ -1,7 +1,7 @@
 import {ComponentFixture, TestBed} from '@angular/core/testing';
 
 import {DetailsValeurComponent} from './details-valeur.component';
-import {COURS_PORTEFEUILLE} from '../../../services/jdd/jdd-cours.dataset';
+import {COURS_CROISSANT, COURS_PORTEFEUILLE} from '../../../services/jdd/jdd-cours.dataset';
 import {TranslateModule} from '@ngx-translate/core';
 import {provideAnimations} from '@angular/platform-browser/animations';
 import {ConfirmationService} from 'primeng/api';
@@ -38,5 +38,13 @@ describe('DetailsValeurComponent', () => {
     fixture.detectChanges();
     const elChart = element.querySelector('p-chart');
     expect(elChart).toBeTruthy();
+  });
+
+  it('Given un cours when #abcBourse ou #boursorama then une popup est ouverte', () => {
+    fixture.componentRef.setInput('cours', COURS_PORTEFEUILLE);
+    spyOn(window, "open");
+    component.abcBourse();
+    component.boursorama();
+    expect(window.open).toHaveBeenCalledTimes(2);
   });
 });
