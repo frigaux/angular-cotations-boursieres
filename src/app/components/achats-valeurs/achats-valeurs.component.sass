@@ -1,8 +1,16 @@
-h2
+.titre
+  display: flex
+  flex-direction: row
+
+  & > span:nth-child(1)
+    font-size: 1.25rem
+
   app-import-export
     margin-left: 1rem
 
 table
+  margin-top: 1rem
+
   thead
     font-weight: bold
     background-color: var(--p-gray-300)

@@ -1,4 +1,4 @@
-div.boutons
+div.titre
   display: flex
   flex-direction: row
 
@@ -38,6 +38,10 @@ div.erreur
   .tableau
     flex-direction: column
 
-@media screen and (orientation: landscape)
+@media screen and (orientation: landscape) and (max-resolution: 150dpi)
   .tableau
     flex-direction: row
+
+@media screen and (orientation: landscape) and (min-resolution: 150dpi)
+  .tableau
+    flex-direction: column

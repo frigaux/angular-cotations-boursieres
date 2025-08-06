@@ -1,7 +1,7 @@
 import {ComponentFixture, TestBed} from '@angular/core/testing';
 
 import {DetailsValeurComponent} from './details-valeur.component';
-import {COURS_CROISSANT, COURS_PORTEFEUILLE} from '../../../services/jdd/jdd-cours.dataset';
+import {COURS_PORTEFEUILLE} from '../../../services/jdd/jdd-cours.dataset';
 import {TranslateModule} from '@ngx-translate/core';
 import {provideAnimations} from '@angular/platform-browser/animations';
 import {ConfirmationService} from 'primeng/api';

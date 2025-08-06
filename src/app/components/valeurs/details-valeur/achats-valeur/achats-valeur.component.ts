@@ -11,6 +11,7 @@ import {DatePipe, NgIf} from '@angular/common';
 import {ConfirmationService} from 'primeng/api';
 import {DialogueService} from '../../../../services/dialogue/dialogue.service';
 
+// TODO : il faudrait virer le bouton enregistrer et faire un enregistrement automatique
 @Component({
   selector: 'app-achats-valeur',
   imports: [

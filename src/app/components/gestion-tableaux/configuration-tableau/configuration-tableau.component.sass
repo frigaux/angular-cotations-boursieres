@@ -7,46 +7,55 @@
   color: var(--p-blue-700)
   cursor: pointer
 
+  span
+    display: inline-block
+    vertical-align: middle
+
 .pi-plus-circle::before
   margin-right: 0.5rem
 
-div.element
-  border: 0.1rem solid black
-  border-radius: 0.3rem
-  padding: 1rem 0 0 0
-  margin-top: 0.5rem
+div.liste
   display: flex
-  flex-direction: row
-  align-items: center
-  cursor: move
+  flex-direction: column
 
-  .pi-trash
-    color: var(--p-red-800)
-    cursor: pointer
+  div.element
+    display: flex
+    flex-direction: row
+    border: 0.1rem solid black
+    border-radius: 0.3rem
+    padding: 1rem 0 0 0
+    margin-top: 0.5rem
+    align-items: center
+    cursor: move
+    width: fit-content
 
-  span
-    margin: 0.5rem
+    .pi-trash
+      color: var(--p-red-800)
+      cursor: pointer
 
-  p-select
-    width: 13rem
+    span
+      margin: 0.5rem
 
-  span:nth-child(2)
-    input
-      width: 10rem
+    p-select
+      width: 13rem
 
-  span:nth-child(4)
-    width: 5rem
+    span:nth-child(2)
+      input
+        width: 10rem
 
-    input
+    span:nth-child(4)
       width: 5rem
 
-  span:nth-child(6)
+      input
+        width: 5rem
+
+    span:nth-child(6)
+      input
+        width: 6rem
+
     input
-      width: 6rem
+      &.ng-invalid.ng-touched, &.ng-invalid.ng-dirty
+        border-color: var(--p-red-800)
 
-  input
-    &.ng-invalid.ng-touched, &.ng-invalid.ng-dirty
-      border-color: var(--p-red-800)
-
-    &.ng-valid
-      border-color: var(--p-green-800)
+      &.ng-valid
+        border-color: var(--p-green-800)

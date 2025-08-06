@@ -1,7 +1,7 @@
-<h2>
-  {{ 'COMPOSANTS.ACHATS_VALEURS.TITRE' | translate }}
+<div class="titre">
+  <span>{{ 'COMPOSANTS.ACHATS_VALEURS.TITRE' | translate }}</span>
   <app-import-export></app-import-export>
-</h2>
+</div>
 
 <app-loader [affiche]="loading" [configuration]="[
   {marginLeft: '0', height: '50vh', width: '50%'}
