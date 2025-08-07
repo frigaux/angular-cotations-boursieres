@@ -52,19 +52,19 @@ export class PortefeuillesComponent implements OnInit {
   date?: string;
   portefeuillesAvecCours: Array<PortefeuilleAvecCours> = [];
   idxPortefeuilleCourant: number = -1;
-
   // cours pour lequel afficher les courbes
   coursSelectionne: CoursPortefeuille | undefined = undefined;
 
   // privé
+  private cours?: DTOCoursAvecListeAllege[];
   private readonly valeurByTicker = new Map<string, DTOValeur>();
 
   constructor(private portefeuillesService: PortefeuillesService,
               private valeursService: ValeursService,
               private coursService: CoursService) {
     portefeuillesService.onUpdate(portefeuilles => this.chargerPortefeuilleCourant());
-    valeursService.onImportAchats(achatsTickers => this.chargerPortefeuilleCourant());
-    valeursService.onUpdateAchats(achatsTickers => this.chargerPortefeuilleCourant());
+    valeursService.onImportAchats(achatsTickers => this.afficherfeuilleCourant());
+    valeursService.onUpdateAchats(achatsTickers => this.afficherfeuilleCourant());
   }
 
   ngOnInit(): void {
@@ -94,13 +94,21 @@ export class PortefeuillesComponent implements OnInit {
     this.loading = true;
     this.coursService.chargerCoursTickersWithLimit(portefeuilleAvecCours.portefeuille.tickers, 300)
       .subscribe(liste => {
-        this.date = liste.length > 0 ? liste[0].date : undefined;
-        const achatsByTicker = this.valeursService.chargerAchatsByTicker();
-        portefeuilleAvecCours.cours = liste.map(dto => {
-          return new CoursPortefeuille(this.valeurByTicker.get(dto.ticker)!, dto, portefeuilleAvecCours.alertes, this.calculerVariationAchats(dto, achatsByTicker));
-        });
+        this.cours = liste;
+        this.afficherfeuilleCourant();
         this.loading = false;
       })
+  }
+
+  afficherfeuilleCourant(): void {
+    if (this.cours) {
+      const portefeuilleAvecCours: PortefeuilleAvecCours = this.portefeuillesAvecCours[this.idxPortefeuilleCourant];
+      this.date = this.cours.length > 0 ? this.cours[0].date : undefined;
+      const achatsByTicker = this.valeursService.chargerAchatsByTicker();
+      portefeuilleAvecCours.cours = this.cours.map(dto => {
+        return new CoursPortefeuille(this.valeurByTicker.get(dto.ticker)!, dto, portefeuilleAvecCours.alertes, this.calculerVariationAchats(dto, achatsByTicker));
+      });
+    }
   }
 
   classeIconeVariation(variation: number): string {

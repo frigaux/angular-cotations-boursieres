@@ -11,7 +11,6 @@ import {DatePipe, NgIf} from '@angular/common';
 import {ConfirmationService} from 'primeng/api';
 import {DialogueService} from '../../../../services/dialogue/dialogue.service';
 
-// TODO : il faudrait virer le bouton enregistrer et faire un enregistrement automatique
 @Component({
   selector: 'app-achats-valeur',
   imports: [
@@ -76,14 +75,8 @@ export class AchatsValeurComponent implements OnInit {
         revendu: false
       });
       this.decorerAchats();
+      this.enregistrerAchats();
     }
-  }
-
-  private decorerAchats() {
-    let i = 0;
-    this.achatsDecores = this.achats
-      .sort((a1, a2) => new Date(a1.date).getTime() - new Date(a2.date).getTime())
-      .map(achat => new AchatDecore(i++, new Date(achat.date), achat));
   }
 
   suppressionAchat(event: Event, achat: DTOAchat) {
@@ -100,19 +93,32 @@ export class AchatsValeurComponent implements OnInit {
   supprimerAchat(achat: DTOAchat) {
     this.achats.splice(this.achats.indexOf(achat), 1);
     this.decorerAchats();
-  }
-
-  enregistrerAchats() {
-    if (this.valeur) {
-      this.erreur = this.valeursService.enregistrerAchatsTicker(this.valeur.ticker, this.achats);
-      if (this.erreur === undefined) {
-        this.succes = this.translateService.instant('COMPOSANTS.VALEURS.DETAILS_VALEUR.ACHATS_VALEUR.ENREGISTREMENT_REUSSI');
-        setTimeout(() => this.succes = undefined, 2000);
-      }
-    }
+    this.enregistrerAchats();
   }
 
   onSelectDate(achatDecore: AchatDecore) {
     achatDecore.achat.date = this.datepipe.transform(achatDecore.date, 'yyyy-MM-dd')!;
+    this.enregistrerAchats();
+  }
+
+  onChange(achatDecore: AchatDecore) {
+    this.enregistrerAchats();
+  }
+
+  private decorerAchats() {
+    let i = 0;
+    this.achatsDecores = this.achats
+      .sort((a1, a2) => new Date(a1.date).getTime() - new Date(a2.date).getTime())
+      .map(achat => new AchatDecore(i++, new Date(achat.date), achat));
+  }
+
+  private enregistrerAchats() {
+    if (this.valeur) {
+      this.erreur = this.valeursService.enregistrerAchatsTicker(this.valeur.ticker, this.achats);
+      if (this.erreur === undefined) {
+        this.succes = this.translateService.instant('COMPOSANTS.VALEURS.DETAILS_VALEUR.ACHATS_VALEUR.ENREGISTREMENT_REUSSI');
+        setTimeout(() => this.succes = undefined, 1500);
+      }
+    }
   }
 }

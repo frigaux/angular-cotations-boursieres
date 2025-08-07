@@ -2,8 +2,6 @@
   <div class="boutons">
     <span class="pi pi-plus-circle" (click)="ajouterAchat()"
           title="{{ 'COMPOSANTS.VALEURS.DETAILS_VALEUR.ACHATS_VALEUR.AJOUTER_ACHAT' | translate }}"></span>
-    <span class="pi pi-save" (click)="enregistrerAchats()"
-          title="{{ 'COMPOSANTS.VALEURS.DETAILS_VALEUR.ACHATS_VALEUR.ENREGISTRER' | translate }}"></span>
     <span class="message">{{succes}}</span>
   </div>
   <div class="erreur" *ngIf="erreur !== undefined">
@@ -29,14 +27,14 @@
       </span>
         <span>
           <input pInputText [(ngModel)]="achatDecore.achat.prix" autocomplete="off" required type="number"
-                 pSize="small"/>
+                 pSize="small" (change)="onChange(achatDecore)"/>
       </span>
         <span>
           <input pInputText [(ngModel)]="achatDecore.achat.quantite" autocomplete="off" required type="number"
-                 pSize="small"/>
+                 pSize="small" (change)="onChange(achatDecore)"/>
       </span>
         <span>
-          <p-toggleswitch [(ngModel)]="achatDecore.achat.revendu"/>
+          <p-toggleswitch [(ngModel)]="achatDecore.achat.revendu" (change)="onChange(achatDecore)"/>
       </span>
       </div>
     }
