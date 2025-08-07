@@ -134,6 +134,7 @@
       "TOTAL": "Total",
       "REVENDU": "Revendu",
       "TOTAL_NON_REVENDU": "Total non revendu",
+      "AUCUN_ACHAT": "Aucun achat",
       "CONFIRMATION_SUPPRESSION": "Confirmez-vous la suppression de l'achat ?"
     },
     "PORTEFEUILLES": {

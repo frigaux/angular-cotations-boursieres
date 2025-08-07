@@ -62,7 +62,6 @@ describe('AchatsValeurComponent', () => {
     it('when #supprimerAchat then l\'achat est bien supprimé de la liste', () => {
       fixture.detectChanges(); // appelle le ngOnInit
       component.supprimerAchat(ACHATS[0].achats[0]);
-      component.enregistrerAchats();
       expect(component.achatsDecores).toHaveSize(ACHATS[0].achats.length - 1);
     });
   });

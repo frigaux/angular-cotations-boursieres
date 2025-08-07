@@ -40,9 +40,9 @@ describe('CoursComponent', () => {
     expect(component).toBeDefined();
   });
 
-  it('should have <h3>', () => {
+  it('should have div.titre', () => {
     const element: HTMLElement = fixture.nativeElement;
-    const el = element.querySelector('h3');
+    const el = element.querySelector('div.titre');
     expect(el).toBeTruthy();
   });
 

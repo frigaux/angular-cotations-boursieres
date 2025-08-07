@@ -57,6 +57,7 @@ export class ValeursService {
 
   public enregistrerAchats(achatsTickers: Array<DTOAchatsTicker>): string | undefined {
     if (this.validerAchats(achatsTickers)) {
+      achatsTickers = this.filtrerTickerSansAchat(achatsTickers);
       window.localStorage.setItem(ValeursService.ACHATS, JSON.stringify(achatsTickers));
       ValeursService.OBSERVERS_UPDATE_ACHATS.forEach(observer => observer.next(achatsTickers));
       return undefined;
@@ -67,8 +68,9 @@ export class ValeursService {
 
   public importAchats(json: string): string | undefined {
     try {
-      const achatsTickers: any = JSON.parse(json);
+      let achatsTickers: any = JSON.parse(json);
       if (this.validerAchats(achatsTickers)) {
+        achatsTickers = this.filtrerTickerSansAchat(achatsTickers);
         window.localStorage.setItem(ValeursService.ACHATS, JSON.stringify(achatsTickers));
         ValeursService.OBSERVERS_IMPORT_ACHATS.forEach(observer => observer.next(achatsTickers));
         return undefined;
@@ -113,13 +115,7 @@ export class ValeursService {
         achats: achats
       })
     }
-    if (this.validerAchats(achatsTickers)) {
-      window.localStorage.setItem(ValeursService.ACHATS, JSON.stringify(achatsTickers));
-      ValeursService.OBSERVERS_UPDATE_ACHATS.forEach(observer => observer.next(achatsTickers));
-      return undefined;
-    } else {
-      return this.translateService.instant(this.cleMessageErreur!);
-    }
+    return this.enregistrerAchats(achatsTickers);
   }
 
   public onUpdateAchats(handler: ((value: Array<DTOAchatsTicker>) => void)): void {
@@ -157,5 +153,9 @@ export class ValeursService {
       }
     }
     return true;
+  }
+
+  private filtrerTickerSansAchat(achatsTickers: Array<DTOAchatsTicker>): Array<DTOAchatsTicker> {
+    return achatsTickers.filter(achatsTicker => achatsTicker.achats.length !== 0);
   }
 }
