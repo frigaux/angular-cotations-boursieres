@@ -7,7 +7,6 @@ import {TypesColonnesCours} from '../../../services/tableaux/types-colonnes-cour
 import {FloatLabel} from 'primeng/floatlabel';
 import {InputText} from 'primeng/inputtext';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import {AutoFocus} from 'primeng/autofocus';
 import {Select} from 'primeng/select';
 import {ToggleSwitch} from 'primeng/toggleswitch';
 import {TypesColonnes} from '../../../services/tableaux/types-colonnes.enum.ts';
@@ -24,7 +23,6 @@ import {EntierPositifValidatorDirective} from './validators/entier-positif-valid
     FloatLabel,
     InputText,
     ReactiveFormsModule,
-    AutoFocus,
     FormsModule,
     Select,
     ToggleSwitch,

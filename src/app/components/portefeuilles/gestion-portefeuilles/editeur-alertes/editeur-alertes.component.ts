@@ -7,7 +7,6 @@ import {Button} from 'primeng/button';
 import {FloatLabel} from 'primeng/floatlabel';
 import {InputText} from 'primeng/inputtext';
 import {FormArray, FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms';
-import {AutoFocus} from 'primeng/autofocus';
 import {NgForOf, NgIf} from '@angular/common';
 import {EditeurConditionAlerteComponent} from './editeur-condition-alerte/editeur-condition-alerte.component';
 import {DialogueService} from '../../../../services/dialogue/dialogue.service';
@@ -23,7 +22,6 @@ import {PortefeuillesService} from '../../../../services/portefeuilles/portefeui
     FloatLabel,
     InputText,
     ReactiveFormsModule,
-    AutoFocus,
     NgForOf,
     EditeurConditionAlerteComponent,
     NgIf

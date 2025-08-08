@@ -21,7 +21,7 @@
       <div formArrayName="noms" *ngFor="let nom of noms.controls; index as idx">
         <div>
           <p-floatlabel>
-            <input pInputText [pAutoFocus]="true" id="{{idx}}" autocomplete="off" [formControlName]="idx"/>
+            <input pInputText id="{{idx}}" autocomplete="off" [formControlName]="idx"/>
             <label for="{{idx}}">
               {{ 'COMPOSANTS.COURS.EDITEUR_FILTRES.NOM' | translate }}
             </label>

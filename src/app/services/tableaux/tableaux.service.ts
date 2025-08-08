@@ -31,97 +31,102 @@ export class TableauxService {
       portefeuille: {
         colonnesPaysage: [
           {
-            nom: 'Libellé',
-            type: TypesColonnesPortefeuille.LIBELLE,
+            nom: "Libellé",
+            type: 3,
             tri: true,
             largeur: 20
           },
           {
-            nom: 'Alertes',
-            type: TypesColonnesPortefeuille.ALERTES,
+            nom: "Alertes",
+            type: 9,
             tri: false,
-            largeur: 17
+            largeur: 12
           },
           {
-            nom: 'Clôture',
-            type: TypesColonnesPortefeuille.CLOTURE,
+            nom: "Clôture",
+            type: 7,
             tri: false,
-            largeur: 9
+            largeur: 8
           },
           {
-            nom: 'Var./Préc.',
-            type: TypesColonnesPortefeuille.VARIATION,
-            parametre: 1,
+            nom: "Var/Ac",
+            type: 10,
             tri: true,
-            largeur: 9
+            largeur: 10
           },
           {
-            nom: 'Var./5j',
-            type: TypesColonnesPortefeuille.VARIATION,
-            parametre: 5,
+            nom: "Var/1j",
+            type: 13,
+            "parametre": 1,
             tri: true,
-            largeur: 9
+            largeur: 10
           },
           {
-            nom: 'MM5j',
-            type: TypesColonnesPortefeuille.MOYENNE_MOBILE,
-            parametre: 5,
+            nom: "MM5",
+            type: 12,
+            "parametre": 5,
             tri: false,
-            largeur: 9
+            largeur: 8
           },
           {
-            nom: 'MM20j',
-            type: TypesColonnesPortefeuille.MOYENNE_MOBILE,
-            parametre: 20,
+            nom: "MM20",
+            type: 12,
+            "parametre": 20,
             tri: false,
-            largeur: 9
+            largeur: 8
           },
           {
-            nom: 'MM50j',
-            type: TypesColonnesPortefeuille.MOYENNE_MOBILE,
-            parametre: 50,
+            nom: "MM50",
+            type: 12,
+            "parametre": 50,
             tri: false,
-            largeur: 9
+            largeur: 8
           },
           {
-            nom: 'MM100j',
-            type: TypesColonnesPortefeuille.MOYENNE_MOBILE,
-            parametre: 100,
+            nom: "MM100",
+            type: 12,
+            "parametre": 100,
             tri: false,
-            largeur: 9
+            largeur: 8
+          },
+          {
+            nom: "MM200",
+            type: 12,
+            "parametre": 200,
+            tri: false,
+            largeur: 8
           }
         ],
         colonnesPortrait: [
           {
-            nom: 'Libellé',
-            type: TypesColonnesPortefeuille.LIBELLE,
+            nom: "Libellé",
+            type: 3,
             tri: true,
             largeur: 30
           },
           {
-            nom: 'Alertes',
-            type: TypesColonnesPortefeuille.ALERTES,
+            nom: "Alertes",
+            type: 9,
             tri: false,
             largeur: 25
           },
           {
-            nom: 'Clôture',
-            type: TypesColonnesPortefeuille.CLOTURE,
+            nom: "Clôture",
+            type: 7,
             tri: false,
             largeur: 15
           },
           {
-            nom: 'Var./Préc.',
-            type: TypesColonnesPortefeuille.VARIATION,
-            parametre: 1,
+            nom: "Var/Ac",
+            type: 10,
             tri: true,
             largeur: 15
           },
           {
-            nom: 'MM5j',
-            type: TypesColonnesPortefeuille.MOYENNE_MOBILE,
-            parametre: 5,
-            tri: false,
+            nom: "Var/1j",
+            type: 13,
+            "parametre": 1,
+            tri: true,
             largeur: 15
           }
         ]

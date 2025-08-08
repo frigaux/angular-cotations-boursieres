@@ -16,7 +16,6 @@ import {NgForOf, NgIf} from '@angular/common';
 import {TranslatePipe, TranslateService} from '@ngx-translate/core';
 import {ConfirmationService} from 'primeng/api';
 import {DialogueService} from '../../../services/dialogue/dialogue.service';
-import {AutoFocus} from 'primeng/autofocus';
 import {EditeurConditionFiltreComponent} from './editeur-condition-filtre/editeur-condition-filtre.component';
 import {DTOFiltre} from '../../../services/cours/dto-filtre.interface';
 import {CoursService} from '../../../services/cours/cours.service';
@@ -33,7 +32,6 @@ import {CoursService} from '../../../services/cours/cours.service';
     NgIf,
     ReactiveFormsModule,
     TranslatePipe,
-    AutoFocus,
     EditeurConditionFiltreComponent
   ],
   templateUrl: './editeur-filtres.component.html',

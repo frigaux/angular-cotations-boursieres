@@ -10,7 +10,7 @@
       <span class="pi pi-trash" (click)="supprimerColonne(deco.colonne)"></span>
       <span>
           <p-floatlabel>
-            <input pInputText [pAutoFocus]="true" [(ngModel)]="deco.colonne.nom" autocomplete="off" required
+            <input pInputText [(ngModel)]="deco.colonne.nom" autocomplete="off" required
                    [appPasDeNomEnDoublon]="{colonnes, colonne: deco.colonne}"/>
             <label>{{ 'COMPOSANTS.GESTION_TABLEAUX.TABLEAU.NOM_COLONNE' | translate }}</label>
           </p-floatlabel>
