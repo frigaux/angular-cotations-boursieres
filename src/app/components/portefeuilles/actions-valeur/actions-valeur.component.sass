@@ -1,10 +1,13 @@
 .actions-valeur
-  .pi
+  & > div
     cursor: pointer
     color: var(--p-blue-700)
+    display: flex
+    flex-direction: row
+    align-items: center
 
-  .pi::before
-    margin-right: 0.5rem
+    & > span:not(.pi)
+      margin-left: 0.5rem
 
   & > div
     margin: 1rem

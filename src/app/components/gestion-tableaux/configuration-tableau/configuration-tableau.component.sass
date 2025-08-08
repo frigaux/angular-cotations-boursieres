@@ -3,16 +3,17 @@
   transition: transform 250ms cubic-bezier(0, 0, 0.2, 1)
 
 
-.pi-plus-circle
-  color: var(--p-blue-700)
-  cursor: pointer
+.boutons
+  & > div
+    cursor: pointer
+    color: var(--p-blue-700)
+    display: flex
+    flex-direction: row
+    align-items: center
 
-  span
-    display: inline-block
-    vertical-align: middle
-
-.pi-plus-circle::before
-  margin-right: 0.5rem
+    & > span:not(.pi)
+      margin-left: 0.5rem
+      font-size: 1.25rem
 
 div.liste
   display: flex

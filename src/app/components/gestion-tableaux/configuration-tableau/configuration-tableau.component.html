@@ -1,7 +1,8 @@
-<div>
-    <span class="pi pi-plus-circle" (click)="ajouterColonne()">
-      <span>{{ 'COMPOSANTS.GESTION_TABLEAUX.TABLEAU.AJOUTER_COLONNE' | translate }}</span>
-    </span>
+<div class="boutons">
+  <div (click)="ajouterColonne()">
+    <span class="pi pi-plus-circle"></span>
+    <span>{{ 'COMPOSANTS.GESTION_TABLEAUX.TABLEAU.AJOUTER_COLONNE' | translate }}</span>
+  </div>
 </div>
 <div cdkDropList class="liste" (cdkDropListDropped)="dropColonne($event)">
   @for (deco of colonnesDecorees; track deco.id) {

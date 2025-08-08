@@ -1,6 +1,6 @@
 <div class="titre">
   <span *ngIf="date">{{ 'COMPOSANTS.COURS.MARCHES_DATE' | translate: {jour: date | date: 'dd/MM/yyyy'} }}</span>
-  <p-skeleton *ngIf="date === undefined" shape="rectangle" borderRadius="0" width="18rem" height="1.5rem"/>
+  <p-skeleton *ngIf="date === undefined" shape="rectangle" borderRadius="0" width="18rem" height="2rem"/>
   <app-import-export></app-import-export>
   <app-selecteur-filtre (selection)="appliquerFiltre($event)"></app-selecteur-filtre>
 </div>

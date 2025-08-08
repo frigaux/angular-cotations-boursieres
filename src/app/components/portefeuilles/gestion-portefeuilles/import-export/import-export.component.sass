@@ -10,20 +10,21 @@ div.conteneur
 
   textarea
     &.error
-      color: var(--p-red-600)
+      color: var(--p-red-800)
 
   div.exemple
     cursor: pointer
     color: var(--p-blue-700)
 
   div.erreur
-    margin: 1rem
+    margin: 1rem 0 1rem 0
+    color: var(--p-red-800)
+    display: flex
+    flex-direction: row
+    align-items: center
 
-    .pi-exclamation-circle
-      color: var(--p-red-600)
-
-    .pi-exclamation-circle::before
-      margin-right: 0.5rem
+    & > span:not(.pi)
+      margin-left: 0.5rem
 
   div.boutons
     text-align: center

@@ -1,16 +1,17 @@
-div.boutons
+div.actions
   display: flex
   flex-direction: row
 
-  .pi
+  & > div
     color: var(--p-blue-700)
     cursor: pointer
+    display: flex
+    flex-direction: row
+    align-items: center
 
-  & > div > span
-    vertical-align: middle
-    display: inline-block
-    font-size: 1.25rem
-    margin-left: 0.5rem
+    span:not(.pi)
+      font-size: 1.25rem
+      margin-left: 0.5rem
 
   .message
     margin-left: 1rem
@@ -18,13 +19,14 @@ div.boutons
     color: var(--p-green-800)
 
 div.erreur
-  margin: 1rem
+  margin: 1rem 0 1rem 0
+  color: var(--p-red-800)
+  display: flex
+  flex-direction: row
+  align-items: center
 
-  .pi-exclamation-circle
-    color: var(--p-red-800)
-
-  .pi-exclamation-circle::before
-    margin-right: 0.5rem
+  & > span:not(.pi)
+    margin-left: 0.5rem
 
 div.liste
   margin-top: 0.5rem

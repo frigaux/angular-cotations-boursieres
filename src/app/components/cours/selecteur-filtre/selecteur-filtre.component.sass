@@ -1,19 +1,29 @@
-.pi-cog
-  cursor: pointer
-  color: var(--p-blue-600)
+div
+  display: flex
+  flex-direction: row
+  align-items: center
 
-span.pi-filter:before
-  margin-right: 0.5rem
-  color: var(--p-gray-400)
+  .pi-cog
+    cursor: pointer
+    color: var(--p-blue-600)
 
-span.pi-filter.actif:before
-  color: black
+  span.filtre
+    display: flex
+    flex-direction: row
+    align-items: center
+    cursor: pointer
+    margin-left: 1rem
+    padding: 0.25rem
+    border-radius: 0.3rem
+    background-color: var(--p-gray-300)
+    font-weight: normal
+    font-size: 1.25rem
 
-span.pi-filter
-  cursor: pointer
-  margin-left: 1rem
-  padding: 0.25rem
-  border-radius: 0.3rem
-  background-color: var(--p-gray-300)
-  font-weight: normal
-  font-size: 1.25rem
+    span:not(.pi)
+      color: var(--p-gray-600)
+
+    span.pi-filter
+      color: var(--p-gray-400)
+
+    span.pi-filter.actif
+      color: var(--p-gray-600)

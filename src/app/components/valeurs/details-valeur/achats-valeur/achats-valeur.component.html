@@ -1,13 +1,14 @@
 @if (valeur) {
-  <div class="boutons">
-    <!--    TODO : font-family de .pi !-->
-    <div class="pi pi-plus-circle" (click)="ajouterAchat()">
+  <div class="actions">
+    <div (click)="ajouterAchat()">
+      <span class="pi pi-plus-circle"></span>
       <span>{{ 'COMPOSANTS.VALEURS.DETAILS_VALEUR.ACHATS_VALEUR.AJOUTER_ACHAT' | translate }}</span>
     </div>
     <span class="message">{{ succes }}</span>
   </div>
   <div class="erreur" *ngIf="erreur !== undefined">
-    <span class="pi pi-exclamation-circle">{{ erreur }}</span>
+    <span class="pi pi-exclamation-circle"></span>
+    <span>{{ erreur }}</span>
   </div>
   <div class="liste" *ngIf="achatsDecores.length > 0">
     <div class="entetes">
@@ -21,12 +22,12 @@
       <div class="element">
         <span class="pi pi-trash" (click)="suppressionAchat($event, achatDecore.achat)"></span>
         <span>
-        <p-datepicker [(ngModel)]="achatDecore.date" dateFormat="dd/mm/yy"
-                      size="small" showIcon iconDisplay="input"
-                      [inputStyle]="{'width': '8rem'}"
-                      readonlyInput="true"
-                      (onSelect)="onSelectDate(achatDecore)"/>
-      </span>
+          <p-datepicker [(ngModel)]="achatDecore.date" dateFormat="dd/mm/yy"
+                        size="small" showIcon iconDisplay="input"
+                        [inputStyle]="{'width': '8rem'}"
+                        readonlyInput="true"
+                        (onSelect)="onSelectDate(achatDecore)"/>
+        </span>
         <span>
           <input pInputText [(ngModel)]="achatDecore.achat.prix" autocomplete="off" required type="number"
                  pSize="small" (change)="onChange(achatDecore)"/>

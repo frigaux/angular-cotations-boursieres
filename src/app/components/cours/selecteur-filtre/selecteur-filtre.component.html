@@ -1,12 +1,14 @@
 <app-editeur-filtres [visible]="editeurVisible" (visibleChange)="editeurVisible = $event"></app-editeur-filtres>
 
-<span class="pi pi-cog" (click)="editeurVisible = true"
-      title="{{ 'COMPOSANTS.COURS.SELECTEUR_FILTRE.EDITER_FILTRE' | translate }}"></span>
+<div>
+  <span class="pi pi-cog" (click)="editeurVisible = true"
+        title="{{ 'COMPOSANTS.COURS.SELECTEUR_FILTRE.EDITER_FILTRE' | translate }}"></span>
 
-@for (filtreDecore of filtresDecores; track filtreDecore.id) {
-  <span class="pi pi-filter" title="{{filtreDecore.filtre.condition}}"
-        [ngClass]="{'actif' : filtreActif === filtreDecore}"
-        (click)="appliquerFiltre(filtreDecore)">
-    {{ filtreDecore.filtre.nom }}
+  @for (filtreDecore of filtresDecores; track filtreDecore.id) {
+    <span class="filtre" (click)="appliquerFiltre(filtreDecore)">
+    <span class="pi pi-filter" title="{{filtreDecore.filtre.condition}}"
+          [ngClass]="{'actif' : filtreActif === filtreDecore}"></span>
+    <span>{{ filtreDecore.filtre.nom }}</span>
   </span>
-}
+  }
+</div>
