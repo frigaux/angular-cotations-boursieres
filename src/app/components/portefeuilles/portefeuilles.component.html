@@ -22,82 +22,84 @@
           <p-accordion-header>{{ portefeuilleAvecCours.portefeuille.nom }}</p-accordion-header>
           <p-accordion-content>
             <p-table
-              sortField="libelle"
+              sortField="{{idColonneTriParDefaut}}"
               [scrollable]="true" scrollHeight="calc(100vh - 20rem)"
               [style]="{ margin: '1rem' }"
               [value]="portefeuilleAvecCours.cours"
               [loading]="loading">
               <ng-template #header>
                 <tr>
-                  <th pSortableColumn="libelle">
-                    {{ 'COMPOSANTS.PORTEFEUILLES.LIBELLE' | translate }}
-                    <p-sortIcon field="libelle"/>
-                  </th>
-                  <th>
-                    {{ 'COMPOSANTS.PORTEFEUILLES.ALERTES' | translate }}
-                  </th>
-                  <th>
-                    {{ 'COMPOSANTS.PORTEFEUILLES.CLOTURE' | translate }}
-                  </th>
-                  <th pSortableColumn="varAchats">
-                    {{ 'COMPOSANTS.PORTEFEUILLES.VAR_ACHATS' | translate }}
-                    <p-sortIcon field="varAchats"/>
-                  </th>
-                  <th pSortableColumn="var1">
-                    {{ 'COMPOSANTS.PORTEFEUILLES.VAR1' | translate }}
-                    <p-sortIcon field="var1"/>
-                  </th>
-                  <th>
-                    {{ 'COMPOSANTS.PORTEFEUILLES.MM5' | translate }}
-                  </th>
-                  <th>
-                    {{ 'COMPOSANTS.PORTEFEUILLES.MM20' | translate }}
-                  </th>
-                  <th>
-                    {{ 'COMPOSANTS.PORTEFEUILLES.MM50' | translate }}
-                  </th>
-                  <th>
-                    {{ 'COMPOSANTS.PORTEFEUILLES.MM100' | translate }}
-                  </th>
-                  <th>
-                    {{ 'COMPOSANTS.PORTEFEUILLES.MM200' | translate }}
-                  </th>
+                  @for (colonneDecoree of colonnesDecorees; track colonneDecoree.id) {
+                    @if (colonneDecoree.colonne.tri) {
+                      <th pSortableColumn="{{colonneDecoree.id}}"
+                          [ngStyle]="{'width': `${colonneDecoree.colonne.largeur}%`, 'text-align': colonneDecoree.textAlign}">
+                        {{ colonneDecoree.colonne.nom }}
+                        <p-sortIcon field="{{colonneDecoree.id}}"/>
+                      </th>
+                    } @else {
+                      <th
+                        [ngStyle]="{'width': `${colonneDecoree.colonne.largeur}%`, 'text-align': colonneDecoree.textAlign}">
+                        {{ colonneDecoree.colonne.nom }}
+                      </th>
+                    }
+                  }
                 </tr>
               </ng-template>
               <ng-template #body let-cours>
                 <tr>
-                  <td>
-                  <span class="pi"
-                        [class]="classeIconeVariation(cours.var1)"
-                        (click)="afficherActions($event, cours, portefeuilleAvecCours.portefeuille)"
-                        title="{{ 'COMPOSANTS.PORTEFEUILLES.ACTIONS' | translate }}"></span>
-                    <span (click)="basculerAffichageCours(cours)">{{ cours.libelle }}</span>
-                  </td>
-                  <td>
-                    <app-alertes [alertes]="cours.alertes"></app-alertes>
-                  </td>
-                  <td>{{ cours.cloture | currency:'€' }}</td>
-                  <td [class]="classeCssVariation(cours.varAchats)">
-                    {{ cours.varAchats | percent:'1.2-2' }}
-                  </td>
-                  <td [class]="classeCssVariation(cours.var1)">
-                    {{ cours.var1 | percent:'1.2-2' }}
-                  </td>
-                  <td [class]="classeCssMM(cours, cours.moyennesMobiles[4])">
-                    {{ cours.moyennesMobiles[4] | currency:'€' }}
-                  </td>
-                  <td [class]="classeCssMM(cours, cours.moyennesMobiles[19])">
-                    {{ cours.moyennesMobiles[19] | currency:'€' }}
-                  </td>
-                  <td [class]="classeCssMM(cours, cours.moyennesMobiles[49])">
-                    {{ cours.moyennesMobiles[49] | currency:'€' }}
-                  </td>
-                  <td [class]="classeCssMM(cours, cours.moyennesMobiles[99])">
-                    {{ cours.moyennesMobiles[99] | currency:'€' }}
-                  </td>
-                  <td [class]="classeCssMM(cours, cours.moyennesMobiles[199])">
-                    {{ cours.moyennesMobiles[199] | currency:'€' }}
-                  </td>
+                  @for (colonneDecoree of colonnesDecorees; track colonneDecoree.id) {
+                    <td
+                      [ngStyle]="{'text-align': colonneDecoree.textAlign}"
+                      [class]="classeCss(colonneDecoree, cours)"
+                      (click)="onClickCours($event, cours, portefeuilleAvecCours.portefeuille)">
+                      @if (colonneDecoree.id === 0) {
+                        <span class="pi"
+                              [class]="classeIconeVariation(cours.var1)"
+                              title="{{ 'COMPOSANTS.PORTEFEUILLES.ACTIONS' | translate }}"></span>
+                      }
+                      @switch (colonneDecoree.colonne.type) {
+                        @case (TypesColonnesPortefeuille.DATE) {
+                          {{ cours[colonneDecoree.id] | date: 'dd/MM/yyyy' }}
+                        }
+                        @case (TypesColonnesPortefeuille.MARCHE) {
+                          {{ `ENUMERATIONS.MARCHE.${cours[colonneDecoree.id]}` | translate }}
+                        }
+                        @case (TypesColonnesPortefeuille.OUVERTURE) {
+                          {{ cours[colonneDecoree.id] | currency:'€' }}
+                        }
+                        @case (TypesColonnesPortefeuille.PLUS_HAUT) {
+                          {{ cours[colonneDecoree.id] | currency:'€' }}
+                        }
+                        @case (TypesColonnesPortefeuille.PLUS_BAS) {
+                          {{ cours[colonneDecoree.id] | currency:'€' }}
+                        }
+                        @case (TypesColonnesPortefeuille.CLOTURE) {
+                          {{ cours[colonneDecoree.id] | currency:'€' }}
+                        }
+                        @case (TypesColonnesPortefeuille.VOLUME) {
+                          {{ cours[colonneDecoree.id] | number }}
+                        }
+                        @case (TypesColonnesPortefeuille.ALERTES) {
+                          <app-alertes [alertes]="cours[colonneDecoree.id]"></app-alertes>
+                        }
+                        @case (TypesColonnesPortefeuille.VARIATION_ACHATS) {
+                          {{ cours[colonneDecoree.id] | percent:'1.2-2' }}
+                        }
+                        @case (TypesColonnesPortefeuille.COURS) {
+                          {{ cours[colonneDecoree.id] | currency:'€' }}
+                        }
+                        @case (TypesColonnesPortefeuille.MOYENNE_MOBILE) {
+                          {{ cours[colonneDecoree.id] | currency:'€' }}
+                        }
+                        @case (TypesColonnesPortefeuille.VARIATION) {
+                          {{ cours[colonneDecoree.id] | percent:'1.2-2' }}
+                        }
+                        @default {
+                          {{ cours[colonneDecoree.id] }}
+                        }
+                      }
+                    </td>
+                  }
                 </tr>
               </ng-template>
             </p-table>

@@ -12,12 +12,13 @@ import {PORTEFEUILLE} from '../../services/jdd/jdd-portefeuilles.dataset';
 import {provideAnimations} from '@angular/platform-browser/animations';
 import {ConfirmationService} from 'primeng/api';
 import {DTOAchat} from '../../services/valeurs/dto-achat.interface';
+import {CurrencyPipe, DatePipe, DecimalPipe, PercentPipe} from '@angular/common';
 
 describe('PortefeuillesComponent', () => {
   let component: PortefeuillesComponent;
   let fixture: ComponentFixture<PortefeuillesComponent>;
 
-  const mockPortefeuillesService = jasmine.createSpyObj('PortefeuillesService', ['charger', 'onUpdate']);
+  const mockPortefeuillesService = jasmine.createSpyObj('PortefeuillesService', ['charger', 'onUpdate', 'indexPortefeuilleParDefaut']);
   const mockValeursService = jasmine.createSpyObj('ValeursService', ['chargerValeurs', 'chargerAchatsByTicker', 'onImportAchats', 'onUpdateAchats']);
   const mockCoursService = jasmine.createSpyObj('CoursService', ['chargerCoursTickersWithLimit']);
 
@@ -35,6 +36,10 @@ describe('PortefeuillesComponent', () => {
         {provide: ValeursService, useValue: mockValeursService},
         {provide: CoursService, useValue: mockCoursService},
         ConfirmationService,
+        DatePipe,
+        PercentPipe,
+        CurrencyPipe,
+        DecimalPipe,
         provideAnimations()
       ]
     });
@@ -55,17 +60,10 @@ describe('PortefeuillesComponent', () => {
     expect(component).toBeDefined();
   });
 
-  it('Given aucun achat when #calculerVariationAchats then la fonction renvoie undefined', () => {
-    expect(component.calculerVariationAchats(LISTE_COURS_AVEC_LISTE_ALLEGEE[0], new Map<string, Array<DTOAchat>>())).toBeUndefined();
-  });
-
-  it('Given deux achats when #calculerVariationAchats then la fonction renvoie la moyenne du prix d\'achat', () => {
-    expect(component.calculerVariationAchats(LISTE_COURS_AVEC_LISTE_ALLEGEE[0], achatsByTicker)).toEqual(0.02012642592458036);
-  });
-
   describe('Given #chargerValeurs et #chargerCours renvoient des valeurs et des cours', () => {
     beforeEach(() => {
       mockPortefeuillesService.charger.and.returnValue([PORTEFEUILLE]);
+      mockPortefeuillesService.indexPortefeuilleParDefaut.and.returnValue(0);
       mockValeursService.chargerValeurs.and.returnValue(of([VALEUR]));
       mockValeursService.chargerAchatsByTicker.and.returnValue(achatsByTicker);
       mockCoursService.chargerCoursTickersWithLimit.and.returnValue(of(LISTE_COURS_AVEC_LISTE_ALLEGEE));

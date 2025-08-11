@@ -276,6 +276,13 @@ export class PortefeuillesService {
     return portefeuilleAvecAuMoinsUneValeur !== undefined;
   }
 
+  public indexPortefeuilleParDefaut(): number {
+    const idxPortefeuilleCourant = this.charger()
+      .filter(portefeuille => portefeuille.tickers.length > 0)
+      .findIndex(portefeuille => portefeuille.parDefaut);
+    return idxPortefeuilleCourant !== -1 ? idxPortefeuilleCourant : 0;
+  }
+
   public validerAlertes(alertes: any): string | undefined {
     this.cleMessageErreur = undefined;
     if (alertes instanceof Array) {

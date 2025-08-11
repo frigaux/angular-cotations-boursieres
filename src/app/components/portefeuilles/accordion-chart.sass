@@ -18,6 +18,14 @@ div.conteneur
   .pi-arrow-circle-down
     color: var(--p-red-600)
 
+  p-table
+    td
+      &.positive
+        color: var(--p-green-600)
+
+      &.negative
+        color: var(--p-red-600)
+
   &:not(.avec-details)
     app-details-valeur
       display: none
@@ -38,14 +46,9 @@ div.conteneur
       p-accordion
         p-table
           tr
-            th:nth-child(1)
-              width: 60%
-
-            th:nth-child(2)
-              width: 40%
-
             th:nth-child(n+3), td:nth-child(n+3)
               display: none
+              width: 0
 
       @media screen and (max-aspect-ratio: 2.1)
         app-details-valeur

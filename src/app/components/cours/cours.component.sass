@@ -10,28 +10,30 @@ div.titre
     margin-left: 1rem
 
 div.conteneur
+  margin-top: 1rem
+
   p-table
     tr
       td:nth-child(1)
         span
           cursor: pointer
 
-      th:nth-child(n+2)
+      th:nth-child(n+2), td:nth-child(n+2)
         text-align: right
 
-      td:nth-child(n+2)
-        text-align: right
+  &.avec-details
+    p-accordion
+      p-table
+        tr
+          th:nth-child(1)
+            width: 60%
+
+          th:nth-child(2)
+            width: 40%
 
   &:not(.avec-details)
     p-accordion
       p-table
-        td
-          &.positive
-            color: var(--p-green-600)
-
-          &.negative
-            color: var(--p-red-600)
-
         tr
           th:nth-child(1)
             width: 20%
@@ -65,3 +67,4 @@ div.conteneur
 
         th:nth-child(n+4), td:nth-child(n+4)
           display: none
+          width: 0

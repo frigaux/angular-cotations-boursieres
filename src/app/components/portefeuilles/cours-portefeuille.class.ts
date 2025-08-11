@@ -6,6 +6,7 @@ import {DTOValeur} from '../../services/valeurs/dto-valeur.interface';
 import {Marches} from '../../services/valeurs/marches.enum';
 import {ValeursService} from '../../services/valeurs/valeurs.service';
 import {DTOAchat} from '../../services/valeurs/dto-achat.interface';
+import {ColonneDecoree} from './colonne-decoree.class';
 
 export class CoursPortefeuille {
   date: string; // ISO 8601 : yyyy-MM-dd
@@ -20,12 +21,11 @@ export class CoursPortefeuille {
   moyennesMobiles: number[];
   alerte: boolean;
   coursAlleges: DTOCoursTickerAllege[];
-  alertes: Alerte[];
-  varAchats?: number;
+  alertes: { alerte: DTOAlerte, evaluer: Function }[];
 
   constructor(valeur: DTOValeur, dto: DTOCoursAvecListeAllege,
               alertes: { alerte: DTOAlerte, evaluer: Function }[],
-              varAchats: number | undefined) {
+              colonnesDecorees: ColonneDecoree[]) {
     this.date = dto.cours[0].date;
     this.ticker = dto.ticker;
     this.libelle = valeur.libelle;
@@ -38,11 +38,13 @@ export class CoursPortefeuille {
     this.moyennesMobiles = dto.moyennesMobiles;
     this.alerte = dto.alerte;
     this.coursAlleges = dto.cours;
-    this.alertes = this.evaluerAlertes(alertes);
-    this.varAchats = varAchats;
+    this.alertes = alertes;
 
     Object.assign(this, {var1: this.calculerVariation(1)});
-    Object.assign(this, {var5: this.calculerVariation(5)});
+
+    for (const colonneDecoree of colonnesDecorees) {
+      Object.assign(this, {[colonneDecoree.id]: colonneDecoree.evaluer(this)});
+    }
   }
 
   public calculerVariation(jours: number) {
@@ -53,8 +55,8 @@ export class CoursPortefeuille {
     }
   }
 
-  private evaluerAlertes(alertes: { alerte: DTOAlerte, evaluer: Function }[]): Alerte[] {
-    return alertes.map(dto =>
+  evaluerAlertes(): Alerte[] {
+    return this.alertes.map(dto =>
       new Alerte(dto.alerte, dto.evaluer(this.coursAlleges, this.moyennesMobiles))
     );
   }

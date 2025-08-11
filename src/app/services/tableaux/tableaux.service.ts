@@ -31,101 +31,101 @@ export class TableauxService {
       portefeuille: {
         colonnesPaysage: [
           {
-            nom: "Libellé",
-            type: 3,
+            nom: 'Libellé',
+            type: TypesColonnesPortefeuille.LIBELLE,
             tri: true,
             largeur: 20
           },
           {
-            nom: "Alertes",
-            type: 9,
+            nom: 'Alertes',
+            type: TypesColonnesPortefeuille.ALERTES,
             tri: false,
             largeur: 12
           },
           {
-            nom: "Clôture",
-            type: 7,
+            nom: 'Clôture',
+            type: TypesColonnesPortefeuille.CLOTURE,
             tri: false,
             largeur: 8
           },
           {
-            nom: "Var/Ac",
-            type: 10,
+            nom: 'Var/Ac',
+            type: TypesColonnesPortefeuille.VARIATION_ACHATS,
             tri: true,
             largeur: 10
           },
           {
-            nom: "Var/1j",
-            type: 13,
-            "parametre": 1,
+            nom: 'Var/1j',
+            type: TypesColonnesPortefeuille.VARIATION,
+            parametre: 1,
             tri: true,
             largeur: 10
           },
           {
-            nom: "MM5",
-            type: 12,
-            "parametre": 5,
+            nom: 'MM5',
+            type: TypesColonnesPortefeuille.MOYENNE_MOBILE,
+            parametre: 5,
             tri: false,
             largeur: 8
           },
           {
-            nom: "MM20",
-            type: 12,
-            "parametre": 20,
+            nom: 'MM20',
+            type: TypesColonnesPortefeuille.MOYENNE_MOBILE,
+            parametre: 20,
             tri: false,
             largeur: 8
           },
           {
-            nom: "MM50",
-            type: 12,
-            "parametre": 50,
+            nom: 'MM50',
+            type: TypesColonnesPortefeuille.MOYENNE_MOBILE,
+            parametre: 50,
             tri: false,
             largeur: 8
           },
           {
-            nom: "MM100",
-            type: 12,
-            "parametre": 100,
+            nom: 'MM100',
+            type: TypesColonnesPortefeuille.MOYENNE_MOBILE,
+            parametre: 100,
             tri: false,
             largeur: 8
           },
           {
-            nom: "MM200",
-            type: 12,
-            "parametre": 200,
+            nom: 'MM200',
+            type: TypesColonnesPortefeuille.MOYENNE_MOBILE,
+            parametre: 200,
             tri: false,
             largeur: 8
           }
         ],
         colonnesPortrait: [
           {
-            nom: "Libellé",
-            type: 3,
+            nom: 'Libellé',
+            type: TypesColonnesPortefeuille.LIBELLE,
             tri: true,
             largeur: 30
           },
           {
-            nom: "Alertes",
-            type: 9,
+            nom: 'Alertes',
+            type: TypesColonnesPortefeuille.ALERTES,
             tri: false,
             largeur: 25
           },
           {
-            nom: "Clôture",
-            type: 7,
+            nom: 'Clôture',
+            type: TypesColonnesPortefeuille.CLOTURE,
             tri: false,
             largeur: 15
           },
           {
-            nom: "Var/Ac",
-            type: 10,
+            nom: 'Var/Ac',
+            type: TypesColonnesPortefeuille.VARIATION_ACHATS,
             tri: true,
             largeur: 15
           },
           {
-            nom: "Var/1j",
-            type: 13,
-            "parametre": 1,
+            nom: 'Var/1j',
+            type: TypesColonnesPortefeuille.VARIATION,
+            parametre: 1,
             tri: true,
             largeur: 15
           }
@@ -139,47 +139,67 @@ export class TableauxService {
             nom: 'Libellé',
             type: TypesColonnesPortefeuille.LIBELLE,
             tri: true,
-            largeur: 25
+            largeur: 20
           },
           {
             nom: 'Alertes',
             type: TypesColonnesPortefeuille.ALERTES,
             tri: false,
-            largeur: 20
+            largeur: 12
           },
           {
             nom: 'Clôture',
             type: TypesColonnesPortefeuille.CLOTURE,
             tri: false,
-            largeur: 11
+            largeur: 8
           },
           {
-            nom: 'Var./Préc.',
+            nom: 'Var/Ac',
+            type: TypesColonnesPortefeuille.VARIATION_ACHATS,
+            tri: true,
+            largeur: 10
+          },
+          {
+            nom: 'Var/1j',
             type: TypesColonnesPortefeuille.VARIATION,
             parametre: 1,
             tri: true,
-            largeur: 11
+            largeur: 10
           },
           {
-            nom: 'MM5j',
+            nom: 'MM5',
             type: TypesColonnesPortefeuille.MOYENNE_MOBILE,
             parametre: 5,
             tri: false,
-            largeur: 11
+            largeur: 8
           },
           {
-            nom: 'MM20j',
+            nom: 'MM20',
             type: TypesColonnesPortefeuille.MOYENNE_MOBILE,
             parametre: 20,
             tri: false,
-            largeur: 11
+            largeur: 8
           },
           {
-            nom: 'MM50j',
+            nom: 'MM50',
             type: TypesColonnesPortefeuille.MOYENNE_MOBILE,
             parametre: 50,
             tri: false,
-            largeur: 11
+            largeur: 8
+          },
+          {
+            nom: 'MM100',
+            type: TypesColonnesPortefeuille.MOYENNE_MOBILE,
+            parametre: 100,
+            tri: false,
+            largeur: 8
+          },
+          {
+            nom: 'MM200',
+            type: TypesColonnesPortefeuille.MOYENNE_MOBILE,
+            parametre: 200,
+            tri: false,
+            largeur: 8
           }
         ],
         colonnesPortrait: [
@@ -187,33 +207,19 @@ export class TableauxService {
             nom: 'Libellé',
             type: TypesColonnesPortefeuille.LIBELLE,
             tri: true,
-            largeur: 30
+            largeur: 40
           },
           {
             nom: 'Alertes',
             type: TypesColonnesPortefeuille.ALERTES,
             tri: false,
-            largeur: 25
+            largeur: 40
           },
           {
             nom: 'Clôture',
             type: TypesColonnesPortefeuille.CLOTURE,
             tri: false,
-            largeur: 15
-          },
-          {
-            nom: 'Var./Préc.',
-            type: TypesColonnesPortefeuille.VARIATION,
-            parametre: 1,
-            tri: true,
-            largeur: 15
-          },
-          {
-            nom: 'MM5j',
-            type: TypesColonnesPortefeuille.MOYENNE_MOBILE,
-            parametre: 5,
-            tri: false,
-            largeur: 15
+            largeur: 20
           }
         ]
       }
@@ -231,55 +237,61 @@ export class TableauxService {
             nom: 'Alertes',
             type: TypesColonnesPortefeuille.ALERTES,
             tri: false,
-            largeur: 17
+            largeur: 12
           },
           {
             nom: 'Clôture',
             type: TypesColonnesPortefeuille.CLOTURE,
             tri: false,
-            largeur: 9
+            largeur: 8
           },
           {
-            nom: 'Var./Préc.',
+            nom: 'Var/Ac',
+            type: TypesColonnesPortefeuille.VARIATION_ACHATS,
+            tri: true,
+            largeur: 10
+          },
+          {
+            nom: 'Var/1j',
             type: TypesColonnesPortefeuille.VARIATION,
             parametre: 1,
             tri: true,
-            largeur: 9
+            largeur: 10
           },
           {
-            nom: 'Var./5j',
-            type: TypesColonnesPortefeuille.VARIATION,
-            parametre: 5,
-            tri: true,
-            largeur: 9
-          },
-          {
-            nom: 'MM5j',
+            nom: 'MM5',
             type: TypesColonnesPortefeuille.MOYENNE_MOBILE,
             parametre: 5,
             tri: false,
-            largeur: 9
+            largeur: 8
           },
           {
-            nom: 'MM20j',
+            nom: 'MM20',
             type: TypesColonnesPortefeuille.MOYENNE_MOBILE,
             parametre: 20,
             tri: false,
-            largeur: 9
+            largeur: 8
           },
           {
-            nom: 'MM50j',
+            nom: 'MM50',
             type: TypesColonnesPortefeuille.MOYENNE_MOBILE,
             parametre: 50,
             tri: false,
-            largeur: 9
+            largeur: 8
           },
           {
-            nom: 'MM100j',
+            nom: 'MM100',
             type: TypesColonnesPortefeuille.MOYENNE_MOBILE,
             parametre: 100,
             tri: false,
-            largeur: 9
+            largeur: 8
+          },
+          {
+            nom: 'MM200',
+            type: TypesColonnesPortefeuille.MOYENNE_MOBILE,
+            parametre: 200,
+            tri: false,
+            largeur: 8
           }
         ],
         colonnesPortrait: [
@@ -302,17 +314,16 @@ export class TableauxService {
             largeur: 15
           },
           {
-            nom: 'Var./Préc.',
-            type: TypesColonnesPortefeuille.VARIATION,
-            parametre: 1,
+            nom: 'Var/Ac',
+            type: TypesColonnesPortefeuille.VARIATION_ACHATS,
             tri: true,
             largeur: 15
           },
           {
-            nom: 'MM5j',
-            type: TypesColonnesPortefeuille.MOYENNE_MOBILE,
-            parametre: 5,
-            tri: false,
+            nom: 'Var/1j',
+            type: TypesColonnesPortefeuille.VARIATION,
+            parametre: 1,
+            tri: true,
             largeur: 15
           }
         ]
@@ -377,7 +388,7 @@ export class TableauxService {
       || type === TypesColonnesPortefeuille.VARIATION;
   }
 
-  public valeurPourUnCours<T extends TypesColonnesPortefeuille | TypesColonnesCours>(colonne: DTOColonne<T>): Function {
+  public valeurFormatteePourUnCours<T extends TypesColonnesPortefeuille | TypesColonnesCours>(colonne: DTOColonne<T>): Function {
     switch (colonne.type) {
       case TypesColonnesPortefeuille.DATE:
         return (cours: CoursPortefeuille) => this.datePipe.transform(cours.date, 'dd/MM/yyyy');
@@ -407,6 +418,41 @@ export class TableauxService {
         return (cours: CoursPortefeuille) => this.currencyPipe.transform(cours.moyennesMobiles[colonne.parametre! - 1], '€');
       case TypesColonnesPortefeuille.VARIATION:
         return (cours: CoursPortefeuille) => this.percentPipe.transform(cours.calculerVariation(colonne.parametre!), '1.2-2');
+      default:
+        throw new Error(`Colonne non gérée ${colonne.type}`);
+    }
+  }
+
+  public valeurPourUnCours<T extends TypesColonnesPortefeuille | TypesColonnesCours>(colonne: DTOColonne<T>): Function {
+    switch (colonne.type) {
+      case TypesColonnesPortefeuille.DATE:
+        return (cours: CoursPortefeuille) => cours.date;
+      case TypesColonnesPortefeuille.MARCHE:
+        return (cours: CoursPortefeuille) => cours.marche;
+      case TypesColonnesPortefeuille.TICKER:
+        return (cours: CoursPortefeuille) => cours.ticker;
+      case TypesColonnesPortefeuille.LIBELLE:
+        return (cours: CoursPortefeuille) => cours.libelle;
+      case TypesColonnesPortefeuille.OUVERTURE:
+        return (cours: CoursPortefeuille) => cours.ouverture
+      case TypesColonnesPortefeuille.PLUS_HAUT:
+        return (cours: CoursPortefeuille) => cours.plusHaut
+      case TypesColonnesPortefeuille.PLUS_BAS:
+        return (cours: CoursPortefeuille) => cours.plusBas
+      case TypesColonnesPortefeuille.CLOTURE:
+        return (cours: CoursPortefeuille) => cours.cloture
+      case TypesColonnesPortefeuille.VOLUME:
+        return (cours: CoursPortefeuille) => cours.volume;
+      case TypesColonnesPortefeuille.ALERTES:
+        return (cours: CoursPortefeuille) => cours.evaluerAlertes();
+      case TypesColonnesPortefeuille.VARIATION_ACHATS:
+        return (cours: CoursPortefeuille) => cours.calculerVariationAchats(this.valeursService);
+      case TypesColonnesPortefeuille.COURS:
+        return (cours: CoursPortefeuille) => cours.coursAlleges[colonne.parametre! - 1].cloture
+      case TypesColonnesPortefeuille.MOYENNE_MOBILE:
+        return (cours: CoursPortefeuille) => cours.moyennesMobiles[colonne.parametre! - 1]
+      case TypesColonnesPortefeuille.VARIATION:
+        return (cours: CoursPortefeuille) => cours.calculerVariation(colonne.parametre!);
       default:
         throw new Error(`Colonne non gérée ${colonne.type}`);
     }

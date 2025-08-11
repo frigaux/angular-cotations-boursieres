@@ -33,7 +33,7 @@ export class DetailsValeurComponent {
 
   private intercepteurCoursPortefeuille(coursPortefeuille: CoursPortefeuille | undefined) {
     this.coursPortefeuille = coursPortefeuille;
-    this.alertes = coursPortefeuille?.alertes;
+    this.alertes = coursPortefeuille?.evaluerAlertes();
     this.cours = coursPortefeuille ? Cours.fromCoursPortefeuille(coursPortefeuille) : undefined;
     return coursPortefeuille;
   }

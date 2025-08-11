@@ -20,6 +20,7 @@ import {SelecteurFiltreComponent} from './selecteur-filtre/selecteur-filtre.comp
 import {FiltreDecore} from './selecteur-filtre/filtre-decore.class';
 import {ImportExportComponent} from './editeur-filtres/import-export/import-export.component';
 
+// TODO : reprendre ligne cliquable comme sur le portefeuille
 @Component({
   selector: 'app-cours',
   imports: [

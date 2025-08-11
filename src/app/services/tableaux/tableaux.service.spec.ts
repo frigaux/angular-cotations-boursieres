@@ -71,22 +71,22 @@ describe('TableauxService', () => {
     expect(service.charger()).toEqual(TABLEAUX);
   });
 
-  it('Given une colonne et un cours when #valeurPourUnCours sur la colonne then la fonction renvoie bien la valeur', () => {
-    expect(service.valeurPourUnCours(COLONNE_DATE_20)(COURS_PORTEFEUILLE)).toBe('09/05/2025');
-    expect(service.valeurPourUnCours(COLONNE_MARCHE_20)(COURS_PORTEFEUILLE)).toBe(`ENUMERATIONS.MARCHE.${COURS_PORTEFEUILLE.marche}`);
-    expect(service.valeurPourUnCours(COLONNE_TICKER_20)(COURS_PORTEFEUILLE)).toBe(COURS_PORTEFEUILLE.ticker);
-    expect(service.valeurPourUnCours(COLONNE_LIBELLE_40)(COURS_PORTEFEUILLE)).toBe(COURS_PORTEFEUILLE.libelle);
-    expect(service.valeurPourUnCours(COLONNE_OUVERTURE_20)(COURS_PORTEFEUILLE)).toBe(`€${COURS_PORTEFEUILLE.ouverture}`);
-    expect(service.valeurPourUnCours(COLONNE_PLUS_HAUT_20)(COURS_PORTEFEUILLE)).toBe(`€${COURS_PORTEFEUILLE.plusHaut}`);
-    expect(service.valeurPourUnCours(COLONNE_PLUS_BAS_20)(COURS_PORTEFEUILLE)).toBe(`€${COURS_PORTEFEUILLE.plusBas}`);
-    expect(service.valeurPourUnCours(COLONNE_CLOTURE_20)(COURS_PORTEFEUILLE)).toBe(`€${COURS_PORTEFEUILLE.cloture}0`);
-    expect(service.valeurPourUnCours(COLONNE_VOLUME_20)(COURS_PORTEFEUILLE)).toBe('2,141,570');
-    expect(service.valeurPourUnCours(COLONNE_ALERTES_20)(COURS_PORTEFEUILLE)).toEqual([]);
+  it('Given une colonne et un cours when #valeurFormatteePourUnCours sur la colonne then la fonction renvoie bien la valeur', () => {
+    expect(service.valeurFormatteePourUnCours(COLONNE_DATE_20)(COURS_PORTEFEUILLE)).toBe('09/05/2025');
+    expect(service.valeurFormatteePourUnCours(COLONNE_MARCHE_20)(COURS_PORTEFEUILLE)).toBe(`ENUMERATIONS.MARCHE.${COURS_PORTEFEUILLE.marche}`);
+    expect(service.valeurFormatteePourUnCours(COLONNE_TICKER_20)(COURS_PORTEFEUILLE)).toBe(COURS_PORTEFEUILLE.ticker);
+    expect(service.valeurFormatteePourUnCours(COLONNE_LIBELLE_40)(COURS_PORTEFEUILLE)).toBe(COURS_PORTEFEUILLE.libelle);
+    expect(service.valeurFormatteePourUnCours(COLONNE_OUVERTURE_20)(COURS_PORTEFEUILLE)).toBe(`€${COURS_PORTEFEUILLE.ouverture}`);
+    expect(service.valeurFormatteePourUnCours(COLONNE_PLUS_HAUT_20)(COURS_PORTEFEUILLE)).toBe(`€${COURS_PORTEFEUILLE.plusHaut}`);
+    expect(service.valeurFormatteePourUnCours(COLONNE_PLUS_BAS_20)(COURS_PORTEFEUILLE)).toBe(`€${COURS_PORTEFEUILLE.plusBas}`);
+    expect(service.valeurFormatteePourUnCours(COLONNE_CLOTURE_20)(COURS_PORTEFEUILLE)).toBe(`€${COURS_PORTEFEUILLE.cloture}0`);
+    expect(service.valeurFormatteePourUnCours(COLONNE_VOLUME_20)(COURS_PORTEFEUILLE)).toBe('2,141,570');
+    expect(service.valeurFormatteePourUnCours(COLONNE_ALERTES_20)(COURS_PORTEFEUILLE)).toEqual([]);
     mockValeursService.chargerAchatsTicker.and.returnValue(achats);
-    expect(service.valeurPourUnCours(COLONNE_VARIATION_ACHATS_20)(COURS_PORTEFEUILLE)).toEqual('2.01%');
-    expect(service.valeurPourUnCours(COLONNE_COURS_20)(COURS_PORTEFEUILLE)).toBe(`€${COURS_PORTEFEUILLE.coursAlleges[0].cloture}`);
-    expect(service.valeurPourUnCours(COLONNE_MOYENNE_MOBILE_20)(COURS_PORTEFEUILLE)).toBe(`€${COURS_PORTEFEUILLE.moyennesMobiles[0]}0`);
-    expect(service.valeurPourUnCours(COLONNE_VARIATION_20)(COURS_PORTEFEUILLE)).toBe('1.16%');
+    expect(service.valeurFormatteePourUnCours(COLONNE_VARIATION_ACHATS_20)(COURS_PORTEFEUILLE)).toEqual('2.01%');
+    expect(service.valeurFormatteePourUnCours(COLONNE_COURS_20)(COURS_PORTEFEUILLE)).toBe(`€${COURS_PORTEFEUILLE.coursAlleges[0].cloture}`);
+    expect(service.valeurFormatteePourUnCours(COLONNE_MOYENNE_MOBILE_20)(COURS_PORTEFEUILLE)).toBe(`€${COURS_PORTEFEUILLE.moyennesMobiles[0]}0`);
+    expect(service.valeurFormatteePourUnCours(COLONNE_VARIATION_20)(COURS_PORTEFEUILLE)).toBe('1.16%');
   });
 
 

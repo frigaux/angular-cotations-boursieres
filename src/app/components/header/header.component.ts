@@ -50,7 +50,6 @@ export class HeaderComponent {
       routerLink: 'gestion-portefeuilles',
       icon: 'pi pi-wrench'
     });
-    // TODO : décommenter et prendre en compte la configuration des colonnes dans les tableaux
     this.items.push({
       label: translateService.instant('COMPOSANTS.HEADER.GESTION_TABLEAUX'),
       routerLink: 'gestion-tableaux',

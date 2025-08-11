@@ -140,16 +140,6 @@
     "PORTEFEUILLES": {
       "PORTEFEUILLES_DATE": "Portefeuilles à la date du",
       "ACTIONS": "Actions sur la valeur",
-      "LIBELLE": "Libellé",
-      "ALERTES": "Alertes",
-      "CLOTURE": "Clôture",
-      "VAR_ACHATS": "Var/ac",
-      "VAR1": "Var/1j",
-      "MM5": "MM5",
-      "MM20": "MM20",
-      "MM50": "MM50",
-      "MM100": "MM100",
-      "MM200": "MM200",
       "DETAILS_VALEUR": {
         "TITRE": "{{valeur}} ({{ticker}}, {{marche}}, {{date}})",
         "ABCBOURSE": "Lien vers ABCBourse",
