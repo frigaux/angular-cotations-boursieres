@@ -62,16 +62,16 @@ export class TableauxService {
             largeur: 7
           },
           {
-            'nom': 'Ticker',
-            'type': TypesColonnesPortefeuille.TICKER,
-            'tri': true,
-            'largeur': 7
+            nom: 'Ticker',
+            type: TypesColonnesPortefeuille.TICKER,
+            tri: true,
+            largeur: 7
           },
           {
-            'nom': 'Marché',
-            'type': TypesColonnesPortefeuille.MARCHE,
-            'tri': true,
-            'largeur': 7
+            nom: 'Marché',
+            type: TypesColonnesPortefeuille.MARCHE,
+            tri: true,
+            largeur: 7
           },
           {
             nom: 'MM5',
@@ -140,98 +140,6 @@ export class TableauxService {
             parametre: 1,
             tri: true,
             largeur: 15
-          }
-        ]
-      }
-    },
-    MOBILE: {
-      portefeuille: {
-        colonnesPaysage: [
-          {
-            nom: 'Libellé',
-            type: TypesColonnesPortefeuille.LIBELLE,
-            tri: true,
-            largeur: 20
-          },
-          {
-            nom: 'Alertes',
-            type: TypesColonnesPortefeuille.ALERTES,
-            tri: false,
-            largeur: 12
-          },
-          {
-            nom: 'Clôture',
-            type: TypesColonnesPortefeuille.CLOTURE,
-            tri: false,
-            largeur: 8
-          },
-          {
-            nom: 'Var/Ac',
-            type: TypesColonnesPortefeuille.VARIATION_ACHATS,
-            tri: true,
-            largeur: 10
-          },
-          {
-            nom: 'Var/1j',
-            type: TypesColonnesPortefeuille.VARIATION,
-            parametre: 1,
-            tri: true,
-            largeur: 10
-          },
-          {
-            nom: 'MM5',
-            type: TypesColonnesPortefeuille.MOYENNE_MOBILE,
-            parametre: 5,
-            tri: false,
-            largeur: 8
-          },
-          {
-            nom: 'MM20',
-            type: TypesColonnesPortefeuille.MOYENNE_MOBILE,
-            parametre: 20,
-            tri: false,
-            largeur: 8
-          },
-          {
-            nom: 'MM50',
-            type: TypesColonnesPortefeuille.MOYENNE_MOBILE,
-            parametre: 50,
-            tri: false,
-            largeur: 8
-          },
-          {
-            nom: 'MM100',
-            type: TypesColonnesPortefeuille.MOYENNE_MOBILE,
-            parametre: 100,
-            tri: false,
-            largeur: 8
-          },
-          {
-            nom: 'MM200',
-            type: TypesColonnesPortefeuille.MOYENNE_MOBILE,
-            parametre: 200,
-            tri: false,
-            largeur: 8
-          }
-        ],
-        colonnesPortrait: [
-          {
-            nom: 'Libellé',
-            type: TypesColonnesPortefeuille.LIBELLE,
-            tri: true,
-            largeur: 40
-          },
-          {
-            nom: 'Alertes',
-            type: TypesColonnesPortefeuille.ALERTES,
-            tri: false,
-            largeur: 40
-          },
-          {
-            nom: 'Clôture',
-            type: TypesColonnesPortefeuille.CLOTURE,
-            tri: false,
-            largeur: 20
           }
         ]
       }
@@ -337,6 +245,78 @@ export class TableauxService {
             parametre: 1,
             tri: true,
             largeur: 15
+          }
+        ]
+      }
+    },
+    MOBILE: {
+      portefeuille: {
+        colonnesPaysage: [
+          {
+            nom: 'Libellé',
+            type: TypesColonnesPortefeuille.LIBELLE,
+            tri: true,
+            largeur: 25
+          },
+          {
+            nom: 'Alertes',
+            type: TypesColonnesPortefeuille.ALERTES,
+            tri: false,
+            largeur: 15
+          },
+          {
+            nom: 'Clôture',
+            type: TypesColonnesPortefeuille.CLOTURE,
+            tri: false,
+            largeur: 10
+          },
+          {
+            nom: 'Var/Ac',
+            type: TypesColonnesPortefeuille.VARIATION_ACHATS,
+            tri: true,
+            largeur: 10
+          },
+          {
+            nom: 'Var/1j',
+            type: TypesColonnesPortefeuille.VARIATION,
+            parametre: 1,
+            tri: true,
+            largeur: 10
+          },
+          {
+            nom: 'MM5',
+            type: TypesColonnesPortefeuille.MOYENNE_MOBILE,
+            parametre: 5,
+            tri: false,
+            largeur: 10
+          },
+          {
+            nom: 'MM20',
+            type: TypesColonnesPortefeuille.MOYENNE_MOBILE,
+            parametre: 20,
+            tri: false,
+            largeur: 10
+          },
+          {
+            nom: 'MM50',
+            type: TypesColonnesPortefeuille.MOYENNE_MOBILE,
+            parametre: 50,
+            tri: false,
+            largeur: 10
+          }
+        ],
+        colonnesPortrait: [
+          {
+            nom: 'Libellé',
+            type: TypesColonnesPortefeuille.LIBELLE,
+            tri: true,
+            largeur: 60
+          },
+          {
+            nom: 'Var/Ac',
+            type: TypesColonnesPortefeuille.VARIATION_ACHATS,
+            tri: true,
+            largeur: 40
           }
         ]
       }
