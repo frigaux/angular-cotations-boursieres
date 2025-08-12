@@ -40,61 +40,73 @@ export class TableauxService {
             nom: 'Alertes',
             type: TypesColonnesPortefeuille.ALERTES,
             tri: false,
-            largeur: 12
+            largeur: 10
           },
           {
             nom: 'Clôture',
             type: TypesColonnesPortefeuille.CLOTURE,
             tri: false,
-            largeur: 8
+            largeur: 7
           },
           {
             nom: 'Var/Ac',
             type: TypesColonnesPortefeuille.VARIATION_ACHATS,
             tri: true,
-            largeur: 10
+            largeur: 7
           },
           {
             nom: 'Var/1j',
             type: TypesColonnesPortefeuille.VARIATION,
             parametre: 1,
             tri: true,
-            largeur: 10
+            largeur: 7
+          },
+          {
+            'nom': 'Ticker',
+            'type': TypesColonnesPortefeuille.TICKER,
+            'tri': true,
+            'largeur': 7
+          },
+          {
+            'nom': 'Marché',
+            'type': TypesColonnesPortefeuille.MARCHE,
+            'tri': true,
+            'largeur': 7
           },
           {
             nom: 'MM5',
             type: TypesColonnesPortefeuille.MOYENNE_MOBILE,
             parametre: 5,
             tri: false,
-            largeur: 8
+            largeur: 7
           },
           {
             nom: 'MM20',
             type: TypesColonnesPortefeuille.MOYENNE_MOBILE,
             parametre: 20,
             tri: false,
-            largeur: 8
+            largeur: 7
           },
           {
             nom: 'MM50',
             type: TypesColonnesPortefeuille.MOYENNE_MOBILE,
             parametre: 50,
             tri: false,
-            largeur: 8
+            largeur: 7
           },
           {
             nom: 'MM100',
             type: TypesColonnesPortefeuille.MOYENNE_MOBILE,
             parametre: 100,
             tri: false,
-            largeur: 8
+            largeur: 7
           },
           {
             nom: 'MM200',
             type: TypesColonnesPortefeuille.MOYENNE_MOBILE,
             parametre: 200,
             tri: false,
-            largeur: 8
+            largeur: 7
           }
         ],
         colonnesPortrait: [

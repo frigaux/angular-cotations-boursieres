@@ -46,15 +46,14 @@
                 </tr>
               </ng-template>
               <ng-template #body let-cours>
-                <tr>
+                <tr (click)="onClickCours($event, cours, portefeuilleAvecCours.portefeuille)">
                   @for (colonneDecoree of colonnesDecorees; track colonneDecoree.id) {
                     <td
                       [ngStyle]="{'text-align': colonneDecoree.textAlign}"
-                      [class]="classeCss(colonneDecoree, cours)"
-                      (click)="onClickCours($event, cours, portefeuilleAvecCours.portefeuille)">
+                      [class]="evolutionColonne(colonneDecoree, cours)">
                       @if (colonneDecoree.id === 0) {
                         <span class="pi"
-                              [class]="classeIconeVariation(cours.var1)"
+                              [class]="iconeVariation(cours.var1)"
                               title="{{ 'COMPOSANTS.PORTEFEUILLES.ACTIONS' | translate }}"></span>
                       }
                       @switch (colonneDecoree.colonne.type) {

@@ -47,7 +47,7 @@ export class Cours {
     return new Cours(dto.date, dto.ticker, dto.libelle, dto.ouverture, dto.plusHaut, dto.plusBas, dto.cloture, dto.volume, dto.moyennesMobiles, dto.alerte, dto.coursAlleges);
   }
 
-  public classeIconeVariation(): string {
+  public iconeVariation(): string {
     if (this.moyennesMobiles.length > 0) {
       if (this.moyennesMobiles[0] == this.moyennesMobiles[1]) {
         return 'pi-arrow-circle-right';

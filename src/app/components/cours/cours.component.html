@@ -56,25 +56,24 @@
                 </tr>
               </ng-template>
               <ng-template #body let-cours>
-                <tr>
+                <tr (click)="onClickCours($event, cours)">
                   <td>
-                  <span class="pi"
-                        [class]="cours.classeIconeVariation()"
-                        (click)="afficherAjoutAuPortefeuille($event, cours)"
-                        title="{{ 'COMPOSANTS.COURS.AJOUTER_AU_PORTEFEUILLE' | translate }}"></span>
-                    <span (click)="basculerAffichageCours(cours)">{{ cours.libelle }}</span>
+                    <span class="pi"
+                          [class]="cours.iconeVariation()"
+                          title="{{ 'COMPOSANTS.COURS.AJOUTER_AU_PORTEFEUILLE' | translate }}"></span>
+                    {{ cours.libelle }}
                   </td>
-                  <td [class]="classeCssVariation(cours.var1)">
+                  <td [class]="evolutionVariation(cours.var1)">
                     {{ cours.var1 | percent:'1.2-2' }}
                   </td>
                   <td>{{ cours.cloture | currency:'€' }}</td>
-                  <td [class]="classeCssMM(cours, cours.moyennesMobiles[4])">
+                  <td [class]="evolutionCours(cours.cloture, cours.moyennesMobiles[4])">
                     {{ cours.moyennesMobiles[4] | currency:'€' }}
                   </td>
-                  <td [class]="classeCssMM(cours, cours.moyennesMobiles[19])">
+                  <td [class]="evolutionCours(cours.cloture, cours.moyennesMobiles[19])">
                     {{ cours.moyennesMobiles[19] | currency:'€' }}
                   </td>
-                  <td [class]="classeCssMM(cours, cours.moyennesMobiles[49])">
+                  <td [class]="evolutionCours(cours.cloture, cours.moyennesMobiles[49])">
                     {{ cours.moyennesMobiles[49] | currency:'€' }}
                   </td>
                 </tr>

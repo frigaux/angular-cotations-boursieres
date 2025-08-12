@@ -54,15 +54,18 @@ export class PortefeuillesComponent implements OnInit {
   // chargement des valeurs et cours
   loading: boolean = true;
 
+  // les colonnes dynamiques de la table
+  protected colonnesDecorees?: ColonneDecoree[];
+  protected idColonneTriParDefaut?: number;
+  protected readonly TypesColonnesPortefeuille = TypesColonnesPortefeuille;
+
   // données pour la vue
   protected date?: string;
   portefeuillesAvecCours: Array<PortefeuilleAvecCours> = [];
   protected idxPortefeuilleCourant: number = -1;
-  protected colonnesDecorees?: ColonneDecoree[];
+
   // cours pour lequel afficher les courbes
   coursSelectionne: CoursPortefeuille | undefined = undefined;
-  protected readonly TypesColonnesPortefeuille = TypesColonnesPortefeuille;
-  protected idColonneTriParDefaut?: number;
 
   // privé
   private listeCours?: DTOCoursAvecListeAllege[];
@@ -126,16 +129,6 @@ export class PortefeuillesComponent implements OnInit {
     }
   }
 
-  protected classeIconeVariation(variation: number): string {
-    if (variation == 0) {
-      return 'pi-arrow-circle-right';
-    } else if (variation > 0) {
-      return 'pi-arrow-circle-up';
-    } else {
-      return 'pi-arrow-circle-down';
-    }
-  }
-
   private decorerColonnes() {
     const tableau = this.tableauxService.charger().portefeuille;
     const isPaysage = this.breakpointObserver.isMatched('(orientation: landscape)');
@@ -146,7 +139,17 @@ export class PortefeuillesComponent implements OnInit {
     );
   }
 
-  protected classeCss(colonneDecoree: ColonneDecoree, cours: CoursPortefeuille): string {
+  protected iconeVariation(variation: number): string {
+    if (variation == 0) {
+      return 'pi-arrow-circle-right';
+    } else if (variation > 0) {
+      return 'pi-arrow-circle-up';
+    } else {
+      return 'pi-arrow-circle-down';
+    }
+  }
+
+  protected evolutionColonne(colonneDecoree: ColonneDecoree, cours: CoursPortefeuille): string {
     if (colonneDecoree.colonne.type === TypesColonnesPortefeuille.COURS
       || colonneDecoree.colonne.type === TypesColonnesPortefeuille.MOYENNE_MOBILE) {
       return cours.cloture >= colonneDecoree.evaluer(cours) ? 'positive' : 'negative';

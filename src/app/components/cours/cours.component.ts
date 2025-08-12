@@ -116,7 +116,15 @@ export class CoursComponent implements OnInit {
     }
   }
 
-  basculerAffichageCours(cours: Cours) {
+  onClickCours(event: MouseEvent, cours: Cours) {
+    if (event.target instanceof Element && event.target.tagName === 'SPAN') {
+      this.afficherAjoutAuPortefeuille(event, cours);
+    } else {
+      this.basculerAffichageCours(cours);
+    }
+  }
+
+  private basculerAffichageCours(cours: Cours) {
     if (this.coursSelectionne === undefined || this.coursSelectionne.ticker !== cours.ticker) {
       this.coursSelectionne = cours;
     } else {
@@ -124,16 +132,16 @@ export class CoursComponent implements OnInit {
     }
   }
 
-  classeCssVariation(variation: number): string {
+  private afficherAjoutAuPortefeuille(event: MouseEvent, cours: Cours) {
+    this.ajoutAuPortefeuille()?.afficher(event, cours.ticker);
+  }
+
+  evolutionVariation(variation: number): string {
     return variation >= 0 ? 'positive' : 'negative';
   }
 
-  classeCssMM(cours: CoursPortefeuille, mm: number) {
-    return cours.cloture >= mm ? 'positive' : 'negative';
-  }
-
-  afficherAjoutAuPortefeuille(event: MouseEvent, cours: Cours) {
-    this.ajoutAuPortefeuille()?.afficher(event, cours.ticker);
+  evolutionCours(cloture: number, cours: number) {
+    return cloture >= cours ? 'positive' : 'negative';
   }
 
   // on procède à un tri "manuel" des données affichées dans le p-table
