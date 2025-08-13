@@ -141,7 +141,7 @@
       "PORTEFEUILLES_DATE": "Portefeuilles à la date du",
       "ACTIONS": "Actions sur la valeur",
       "DETAILS_VALEUR": {
-        "TITRE": "{{valeur}} ({{ticker}}, {{marche}}, {{date}})",
+        "TITRE": "{{valeur}} ({{ticker}}, {{marche}})",
         "ABCBOURSE": "Lien vers ABCBourse",
         "BOURSORAMA": "Lien vers Boursorama"
       },

@@ -13,14 +13,12 @@ import {DetailsValeurComponent} from './details-valeur/details-valeur.component'
 import {CurrencyPipe, DatePipe, NgClass, NgIf, PercentPipe} from '@angular/common';
 import {Skeleton} from 'primeng/skeleton';
 import {LoaderComponent} from '../loader/loader.component';
-import {CoursPortefeuille} from '../portefeuilles/cours-portefeuille.class';
 import {AjoutAuPortefeuilleComponent} from './ajout-au-portefeuille/ajout-au-portefeuille.component';
 import {SortEvent} from 'primeng/api';
 import {SelecteurFiltreComponent} from './selecteur-filtre/selecteur-filtre.component';
 import {FiltreDecore} from './selecteur-filtre/filtre-decore.class';
 import {ImportExportComponent} from './editeur-filtres/import-export/import-export.component';
 
-// TODO : reprendre ligne cliquable comme sur le portefeuille
 @Component({
   selector: 'app-cours',
   imports: [

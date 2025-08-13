@@ -1,6 +1,5 @@
 import {Component, input, InputSignal, output} from '@angular/core';
 import {CoursPortefeuille} from '../cours-portefeuille.class';
-import {DatePipe} from '@angular/common';
 import {Panel} from 'primeng/panel';
 import {ChartsComponent} from '../../cours/charts/charts.component';
 import {Cours} from '../../cours/cours.class';
@@ -11,7 +10,6 @@ import {TranslatePipe} from '@ngx-translate/core';
 @Component({
   selector: 'app-details-valeur',
   imports: [
-    DatePipe,
     Panel,
     ChartsComponent,
     AlertesComponent,
