@@ -29,6 +29,7 @@
     "@capacitor/status-bar": "7.0.1",
     "@ngx-translate/core": "16.0.4",
     "@primeng/themes": "19.1.3",
+    "@squareetlabs/capacitor-navigation-bar": "1.1.0",
     "chart.js": "4.5.0",
     "jwt-decode": "4.0.0",
     "primeicons": "7.0.0",
