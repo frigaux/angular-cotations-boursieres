@@ -1,11 +1,9 @@
-import { TestBed } from '@angular/core/testing';
+import {TestBed} from '@angular/core/testing';
 
-import { AuthentificationService } from './authentification.service';
-import { provideHttpClient } from '@angular/common/http';
-import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
-import { lastValueFrom } from 'rxjs';
-// import { HttpClient } from '@angular/common/http';
-// import { Observable } from 'rxjs';
+import {AuthentificationService} from './authentification.service';
+import {provideHttpClient} from '@angular/common/http';
+import {HttpTestingController, provideHttpClientTesting} from '@angular/common/http/testing';
+import {lastValueFrom} from 'rxjs';
 
 describe('AuthentificationService', () => {
   let authentificationService: AuthentificationService;
@@ -41,8 +39,12 @@ describe('AuthentificationService', () => {
       method: 'POST',
       url: 'bourse/authentification',
     }).error(new ProgressEvent(''));
-    // on attend la résolution de la promise
-    await promiseAuthentifier;
+    // on attend la résolution de la promise et on ignore l'erreur volontaire
+    try {
+      await promiseAuthentifier;
+    } catch {
+      // erreur attendue lors de l'authentification: on la neutralise pour ne pas polluer la console des tests
+    }
     // vérification qu'il n'y a pas de requêtes en attente
     httpTesting.verify();
   }
@@ -70,7 +72,6 @@ describe('AuthentificationService', () => {
     });
   });
 
-  // TODO : ce test log une erreur dans la console : "context.js:265 HttpErrorResponse"
   describe('Given l\'authentification a échoué', () => {
     beforeEach(() => {
       authentificationService.reinitialiser();

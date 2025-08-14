@@ -2,7 +2,7 @@ import {TestBed} from '@angular/core/testing';
 
 import {DialogueService} from './dialogue.service';
 import {TranslateModule} from '@ngx-translate/core';
-import {Confirmation, ConfirmationService} from 'primeng/api';
+import {ConfirmationService} from 'primeng/api';
 
 describe('DialogueService', () => {
   let dialogueService: DialogueService;
