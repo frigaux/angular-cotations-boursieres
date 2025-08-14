@@ -101,13 +101,15 @@ Ajout des lignes suivantes dans les styles du fichier angular.json :
 npm install @ngx-translate/core
 ```
 
-## Ajout de Capacitor et des plugins : Status Bar et Screen Orientation
+## Ajout de Capacitor et des plugins : Status Bar, Navigation Bar et Screen Orientation
 ```
 ng add @capacitor/angular
 npm run build
 npm i @capacitor/android
 npx cap add android
 npm install @capacitor/status-bar
+npx cap sync
+npm install @squareetlabs/capacitor-navigation-bar
 npx cap sync
 npm install @capacitor/screen-orientation
 npx cap sync
