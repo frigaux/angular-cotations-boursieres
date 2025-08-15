@@ -53,6 +53,7 @@ export class CoursComponent implements OnInit {
   // données pour la vue
   date?: string;
   marches?: CoursMarche[];
+  idxMarcheCourant: number = -1;
 
   // cours pour lequel afficher les moyennes mobiles
   coursSelectionne: Cours | undefined = undefined;
@@ -190,5 +191,8 @@ export class CoursComponent implements OnInit {
   appliquerFiltre(filtreDecore: FiltreDecore | undefined) {
     this.filtreActif = filtreDecore;
     this.decorerCours();
+    if (this.marches!.length > 0) {
+      this.idxMarcheCourant = 0;
+    }
   }
 }

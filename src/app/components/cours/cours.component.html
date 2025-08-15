@@ -15,9 +15,9 @@
 
 <div class="conteneur" [ngClass]="{'avec-details': coursSelectionne !== undefined}">
   @if (!loading && marches) {
-    <p-accordion>
+    <p-accordion [(value)]="idxMarcheCourant">
       @for (marche of marches; track marche.libelle; let i = $index) {
-        <p-accordion-panel value="{{i}}">
+        <p-accordion-panel [value]="i">
           <p-accordion-header>{{ marche.libelle }}</p-accordion-header>
           <p-accordion-content>
             <p-table

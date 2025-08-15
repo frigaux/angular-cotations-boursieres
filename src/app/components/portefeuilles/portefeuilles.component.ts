@@ -96,7 +96,6 @@ export class PortefeuillesComponent implements OnInit {
 
   onOpenAccordion(e: AccordionTabOpenEvent) {
     this.coursSelectionne = undefined;
-    this.idxPortefeuilleCourant = e.index;
     this.chargerPortefeuilleCourant();
   }
 

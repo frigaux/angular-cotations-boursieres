@@ -15,10 +15,10 @@
 
 @if (portefeuillesAvecCours) {
   <div class="conteneur" [ngClass]="{'avec-details': coursSelectionne !== undefined}">
-    <p-accordion *ngIf="!loading" value="{{idxPortefeuilleCourant}}" (onOpen)="onOpenAccordion($event)">
+    <p-accordion *ngIf="!loading" [(value)]="idxPortefeuilleCourant" (onOpen)="onOpenAccordion($event)">
       @for (portefeuilleAvecCours of portefeuillesAvecCours; track portefeuilleAvecCours.portefeuille.nom; let
         i = $index) {
-        <p-accordion-panel value="{{i}}">
+        <p-accordion-panel [value]="i">
           <p-accordion-header>{{ portefeuilleAvecCours.portefeuille.nom }}</p-accordion-header>
           <p-accordion-content>
             <p-table
