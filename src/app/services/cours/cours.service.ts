@@ -24,14 +24,22 @@ export class CoursService {
 
   private cleMessageErreur: string | undefined;
 
-  public static readonly CONFIGURATION_INITIALE = [
+  public static readonly CONFIGURATION_INITIALE_FILTRE = [
     {
-      nom:'Vague',
+      nom:'Creux vague',
       condition: 'M100 < M50 && M50 > M25 && M25 > M10 && M10 > M5 && M5 > M4 && M2 < (0.995 * M1)'
     },
     {
       nom:'Remontée',
       condition: 'M100 > M50 && M50 > M25 && M25 > M10 && M10 > M5 && M5 > M4 && M2 < (0.995 * M1)'
+    },
+    {
+      nom:'Sommet vague',
+      condition: 'M100 > M50 && M50 < M25 && M25 < M10 && M10 < M5 && M5 < M4 && M2 > (1.005 * M1)'
+    },
+    {
+      nom:'Chute',
+      condition: 'M100 < M50 && M50 < M25 && M25 < M10 && M10 < M5 && M5 < M4 && M2 > (1.005 * M1)'
     }
   ];
 

@@ -67,12 +67,12 @@ export class PortefeuillesService {
       ],
       alertes: [
         {
-          nom: 'Remontée',
-          condition: 'M20 > M10 && M10 > M5 && C2 < (0.98 * C1)'
+          nom: 'Creux',
+          condition: 'M20 > M10 && M10 > M5 && C2 < (0.995 * C1)'
         },
         {
-          nom: 'Chute',
-          condition: 'M20 < M10 && M10 < M5 && C2 > (1.02 * C1)'
+          nom: 'Sommet',
+          condition: 'M20 < M10 && M10 < M5 && C2 > (1.005 * C1)'
         },
         {
           nom: 'Choc',
@@ -99,12 +99,12 @@ export class PortefeuillesService {
       ],
       alertes: [
         {
-          nom: 'Remontée',
-          condition: 'M20 > M10 && M10 > M5 && C2 < (0.98 * C1)'
+          nom: 'Creux',
+          condition: 'M20 > M10 && M10 > M5 && C2 < (0.995 * C1)'
         },
         {
-          nom: 'Chute',
-          condition: 'M20 < M10 && M10 < M5 && C2 > (1.02 * C1)'
+          nom: 'Sommet',
+          condition: 'M20 < M10 && M10 < M5 && C2 > (1.005 * C1)'
         },
         {
           nom: 'Choc',

@@ -50,6 +50,6 @@ export class ImportExportComponent {
 
   exemple() {
     this.reinitialiserVue();
-    this.filtres = JSON.stringify(CoursService.CONFIGURATION_INITIALE, null, 2);
+    this.filtres = JSON.stringify(CoursService.CONFIGURATION_INITIALE_FILTRE, null, 2);
   }
 }
