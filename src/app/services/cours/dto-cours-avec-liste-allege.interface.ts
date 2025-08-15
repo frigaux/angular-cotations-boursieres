@@ -9,6 +9,5 @@ export interface DTOCoursAvecListeAllege {
   cloture: number;
   volume: number;
   moyennesMobiles: number[];
-  alerte: boolean;
   cours: DTOCoursTickerAllege[];
 }

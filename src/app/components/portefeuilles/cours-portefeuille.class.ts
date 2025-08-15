@@ -19,7 +19,6 @@ export class CoursPortefeuille {
   cloture: number;
   volume: number;
   moyennesMobiles: number[];
-  alerte: boolean;
   coursAlleges: DTOCoursTickerAllege[];
   alertes: { alerte: DTOAlerte, evaluer: Function }[];
 
@@ -36,7 +35,6 @@ export class CoursPortefeuille {
     this.cloture = dto.cloture;
     this.volume = dto.volume;
     this.moyennesMobiles = dto.moyennesMobiles;
-    this.alerte = dto.alerte;
     this.coursAlleges = dto.cours;
     this.alertes = alertes;
 

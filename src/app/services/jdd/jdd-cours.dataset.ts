@@ -20,8 +20,7 @@ export const LISTE_COURS: DTOListeCours = {
       "moyennesMobiles": [
         46.8,
         46.68
-      ],
-      "alerte": true
+      ]
     }
   ]
 };
@@ -36,22 +35,19 @@ export const COURS_TICKER: DTOCoursTicker = {
   "moyennesMobiles": [
     46.8,
     46.68
-  ],
-  "alerte": true
+  ]
 };
 
 export const LISTE_COURS_TICKER_ALLEGE: DTOCoursTickerAllege[] = [
   {
     "date": "2025-05-09",
     "cloture": 46.23,
-    "volume": 2141570,
-    "alerte": true
+    "volume": 2141570
   },
   {
     "date": "2025-05-08",
     "cloture": 45.7,
-    "volume": 2047911,
-    "alerte": true
+    "volume": 2047911
   }
 ];
 
@@ -66,8 +62,7 @@ export const COURS_CROISSANT: Cours = Cours.fromDTOCoursTicker("GLE", "Societe G
     "moyennesMobiles": [
       46.8,
       46.68
-    ],
-    "alerte": true
+    ]
   }, LISTE_COURS_TICKER_ALLEGE);
 
 export const COURS_DECROISSANT: Cours = Cours.fromDTOCoursTicker("GLE", "Societe Generale",
@@ -81,8 +76,7 @@ export const COURS_DECROISSANT: Cours = Cours.fromDTOCoursTicker("GLE", "Societe
     "moyennesMobiles": [
       46.8,
       46.68
-    ],
-    "alerte": true
+    ]
   }, LISTE_COURS_TICKER_ALLEGE);
 
 export const LISTE_COURS_AVEC_LISTE_ALLEGEE: DTOCoursAvecListeAllege[] = [
@@ -98,7 +92,6 @@ export const LISTE_COURS_AVEC_LISTE_ALLEGEE: DTOCoursAvecListeAllege[] = [
       46.8,
       46.68
     ],
-    "alerte": true,
     "cours": LISTE_COURS_TICKER_ALLEGE
   }
 ];

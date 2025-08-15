@@ -13,12 +13,11 @@ export class Cours {
   cloture: number;
   volume: number;
   moyennesMobiles: number[];
-  alerte: boolean;
   coursAlleges: DTOCoursTickerAllege[];
   var1?: number;
 
   constructor(date: string, ticker: string, libelle: string, ouverture: number, plusHaut: number, plusBas: number,
-              cloture: number, volume: number, moyennesMobiles: number[], alerte: boolean, coursAlleges: DTOCoursTickerAllege[]) {
+              cloture: number, volume: number, moyennesMobiles: number[], coursAlleges: DTOCoursTickerAllege[]) {
     this.date = date;
     this.ticker = ticker;
     this.libelle = libelle;
@@ -28,7 +27,6 @@ export class Cours {
     this.cloture = cloture;
     this.volume = volume;
     this.moyennesMobiles = moyennesMobiles;
-    this.alerte = alerte;
     this.coursAlleges = coursAlleges;
     if (moyennesMobiles.length > 1) {
       this.var1 = (cloture / (moyennesMobiles[1] * 2 - cloture)) - 1;
@@ -36,15 +34,15 @@ export class Cours {
   }
 
   public static fromDTOCours(date: string, libelle: string, dto: DTOCours) {
-    return new Cours(date, dto.ticker, libelle, dto.ouverture, dto.plusHaut, dto.plusBas, dto.cloture, dto.volume, dto.moyennesMobiles, dto.alerte, []);
+    return new Cours(date, dto.ticker, libelle, dto.ouverture, dto.plusHaut, dto.plusBas, dto.cloture, dto.volume, dto.moyennesMobiles, []);
   }
 
   public static fromDTOCoursTicker(ticker: string, libelle: string, dto: DTOCoursTicker, cours: DTOCoursTickerAllege[]) {
-    return new Cours(dto.date, ticker, libelle, dto.ouverture, dto.plusHaut, dto.plusBas, dto.cloture, dto.volume, dto.moyennesMobiles, dto.alerte, cours);
+    return new Cours(dto.date, ticker, libelle, dto.ouverture, dto.plusHaut, dto.plusBas, dto.cloture, dto.volume, dto.moyennesMobiles, cours);
   }
 
   public static fromCoursPortefeuille(dto: CoursPortefeuille) {
-    return new Cours(dto.date, dto.ticker, dto.libelle, dto.ouverture, dto.plusHaut, dto.plusBas, dto.cloture, dto.volume, dto.moyennesMobiles, dto.alerte, dto.coursAlleges);
+    return new Cours(dto.date, dto.ticker, dto.libelle, dto.ouverture, dto.plusHaut, dto.plusBas, dto.cloture, dto.volume, dto.moyennesMobiles, dto.coursAlleges);
   }
 
   public iconeVariation(): string {

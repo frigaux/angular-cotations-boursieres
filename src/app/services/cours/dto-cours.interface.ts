@@ -6,5 +6,4 @@ export interface DTOCours {
   cloture: number;
   volume: number;
   moyennesMobiles: number[];
-  alerte: boolean;
 }
