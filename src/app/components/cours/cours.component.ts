@@ -18,6 +18,7 @@ import {SortEvent} from 'primeng/api';
 import {SelecteurFiltreComponent} from './selecteur-filtre/selecteur-filtre.component';
 import {FiltreDecore} from './selecteur-filtre/filtre-decore.class';
 import {ImportExportComponent} from './editeur-filtres/import-export/import-export.component';
+import {PortefeuillesService} from '../../services/portefeuilles/portefeuilles.service';
 
 @Component({
   selector: 'app-cours',
@@ -56,14 +57,17 @@ export class CoursComponent implements OnInit {
   // cours pour lequel afficher les moyennes mobiles
   coursSelectionne: Cours | undefined = undefined;
 
-  // services
+  // private
   private translateService = inject(TranslateService);
   private valeurByTicker?: Map<string, DTOValeur>;
   private liste?: DTOListeCours;
   private filtreActif?: FiltreDecore;
+  private portefeuilles: boolean;
 
   constructor(private valeursService: ValeursService,
-              private coursService: CoursService) {
+              private coursService: CoursService,
+              private portefeuillesService: PortefeuillesService) {
+    this.portefeuilles = this.portefeuillesService.auMoinsUnPortefeuilleCorrectementConfigure();
   }
 
   ngOnInit(): void {
@@ -115,7 +119,7 @@ export class CoursComponent implements OnInit {
   }
 
   onClickCours(event: MouseEvent, cours: Cours) {
-    if (event.target instanceof Element && event.target.tagName === 'SPAN') {
+    if (event.target instanceof Element && event.target.tagName === 'SPAN' && this.portefeuilles) {
       this.afficherAjoutAuPortefeuille(event, cours);
     } else {
       this.basculerAffichageCours(cours);

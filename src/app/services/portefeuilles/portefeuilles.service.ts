@@ -21,153 +21,94 @@ export class PortefeuillesService {
 
   public static readonly CONFIGURATION_INITIALE = [
     {
-      "nom": "Spéculation",
-      "parDefaut": true,
-      "tickers": [
-        "CA",
-        "TTE",
-        "AC",
-        "SK",
-        "SGO",
-        "GLE",
-        "BNP",
-        "ALO",
-        "STMPA"
+      nom: 'Cac40',
+      parDefaut: true,
+      tickers: [
+        'ACA',
+        'AI',
+        'CA',
+        'AC',
+        'EN',
+        'CS',
+        'BN',
+        'EL',
+        'CAP',
+        'BNP',
+        'BVI',
+        'ENGI',
+        'EDEN',
+        'DSY',
+        'MT',
+        'AIR',
+        'ERF',
+        'RMS',
+        'KER',
+        'LR',
+        'OR',
+        'MC',
+        'ML',
+        'ORA',
+        'RI',
+        'PUB',
+        'RNO',
+        'SAF',
+        'SGO',
+        'SAN',
+        'SU',
+        'GLE',
+        'STLAP',
+        'STMPA',
+        'TEP',
+        'HO',
+        'TTE',
+        'URW',
+        'VIE',
+        'DG'
       ],
-      "alertes": [
+      alertes: [
         {
-          "nom": "Remontée",
-          "condition": "M20 > M10 && M10 > M5 && C2 < (0.98 * C1)"
+          nom: 'Remontée',
+          condition: 'M20 > M10 && M10 > M5 && C2 < (0.98 * C1)'
         },
         {
-          "nom": "Chute",
-          "condition": "M20 < M10 && M10 < M5 && C2 > (1.02 * C1)"
+          nom: 'Chute',
+          condition: 'M20 < M10 && M10 < M5 && C2 > (1.02 * C1)'
         },
         {
-          "nom": "Choc",
-          "condition": "C2 < 0.98 * C1 || C2 > 1.02 * C1"
+          nom: 'Choc',
+          condition: 'C2 < 0.98 * C1 || C2 > 1.02 * C1'
         }
       ]
     },
     {
-      "nom": "Spéculation2",
-      "parDefaut": false,
-      "tickers": [
-        "SAN",
-        "PUB",
-        "EDEN",
-        "WLN",
-        "VLTSA",
-        "FR",
-        "DSY",
-        "OVH",
-        "ATO",
-        "NXI"
+      nom: 'Charles Gave',
+      parDefaut: false,
+      tickers: [
+        'AC',
+        'AI',
+        'CAP',
+        'BN',
+        'RMS',
+        'KER',
+        'OR',
+        'MC',
+        'RI',
+        'SU',
+        'SW',
+        'TTE'
       ],
-      "alertes": [
+      alertes: [
         {
-          "nom": "Remontée",
-          "condition": "M20 > M10 && M10 > M5 && C2 < (0.98 * C1)"
+          nom: 'Remontée',
+          condition: 'M20 > M10 && M10 > M5 && C2 < (0.98 * C1)'
         },
         {
-          "nom": "Chute",
-          "condition": "M20 < M10 && M10 < M5 && C2 > (1.02 * C1)"
+          nom: 'Chute',
+          condition: 'M20 < M10 && M10 < M5 && C2 > (1.02 * C1)'
         },
         {
-          "nom": "Choc",
-          "condition": "C2 < 0.98 * C1 || C2 > 1.02 * C1"
-        }
-      ]
-    },
-    {
-      "nom": "Cac40",
-      "parDefaut": false,
-      "tickers": [
-        "ACA",
-        "AI",
-        "CA",
-        "AC",
-        "EN",
-        "CS",
-        "BN",
-        "EL",
-        "CAP",
-        "BNP",
-        "BVI",
-        "ENGI",
-        "EDEN",
-        "DSY",
-        "MT",
-        "AIR",
-        "ERF",
-        "RMS",
-        "KER",
-        "LR",
-        "OR",
-        "MC",
-        "ML",
-        "ORA",
-        "RI",
-        "PUB",
-        "RNO",
-        "SAF",
-        "SGO",
-        "SAN",
-        "SU",
-        "GLE",
-        "STLAP",
-        "STMPA",
-        "TEP",
-        "HO",
-        "TTE",
-        "URW",
-        "VIE",
-        "DG"
-      ],
-      "alertes": [
-        {
-          "nom": "Remontée",
-          "condition": "M20 > M10 && M10 > M5 && C2 < (0.98 * C1)"
-        },
-        {
-          "nom": "Chute",
-          "condition": "M20 < M10 && M10 < M5 && C2 > (1.02 * C1)"
-        },
-        {
-          "nom": "Choc",
-          "condition": "C2 < 0.98 * C1 || C2 > 1.02 * C1"
-        }
-      ]
-    },
-    {
-      "nom": "Charles Gave",
-      "parDefaut": false,
-      "tickers": [
-        "AC",
-        "AI",
-        "CAP",
-        "BN",
-        "RMS",
-        "KER",
-        "OR",
-        "MC",
-        "RI",
-        "SU",
-        "SW",
-        "TTE"
-      ],
-      "alertes": [
-        {
-          "nom": "Remontée",
-          "condition": "M20 > M10 && M10 > M5 && C2 < (0.98 * C1)"
-        },
-        {
-          "nom": "Chute",
-          "condition": "M20 < M10 && M10 < M5 && C2 > (1.02 * C1)"
-        },
-        {
-          "nom": "Choc",
-          "condition": "C2 < 0.98 * C1 || C2 > 1.02 * C1"
+          nom: 'Choc',
+          condition: 'C2 < 0.98 * C1 || C2 > 1.02 * C1'
         }
       ]
     }

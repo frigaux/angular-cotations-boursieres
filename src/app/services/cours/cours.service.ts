@@ -26,13 +26,13 @@ export class CoursService {
 
   public static readonly CONFIGURATION_INITIALE = [
     {
-      "nom": "Remontée",
-      "condition": "M100 > M50 && M50 > M25 && M25 > M10 && M2 < (0.98 * M1)"
+      nom:'Vague',
+      condition: 'M100 < M50 && M50 > M25 && M25 > M10 && M10 > M5 && M5 > M4 && M2 < (0.995 * M1)'
     },
     {
-      "nom": "Chute",
-      "condition": "M100 < M50 && M50 < M25 && M25 < M10 && M2 > (1.02 * M1)"
-    },
+      nom:'Remontée',
+      condition: 'M100 > M50 && M50 > M25 && M25 > M10 && M10 > M5 && M5 > M4 && M2 < (0.995 * M1)'
+    }
   ];
 
   constructor(private http: HttpClient,
