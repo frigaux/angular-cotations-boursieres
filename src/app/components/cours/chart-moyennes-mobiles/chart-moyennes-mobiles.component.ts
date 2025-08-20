@@ -13,17 +13,20 @@ import {Cours} from '../cours.class';
 })
 export class ChartMoyennesMobilesComponent {
   // input/output
-  cours: InputSignal<Cours | undefined> = input(undefined,
-    {transform: o => this.intercepteurCours(o)});
+  inputCours: InputSignal<Cours | undefined> = input(undefined,
+    {transform: o => this.intercepteurCours(o), alias: 'cours'});
 
   // https://www.chartjs.org/
   data: any;
   options: any;
 
+  cours?: Cours;
+
   constructor(private translateService: TranslateService) {
   }
 
   private intercepteurCours(cours: Cours | undefined) {
+    this.cours = cours;
     if (cours) {
       this.initChart(cours);
     }

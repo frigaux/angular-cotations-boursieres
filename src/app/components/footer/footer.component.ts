@@ -1,5 +1,6 @@
 import {Component} from '@angular/core';
 import {NgIf} from '@angular/common';
+import {environment} from '../../../environments/environment';
 
 @Component({
   selector: 'app-footer',
@@ -23,6 +24,6 @@ export class FooterComponent {
   }
 
   telechargerApk() {
-    window.open('/apk/app-debug.apk');
+    window.open(environment.staticPrefixUrl + '/apk/app-debug.apk');
   }
 }

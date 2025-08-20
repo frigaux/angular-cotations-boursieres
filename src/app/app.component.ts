@@ -14,8 +14,6 @@ import {PrimeNG} from 'primeng/config';
 import {PickList} from 'primeng/picklist';
 import {NavigationBar} from '@squareetlabs/capacitor-navigation-bar';
 
-// TODO : récupérer les actus : https://www.abcbourse.com/marches/actualites-des-marches_0 ; DlType=all&DateActu=2025-07-31
-// TODO : cours de séance actualisé toutes les 5 minutes : https://www.abcbourse.com/download/telechargement_intraday
 @Component({
   selector: 'app-root',
   standalone: true,

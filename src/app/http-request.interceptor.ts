@@ -1,17 +1,24 @@
-import {HttpContextToken, HttpInterceptorFn} from '@angular/common/http';
+import {HttpContextToken, HttpEvent, HttpInterceptorFn, HttpRequest} from '@angular/common/http';
 import {environment} from '../environments/environment';
 import {AuthentificationService} from './services/authentification/authentification.service';
 import {inject} from '@angular/core';
 import {Router} from '@angular/router';
-import {throwError} from 'rxjs';
+import {Observable, throwError} from 'rxjs';
 
 export const AUTHENTIFICATION_REQUISE = new HttpContextToken<boolean>(() => true);
 
-// https://angular.dev/guide/http/interceptors
-export const httpRequestInterceptor: HttpInterceptorFn = (req, next) => {
+function isRequeteProxy(url: string): boolean {
+  return url.startsWith('abcbourse');
+}
+
+function makeProxyCall(req: HttpRequest<unknown>, next: (req: HttpRequest<unknown>) => Observable<HttpEvent<unknown>>) {
+  return next(req.clone({url: environment.staticPrefixUrl + '/' + req.url}));
+}
+
+function makeApiCall(req: HttpRequest<unknown>, next: (req: HttpRequest<unknown>) => Observable<HttpEvent<unknown>>) {
   const authentificationRequise = req.context.get(AUTHENTIFICATION_REQUISE);
   const updateRequest = {
-    url: environment.apiUrl + '/v' + environment.apiVersion + '/' + req.url,
+    url: environment.apiPrefixUrl + '/v' + environment.apiVersion + '/' + req.url,
     headers: req.headers
       .append('Accept', 'application/json')
       .append('Content-Type', 'application/json'),
@@ -27,5 +34,14 @@ export const httpRequestInterceptor: HttpInterceptorFn = (req, next) => {
     }
   } else {
     return next(req.clone(updateRequest));
+  }
+}
+
+// https://angular.dev/guide/http/interceptors
+export const httpRequestInterceptor: HttpInterceptorFn = (req, next) => {
+  if (isRequeteProxy(req.url)) {
+    return makeProxyCall(req, next);
+  } else {
+    return makeApiCall(req, next);
   }
 };
