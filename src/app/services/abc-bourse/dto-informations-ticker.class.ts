@@ -6,15 +6,18 @@ import {DTORatio} from './dto-ratio.class';
 export class DTOInformationsTicker {
   ticker: string;
   informations: Array<DTOInformationTicker>;
-  dividendes: Array<DTODividende>;
   variations: Array<DTOVariation>;
+  dividendes: Array<DTODividende>;
   ratios: Array<DTORatio>;
+  variationCAC?: number;
+  correlationCAC?: number;
+  qualiteFinanciere?: string;
 
   constructor(ticker: string) {
     this.ticker = ticker;
     this.informations = [];
-    this.dividendes = [];
     this.variations = [];
+    this.dividendes = [];
     this.ratios = [];
   }
 }

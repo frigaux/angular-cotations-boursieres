@@ -4,10 +4,13 @@ import {DetailsValeurComponent} from './details-valeur.component';
 import {COURS_CROISSANT} from '../../../services/jdd/jdd-cours.dataset';
 import {TranslateModule} from '@ngx-translate/core';
 import {provideAnimations} from '@angular/platform-browser/animations';
+import {AbcBourseService} from '../../../services/abc-bourse/abc-bourse.service';
 
 describe('DetailsValeurComponent', () => {
   let component: DetailsValeurComponent;
   let fixture: ComponentFixture<DetailsValeurComponent>;
+
+  const mockAbcBourseService = jasmine.createSpyObj('AbcBourseService', ['chargerInformationsTicker']);
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
@@ -16,6 +19,7 @@ describe('DetailsValeurComponent', () => {
         TranslateModule.forRoot({})
       ],
       providers: [
+        {provide: AbcBourseService, useValue: mockAbcBourseService},
         provideAnimations()
       ]
     })
@@ -39,11 +43,8 @@ describe('DetailsValeurComponent', () => {
     expect(elChart).toBeTruthy();
   });
 
-  it('Given un cours when #abcBourse ou #boursorama then une popup est ouverte', () => {
+  it('Given un cours when #informationsDetaillees est true then les informations détaillées sont affichées', () => {
     fixture.componentRef.setInput('cours', COURS_CROISSANT);
-    spyOn(window, "open");
-    component.abcBourse();
-    component.boursorama();
-    expect(window.open).toHaveBeenCalledTimes(2);
+    component.informationsDetaillees = true;
   });
 });

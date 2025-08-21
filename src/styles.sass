@@ -1,21 +1,27 @@
 /* You can add global styles to this file, and also import other style files */
 
 .p-menubar-item-link-active
-  background-color: var(--p-gray-300)
-  border-radius: 0.5rem
+  background-color: var(--p-blue-500)
+  color: var(--p-blue-100) !important
+
+  .p-menubar-item-icon
+    color: var(--p-blue-100) !important
 
 :root
-  --p-content-border-color: var(--p-gray-400) !important
-  --p-card-shadow: 0 1px 2px 1px var(--p-gray-500) !important
-  --p-form-field-border-color: var(--p-gray-400) !important
-  --p-popover-border-color: var(--p-gray-400) !important
+  //--p-content-border-color: var(--p-gray-400) !important
+  //--p-card-shadow: 0 1px 2px 1px var(--p-gray-500) !important
+  //--p-form-field-border-color: var(--p-gray-400) !important
+  //--p-popover-border-color: var(--p-gray-400) !important
   font-family: system-ui
 
   --p-skeleton-background: #FFFFFF !important
   --p-skeleton-animation-background: rgba(0, 0, 0, 1) !important
-  background: linear-gradient(to right, var(--p-violet-300), var(--p-violet-400))
+  background: linear-gradient(to right, var(--p-violet-200), var(--p-violet-300))
 
+
+  //
   // https://angular.dev/guide/drag-drop#transfer-draggable-elements-between-lists
+  //
   .cdk-drag-preview
     border: none
     box-sizing: border-box
@@ -36,16 +42,22 @@
   // drag & drop sur la gestion des tableaux
   div.cdk-drag-preview.element
     .pi
-      font-size: xx-large
+      font-size: x-large
 
+
+  //
   // responsive design global
+  //
   @media screen and (min-resolution: 200dpi) and (max-resolution: 250dpi)
     font-size: small
 
   @media screen and (min-resolution: 250dpi)
     font-size: x-small
 
+
+  //
   // responsive design : gestion globale de la taille des icônes
+  //
   .pi-times-circle
     font-size: xx-large
 

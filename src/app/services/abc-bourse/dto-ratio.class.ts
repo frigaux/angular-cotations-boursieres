@@ -1,11 +1,11 @@
 export class DTORatio {
   annee: number;
-  per: number;
   bnpa: number;
+  per: number;
 
-  constructor(annee: number, per: number, bnpa: number) {
+  constructor(annee: number, bnpa: number, per: number) {
     this.annee = annee;
-    this.per = per;
     this.bnpa = bnpa;
+    this.per = per;
   }
 }

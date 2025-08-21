@@ -1,9 +1,9 @@
 export class DTOVariation {
   duree: string;
-  valeur: number;
+  pourcentage: number;
 
-  constructor(duree: string, valeur: number) {
+  constructor(duree: string, pourcentage: number) {
     this.duree = duree;
-    this.valeur = valeur;
+    this.pourcentage = pourcentage;
   }
 }
