@@ -1,6 +1,6 @@
 <ul *ngIf="affiche()">
   @for (loader of configuration(); track loader) {
-    <li [style]="{'margin-left': loader.marginLeft}">
+    <li [style]="{'margin-left': loader.marginLeft, 'margin-top': loader.marginTop}">
       <p-skeleton shape="rectangle" borderRadius="0" [width]="loader.width" [height]="loader.height"/>
     </li>
   }

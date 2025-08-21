@@ -19,44 +19,44 @@ div.liste
   display: flex
   flex-direction: column
 
-  div.element
-    display: flex
-    flex-direction: row
-    border: 0.1rem solid black
-    border-radius: 0.3rem
-    padding: 1rem 0 0 0
-    margin-top: 0.5rem
-    align-items: center
-    cursor: move
-    width: fit-content
+div.element, div.cdk-drag-preview.element
+  display: flex
+  flex-direction: row
+  border: 0.1rem solid black
+  border-radius: 0.3rem
+  padding: 1rem 0 0 0
+  margin-top: 0.5rem
+  align-items: center
+  cursor: move
+  width: fit-content
 
-    .pi-trash
-      color: var(--p-red-800)
-      cursor: pointer
+  .pi-trash
+    color: var(--p-red-800)
+    cursor: pointer
 
-    span
-      margin: 0.5rem
+  span
+    margin: 0.5rem
 
-    p-select
-      width: 13rem
+  p-select
+    width: 13rem
 
-    span:nth-child(2)
-      input
-        width: 10rem
+  span:nth-child(2)
+    input
+      width: 10rem
 
-    span:nth-child(4)
-      width: 5rem
-
-      input
-        width: 5rem
-
-    span:nth-child(6)
-      input
-        width: 6rem
+  span:nth-child(4)
+    width: 5rem
 
     input
-      &.ng-invalid.ng-touched, &.ng-invalid.ng-dirty
-        border-color: var(--p-red-800)
+      width: 5rem
 
-      &.ng-valid
-        border-color: var(--p-green-800)
+  span:nth-child(6)
+    input
+      width: 6rem
+
+  input
+    &.ng-invalid.ng-touched, &.ng-invalid.ng-dirty
+      border-color: var(--p-red-800)
+
+    &.ng-valid
+      border-color: var(--p-green-800)
