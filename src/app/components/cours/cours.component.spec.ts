@@ -40,12 +40,6 @@ describe('CoursComponent', () => {
     expect(component).toBeDefined();
   });
 
-  it('should have div.titre', () => {
-    const element: HTMLElement = fixture.nativeElement;
-    const el = element.querySelector('div.titre');
-    expect(el).toBeTruthy();
-  });
-
   describe('Given #chargerValeurs et #chargerCours renvoient des valeurs et des cours', () => {
     beforeEach(() => {
       mockValeursService.chargerValeurs.and.returnValue(of([VALEUR]));

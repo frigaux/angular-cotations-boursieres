@@ -1,0 +1,29 @@
+div
+  display: flex
+  flex-direction: row
+
+  & > div
+    display: flex
+    flex-direction: column
+    margin: 1rem
+
+    .positive
+      color: var(--p-green-600)
+
+    .negative
+      color: var(--p-red-600)
+
+    p-fieldset:nth-child(n+2)
+      margin-top: 1rem
+
+    p-fieldset
+      div
+        margin: 1rem 0 1rem 0
+
+        label
+          width: 12rem
+          font-weight: bold
+
+        span
+          width: 6rem
+          text-align: right

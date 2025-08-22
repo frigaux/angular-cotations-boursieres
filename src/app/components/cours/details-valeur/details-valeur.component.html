@@ -20,7 +20,7 @@
       <span class="pi pi-times-circle" (click)="this.ferme.emit()"></span>
     </ng-template>
     @if (informationsDetaillees) {
-      <app-informations-ticker [ticker]="cours.ticker"></app-informations-ticker>
+      <app-informations-ticker [cours]="cours"></app-informations-ticker>
     } @else {
       <app-chart-moyennes-mobiles [cours]="cours"></app-chart-moyennes-mobiles>
     }

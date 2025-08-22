@@ -1,12 +1,24 @@
 import {Component, input, InputSignal} from '@angular/core';
 import {DTOInformationsTicker} from '../../../services/abc-bourse/dto-informations-ticker.class';
 import {AbcBourseService} from '../../../services/abc-bourse/abc-bourse.service';
-import {JsonPipe} from '@angular/common';
+import {Fieldset} from 'primeng/fieldset';
+import {LoaderComponent} from '../../loader/loader.component';
+import {TableModule} from 'primeng/table';
+import {CurrencyPipe, DecimalPipe, NgClass, PercentPipe} from '@angular/common';
+import {TranslatePipe} from '@ngx-translate/core';
+import {Cours} from '../cours.class';
 
 @Component({
   selector: 'app-informations-ticker',
   imports: [
-    JsonPipe
+    Fieldset,
+    LoaderComponent,
+    TableModule,
+    PercentPipe,
+    TranslatePipe,
+    DecimalPipe,
+    CurrencyPipe,
+    NgClass
   ],
   templateUrl: './informations-ticker.component.html',
   styleUrl: './informations-ticker.component.sass'
@@ -16,24 +28,29 @@ export class InformationsTickerComponent {
   loading: boolean = true;
 
   // input/output
-  inputTicker: InputSignal<string | undefined> = input(undefined,
-    {transform: o => this.intercepteurTicker(o), alias: 'ticker'});
+  inputCours: InputSignal<Cours | undefined> = input(undefined,
+    {transform: o => this.intercepteurCours(o), alias: 'cours'});
+
+  cours?: Cours;
 
   // données pour la vue
   informationsTicker?: DTOInformationsTicker;
+  pourcentageDividendes?: number;
 
   constructor(private abcBourseService: AbcBourseService) {
   }
 
-  private intercepteurTicker(ticker: string | undefined) {
-    if (ticker) {
+  private intercepteurCours(cours: Cours | undefined) {
+    this.cours = cours;
+    if (cours) {
       this.loading = true;
-      this.abcBourseService.chargerInformationsTicker(ticker)
+      this.abcBourseService.chargerInformationsTicker(cours.ticker)
         .subscribe(dto => {
           this.informationsTicker = dto;
-          this.loading = true;
+          this.pourcentageDividendes = dto.dividendes.length > 0 ? dto.dividendes[0].montant / cours.cloture : 0;
+          this.loading = false;
         });
     }
-    return ticker;
+    return cours;
   }
 }

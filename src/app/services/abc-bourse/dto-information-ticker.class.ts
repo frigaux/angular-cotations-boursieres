@@ -1,9 +1,9 @@
 export class DTOInformationTicker {
   date: string;
-  libelle: string;
+  titre: string;
 
-  constructor(date: string, libelle: string) {
+  constructor(date: string, titre: string) {
     this.date = date;
-    this.libelle = libelle;
+    this.titre = titre;
   }
 }
