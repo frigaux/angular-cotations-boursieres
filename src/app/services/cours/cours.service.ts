@@ -49,19 +49,19 @@ export class CoursService {
 
   public chargerCours(): Observable<DTOListeCours> {
     return this.http.get<DTOListeCours>(
-      'bourse/cours'
+      '/bourse/cours'
     );
   }
 
   public chargerCoursTicker(ticker: string): Observable<DTOCoursTicker> {
     return this.http.get<DTOCoursTicker>(
-      `bourse/cours/${ticker}`
+      `/bourse/cours/${ticker}`
     );
   }
 
   public chargerCoursTickerWithLimit(ticker: string, limit: number): Observable<DTOCoursTickerAllege[]> {
     return this.http.get<DTOCoursTickerAllege[]>(
-      `bourse/cours/${ticker}/${limit}`
+      `/bourse/cours/${ticker}/${limit}`
     );
   }
 
@@ -69,7 +69,7 @@ export class CoursService {
     if (tickers.length > 0) {
       const liste: string = tickers.reduce((t1, t2) => t1 + ',' + t2);
       return this.http.get<DTOCoursAvecListeAllege[]>(
-        `bourse/cours/tickers/${limit}?tickers=${liste}`
+        `/bourse/cours/tickers/${limit}?tickers=${liste}`
       );
     } else {
       return of([]);

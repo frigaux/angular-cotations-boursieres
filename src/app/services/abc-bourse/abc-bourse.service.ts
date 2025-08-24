@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {DTOInformationsTicker} from './dto-informations-ticker.class';
-import {DTOInformationTicker} from './dto-information-ticker.class';
+import {DTOActualite} from './dto-actualite.class';
 import {DTODividende} from './dto-dividende.class';
 import {DTOVariation} from './dto-variation.class';
 import {DTORatio} from './dto-ratio.class';
@@ -21,38 +21,45 @@ export class AbcBourseService {
     return new Observable(observer => {
       const headers = new HttpHeaders()
         .set('Accept', 'text/html; charset=utf-8');
-      this.http.get(`abcbourse/cotation/${ticker}p`, {headers, responseType: 'text'}
+      this.http.get(`/abcbourse/cotation/${ticker}p`, {headers, responseType: 'text'}
       ).subscribe({
         error: httpResponseError => {
           observer.error(httpResponseError);
           observer.complete();
         },
         next: html => {
-          observer.next(this.parseAndMap(html, ticker));
+          observer.next(this.parseAndMapInformations(html, ticker));
           observer.complete();
         }
       });
     });
   }
 
-  private parseAndMap(html: string, ticker: string): DTOInformationsTicker {
+  private parseAndMapInformations(html: string, ticker: string): DTOInformationsTicker {
     const result = new DTOInformationsTicker(ticker);
 
     this.execRegexpAndMap(
-      result.informations,
+      result.actualites,
       html,
       new RegExp('<div class="newsln2">\\s*<div>([^>]+)<\\/div>\\s*<div><a href="([^"]+)">([^>]+)<\\/a>', 'gm'),
-      (matches) => new DTOInformationTicker(matches[1], matches[3])
+      (matches) => new DTOActualite(matches[1], matches[3], matches[2])
     );
 
     const elTables = new DOMParser()
       .parseFromString(html, 'text/html')
       .querySelectorAll('table.tableDis');
 
-    this.mapVariations(result.variations, elTables[0]);
-    this.mapDividendes(result.dividendes, elTables[1]);
-    this.mapRatios(result.ratios, elTables[2]);
-    this.mapIndicateurs(result, elTables[3]);
+    if (elTables.length === 4) {
+      this.mapVariations(result.variations, elTables[0]);
+      this.mapDividendes(result.dividendes, elTables[1]);
+      this.mapRatios(result.ratios, elTables[2]);
+      this.mapIndicateurs(result, elTables[3]);
+    }
+    if (elTables.length === 3) { // bloc dividende absent
+      this.mapVariations(result.variations, elTables[0]);
+      this.mapRatios(result.ratios, elTables[1]);
+      this.mapIndicateurs(result, elTables[2]);
+    }
 
     return result;
   }
@@ -106,7 +113,8 @@ export class AbcBourseService {
       result.correlationCAC = this.parseNumber(elTdCorrelation.innerText) / 100;
     }
 
-    const elSpanQualite: HTMLSpanElement | null = elTrs[2].querySelector('td:nth-child(2) > span');
+    // pas toujours défini
+    const elSpanQualite: HTMLSpanElement | null = elTrs[2]?.querySelector('td:nth-child(2) > span');
     if (elSpanQualite) {
       result.qualiteFinanciere = elSpanQualite.innerText;
     }
@@ -126,5 +134,32 @@ export class AbcBourseService {
       return Number(match[0]);
     }
     return NaN;
+  }
+
+  public chargerActualite(actualite: DTOActualite): Observable<string> {
+    return new Observable(observer => {
+      const headers = new HttpHeaders()
+        .set('Accept', 'text/html; charset=utf-8');
+      this.http.get(`/abcbourse/${actualite.pathname}`, {headers, responseType: 'text'}
+      ).subscribe({
+        error: httpResponseError => {
+          observer.error(httpResponseError);
+          observer.complete();
+        },
+        next: html => {
+          observer.next(this.parseActualite(html));
+          observer.complete();
+        }
+      });
+    });
+  }
+
+  private parseActualite(html: string) {
+    let result = '';
+    new DOMParser()
+      .parseFromString(html, 'text/html')
+      .querySelectorAll('article')
+      .forEach(elArticle => result += '<p>' + elArticle.innerHTML + '</p>');
+    return result.replaceAll(/<img src="([^"]+)"/g, '<img src="https://www.abcbourse.com$1"');
   }
 }

@@ -18,7 +18,7 @@ describe('AuthentificationService', () => {
     // bouchonnage de la ressource HTTP
     httpTesting.expectOne({
       method: 'POST',
-      url: 'bourse/authentification',
+      url: '/bourse/authentification',
     }).flush({ jwt });
     // on attend la résolution de la promise
     await promiseAuthentifier;
@@ -37,7 +37,7 @@ describe('AuthentificationService', () => {
     // bouchonnage de la ressource HTTP
     httpTesting.expectOne({
       method: 'POST',
-      url: 'bourse/authentification',
+      url: '/bourse/authentification',
     }).error(new ProgressEvent(''));
     // on attend la résolution de la promise et on ignore l'erreur volontaire
     try {

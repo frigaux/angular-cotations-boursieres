@@ -7,7 +7,11 @@ import {TableModule} from 'primeng/table';
 import {CurrencyPipe, DecimalPipe, NgClass, PercentPipe} from '@angular/common';
 import {TranslatePipe} from '@ngx-translate/core';
 import {Cours} from '../cours.class';
+import {DTOActualite} from '../../../services/abc-bourse/dto-actualite.class';
+import {ActualiteComponent} from './actualite/actualite.component';
 
+// TODO : coverage
+// TODO : ajouter ce composant dans portefeuille
 @Component({
   selector: 'app-informations-ticker',
   imports: [
@@ -18,7 +22,8 @@ import {Cours} from '../cours.class';
     TranslatePipe,
     DecimalPipe,
     CurrencyPipe,
-    NgClass
+    NgClass,
+    ActualiteComponent
   ],
   templateUrl: './informations-ticker.component.html',
   styleUrl: './informations-ticker.component.sass'
@@ -36,6 +41,7 @@ export class InformationsTickerComponent {
   // données pour la vue
   informationsTicker?: DTOInformationsTicker;
   pourcentageDividendes?: number;
+  actualiteCourante?: DTOActualite
 
   constructor(private abcBourseService: AbcBourseService) {
   }
@@ -43,14 +49,25 @@ export class InformationsTickerComponent {
   private intercepteurCours(cours: Cours | undefined) {
     this.cours = cours;
     if (cours) {
+      this.informationsTicker = undefined;
+      this.pourcentageDividendes = undefined;
       this.loading = true;
-      this.abcBourseService.chargerInformationsTicker(cours.ticker)
-        .subscribe(dto => {
+
+      this.abcBourseService.chargerInformationsTicker(cours.ticker).subscribe({
+        error: httpResponseError => {
+          this.loading = false;
+        },
+        next: dto => {
           this.informationsTicker = dto;
           this.pourcentageDividendes = dto.dividendes.length > 0 ? dto.dividendes[0].montant / cours.cloture : 0;
           this.loading = false;
-        });
+        }
+      });
     }
     return cours;
+  }
+
+  afficherActualite(actualite: DTOActualite) {
+    this.actualiteCourante = actualite;
   }
 }

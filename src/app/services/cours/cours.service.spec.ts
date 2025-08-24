@@ -51,7 +51,7 @@ describe('CoursService', () => {
     // bouchonnage de la ressource HTTP
     httpTesting.expectOne({
       method: 'GET',
-      url: 'bourse/cours',
+      url: '/bourse/cours',
     }).flush(LISTE_COURS);
     expect(await promiseCours).toEqual(LISTE_COURS);
     // vérification qu'il n'y a pas de requêtes en attente
@@ -64,7 +64,7 @@ describe('CoursService', () => {
     // bouchonnage de la ressource HTTP
     httpTesting.expectOne({
       method: 'GET',
-      url: 'bourse/cours/GLE',
+      url: '/bourse/cours/GLE',
     }).flush(COURS_TICKER);
     expect(await promiseCours).toEqual(COURS_TICKER);
     // vérification qu'il n'y a pas de requêtes en attente
@@ -77,7 +77,7 @@ describe('CoursService', () => {
     // bouchonnage de la ressource HTTP
     httpTesting.expectOne({
       method: 'GET',
-      url: 'bourse/cours/GLE/2',
+      url: '/bourse/cours/GLE/2',
     }).flush(LISTE_COURS_TICKER_ALLEGE);
     expect(await promiseCours).toEqual(LISTE_COURS_TICKER_ALLEGE);
     // vérification qu'il n'y a pas de requêtes en attente
@@ -98,7 +98,7 @@ describe('CoursService', () => {
     // bouchonnage de la ressource HTTP
     httpTesting.expectOne({
       method: 'GET',
-      url: 'bourse/cours/tickers/4?tickers=GLE,BNP',
+      url: '/bourse/cours/tickers/4?tickers=GLE,BNP',
     }).flush(LISTE_COURS_AVEC_LISTE_ALLEGEE);
     expect(await promiseCours).toEqual(LISTE_COURS_AVEC_LISTE_ALLEGEE);
     // vérification qu'il n'y a pas de requêtes en attente

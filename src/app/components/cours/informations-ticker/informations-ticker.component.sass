@@ -1,8 +1,16 @@
-div
+div.ligne
   display: flex
   flex-direction: row
 
-  & > div
+  & > div.colonne:nth-child(1)
+    width: 16rem
+
+  & > div.colonne:nth-child(2)
+    & > p-fieldset:nth-child(1)
+      tr > td:nth-child(2)
+        cursor: pointer
+
+  & > div.colonne
     display: flex
     flex-direction: column
     margin: 1rem
@@ -16,14 +24,24 @@ div
     p-fieldset:nth-child(n+2)
       margin-top: 1rem
 
-    p-fieldset
-      div
-        margin: 1rem 0 1rem 0
+    div.ratios
+      display: flex
+      flex-direction: row
 
-        label
-          width: 12rem
-          font-weight: bold
+      & > div:nth-child(2)
+        margin-left: 1rem
+        border-left: 1px solid var(--p-gray-400)
+        padding: 0 0 0 1rem
 
-        span
-          width: 6rem
-          text-align: right
+        & > div
+          margin: 0.5rem
+
+          label
+            display: inline-block
+            width: 10rem
+            font-weight: bold
+
+          span
+            display: inline-block
+            width: 5rem
+            text-align: right

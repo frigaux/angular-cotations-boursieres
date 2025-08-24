@@ -7,18 +7,27 @@ import {Observable, throwError} from 'rxjs';
 
 export const AUTHENTIFICATION_REQUISE = new HttpContextToken<boolean>(() => true);
 
-function isRequeteProxy(url: string): boolean {
-  return url.startsWith('abcbourse');
+// https://angular.dev/guide/http/interceptors
+export const httpRequestInterceptor: HttpInterceptorFn = (req, next) => {
+  if (isRequeteProxy(req.url)) {
+    return makeProxyCall(req, next);
+  } else {
+    return makeApiCall(req, next);
+  }
+};
+
+function isRequeteProxy(pathname: string): boolean {
+  return pathname.startsWith('/abcbourse');
 }
 
 function makeProxyCall(req: HttpRequest<unknown>, next: (req: HttpRequest<unknown>) => Observable<HttpEvent<unknown>>) {
-  return next(req.clone({url: environment.staticPrefixUrl + '/' + req.url}));
+  return next(req.clone({url: environment.staticPrefixUrl + req.url}));
 }
 
 function makeApiCall(req: HttpRequest<unknown>, next: (req: HttpRequest<unknown>) => Observable<HttpEvent<unknown>>) {
   const authentificationRequise = req.context.get(AUTHENTIFICATION_REQUISE);
   const updateRequest = {
-    url: environment.apiPrefixUrl + '/v' + environment.apiVersion + '/' + req.url,
+    url: environment.apiPrefixUrl + '/v' + environment.apiVersion + req.url,
     headers: req.headers
       .append('Accept', 'application/json')
       .append('Content-Type', 'application/json'),
@@ -36,12 +45,3 @@ function makeApiCall(req: HttpRequest<unknown>, next: (req: HttpRequest<unknown>
     return next(req.clone(updateRequest));
   }
 }
-
-// https://angular.dev/guide/http/interceptors
-export const httpRequestInterceptor: HttpInterceptorFn = (req, next) => {
-  if (isRequeteProxy(req.url)) {
-    return makeProxyCall(req, next);
-  } else {
-    return makeApiCall(req, next);
-  }
-};

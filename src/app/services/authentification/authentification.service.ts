@@ -31,7 +31,7 @@ export class AuthentificationService {
   public authentifier(): Observable<DTOJwt> {
     return new Observable(observer => {
       this.http.post<DTOJwt>(
-        'bourse/authentification',
+        '/bourse/authentification',
         { identifiant: 'anonymous', motDePasse: 'anonymous' },
         { context: new HttpContext().set(AUTHENTIFICATION_REQUISE, false) }
       ).subscribe({

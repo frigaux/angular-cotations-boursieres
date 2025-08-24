@@ -10,18 +10,28 @@ export const httpResponseInterceptor: HttpInterceptorFn = (req, next) => {
   return next(req).pipe(
     delay(environment.httpDelay),
     catchError((error: unknown) => {
-      if (error instanceof HttpErrorResponse) {
-        switch (error.status) {
-          case 401:
-            router.navigate(['/authentification']);
-            break;
-          default:
-            router.navigate(['/erreur-technique'], {
-              queryParams: {message: `${error.message}`}
-            });
-        }
+      if (isRequeteApi(req.url)) {
+        handleApiError(error, router);
       }
       return throwError(() => error);
     })
   );
 };
+
+function isRequeteApi(url: string): boolean {
+  return !new URL(url).pathname.startsWith('/abcbourse');
+}
+
+function handleApiError(error: unknown, router: Router) {
+  if (error instanceof HttpErrorResponse) {
+    switch (error.status) {
+      case 401:
+        router.navigate(['/authentification']);
+        break;
+      default:
+        router.navigate(['/erreur-technique'], {
+          queryParams: {message: `${error.message}`}
+        });
+    }
+  }
+}

@@ -134,19 +134,16 @@
           "ANNEE": "Année",
           "MONTANT": "Montant"
         },
-        "INFORMATIONS": {
-          "INFORMATIONS": "Informations",
+        "ACTUALITES": {
+          "ACTUALITES": "Actualités",
           "DATE": "Date",
           "TITRE": "Titre"
         },
-        "RATIOS_ANNUELS": {
-          "RATIOS_ANNUELS": "Ratios financiers par année",
-          "ANNEE": "Année",
-          "BNPA": "BNPA",
-          "PER": "PER"
-        },
         "RATIOS": {
           "RATIOS": "Ratios financiers",
+          "ANNEE": "Année",
+          "BNPA": "BNPA",
+          "PER": "PER",
           "VARIATION_CAC": "Variation / CAC40",
           "CORRELATION_CAC": "Corrélation / CAC40",
           "QUALITE": "Qualité financière"

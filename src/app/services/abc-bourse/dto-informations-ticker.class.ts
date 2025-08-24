@@ -1,11 +1,11 @@
-import {DTOInformationTicker} from './dto-information-ticker.class';
+import {DTOActualite} from './dto-actualite.class';
 import {DTODividende} from './dto-dividende.class';
 import {DTOVariation} from './dto-variation.class';
 import {DTORatio} from './dto-ratio.class';
 
 export class DTOInformationsTicker {
   ticker: string;
-  informations: Array<DTOInformationTicker>;
+  actualites: Array<DTOActualite>;
   variations: Array<DTOVariation>;
   dividendes: Array<DTODividende>;
   ratios: Array<DTORatio>;
@@ -15,7 +15,7 @@ export class DTOInformationsTicker {
 
   constructor(ticker: string) {
     this.ticker = ticker;
-    this.informations = [];
+    this.actualites = [];
     this.variations = [];
     this.dividendes = [];
     this.ratios = [];

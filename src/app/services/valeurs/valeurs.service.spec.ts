@@ -42,7 +42,7 @@ describe('ValeursService', () => {
     // bouchonnage de la ressource HTTP
     httpTesting.expectOne({
       method: 'GET',
-      url: 'bourse/valeurs',
+      url: '/bourse/valeurs',
     }).flush(VALEURS);
     expect(await promiseValeurs).toEqual(VALEURS);
     // vérification qu'il n'y a pas de requêtes en attente

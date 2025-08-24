@@ -28,7 +28,7 @@ export class ValeursService {
 
   public chargerValeurs(): Observable<DTOValeur[]> {
     return this.http.get<DTOValeur[]>(
-      'bourse/valeurs'
+      '/bourse/valeurs'
     );
   }
 
