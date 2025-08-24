@@ -68,7 +68,7 @@
             </ng-template>
             <ng-template #body let-actualite>
               <tr>
-                <td>{{ actualite.date }}</td>
+                <td>{{ actualite.date | date: 'dd/MM/yyyy' }}</td>
                 <td (click)="afficherActualite(actualite)">{{ actualite.titre }}</td>
               </tr>
             </ng-template>

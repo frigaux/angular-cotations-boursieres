@@ -151,7 +151,7 @@
       }
     },
     "ACHATS_VALEURS": {
-      "TITRE": "Liste des achats de valeurs",
+      "ACHATS_VALEURS": "Liste des achats de valeurs",
       "VALEUR": "Valeur",
       "DATE": "Date",
       "PRIX": "Prix",
@@ -166,9 +166,8 @@
       "PORTEFEUILLES_DATE": "Portefeuilles à la date du",
       "ACTIONS": "Actions sur la valeur",
       "DETAILS_VALEUR": {
-        "TITRE": "{{valeur}} ({{ticker}}, {{marche}})",
-        "ABCBOURSE": "Lien vers ABCBourse",
-        "BOURSORAMA": "Lien vers Boursorama"
+        "DETAILS_VALEUR": "{{valeur}} ({{ticker}}, {{marche}})",
+        "INFORMATIONS_DETAILLEES": "Informations détaillées : {{valeur}} ({{ticker}}, {{marche}})"
       },
       "ACTIONS_VALEUR": {
         "SUPPRIMER_DU_PORTEFEUILLE": "Supprimer la valeur du portefeuille",

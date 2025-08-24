@@ -4,7 +4,8 @@
       <h2>
         <span class="pi" [class]="cours!.iconeVariation()"></span>
         {{
-          'COMPOSANTS.PORTEFEUILLES.DETAILS_VALEUR.TITRE' | translate: {
+          (informationsDetaillees ? 'COMPOSANTS.PORTEFEUILLES.DETAILS_VALEUR.INFORMATIONS_DETAILLEES' : 'COMPOSANTS.PORTEFEUILLES.DETAILS_VALEUR.DETAILS_VALEUR')
+            | translate: {
             valeur: cours.libelle,
             ticker: cours.ticker,
             marche: `ENUMERATIONS.MARCHE.${coursPortefeuille.marche}` | translate
@@ -12,12 +13,22 @@
         }}
         <app-alertes [alertes]="alertes"></app-alertes>
       </h2>
-      <span class="pi pi-external-link" (click)="abcBourse()"
-            title="{{ 'COMPOSANTS.PORTEFEUILLES.DETAILS_VALEUR.ABCBOURSE' | translate}}"></span>
-      <span class="pi pi-external-link" (click)="boursorama()"
-            title="{{ 'COMPOSANTS.PORTEFEUILLES.DETAILS_VALEUR.BOURSORAMA' | translate}}"></span>
+      <span class="pi" [ngClass]="{'pi-chart-line': informationsDetaillees, 'pi-info-circle': !informationsDetaillees}"
+            (click)="informationsDetaillees = !informationsDetaillees"
+            title="{{
+          (informationsDetaillees ? 'COMPOSANTS.PORTEFEUILLES.DETAILS_VALEUR.DETAILS_VALEUR' : 'COMPOSANTS.PORTEFEUILLES.DETAILS_VALEUR.INFORMATIONS_DETAILLEES')
+            | translate : {
+            valeur: cours.libelle,
+            ticker: cours.ticker,
+            marche: `ENUMERATIONS.MARCHE.${coursPortefeuille.marche}` | translate
+          }
+        }}"></span>
       <span class="pi pi-times-circle" (click)="this.ferme.emit()"></span>
     </ng-template>
-    <app-charts [cours]="cours"></app-charts>
+    @if (informationsDetaillees) {
+      <app-informations-ticker [cours]="cours"></app-informations-ticker>
+    } @else {
+      <app-charts [cours]="cours"></app-charts>
+    }
   </p-panel>
 }

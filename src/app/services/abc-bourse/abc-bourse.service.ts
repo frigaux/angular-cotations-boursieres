@@ -42,7 +42,7 @@ export class AbcBourseService {
       result.actualites,
       html,
       new RegExp('<div class="newsln2">\\s*<div>([^>]+)<\\/div>\\s*<div><a href="([^"]+)">([^>]+)<\\/a>', 'gm'),
-      (matches) => new DTOActualite(matches[1], matches[3], matches[2])
+      (matches) => new DTOActualite(this.parseAndMapTo8601(matches[1]), matches[3], matches[2])
     );
 
     const elTables = new DOMParser()
@@ -136,6 +136,10 @@ export class AbcBourseService {
     return NaN;
   }
 
+  private parseAndMapTo8601(dateFr: string) {
+    return dateFr.replace(/(\d+)\/(\d+)\/(\d+)/g, '20$3-$2-$1');
+  }
+
   public chargerActualite(actualite: DTOActualite): Observable<string> {
     return new Observable(observer => {
       const headers = new HttpHeaders()
@@ -160,6 +164,8 @@ export class AbcBourseService {
       .parseFromString(html, 'text/html')
       .querySelectorAll('article')
       .forEach(elArticle => result += '<p>' + elArticle.innerHTML + '</p>');
-    return result.replaceAll(/<img src="([^"]+)"/g, '<img src="https://www.abcbourse.com$1"');
+    // return result.replaceAll(/<img src="([^"]+)"/g, '<img src="https://www.abcbourse.com$1"');
+    return result.replaceAll(/<img [^>]*>/g, '')
+      .replaceAll(/<a [^>]*>([^<]*)<\/a>/g, '$1');
   }
 }

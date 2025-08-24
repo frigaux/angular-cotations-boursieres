@@ -4,7 +4,7 @@ import {AbcBourseService} from '../../../services/abc-bourse/abc-bourse.service'
 import {Fieldset} from 'primeng/fieldset';
 import {LoaderComponent} from '../../loader/loader.component';
 import {TableModule} from 'primeng/table';
-import {CurrencyPipe, DecimalPipe, NgClass, PercentPipe} from '@angular/common';
+import {CurrencyPipe, DatePipe, DecimalPipe, NgClass, PercentPipe} from '@angular/common';
 import {TranslatePipe} from '@ngx-translate/core';
 import {Cours} from '../cours.class';
 import {DTOActualite} from '../../../services/abc-bourse/dto-actualite.class';
@@ -23,7 +23,8 @@ import {ActualiteComponent} from './actualite/actualite.component';
     DecimalPipe,
     CurrencyPipe,
     NgClass,
-    ActualiteComponent
+    ActualiteComponent,
+    DatePipe
   ],
   templateUrl: './informations-ticker.component.html',
   styleUrl: './informations-ticker.component.sass'

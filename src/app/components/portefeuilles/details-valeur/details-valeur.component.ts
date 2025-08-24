@@ -6,6 +6,8 @@ import {Cours} from '../../cours/cours.class';
 import {AlertesComponent} from '../alertes/alertes.component';
 import {Alerte} from '../alerte.class';
 import {TranslatePipe} from '@ngx-translate/core';
+import {InformationsTickerComponent} from '../../cours/informations-ticker/informations-ticker.component';
+import {NgClass} from '@angular/common';
 
 @Component({
   selector: 'app-details-valeur',
@@ -13,7 +15,9 @@ import {TranslatePipe} from '@ngx-translate/core';
     Panel,
     ChartsComponent,
     AlertesComponent,
-    TranslatePipe
+    TranslatePipe,
+    InformationsTickerComponent,
+    NgClass
   ],
   templateUrl: './details-valeur.component.html',
   styleUrl: './details-valeur.component.sass'
@@ -28,19 +32,12 @@ export class DetailsValeurComponent {
   alertes: Alerte[] | undefined;
   coursPortefeuille?: CoursPortefeuille;
   cours: Cours | undefined;
+  informationsDetaillees: boolean = false;
 
   private intercepteurCoursPortefeuille(coursPortefeuille: CoursPortefeuille | undefined) {
     this.coursPortefeuille = coursPortefeuille;
     this.alertes = coursPortefeuille?.evaluerAlertes();
     this.cours = coursPortefeuille ? Cours.fromCoursPortefeuille(coursPortefeuille) : undefined;
     return coursPortefeuille;
-  }
-
-  boursorama() {
-    window.open(`https://www.boursorama.com/cours/1rP${this.cours?.ticker}/`);
-  }
-
-  abcBourse() {
-    window.open(`https://www.abcbourse.com/cotation/${this.cours?.ticker}p`);
   }
 }
