@@ -1,33 +1,33 @@
 import {Component, input, InputSignal, WritableSignal} from '@angular/core';
 import {Dialog} from 'primeng/dialog';
-import {DTOActualite} from '../../../../services/abc-bourse/dto-actualite.class';
+import {DTOActualiteTicker} from '../../../../services/abc-bourse/dto-actualite-ticker.class';
 import {AbcBourseService} from '../../../../services/abc-bourse/abc-bourse.service';
 
 @Component({
-  selector: 'app-actualite',
+  selector: 'app-actualite-ticker',
   imports: [
     Dialog
   ],
-  templateUrl: './actualite.component.html',
-  styleUrl: './actualite.component.sass'
+  templateUrl: './actualite-ticker.component.html',
+  styleUrl: './actualite-ticker.component.sass'
 })
-export class ActualiteComponent {
+export class ActualiteTickerComponent {
   // input/output
-  inputActualite: InputSignal<DTOActualite | undefined> = input(undefined,
+  inputActualite: InputSignal<DTOActualiteTicker | undefined> = input(undefined,
     {transform: o => this.intercepteurActualite(o), alias: 'actualite'});
 
   // données pour la vue
   visible: boolean | WritableSignal<boolean> = false;
-  actualite?: DTOActualite;
+  actualite?: DTOActualiteTicker;
   html?: string;
 
   constructor(private abcBourseService: AbcBourseService) {
   }
 
-  private intercepteurActualite(actualite: DTOActualite | undefined) {
+  private intercepteurActualite(actualite: DTOActualiteTicker | undefined) {
     this.actualite = actualite;
     if (actualite) {
-      this.abcBourseService.chargerActualite(actualite).subscribe({
+      this.abcBourseService.chargerActualiteTicker(actualite).subscribe({
         error: httpResponseError => {
         },
         next: html => {

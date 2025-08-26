@@ -1,7 +1,9 @@
-<h3>{{ 'COMPOSANTS.PORTEFEUILLES.PORTEFEUILLES_DATE' | translate }}
-  <p-skeleton *ngIf="date === undefined" shape="rectangle" borderRadius="0" width="6rem" height="1rem"/>
-  {{ date | date: 'dd/MM/yyyy' }}
-</h3>
+<p-skeleton *ngIf="date === undefined" shape="rectangle" borderRadius="0" width="24rem" height="2rem"/>
+
+<div class="titre" *ngIf="date">
+  <span>{{ 'COMPOSANTS.PORTEFEUILLES.PORTEFEUILLES_DATE' | translate: {jour: date | date: 'dd/MM/yyyy'} }}</span>
+  <app-actualites></app-actualites>
+</div>
 
 <app-loader [affiche]="loading" [configuration]="[
   {marginLeft: '0', marginTop: '1rem', height: '3rem', width: '100%'},

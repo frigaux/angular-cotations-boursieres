@@ -1,4 +1,4 @@
-export class DTOActualite {
+export class DTOActualiteTicker {
   date: string; // ISO 8601 : yyyy-MM-dd
   titre: string;
   pathname: string;

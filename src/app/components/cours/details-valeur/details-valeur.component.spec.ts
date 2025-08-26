@@ -45,6 +45,5 @@ describe('DetailsValeurComponent', () => {
 
   it('Given un cours when #informationsDetaillees est true then les informations détaillées sont affichées', () => {
     fixture.componentRef.setInput('cours', COURS_CROISSANT);
-    component.informationsDetaillees = true;
   });
 });

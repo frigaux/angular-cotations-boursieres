@@ -22,6 +22,7 @@ import {DTOColonne} from '../../services/tableaux/dto-colonne-portefeuille.inter
 import {TypesColonnesPortefeuille} from '../../services/tableaux/types-colonnes-portefeuille.enum';
 import {ColonneDecoree} from './colonne-decoree.class';
 import {BreakpointObserver} from '@angular/cdk/layout';
+import {ActualitesComponent} from '../cours/actualites/actualites.component';
 
 @Component({
   selector: 'app-portefeuilles',
@@ -43,7 +44,8 @@ import {BreakpointObserver} from '@angular/cdk/layout';
     NgStyle,
     CurrencyPipe,
     PercentPipe,
-    DecimalPipe
+    DecimalPipe,
+    ActualitesComponent
   ],
   templateUrl: './portefeuilles.component.html',
   styleUrls: ['./accordion-chart.sass', './portefeuilles.component.sass']

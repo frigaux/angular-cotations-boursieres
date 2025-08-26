@@ -1,11 +1,11 @@
-import {DTOActualite} from './dto-actualite.class';
+import {DTOActualiteTicker} from './dto-actualite-ticker.class';
 import {DTODividende} from './dto-dividende.class';
 import {DTOVariation} from './dto-variation.class';
 import {DTORatio} from './dto-ratio.class';
 
 export class DTOInformationsTicker {
   ticker: string;
-  actualites: Array<DTOActualite>;
+  actualites: Array<DTOActualiteTicker>;
   variations: Array<DTOVariation>;
   dividendes: Array<DTODividende>;
   ratios: Array<DTORatio>;

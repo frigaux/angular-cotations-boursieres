@@ -19,6 +19,7 @@ import {SelecteurFiltreComponent} from './selecteur-filtre/selecteur-filtre.comp
 import {FiltreDecore} from './selecteur-filtre/filtre-decore.class';
 import {ImportExportComponent} from './editeur-filtres/import-export/import-export.component';
 import {PortefeuillesService} from '../../services/portefeuilles/portefeuilles.service';
+import {ActualitesComponent} from './actualites/actualites.component';
 
 @Component({
   selector: 'app-cours',
@@ -39,7 +40,8 @@ import {PortefeuillesService} from '../../services/portefeuilles/portefeuilles.s
     PercentPipe,
     AjoutAuPortefeuilleComponent,
     SelecteurFiltreComponent,
-    ImportExportComponent
+    ImportExportComponent,
+    ActualitesComponent
   ],
   templateUrl: './cours.component.html',
   styleUrls: ['../portefeuilles/accordion-chart.sass', './cours.component.sass']

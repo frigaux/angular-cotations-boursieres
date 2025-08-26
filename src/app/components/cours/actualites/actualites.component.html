@@ -1,0 +1,117 @@
+<span class="pi pi-book" (click)="visible = true"
+      title="{{ 'COMPOSANTS.COURS.ACTUALITES.ACTUALITES' | translate }}"></span>
+
+<p-dialog header="{{ 'COMPOSANTS.COURS.ACTUALITES.ACTUALITES' | translate }}"
+          [modal]="true" (onShow)="reinitialiserVue()" [(visible)]="visible" [style]="{ width: '90vw' }">
+  <app-loader [affiche]="loading" [configuration]="[
+        {marginLeft: '0', marginTop: '0', height: '70vh', width: '100%'}
+      ]"></app-loader>
+
+  @if (!loading && actualites) {
+    <div [innerHTML]="actualites.marches"></div>
+    <div class="ligne">
+      <div class="colonne">
+        <p-fieldset legend="{{ 'COMPOSANTS.COURS.ACTUALITES.ANALYSES.ANALYSES' | translate }}">
+          <p-table size="small"
+                   [value]="actualites.analyses"
+                   [loading]="loading">
+            <ng-template #header>
+              <tr>
+                <th>{{ 'COMPOSANTS.COURS.ACTUALITES.ANALYSES.DATE' | translate }}</th>
+                <th>{{ 'COMPOSANTS.COURS.ACTUALITES.ANALYSES.TITRE' | translate }}
+                </th>
+              </tr>
+            </ng-template>
+            <ng-template #body let-analyse>
+              <tr>
+                <td>{{ analyse.moment }}</td>
+                <td><strong>{{ analyse.objet }}</strong> : {{ analyse.titre }}</td>
+              </tr>
+            </ng-template>
+          </p-table>
+        </p-fieldset>
+
+        <p-fieldset legend="{{ 'COMPOSANTS.COURS.ACTUALITES.CHRONIQUES.CHRONIQUES' | translate }}">
+          <p-table size="small"
+                   [value]="actualites.chroniques"
+                   [loading]="loading">
+            <ng-template #header>
+              <tr>
+                <th>{{ 'COMPOSANTS.COURS.ACTUALITES.CHRONIQUES.HEURE' | translate }}</th>
+                <th>{{ 'COMPOSANTS.COURS.ACTUALITES.CHRONIQUES.TITRE' | translate }}</th>
+              </tr>
+            </ng-template>
+            <ng-template #body let-chronique>
+              <tr>
+                <td>{{ chronique.moment }}</td>
+                <td><strong>{{ chronique.objet }}</strong> : {{ chronique.titre }}</td>
+              </tr>
+            </ng-template>
+          </p-table>
+        </p-fieldset>
+      </div>
+      <div class="colonne">
+        <p-fieldset legend="{{ 'COMPOSANTS.COURS.ACTUALITES.VENTES_DECOUVERT.VENTES_DECOUVERT' | translate }}">
+          <p-table size="small"
+                   [value]="actualites.ventesADecouvert"
+                   [loading]="loading">
+            <ng-template #header>
+              <tr>
+                <th>{{ 'COMPOSANTS.COURS.ACTUALITES.VENTES_DECOUVERT.VALEUR' | translate }}</th>
+                <th style="text-align: right">{{ 'COMPOSANTS.COURS.ACTUALITES.VENTES_DECOUVERT.CAPITAL' | translate }}
+                </th>
+                <th style="text-align: right">{{ 'COMPOSANTS.COURS.ACTUALITES.VENTES_DECOUVERT.ACTION' | translate }}
+                </th>
+                <th
+                  style="text-align: right">{{ 'COMPOSANTS.COURS.ACTUALITES.VENTES_DECOUVERT.POSITION' | translate }}
+                </th>
+              </tr>
+            </ng-template>
+            <ng-template #body let-vad>
+              <tr>
+                <td>{{ vad.valeur }}</td>
+                <td style="text-align: right">{{ vad.pourcentageCapital | percent:'1.2-2' }}</td>
+                <td style="text-align: right">{{ vad.nombreActions | number }}</td>
+                <td style="text-align: right">{{ vad.positionEnM | number }}</td>
+              </tr>
+            </ng-template>
+          </p-table>
+        </p-fieldset>
+      </div>
+    </div>
+    <div>
+      <p-fieldset legend="{{ 'COMPOSANTS.COURS.ACTUALITES.TRANSACTIONS.TRANSACTIONS' | translate }}">
+        <p-table size="small"
+                 [value]="actualites.transactionsDirigeants"
+                 [loading]="loading">
+          <ng-template #header>
+            <tr>
+              <th>{{ 'COMPOSANTS.COURS.ACTUALITES.TRANSACTIONS.VALEUR' | translate }}</th>
+              <th>{{ 'COMPOSANTS.COURS.ACTUALITES.TRANSACTIONS.DATE_DECLARATION' | translate }}</th>
+              <th>{{ 'COMPOSANTS.COURS.ACTUALITES.TRANSACTIONS.OPERATION' | translate }}</th>
+              <th>{{ 'COMPOSANTS.COURS.ACTUALITES.TRANSACTIONS.INSTRUMENT' | translate }}</th>
+              <th style="text-align: right">{{ 'COMPOSANTS.COURS.ACTUALITES.TRANSACTIONS.MONTANT' | translate }}</th>
+              <th>{{ 'COMPOSANTS.COURS.ACTUALITES.TRANSACTIONS.AUTEUR' | translate }}</th>
+              <th>{{ 'COMPOSANTS.COURS.ACTUALITES.TRANSACTIONS.DATE_OPERATION' | translate }}</th>
+              <th style="text-align: right">{{ 'COMPOSANTS.COURS.ACTUALITES.TRANSACTIONS.QUANTITE' | translate }}</th>
+              <th style="text-align: right">{{ 'COMPOSANTS.COURS.ACTUALITES.TRANSACTIONS.PRIX' | translate }}</th>
+            </tr>
+          </ng-template>
+          <ng-template #body let-transaction>
+            <tr>
+              <td>{{ transaction.valeur }}</td>
+              <td>{{ transaction.dateDeclaration | date: 'dd/MM/yyyy' }}</td>
+              <td [innerHTML]="transaction.operation"></td>
+              <td [innerHTML]="transaction.instrument"></td>
+              <td style="text-align: right">{{ transaction.montant | currency:'€' }}</td>
+              <td [innerHTML]="transaction.auteur"></td>
+              <td>{{ transaction.dateOperation | date: 'dd/MM/yyyy' }}</td>
+              <td style="text-align: right">{{ transaction.quantite | number }}</td>
+              <td style="text-align: right">{{ transaction.prix | currency:'€' }}</td>
+            </tr>
+          </ng-template>
+        </p-table>
+      </p-fieldset>
+    </div>
+  }
+</p-dialog>

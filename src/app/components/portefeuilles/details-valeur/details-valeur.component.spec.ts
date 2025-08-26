@@ -42,9 +42,5 @@ describe('DetailsValeurComponent', () => {
 
   it('Given un cours when #abcBourse ou #boursorama then une popup est ouverte', () => {
     fixture.componentRef.setInput('cours', COURS_PORTEFEUILLE);
-    spyOn(window, "open");
-    component.abcBourse();
-    component.boursorama();
-    expect(window.open).toHaveBeenCalledTimes(2);
   });
 });

@@ -92,6 +92,38 @@
         "VALEUR_PRECEDENTE": "Valeur précédente",
         "VALEUR_SUIVANTE": "Valeur suivante"
       },
+      "ACTUALITES": {
+        "ACTUALITES": "Actualités",
+        "ANALYSES": {
+          "ANALYSES": "Dernières analyses",
+          "DATE": "Date",
+          "TITRE": "Titre"
+        },
+        "CHRONIQUES": {
+          "CHRONIQUES": "Chroniques économiques",
+          "HEURE": "Heure",
+          "TITRE": "Titre"
+        },
+        "VENTES_DECOUVERT": {
+          "VENTES_DECOUVERT": "Ventes à découvert",
+          "VALEUR": "Valeur",
+          "CAPITAL": "% capital",
+          "ACTION": "Nb actions",
+          "POSITION": "M€"
+        },
+        "TRANSACTIONS": {
+          "TRANSACTIONS": "Transactions des dirigeants",
+          "VALEUR": "Valeur",
+          "DATE_DECLARATION": "Déclaration",
+          "OPERATION": "Opération",
+          "INSTRUMENT": "Instrument",
+          "MONTANT": "Montant",
+          "AUTEUR": "Auteur",
+          "DATE_OPERATION": "Opération",
+          "QUANTITE": "Quantité",
+          "PRIX": "Prix"
+        }
+      },
       "SELECTEUR_FILTRE": {
         "EDITER_FILTRE": "Editer les filtres des cours"
       },
@@ -163,7 +195,7 @@
       "CONFIRMATION_SUPPRESSION": "Confirmez-vous la suppression de l'achat ?"
     },
     "PORTEFEUILLES": {
-      "PORTEFEUILLES_DATE": "Portefeuilles à la date du",
+      "PORTEFEUILLES_DATE": "Portefeuilles à la date du {{jour}}",
       "ACTIONS": "Actions sur la valeur",
       "DETAILS_VALEUR": {
         "DETAILS_VALEUR": "{{valeur}} ({{ticker}}, {{marche}})",

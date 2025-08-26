@@ -7,11 +7,10 @@ import {TableModule} from 'primeng/table';
 import {CurrencyPipe, DatePipe, DecimalPipe, NgClass, PercentPipe} from '@angular/common';
 import {TranslatePipe} from '@ngx-translate/core';
 import {Cours} from '../cours.class';
-import {DTOActualite} from '../../../services/abc-bourse/dto-actualite.class';
-import {ActualiteComponent} from './actualite/actualite.component';
+import {DTOActualiteTicker} from '../../../services/abc-bourse/dto-actualite-ticker.class';
+import {ActualiteTickerComponent} from './actualite-ticker/actualite-ticker.component';
 
 // TODO : coverage
-// TODO : ajouter ce composant dans portefeuille
 @Component({
   selector: 'app-informations-ticker',
   imports: [
@@ -23,7 +22,7 @@ import {ActualiteComponent} from './actualite/actualite.component';
     DecimalPipe,
     CurrencyPipe,
     NgClass,
-    ActualiteComponent,
+    ActualiteTickerComponent,
     DatePipe
   ],
   templateUrl: './informations-ticker.component.html',
@@ -42,7 +41,7 @@ export class InformationsTickerComponent {
   // données pour la vue
   informationsTicker?: DTOInformationsTicker;
   pourcentageDividendes?: number;
-  actualiteCourante?: DTOActualite
+  actualiteCourante?: DTOActualiteTicker
 
   constructor(private abcBourseService: AbcBourseService) {
   }
@@ -68,7 +67,7 @@ export class InformationsTickerComponent {
     return cours;
   }
 
-  afficherActualite(actualite: DTOActualite) {
+  afficherActualite(actualite: DTOActualiteTicker) {
     this.actualiteCourante = actualite;
   }
 }

@@ -1,19 +1,21 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
-import {Observable} from 'rxjs';
+import {forkJoin, Observable} from 'rxjs';
 import {DTOInformationsTicker} from './dto-informations-ticker.class';
-import {DTOActualite} from './dto-actualite.class';
+import {DTOActualiteTicker} from './dto-actualite-ticker.class';
 import {DTODividende} from './dto-dividende.class';
 import {DTOVariation} from './dto-variation.class';
 import {DTORatio} from './dto-ratio.class';
+import {ParseUtil} from './parse-util.class';
+import {DTOActualites} from './dto-actualites';
+import {DTOLien} from './dto-lien.class';
+import {DTOVentesADecouvert} from './dto-ventes-a-decouvert.class';
+import {DTOTransaction} from './dto-transaction.class';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AbcBourseService {
-  private static readonly regexpNumber = /-?[0-9]+,[0-9]+/g;
-  private static readonly regexpYear = /[0-9]{4}/g;
-
   constructor(private http: HttpClient) {
   }
 
@@ -21,8 +23,7 @@ export class AbcBourseService {
     return new Observable(observer => {
       const headers = new HttpHeaders()
         .set('Accept', 'text/html; charset=utf-8');
-      this.http.get(`/abcbourse/cotation/${ticker}p`, {headers, responseType: 'text'}
-      ).subscribe({
+      this.http.get(`/abcbourse/cotation/${ticker}p`, {headers, responseType: 'text'}).subscribe({
         error: httpResponseError => {
           observer.error(httpResponseError);
           observer.complete();
@@ -38,11 +39,11 @@ export class AbcBourseService {
   private parseAndMapInformations(html: string, ticker: string): DTOInformationsTicker {
     const result = new DTOInformationsTicker(ticker);
 
-    this.execRegexpAndMap(
+    ParseUtil.execRegexpAndMap(
       result.actualites,
       html,
       new RegExp('<div class="newsln2">\\s*<div>([^>]+)<\\/div>\\s*<div><a href="([^"]+)">([^>]+)<\\/a>', 'gm'),
-      (matches) => new DTOActualite(this.parseAndMapTo8601(matches[1]), matches[3], matches[2])
+      (matches) => new DTOActualiteTicker(ParseUtil.parseAndMap2To8601(matches[1]), matches[3], matches[2])
     );
 
     const elTables = new DOMParser()
@@ -64,18 +65,11 @@ export class AbcBourseService {
     return result;
   }
 
-  private execRegexpAndMap<T>(result: Array<T>, html: string, regexp: RegExp, mapper: (m: Array<string>) => T) {
-    let matches;
-    while ((matches = regexp.exec(html))) {
-      result.push(mapper(matches));
-    }
-  }
-
   private mapVariations(variations: DTOVariation[], elTable: Element) {
     elTable.querySelectorAll('tbody > tr:not(:last-child)')
       .forEach(elTr => {
         const elTds = elTr.querySelectorAll('td');
-        variations.push(new DTOVariation(elTds[0].innerText, this.parseNumber(elTds[4].innerText) / 100));
+        variations.push(new DTOVariation(elTds[0].innerText, ParseUtil.parseNumber(elTds[4].innerText) / 100));
       });
   }
 
@@ -83,7 +77,7 @@ export class AbcBourseService {
     elTable.querySelectorAll('tr:not(:first-child)')
       .forEach(elTr => {
         const elTds: NodeListOf<HTMLTableCellElement> = elTr.querySelectorAll('td');
-        dividendes.push(new DTODividende(this.parseYear(elTds[0].innerText), this.parseNumber(elTds[1].innerText)));
+        dividendes.push(new DTODividende(ParseUtil.parseYear(elTds[0].innerText), ParseUtil.parseNumber(elTds[1].innerText)));
       });
   }
 
@@ -93,9 +87,9 @@ export class AbcBourseService {
     const elTdsPer: NodeListOf<HTMLTableCellElement> = elTable.querySelectorAll('tbody > tr:nth-child(2) > td:not(:first-child)');
     for (let i = 0; i < elThsAnnees.length; i++) {
       ratios.unshift(new DTORatio(
-        this.parseYear(elThsAnnees[i].innerText),
-        this.parseNumber(elTdsBnpa[i].innerText),
-        this.parseNumber(elTdsPer[i].innerText))
+        ParseUtil.parseYear(elThsAnnees[i].innerText),
+        ParseUtil.parseNumber(elTdsBnpa[i].innerText),
+        ParseUtil.parseNumber(elTdsPer[i].innerText))
       );
     }
   }
@@ -105,12 +99,12 @@ export class AbcBourseService {
 
     const elTdVariation: HTMLTableCellElement | null = elTrs[0].querySelector('td:nth-child(2)');
     if (elTdVariation) {
-      result.variationCAC = this.parseNumber(elTdVariation.innerText);
+      result.variationCAC = ParseUtil.parseNumber(elTdVariation.innerText);
     }
 
     const elTdCorrelation: HTMLTableCellElement | null = elTrs[1].querySelector('td:nth-child(2)');
     if (elTdCorrelation) {
-      result.correlationCAC = this.parseNumber(elTdCorrelation.innerText) / 100;
+      result.correlationCAC = ParseUtil.parseNumber(elTdCorrelation.innerText) / 100;
     }
 
     // pas toujours défini
@@ -120,52 +114,115 @@ export class AbcBourseService {
     }
   }
 
-  private parseNumber(str: string): number {
-    const match = str.match(AbcBourseService.regexpNumber);
-    if (match) {
-      return Number(match[0].replace(',', '.'));
-    }
-    return NaN;
-  }
-
-  private parseYear(str: string): number {
-    const match = str.match(AbcBourseService.regexpYear);
-    if (match) {
-      return Number(match[0]);
-    }
-    return NaN;
-  }
-
-  private parseAndMapTo8601(dateFr: string) {
-    return dateFr.replace(/(\d+)\/(\d+)\/(\d+)/g, '20$3-$2-$1');
-  }
-
-  public chargerActualite(actualite: DTOActualite): Observable<string> {
+  public chargerActualiteTicker(actualite: DTOActualiteTicker): Observable<string> {
     return new Observable(observer => {
       const headers = new HttpHeaders()
         .set('Accept', 'text/html; charset=utf-8');
-      this.http.get(`/abcbourse/${actualite.pathname}`, {headers, responseType: 'text'}
-      ).subscribe({
+      this.http.get(`/abcbourse${actualite.pathname}`, {headers, responseType: 'text'}).subscribe({
         error: httpResponseError => {
           observer.error(httpResponseError);
           observer.complete();
         },
         next: html => {
-          observer.next(this.parseActualite(html));
+          observer.next(ParseUtil.parseAndMapTagArticle(html));
           observer.complete();
         }
       });
     });
   }
 
-  private parseActualite(html: string) {
-    let result = '';
-    new DOMParser()
+  public chargerActualites(): Observable<DTOActualites> {
+    return new Observable(observer => {
+      const headers = new HttpHeaders()
+        .set('Accept', 'text/html; charset=utf-8');
+      this.http.get('/abcbourse', {headers, responseType: 'text'}).subscribe({
+        error: httpResponseError => {
+          observer.error(httpResponseError);
+          observer.complete();
+        },
+        next: html => {
+          this.parseActualites(html).subscribe({
+            error: httpResponseError => {
+              observer.error(httpResponseError);
+              observer.complete();
+            },
+            next: dto => {
+              observer.next(dto);
+              observer.complete();
+            }
+          });
+        }
+      });
+    });
+  }
+
+  private parseActualites(html: string): Observable<DTOActualites> {
+    return new Observable(observer => {
+      const result = new DTOActualites();
+      this.parseAndMapLiens(html, result);
+
+      const pathnameMarches = new RegExp('<span>Marchés<\\/span>\\s*<\\/div>\\s*<div class="hptit">\\s*<a href="([^"]+)"', 'gm');
+      const match = pathnameMarches.exec(html);
+      if (match) {
+        const headers = new HttpHeaders()
+          .set('Accept', 'text/html; charset=utf-8');
+        forkJoin([
+          this.http.get(`/abcbourse${match[1]}`, {headers, responseType: 'text'}),
+          this.http.get(`/abcbourse/marches/vad`, {headers, responseType: 'text'}),
+          this.http.get(`/abcbourse/marches/transactions_dirigeants`, {headers, responseType: 'text'})
+        ]).subscribe({
+          error: httpResponseError => {
+            observer.error(httpResponseError);
+            observer.complete();
+          },
+          next: htmls => {
+            result.marches = ParseUtil.parseAndMapTagArticle(htmls[0]);
+            ParseUtil.execRegexpAndMap(
+              result.ventesADecouvert,
+              htmls[1],
+              new RegExp('<tr class="alri">\\s*<td class="allf"><a href="[^"]+">([^"]+)<\\/a><\\/td>\\s*<td>([^"<]+)<\\/td>\\s*<td>([^"<]+)<\\/td>\\s*<td>([^"<]+)<\\/td>', 'gm'),
+              (matches) => new DTOVentesADecouvert(matches[1], ParseUtil.parseNumber(matches[2]) / 100, ParseUtil.parseNumber(matches[3]), ParseUtil.parseNumber(matches[4]))
+            );
+            result.transactionsDirigeants = this.parseAndMapTransactions(htmls[2]);
+            observer.next(result);
+            observer.complete();
+          }
+        });
+      }
+    });
+  }
+
+  private parseAndMapLiens(html: string, result: DTOActualites) {
+    const elDivs = new DOMParser()
       .parseFromString(html, 'text/html')
-      .querySelectorAll('article')
-      .forEach(elArticle => result += '<p>' + elArticle.innerHTML + '</p>');
-    // return result.replaceAll(/<img src="([^"]+)"/g, '<img src="https://www.abcbourse.com$1"');
-    return result.replaceAll(/<img [^>]*>/g, '')
-      .replaceAll(/<a [^>]*>([^<]*)<\/a>/g, '$1');
+      .querySelectorAll('div.hom_ncont');
+
+    if (elDivs.length === 2) {
+      ParseUtil.execRegexpAndMap(
+        result.analyses,
+        elDivs[0].innerHTML,
+        new RegExp('(\\d{2}\\/\\d{2})<a href="([^"]+)"><span>([^<]+)<\\/span> : ([^<]+)', 'gm'),
+        (matches) => new DTOLien(matches[1], matches[3], matches[4], matches[2])
+      );
+      ParseUtil.execRegexpAndMap(
+        result.chroniques,
+        elDivs[1].innerHTML,
+        new RegExp('(\\d{2}:\\d{2})<a href="([^"]+)"><span>([^<]+)<\\/span> : ([^<]+)', 'gm'),
+        (matches) => new DTOLien(matches[1], matches[3], matches[4], matches[2])
+      );
+    }
+  }
+
+  private parseAndMapTransactions(html: string): Array<DTOTransaction> {
+    const r1 = new RegExp('<tr>\\s*<td><a href="[^"]+">([^<]+)<\\/a><\\/td>\\s*<td>([^<]+)<\\/td>\\s*<td class="[^"]*">([^<]+)<\\/td>\\s*<td>([^<]+)<\\/td>\\s*<td>([^<]+)<\\/td>', 'gm');
+    const r2 = new RegExp('Auteur: <\\/span>([^<]+)<\\/td>\\s*<\\/tr>\\s*<tr>\\s*<td><span class="bold">Date d\'opération: <\\/span>([^<]+)<\\/td>\\s*<td><span class="bold">Quantité: <\\/span>([^<]+)<\\/td>\\s*<td><span class="bold">Prix: <\\/span>([^<]+)', 'gm');
+
+    const result: Array<DTOTransaction> = [];
+    let m1, m2;
+    while ((m1 = r1.exec(html)) && (m2 = r2.exec(html))) {
+      result.push(new DTOTransaction(m1[1], ParseUtil.parseAndMap4To8601(m1[2]), m1[3], m1[4], ParseUtil.parseNumber(m1[5]),
+        m2[1], ParseUtil.parseAndMap4To8601(m2[2]), ParseUtil.parseNumber(m2[3]), ParseUtil.parseNumber(m2[4])));
+    }
+    return result;
   }
 }

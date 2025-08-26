@@ -2,6 +2,7 @@
 
 <div class="titre" *ngIf="date">
   <span>{{ 'COMPOSANTS.COURS.MARCHES_DATE' | translate: {jour: date | date: 'dd/MM/yyyy'} }}</span>
+  <app-actualites></app-actualites>
   <app-import-export></app-import-export>
   <app-selecteur-filtre (selection)="appliquerFiltre($event)"></app-selecteur-filtre>
 </div>
