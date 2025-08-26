@@ -5,7 +5,7 @@ import {AbcBourseService} from '../../../services/abc-bourse/abc-bourse.service'
 import {DTOActualites} from '../../../services/abc-bourse/dto-actualites';
 import {LoaderComponent} from '../../loader/loader.component';
 import {Fieldset} from 'primeng/fieldset';
-import {CurrencyPipe, DatePipe, DecimalPipe, PercentPipe} from '@angular/common';
+import {CurrencyPipe, DatePipe, DecimalPipe, NgClass, PercentPipe} from '@angular/common';
 import {TableModule} from 'primeng/table';
 
 @Component({
@@ -20,6 +20,7 @@ import {TableModule} from 'primeng/table';
     DecimalPipe,
     DatePipe,
     CurrencyPipe,
+    NgClass,
   ],
   templateUrl: './actualites.component.html',
   styleUrl: './actualites.component.sass'

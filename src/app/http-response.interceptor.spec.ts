@@ -26,7 +26,7 @@ describe('httpResponseInterceptor', () => {
       TestBed.runInInjectionContext(() => httpResponseInterceptor(req, next));
 
     // Create a mock request
-    mockRequest = new HttpRequest('GET', '/api/test');
+    mockRequest = new HttpRequest('GET', 'http://fabienrigaux.freeboxos.fr:8080/v1/test');
 
     // Create a mock handler
     mockHandler = jasmine.createSpy();

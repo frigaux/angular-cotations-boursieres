@@ -52,18 +52,22 @@
       </div>
       <div class="colonne">
         <p-fieldset legend="{{ 'COMPOSANTS.COURS.ACTUALITES.VENTES_DECOUVERT.VENTES_DECOUVERT' | translate }}">
-          <p-table size="small"
+          <p-table sortField="positionEnM" [sortOrder]="-1" size="small"
                    [value]="actualites.ventesADecouvert"
                    [loading]="loading">
             <ng-template #header>
               <tr>
-                <th>{{ 'COMPOSANTS.COURS.ACTUALITES.VENTES_DECOUVERT.VALEUR' | translate }}</th>
+                <th pSortableColumn="valeur">
+                  {{ 'COMPOSANTS.COURS.ACTUALITES.VENTES_DECOUVERT.VALEUR' | translate }}
+                  <p-sortIcon field="valeur"/>
+                </th>
                 <th style="text-align: right">{{ 'COMPOSANTS.COURS.ACTUALITES.VENTES_DECOUVERT.CAPITAL' | translate }}
                 </th>
                 <th style="text-align: right">{{ 'COMPOSANTS.COURS.ACTUALITES.VENTES_DECOUVERT.ACTION' | translate }}
                 </th>
-                <th
-                  style="text-align: right">{{ 'COMPOSANTS.COURS.ACTUALITES.VENTES_DECOUVERT.POSITION' | translate }}
+                <th pSortableColumn="positionEnM" style="text-align: right">
+                  {{ 'COMPOSANTS.COURS.ACTUALITES.VENTES_DECOUVERT.POSITION' | translate }}
+                  <p-sortIcon field="positionEnM"/>
                 </th>
               </tr>
             </ng-template>
@@ -81,16 +85,22 @@
     </div>
     <div>
       <p-fieldset legend="{{ 'COMPOSANTS.COURS.ACTUALITES.TRANSACTIONS.TRANSACTIONS' | translate }}">
-        <p-table size="small"
+        <p-table sortField="montant" [sortOrder]="-1" size="small"
                  [value]="actualites.transactionsDirigeants"
                  [loading]="loading">
           <ng-template #header>
             <tr>
-              <th>{{ 'COMPOSANTS.COURS.ACTUALITES.TRANSACTIONS.VALEUR' | translate }}</th>
+              <th pSortableColumn="valeur">
+                {{ 'COMPOSANTS.COURS.ACTUALITES.TRANSACTIONS.VALEUR' | translate }}
+                <p-sortIcon field="valeur"/>
+              </th>
               <th>{{ 'COMPOSANTS.COURS.ACTUALITES.TRANSACTIONS.DATE_DECLARATION' | translate }}</th>
               <th>{{ 'COMPOSANTS.COURS.ACTUALITES.TRANSACTIONS.OPERATION' | translate }}</th>
               <th>{{ 'COMPOSANTS.COURS.ACTUALITES.TRANSACTIONS.INSTRUMENT' | translate }}</th>
-              <th style="text-align: right">{{ 'COMPOSANTS.COURS.ACTUALITES.TRANSACTIONS.MONTANT' | translate }}</th>
+              <th pSortableColumn="montant" style="text-align: right">
+                {{ 'COMPOSANTS.COURS.ACTUALITES.TRANSACTIONS.MONTANT' | translate }}
+                <p-sortIcon field="montant"/>
+              </th>
               <th>{{ 'COMPOSANTS.COURS.ACTUALITES.TRANSACTIONS.AUTEUR' | translate }}</th>
               <th>{{ 'COMPOSANTS.COURS.ACTUALITES.TRANSACTIONS.DATE_OPERATION' | translate }}</th>
               <th style="text-align: right">{{ 'COMPOSANTS.COURS.ACTUALITES.TRANSACTIONS.QUANTITE' | translate }}</th>
@@ -101,7 +111,8 @@
             <tr>
               <td>{{ transaction.valeur }}</td>
               <td>{{ transaction.dateDeclaration | date: 'dd/MM/yyyy' }}</td>
-              <td [innerHTML]="transaction.operation"></td>
+              <td [innerHTML]="transaction.operation"
+                  [ngClass]="{'negative': transaction.operation === 'Cession', 'positive': transaction.operation === 'Acquisition' || transaction.operation === 'Souscription' }"></td>
               <td [innerHTML]="transaction.instrument"></td>
               <td style="text-align: right">{{ transaction.montant | currency:'€' }}</td>
               <td [innerHTML]="transaction.auteur"></td>
