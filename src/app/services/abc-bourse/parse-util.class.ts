@@ -1,6 +1,6 @@
 export class ParseUtil {
-  private static readonly regexpNumber = /-?[0-9]+,?[0-9]*/g;
-  private static readonly regexpYear = /[0-9]{4}/g;
+  private static readonly REGEXP_NUMBER = /-?[0-9]+,?[0-9]*/g;
+  private static readonly REGEXP_YEAR = /[0-9]{4}/g;
 
   static execRegexpAndMap<T>(result: Array<T>, html: string, regexp: RegExp, mapper: (m: Array<string>) => T) {
     let matches;
@@ -12,7 +12,7 @@ export class ParseUtil {
   static parseNumber(str: string): number {
     const match = str
       .replaceAll(/&[\w#]+;/g, '')
-      .match(ParseUtil.regexpNumber);
+      .match(ParseUtil.REGEXP_NUMBER);
     if (match) {
       return Number(match[0].replace(',', '.'));
     }
@@ -20,19 +20,24 @@ export class ParseUtil {
   }
 
   static parseYear(str: string): number {
-    const match = str.match(ParseUtil.regexpYear);
+    const match = str.match(ParseUtil.REGEXP_YEAR);
     if (match) {
       return Number(match[0]);
     }
     return NaN;
   }
 
-  static parseAndMap2To8601(dateFr: string) {
-    return dateFr.replace(/(\d{2})\/(\d{2})\/(\d{2})/g, '20$3-$2-$1');
-  }
-
-  static parseAndMap4To8601(dateFr: string) {
-    return dateFr.replace(/(\d{2})\/(\d{2})\/(\d{4})/g, '$3-$2-$1');
+  static parseAndMapTo8601(dateFr: string): string {
+    const regexp = /(\d{2})\/(\d{2})\/(\d{2,4})/g;
+    const match = regexp.exec(dateFr);
+    if (match) {
+      if (match[3].length === 4) {
+        return `${match[3]}-${match[2]}-${match[1]}`;
+      } else {
+        return `20${match[3]}-${match[2]}-${match[1]}`;
+      }
+    }
+    return dateFr;
   }
 
   static parseAndMapTagArticle(html: string) {
@@ -44,5 +49,9 @@ export class ParseUtil {
     // return result.replaceAll(/<img src="([^"]+)"/g, '<img src="https://www.abcbourse.com$1"');
     return result.replaceAll(/<img [^>]*>/g, '')
       .replaceAll(/<a [^>]*>([^<]*)<\/a>/g, '$1');
+  }
+
+  static isMobile(): boolean {
+    return window.navigator.userAgent.toLowerCase().includes('mobile');
   }
 }

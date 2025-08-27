@@ -8,82 +8,120 @@
       ]"></app-loader>
 
   @if (!loading && actualites) {
-    <div [innerHTML]="actualites.marches"></div>
-    <div class="ligne">
-      <div class="colonne">
-        <p-fieldset legend="{{ 'COMPOSANTS.COURS.ACTUALITES.ANALYSES.ANALYSES' | translate }}">
-          <p-table size="small"
-                   [value]="actualites.analyses"
-                   [loading]="loading">
-            <ng-template #header>
-              <tr>
-                <th>{{ 'COMPOSANTS.COURS.ACTUALITES.ANALYSES.DATE' | translate }}</th>
-                <th>{{ 'COMPOSANTS.COURS.ACTUALITES.ANALYSES.TITRE' | translate }}
-                </th>
-              </tr>
-            </ng-template>
-            <ng-template #body let-analyse>
-              <tr>
-                <td>{{ analyse.moment }}</td>
-                <td><strong>{{ analyse.objet }}</strong> : {{ analyse.titre }}</td>
-              </tr>
-            </ng-template>
-          </p-table>
-        </p-fieldset>
-
-        <p-fieldset legend="{{ 'COMPOSANTS.COURS.ACTUALITES.CHRONIQUES.CHRONIQUES' | translate }}">
-          <p-table size="small"
-                   [value]="actualites.chroniques"
-                   [loading]="loading">
-            <ng-template #header>
-              <tr>
-                <th>{{ 'COMPOSANTS.COURS.ACTUALITES.CHRONIQUES.HEURE' | translate }}</th>
-                <th>{{ 'COMPOSANTS.COURS.ACTUALITES.CHRONIQUES.TITRE' | translate }}</th>
-              </tr>
-            </ng-template>
-            <ng-template #body let-chronique>
-              <tr>
-                <td>{{ chronique.moment }}</td>
-                <td><strong>{{ chronique.objet }}</strong> : {{ chronique.titre }}</td>
-              </tr>
-            </ng-template>
-          </p-table>
-        </p-fieldset>
-      </div>
-      <div class="colonne">
-        <p-fieldset legend="{{ 'COMPOSANTS.COURS.ACTUALITES.VENTES_DECOUVERT.VENTES_DECOUVERT' | translate }}">
-          <p-table sortField="positionEnM" [sortOrder]="-1" size="small"
-                   [value]="actualites.ventesADecouvert"
-                   [loading]="loading">
-            <ng-template #header>
-              <tr>
-                <th pSortableColumn="valeur">
-                  {{ 'COMPOSANTS.COURS.ACTUALITES.VENTES_DECOUVERT.VALEUR' | translate }}
-                  <p-sortIcon field="valeur"/>
-                </th>
-                <th style="text-align: right">{{ 'COMPOSANTS.COURS.ACTUALITES.VENTES_DECOUVERT.CAPITAL' | translate }}
-                </th>
-                <th style="text-align: right">{{ 'COMPOSANTS.COURS.ACTUALITES.VENTES_DECOUVERT.ACTION' | translate }}
-                </th>
-                <th pSortableColumn="positionEnM" style="text-align: right">
-                  {{ 'COMPOSANTS.COURS.ACTUALITES.VENTES_DECOUVERT.POSITION' | translate }}
-                  <p-sortIcon field="positionEnM"/>
-                </th>
-              </tr>
-            </ng-template>
-            <ng-template #body let-vad>
-              <tr>
-                <td>{{ vad.valeur }}</td>
-                <td style="text-align: right">{{ vad.pourcentageCapital | percent:'1.2-2' }}</td>
-                <td style="text-align: right">{{ vad.nombreActions | number }}</td>
-                <td style="text-align: right">{{ vad.positionEnM | number }}</td>
-              </tr>
-            </ng-template>
-          </p-table>
-        </p-fieldset>
-      </div>
+    <div class="bloc" [innerHTML]="actualites.marches"></div>
+    <div class="bloc">
+      <h4>Ventes à découvert</h4>
+      <ul>
+        @for (vad of actualites.ventesADecouvert; track vad.valeur) {
+          <li>
+            <label [innerHTML]="vad.valeur"></label>
+            <span>{{ vad.pourcentageCapital | percent:'1.2-2' }}</span>
+          </li>
+        }
+      </ul>
     </div>
-    <div>
+    <div class="bloc">
+      <h4>Acquisitions et souscriptions</h4>
+      <ul>
+        @for (transaction of acquisitions; track transaction.valeur) {
+          <li>
+            <label [innerHTML]="transaction.valeur"></label>
+            <span>{{ transaction.montant | currency:'€' }}</span>
+          </li>
+        }
+      </ul>
+    </div>
+    <div class="bloc">
+      <h4>Cessions</h4>
+      <ul>
+        @for (cession of cessions; track cession.valeur) {
+          <li>
+            <label [innerHTML]="cession.valeur"></label>
+            <span>{{ cession.montant | currency:'€' }}</span>
+          </li>
+        }
+      </ul>
+    </div>
+    <div class="bloc">
+      <p-fieldset legend="{{ 'COMPOSANTS.COURS.ACTUALITES.ANALYSES.ANALYSES' | translate }}">
+        <p-table size="small"
+                 [value]="actualites.analyses"
+                 [loading]="loading">
+          <ng-template #header>
+            <tr>
+              <th>{{ 'COMPOSANTS.COURS.ACTUALITES.ANALYSES.DATE' | translate }}</th>
+              <th>{{ 'COMPOSANTS.COURS.ACTUALITES.ANALYSES.TITRE' | translate }}
+              </th>
+            </tr>
+          </ng-template>
+          <ng-template #body let-analyse>
+            <tr>
+              <td>{{ analyse.moment }}</td>
+              <td><strong [innerHTML]="analyse.objet"></strong> : <span [innerHTML]="analyse.titre"></span></td>
+            </tr>
+          </ng-template>
+        </p-table>
+      </p-fieldset>
+    </div>
+    <div class="bloc">
+      <p-fieldset legend="{{ 'COMPOSANTS.COURS.ACTUALITES.CHRONIQUES.CHRONIQUES' | translate }}">
+        <p-table size="small"
+                 [value]="actualites.chroniques"
+                 [loading]="loading">
+          <ng-template #header>
+            <tr>
+              <th>{{ 'COMPOSANTS.COURS.ACTUALITES.CHRONIQUES.HEURE' | translate }}</th>
+              <th>{{ 'COMPOSANTS.COURS.ACTUALITES.CHRONIQUES.TITRE' | translate }}</th>
+            </tr>
+          </ng-template>
+          <ng-template #body let-chronique>
+            <tr>
+              <td>{{ chronique.moment }}</td>
+              @if (chronique.objet) {
+                <td><strong [innerHTML]="chronique.objet"></strong> : <span [innerHTML]="chronique.titre"></span></td>
+              } @else {
+                <td [innerHTML]="chronique.titre"></td>
+              }
+            </tr>
+          </ng-template>
+        </p-table>
+      </p-fieldset>
+    </div>
+    <div class="bloc">
+      <p-fieldset legend="{{ 'COMPOSANTS.COURS.ACTUALITES.VENTES_DECOUVERT.VENTES_DECOUVERT' | translate }}">
+        <p-table sortField="pourcentageCapital" [sortOrder]="-1" size="small"
+                 [value]="actualites.ventesADecouvert"
+                 [loading]="loading">
+          <ng-template #header>
+            <tr>
+              <th pSortableColumn="valeur">
+                {{ 'COMPOSANTS.COURS.ACTUALITES.VENTES_DECOUVERT.VALEUR' | translate }}
+                <p-sortIcon field="valeur"/>
+              </th>
+              <th pSortableColumn="pourcentageCapital" style="text-align: right">
+                {{ 'COMPOSANTS.COURS.ACTUALITES.VENTES_DECOUVERT.CAPITAL' | translate }}
+                <p-sortIcon field="pourcentageCapital"/>
+              </th>
+              <th style="text-align: right">{{ 'COMPOSANTS.COURS.ACTUALITES.VENTES_DECOUVERT.ACTION' | translate }}
+              </th>
+              <th pSortableColumn="positionEnM" style="text-align: right">
+                {{ 'COMPOSANTS.COURS.ACTUALITES.VENTES_DECOUVERT.POSITION' | translate }}
+                <p-sortIcon field="positionEnM"/>
+              </th>
+            </tr>
+          </ng-template>
+          <ng-template #body let-vad>
+            <tr>
+              <td>{{ vad.valeur }}</td>
+              <td style="text-align: right">{{ vad.pourcentageCapital | percent:'1.2-2' }}</td>
+              <td style="text-align: right">{{ vad.nombreActions | number }}</td>
+              <td style="text-align: right">{{ vad.positionEnM | number }}</td>
+            </tr>
+          </ng-template>
+        </p-table>
+      </p-fieldset>
+    </div>
+    <div class="bloc">
       <p-fieldset legend="{{ 'COMPOSANTS.COURS.ACTUALITES.TRANSACTIONS.TRANSACTIONS' | translate }}">
         <p-table sortField="montant" [sortOrder]="-1" size="small"
                  [value]="actualites.transactionsDirigeants"
