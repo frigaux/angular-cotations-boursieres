@@ -118,9 +118,12 @@ export class AbcBourseService {
     }
   }
 
-  public chargerActualiteTicker(actualite: DTOActualiteTicker): Observable<string> {
+  public chargerLien(pathname: string): Observable<string> {
     return new Observable(observer => {
-      this.http.get(`/abcbourse${actualite.pathname}`, {
+      if (!pathname.startsWith('/')) {
+        pathname = '/' + pathname;
+      }
+      this.http.get(`/abcbourse${pathname}`, {
         headers: AbcBourseService.HEADERS,
         responseType: 'text'
       }).subscribe({
@@ -187,8 +190,8 @@ export class AbcBourseService {
             ParseUtil.execRegexpAndMap(
               result.ventesADecouvert,
               htmls[1],
-              new RegExp('<tr class="alri">\\s*<td class="allf"><a href="[^"]+">([^"]+)<\\/a><\\/td>\\s*<td>([^"<]+)<\\/td>\\s*<td>([^"<]+)<\\/td>\\s*<td>([^"<]+)<\\/td>', 'gm'),
-              (matches) => new DTOVentesADecouvert(matches[1], ParseUtil.parseNumber(matches[2]) / 100, ParseUtil.parseNumber(matches[3]), ParseUtil.parseNumber(matches[4]))
+              new RegExp('<tr class="alri">\\s*<td class="allf"><a href="([^"]+)">([^"]+)<\\/a><\\/td>\\s*<td>([^"<]+)<\\/td>\\s*<td>([^"<]+)<\\/td>\\s*<td>([^"<]+)<\\/td>', 'gm'),
+              (matches) => new DTOVentesADecouvert(matches[2], matches[1], ParseUtil.parseNumber(matches[3]) / 100, ParseUtil.parseNumber(matches[4]), ParseUtil.parseNumber(matches[5]))
             );
             result.transactionsDirigeants = this.parseAndMapTransactions(htmls[2]);
             observer.next(result);
@@ -243,13 +246,14 @@ export class AbcBourseService {
   }
 
   private parseAndMapTransactions(html: string): Array<DTOTransaction> {
-    const r1 = new RegExp('<tr>\\s*<td><a href="[^"]+">([^<]+)<\\/a><\\/td>\\s*<td>([^<]+)<\\/td>\\s*<td class="[^"]*">([^<]+)<\\/td>\\s*<td>([^<]+)<\\/td>\\s*<td>([^<]+)<\\/td>', 'gm');
+    const r1 = new RegExp('<tr>\\s*<td><a href="([^"]+)">([^<]+)<\\/a><\\/td>\\s*<td>([^<]+)<\\/td>\\s*<td class="[^"]*">([^<]+)<\\/td>\\s*<td>([^<]+)<\\/td>\\s*<td>([^<]+)<\\/td>', 'gm');
     const r2 = new RegExp('Auteur: <\\/span>([^<]+)<\\/td>\\s*<\\/tr>\\s*<tr>\\s*<td><span class="bold">Date d\'opération: <\\/span>([^<]+)<\\/td>\\s*<td><span class="bold">Quantité: <\\/span>([^<]+)<\\/td>\\s*<td><span class="bold">Prix: <\\/span>([^<]+)', 'gm');
 
     const result: Array<DTOTransaction> = [];
     let m1, m2;
+    let i = 0;
     while ((m1 = r1.exec(html)) && (m2 = r2.exec(html))) {
-      result.push(new DTOTransaction(m1[1], ParseUtil.parseAndMapTo8601(m1[2]), m1[3], m1[4], ParseUtil.parseNumber(m1[5]),
+      result.push(new DTOTransaction(i++, m1[2], m1[1], ParseUtil.parseAndMapTo8601(m1[3]), m1[4], m1[5], ParseUtil.parseNumber(m1[6]),
         m2[1], ParseUtil.parseAndMapTo8601(m2[2]), ParseUtil.parseNumber(m2[3]), ParseUtil.parseNumber(m2[4])));
     }
     return result;

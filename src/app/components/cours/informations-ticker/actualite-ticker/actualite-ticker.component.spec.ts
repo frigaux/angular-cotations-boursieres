@@ -11,7 +11,7 @@ describe('ActualiteComponent', () => {
   let component: ActualiteTickerComponent;
   let fixture: ComponentFixture<ActualiteTickerComponent>;
 
-  const mockAbcBourseService = jasmine.createSpyObj('AbcBourseService', ['chargerActualiteTicker']);
+  const mockAbcBourseService = jasmine.createSpyObj('AbcBourseService', ['chargerLien']);
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
@@ -31,9 +31,9 @@ describe('ActualiteComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  describe('Given #chargerActualiteTicker renvoie une actualité', () => {
+  describe('Given #chargerLien renvoie une actualité', () => {
     beforeEach(() => {
-      mockAbcBourseService.chargerActualiteTicker.and.returnValue(of(''));
+      mockAbcBourseService.chargerLien.and.returnValue(of(''));
     });
 
     it('when #reinitialiserVue then le composant est chargé', () => {

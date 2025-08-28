@@ -40,7 +40,7 @@ describe('AbcBourseService', () => {
     expect(informationsTicker.correlationCAC).toBeDefined();
     expect(informationsTicker.qualiteFinanciere).toBeDefined();
 
-    const promiseActualiteTicker: Promise<string> = firstValueFrom(service.chargerActualiteTicker(informationsTicker.actualites[0]));
+    const promiseActualiteTicker: Promise<string> = firstValueFrom(service.chargerLien(informationsTicker.actualites[0].pathname));
     const actualiteTicker = await promiseActualiteTicker;
     expect(actualiteTicker).toBeDefined();
   });

@@ -8,6 +8,7 @@ import {Fieldset} from 'primeng/fieldset';
 import {CurrencyPipe, DatePipe, DecimalPipe, NgClass, PercentPipe} from '@angular/common';
 import {TableModule} from 'primeng/table';
 import {DTOTransaction} from '../../../services/abc-bourse/dto-transaction.class';
+import {BlocLiensComponent} from './bloc-liens/bloc-liens.component';
 
 @Component({
   selector: 'app-actualites',
@@ -22,6 +23,7 @@ import {DTOTransaction} from '../../../services/abc-bourse/dto-transaction.class
     DatePipe,
     CurrencyPipe,
     NgClass,
+    BlocLiensComponent,
   ],
   templateUrl: './actualites.component.html',
   styleUrl: './actualites.component.sass'

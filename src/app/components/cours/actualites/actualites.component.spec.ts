@@ -38,10 +38,10 @@ describe('ActualitesComponent', () => {
       const actualites = new DTOActualites();
       actualites.marches = '';
       actualites.transactionsDirigeants = [
-        new DTOTransaction('', '', 'Acquisition', '', 6, '', '', 3, 2),
-        new DTOTransaction('', '', 'Acquisition', '', 4, '', '', 2, 2),
-        new DTOTransaction('', '', 'Cession', '', 2, '', '', 2, 1),
-        new DTOTransaction('', '', 'Cession', '', 4, '', '', 2, 2)
+        new DTOTransaction(0, '', '', '', 'Acquisition', '', 6, '', '', 3, 2),
+        new DTOTransaction(1, '', '', '', 'Acquisition', '', 4, '', '', 2, 2),
+        new DTOTransaction(2, '', '', '', 'Cession', '', 2, '', '', 2, 1),
+        new DTOTransaction(3, '', '', '', 'Cession', '', 4, '', '', 2, 2)
       ];
       mockAbcBourseService.chargerActualites.and.returnValue(of(actualites));
     });

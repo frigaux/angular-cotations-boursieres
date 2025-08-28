@@ -27,7 +27,7 @@ export class ActualiteTickerComponent {
   private intercepteurActualite(actualite: DTOActualiteTicker | undefined) {
     this.actualite = actualite;
     if (actualite) {
-      this.abcBourseService.chargerActualiteTicker(actualite).subscribe({
+      this.abcBourseService.chargerLien(actualite.pathname).subscribe({
         error: httpResponseError => {
         },
         next: html => {
