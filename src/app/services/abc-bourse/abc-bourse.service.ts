@@ -60,7 +60,7 @@ export class AbcBourseService {
       this.mapRatios(result.ratios, elTables[2]);
       this.mapIndicateurs(result, elTables[3]);
     }
-    if (elTables.length === 3) { // bloc dividende absent
+    if (elTables.length === 3) { // bloc dividende facultatif
       this.mapVariations(result.variations, elTables[0]);
       this.mapRatios(result.ratios, elTables[1]);
       this.mapIndicateurs(result, elTables[2]);
@@ -111,7 +111,7 @@ export class AbcBourseService {
       result.correlationCAC = ParseUtil.parseNumber(elTdCorrelation.innerText) / 100;
     }
 
-    // pas toujours défini
+    // qualité financière facultative
     const elSpanQualite: HTMLSpanElement | null = elTrs[2]?.querySelector('td:nth-child(2) > span');
     if (elSpanQualite) {
       result.qualiteFinanciere = elSpanQualite.innerText;

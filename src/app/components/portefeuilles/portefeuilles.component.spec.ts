@@ -20,7 +20,7 @@ describe('PortefeuillesComponent', () => {
   let fixture: ComponentFixture<PortefeuillesComponent>;
 
   const mockPortefeuillesService = jasmine.createSpyObj('PortefeuillesService', ['charger', 'onUpdate', 'indexPortefeuilleParDefaut']);
-  const mockValeursService = jasmine.createSpyObj('ValeursService', ['chargerValeurs', 'chargerAchatsByTicker', 'onImportAchats', 'onUpdateAchats']);
+  const mockValeursService = jasmine.createSpyObj('ValeursService', ['chargerValeurs', 'chargerAchatsByTicker', 'chargerAchatsTicker', 'onImportAchats', 'onUpdateAchats']);
   const mockCoursService = jasmine.createSpyObj('CoursService', ['chargerCoursTickersWithLimit']);
   const mockAbcBourseService = jasmine.createSpyObj('AbcBourseService', ['chargerActualites']);
 
@@ -69,11 +69,17 @@ describe('PortefeuillesComponent', () => {
       mockPortefeuillesService.indexPortefeuilleParDefaut.and.returnValue(0);
       mockValeursService.chargerValeurs.and.returnValue(of([VALEUR]));
       mockValeursService.chargerAchatsByTicker.and.returnValue(achatsByTicker);
+      mockValeursService.chargerAchatsTicker.and.returnValue(ACHATS[0].achats);
       mockCoursService.chargerCoursTickersWithLimit.and.returnValue(of(LISTE_COURS_AVEC_LISTE_ALLEGEE));
     });
 
-    it('when #ngOnInit then le composant est chargé', () => {
-      fixture.detectChanges(); // appelle le ngOnInit
+    it('when #ngOnInit then le composant est chargé', async () => {
+      // déclenche ngOnInit
+      fixture.detectChanges();
+      // Attendre la stabilisation de la fixture pour s'assurer que tous les Observables
+      // (et micro/macro-tâches) déclenchés par le cycle de détection ont terminé.
+      // await fixture.whenStable();
+
       expect(component).toBeDefined();
       expect(component.loading).toBeFalse();
       component.basculerAffichageCours(component.portefeuillesAvecCours[0].cours[0]);

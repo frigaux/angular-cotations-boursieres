@@ -129,7 +129,7 @@ export class CoursComponent implements OnInit {
     }
   }
 
-  basculerAffichageCours(cours: Cours) {
+  private basculerAffichageCours(cours: Cours) {
     if (this.coursSelectionne === undefined || this.coursSelectionne.ticker !== cours.ticker) {
       this.coursSelectionne = cours;
     } else {

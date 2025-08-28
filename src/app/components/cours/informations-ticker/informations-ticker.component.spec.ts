@@ -1,7 +1,13 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { InformationsTickerComponent } from './informations-ticker.component';
+import {InformationsTickerComponent} from './informations-ticker.component';
 import {AbcBourseService} from '../../../services/abc-bourse/abc-bourse.service';
+import {DTOInformationsTicker} from '../../../services/abc-bourse/dto-informations-ticker.class';
+import {of} from 'rxjs';
+import {COURS_CROISSANT} from '../../../services/jdd/jdd-cours.dataset';
+import {provideAnimations} from '@angular/platform-browser/animations';
+import {DTOActualiteTicker} from '../../../services/abc-bourse/dto-actualite-ticker.class';
+import {TranslateModule} from '@ngx-translate/core';
 
 describe('InformationsTickerComponent', () => {
   let component: InformationsTickerComponent;
@@ -11,19 +17,39 @@ describe('InformationsTickerComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [InformationsTickerComponent],
+      imports: [
+        InformationsTickerComponent,
+        TranslateModule.forRoot({})
+      ],
       providers: [
-        {provide: AbcBourseService, useValue: mockAbcBourseService}
+        {provide: AbcBourseService, useValue: mockAbcBourseService},
+        provideAnimations()
       ]
     })
-    .compileComponents();
+      .compileComponents();
 
     fixture = TestBed.createComponent(InformationsTickerComponent);
     component = fixture.componentInstance;
-    fixture.detectChanges();
   });
 
   it('should create', () => {
-    expect(component).toBeTruthy();
+    expect(component).toBeDefined();
   });
+
+  describe('Given #chargerInformationsTicker renvoie les informations pour un ticker', () => {
+    beforeEach(() => {
+      const informationsTicker = new DTOInformationsTicker('GLE');
+      informationsTicker.variationCAC = 0;
+      informationsTicker.correlationCAC = 0;
+      informationsTicker.qualiteFinanciere = '';
+      mockAbcBourseService.chargerInformationsTicker.and.returnValue(of(informationsTicker));
+    });
+
+    it('when input cours then le composant est chargé', () => {
+      fixture.componentRef.setInput('cours', COURS_CROISSANT);
+      fixture.detectChanges(); // appelle le ngOnInit
+      expect(component).toBeDefined();
+      expect(component.loading).toBeFalse();
+    });
+  })
 });

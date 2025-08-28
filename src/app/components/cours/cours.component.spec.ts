@@ -8,7 +8,7 @@ import {of} from 'rxjs';
 import {provideAnimations} from '@angular/platform-browser/animations';
 import {VALEUR} from '../../services/jdd/jdd-valeurs.dataset';
 import {FILTRES, LISTE_COURS} from '../../services/jdd/jdd-cours.dataset';
-import {ConfirmationService} from 'primeng/api';
+import {ConfirmationService, SortEvent} from 'primeng/api';
 import {AbcBourseService} from '../../services/abc-bourse/abc-bourse.service';
 
 describe('CoursComponent', () => {
@@ -55,9 +55,12 @@ describe('CoursComponent', () => {
       expect(component).toBeDefined();
       expect(component.loading).toBeFalse();
       const cours = component.marches![0].cours[0];
-      component.basculerAffichageCours(cours);
+      component.onClickCours(new MouseEvent('click'), cours);
       component.valeurSuivante();
       component.valeurPrecedente();
+      component.trierColonne({field: 'libelle'}, component.marches![0]);
+      component.trierColonne({field: 'cloture'}, component.marches![0]);
+      component.trierColonne({field: 'var1'}, component.marches![0]);
       expect(component.coursSelectionne).toEqual(cours);
     });
   });
