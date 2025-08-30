@@ -5,7 +5,6 @@ import {ConfigurationTableauComponent} from './configuration-tableau/configurati
 import {TypesColonnes} from '../../services/tableaux/types-colonnes.enum.ts';
 import {TranslatePipe, TranslateService} from '@ngx-translate/core';
 import {Card} from 'primeng/card';
-import {NgIf} from '@angular/common';
 import {ImportExportComponent} from './import-export/import-export.component';
 
 @Component({
@@ -14,7 +13,6 @@ import {ImportExportComponent} from './import-export/import-export.component';
     ConfigurationTableauComponent,
     TranslatePipe,
     Card,
-    NgIf,
     ImportExportComponent
   ],
   templateUrl: './gestion-tableaux.component.html',

@@ -4,33 +4,39 @@
 
 <p-dialog [header]="'COMPOSANTS.COURS.EDITEUR_FILTRES.MODIFICATION_FILTRES' | translate" [modal]="true"
           [visible]="visible" closable="false">
-  <div class="erreur" *ngIf="erreur !== undefined">
-    <span class="pi pi-exclamation-circle"></span>
-    <span>{{erreur}}</span>
-  </div>
+  @if (erreur !== undefined) {
+    <div class="erreur">
+      <span class="pi pi-exclamation-circle"></span>
+      <span>{{erreur}}</span>
+    </div>
+  }
 
   <div class="conteneur">
     <div class="pi pi-plus-circle" (click)="ajouterFiltre()"
          title="{{ 'COMPOSANTS.COURS.EDITEUR_FILTRES.AJOUTER' | translate }}"></div>
-    <div class="pi pi-arrow-left"
-         *ngIf="filtres.length === 0">
-      <span>{{ 'COMPOSANTS.COURS.EDITEUR_FILTRES.AUCUN_FILTRE' | translate }}</span>
-    </div>
+    @if (filtres.length === 0) {
+      <div class="pi pi-arrow-left">
+        <span>{{ 'COMPOSANTS.COURS.EDITEUR_FILTRES.AUCUN_FILTRE' | translate }}</span>
+      </div>
+    }
 
     <div class="formulaire" [formGroup]="formulaire">
-      <div formArrayName="noms" *ngFor="let nom of noms.controls; index as idx">
-        <div>
-          <p-floatlabel>
-            <input pInputText id="{{idx}}" autocomplete="off" [formControlName]="idx"/>
-            <label for="{{idx}}">
-              {{ 'COMPOSANTS.COURS.EDITEUR_FILTRES.NOM' | translate }}
-            </label>
-          </p-floatlabel>
-          <span class="pi pi-wrench" (click)="editionFiltre(idx)"
-                title="{{ 'COMPOSANTS.COURS.EDITEUR_FILTRES.EDITER_CONDITION' | translate }}"></span>
-          <span class="pi pi-trash" (click)="suppressionFiltre($event, idx)"
-                title="{{ 'COMPOSANTS.COURS.EDITEUR_FILTRES.SUPPRIMER' | translate }}"></span>
-        </div>
+      <div formArrayName="noms">
+        <!-- TODO : check track-->
+        @for (nom of noms.controls; track nom; let idx = $index) {
+          <div>
+            <p-floatlabel>
+              <input pInputText id="{{idx}}" autocomplete="off" [formControlName]="idx"/>
+              <label for="{{idx}}">
+                {{ 'COMPOSANTS.COURS.EDITEUR_FILTRES.NOM' | translate }}
+              </label>
+            </p-floatlabel>
+            <span class="pi pi-wrench" (click)="editionFiltre(idx)"
+                  title="{{ 'COMPOSANTS.COURS.EDITEUR_FILTRES.EDITER_CONDITION' | translate }}"></span>
+            <span class="pi pi-trash" (click)="suppressionFiltre($event, idx)"
+                  title="{{ 'COMPOSANTS.COURS.EDITEUR_FILTRES.SUPPRIMER' | translate }}"></span>
+          </div>
+        }
       </div>
     </div>
   </div>

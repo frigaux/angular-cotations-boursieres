@@ -1,7 +1,7 @@
 import {Component, input, InputSignal, output} from '@angular/core';
 import {TranslateService} from '@ngx-translate/core';
 import {CoursService} from '../../../services/cours/cours.service';
-import {DatePipe, NgIf} from '@angular/common';
+import {DatePipe} from '@angular/common';
 import {Valeur} from '../valeur.class';
 import {EncartsValeurComponent} from './encarts-valeur/encarts-valeur.component';
 import {Cours} from '../../cours/cours.class';
@@ -12,7 +12,6 @@ import {Panel} from 'primeng/panel';
 @Component({
   selector: 'app-details-valeur',
   imports: [
-    NgIf,
     EncartsValeurComponent,
     ChartsComponent,
     DatePipe,

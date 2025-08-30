@@ -6,7 +6,6 @@ import {PortefeuillesService} from '../../../services/portefeuilles/portefeuille
 import {DTOPortefeuille} from '../../../services/portefeuilles/dto-portefeuille.interface';
 import {AchatsValeurComponent} from '../../valeurs/details-valeur/achats-valeur/achats-valeur.component';
 import {Panel} from 'primeng/panel';
-import {NgIf} from '@angular/common';
 import {ConfirmationService} from 'primeng/api';
 import {DialogueService} from '../../../services/dialogue/dialogue.service';
 
@@ -16,8 +15,7 @@ import {DialogueService} from '../../../services/dialogue/dialogue.service';
     Popover,
     TranslatePipe,
     AchatsValeurComponent,
-    Panel,
-    NgIf
+    Panel
   ],
   templateUrl: './actions-valeur.component.html',
   styleUrl: './actions-valeur.component.sass'

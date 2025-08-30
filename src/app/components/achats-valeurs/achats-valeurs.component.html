@@ -32,7 +32,11 @@
             <td>{{ achatDecore.achat.prix  | currency:'€' }}</td>
             <td>{{ achatDecore.achat.quantite  | number }}</td>
             <td>{{ (achatDecore.achat.prix * achatDecore.achat.quantite)  | number }}</td>
-            <td><span class="pi pi-verified" *ngIf="achatDecore.achat.revendu"></span></td>
+            <td>
+              @if (achatDecore.achat.revendu) {
+                <span class="pi pi-verified"></span>
+              }
+            </td>
           </tr>
         }
         <tr class="totaux">

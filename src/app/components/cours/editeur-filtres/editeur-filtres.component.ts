@@ -12,7 +12,6 @@ import {
   Validators
 } from '@angular/forms';
 import {InputText} from 'primeng/inputtext';
-import {NgForOf, NgIf} from '@angular/common';
 import {TranslatePipe, TranslateService} from '@ngx-translate/core';
 import {ConfirmationService} from 'primeng/api';
 import {DialogueService} from '../../../services/dialogue/dialogue.service';
@@ -28,8 +27,6 @@ import {CoursService} from '../../../services/cours/cours.service';
     FloatLabel,
     FormsModule,
     InputText,
-    NgForOf,
-    NgIf,
     ReactiveFormsModule,
     TranslatePipe,
     EditeurConditionFiltreComponent

@@ -2,7 +2,6 @@ import {Component, inject, input, InputSignal, output} from '@angular/core';
 import {Button} from 'primeng/button';
 import {FloatLabel} from 'primeng/floatlabel';
 import {InputText} from 'primeng/inputtext';
-import {NgIf} from '@angular/common';
 import {FormBuilder, ReactiveFormsModule, Validators} from '@angular/forms';
 import {TranslatePipe, TranslateService} from '@ngx-translate/core';
 import {DTOPortefeuille} from '../../../../services/portefeuilles/dto-portefeuille.interface';
@@ -16,7 +15,6 @@ import {Dialog} from 'primeng/dialog';
     Button,
     FloatLabel,
     InputText,
-    NgIf,
     ReactiveFormsModule,
     TranslatePipe,
     AutoFocus,

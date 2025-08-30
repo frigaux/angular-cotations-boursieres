@@ -1,11 +1,9 @@
 import {Component, input, InputSignal} from '@angular/core';
 import {Alerte} from '../alerte.class';
-import {NgIf} from '@angular/common';
 
 @Component({
   selector: 'app-alertes',
   imports: [
-    NgIf
   ],
   templateUrl: './alertes.component.html',
   styleUrl: './alertes.component.sass'

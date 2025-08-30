@@ -1,11 +1,9 @@
 import {Component} from '@angular/core';
-import {NgIf} from '@angular/common';
 import {environment} from '../../../environments/environment';
 
 @Component({
   selector: 'app-footer',
   imports: [
-    NgIf
   ],
   templateUrl: './footer.component.html',
   styleUrl: './footer.component.sass'

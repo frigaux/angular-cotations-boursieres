@@ -7,7 +7,7 @@ import {ToggleSwitch} from 'primeng/toggleswitch';
 import {AchatDecore} from './achat-decore.class';
 import {InputText} from 'primeng/inputtext';
 import {DatePicker} from 'primeng/datepicker';
-import {DatePipe, NgIf} from '@angular/common';
+import {DatePipe} from '@angular/common';
 import {ConfirmationService} from 'primeng/api';
 import {DialogueService} from '../../../../services/dialogue/dialogue.service';
 
@@ -18,8 +18,7 @@ import {DialogueService} from '../../../../services/dialogue/dialogue.service';
     FormsModule,
     ToggleSwitch,
     InputText,
-    DatePicker,
-    NgIf
+    DatePicker
   ],
   templateUrl: './achats-valeur.component.html',
   styleUrl: './achats-valeur.component.sass'

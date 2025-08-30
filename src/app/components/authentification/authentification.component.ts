@@ -1,5 +1,4 @@
 import {Component, OnInit} from '@angular/core';
-import {NgSwitch, NgSwitchCase} from '@angular/common';
 
 import {Dialog} from 'primeng/dialog';
 import {ProgressBar} from 'primeng/progressbar';
@@ -11,7 +10,7 @@ import {PortefeuillesService} from '../../services/portefeuilles/portefeuilles.s
 
 @Component({
   selector: 'app-authentification',
-  imports: [Dialog, ProgressBar, NgSwitch, NgSwitchCase, TranslatePipe],
+  imports: [Dialog, ProgressBar, TranslatePipe],
   templateUrl: './authentification.component.html',
   styleUrl: './authentification.component.sass'
 })

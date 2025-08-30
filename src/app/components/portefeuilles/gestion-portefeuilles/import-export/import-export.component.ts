@@ -4,7 +4,7 @@ import {PortefeuillesService} from '../../../../services/portefeuilles/portefeui
 import {Dialog} from 'primeng/dialog';
 import {FormsModule} from '@angular/forms';
 import {Button} from 'primeng/button';
-import {NgClass, NgIf} from '@angular/common';
+import {NgClass} from '@angular/common';
 import {Textarea} from 'primeng/textarea';
 import {FloatLabel} from 'primeng/floatlabel';
 
@@ -17,7 +17,6 @@ import {FloatLabel} from 'primeng/floatlabel';
     Button,
     NgClass,
     Textarea,
-    NgIf,
     FloatLabel
   ],
   templateUrl: './import-export.component.html',

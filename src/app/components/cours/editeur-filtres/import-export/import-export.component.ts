@@ -2,7 +2,7 @@ import {Component} from '@angular/core';
 import {Button} from "primeng/button";
 import {Dialog} from "primeng/dialog";
 import {FloatLabel} from "primeng/floatlabel";
-import {NgClass, NgIf} from "@angular/common";
+import {NgClass} from "@angular/common";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {Textarea} from "primeng/textarea";
 import {TranslatePipe} from "@ngx-translate/core";
@@ -14,7 +14,6 @@ import {CoursService} from '../../../../services/cours/cours.service';
     Button,
     Dialog,
     FloatLabel,
-    NgIf,
     ReactiveFormsModule,
     Textarea,
     TranslatePipe,

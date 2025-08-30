@@ -10,7 +10,7 @@ import {DTOListeCours} from '../../services/cours/dto-liste-cours.interface';
 import {Accordion, AccordionContent, AccordionHeader, AccordionPanel} from 'primeng/accordion';
 import {Cours} from './cours.class';
 import {DetailsValeurComponent} from './details-valeur/details-valeur.component';
-import {CurrencyPipe, DatePipe, NgClass, NgIf, PercentPipe} from '@angular/common';
+import {CurrencyPipe, DatePipe, NgClass, PercentPipe} from '@angular/common';
 import {Skeleton} from 'primeng/skeleton';
 import {LoaderComponent} from '../loader/loader.component';
 import {AjoutAuPortefeuilleComponent} from './ajout-au-portefeuille/ajout-au-portefeuille.component';
@@ -32,7 +32,6 @@ import {ActualitesComponent} from './actualites/actualites.component';
     AccordionContent,
     DetailsValeurComponent,
     DatePipe,
-    NgIf,
     NgClass,
     CurrencyPipe,
     Skeleton,

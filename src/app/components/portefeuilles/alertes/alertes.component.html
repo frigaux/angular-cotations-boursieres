@@ -1,3 +1,5 @@
 @for (dto of alertes; track dto.alerte.nom) {
-  <span *ngIf="dto.evaluation" title="{{ dto.alerte.condition }}">{{ dto.alerte.nom }}</span>
+  @if (dto.evaluation) {
+    <span title="{{ dto.alerte.condition }}">{{ dto.alerte.nom }}</span>
+  }
 }

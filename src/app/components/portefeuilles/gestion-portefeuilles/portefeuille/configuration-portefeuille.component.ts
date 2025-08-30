@@ -1,13 +1,11 @@
 import {Component, input, InputSignal} from '@angular/core';
 import {DTOPortefeuille} from '../../../../services/portefeuilles/dto-portefeuille.interface';
 import {TranslatePipe} from '@ngx-translate/core';
-import {NgIf} from '@angular/common';
 
 @Component({
   selector: 'app-configuration-portefeuille',
   imports: [
-    TranslatePipe,
-    NgIf
+    TranslatePipe
   ],
   templateUrl: './configuration-portefeuille.component.html',
   styleUrl: './configuration-portefeuille.component.sass'

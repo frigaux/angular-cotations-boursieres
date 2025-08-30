@@ -1,11 +1,15 @@
-<p-skeleton *ngIf="date === undefined" shape="rectangle" borderRadius="0" width="24rem" height="2rem"/>
+@if (date === undefined) {
+  <p-skeleton shape="rectangle" borderRadius="0" width="24rem" height="2rem"/>
+}
 
-<div class="titre" *ngIf="date">
-  <span>{{ 'COMPOSANTS.COURS.MARCHES_DATE' | translate: {jour: date | date: 'dd/MM/yyyy'} }}</span>
-  <app-actualites></app-actualites>
-  <app-import-export></app-import-export>
-  <app-selecteur-filtre (selection)="appliquerFiltre($event)"></app-selecteur-filtre>
-</div>
+@if (date) {
+  <div class="titre">
+    <span>{{ 'COMPOSANTS.COURS.MARCHES_DATE' | translate: {jour: date | date: 'dd/MM/yyyy'} }}</span>
+    <app-actualites></app-actualites>
+    <app-import-export></app-import-export>
+    <app-selecteur-filtre (selection)="appliquerFiltre($event)"></app-selecteur-filtre>
+  </div>
+}
 
 <app-loader [affiche]="loading" [configuration]="[
   {marginLeft: '0', marginTop: '1rem', height: '3rem', width: '100%'},

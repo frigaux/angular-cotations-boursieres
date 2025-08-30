@@ -10,46 +10,50 @@
                      (abandon)="portefeuilleAlertesEnModification = undefined"
                      (modifie)="modifierAlertesPortefeuille($event)"></app-editeur-alertes>
 
-<p-card *ngIf="afficherCreation || this.portefeuilles.length === 0">
-  <h3>{{ 'COMPOSANTS.PORTEFEUILLES.GESTION_PORTEFEUILLES.CREATION' | translate }}</h3>
+@if (afficherCreation || this.portefeuilles.length === 0) {
+  <p-card>
+    <h3>{{ 'COMPOSANTS.PORTEFEUILLES.GESTION_PORTEFEUILLES.CREATION' | translate }}</h3>
 
-  <app-formulaire-creation [portefeuilles]="portefeuilles" (cree)="creerPortefeuille($event)"></app-formulaire-creation>
-</p-card>
+    <app-formulaire-creation [portefeuilles]="portefeuilles" (cree)="creerPortefeuille($event)"></app-formulaire-creation>
+  </p-card>
+}
 
-<p-card *ngIf="portefeuilles.length != 0">
-  <div class="titre">
-    <span>
-      {{ 'COMPOSANTS.PORTEFEUILLES.GESTION_PORTEFEUILLES.PORTEFEUILLES' | translate }}
-    </span>
-    <span class="pi pi-plus-circle" (click)="afficherCreation = true"
-          title="{{ 'COMPOSANTS.PORTEFEUILLES.GESTION_PORTEFEUILLES.CREER' | translate }}"></span>
-    <app-import-export></app-import-export>
-  </div>
+@if (portefeuilles.length != 0) {
+  <p-card>
+    <div class="titre">
+      <span>
+        {{ 'COMPOSANTS.PORTEFEUILLES.GESTION_PORTEFEUILLES.PORTEFEUILLES' | translate }}
+      </span>
+      <span class="pi pi-plus-circle" (click)="afficherCreation = true"
+            title="{{ 'COMPOSANTS.PORTEFEUILLES.GESTION_PORTEFEUILLES.CREER' | translate }}"></span>
+      <app-import-export></app-import-export>
+    </div>
 
-  <div cdkDropList class="liste" (cdkDropListDropped)="dropColonne($event)">
-    @for (portefeuille of portefeuilles; track portefeuille.nom; let idx = $index) {
-      <div cdkDrag class="ligne">
-        <div>
-          <input type="radio" name="idxPortefeuilleParDefaut" [value]="idx" [checked]="portefeuille.parDefaut"
-                 title="{{ 'COMPOSANTS.PORTEFEUILLES.GESTION_PORTEFEUILLES.PAR_DEFAUT' | translate }}"
-                 (change)="changerParDefaut(idx)">
-        </div>
-        <div class="colonne">
-          <div><span class="pi pi-link" (click)="associationValeursPortefeuille(idx)"
-                     title="{{ 'COMPOSANTS.PORTEFEUILLES.GESTION_PORTEFEUILLES.ASSOCIER_VALEUR' | translate }}"></span>
+    <div cdkDropList class="liste" (cdkDropListDropped)="dropColonne($event)">
+      @for (portefeuille of portefeuilles; track portefeuille.nom; let idx = $index) {
+        <div cdkDrag class="ligne">
+          <div>
+            <input type="radio" name="idxPortefeuilleParDefaut" [value]="idx" [checked]="portefeuille.parDefaut"
+                   title="{{ 'COMPOSANTS.PORTEFEUILLES.GESTION_PORTEFEUILLES.PAR_DEFAUT' | translate }}"
+                   (change)="changerParDefaut(idx)">
           </div>
-          <div><span class="pi pi-bell" (click)="editionAlertesPortefeuille(idx)"
-                     title="{{ 'COMPOSANTS.PORTEFEUILLES.GESTION_PORTEFEUILLES.EDITER_ALERTES' | translate }}"></span>
+          <div class="colonne">
+            <div><span class="pi pi-link" (click)="associationValeursPortefeuille(idx)"
+                       title="{{ 'COMPOSANTS.PORTEFEUILLES.GESTION_PORTEFEUILLES.ASSOCIER_VALEUR' | translate }}"></span>
+            </div>
+            <div><span class="pi pi-bell" (click)="editionAlertesPortefeuille(idx)"
+                       title="{{ 'COMPOSANTS.PORTEFEUILLES.GESTION_PORTEFEUILLES.EDITER_ALERTES' | translate }}"></span>
+            </div>
+            <div><span class="pi pi-pencil" (click)="modificationNomPortefeuille(idx)"
+                       title="{{ 'COMPOSANTS.PORTEFEUILLES.GESTION_PORTEFEUILLES.RENOMMER' | translate }}"></span>
+            </div>
           </div>
-          <div><span class="pi pi-pencil" (click)="modificationNomPortefeuille(idx)"
-                     title="{{ 'COMPOSANTS.PORTEFEUILLES.GESTION_PORTEFEUILLES.RENOMMER' | translate }}"></span>
+          <div><span class="pi pi-trash" (click)="suppressionPortefeuille($event, idx)"
+                     title="{{ 'COMPOSANTS.PORTEFEUILLES.GESTION_PORTEFEUILLES.SUPPRIMER' | translate }}"></span>
           </div>
+          <app-configuration-portefeuille [portefeuille]="portefeuille"></app-configuration-portefeuille>
         </div>
-        <div><span class="pi pi-trash" (click)="suppressionPortefeuille($event, idx)"
-                   title="{{ 'COMPOSANTS.PORTEFEUILLES.GESTION_PORTEFEUILLES.SUPPRIMER' | translate }}"></span>
-        </div>
-        <app-configuration-portefeuille [portefeuille]="portefeuille"></app-configuration-portefeuille>
-      </div>
-    }
-  </div>
-</p-card>
+      }
+    </div>
+  </p-card>
+}

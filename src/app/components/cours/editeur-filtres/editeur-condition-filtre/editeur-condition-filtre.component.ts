@@ -7,7 +7,6 @@ import {Card} from 'primeng/card';
 import {FloatLabel} from 'primeng/floatlabel';
 import {AutoFocus} from 'primeng/autofocus';
 import {Button} from 'primeng/button';
-import {NgIf} from '@angular/common';
 import {InputText} from 'primeng/inputtext';
 import {CoursService} from '../../../../services/cours/cours.service';
 
@@ -21,7 +20,6 @@ import {CoursService} from '../../../../services/cours/cours.service';
     FloatLabel,
     AutoFocus,
     Button,
-    NgIf,
     InputText
   ],
   templateUrl: './editeur-condition-filtre.component.html',

@@ -1,13 +1,11 @@
 import {Component, input, InputSignal} from '@angular/core';
 import {DtoConfigurationLoader} from './dto-configuration-loader.interface';
 import {Skeleton} from 'primeng/skeleton';
-import {NgIf} from '@angular/common';
 
 @Component({
   selector: 'app-loader',
   imports: [
-    Skeleton,
-    NgIf
+    Skeleton
   ],
   templateUrl: './loader.component.html',
   styleUrl: './loader.component.sass'

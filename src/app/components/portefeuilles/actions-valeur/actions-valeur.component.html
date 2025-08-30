@@ -16,14 +16,16 @@
 </p-popover>
 
 
-<p-panel *ngIf="achatsVisible">
-  <ng-template #header>
-    <div class="titre">
-      <span>{{ titre }}</span>
-      <span class="pi pi-times-circle" (click)="achatsVisible=false"></span>
-    </div>
-  </ng-template>
-  @if (cours) {
-    <app-achats-valeur [valeur]="{ticker: cours.ticker, cloture: cours.cloture}"></app-achats-valeur>
-  }
-</p-panel>
+@if (achatsVisible) {
+  <p-panel>
+    <ng-template #header>
+      <div class="titre">
+        <span>{{ titre }}</span>
+        <span class="pi pi-times-circle" (click)="achatsVisible=false"></span>
+      </div>
+    </ng-template>
+    @if (cours) {
+      <app-achats-valeur [valeur]="{ticker: cours.ticker, cloture: cours.cloture}"></app-achats-valeur>
+    }
+  </p-panel>
+}

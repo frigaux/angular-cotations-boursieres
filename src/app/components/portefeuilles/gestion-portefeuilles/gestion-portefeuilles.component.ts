@@ -1,5 +1,4 @@
 import {Component, OnInit} from '@angular/core';
-import {NgIf} from "@angular/common";
 import {ReactiveFormsModule} from '@angular/forms';
 import {Card} from 'primeng/card';
 import {TranslatePipe, TranslateService} from '@ngx-translate/core';
@@ -19,7 +18,6 @@ import {ConfirmationService} from 'primeng/api';
 @Component({
   selector: 'app-gestion-portefeuilles',
   imports: [
-    NgIf,
     Card,
     ReactiveFormsModule,
     TranslatePipe,

@@ -1,10 +1,14 @@
-<div [ngSwitch]="statut">
-    <div *ngSwitchCase="enumStatut.AUTHENTIFICATION">
-        <p-dialog header="Edit Profile" modal="true" [visible]="true" showHeader="false" [style]="{'width': '50%'}"
-            [contentStyle]="{'padding': '2px'}">
-            <p-progressbar mode="indeterminate" [style]="{'height': '10px'}" />
-        </p-dialog>
-    </div>
-    <div *ngSwitchCase="enumStatut.SUCCES">{{ 'COMPOSANTS.AUTHENTIFICATION.REUSSIE' | translate }}</div>
-    <div *ngSwitchCase="enumStatut.ERREUR">{{messageErreur}}</div>
-</div>
+@switch (statut) {
+  @case (enumStatut.AUTHENTIFICATION) {
+    <p-dialog header="Edit Profile" modal="true" [visible]="true" showHeader="false" [style]="{'width': '50%'}"
+              [contentStyle]="{'padding': '2px'}">
+      <p-progressbar mode="indeterminate" [style]="{'height': '10px'}" />
+    </p-dialog>
+  }
+  @case (enumStatut.SUCCES) {
+    {{ 'COMPOSANTS.AUTHENTIFICATION.REUSSIE' | translate }}
+  }
+  @case (enumStatut.ERREUR) {
+    {{messageErreur}}
+  }
+}

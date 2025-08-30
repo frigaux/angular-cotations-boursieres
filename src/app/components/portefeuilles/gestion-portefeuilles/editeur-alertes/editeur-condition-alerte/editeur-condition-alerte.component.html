@@ -19,25 +19,29 @@
       </P>
     </p-card>
   </div>
-  <div class="erreur" *ngIf="erreur !== undefined">
-    <span class="pi pi-exclamation-circle"></span>
-    <span>{{erreur}}</span>
-  </div>
-  <form *ngIf="alerteEnModification !== undefined" [formGroup]="formulaire"
-        (ngSubmit)="modifierConditionAlerte()">
-    <p-floatlabel>
-      <input pInputText [pAutoFocus]="true" id="condition" formControlName="condition" autocomplete="off" size="60"/>
-      <label for="condition">
-        {{ 'COMPOSANTS.PORTEFEUILLES.GESTION_PORTEFEUILLES.EDITEUR_ALERTES.EDITEUR_CONDITION_ALERTE.CONDITION' | translate }}
-      </label>
-    </p-floatlabel>
-    <div class="boutons">
-      <p-button
-        label="{{ 'COMPOSANTS.COMMUN.ANNULER' | translate }}"
-        (onClick)="this.abandon.emit()" type="reset" severity="warn"/>
-      <p-button
-        label="{{ 'COMPOSANTS.PORTEFEUILLES.GESTION_PORTEFEUILLES.EDITEUR_ALERTES.EDITEUR_CONDITION_ALERTE.MODIFIER' | translate }}"
-        type="submit" severity="danger"/>
+  @if (erreur !== undefined) {
+    <div class="erreur">
+      <span class="pi pi-exclamation-circle"></span>
+      <span>{{erreur}}</span>
     </div>
-  </form>
+  }
+  @if (alerteEnModification !== undefined) {
+    <form [formGroup]="formulaire"
+          (ngSubmit)="modifierConditionAlerte()">
+      <p-floatlabel>
+        <input pInputText [pAutoFocus]="true" id="condition" formControlName="condition" autocomplete="off" size="60"/>
+        <label for="condition">
+          {{ 'COMPOSANTS.PORTEFEUILLES.GESTION_PORTEFEUILLES.EDITEUR_ALERTES.EDITEUR_CONDITION_ALERTE.CONDITION' | translate }}
+        </label>
+      </p-floatlabel>
+      <div class="boutons">
+        <p-button
+          label="{{ 'COMPOSANTS.COMMUN.ANNULER' | translate }}"
+          (onClick)="this.abandon.emit()" type="reset" severity="warn"/>
+        <p-button
+          label="{{ 'COMPOSANTS.PORTEFEUILLES.GESTION_PORTEFEUILLES.EDITEUR_ALERTES.EDITEUR_CONDITION_ALERTE.MODIFIER' | translate }}"
+          type="submit" severity="danger"/>
+      </div>
+    </form>
+  }
 </p-dialog>

@@ -4,7 +4,7 @@ import {DTOAchatsTicker} from '../../services/valeurs/dto-achats-ticker.interfac
 import {DTOValeur} from '../../services/valeurs/dto-valeur.interface';
 import {AchatsValeurDecores} from './achats-valeur-decores.class';
 import {AchatDecore} from '../valeurs/details-valeur/achats-valeur/achat-decore.class';
-import {CurrencyPipe, DatePipe, DecimalPipe, NgIf} from '@angular/common';
+import {CurrencyPipe, DatePipe, DecimalPipe} from '@angular/common';
 import {TranslatePipe, TranslateService} from '@ngx-translate/core';
 import {DTOAchat} from '../../services/valeurs/dto-achat.interface';
 import {ConfirmationService} from 'primeng/api';
@@ -18,7 +18,6 @@ import {ImportExportComponent} from './import-export/import-export.component';
     DatePipe,
     CurrencyPipe,
     DecimalPipe,
-    NgIf,
     TranslatePipe,
     LoaderComponent,
     ImportExportComponent

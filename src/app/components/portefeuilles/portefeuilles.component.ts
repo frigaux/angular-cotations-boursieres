@@ -1,5 +1,5 @@
 import {Component, OnInit, viewChild} from '@angular/core';
-import {CurrencyPipe, DatePipe, DecimalPipe, NgClass, NgIf, NgStyle, PercentPipe} from '@angular/common';
+import {CurrencyPipe, DatePipe, DecimalPipe, NgClass, NgStyle, PercentPipe} from '@angular/common';
 import {PortefeuillesService} from '../../services/portefeuilles/portefeuilles.service';
 import {Accordion, AccordionContent, AccordionHeader, AccordionPanel, AccordionTabOpenEvent} from 'primeng/accordion';
 import {TableModule} from 'primeng/table';
@@ -27,7 +27,6 @@ import {ActualitesComponent} from '../cours/actualites/actualites.component';
 @Component({
   selector: 'app-portefeuilles',
   imports: [
-    NgIf,
     Accordion,
     AccordionContent,
     AccordionHeader,

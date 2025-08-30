@@ -1,23 +1,27 @@
 <div>
   @if (portefeuille !== undefined) {
     <div>{{ portefeuille.nom }}</div>
-    <div *ngIf="portefeuille.tickers.length > 0">
+    @if (portefeuille.tickers.length > 0) {
       <span class="vert">{{ 'COMPOSANTS.PORTEFEUILLES.GESTION_PORTEFEUILLES.PORTEFEUILLE.VALEURS' | translate }} :</span>
       <span> {{ tickers(portefeuille) }}</span>
-    </div>
-    <div class="rouge" *ngIf="portefeuille.tickers.length === 0">
-      {{ 'COMPOSANTS.PORTEFEUILLES.GESTION_PORTEFEUILLES.PORTEFEUILLE.PORTEFEUILLE_SANS_VALEUR' | translate }}
-    </div>
-    <div class="rouge" *ngIf="portefeuille.alertes.length > 0">
-      {{ 'COMPOSANTS.PORTEFEUILLES.GESTION_PORTEFEUILLES.PORTEFEUILLE.ALERTES' | translate }} :
-    </div>
-    <div class="rouge" *ngIf="portefeuille.alertes.length === 0">
-      {{ 'COMPOSANTS.PORTEFEUILLES.GESTION_PORTEFEUILLES.PORTEFEUILLE.PORTEFEUILLE_SANS_ALERTE' | translate }}
-    </div>
-    <ul>
-      @for (alerte of portefeuille.alertes; track alerte.nom) {
-        <li><span>{{ alerte.nom }}</span> : {{ alerte.condition }}</li>
-      }
-    </ul>
+    } @else {
+      <div class="rouge">
+        {{ 'COMPOSANTS.PORTEFEUILLES.GESTION_PORTEFEUILLES.PORTEFEUILLE.PORTEFEUILLE_SANS_VALEUR' | translate }}
+      </div>
+    }
+    @if (portefeuille.alertes.length > 0) {
+      <div class="rouge">
+        {{ 'COMPOSANTS.PORTEFEUILLES.GESTION_PORTEFEUILLES.PORTEFEUILLE.ALERTES' | translate }} :
+      </div>
+      <ul>
+        @for (alerte of portefeuille.alertes; track alerte.nom) {
+          <li><span>{{ alerte.nom }}</span> : {{ alerte.condition }}</li>
+        }
+      </ul>
+    } @else {
+      <div class="rouge">
+        {{ 'COMPOSANTS.PORTEFEUILLES.GESTION_PORTEFEUILLES.PORTEFEUILLE.PORTEFEUILLE_SANS_ALERTE' | translate }}
+      </div>
+    }
   }
 </div>

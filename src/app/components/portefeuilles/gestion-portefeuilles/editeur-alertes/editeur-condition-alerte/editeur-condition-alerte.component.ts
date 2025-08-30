@@ -4,7 +4,6 @@ import {Button} from 'primeng/button';
 import {FloatLabel} from 'primeng/floatlabel';
 import {FormBuilder, FormsModule, ReactiveFormsModule, Validators} from '@angular/forms';
 import {InputText} from 'primeng/inputtext';
-import {NgIf} from '@angular/common';
 import {TranslatePipe, TranslateService} from '@ngx-translate/core';
 import {AutoFocus} from 'primeng/autofocus';
 import {DTOAlerte} from '../../../../../services/portefeuilles/dto-alerte.interface';
@@ -19,7 +18,6 @@ import {PortefeuillesService} from '../../../../../services/portefeuilles/portef
     FloatLabel,
     FormsModule,
     InputText,
-    NgIf,
     ReactiveFormsModule,
     TranslatePipe,
     AutoFocus,

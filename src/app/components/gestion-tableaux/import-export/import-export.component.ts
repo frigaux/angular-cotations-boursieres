@@ -1,7 +1,7 @@
 import {Component} from '@angular/core';
 import {Button} from "primeng/button";
 import {Dialog} from "primeng/dialog";
-import {NgClass, NgIf} from "@angular/common";
+import {NgClass} from "@angular/common";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {Textarea} from "primeng/textarea";
 import {TranslatePipe} from "@ngx-translate/core";
@@ -13,7 +13,6 @@ import {FloatLabel} from 'primeng/floatlabel';
   imports: [
     Button,
     Dialog,
-    NgIf,
     ReactiveFormsModule,
     Textarea,
     TranslatePipe,

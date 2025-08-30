@@ -19,25 +19,29 @@
       </P>
     </p-card>
   </div>
-  <div class="erreur" *ngIf="erreur !== undefined">
-    <span class="pi pi-exclamation-circle"></span>
-    <span>{{erreur}}</span>
-  </div>
-  <form *ngIf="filtre !== undefined" [formGroup]="formulaire"
-        (ngSubmit)="modifierConditionFiltre()">
-    <p-floatlabel>
-      <input pInputText [pAutoFocus]="true" id="condition" formControlName="condition" autocomplete="off" size="60"/>
-      <label for="condition">
-        {{ 'COMPOSANTS.COURS.EDITEUR_FILTRES.EDITEUR_CONDITION_FILTRE.CONDITION' | translate }}
-      </label>
-    </p-floatlabel>
-    <div class="boutons">
-      <p-button
-        label="{{ 'COMPOSANTS.COMMUN.ANNULER' | translate }}"
-        (onClick)="this.abandon.emit()" type="reset" severity="warn"/>
-      <p-button
-        label="{{ 'COMPOSANTS.COURS.EDITEUR_FILTRES.EDITEUR_CONDITION_FILTRE.MODIFIER' | translate }}"
-        type="submit" severity="danger"/>
+  @if (erreur !== undefined) {
+    <div class="erreur">
+      <span class="pi pi-exclamation-circle"></span>
+      <span>{{erreur}}</span>
     </div>
-  </form>
+  }
+  @if (filtre !== undefined) {
+    <form [formGroup]="formulaire"
+          (ngSubmit)="modifierConditionFiltre()">
+      <p-floatlabel>
+        <input pInputText [pAutoFocus]="true" id="condition" formControlName="condition" autocomplete="off" size="60"/>
+        <label for="condition">
+          {{ 'COMPOSANTS.COURS.EDITEUR_FILTRES.EDITEUR_CONDITION_FILTRE.CONDITION' | translate }}
+        </label>
+      </p-floatlabel>
+      <div class="boutons">
+        <p-button
+          label="{{ 'COMPOSANTS.COMMUN.ANNULER' | translate }}"
+          (onClick)="this.abandon.emit()" type="reset" severity="warn"/>
+        <p-button
+          label="{{ 'COMPOSANTS.COURS.EDITEUR_FILTRES.EDITEUR_CONDITION_FILTRE.MODIFIER' | translate }}"
+          type="submit" severity="danger"/>
+      </div>
+    </form>
+  }
 </p-dialog>

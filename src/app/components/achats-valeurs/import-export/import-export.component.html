@@ -14,10 +14,12 @@
       </label>
     </p-floatlabel>
 
-    <div class="erreur" *ngIf="erreur !== undefined">
-      <span class="pi pi-exclamation-circle"></span>
-      <span>{{ erreur }}</span>
-    </div>
+    @if (erreur !== undefined) {
+      <div class="erreur">
+        <span class="pi pi-exclamation-circle"></span>
+        <span>{{ erreur }}</span>
+      </div>
+    }
 
     <div class="boutons">
       <p-button type="button" (click)="exporter()"

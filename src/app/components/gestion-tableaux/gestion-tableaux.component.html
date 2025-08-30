@@ -7,10 +7,12 @@
       <app-import-export></app-import-export>
       <span class="message">{{ succes }}</span>
     </div>
-    <div class="erreur" *ngIf="erreur !== undefined">
-      <span class="pi pi-exclamation-circle"></span>
-      <span>{{ erreur }}</span>
-    </div>
+    @if (erreur !== undefined) {
+      <div class="erreur">
+        <span class="pi pi-exclamation-circle"></span>
+        <span>{{ erreur }}</span>
+      </div>
+    }
     <div class="tableau">
       <div class="paysage">
         <h4>{{ 'COMPOSANTS.GESTION_TABLEAUX.PAYSAGE' | translate }}</h4>

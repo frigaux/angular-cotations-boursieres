@@ -1,5 +1,4 @@
 import {Component, input, InputSignal, output} from '@angular/core';
-import {NgIf} from "@angular/common";
 import {PickList} from "primeng/picklist";
 import {DTOValeur} from '../../../../services/valeurs/dto-valeur.interface';
 import {ValeursService} from '../../../../services/valeurs/valeurs.service';
@@ -12,7 +11,6 @@ import {LoaderComponent} from '../../../loader/loader.component';
 @Component({
   selector: 'app-selecteur-valeurs',
   imports: [
-    NgIf,
     PickList,
     TranslatePipe,
     Dialog,
