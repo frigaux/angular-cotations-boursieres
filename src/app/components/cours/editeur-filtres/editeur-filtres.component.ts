@@ -51,7 +51,7 @@ export class EditeurFiltresComponent {
 
   // formulaire
   noms: FormArray<FormControl<unknown>> = this.formBuilder.array([]);
-  formulaire = new FormGroup({
+  formulaire: FormGroup = this.formBuilder.group({
     noms: this.noms
   });
 

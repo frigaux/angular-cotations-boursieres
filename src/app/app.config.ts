@@ -17,7 +17,7 @@ export const appConfig: ApplicationConfig = {
   providers: [
     provideZoneChangeDetection({eventCoalescing: true}),
     provideTranslateService({
-      defaultLanguage: 'fr'
+      fallbackLang: 'fr'
     }),
     provideRouter(routes),
     provideHttpClient(

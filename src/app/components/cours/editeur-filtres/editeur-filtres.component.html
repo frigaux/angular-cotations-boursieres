@@ -22,8 +22,7 @@
 
     <div class="formulaire" [formGroup]="formulaire">
       <div formArrayName="noms">
-        <!-- TODO : check track-->
-        @for (nom of noms.controls; track nom; let idx = $index) {
+        @for (nom of noms.controls; track $index; let idx = $index) {
           <div>
             <p-floatlabel>
               <input pInputText id="{{idx}}" autocomplete="off" [formControlName]="idx"/>
