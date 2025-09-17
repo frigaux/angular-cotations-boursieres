@@ -31,7 +31,7 @@ export class AuthentificationComponent implements OnInit {
   authentifier(): void {
     this.authentificationService.authentifier().subscribe({
       error: httpResponseError => {
-        this.messageErreur = `${httpResponseError.url} => ${httpResponseError.status}`;
+        this.messageErreur = `${httpResponseError.message}`;
         this.statut = Statuts.ERREUR;
       },
       complete: () => {

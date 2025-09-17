@@ -3,7 +3,7 @@ import {environment} from '../environments/environment';
 import {AuthentificationService} from './services/authentification/authentification.service';
 import {inject} from '@angular/core';
 import {Router} from '@angular/router';
-import {Observable, throwError} from 'rxjs';
+import {Observable, throwError, timeout} from 'rxjs';
 
 export const AUTHENTIFICATION_REQUISE = new HttpContextToken<boolean>(() => true);
 
@@ -36,12 +36,12 @@ function makeApiCall(req: HttpRequest<unknown>, next: (req: HttpRequest<unknown>
     const authentificationService = inject(AuthentificationService);
     if (authentificationService.isAuthentifie()) {
       updateRequest.headers = updateRequest.headers.append('Authorization', 'Bearer ' + authentificationService.getJwt());
-      return next(req.clone(updateRequest));
+      return next(req.clone(updateRequest)).pipe(timeout(environment.httpRequestTimeout));
     } else {
       inject(Router).navigate(['/authentification']);
       return throwError(() => 'pas authentifié, routage vers authentification');
     }
   } else {
-    return next(req.clone(updateRequest));
+    return next(req.clone(updateRequest)).pipe(timeout(environment.httpRequestTimeout));
   }
 }

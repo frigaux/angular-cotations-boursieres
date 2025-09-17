@@ -1,4 +1,4 @@
-import {ApplicationConfig, provideZoneChangeDetection} from '@angular/core';
+import {ApplicationConfig, inject, provideAppInitializer, provideZoneChangeDetection} from '@angular/core';
 import {provideRouter} from '@angular/router';
 
 import {routes} from './app.routes';
@@ -12,6 +12,7 @@ import {httpResponseInterceptor} from './http-response.interceptor';
 import {provideTranslateService} from "@ngx-translate/core";
 import {definePreset} from '@primeng/themes';
 import {CurrencyPipe, DatePipe, DecimalPipe, PercentPipe} from '@angular/common';
+import {AppInitializerService} from './services/app-initializer/app-initializer-service';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -24,6 +25,7 @@ export const appConfig: ApplicationConfig = {
       withInterceptors([httpRequestInterceptor, httpResponseInterceptor])
     ),
     provideAnimationsAsync(),
+    provideAppInitializer(() => inject(AppInitializerService).prechaufferDnsEtHttp()),
     providePrimeNG({
       theme: {
         preset: definePreset(themePrimeNG, {

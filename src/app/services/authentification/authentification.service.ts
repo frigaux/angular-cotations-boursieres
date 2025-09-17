@@ -1,9 +1,9 @@
-import { HttpClient, HttpContext } from '@angular/common/http';
-import { Injectable } from '@angular/core';
-import { jwtDecode, JwtPayload } from 'jwt-decode';
-import { DTOJwt } from './dto-jwt.interface';
-import { Observable } from 'rxjs';
-import { AUTHENTIFICATION_REQUISE } from '../../http-request.interceptor';
+import {HttpClient, HttpContext} from '@angular/common/http';
+import {Injectable} from '@angular/core';
+import {jwtDecode, JwtPayload} from 'jwt-decode';
+import {DTOJwt} from './dto-jwt.interface';
+import {Observable} from 'rxjs';
+import {AUTHENTIFICATION_REQUISE} from '../../http-request.interceptor';
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +13,8 @@ export class AuthentificationService {
   private jwt: string | undefined;
   private jwtPayload: JwtPayload | undefined;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {
+  }
 
   public isAuthentifie(): boolean {
     if (!this.jwtPayload) {
@@ -32,8 +33,8 @@ export class AuthentificationService {
     return new Observable(observer => {
       this.http.post<DTOJwt>(
         '/bourse/authentification',
-        { identifiant: 'anonymous', motDePasse: 'anonymous' },
-        { context: new HttpContext().set(AUTHENTIFICATION_REQUISE, false) }
+        {identifiant: 'anonymous', motDePasse: 'anonymous'},
+        {context: new HttpContext().set(AUTHENTIFICATION_REQUISE, false)}
       ).subscribe({
         error: httpResponseError => {
           observer.error(httpResponseError);

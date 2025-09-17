@@ -3,5 +3,6 @@ export const environment = {
   staticPrefixUrl: 'http://fabienrigaux.freeboxos.fr',
   apiPrefixUrl: 'http://fabienrigaux.freeboxos.fr:8080',
   apiVersion: '1',
-  httpDelay: 250
+  httpDelay: 250,
+  httpRequestTimeout: 3000
 };
