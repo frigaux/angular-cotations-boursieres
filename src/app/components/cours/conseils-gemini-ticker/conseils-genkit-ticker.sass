@@ -1,0 +1,36 @@
+div.boutons
+  display: flex
+  flex-direction: row
+
+  span.pi
+    margin-left: 1rem
+    cursor: pointer
+    color: var(--p-blue-700)
+
+div.erreur
+  margin: 1rem
+  color: var(--p-red-800)
+
+div.ligne
+  display: flex
+  flex-direction: row
+
+  div.colonne
+    display: flex
+    flex-direction: column
+
+    & > div
+      margin: 0.5rem
+
+      label
+        display: inline-block
+        width: 9rem
+        font-weight: bold
+
+      span
+        display: inline-block
+        width: 6rem
+        text-align: right
+
+div.analyses
+  margin: 1rem 0.5rem 0.5rem 0.5rem

@@ -13,8 +13,10 @@
     "COMMUN": {
       "ANNULER": "Annuler",
       "SUPPRIMER": "Supprimer",
-      "ENREGISTRER": "Enregistrer les modifications",
-      "ABANDONNER": "Abandonner les modifications"
+      "ENREGISTRER": "Enregistrer",
+      "ABANDONNER": "Abandonner",
+      "ENREGISTRER_MODIFICATIONS": "Enregistrer les modifications",
+      "ABANDONNER_MODIFICATIONS": "Abandonner les modifications"
     },
     "AUTHENTIFICATION": {
       "REUSSIE": "Authentification réussie !"
@@ -179,7 +181,23 @@
           "VARIATION_CAC": "Variation / CAC40",
           "CORRELATION_CAC": "Corrélation / CAC40",
           "QUALITE": "Qualité financière"
+        },
+        "IA": {
+          "GEMINI": "IA Google Gemini"
         }
+      },
+      "CONSEILS_GEMINI_TICKER": {
+        "CLE_API_GEMINI": "Clé API Gemini",
+        "NOM": "Nom",
+        "MARCHE": "Marché",
+        "ACHETER": "Acheter",
+        "VENDRE": "Vendre",
+        "PRIX_1_JOUR": "Prix 1 jour",
+        "PRIX_1_SEMAINE": "Prix 1 semaine",
+        "PRIX_1_MOIS": "Prix 1 mois",
+        "PRIX_1_AN": "Prix 1 an",
+        "true": "oui",
+        "false": "non"
       }
     },
     "ACHATS_VALEURS": {

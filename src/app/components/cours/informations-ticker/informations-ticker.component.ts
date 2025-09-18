@@ -9,8 +9,8 @@ import {TranslatePipe} from '@ngx-translate/core';
 import {Cours} from '../cours.class';
 import {DTOActualiteTicker} from '../../../services/abc-bourse/dto-actualite-ticker.class';
 import {ActualiteTickerComponent} from './actualite-ticker/actualite-ticker.component';
+import {ConseilsGeminiTicker} from '../conseils-gemini-ticker/conseils-gemini-ticker';
 
-// TODO : coverage
 @Component({
   selector: 'app-informations-ticker',
   imports: [
@@ -23,7 +23,8 @@ import {ActualiteTickerComponent} from './actualite-ticker/actualite-ticker.comp
     CurrencyPipe,
     NgClass,
     ActualiteTickerComponent,
-    DatePipe
+    DatePipe,
+    ConseilsGeminiTicker
   ],
   templateUrl: './informations-ticker.component.html',
   styleUrl: './informations-ticker.component.sass'
