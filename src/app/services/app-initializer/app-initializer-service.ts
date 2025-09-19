@@ -2,6 +2,7 @@ import {Injectable} from '@angular/core';
 import {Capacitor, CapacitorHttp, HttpOptions, HttpResponse} from '@capacitor/core';
 import {environment} from '../../../environments/environment';
 import {Observable} from 'rxjs';
+import {CapacitorHttpPlugin} from '@capacitor/core/types/core-plugins';
 
 @Injectable({
   providedIn: 'root'
@@ -40,6 +41,10 @@ export class AppInitializerService {
       connectTimeout: 500,
       readTimeout: 500
     };
-    return CapacitorHttp.request(options);
+    return this.capacitorHttp().request(options);
+  }
+
+  private capacitorHttp(): CapacitorHttpPlugin {
+    return CapacitorHttp;
   }
 }
