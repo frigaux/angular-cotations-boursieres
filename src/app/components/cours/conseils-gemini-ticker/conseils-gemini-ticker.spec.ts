@@ -36,7 +36,7 @@ describe('ConseilsGeminiTicker', () => {
 
   describe('Given #chargerCleAPIGemini renvoie une clé et #interrogerApiGemini renvoie un DTO', () => {
     beforeEach(() => {
-      mockIAService.chargerCleAPIGemini.and.returnValue('cle');
+      mockIAService.chargerCleAPIGemini.and.returnValue('cle-test');
       mockIAService.interrogerApiGemini.and.returnValue(of(new DTOConseilsGeminiTicker(REPONSE_API_GEMINI.candidates![0].content!.parts![0].text!)));
     });
 

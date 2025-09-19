@@ -75,13 +75,15 @@ export class IAService {
     window.localStorage.setItem(IAService.CLE_API_GEMINI, cleAPIGemini);
   }
 
+  private creerClient(): GoogleGenAI {
+    return new GoogleGenAI({
+      apiKey: this.chargerCleAPIGemini()
+    });
+  }
+
   public interrogerApiGemini(cours: Cours): Observable<DTOConseilsGeminiTicker> {
     return new Observable(observer => {
-      new GoogleGenAI(
-        {
-          apiKey: this.chargerCleAPIGemini()
-        }
-      ).models.generateContent(
+      this.creerClient().models.generateContent(
         {
           model: "gemini-2.5-flash",
           contents: `Ecrire une recommandation d'achat ou vente concernant l\'action "${cours.libelle}" identifiée par le ticker "${cours.ticker}" sur le marché Euronext`,

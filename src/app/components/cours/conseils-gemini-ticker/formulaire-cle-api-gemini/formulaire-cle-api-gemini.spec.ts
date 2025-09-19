@@ -46,7 +46,7 @@ describe('FormulaireCleApiGemini', () => {
 
   describe('Given #chargerCleAPIGemini renvoie une clé', () => {
     beforeEach(() => {
-      mockIAService.chargerCleAPIGemini.and.returnValue('cle');
+      mockIAService.chargerCleAPIGemini.and.returnValue('cle-test');
       spyOn(component.modifie, "emit");
     });
 
@@ -57,7 +57,7 @@ describe('FormulaireCleApiGemini', () => {
       expect(component.modificationCleApiGemini).toBeTrue();
       component.enregistrerCleApiGemini();
       expect(component.modifie.emit).toHaveBeenCalled();
-      expect(mockIAService.enregistrerCleAPIGemini).toHaveBeenCalledWith('cle');
+      expect(mockIAService.enregistrerCleAPIGemini).toHaveBeenCalledWith('cle-test');
     });
   })
 });
