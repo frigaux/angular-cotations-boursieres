@@ -76,29 +76,30 @@ export class IAService {
   }
 
   public interrogerApiGemini(cours: Cours): Observable<DTOConseilsGeminiTicker> {
-    // https://ai.google.dev/gemini-api/docs?hl=fr
-    // https://aistudio.google.com/apikey
-    // const ai = new GoogleGenAI({apiKey: 'AIzaSyAaGggRIz6o9GhwPbM2dxOh9H2ZMajvkuI'});
-
     return new Observable(observer => {
-      const ai = new GoogleGenAI({apiKey: this.chargerCleAPIGemini()});
-
-      ai.models.generateContent({
-        model: "gemini-2.5-flash",
-        contents: `Ecrire une recommandation d'achat ou vente concernant l\'action "${cours.libelle}" identifiée par le ticker "${cours.ticker}" sur le marché Euronext`,
-        config: IAService.GENERATECONTENTCONFIG
-      }).then(reponse => {
-        if (reponse && reponse.candidates && reponse.candidates.length > 0) {
-          const candidate = reponse.candidates[0];
-          if (candidate.content && candidate.content.parts && candidate.content.parts.length > 0) {
-            const part = candidate.content.parts[0];
-            if (part.text) {
-              observer.next(new DTOConseilsGeminiTicker(part.text));
+      new GoogleGenAI(
+        {
+          apiKey: this.chargerCleAPIGemini()
+        }
+      ).models.generateContent(
+        {
+          model: "gemini-2.5-flash",
+          contents: `Ecrire une recommandation d'achat ou vente concernant l\'action "${cours.libelle}" identifiée par le ticker "${cours.ticker}" sur le marché Euronext`,
+          config: IAService.GENERATECONTENTCONFIG
+        }
+      ).then(reponse => {
+          if (reponse && reponse.candidates && reponse.candidates.length > 0) {
+            const candidate = reponse.candidates[0];
+            if (candidate.content && candidate.content.parts && candidate.content.parts.length > 0) {
+              const part = candidate.content.parts[0];
+              if (part.text) {
+                observer.next(new DTOConseilsGeminiTicker(part.text));
+              }
             }
           }
+          observer.complete();
         }
-        observer.complete();
-      }).catch(erreur => {
+      ).catch(erreur => {
         if (erreur instanceof ApiError) {
           const json = JSON.parse(erreur.message);
           if ('error' in json) {

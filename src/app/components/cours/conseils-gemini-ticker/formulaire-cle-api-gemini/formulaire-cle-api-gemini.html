@@ -1,0 +1,25 @@
+@if (creationCleApiGemini || modificationCleApiGemini) {
+  <form [formGroup]="formulaire"
+        (ngSubmit)="enregistrerCleApiGemini()">
+    <div>
+      <p-floatlabel>
+        <input pInputText [pAutoFocus]="true" id="cleApiGemini" formControlName="cleApiGemini" autocomplete="off"/>
+        <label for="cleApiGemini">
+          {{ 'COMPOSANTS.COURS.CONSEILS_GEMINI_TICKER.CLE_API_GEMINI' | translate }}
+        </label>
+      </p-floatlabel>
+    </div>
+    @if (modificationCleApiGemini) {
+      <div>
+        <p-button
+          label="{{ 'COMPOSANTS.COMMUN.ABANDONNER' | translate }}"
+          (onClick)="abandonnerModification()" severity="warn"/>
+      </div>
+    }
+    <div>
+      <p-button
+        label="{{ 'COMPOSANTS.COMMUN.ENREGISTRER' | translate }}"
+        type="submit" severity="danger"/>
+    </div>
+  </form>
+}

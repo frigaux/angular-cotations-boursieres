@@ -83,19 +83,6 @@ Ajout de primeicons.css dans le fichier angular.json :
             ],
 `
 
-## Finalement pas ajoutés : bootstrap et fontawesome
-```
-npm install --save bootstrap
-npm install --save @fortawesome/fontawesome-free
-```
-
-Ajout des lignes suivantes dans les styles du fichier angular.json :
-`
-"node_modules/bootstrap/dist/css/bootstrap.min.css",
-"node_modules/bootstrap/dist/css/bootstrap-grid.min.css",
-"node_modules/@fortawesome/fontawesome-free/css/all.min.css"
-`
-
 ## Ajout de NGX-translate
 ```
 npm install @ngx-translate/core
@@ -119,6 +106,13 @@ npx cap sync
 https://angular.dev/guide/drag-drop
 ```
 ng add @angular/cdk
+```
+
+## Ajout de l'API Gemini
+https://ai.google.dev/gemini-api/docs?hl=fr
+https://aistudio.google.com/apikey
+```
+npm install @google/genai
 ```
 
 ## Scripts dans package.json

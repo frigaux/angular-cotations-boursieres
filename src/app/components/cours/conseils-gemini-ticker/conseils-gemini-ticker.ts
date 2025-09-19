@@ -1,35 +1,24 @@
-import {Component, inject, input, InputSignal} from '@angular/core';
+import {Component, input, InputSignal, OnInit} from '@angular/core';
 import {Cours} from '../cours.class';
 import {LoaderComponent} from '../../loader/loader.component';
 import {IAService} from '../../../services/IA/ia.service';
-import {FloatLabel} from 'primeng/floatlabel';
-import {InputText} from 'primeng/inputtext';
-import {FormBuilder, ReactiveFormsModule, Validators} from '@angular/forms';
-import {TranslatePipe} from '@ngx-translate/core';
-import {AutoFocus} from 'primeng/autofocus';
-import {Button} from 'primeng/button';
+import {ReactiveFormsModule} from '@angular/forms';
 import {DTOConseilsGeminiTicker} from '../../../services/IA/dto-conseils-gemini-ticker.class';
-import {CurrencyPipe} from '@angular/common';
+import {FormulaireCleApiGemini} from './formulaire-cle-api-gemini/formulaire-cle-api-gemini';
+import {ResultatApiGemini} from './resultat-api-gemini/resultat-api-gemini';
 
 @Component({
   selector: 'app-conseils-gemini-ticker',
   imports: [
     LoaderComponent,
-    FloatLabel,
-    InputText,
     ReactiveFormsModule,
-    TranslatePipe,
-    AutoFocus,
-    Button,
-    CurrencyPipe
+    FormulaireCleApiGemini,
+    ResultatApiGemini
   ],
   templateUrl: './conseils-gemini-ticker.html',
-  styleUrls: ['./conseils-genkit-ticker.sass', '../../portefeuilles/gestion-portefeuilles/formulaire-creation/formulaire-creation.component.sass']
+  styleUrl: './conseils-genkit-ticker.sass'
 })
-export class ConseilsGeminiTicker {
-  // injections
-  private formBuilder = inject(FormBuilder);
-
+export class ConseilsGeminiTicker implements OnInit {
   // chargement des informations pour le ticker
   loading: boolean = false;
 
@@ -37,15 +26,9 @@ export class ConseilsGeminiTicker {
   inputCours: InputSignal<Cours | undefined> = input(undefined,
     {transform: o => this.intercepteurCours(o), alias: 'cours'});
 
-  // formulaires
-  formulaire = this.formBuilder.group({
-    cleApiGemini: ['', [Validators.required]]
-  });
-
   // données pour la vue
   cours?: Cours;
-  creationCleApiGemini: boolean = false;
-  modificationCleApiGemini: boolean = false;
+  afficherFormulaireCleApiGemini: boolean = false;
   conseilsGeminiTicker?: DTOConseilsGeminiTicker;
   erreurAPIGemini?: string;
 
@@ -54,28 +37,22 @@ export class ConseilsGeminiTicker {
 
   private intercepteurCours(cours: Cours | undefined) {
     this.cours = cours;
-    if (cours) {
-      this.erreurAPIGemini = undefined;
-      this.conseilsGeminiTicker = undefined;
-      if (this.iaService.chargerCleAPIGemini() == undefined) {
-        this.creationCleApiGemini = true;
-      }
-    }
+    this.erreurAPIGemini = undefined;
+    this.conseilsGeminiTicker = undefined;
     return cours;
   }
 
-  enregistrerCleApiGemini() {
-    this.formulaire.get('cleApiGemini')?.updateValueAndValidity();
-    if (this.formulaire.valid && this.formulaire.value.cleApiGemini) {
-      this.iaService.enregistrerCleAPIGemini(this.formulaire.value.cleApiGemini);
-      this.creationCleApiGemini = false;
-      this.modificationCleApiGemini = false;
+  ngOnInit(): void {
+    if (this.iaService.chargerCleAPIGemini() == undefined) {
+      this.afficherFormulaireCleApiGemini = true;
     }
   }
 
   interrogerApiGemini() {
     if (this.cours) {
       this.loading = true;
+      this.erreurAPIGemini = undefined;
+      this.conseilsGeminiTicker = undefined;
       this.iaService.interrogerApiGemini(this.cours)
         .subscribe({
           error: erreur => {
@@ -83,23 +60,10 @@ export class ConseilsGeminiTicker {
             this.loading = false;
           },
           next: conseils => {
-            this.erreurAPIGemini = undefined;
             this.conseilsGeminiTicker = conseils;
             this.loading = false;
           }
         });
     }
-  }
-
-  modification() {
-    const cle = this.iaService.chargerCleAPIGemini();
-    if (cle) {
-      this.formulaire.get('cleApiGemini')?.setValue(cle);
-    }
-    this.modificationCleApiGemini = true;
-  }
-
-  abandonnerModification() {
-    this.modificationCleApiGemini = false;
   }
 }
