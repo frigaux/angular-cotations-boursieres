@@ -35,6 +35,7 @@ export class DetailsValeurComponent {
   informationsDetaillees: boolean = false;
 
   private intercepteurCoursPortefeuille(coursPortefeuille: CoursPortefeuille | undefined) {
+    this.informationsDetaillees = false;
     this.coursPortefeuille = coursPortefeuille;
     this.alertes = coursPortefeuille?.evaluerAlertes();
     this.cours = coursPortefeuille ? Cours.fromCoursPortefeuille(coursPortefeuille) : undefined;

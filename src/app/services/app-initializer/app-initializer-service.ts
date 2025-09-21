@@ -44,6 +44,7 @@ export class AppInitializerService {
     return this.capacitorHttp().request(options);
   }
 
+  // pour pouvoir mocker CapacitorHttp dans les tests
   private capacitorHttp(): CapacitorHttpPlugin {
     return CapacitorHttp;
   }

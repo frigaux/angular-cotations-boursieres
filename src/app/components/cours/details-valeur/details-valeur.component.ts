@@ -30,6 +30,7 @@ export class DetailsValeurComponent {
   informationsDetaillees: boolean = false;
 
   private intercepteurCours(cours: Cours | undefined) {
+    this.informationsDetaillees = false;
     this.cours = cours;
     return cours;
   }

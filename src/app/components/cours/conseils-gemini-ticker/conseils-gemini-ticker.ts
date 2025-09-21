@@ -6,6 +6,7 @@ import {ReactiveFormsModule} from '@angular/forms';
 import {DTOConseilsGeminiTicker} from '../../../services/IA/dto-conseils-gemini-ticker.class';
 import {FormulaireCleApiGemini} from './formulaire-cle-api-gemini/formulaire-cle-api-gemini';
 import {ResultatApiGemini} from './resultat-api-gemini/resultat-api-gemini';
+import {TranslatePipe} from '@ngx-translate/core';
 
 @Component({
   selector: 'app-conseils-gemini-ticker',
@@ -13,7 +14,8 @@ import {ResultatApiGemini} from './resultat-api-gemini/resultat-api-gemini';
     LoaderComponent,
     ReactiveFormsModule,
     FormulaireCleApiGemini,
-    ResultatApiGemini
+    ResultatApiGemini,
+    TranslatePipe
   ],
   templateUrl: './conseils-gemini-ticker.html',
   styleUrl: './conseils-genkit-ticker.sass'

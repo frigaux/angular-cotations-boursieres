@@ -75,6 +75,7 @@ export class IAService {
     window.localStorage.setItem(IAService.CLE_API_GEMINI, cleAPIGemini);
   }
 
+  // pour pouvoir mocker GoogleGenAI dans les tests
   private creerClient(): GoogleGenAI {
     return new GoogleGenAI({
       apiKey: this.chargerCleAPIGemini()
