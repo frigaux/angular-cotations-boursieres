@@ -38,6 +38,7 @@ export class FormulaireCleApiGemini implements OnInit {
   // données pour la vue
   creationCleApiGemini: boolean = false;
   modificationCleApiGemini: boolean = false;
+  autofocus: boolean = false;
 
   constructor(private iaService: IAService) {
   }
@@ -50,6 +51,7 @@ export class FormulaireCleApiGemini implements OnInit {
       if (this.iaService.chargerCleAPIGemini() == undefined) {
         this.creationCleApiGemini = true;
       } else {
+        this.autofocus = true;
         this.modificationCleApiGemini = true;
       }
     }
