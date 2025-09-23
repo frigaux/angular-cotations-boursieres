@@ -64,7 +64,7 @@ export class PortefeuillesComponent implements OnInit {
   protected date?: string;
   portefeuillesAvecCours: Array<PortefeuilleAvecCours> = [];
   protected idxPortefeuilleCourant: number = -1;
-  protected scrollHeight: string = 'calc(100vh - 13rem)';
+  protected scrollHeight: string = 'calc(100vh - 14rem)';
 
   // cours pour lequel afficher les courbes
   coursSelectionne: CoursPortefeuille | undefined = undefined;
@@ -105,7 +105,7 @@ export class PortefeuillesComponent implements OnInit {
     this.portefeuillesAvecCours = this.portefeuillesService.charger()
       .filter(portefeuille => portefeuille.tickers.length > 0)
       .map(portefeuille => new PortefeuilleAvecCours(portefeuille));
-    this.scrollHeight = `calc(100vh - ${13 + 4 * this.portefeuillesAvecCours.length}rem)`;
+    this.scrollHeight = `calc(100vh - ${14 + 4 * this.portefeuillesAvecCours.length}rem)`;
     const portefeuilleAvecCours: PortefeuilleAvecCours = this.portefeuillesAvecCours[this.idxPortefeuilleCourant];
     this.loading = true;
     this.coursService.chargerCoursTickersWithLimit(portefeuilleAvecCours.portefeuille.tickers, 300)
