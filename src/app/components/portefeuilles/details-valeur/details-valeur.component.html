@@ -4,7 +4,7 @@
       <h2>
         <span class="pi" [class]="cours!.iconeVariation()"></span>
         {{
-          (informationsDetaillees ? 'COMPOSANTS.PORTEFEUILLES.DETAILS_VALEUR.INFORMATIONS_DETAILLEES' : 'COMPOSANTS.PORTEFEUILLES.DETAILS_VALEUR.DETAILS_VALEUR')
+          'COMPOSANTS.PORTEFEUILLES.DETAILS_VALEUR.DETAILS_VALEUR'
             | translate: {
             valeur: cours.libelle,
             ticker: cours.ticker,
@@ -16,7 +16,7 @@
       <span class="pi" [ngClass]="{'pi-chart-line': informationsDetaillees, 'pi-info-circle': !informationsDetaillees}"
             (click)="informationsDetaillees = !informationsDetaillees"
             title="{{
-          (informationsDetaillees ? 'COMPOSANTS.PORTEFEUILLES.DETAILS_VALEUR.DETAILS_VALEUR' : 'COMPOSANTS.PORTEFEUILLES.DETAILS_VALEUR.INFORMATIONS_DETAILLEES')
+          (informationsDetaillees ? 'COMPOSANTS.PORTEFEUILLES.DETAILS_VALEUR.COURBES' : 'COMPOSANTS.PORTEFEUILLES.DETAILS_VALEUR.INFORMATIONS_DETAILLEES')
             | translate : {
             valeur: cours.libelle,
             ticker: cours.ticker,

@@ -224,6 +224,7 @@
       "ACTIONS": "Actions sur la valeur",
       "DETAILS_VALEUR": {
         "DETAILS_VALEUR": "{{valeur}} ({{ticker}}, {{marche}})",
+        "COURBES": "Courbes : {{valeur}} ({{ticker}}, {{marche}})",
         "INFORMATIONS_DETAILLEES": "Informations détaillées : {{valeur}} ({{ticker}}, {{marche}})"
       },
       "ACTIONS_VALEUR": {
