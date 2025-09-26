@@ -92,7 +92,9 @@
         "COURBE_MM": "Courbe des moyennes mobiles : {{valeur}} ({{ticker}})",
         "INFORMATIONS_DETAILLEES": "Informations détaillées : {{valeur}} ({{ticker}})",
         "VALEUR_PRECEDENTE": "Valeur précédente",
-        "VALEUR_SUIVANTE": "Valeur suivante"
+        "VALEUR_SUIVANTE": "Valeur suivante",
+        "ABCBOURSE": "Lien vers ABCBourse",
+        "BOURSORAMA": "Lien vers Boursorama"
       },
       "ACTUALITES": {
         "ACTUALITES": "Actualités",
@@ -225,7 +227,9 @@
       "DETAILS_VALEUR": {
         "DETAILS_VALEUR": "{{valeur}} ({{ticker}}, {{marche}})",
         "COURBES": "Courbes : {{valeur}} ({{ticker}}, {{marche}})",
-        "INFORMATIONS_DETAILLEES": "Informations détaillées : {{valeur}} ({{ticker}}, {{marche}})"
+        "INFORMATIONS_DETAILLEES": "Informations détaillées : {{valeur}} ({{ticker}}, {{marche}})",
+        "ABCBOURSE": "Lien vers ABCBourse",
+        "BOURSORAMA": "Lien vers Boursorama"
       },
       "ACTIONS_VALEUR": {
         "SUPPRIMER_DU_PORTEFEUILLE": "Supprimer la valeur du portefeuille",

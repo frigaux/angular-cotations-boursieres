@@ -8,6 +8,7 @@ import {Alerte} from '../alerte.class';
 import {TranslatePipe} from '@ngx-translate/core';
 import {InformationsTickerComponent} from '../../cours/informations-ticker/informations-ticker.component';
 import {NgClass} from '@angular/common';
+import {Capacitor} from '@capacitor/core';
 
 @Component({
   selector: 'app-details-valeur',
@@ -33,6 +34,7 @@ export class DetailsValeurComponent {
   coursPortefeuille?: CoursPortefeuille;
   cours: Cours | undefined;
   informationsDetaillees: boolean = false;
+  isNativePlatform: boolean = Capacitor.isNativePlatform(); // Android/iOS
 
   private intercepteurCoursPortefeuille(coursPortefeuille: CoursPortefeuille | undefined) {
     this.informationsDetaillees = false;
@@ -40,5 +42,13 @@ export class DetailsValeurComponent {
     this.alertes = coursPortefeuille?.evaluerAlertes();
     this.cours = coursPortefeuille ? Cours.fromCoursPortefeuille(coursPortefeuille) : undefined;
     return coursPortefeuille;
+  }
+
+  boursorama() {
+    window.open(`https://www.boursorama.com/cours/1rP${this.cours?.ticker}/`);
+  }
+
+  abcBourse() {
+    window.open(`https://www.abcbourse.com/cotation/${this.cours?.ticker}p`);
   }
 }

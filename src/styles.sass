@@ -1,17 +1,17 @@
 /* You can add global styles to this file, and also import other style files */
 
-.p-menubar-item-link-active
-  background-color: var(--p-blue-500)
-  color: var(--p-blue-100) !important
+@media (prefers-color-scheme: dark)
+  // user has requested light or dark color themes
+
+
+:root
+  .p-menubar-item-link-active
+    background-color: var(--p-blue-500)
+    color: var(--p-blue-100) !important
 
   .p-menubar-item-icon
     color: var(--p-blue-100) !important
 
-:root
-  //--p-content-border-color: var(--p-gray-400) !important
-  //--p-card-shadow: 0 1px 2px 1px var(--p-gray-500) !important
-  //--p-form-field-border-color: var(--p-gray-400) !important
-  //--p-popover-border-color: var(--p-gray-400) !important
   font-family: system-ui
 
   --p-skeleton-background: #FFFFFF !important
@@ -67,7 +67,7 @@
 
 
   app-details-valeur
-    .pi-arrow-circle-up, .pi-arrow-circle-down, .pi-arrow-circle-right
+    .pi-external-link, .pi-arrow-circle-up, .pi-arrow-circle-down, .pi-arrow-circle-right
       font-size: x-large
 
   app-achats-valeur
