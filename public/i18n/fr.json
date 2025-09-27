@@ -233,6 +233,7 @@
       },
       "ACTIONS_VALEUR": {
         "SUPPRIMER_DU_PORTEFEUILLE": "Supprimer la valeur du portefeuille",
+        "AJOUTER_AU_PORTEFEUILLE": "Ajouter la valeur au portefeuille",
         "ACHATS": "Achats de la valeur",
         "ACHATS_VALEUR": "Achats de la valeur {{nom}}",
         "CONFIRMATION_SUPPRESSION": "Confirmez-vous la suppression de la valeur {{valeur}} du portefeuille {{nomPortefeuille}} ?"

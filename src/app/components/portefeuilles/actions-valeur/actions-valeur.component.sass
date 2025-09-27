@@ -1,16 +1,19 @@
 .actions-valeur
+  p-select
+    margin-left: 1rem
+
   & > div
-    cursor: pointer
-    color: var(--p-blue-700)
+    margin: 1rem
     display: flex
     flex-direction: row
     align-items: center
 
+  div.libelle
+    cursor: pointer
+    color: var(--p-blue-700)
+
     & > span:not(.pi)
       margin-left: 0.5rem
-
-  & > div
-    margin: 1rem
 
 p-panel
   z-index: 10
