@@ -1,7 +1,7 @@
 <p-popover>
   @if (cours) {
     <div class="actions-valeur">
-      @if (portefeuille && portefeuille.tickers.length > 1) {
+      @if (portefeuilleAffiche && portefeuilleAffiche.tickers.length > 1) {
         <div class="libelle" (click)="suppressionDuPortefeuille($event)">
           <span class="pi pi-minus-circle"></span>
           <span>{{ 'COMPOSANTS.PORTEFEUILLES.ACTIONS_VALEUR.SUPPRIMER_DU_PORTEFEUILLE' | translate }}</span>
@@ -13,8 +13,19 @@
             <span class="pi pi-plus-circle"></span>
             <span>{{ 'COMPOSANTS.PORTEFEUILLES.ACTIONS_VALEUR.AJOUTER_AU_PORTEFEUILLE' | translate }}</span>
           </div>
-          <p-select [options]="nomsPortefeuillesDisponibles" [(ngModel)]="nomsPortefeuilleSelectionne" size="small"></p-select>
+          <p-select [options]="nomsPortefeuillesDisponibles" [(ngModel)]="nomsPortefeuilleSelectionne"
+                    size="small"></p-select>
         </div>
+        @if (portefeuilleAffiche && portefeuilleAffiche.tickers.length > 1) {
+          <div>
+            <div class="libelle" (click)="deplacerDansPortefeuille()">
+              <span class="pi pi-plus-circle"></span>
+              <span>{{ 'COMPOSANTS.PORTEFEUILLES.ACTIONS_VALEUR.DEPLACER_DANS_PORTEFEUILLE' | translate }}</span>
+            </div>
+            <p-select [options]="nomsPortefeuillesDisponibles" [(ngModel)]="nomsPortefeuilleSelectionne"
+                      size="small"></p-select>
+          </div>
+        }
       }
       <div class="libelle" (click)="achats()">
         <span class="pi pi-shopping-bag"></span>

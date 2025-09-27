@@ -12,7 +12,7 @@ import {Select} from 'primeng/select';
 import {FormsModule} from '@angular/forms';
 
 @Component({
-  selector: 'app-achat-valeur',
+  selector: 'actions-valeur',
   imports: [
     Popover,
     TranslatePipe,
@@ -29,7 +29,7 @@ export class ActionsValeurComponent {
 
   // paramètres
   cours?: Cours;
-  portefeuille?: DTOPortefeuille;
+  portefeuilleAffiche?: DTOPortefeuille;
 
   // données pour la vue
   titre?: string;
@@ -49,7 +49,7 @@ export class ActionsValeurComponent {
 
   afficher(event: MouseEvent, cours: Cours, portefeuille: DTOPortefeuille) {
     this.achatsVisible = false;
-    this.portefeuille = portefeuille;
+    this.portefeuilleAffiche = portefeuille;
     this.titre = this.translateService.instant('COMPOSANTS.PORTEFEUILLES.ACTIONS_VALEUR.ACHATS_VALEUR', {'nom': cours.libelle});
     this.nomsPortefeuillesDisponibles = this.portefeuillesService.charger()
       .map(p => p.nom)
@@ -62,12 +62,12 @@ export class ActionsValeurComponent {
   }
 
   suppressionDuPortefeuille(event: Event) {
-    if (this.portefeuille && this.cours) {
+    if (this.portefeuilleAffiche && this.cours) {
       this.dialogueService.confirmationSuppression(
         this.confirmationService,
         event,
         this.translateService.instant('COMPOSANTS.PORTEFEUILLES.ACTIONS_VALEUR.CONFIRMATION_SUPPRESSION',
-          {'valeur': this.cours.libelle, 'nomPortefeuille': this.portefeuille.nom}),
+          {'valeur': this.cours.libelle, 'nomPortefeuille': this.portefeuilleAffiche.nom}),
         () => {
           this.supprimerDuPortefeuille();
         }
@@ -76,9 +76,9 @@ export class ActionsValeurComponent {
   }
 
   supprimerDuPortefeuille() {
-    if (this.portefeuille && this.cours) {
+    if (this.portefeuilleAffiche && this.cours) {
       const portefeuilles = this.portefeuillesService.charger();
-      const portefeuille = portefeuilles.find(p => p.nom === this.portefeuille!.nom);
+      const portefeuille = portefeuilles.find(p => p.nom === this.portefeuilleAffiche!.nom);
       if (portefeuille) {
         portefeuille.tickers.splice(portefeuille.tickers.indexOf(this.cours.ticker), 1);
         this.portefeuillesService.enregistrer(portefeuilles);
@@ -99,6 +99,22 @@ export class ActionsValeurComponent {
         .find(p => p.nom === this.nomsPortefeuilleSelectionne);
       if (portefeuilleSelectionne && !portefeuilleSelectionne.tickers.includes(this.cours.ticker)) {
         portefeuilleSelectionne.tickers.push(this.cours.ticker);
+        this.portefeuillesService.enregistrer(portefeuilles);
+      }
+    }
+    this.popover()?.hide();
+  }
+
+  deplacerDansPortefeuille() {
+    if (this.portefeuilleAffiche && this.nomsPortefeuilleSelectionne && this.cours) {
+      const portefeuilles = this.portefeuillesService.charger();
+      const portefeuilleSource = portefeuilles
+        .find(p => p.nom === this.portefeuilleAffiche!.nom);
+      const portefeuilleDestination = portefeuilles
+        .find(p => p.nom === this.nomsPortefeuilleSelectionne);
+      if (portefeuilleSource && portefeuilleDestination && !portefeuilleDestination.tickers.includes(this.cours.ticker)) {
+        portefeuilleSource.tickers.splice(portefeuilleSource.tickers.indexOf(this.cours.ticker), 1);
+        portefeuilleDestination.tickers.push(this.cours.ticker);
         this.portefeuillesService.enregistrer(portefeuilles);
       }
     }
