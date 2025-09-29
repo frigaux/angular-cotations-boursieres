@@ -54,11 +54,9 @@ describe('AchatsValeursComponent', () => {
 
       expect(component).toBeDefined();
       expect(component.loading).toBeFalse();
-      expect(component.achatsValeursDecores).toHaveSize(ACHATS.length);
-      expect(component.totalPrix).toEqual(2085);
-      expect(component.totalQuantite).toEqual(40);
-      expect(component.achatsValeursDecores![0].valeur).toEqual(VALEURS[1]);
-      expect(component.achatsValeursDecores![1].valeur).toEqual(VALEURS[0]);
+      expect(component.achatsNonRevendus).toHaveSize(ACHATS.length);
+      expect(component.achatsNonRevendus![0].valeur).toEqual(VALEURS[1]);
+      expect(component.achatsNonRevendus![1].valeur).toEqual(VALEURS[0]);
     });
 
 
@@ -66,12 +64,13 @@ describe('AchatsValeursComponent', () => {
       fixture.detectChanges(); // appelle le ngOnInit
 
       spyOn(dialogueService, 'confirmationSuppression').and.callThrough();
-      const achatsTicker = component.achatsValeursDecores![0].achatsTicker;
-      component.suppressionAchat(new MouseEvent('click'), achatsTicker, achatsTicker.achats[0]);
+      const achatsNonRevendus = component.achatsNonRevendus;
+      const achatsTicker = achatsNonRevendus![0];
+      component.suppressionAchat({event: new MouseEvent('click'), achatsValeurDecores: achatsTicker, achatDecore: achatsTicker.achatsDecores[0]});
       expect(dialogueService.confirmationSuppression).toHaveBeenCalled();
       const onSuppression: Function = (dialogueService.confirmationSuppression as jasmine.Spy).calls.mostRecent().args[3];
       onSuppression();
-      expect(component.achatsValeursDecores![0].achatsTicker.achats).toHaveSize(0);
+      expect(achatsNonRevendus![0].achatsTicker.achats).toHaveSize(0);
     });
   });
 });

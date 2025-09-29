@@ -7,52 +7,20 @@
   {marginLeft: '0', marginTop: '1rem', height: '50vh', width: '100%'}
 ]"></app-loader>
 
-@if (achatsValeursDecores) {
-  <table>
-    <thead>
-    <tr>
-      <th></th>
-      <th>{{ 'COMPOSANTS.ACHATS_VALEURS.VALEUR' | translate }}</th>
-      <th>{{ 'COMPOSANTS.ACHATS_VALEURS.DATE' | translate }}</th>
-      <th>{{ 'COMPOSANTS.ACHATS_VALEURS.PRIX' | translate }}</th>
-      <th>{{ 'COMPOSANTS.ACHATS_VALEURS.QUANTITE' | translate }}</th>
-      <th>{{ 'COMPOSANTS.ACHATS_VALEURS.TOTAL' | translate }}</th>
-      <th>{{ 'COMPOSANTS.ACHATS_VALEURS.REVENDU' | translate }}</th>
-    </tr>
-    </thead>
-    <tbody>
-      @for (achatsValeurDecores of achatsValeursDecores; track achatsValeurDecores.id) {
-        @for (achatDecore of achatsValeurDecores.achatsDecores; track achatDecore.id) {
-          <tr>
-            <td><span class="pi pi-trash"
-                      (click)="suppressionAchat($event, achatsValeurDecores.achatsTicker, achatDecore.achat)"></span>
-            </td>
-            <td>{{ achatsValeurDecores.valeur.libelle }}</td>
-            <td>{{ achatDecore.achat.date | date: 'dd/MM/yyyy' }}</td>
-            <td>{{ achatDecore.achat.prix  | currency:'€' }}</td>
-            <td>{{ achatDecore.achat.quantite  | number }}</td>
-            <td>{{ (achatDecore.achat.prix * achatDecore.achat.quantite)  | number }}</td>
-            <td>
-              @if (achatDecore.achat.revendu) {
-                <span class="pi pi-verified"></span>
-              }
-            </td>
-          </tr>
-        }
-        <tr class="totaux">
-          <td>{{ 'COMPOSANTS.ACHATS_VALEURS.TOTAL_NON_REVENDU' | translate }}</td>
-          <td></td>
-          <td></td>
-          <td>{{ totalPrix  | currency:'€' }}</td>
-          <td>{{ totalQuantite  | number }}</td>
-          <td></td>
-          <td></td>
-        </tr>
-      } @empty {
-        <tr>
-          <td colspan="7">{{ 'COMPOSANTS.ACHATS_VALEURS.AUCUN_ACHAT' | translate }}</td>
-        </tr>
-      }
-    </tbody>
-  </table>
+@if (achatsNonRevendus) {
+  <h3>{{ 'COMPOSANTS.ACHATS_VALEURS.NON_REVENDUS' | translate }}</h3>
+  @if (achatsNonRevendus.length === 0) {
+    <div>-</div>
+  } @else {
+    <app-tableau-achats [achats]="achatsNonRevendus" (suppression)="suppressionAchat($event)"></app-tableau-achats>
+  }
+}
+
+@if (achatsRevendus) {
+  <h3>{{ 'COMPOSANTS.ACHATS_VALEURS.REVENDUS' | translate }}</h3>
+  @if (achatsRevendus.length === 0) {
+    <div>-</div>
+  } @else {
+    <app-tableau-achats [achats]="achatsRevendus" (suppression)="suppressionAchat($event)"></app-tableau-achats>
+  }
 }

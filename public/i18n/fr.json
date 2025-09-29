@@ -211,15 +211,16 @@
     },
     "ACHATS_VALEURS": {
       "ACHATS_VALEURS": "Liste des achats de valeurs",
-      "VALEUR": "Valeur",
-      "DATE": "Date",
-      "PRIX": "Prix",
-      "QUANTITE": "Quantité",
-      "TOTAL": "Total",
-      "REVENDU": "Revendu",
-      "TOTAL_NON_REVENDU": "Total non revendu",
-      "AUCUN_ACHAT": "Aucun achat",
-      "CONFIRMATION_SUPPRESSION": "Confirmez-vous la suppression de l'achat ?"
+      "CONFIRMATION_SUPPRESSION": "Confirmez-vous la suppression de l'achat ?",
+      "NON_REVENDUS": "Non revendus",
+      "REVENDUS": "Revendus",
+      "TABLEAU": {
+        "VALEUR": "Valeur",
+        "DATE": "Date",
+        "PRIX": "Prix",
+        "QUANTITE": "Quantité",
+        "TOTAL": "Total"
+      }
     },
     "PORTEFEUILLES": {
       "PORTEFEUILLES_DATE": "Portefeuilles à la date du {{jour}}",
@@ -305,8 +306,8 @@
       "TABLEAUX": "Configuration des colonnes des tableaux",
       "ENREGISTRER": "Enregistrer les tableaux",
       "ENREGISTREMENT_REUSSI": "Enregistrement réussi",
-      "PAYSAGE": "Paysage",
-      "PORTRAIT": "Portrait",
+      "PAYSAGE_PORTEFEUILLE": "Orientation paysage du portefeuille",
+      "PORTRAIT_PORTEFEUILLE": "Orientation portrait du portefeuille",
       "TABLEAU": {
         "AJOUTER_COLONNE": "Ajouter une colonne",
         "NOM_COLONNE": "Nom",
