@@ -8,7 +8,6 @@ import {Alerte} from '../alerte.class';
 import {TranslatePipe} from '@ngx-translate/core';
 import {InformationsTickerComponent} from '../../cours/informations-ticker/informations-ticker.component';
 import {NgClass} from '@angular/common';
-import {Capacitor} from '@capacitor/core';
 
 @Component({
   selector: 'app-details-valeur',
@@ -34,7 +33,6 @@ export class DetailsValeurComponent {
   coursPortefeuille?: CoursPortefeuille;
   cours: Cours | undefined;
   informationsDetaillees: boolean = false;
-  isNativePlatform: boolean = Capacitor.isNativePlatform(); // Android/iOS
 
   private intercepteurCoursPortefeuille(coursPortefeuille: CoursPortefeuille | undefined) {
     this.informationsDetaillees = false;

@@ -5,7 +5,6 @@ import {ChartMoyennesMobilesComponent} from '../chart-moyennes-mobiles/chart-moy
 import {Cours} from '../cours.class';
 import {InformationsTickerComponent} from '../informations-ticker/informations-ticker.component';
 import {NgClass} from '@angular/common';
-import {Capacitor} from '@capacitor/core';
 
 @Component({
   selector: 'app-details-valeur',
@@ -30,7 +29,6 @@ export class DetailsValeurComponent {
   // données pour la vue
   cours?: Cours;
   informationsDetaillees: boolean = false;
-  isNativePlatform: boolean = Capacitor.isNativePlatform(); // Android/iOS
 
   private intercepteurCours(cours: Cours | undefined) {
     this.informationsDetaillees = false;

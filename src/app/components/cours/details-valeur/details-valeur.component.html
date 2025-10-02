@@ -11,12 +11,10 @@
             title="{{ 'COMPOSANTS.COURS.DETAILS_VALEUR.VALEUR_PRECEDENTE' | translate}}"></span>
       <span class="pi pi-caret-right" (click)="this.suivant.emit()"
             title="{{ 'COMPOSANTS.COURS.DETAILS_VALEUR.VALEUR_SUIVANTE' | translate}}"></span>
-      @if (!isNativePlatform) {
-        <span class="pi pi-external-link" (click)="abcBourse()"
-              title="{{ 'COMPOSANTS.COURS.DETAILS_VALEUR.ABCBOURSE' | translate}}"></span>
-        <span class="pi pi-external-link" (click)="boursorama()"
-              title="{{ 'COMPOSANTS.COURS.DETAILS_VALEUR.BOURSORAMA' | translate}}"></span>
-      }
+      <span class="lien-bandeau" (click)="abcBourse()"
+            title="{{ 'COMPOSANTS.COURS.DETAILS_VALEUR.ABCBOURSE' | translate}}">A</span>
+      <span class="lien-bandeau" (click)="boursorama()"
+            title="{{ 'COMPOSANTS.COURS.DETAILS_VALEUR.BOURSORAMA' | translate}}">B</span>
       <span class="pi" [ngClass]="{'pi-chart-line': informationsDetaillees, 'pi-info-circle': !informationsDetaillees}"
             (click)="informationsDetaillees = !informationsDetaillees"
             title="{{
