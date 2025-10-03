@@ -95,4 +95,10 @@ export class AchatsValeursComponent implements OnInit {
     this.valeursService.enregistrerAchatsTicker(achatsTicker.ticker, achatsTicker.achats);
     this.construireVue();
   }
+
+  revendreAchat(data: { event: MouseEvent; achatsValeurDecores: AchatsValeurDecores; achatDecore: AchatDecore }) {
+    data.achatDecore.achat.revendu = true;
+    this.valeursService.enregistrerAchatsTicker(data.achatsValeurDecores.achatsTicker.ticker, data.achatsValeurDecores.achatsTicker.achats);
+    this.construireVue();
+  }
 }

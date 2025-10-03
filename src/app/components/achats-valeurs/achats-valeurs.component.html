@@ -12,7 +12,7 @@
   @if (achatsNonRevendus.length === 0) {
     <div>-</div>
   } @else {
-    <app-tableau-achats [achats]="achatsNonRevendus" (suppression)="suppressionAchat($event)"></app-tableau-achats>
+  <app-tableau-achats [achats]="achatsNonRevendus" (suppression)="suppressionAchat($event)" (revente)="revendreAchat($event)"></app-tableau-achats>
   }
 }
 

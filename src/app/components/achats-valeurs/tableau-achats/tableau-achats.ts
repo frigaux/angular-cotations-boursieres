@@ -3,7 +3,6 @@ import {CurrencyPipe, DatePipe, DecimalPipe} from "@angular/common";
 import {TranslatePipe} from "@ngx-translate/core";
 import {AchatsValeurDecores} from '../achats-valeur-decores.class';
 import {AchatDecore} from '../../valeurs/details-valeur/achats-valeur/achat-decore.class';
-import {FiltreDecore} from '../../cours/selecteur-filtre/filtre-decore.class';
 
 @Component({
   selector: 'app-tableau-achats',
@@ -20,6 +19,7 @@ export class TableauAchats {
   inputAchats: InputSignal<Array<AchatsValeurDecores> | undefined> = input(undefined,
     {transform: o => this.intercepteurAchats(o), alias: 'achats'});
   suppression = output<{event: MouseEvent, achatsValeurDecores: AchatsValeurDecores, achatDecore: AchatDecore}>();
+  revente = output<{event: MouseEvent, achatsValeurDecores: AchatsValeurDecores, achatDecore: AchatDecore}>();
 
   // données pour la vue
   achatsValeursDecores?: Array<AchatsValeurDecores>;
@@ -48,5 +48,9 @@ export class TableauAchats {
 
   suppressionAchat(event: PointerEvent, achatsValeurDecores: AchatsValeurDecores, achatDecore: AchatDecore) {
     this.suppression.emit({event, achatsValeurDecores, achatDecore});
+  }
+
+  reventeAchat(event: PointerEvent, achatsValeurDecores: AchatsValeurDecores, achatDecore: AchatDecore) {
+    this.revente.emit({event, achatsValeurDecores, achatDecore});
   }
 }

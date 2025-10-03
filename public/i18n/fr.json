@@ -219,7 +219,9 @@
         "DATE": "Date",
         "PRIX": "Prix",
         "QUANTITE": "Quantité",
-        "TOTAL": "Total"
+        "TOTAL": "Total",
+        "SUPPRESSION": "Suppression de l'achat",
+        "REVENTE": "Revente"
       }
     },
     "PORTEFEUILLES": {
