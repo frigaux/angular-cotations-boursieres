@@ -24,7 +24,6 @@ import {ColonneDecoree} from './colonne-decoree.class';
 import {BreakpointObserver} from '@angular/cdk/layout';
 import {ActualitesComponent} from '../cours/actualites/actualites.component';
 
-// TODO : créer dynamiquement le portefeuille des achats
 @Component({
   selector: 'app-portefeuilles',
   imports: [
@@ -103,9 +102,7 @@ export class PortefeuillesComponent implements OnInit {
   }
 
   chargerPortefeuilleCourant(): void {
-    this.portefeuillesAvecCours = this.portefeuillesService.charger()
-      .filter(portefeuille => portefeuille.tickers.length > 0)
-      .map(portefeuille => new PortefeuilleAvecCours(portefeuille));
+    this.portefeuillesAvecCours = this.chargerPortefeuillesAvecPortefeuilleAchats();
     this.scrollHeight = `calc(100vh - ${14 + 4 * this.portefeuillesAvecCours.length}rem)`;
     const portefeuilleAvecCours: PortefeuilleAvecCours = this.portefeuillesAvecCours[this.idxPortefeuilleCourant];
     this.loading = true;
@@ -115,6 +112,24 @@ export class PortefeuillesComponent implements OnInit {
         this.afficherPortefeuilleCourant();
         this.loading = false;
       });
+  }
+
+  private chargerPortefeuillesAvecPortefeuilleAchats() {
+    const portefeuilles = this.portefeuillesService.charger();
+    const tickersNonRevendus = this.valeursService.chargerAchats()
+      .filter(achats => achats.achats.find(achat => !achat.revendu) !== undefined)
+      .map(achats => achats.ticker);
+    if (tickersNonRevendus.length > 0) {
+      portefeuilles.forEach(portefeuille => portefeuille.parDefaut = false);
+      portefeuilles.unshift({
+        nom: 'Achats',
+        parDefaut: true,
+        tickers: tickersNonRevendus,
+        alertes: PortefeuillesService.CONFIGURATION_INITIALE[0].alertes,
+      });
+    }
+    return portefeuilles.filter(portefeuille => portefeuille.tickers.length > 0)
+      .map(portefeuille => new PortefeuilleAvecCours(portefeuille));
   }
 
   afficherPortefeuilleCourant(): void {
