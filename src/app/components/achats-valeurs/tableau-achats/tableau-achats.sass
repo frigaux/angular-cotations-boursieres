@@ -1,5 +1,6 @@
 table
   margin-top: 1rem
+  background-color: white
 
   thead
     font-weight: bold
@@ -11,22 +12,43 @@ table
     th:nth-child(1), th:nth-child(2), th:nth-child(3)
       text-align: left
 
-    th:nth-child(4), th:nth-child(5), th:nth-child(6)
+    th:nth-child(n+4)
       text-align: right
+
+    th:nth-child(1)
+      min-width: 6rem
+
+    th:nth-child(2)
+      min-width: 10rem
+
+    th:nth-child(4), th:nth-child(n+6)
+      min-width: 6rem
+
+    th:nth-child(n+7)
+      background-color: var(--p-yellow-200)
 
   tbody
     td
       padding: 0.25rem 0.5rem 0.25rem 0.5rem
 
+      &.positive
+        color: var(--p-green-600)
+
+      &.negative
+        color: var(--p-red-600)
+
     td:nth-child(1), td:nth-child(2), td:nth-child(3)
       text-align: left
 
-    td:nth-child(4), td:nth-child(5), td:nth-child(6)
+    td:nth-child(n+4)
       text-align: right
+
+    td:nth-child(n+7)
+      background-color: var(--p-yellow-100)
 
     tr.totaux
       font-weight: bold
-      background-color: var(--p-gray-400)
+      background-color: var(--p-gray-300)
 
     .pi
       margin: 0 0.5rem 0 0.5rem
@@ -38,3 +60,11 @@ table
     .pi-euro
       color: var(--p-blue-700)
       cursor: pointer
+
+
+// orientation verticale
+@media screen and (orientation: portrait)
+  tr
+    th:nth-child(3), th:nth-child(4), th:nth-child(5), th:nth-child(6), th:nth-child(7), td:nth-child(3), td:nth-child(4), td:nth-child(5), td:nth-child(6), td:nth-child(7)
+      display: none
+      width: 0

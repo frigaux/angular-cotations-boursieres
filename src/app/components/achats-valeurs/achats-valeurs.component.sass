@@ -1,3 +1,7 @@
+.pi
+  cursor: pointer
+  color: var(--p-blue-700)
+
 .titre
   display: flex
   flex-direction: row
@@ -5,5 +9,44 @@
   & > span:nth-child(1)
     font-size: 1.25rem
 
-  app-import-export
-    margin-left: 1rem
+  & > span:nth-child(2), app-import-export
+    margin-left: 1.5rem
+
+table
+  margin-top: 1rem
+  background-color: white
+
+  thead
+    font-weight: bold
+    background-color: var(--p-gray-300)
+
+    th
+      padding: 0.25rem 0.5rem 0.25rem 0.5rem
+
+    th:nth-child(1)
+      text-align: left
+
+    th:nth-child(n+2)
+      text-align: right
+
+    th:nth-child(1)
+      min-width: 10rem
+
+    th:nth-child(n+2)
+      min-width: 6rem
+
+  tbody
+    td
+      padding: 0.25rem 0.5rem 0.25rem 0.5rem
+
+      &.positive
+        color: var(--p-green-600)
+
+      &.negative
+        color: var(--p-red-600)
+
+    td:nth-child(1)
+      text-align: left
+
+    td:nth-child(n+2)
+      text-align: right

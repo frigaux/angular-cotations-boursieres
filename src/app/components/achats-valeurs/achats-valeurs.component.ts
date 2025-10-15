@@ -10,6 +10,8 @@ import {ImportExportComponent} from './import-export/import-export.component';
 import {ConfirmationService} from 'primeng/api';
 import {DialogueService} from '../../services/dialogue/dialogue.service';
 import {TableauAchats} from './tableau-achats/tableau-achats';
+import {BoursoramaService} from '../../services/boursorama/boursorama.service';
+import {CurrencyPipe, PercentPipe} from '@angular/common';
 
 @Component({
   selector: 'app-achats-valeurs',
@@ -17,7 +19,9 @@ import {TableauAchats} from './tableau-achats/tableau-achats';
     TranslatePipe,
     LoaderComponent,
     ImportExportComponent,
-    TableauAchats
+    TableauAchats,
+    CurrencyPipe,
+    PercentPipe
   ],
   templateUrl: './achats-valeurs.component.html',
   styleUrl: './achats-valeurs.component.sass'
@@ -29,12 +33,14 @@ export class AchatsValeursComponent implements OnInit {
   // données pour la vue
   achatsNonRevendus?: Array<AchatsValeurDecores>;
   achatsRevendus?: Array<AchatsValeurDecores>;
+  coursNonRevendus?: Array<AchatsValeurDecores>;
 
   private valeurByTicker?: Map<string, DTOValeur>;
   private achatsTickers?: Array<DTOAchatsTicker>;
 
   constructor(private translateService: TranslateService,
               private valeursService: ValeursService,
+              private boursoramaService: BoursoramaService,
               private confirmationService: ConfirmationService,
               private dialogueService: DialogueService) {
   }
@@ -100,5 +106,31 @@ export class AchatsValeursComponent implements OnInit {
     data.achatDecore.achat.revendu = true;
     this.valeursService.enregistrerAchatsTicker(data.achatsValeurDecores.achatsTicker.ticker, data.achatsValeurDecores.achatsTicker.achats);
     this.construireVue();
+  }
+
+  recupererCoursValeursNonRevendues() {
+    if (this.achatsNonRevendus && this.achatsNonRevendus.length > 0) {
+      this.loading = true;
+      const tickers = this.achatsNonRevendus.map(achat => achat.valeur.ticker);
+      this.coursNonRevendus = JSON.parse(JSON.stringify(this.achatsNonRevendus));
+      this.boursoramaService.recupererCours(tickers)
+        .subscribe(liste => {
+          this.coursNonRevendus?.forEach(achats => {
+            const cours = liste.find(c => c.ticker === achats.valeur.ticker);
+            achats.achatsDecores.forEach(achatDecore => {
+              achatDecore.cloture = cours ? cours.cloture : undefined;
+              achatDecore.variation = cours ? (cours.cloture / achatDecore.achat.prix) - 1 : undefined;
+            });
+          });
+          this.loading = false;
+        });
+    }
+  }
+
+  evolutionVariation(variation?: number): string {
+    if (variation === undefined) {
+      return '';
+    }
+    return variation >= 0 ? 'positive' : 'negative';
   }
 }

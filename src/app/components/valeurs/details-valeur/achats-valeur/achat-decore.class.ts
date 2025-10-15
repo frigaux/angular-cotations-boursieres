@@ -4,6 +4,8 @@ export class AchatDecore {
   id: number;
   date: Date;
   achat: DTOAchat;
+  cloture?: number;
+  variation?: number;
 
   constructor(id: number, date: Date, achat: DTOAchat) {
     this.id = id;

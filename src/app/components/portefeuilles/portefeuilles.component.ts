@@ -24,6 +24,7 @@ import {ColonneDecoree} from './colonne-decoree.class';
 import {BreakpointObserver} from '@angular/cdk/layout';
 import {ActualitesComponent} from '../cours/actualites/actualites.component';
 
+// TODO : créer dynamiquement le portefeuille des achats
 @Component({
   selector: 'app-portefeuilles',
   imports: [
@@ -113,7 +114,7 @@ export class PortefeuillesComponent implements OnInit {
         this.listeCours = liste;
         this.afficherPortefeuilleCourant();
         this.loading = false;
-      })
+      });
   }
 
   afficherPortefeuilleCourant(): void {

@@ -8,6 +8,9 @@
       <th>{{ 'COMPOSANTS.ACHATS_VALEURS.TABLEAU.PRIX' | translate }}</th>
       <th>{{ 'COMPOSANTS.ACHATS_VALEURS.TABLEAU.QUANTITE' | translate }}</th>
       <th>{{ 'COMPOSANTS.ACHATS_VALEURS.TABLEAU.TOTAL' | translate }}</th>
+      <th>{{ 'COMPOSANTS.ACHATS_VALEURS.TABLEAU.CLOTURE' | translate }}</th>
+      <th>{{ 'COMPOSANTS.ACHATS_VALEURS.TABLEAU.VARIATION_ACHAT' | translate }}</th>
+      <th>{{ 'COMPOSANTS.ACHATS_VALEURS.TABLEAU.TOTAL_CLOTURE' | translate }}</th>
     </tr>
     </thead>
     <tbody>
@@ -27,17 +30,25 @@
             <td>{{ achatDecore.achat.prix  | currency:'€' }}</td>
             <td>{{ achatDecore.achat.quantite  | number }}</td>
             <td>{{ (achatDecore.achat.prix * achatDecore.achat.quantite)  | currency:'€' }}</td>
+            <td>{{ achatDecore.cloture | currency:'€' }}</td>
+            <td [class]="evolutionVariation(achatDecore.variation)">
+              {{ achatDecore.variation | percent:'1.2-2' }}
+            </td>
+            <td>{{ (achatDecore.cloture! * achatDecore.achat.quantite)  | currency:'€' }}</td>
           </tr>
         }
       }
       @if (achatsValeursDecores.length > 0) {
         <tr class="totaux">
-          <td>{{ 'COMPOSANTS.ACHATS_VALEURS.TABLEAU.TOTAL' | translate }}</td>
+          <td>{{ 'COMPOSANTS.ACHATS_VALEURS.TABLEAU.TOTAUX' | translate }}</td>
           <td></td>
           <td></td>
           <td></td>
           <td>{{ totalQuantite  | number }}</td>
-          <td>{{ totaux  | currency:'€' }}</td>
+          <td>{{ totauxAchats  | currency:'€' }}</td>
+          <td></td>
+          <td></td>
+          <td>{{ totauxClotures  | currency:'€' }}</td>
         </tr>
       }
     </tbody>

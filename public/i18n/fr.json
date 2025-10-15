@@ -211,15 +211,25 @@
     },
     "ACHATS_VALEURS": {
       "ACHATS_VALEURS": "Liste des achats de valeurs",
+      "RECUPERER_COURS": "Récupérer les cours pour les valeurs non revendues",
       "CONFIRMATION_SUPPRESSION": "Confirmez-vous la suppression de l'achat ?",
-      "NON_REVENDUS": "Non revendus",
-      "REVENDUS": "Revendus",
+      "NON_REVENDUES": "Non revendues",
+      "REVENDUES": "Revendues",
+      "COURS_ACHATS": "Cours des valeurs non revendues",
+      "VALEUR": "Valeur",
+      "PRIX_ACHAT": "Prix achat",
+      "COURS": "Cours",
+      "VARIATION_ACHAT": "Var/Ac",
       "TABLEAU": {
+        "TOTAUX": "Totaux",
         "VALEUR": "Valeur",
         "DATE": "Date",
         "PRIX": "Prix",
         "QUANTITE": "Quantité",
         "TOTAL": "Total",
+        "CLOTURE": "Clôture",
+        "VARIATION_ACHAT": "Var/Ac",
+        "TOTAL_CLOTURE": "Total cours",
         "SUPPRESSION": "Suppression de l'achat",
         "REVENTE": "Revente"
       }
