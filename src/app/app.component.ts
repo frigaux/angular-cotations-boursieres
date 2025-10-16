@@ -14,6 +14,8 @@ import {PrimeNG} from 'primeng/config';
 import {PickList} from 'primeng/picklist';
 import {NavigationBar} from '@squareetlabs/capacitor-navigation-bar';
 
+// TODO : import/export dans google drive
+// TODO : alertes min/max/moyenne/nombre vagues
 @Component({
   selector: 'app-root',
   standalone: true,
