@@ -4,8 +4,8 @@ import {LoaderComponent} from '../../loader/loader.component';
 import {IAService} from '../../../services/IA/ia.service';
 import {ReactiveFormsModule} from '@angular/forms';
 import {DTOConseilsGeminiTicker} from '../../../services/IA/dto-conseils-gemini-ticker.class';
-import {FormulaireCleApiGemini} from './formulaire-cle-api-gemini/formulaire-cle-api-gemini';
-import {ResultatApiGemini} from './resultat-api-gemini/resultat-api-gemini';
+import {FormulaireCleApiGeminiComponent} from './formulaire-cle-api-gemini/formulaire-cle-api-gemini.component';
+import {ResultatApiGeminiComponent} from './resultat-api-gemini/resultat-api-gemini.component';
 import {TranslatePipe} from '@ngx-translate/core';
 
 @Component({
@@ -13,14 +13,14 @@ import {TranslatePipe} from '@ngx-translate/core';
   imports: [
     LoaderComponent,
     ReactiveFormsModule,
-    FormulaireCleApiGemini,
-    ResultatApiGemini,
+    FormulaireCleApiGeminiComponent,
+    ResultatApiGeminiComponent,
     TranslatePipe
   ],
-  templateUrl: './conseils-gemini-ticker.html',
-  styleUrl: './conseils-genkit-ticker.sass'
+  templateUrl: './conseils-gemini-ticker.component.html',
+  styleUrl: './conseils-genkit-ticker.component.sass'
 })
-export class ConseilsGeminiTicker implements OnInit {
+export class ConseilsGeminiTickerComponent implements OnInit {
   // chargement des informations pour le ticker
   loading: boolean = false;
 

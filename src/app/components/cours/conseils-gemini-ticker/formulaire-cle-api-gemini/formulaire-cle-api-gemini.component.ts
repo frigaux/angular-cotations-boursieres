@@ -17,10 +17,10 @@ import {InputText} from 'primeng/inputtext';
     ReactiveFormsModule,
     InputText
   ],
-  templateUrl: './formulaire-cle-api-gemini.html',
-  styleUrls: ['./formulaire-cle-api-gemini.sass', '../../../portefeuilles/gestion-portefeuilles/formulaire-creation/formulaire-creation.component.sass']
+  templateUrl: './formulaire-cle-api-gemini.component.html',
+  styleUrls: ['./formulaire-cle-api-gemini.component.sass', '../../../portefeuilles/gestion-portefeuilles/formulaire-creation/formulaire-creation.component.sass']
 })
-export class FormulaireCleApiGemini implements OnInit {
+export class FormulaireCleApiGeminiComponent implements OnInit {
   // injections
   private formBuilder = inject(FormBuilder);
 

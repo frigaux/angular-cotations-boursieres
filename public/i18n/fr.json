@@ -7,7 +7,8 @@
     "ACHATS_VALEURS": "Achats de valeurs",
     "PORTEFEUILLES": "Portefeuilles",
     "GESTION_PORTEFEUILLES": "Gestion des portefeuilles",
-    "GESTION_TABLEAUX": "Gestion des tableaux"
+    "GESTION_TABLEAUX": "Gestion des tableaux",
+    "SAUVEGARDE_RESTAURATION": "Sauvegarde / restauration"
   },
   "COMPOSANTS": {
     "COMMUN": {
@@ -26,10 +27,11 @@
       "COURS": "Cours",
       "ACHATS_VALEURS": "Achats",
       "PORTEFEUILLES": "Portefeuilles",
-      "PARAMETRAGE": "Administration",
+      "PARAMETRAGE": "Paramétrage",
       "/PARAMETRAGE": {
         "GESTION_PORTEFEUILLES": "Gestion des portefeuilles",
-        "GESTION_TABLEAUX": "Gestion des tableaux"
+        "GESTION_TABLEAUX": "Gestion des tableaux",
+        "SAUVEGARDE_RESTAURATION": "Sauvegarde / restauration"
       }
     },
     "VALEURS": {

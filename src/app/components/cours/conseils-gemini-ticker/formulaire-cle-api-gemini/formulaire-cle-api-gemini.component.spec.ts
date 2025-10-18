@@ -1,19 +1,19 @@
 import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import {FormulaireCleApiGemini} from './formulaire-cle-api-gemini';
+import {FormulaireCleApiGeminiComponent} from './formulaire-cle-api-gemini.component';
 import {IAService} from '../../../../services/IA/ia.service';
 import {TranslateModule} from '@ngx-translate/core';
 
-describe('FormulaireCleApiGemini', () => {
-  let component: FormulaireCleApiGemini;
-  let fixture: ComponentFixture<FormulaireCleApiGemini>;
+describe('FormulaireCleApiGeminiComponent', () => {
+  let component: FormulaireCleApiGeminiComponent;
+  let fixture: ComponentFixture<FormulaireCleApiGeminiComponent>;
 
   const mockIAService = jasmine.createSpyObj('IAService', ['chargerCleAPIGemini', 'enregistrerCleAPIGemini']);
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [
-        FormulaireCleApiGemini,
+        FormulaireCleApiGeminiComponent,
         TranslateModule.forRoot({})
       ],
       providers: [
@@ -22,7 +22,7 @@ describe('FormulaireCleApiGemini', () => {
     })
       .compileComponents();
 
-    fixture = TestBed.createComponent(FormulaireCleApiGemini);
+    fixture = TestBed.createComponent(FormulaireCleApiGeminiComponent);
     component = fixture.componentInstance;
     // fixture.detectChanges();
   });

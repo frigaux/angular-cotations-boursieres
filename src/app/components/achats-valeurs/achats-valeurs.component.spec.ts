@@ -9,6 +9,8 @@ import {ValeursService} from '../../services/valeurs/valeurs.service';
 import {of} from 'rxjs';
 import {ACHATS, VALEURS} from '../../services/jdd/jdd-valeurs.dataset';
 import {DialogueService} from '../../services/dialogue/dialogue.service';
+import {CoursService} from '../../services/cours/cours.service';
+import {LISTE_COURS_AVEC_LISTE_ALLEGEE} from '../../services/jdd/jdd-cours.dataset';
 
 describe('AchatsValeursComponent', () => {
   let dialogueService: DialogueService;
@@ -18,6 +20,7 @@ describe('AchatsValeursComponent', () => {
   const cloneACHATS: Function = () => JSON.parse(JSON.stringify(ACHATS));
 
   const mockValeursService = jasmine.createSpyObj('ValeursService', ['onImportAchats', 'chargerValeurs', 'chargerAchats', 'enregistrerAchatsTicker']);
+  const mockCoursService = jasmine.createSpyObj('CoursService', ['chargerCoursTickersWithLimit']);
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
@@ -27,6 +30,7 @@ describe('AchatsValeursComponent', () => {
       ],
       providers: [
         {provide: ValeursService, useValue: mockValeursService},
+        {provide: CoursService, useValue: mockCoursService},
         provideHttpClient(),
         provideHttpClientTesting(),
         ConfirmationService
@@ -47,6 +51,7 @@ describe('AchatsValeursComponent', () => {
     beforeEach(() => {
       mockValeursService.chargerValeurs.and.returnValue(of(VALEURS));
       mockValeursService.chargerAchats.and.returnValue(cloneACHATS());
+      mockCoursService.chargerCoursTickersWithLimit.and.returnValue(of(LISTE_COURS_AVEC_LISTE_ALLEGEE));
     });
 
     it('when #ngOnInit then le composant est chargé', () => {

@@ -9,10 +9,10 @@ import {DTOConseilsGeminiTicker} from '../../../../services/IA/dto-conseils-gemi
     CurrencyPipe,
     TranslatePipe
   ],
-  templateUrl: './resultat-api-gemini.html',
-  styleUrl: './resultat-api-gemini.sass'
+  templateUrl: './resultat-api-gemini.component.html',
+  styleUrl: './resultat-api-gemini.component.sass'
 })
-export class ResultatApiGemini {
+export class ResultatApiGeminiComponent {
   // input/output
   inputDTO: InputSignal<DTOConseilsGeminiTicker | undefined> = input(undefined,
     {transform: o => this.intercepteurDTOConseilsGeminiTicker(o), alias: 'dto'});

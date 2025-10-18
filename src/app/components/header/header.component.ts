@@ -58,6 +58,11 @@ export class HeaderComponent {
           label: translateService.instant('COMPOSANTS.HEADER./PARAMETRAGE.GESTION_TABLEAUX'),
           routerLink: 'gestion-tableaux',
           icon: 'pi pi-wrench'
+        },
+        {
+          label: translateService.instant('COMPOSANTS.HEADER./PARAMETRAGE.SAUVEGARDE_RESTAURATION'),
+          routerLink: 'sauvegarde-restauration',
+          icon: 'pi pi-sync'
         }
       ]
     });

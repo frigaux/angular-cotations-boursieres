@@ -11,6 +11,9 @@ import {
 } from './components/portefeuilles/gestion-portefeuilles/gestion-portefeuilles.component';
 import {GestionTableauxComponent} from './components/gestion-tableaux/gestion-tableaux.component';
 import {AchatsValeursComponent} from './components/achats-valeurs/achats-valeurs.component';
+import {
+  SauvegardeRestaurationComponent
+} from './components/parametrage/sauvegarde-restauration/sauvegarde-restauration.component';
 
 export const routes: Routes = [
   {
@@ -49,6 +52,11 @@ export const routes: Routes = [
   {
     path: 'gestion-tableaux',
     component: GestionTableauxComponent,
+    canActivate: [authentificationGuard]
+  },
+  {
+    path: 'sauvegarde-restauration',
+    component: SauvegardeRestaurationComponent,
     canActivate: [authentificationGuard]
   },
   {path: '**', redirectTo: '/authentification'}
