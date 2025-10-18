@@ -14,8 +14,9 @@ import {PrimeNG} from 'primeng/config';
 import {PickList} from 'primeng/picklist';
 import {NavigationBar} from '@squareetlabs/capacitor-navigation-bar';
 
-// TODO : import/export dans google drive
-// TODO : alertes min/max/moyenne/nombre vagues
+// TODO : nouvelle page dividende : date dernier import, un dividende par ticker avec date, type, montant, rendement (https://abcbourse.com/marches/dividendes)
+// TODO : nouvelle page sauvegarde/restauration via une ressource HTTP qui permet le POST/GET d'un JSON
+// TODO : nouvelles opérandes pour les alertes du portefeuille/cours min/max/moyenne/nombre vagues
 @Component({
   selector: 'app-root',
   standalone: true,

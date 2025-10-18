@@ -46,14 +46,20 @@ export class HeaderComponent {
       });
     }
     this.items.push({
-      label: translateService.instant('COMPOSANTS.HEADER.GESTION_PORTEFEUILLES'),
-      routerLink: 'gestion-portefeuilles',
-      icon: 'pi pi-wrench'
-    });
-    this.items.push({
-      label: translateService.instant('COMPOSANTS.HEADER.GESTION_TABLEAUX'),
-      routerLink: 'gestion-tableaux',
-      icon: 'pi pi-wrench'
+      label: translateService.instant('COMPOSANTS.HEADER.PARAMETRAGE'),
+      icon: 'pi pi-cog',
+      items: [
+        {
+          label: translateService.instant('COMPOSANTS.HEADER./PARAMETRAGE.GESTION_PORTEFEUILLES'),
+          routerLink: 'gestion-portefeuilles',
+          icon: 'pi pi-wrench'
+        },
+        {
+          label: translateService.instant('COMPOSANTS.HEADER./PARAMETRAGE.GESTION_TABLEAUX'),
+          routerLink: 'gestion-tableaux',
+          icon: 'pi pi-wrench'
+        }
+      ]
     });
   }
 }

@@ -26,8 +26,11 @@
       "COURS": "Cours",
       "ACHATS_VALEURS": "Achats",
       "PORTEFEUILLES": "Portefeuilles",
-      "GESTION_PORTEFEUILLES": "Gestion des portefeuilles",
-      "GESTION_TABLEAUX": "Gestion des tableaux"
+      "PARAMETRAGE": "Administration",
+      "/PARAMETRAGE": {
+        "GESTION_PORTEFEUILLES": "Gestion des portefeuilles",
+        "GESTION_TABLEAUX": "Gestion des tableaux"
+      }
     },
     "VALEURS": {
       "LIBELLE": "Libellé",

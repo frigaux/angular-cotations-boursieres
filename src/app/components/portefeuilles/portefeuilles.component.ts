@@ -192,7 +192,7 @@ export class PortefeuillesComponent implements OnInit {
   }
 
   protected onClickCours(event: MouseEvent, cours: any, portefeuille: DTOPortefeuille) {
-    if (event.target instanceof Element && event.target.tagName === 'SPAN') {
+    if (event.target instanceof Element && event.target.tagName === 'SPAN' && event.target.className.indexOf('pi') !== -1) {
       this.afficherActions(event, cours, portefeuille);
     } else {
       this.basculerAffichageCours(cours);

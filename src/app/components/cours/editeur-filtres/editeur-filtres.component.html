@@ -15,7 +15,7 @@
     <div class="pi pi-plus-circle" (click)="ajouterFiltre()"
          title="{{ 'COMPOSANTS.COURS.EDITEUR_FILTRES.AJOUTER' | translate }}"></div>
     @if (filtres.length === 0) {
-      <div class="pi pi-arrow-left">
+      <div class="libelle" (click)="ajouterFiltre()">
         <span>{{ 'COMPOSANTS.COURS.EDITEUR_FILTRES.AUCUN_FILTRE' | translate }}</span>
       </div>
     }
