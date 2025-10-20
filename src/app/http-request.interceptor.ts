@@ -9,7 +9,9 @@ export const AUTHENTIFICATION_REQUISE = new HttpContextToken<boolean>(() => true
 
 // https://angular.dev/guide/http/interceptors
 export const httpRequestInterceptor: HttpInterceptorFn = (req, next) => {
-  if (isRequeteProxy(req.url)) {
+  if (req.url.startsWith('http')) {
+    return next(req);
+  } else if (isRequeteProxy(req.url)) {
     return makeProxyCall(req, next);
   } else {
     return makeApiCall(req, next);

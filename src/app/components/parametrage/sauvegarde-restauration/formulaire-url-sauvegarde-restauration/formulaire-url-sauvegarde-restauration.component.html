@@ -1,0 +1,26 @@
+@if (creationUrlSauvegardeRestauration || modificationUrlSauvegardeRestauration) {
+  <form [formGroup]="formulaire"
+        (ngSubmit)="enregistrerUrlSauvegardeRestauration()">
+    <div>
+      <p-floatlabel>
+        <input pInputText [pAutoFocus]="autofocus" id="urlSauvegardeRestauration"
+               formControlName="urlSauvegardeRestauration" autocomplete="off"/>
+        <label for="urlSauvegardeRestauration">
+          {{ 'COMPOSANTS.PARAMETRAGE.SAUVEGARDE_RESTAURATION.FORMULAIRE.URL' | translate }}
+        </label>
+      </p-floatlabel>
+    </div>
+    @if (modificationUrlSauvegardeRestauration) {
+      <div>
+        <p-button
+          label="{{ 'COMPOSANTS.COMMUN.ABANDONNER' | translate }}"
+          (onClick)="abandonnerModification()" severity="warn"/>
+      </div>
+    }
+    <div>
+      <p-button
+        label="{{ 'COMPOSANTS.COMMUN.ENREGISTRER' | translate }}"
+        type="submit" severity="danger"/>
+    </div>
+  </form>
+}

@@ -8,7 +8,7 @@ import {Observable} from 'rxjs';
   providedIn: 'root'
 })
 export class IAService {
-  private static readonly CLE_API_GEMINI = 'CLE_API_GEMINI';
+  private static readonly CLE_API_GEMINI = 'cleApiGemini';
   private static readonly GENERATECONTENTCONFIG: GenerateContentConfig = {
     // safetySettings: [
     //   {

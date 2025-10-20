@@ -8,6 +8,7 @@ import {lastValueFrom} from 'rxjs';
 describe('AuthentificationService', () => {
   let authentificationService: AuthentificationService;
   let httpTesting: HttpTestingController;
+  let mockLocalStorage: Record<string, string>;
 
   // const httpClientSpy = jasmine.createSpyObj('HttpClient', ['post']);
 
@@ -60,6 +61,14 @@ describe('AuthentificationService', () => {
     });
     authentificationService = TestBed.inject(AuthentificationService);
     httpTesting = TestBed.inject(HttpTestingController);
+    // bouchonnage du localStorage
+    mockLocalStorage = {};
+    spyOn(window.localStorage, 'getItem').and.callFake(
+      (key: string) => mockLocalStorage[key] || null
+    );
+    spyOn(window.localStorage, 'setItem').and.callFake(
+      (key: string, value: string) => mockLocalStorage[key] = value
+    );
   });
 
   describe('Given n\'est pas authentifié', () => {

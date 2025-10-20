@@ -19,8 +19,7 @@ export const httpResponseInterceptor: HttpInterceptorFn = (req, next) => {
 };
 
 function isRequeteApi(url: string): boolean {
-  const pathname = new URL(url).pathname;
-  return !pathname.startsWith('/abcbourse') && !pathname.startsWith('/boursorama');
+  return url.startsWith(environment.apiPrefixUrl);
 }
 
 function handleApiError(error: unknown, router: Router) {

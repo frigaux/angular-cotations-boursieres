@@ -27,4 +27,22 @@ export class DialogueService {
       accept: () => onSuppression()
     });
   }
+
+  confirmation(confirmationService: ConfirmationService, event: Event, header: string, onConfirmation: Function, keyTranslation: string) {
+    confirmationService.confirm({
+      target: event.target as EventTarget,
+      header,
+      closable: false,
+      closeOnEscape: true,
+      rejectButtonProps: {
+        label: this.translateService.instant('COMPOSANTS.COMMUN.ANNULER'),
+        severity: 'warn'
+      },
+      acceptButtonProps: {
+        label: this.translateService.instant(keyTranslation),
+        severity: 'danger'
+      },
+      accept: () => onConfirmation()
+    });
+  }
 }

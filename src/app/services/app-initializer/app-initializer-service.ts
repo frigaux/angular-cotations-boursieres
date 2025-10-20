@@ -17,7 +17,8 @@ export class AppInitializerService {
         const now = Date.now();
         const urls = [
           `${environment.staticPrefixUrl}?_prewarm=${now}`,
-          `${environment.apiPrefixUrl}?_prewarm=${now}`
+          `${environment.apiPrefixUrl}?_prewarm=${now}`,
+          `http://fabien.rigaux.free.fr?_prewarm=${now}`
         ];
         Promise.allSettled(urls.map(url => this.requestGet(url)))
           .then(value => {
