@@ -7,13 +7,15 @@ import {TranslatePipe, TranslateService} from '@ngx-translate/core';
 import {DialogueService} from '../../../services/dialogue/dialogue.service';
 import {ConfirmationService} from 'primeng/api';
 import {LoaderComponent} from '../../loader/loader.component';
+import {JsonPipe} from '@angular/common';
 
 @Component({
   selector: 'app-sauvegarde-restauration',
   imports: [
     FormulaireUrlSauvegardeRestaurationComponent,
     TranslatePipe,
-    LoaderComponent
+    LoaderComponent,
+    JsonPipe
   ],
   templateUrl: './sauvegarde-restauration.component.html',
   styleUrl: './sauvegarde-restauration.component.sass'
@@ -23,8 +25,8 @@ export class SauvegardeRestaurationComponent implements OnInit {
   // données pour la vue
   afficherFormulaireUrlSauvegardeRestauration: boolean = false;
   loading: boolean = false;
-  erreur?: string;
   succes?: string;
+  httpResponseError?: any;
 
   constructor(private translateService: TranslateService,
               private parametrageService: ParametrageService,
@@ -45,11 +47,11 @@ export class SauvegardeRestaurationComponent implements OnInit {
       this.translateService.instant('COMPOSANTS.PARAMETRAGE.SAUVEGARDE_RESTAURATION.CONFIRMATION_SAUVEGARDE'),
       () => {
         this.loading = true;
-        this.erreur = undefined;
+        this.httpResponseError = undefined;
         this.succes = undefined;
         this.parametrageService.sauvegarder().subscribe({
           error: httpResponseError => {
-            this.erreur = httpResponseError.message;
+            this.httpResponseError = httpResponseError;
             this.loading = false;
           },
           next: () => {
@@ -69,11 +71,11 @@ export class SauvegardeRestaurationComponent implements OnInit {
       this.translateService.instant('COMPOSANTS.PARAMETRAGE.SAUVEGARDE_RESTAURATION.CONFIRMATION_RESTAURATION'),
       () => {
         this.loading = true;
-        this.erreur = undefined;
+        this.httpResponseError = undefined;
         this.succes = undefined;
         this.parametrageService.restaurer().subscribe({
           error: httpResponseError => {
-            this.erreur = httpResponseError.message;
+            this.httpResponseError = httpResponseError;
             this.loading = false;
           },
           next: () => {

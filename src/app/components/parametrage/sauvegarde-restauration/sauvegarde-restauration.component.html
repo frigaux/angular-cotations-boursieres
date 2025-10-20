@@ -16,5 +16,5 @@
           title="{{ 'COMPOSANTS.PARAMETRAGE.SAUVEGARDE_RESTAURATION.RESTAURATION' | translate }}"></span>
   </div>
   <div class="succes">{{ succes }}</div>
-  <div class="erreur">{{ erreur }}</div>
+  <pre class="erreur">{{ httpResponseError | json }}</pre>
 }
