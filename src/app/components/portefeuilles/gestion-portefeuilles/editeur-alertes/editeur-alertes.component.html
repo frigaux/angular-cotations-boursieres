@@ -25,7 +25,7 @@
           @for (nom of noms.controls; track $index; let idx = $index) {
             <div>
               <p-floatlabel>
-                <input pInputText id="{{idx}}" autocomplete="off" [formControlName]="idx"/>
+                <input pInputText id="{{idx}}" autocomplete="off" [formControlName]="idx" title="{{this.alertes[idx].condition}}"/>
                 <label for="{{idx}}">
                   {{ 'COMPOSANTS.PORTEFEUILLES.GESTION_PORTEFEUILLES.EDITEUR_ALERTES.NOM' | translate }}
                 </label>

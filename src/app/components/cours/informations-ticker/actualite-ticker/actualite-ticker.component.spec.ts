@@ -2,7 +2,6 @@ import {ComponentFixture, TestBed} from '@angular/core/testing';
 
 import {ActualiteTickerComponent} from './actualite-ticker.component';
 import {AbcBourseService} from '../../../../services/abc-bourse/abc-bourse.service';
-import {DTOActualites} from '../../../../services/abc-bourse/dto-actualites';
 import {of} from 'rxjs';
 import {DTOActualiteTicker} from '../../../../services/abc-bourse/dto-actualite-ticker.class';
 import {provideAnimations} from '@angular/platform-browser/animations';

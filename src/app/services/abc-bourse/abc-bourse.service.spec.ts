@@ -4,7 +4,7 @@ import {AbcBourseService} from './abc-bourse.service';
 import {HttpErrorResponse, HttpInterceptorFn, provideHttpClient, withInterceptors} from '@angular/common/http';
 import {firstValueFrom, lastValueFrom} from 'rxjs';
 import {DTOInformationsTicker} from './dto-informations-ticker.class';
-import {DTOActualites} from './dto-actualites';
+import {DTOActualites} from './dto-actualites.class';
 
 describe('AbcBourseService', () => {
   let service: AbcBourseService;

@@ -3,7 +3,7 @@ import {ComponentFixture, TestBed} from '@angular/core/testing';
 import {ActualitesComponent} from './actualites.component';
 import {AbcBourseService} from '../../../services/abc-bourse/abc-bourse.service';
 import {TranslateModule} from '@ngx-translate/core';
-import {DTOActualites} from '../../../services/abc-bourse/dto-actualites';
+import {DTOActualites} from '../../../services/abc-bourse/dto-actualites.class';
 import {of} from 'rxjs';
 import {DTOTransaction} from '../../../services/abc-bourse/dto-transaction.class';
 

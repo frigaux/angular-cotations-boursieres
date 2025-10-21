@@ -25,7 +25,7 @@
         @for (nom of noms.controls; track $index; let idx = $index) {
           <div>
             <p-floatlabel>
-              <input pInputText id="{{idx}}" autocomplete="off" [formControlName]="idx"/>
+              <input pInputText id="{{idx}}" autocomplete="off" [formControlName]="idx" title="{{this.filtres[idx].condition}}"/>
               <label for="{{idx}}">
                 {{ 'COMPOSANTS.COURS.EDITEUR_FILTRES.NOM' | translate }}
               </label>

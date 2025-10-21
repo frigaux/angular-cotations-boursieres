@@ -14,10 +14,7 @@ import {PrimeNG} from 'primeng/config';
 import {PickList} from 'primeng/picklist';
 import {NavigationBar} from '@squareetlabs/capacitor-navigation-bar';
 
-// TODO : editeur des filtres : voir les conditions; homogénéiser avec les alertes
 // TODO : achats : récupérer aussi la liste des achats / ventes en cours sur boursorama
-// TODO : renommer dto-actualites.ts
-// TODO : page sauvegarde/restauration : restauration des tableaux a rendre facultatif
 // TODO : nouvelle page dividende : date dernier import, un dividende par ticker avec date, type, montant, rendement (https://abcbourse.com/marches/dividendes)
 // TODO : nouvelles opérandes pour les alertes du portefeuille/cours min/max/moyenne/nombre vagues
 // TODO : coverage

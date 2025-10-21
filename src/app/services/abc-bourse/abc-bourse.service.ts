@@ -7,7 +7,7 @@ import {DTODividende} from './dto-dividende.class';
 import {DTOVariation} from './dto-variation.class';
 import {DTORatio} from './dto-ratio.class';
 import {ParseUtil} from './parse-util.class';
-import {DTOActualites} from './dto-actualites';
+import {DTOActualites} from './dto-actualites.class';
 import {DTOLien} from './dto-lien.class';
 import {DTOVentesADecouvert} from './dto-ventes-a-decouvert.class';
 import {DTOTransaction} from './dto-transaction.class';

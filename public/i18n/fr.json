@@ -366,6 +366,10 @@
         "SAUVEGARDE_REUSSI": "Sauvegarde réussie !",
         "DIALOG_RESTAURATION": {
           "CONFIRMATION_RESTAURATION": "Confirmez-vous la restauration des paramètres ?",
+          "TABLEAUX": "le paramétrage des colonnes des tableaux",
+          "PORTEFEUILLES": "les portefeuilles avec leurs valeurs et alertes",
+          "FILTRES": "les filtres des cours",
+          "ACHATS": "la liste des achats",
           "RESTAURER": "Restaurer"
         },
         "RESTAURATION_REUSSIE": "Restauration réussie !"
