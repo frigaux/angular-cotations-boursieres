@@ -7,6 +7,9 @@ import {DTOParametrage} from './dto-parametrage.interface';
 import {DTOValeur} from '../valeurs/dto-valeur.interface';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Observable} from 'rxjs';
+import {
+  DTORestauration
+} from '../../components/parametrage/sauvegarde-restauration/dialog-restauration/dto-restauration.class';
 
 @Injectable({
   providedIn: 'root'
@@ -50,7 +53,7 @@ export class ParametrageService {
     }
   }
 
-  restaurer() {
+  restaurer(dtoRestauration: DTORestauration) {
     const url = this.chargerUrlSauvegardeRestauration();
     if (url && URL.canParse(url)) {
       return this.http.get<DTOParametrage>(
@@ -58,10 +61,18 @@ export class ParametrageService {
         {headers: ParametrageService.HEADERS}
       ).pipe(o => {
         o.subscribe(dto => {
-          this.valeursService.enregistrerAchats(dto.achats);
-          this.coursService.enregistrerFiltres(dto.filtres);
-          this.portefeuillesService.enregistrer(dto.portefeuilles);
-          this.tableauxService.enregistrer(dto.tableaux);
+          if (dtoRestauration.achats) {
+            this.valeursService.enregistrerAchats(dto.achats);
+          }
+          if (dtoRestauration.filtres) {
+            this.coursService.enregistrerFiltres(dto.filtres);
+          }
+          if (dtoRestauration.portefeuilles) {
+            this.portefeuillesService.enregistrer(dto.portefeuilles);
+          }
+          if (dtoRestauration.tableaux) {
+            this.tableauxService.enregistrer(dto.tableaux);
+          }
         });
         return o;
       });

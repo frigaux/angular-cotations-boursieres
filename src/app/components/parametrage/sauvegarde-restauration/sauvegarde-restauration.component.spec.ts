@@ -2,11 +2,13 @@ import {ComponentFixture, TestBed} from '@angular/core/testing';
 
 import {SauvegardeRestaurationComponent} from './sauvegarde-restauration.component';
 import {TranslateModule} from '@ngx-translate/core';
-import {ConfirmationService} from 'primeng/api';
+import {ParametrageService} from '../../../services/parametrage/parametrage.service';
 
 describe('SauvegardeRestaurationComponent', () => {
   let component: SauvegardeRestaurationComponent;
   let fixture: ComponentFixture<SauvegardeRestaurationComponent>;
+
+  let mockParametrageService = jasmine.createSpyObj('ParametrageService', ['chargerUrlSauvegardeRestauration', 'sauvegarder', 'restaurer']);
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
@@ -15,7 +17,7 @@ describe('SauvegardeRestaurationComponent', () => {
         TranslateModule.forRoot({})
       ],
       providers: [
-        ConfirmationService
+        {provide: ParametrageService, useValue: mockParametrageService}
       ]
     })
       .compileComponents();

@@ -26,9 +26,9 @@
     }
 
     <div class="boutons">
-      <p-button type="button" (click)="exporter()"
+      <p-button type="button" (click)="exporter()" severity="warn"
                 label="{{ 'COMPOSANTS.PORTEFEUILLES.GESTION_PORTEFEUILLES.IMPORT_EXPORT.EXPORTER' | translate }}"/>
-      <p-button type="button" (click)="importer()" severity="warn"
+      <p-button type="button" (click)="importer()" severity="danger"
                 label="{{ 'COMPOSANTS.PORTEFEUILLES.GESTION_PORTEFEUILLES.IMPORT_EXPORT.IMPORTER' | translate }}"/>
       <p-button type="button" (click)="toutSupprimer()" severity="danger"
                 label="{{ 'COMPOSANTS.PORTEFEUILLES.GESTION_PORTEFEUILLES.IMPORT_EXPORT.TOUT_SUPPRIMER' | translate }}"/>

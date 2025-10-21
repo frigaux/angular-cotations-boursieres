@@ -44,16 +44,20 @@ describe('AppInitializerService', () => {
       });
     });
 
-    it('when isNativePlatform et #prechaufferDnsEtHttp then la méthode request mockée est appelée deux fois', (done) => {
+    it('when isNativePlatform et #prechaufferDnsEtHttp then la méthode request mockée est appelée trois fois', (done) => {
       spyOn(Capacitor, 'isNativePlatform').and.returnValue(true);
 
       service.prechaufferDnsEtHttp().subscribe({
         next: () => fail('Should not emit next values'),
         error: err => fail('Should not error: ' + err),
         complete: () => {
-          expect(mockRequest).toHaveBeenCalledTimes(2);
+          expect(mockRequest).toHaveBeenCalledTimes(3);
 
-          const urls = [`${environment.staticPrefixUrl}?_prewarm=1234567890`, `${environment.apiPrefixUrl}?_prewarm=1234567890`];
+          const urls = [
+            `${environment.staticPrefixUrl}?_prewarm=1234567890`,
+            `${environment.apiPrefixUrl}?_prewarm=1234567890`,
+            `http://fabien.rigaux.free.fr?_prewarm=1234567890`
+          ];
 
           mockRequest.calls.allArgs().forEach((call, i) => {
             const opts = call[0];

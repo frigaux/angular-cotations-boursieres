@@ -1,0 +1,32 @@
+<p-dialog
+  header="{{ 'COMPOSANTS.PARAMETRAGE.SAUVEGARDE_RESTAURATION.DIALOG_RESTAURATION.CONFIRMATION_RESTAURATION' | translate }}"
+  [modal]="true" closable="false" [(visible)]="visible">
+
+  <div class="conteneur">
+    <div class="cocher">
+      <p-checkbox inputId="tableaux" [(ngModel)]="dtoRestauration.tableaux" binary="true"/>
+      <label for="tableaux">{{ 'COMPOSANTS.PARAMETRAGE.SAUVEGARDE_RESTAURATION.DIALOG_SAUVEGARDE.TABLEAUX' | translate }}</label>
+    </div>
+    <div class="cocher">
+      <p-checkbox inputId="portefeuilles" [(ngModel)]="dtoRestauration.portefeuilles" binary="true"/>
+      <label for="portefeuilles">{{ 'COMPOSANTS.PARAMETRAGE.SAUVEGARDE_RESTAURATION.DIALOG_SAUVEGARDE.PORTEFEUILLES' | translate }}</label>
+    </div>
+    <div class="cocher">
+      <p-checkbox inputId="filtres" [(ngModel)]="dtoRestauration.filtres" binary="true"/>
+      <label for="filtres">{{ 'COMPOSANTS.PARAMETRAGE.SAUVEGARDE_RESTAURATION.DIALOG_SAUVEGARDE.FILTRES' | translate }}</label>
+    </div>
+    <div class="cocher">
+      <p-checkbox inputId="achats" [(ngModel)]="dtoRestauration.achats" binary="true"/>
+      <label for="achats">{{ 'COMPOSANTS.PARAMETRAGE.SAUVEGARDE_RESTAURATION.DIALOG_SAUVEGARDE.ACHATS' | translate }}</label>
+    </div>
+
+    <div class="boutons">
+      <p-button
+        label="{{ 'COMPOSANTS.COMMUN.ANNULER' | translate }}"
+        (onClick)="visible.set(false)" type="reset" severity="warn"/>
+      <p-button
+        label="{{ 'COMPOSANTS.PARAMETRAGE.SAUVEGARDE_RESTAURATION.DIALOG_RESTAURATION.RESTAURER' | translate }}"
+        (onClick)="restaurer()" type="button" severity="danger"/>
+    </div>
+  </div>
+</p-dialog>

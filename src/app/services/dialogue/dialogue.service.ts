@@ -11,21 +11,7 @@ export class DialogueService {
   }
 
   confirmationSuppression(confirmationService: ConfirmationService, event: Event, header: string, onSuppression: Function) {
-    confirmationService.confirm({
-      target: event.target as EventTarget,
-      header,
-      closable: false,
-      closeOnEscape: true,
-      rejectButtonProps: {
-        label: this.translateService.instant('COMPOSANTS.COMMUN.ANNULER'),
-        severity: 'warn'
-      },
-      acceptButtonProps: {
-        label: this.translateService.instant('COMPOSANTS.COMMUN.SUPPRIMER'),
-        severity: 'danger'
-      },
-      accept: () => onSuppression()
-    });
+    this.confirmation(confirmationService, event, header, onSuppression, 'COMPOSANTS.COMMUN.SUPPRIMER');
   }
 
   confirmation(confirmationService: ConfirmationService, event: Event, header: string, onConfirmation: Function, keyTranslation: string) {

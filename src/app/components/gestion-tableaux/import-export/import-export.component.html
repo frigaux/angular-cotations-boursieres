@@ -28,9 +28,9 @@
     }
 
     <div class="boutons">
-      <p-button type="button" (click)="exporter()"
+      <p-button type="button" (click)="exporter()" severity="warn"
                 label="{{ 'COMPOSANTS.GESTION_TABLEAUX.IMPORT_EXPORT.EXPORTER' | translate }}"/>
-      <p-button type="button" (click)="importer()" severity="warn"
+      <p-button type="button" (click)="importer()" severity="danger"
                 label="{{ 'COMPOSANTS.GESTION_TABLEAUX.IMPORT_EXPORT.IMPORTER' | translate }}"/>
     </div>
   </div>

@@ -1,0 +1,22 @@
+<p-dialog
+  header="{{ 'COMPOSANTS.PARAMETRAGE.SAUVEGARDE_RESTAURATION.DIALOG_SAUVEGARDE.CONFIRMATION_SAUVEGARDE' | translate }}"
+  [modal]="true" closable="false" [(visible)]="visible">
+
+  <div class="conteneur">
+    <ul>
+      <li>{{ 'COMPOSANTS.PARAMETRAGE.SAUVEGARDE_RESTAURATION.DIALOG_SAUVEGARDE.TABLEAUX' | translate }},</li>
+      <li>{{ 'COMPOSANTS.PARAMETRAGE.SAUVEGARDE_RESTAURATION.DIALOG_SAUVEGARDE.PORTEFEUILLES' | translate }},</li>
+      <li>{{ 'COMPOSANTS.PARAMETRAGE.SAUVEGARDE_RESTAURATION.DIALOG_SAUVEGARDE.FILTRES' | translate }},</li>
+      <li>{{ 'COMPOSANTS.PARAMETRAGE.SAUVEGARDE_RESTAURATION.DIALOG_SAUVEGARDE.ACHATS' | translate }}.</li>
+    </ul>
+
+    <div class="boutons">
+      <p-button
+        label="{{ 'COMPOSANTS.COMMUN.ANNULER' | translate }}"
+        (onClick)="visible.set(false)" type="reset" severity="warn"/>
+      <p-button
+        label="{{ 'COMPOSANTS.PARAMETRAGE.SAUVEGARDE_RESTAURATION.DIALOG_SAUVEGARDE.SAUVEGARDER' | translate }}"
+        (onClick)="sauvegarder()" type="button" severity="danger"/>
+    </div>
+  </div>
+</p-dialog>

@@ -4,7 +4,7 @@ import {FormulaireUrlSauvegardeRestaurationComponent} from './formulaire-url-sau
 import {TranslateModule} from '@ngx-translate/core';
 import {ParametrageService} from '../../../../services/parametrage/parametrage.service';
 
-describe('FormulaireCleApiGeminiComponent', () => {
+describe('FormulaireUrlSauvegardeRestaurationComponent', () => {
   let component: FormulaireUrlSauvegardeRestaurationComponent;
   let fixture: ComponentFixture<FormulaireUrlSauvegardeRestaurationComponent>;
 
@@ -24,7 +24,6 @@ describe('FormulaireCleApiGeminiComponent', () => {
 
     fixture = TestBed.createComponent(FormulaireUrlSauvegardeRestaurationComponent);
     component = fixture.componentInstance;
-    // fixture.detectChanges();
   });
 
   it('should create', () => {
@@ -46,7 +45,7 @@ describe('FormulaireCleApiGeminiComponent', () => {
 
   describe('Given #chargerUrlSauvegardeRestauration renvoie une clé', () => {
     beforeEach(() => {
-      mockParametrageService.chargerUrlSauvegardeRestauration.and.returnValue('cle-test');
+      mockParametrageService.chargerUrlSauvegardeRestauration.and.returnValue('http://url-test');
       spyOn(component.modifie, "emit");
     });
 
@@ -57,7 +56,7 @@ describe('FormulaireCleApiGeminiComponent', () => {
       expect(component.modificationUrlSauvegardeRestauration).toBeTrue();
       component.enregistrerUrlSauvegardeRestauration();
       expect(component.modifie.emit).toHaveBeenCalled();
-      expect(mockParametrageService.enregistrerUrlSauvegardeRestauration).toHaveBeenCalledWith('cle-test');
+      expect(mockParametrageService.enregistrerUrlSauvegardeRestauration).toHaveBeenCalledWith('http://url-test');
     });
   })
 });

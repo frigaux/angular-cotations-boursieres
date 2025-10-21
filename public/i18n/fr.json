@@ -352,15 +352,23 @@
         "EDITER_URL": "Editer l'URL de sauvegarde/restauration",
         "SAUVEGARDE": "Sauvegarder les paramètres",
         "RESTAURATION": "Restaurer les paramètres",
-        "CONFIRMATION_SAUVEGARDE": "Confirmez-vous la sauvegarde des paramètres ?",
-        "SAUVEGARDER": "Sauvegarder",
-        "SAUVEGARDE_REUSSI": "Sauvegarde réussie !",
-        "CONFIRMATION_RESTAURATION": "Confirmez-vous la restauration des paramètres ?",
-        "RESTAURER": "Restaurer",
-        "RESTAURATION_REUSSIE": "Restauration réussie !",
         "FORMULAIRE": {
           "URL": "URL"
-        }
+        },
+        "DIALOG_SAUVEGARDE": {
+          "CONFIRMATION_SAUVEGARDE": "Confirmez-vous la sauvegarde des paramètres ?",
+          "TABLEAUX": "le paramétrage des colonnes des tableaux",
+          "PORTEFEUILLES": "les portefeuilles avec leurs valeurs et alertes",
+          "FILTRES": "les filtres des cours",
+          "ACHATS": "la liste des achats",
+          "SAUVEGARDER": "Sauvegarder"
+        },
+        "SAUVEGARDE_REUSSI": "Sauvegarde réussie !",
+        "DIALOG_RESTAURATION": {
+          "CONFIRMATION_RESTAURATION": "Confirmez-vous la restauration des paramètres ?",
+          "RESTAURER": "Restaurer"
+        },
+        "RESTAURATION_REUSSIE": "Restauration réussie !"
       }
     }
   },

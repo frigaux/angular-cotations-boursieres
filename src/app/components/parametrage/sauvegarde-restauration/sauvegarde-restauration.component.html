@@ -2,6 +2,10 @@
                                             (modifie)="afficherFormulaireUrlSauvegardeRestauration=false"
                                             (abandon)="afficherFormulaireUrlSauvegardeRestauration=false"></app-formulaire-url-sauvegarde-restauration>
 
+<app-dialog-sauvegarde [(visible)]="dialogSauvegardeVisible" (sauvegarde)="sauvegarder()"></app-dialog-sauvegarde>
+
+<app-dialog-restauration [(visible)]="dialogRestaurationVisible" (restauration)="restaurer($event)"></app-dialog-restauration>
+
 <app-loader [affiche]="loading" [configuration]="[
         {marginLeft: '0', marginTop: '0', height: '4rem', width: '15rem'}
       ]"></app-loader>
@@ -10,9 +14,9 @@
   <div class="boutons">
     <span class="pi pi-pencil" (click)="afficherFormulaireUrlSauvegardeRestauration=true"
           title="{{ 'COMPOSANTS.PARAMETRAGE.SAUVEGARDE_RESTAURATION.EDITER_URL' | translate }}"></span>
-    <span class="pi pi-cloud-upload" (click)="sauvegarde($event)"
+    <span class="pi pi-cloud-upload" (click)="dialogSauvegardeVisible = true"
           title="{{ 'COMPOSANTS.PARAMETRAGE.SAUVEGARDE_RESTAURATION.SAUVEGARDE' | translate }}"></span>
-    <span class="pi pi-cloud-download" (click)="restauration($event)"
+    <span class="pi pi-cloud-download" (click)="dialogRestaurationVisible = true"
           title="{{ 'COMPOSANTS.PARAMETRAGE.SAUVEGARDE_RESTAURATION.RESTAURATION' | translate }}"></span>
   </div>
   <div class="succes">{{ succes }}</div>
