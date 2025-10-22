@@ -4,7 +4,7 @@ import {TranslatePipe} from '@ngx-translate/core';
 import {Button} from 'primeng/button';
 import {Checkbox} from 'primeng/checkbox';
 import {FormsModule} from '@angular/forms';
-import {DTORestauration} from './dto-restauration.class';
+import {DTORestauration} from '../../../../services/parametrage/dto-restauration.class';
 
 @Component({
   selector: 'app-dialog-restauration',

@@ -9,7 +9,7 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {
   DTORestauration
-} from '../../components/parametrage/sauvegarde-restauration/dialog-restauration/dto-restauration.class';
+} from './dto-restauration.class';
 
 @Injectable({
   providedIn: 'root'

@@ -8,7 +8,7 @@ import {LoaderComponent} from '../../loader/loader.component';
 import {JsonPipe} from '@angular/common';
 import {DialogSauvegarde} from './dialog-sauvegarde/dialog-sauvegarde.component';
 import {DialogRestauration} from './dialog-restauration/dialog-restauration.component';
-import {DTORestauration} from './dialog-restauration/dto-restauration.class';
+import {DTORestauration} from '../../../services/parametrage/dto-restauration.class';
 
 @Component({
   selector: 'app-sauvegarde-restauration',

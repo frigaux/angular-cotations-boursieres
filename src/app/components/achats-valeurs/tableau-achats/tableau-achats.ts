@@ -72,8 +72,8 @@ export class TableauAchats {
             const achats = this.achatsValeursDecores!.find(achats => achats.valeur.ticker === cours.ticker);
             if (achats) {
               achats.achatsDecores.forEach(achatDecore => {
-                achatDecore.cloture = cours.cloture;
-                achatDecore.variation = (cours.cloture / achatDecore.achat.prix) - 1;
+                achatDecore.cours = cours.cloture;
+                achatDecore.variationAchat = (cours.cloture / achatDecore.achat.prix) - 1;
                 this.totauxClotures += cours.cloture * achatDecore.achat.quantite;
               });
             }

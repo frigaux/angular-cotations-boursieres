@@ -226,6 +226,7 @@
       "PRIX_ACHAT": "Prix achat",
       "COURS": "Cours",
       "VARIATION_ACHAT": "Var/Ac",
+      "VARIATION_HAUT_BAS": "Var/Haut/Bas",
       "TABLEAU": {
         "TOTAUX": "Totaux",
         "VALEUR": "Valeur",

@@ -30,11 +30,11 @@
             <td>{{ achatDecore.achat.prix  | currency:'€' }}</td>
             <td>{{ achatDecore.achat.quantite  | number }}</td>
             <td>{{ (achatDecore.achat.prix * achatDecore.achat.quantite)  | currency:'€' }}</td>
-            <td [class]="evolutionVariation(achatDecore.variation)">{{ achatDecore.cloture | currency:'€' }}</td>
-            <td [class]="evolutionVariation(achatDecore.variation)">
-              {{ achatDecore.variation | percent:'1.2-2' }}
+            <td [class]="evolutionVariation(achatDecore.variationAchat)">{{ achatDecore.cours | currency:'€' }}</td>
+            <td [class]="evolutionVariation(achatDecore.variationAchat)">
+              {{ achatDecore.variationAchat | percent:'1.2-2' }}
             </td>
-            <td [class]="evolutionVariation(achatDecore.variation)">{{ (achatDecore.cloture! * achatDecore.achat.quantite)  | currency:'€' }}</td>
+            <td [class]="evolutionVariation(achatDecore.variationAchat)">{{ (achatDecore.cours! * achatDecore.achat.quantite)  | currency:'€' }}</td>
           </tr>
         }
       }

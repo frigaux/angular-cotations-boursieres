@@ -118,8 +118,10 @@ export class AchatsValeursComponent implements OnInit {
           this.coursNonRevendus?.forEach(achats => {
             const cours = liste.find(c => c.ticker === achats.valeur.ticker);
             achats.achatsDecores.forEach(achatDecore => {
-              achatDecore.cloture = cours ? cours.cloture : undefined;
-              achatDecore.variation = cours ? (cours.cloture / achatDecore.achat.prix) - 1 : undefined;
+              achatDecore.cours = cours ? cours.cloture : undefined;
+              achatDecore.variationAchat = cours ? (cours.cloture / achatDecore.achat.prix) - 1 : undefined;
+              achatDecore.variationBas = cours ? (cours.cloture / cours.plusBas) - 1 : undefined;
+              achatDecore.variationHaut = cours ? (cours.cloture / cours.plusHaut) - 1 : undefined;
             });
           });
           this.loading = false;
