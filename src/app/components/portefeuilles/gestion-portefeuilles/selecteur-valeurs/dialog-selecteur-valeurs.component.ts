@@ -9,7 +9,7 @@ import {Button} from 'primeng/button';
 import {LoaderComponent} from '../../../loader/loader.component';
 
 @Component({
-  selector: 'app-selecteur-valeurs',
+  selector: 'app-dialog-selecteur-valeurs',
   imports: [
     PickList,
     TranslatePipe,
@@ -17,10 +17,10 @@ import {LoaderComponent} from '../../../loader/loader.component';
     Button,
     LoaderComponent
   ],
-  templateUrl: './selecteur-valeurs.component.html',
-  styleUrl: './selecteur-valeurs.component.sass'
+  templateUrl: './dialog-selecteur-valeurs.component.html',
+  styleUrl: './dialog-selecteur-valeurs.component.sass'
 })
-export class SelecteurValeursComponent {
+export class DialogSelecteurValeursComponent {
   // chargement des valeurs
   loading: boolean = true;
 

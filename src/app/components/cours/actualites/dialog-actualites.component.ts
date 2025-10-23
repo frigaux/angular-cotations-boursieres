@@ -11,7 +11,7 @@ import {DTOTransaction} from '../../../services/abc-bourse/dto-transaction.class
 import {BlocLiensComponent} from './bloc-liens/bloc-liens.component';
 
 @Component({
-  selector: 'app-actualites',
+  selector: 'app-dialog-actualites',
   imports: [
     Dialog,
     TranslatePipe,
@@ -25,10 +25,10 @@ import {BlocLiensComponent} from './bloc-liens/bloc-liens.component';
     NgClass,
     BlocLiensComponent,
   ],
-  templateUrl: './actualites.component.html',
-  styleUrl: './actualites.component.sass'
+  templateUrl: './dialog-actualites.component.html',
+  styleUrl: './dialog-actualites.component.sass'
 })
-export class ActualitesComponent {
+export class DialogActualitesComponent {
   // chargement des actualités
   loading: boolean = true;
 

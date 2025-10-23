@@ -1,6 +1,6 @@
-<app-editeur-condition-filtre [filtre]="filtreEnModification"
+<app-dialog-editeur-condition-filtre [filtre]="filtreEnModification"
                               (abandon)="filtreEnModification = undefined"
-                              (modifie)="modifierConditionFiltre($event)"></app-editeur-condition-filtre>
+                              (modifie)="modifierConditionFiltre($event)"></app-dialog-editeur-condition-filtre>
 
 <p-dialog [header]="'COMPOSANTS.COURS.EDITEUR_FILTRES.MODIFICATION_FILTRES' | translate" [modal]="true"
           [visible]="visible" closable="false">

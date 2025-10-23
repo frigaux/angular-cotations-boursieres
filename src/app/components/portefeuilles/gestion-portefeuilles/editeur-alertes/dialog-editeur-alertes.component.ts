@@ -13,7 +13,7 @@ import {ConfirmationService} from 'primeng/api';
 import {PortefeuillesService} from '../../../../services/portefeuilles/portefeuilles.service';
 
 @Component({
-  selector: 'app-editeur-alertes',
+  selector: 'app-dialog-editeur-alertes',
   imports: [
     Dialog,
     Button,
@@ -23,10 +23,10 @@ import {PortefeuillesService} from '../../../../services/portefeuilles/portefeui
     ReactiveFormsModule,
     DialogEditeurConditionAlerteComponent
   ],
-  templateUrl: './editeur-alertes.component.html',
-  styleUrl: './editeur-alertes.component.sass'
+  templateUrl: './dialog-editeur-alertes.component.html',
+  styleUrl: './dialog-editeur-alertes.component.sass'
 })
-export class EditeurAlertesComponent {
+export class DialogEditeurAlertesComponent {
   private formBuilder = inject(FormBuilder);
 
   // input/output

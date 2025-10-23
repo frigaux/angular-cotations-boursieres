@@ -1,6 +1,6 @@
 import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import {EditeurAlertesComponent} from './editeur-alertes.component';
+import {DialogEditeurAlertesComponent} from './dialog-editeur-alertes.component';
 import {TranslateModule} from '@ngx-translate/core';
 import {ConfirmationService} from 'primeng/api';
 import {PORTEFEUILLES} from '../../../../services/jdd/jdd-portefeuilles.dataset';
@@ -8,14 +8,14 @@ import {DTOAlerte} from '../../../../services/portefeuilles/dto-alerte.interface
 import {provideAnimations} from '@angular/platform-browser/animations';
 
 describe('EditeurAlertesComponent', () => {
-  let component: EditeurAlertesComponent;
-  let fixture: ComponentFixture<EditeurAlertesComponent>;
+  let component: DialogEditeurAlertesComponent;
+  let fixture: ComponentFixture<DialogEditeurAlertesComponent>;
   const clonePORTEFEUILLES: Function = () => JSON.parse(JSON.stringify(PORTEFEUILLES));
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [
-        EditeurAlertesComponent,
+        DialogEditeurAlertesComponent,
         TranslateModule.forRoot({})
       ],
       providers: [
@@ -25,7 +25,7 @@ describe('EditeurAlertesComponent', () => {
     })
       .compileComponents();
 
-    fixture = TestBed.createComponent(EditeurAlertesComponent);
+    fixture = TestBed.createComponent(DialogEditeurAlertesComponent);
     component = fixture.componentInstance;
   });
 

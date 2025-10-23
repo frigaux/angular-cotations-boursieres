@@ -1,6 +1,6 @@
 import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import {EditeurFiltresComponent} from './editeur-filtres.component';
+import {DialogEditeurFiltresComponent} from './dialog-editeur-filtres.component';
 import {TranslateModule} from '@ngx-translate/core';
 import {CoursService} from '../../../services/cours/cours.service';
 import {ConfirmationService} from 'primeng/api';
@@ -9,8 +9,8 @@ import {FILTRES} from '../../../services/jdd/jdd-cours.dataset';
 import {provideAnimations} from '@angular/platform-browser/animations';
 
 describe('EditeurFiltreComponent', () => {
-  let component: EditeurFiltresComponent;
-  let fixture: ComponentFixture<EditeurFiltresComponent>;
+  let component: DialogEditeurFiltresComponent;
+  let fixture: ComponentFixture<DialogEditeurFiltresComponent>;
 
   const mockCoursService = jasmine.createSpyObj('CoursService', ['chargerFiltres', 'enregistrerFiltres']);
 
@@ -19,7 +19,7 @@ describe('EditeurFiltreComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [
-        EditeurFiltresComponent,
+        DialogEditeurFiltresComponent,
         TranslateModule.forRoot({})
       ],
       providers: [
@@ -30,7 +30,7 @@ describe('EditeurFiltreComponent', () => {
     })
       .compileComponents();
 
-    fixture = TestBed.createComponent(EditeurFiltresComponent);
+    fixture = TestBed.createComponent(DialogEditeurFiltresComponent);
     component = fixture.componentInstance;
   });
 

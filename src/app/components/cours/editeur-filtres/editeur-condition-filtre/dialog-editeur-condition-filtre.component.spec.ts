@@ -1,6 +1,6 @@
 import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import {EditeurConditionFiltreComponent} from './editeur-condition-filtre.component';
+import {DialogEditeurConditionFiltreComponent} from './dialog-editeur-condition-filtre.component';
 import {TranslateModule} from '@ngx-translate/core';
 import {FILTRES} from '../../../../services/jdd/jdd-cours.dataset';
 import {provideAnimations} from '@angular/platform-browser/animations';
@@ -8,15 +8,15 @@ import {provideHttpClient} from '@angular/common/http';
 import {provideHttpClientTesting} from '@angular/common/http/testing';
 
 describe('EditeurConditionFiltreComponent', () => {
-  let component: EditeurConditionFiltreComponent;
-  let fixture: ComponentFixture<EditeurConditionFiltreComponent>;
+  let component: DialogEditeurConditionFiltreComponent;
+  let fixture: ComponentFixture<DialogEditeurConditionFiltreComponent>;
 
   const cloneFILTRES: Function = () => JSON.parse(JSON.stringify(FILTRES));
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [
-        EditeurConditionFiltreComponent,
+        DialogEditeurConditionFiltreComponent,
         TranslateModule.forRoot({})
       ],
       providers: [
@@ -27,7 +27,7 @@ describe('EditeurConditionFiltreComponent', () => {
     })
       .compileComponents();
 
-    fixture = TestBed.createComponent(EditeurConditionFiltreComponent);
+    fixture = TestBed.createComponent(DialogEditeurConditionFiltreComponent);
     component = fixture.componentInstance;
   });
 

@@ -15,12 +15,12 @@ import {InputText} from 'primeng/inputtext';
 import {TranslatePipe, TranslateService} from '@ngx-translate/core';
 import {ConfirmationService} from 'primeng/api';
 import {DialogueService} from '../../../services/dialogue/dialogue.service';
-import {EditeurConditionFiltreComponent} from './editeur-condition-filtre/editeur-condition-filtre.component';
+import {DialogEditeurConditionFiltreComponent} from './editeur-condition-filtre/dialog-editeur-condition-filtre.component';
 import {DTOFiltre} from '../../../services/cours/dto-filtre.interface';
 import {CoursService} from '../../../services/cours/cours.service';
 
 @Component({
-  selector: 'app-editeur-filtres',
+  selector: 'app-dialog-editeur-filtres',
   imports: [
     Button,
     Dialog,
@@ -29,12 +29,12 @@ import {CoursService} from '../../../services/cours/cours.service';
     InputText,
     ReactiveFormsModule,
     TranslatePipe,
-    EditeurConditionFiltreComponent
+    DialogEditeurConditionFiltreComponent
   ],
-  templateUrl: './editeur-filtres.component.html',
-  styleUrls: ['../../portefeuilles/gestion-portefeuilles/editeur-alertes/editeur-alertes.component.sass', './editeur-filtres.component.sass']
+  templateUrl: './dialog-editeur-filtres.component.html',
+  styleUrls: ['../../portefeuilles/gestion-portefeuilles/editeur-alertes/dialog-editeur-alertes.component.sass', './dialog-editeur-filtres.component.sass']
 })
-export class EditeurFiltresComponent {
+export class DialogEditeurFiltresComponent {
   private formBuilder = inject(FormBuilder);
 
   // input/output

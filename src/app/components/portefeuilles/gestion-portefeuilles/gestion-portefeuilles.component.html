@@ -1,14 +1,14 @@
-<app-formulaire-modification [portefeuilles]="portefeuilles" [portefeuille]="portefeuilleNomEnModification"
+<app-dialog-formulaire-modification [portefeuilles]="portefeuilles" [portefeuille]="portefeuilleNomEnModification"
                              (abandon)="portefeuilleNomEnModification = undefined"
-                             (modifie)="modifierNomPortefeuille($event)"></app-formulaire-modification>
+                             (modifie)="modifierNomPortefeuille($event)"></app-dialog-formulaire-modification>
 
-<app-selecteur-valeurs [portefeuille]="portefeuilleValeursEnModification"
+<app-dialog-selecteur-valeurs [portefeuille]="portefeuilleValeursEnModification"
                        (abandon)="portefeuilleValeursEnModification = undefined"
-                       (modifie)="modifierValeursPortefeuille($event)"></app-selecteur-valeurs>
+                       (modifie)="modifierValeursPortefeuille($event)"></app-dialog-selecteur-valeurs>
 
-<app-editeur-alertes [portefeuille]="portefeuilleAlertesEnModification"
+<app-dialog-editeur-alertes [portefeuille]="portefeuilleAlertesEnModification"
                      (abandon)="portefeuilleAlertesEnModification = undefined"
-                     (modifie)="modifierAlertesPortefeuille($event)"></app-editeur-alertes>
+                     (modifie)="modifierAlertesPortefeuille($event)"></app-dialog-editeur-alertes>
 
 @if (afficherCreation || this.portefeuilles.length === 0) {
   <p-card>

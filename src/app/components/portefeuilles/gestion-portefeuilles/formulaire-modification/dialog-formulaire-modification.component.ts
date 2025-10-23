@@ -10,7 +10,7 @@ import {AutoFocus} from 'primeng/autofocus';
 import {Dialog} from 'primeng/dialog';
 
 @Component({
-  selector: 'app-formulaire-modification',
+  selector: 'app-dialog-formulaire-modification',
   imports: [
     Button,
     FloatLabel,
@@ -20,10 +20,10 @@ import {Dialog} from 'primeng/dialog';
     AutoFocus,
     Dialog
   ],
-  templateUrl: './formulaire-modification.component.html',
-  styleUrls: ['./formulaire-modification.component.sass', '../formulaire-creation/formulaire-creation.component.sass']
+  templateUrl: './dialog-formulaire-modification.component.html',
+  styleUrls: ['./dialog-formulaire-modification.component.sass', '../formulaire-creation/formulaire-creation.component.sass']
 })
-export class FormulaireModificationComponent {
+export class DialogFormulaireModificationComponent {
   // injections
   private formBuilder = inject(FormBuilder);
 

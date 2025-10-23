@@ -8,7 +8,7 @@ import {CurrencyPipe, DatePipe, DecimalPipe, NgClass, PercentPipe} from '@angula
 import {TranslatePipe} from '@ngx-translate/core';
 import {Cours} from '../cours.class';
 import {DTOActualiteTicker} from '../../../services/abc-bourse/dto-actualite-ticker.class';
-import {ActualiteTickerComponent} from './actualite-ticker/actualite-ticker.component';
+import {DialogActualiteTickerComponent} from './actualite-ticker/dialog-actualite-ticker.component';
 import {ConseilsGeminiTickerComponent} from '../conseils-gemini-ticker/conseils-gemini-ticker.component';
 
 @Component({
@@ -22,7 +22,7 @@ import {ConseilsGeminiTickerComponent} from '../conseils-gemini-ticker/conseils-
     DecimalPipe,
     CurrencyPipe,
     NgClass,
-    ActualiteTickerComponent,
+    DialogActualiteTickerComponent,
     DatePipe,
     ConseilsGeminiTickerComponent
   ],

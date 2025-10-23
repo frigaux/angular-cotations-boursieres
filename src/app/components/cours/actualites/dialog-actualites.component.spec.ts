@@ -1,6 +1,6 @@
 import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import {ActualitesComponent} from './actualites.component';
+import {DialogActualitesComponent} from './dialog-actualites.component';
 import {AbcBourseService} from '../../../services/abc-bourse/abc-bourse.service';
 import {TranslateModule} from '@ngx-translate/core';
 import {DTOActualites} from '../../../services/abc-bourse/dto-actualites.class';
@@ -8,15 +8,15 @@ import {of} from 'rxjs';
 import {DTOTransaction} from '../../../services/abc-bourse/dto-transaction.class';
 
 describe('ActualitesComponent', () => {
-  let component: ActualitesComponent;
-  let fixture: ComponentFixture<ActualitesComponent>;
+  let component: DialogActualitesComponent;
+  let fixture: ComponentFixture<DialogActualitesComponent>;
 
   const mockAbcBourseService = jasmine.createSpyObj('AbcBourseService', ['chargerActualites']);
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [
-        ActualitesComponent,
+        DialogActualitesComponent,
         TranslateModule.forRoot({})
       ],
       providers: [
@@ -25,7 +25,7 @@ describe('ActualitesComponent', () => {
     })
       .compileComponents();
 
-    fixture = TestBed.createComponent(ActualitesComponent);
+    fixture = TestBed.createComponent(DialogActualitesComponent);
     component = fixture.componentInstance;
   });
 

@@ -14,10 +14,10 @@ import {PrimeNG} from 'primeng/config';
 import {PickList} from 'primeng/picklist';
 import {NavigationBar} from '@squareetlabs/capacitor-navigation-bar';
 
+// TODO : edition des alertes : reprendre l'exemple
 // TODO : achats : récupérer aussi la liste des achats / ventes en cours sur boursorama
 // TODO : nouvelle page dividende : date dernier import, un dividende par ticker avec date, type, montant, rendement (https://abcbourse.com/marches/dividendes)
 // TODO : nouvelles opérandes pour les alertes du portefeuille/cours min/max/moyenne/nombre vagues
-// TODO : préfixer les noms de componsants par dialogue, panneau, ...
 // TODO : coverage
 // TODO : examiner les logs du debugger android studio
 @Component({

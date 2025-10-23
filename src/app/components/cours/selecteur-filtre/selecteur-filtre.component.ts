@@ -1,7 +1,7 @@
 import {Component, OnInit, output} from '@angular/core';
 import {CoursService} from '../../../services/cours/cours.service';
 import {TranslatePipe} from '@ngx-translate/core';
-import {EditeurFiltresComponent} from '../editeur-filtres/editeur-filtres.component';
+import {DialogEditeurFiltresComponent} from '../editeur-filtres/dialog-editeur-filtres.component';
 import {FiltreDecore} from './filtre-decore.class';
 import {NgClass} from '@angular/common';
 
@@ -9,7 +9,7 @@ import {NgClass} from '@angular/common';
   selector: 'app-selecteur-filtre',
   imports: [
     TranslatePipe,
-    EditeurFiltresComponent,
+    DialogEditeurFiltresComponent,
     NgClass
   ],
   templateUrl: './selecteur-filtre.component.html',

@@ -3,12 +3,12 @@ import {ReactiveFormsModule} from '@angular/forms';
 import {Card} from 'primeng/card';
 import {TranslatePipe, TranslateService} from '@ngx-translate/core';
 import {DTOPortefeuille} from '../../../services/portefeuilles/dto-portefeuille.interface';
-import {SelecteurValeursComponent} from './selecteur-valeurs/selecteur-valeurs.component';
+import {DialogSelecteurValeursComponent} from './selecteur-valeurs/dialog-selecteur-valeurs.component';
 import {FormulaireCreationComponent} from './formulaire-creation/formulaire-creation.component';
-import {FormulaireModificationComponent} from './formulaire-modification/formulaire-modification.component';
+import {DialogFormulaireModificationComponent} from './formulaire-modification/dialog-formulaire-modification.component';
 import {DialogImportExportComponent} from './import-export/dialog-import-export.component';
 import {PortefeuillesService} from '../../../services/portefeuilles/portefeuilles.service';
-import {EditeurAlertesComponent} from './editeur-alertes/editeur-alertes.component';
+import {DialogEditeurAlertesComponent} from './editeur-alertes/dialog-editeur-alertes.component';
 import {DTOAlerte} from '../../../services/portefeuilles/dto-alerte.interface';
 import {ConfigurationPortefeuilleComponent} from './portefeuille/configuration-portefeuille.component';
 import {CdkDrag, CdkDragDrop, CdkDropList, moveItemInArray} from '@angular/cdk/drag-drop';
@@ -21,11 +21,11 @@ import {ConfirmationService} from 'primeng/api';
     Card,
     ReactiveFormsModule,
     TranslatePipe,
-    SelecteurValeursComponent,
+    DialogSelecteurValeursComponent,
     FormulaireCreationComponent,
-    FormulaireModificationComponent,
+    DialogFormulaireModificationComponent,
     DialogImportExportComponent,
-    EditeurAlertesComponent,
+    DialogEditeurAlertesComponent,
     ConfigurationPortefeuilleComponent,
     CdkDropList,
     CdkDrag

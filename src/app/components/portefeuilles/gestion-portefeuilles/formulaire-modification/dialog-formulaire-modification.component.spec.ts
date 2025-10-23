@@ -1,19 +1,19 @@
 import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import {FormulaireModificationComponent} from './formulaire-modification.component';
+import {DialogFormulaireModificationComponent} from './dialog-formulaire-modification.component';
 import {TranslateModule} from '@ngx-translate/core';
 import {PORTEFEUILLE, PORTEFEUILLES} from '../../../../services/jdd/jdd-portefeuilles.dataset';
 import {provideAnimations} from '@angular/platform-browser/animations';
 
 describe('FormulaireModificationComponent', () => {
-  let component: FormulaireModificationComponent;
-  let fixture: ComponentFixture<FormulaireModificationComponent>;
+  let component: DialogFormulaireModificationComponent;
+  let fixture: ComponentFixture<DialogFormulaireModificationComponent>;
   const clonePORTEFEUILLES: Function = () => JSON.parse(JSON.stringify(PORTEFEUILLES))
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [
-        FormulaireModificationComponent,
+        DialogFormulaireModificationComponent,
         TranslateModule.forRoot({})
       ],
       providers: [
@@ -22,7 +22,7 @@ describe('FormulaireModificationComponent', () => {
     })
       .compileComponents();
 
-    fixture = TestBed.createComponent(FormulaireModificationComponent);
+    fixture = TestBed.createComponent(DialogFormulaireModificationComponent);
     component = fixture.componentInstance;
   });
 

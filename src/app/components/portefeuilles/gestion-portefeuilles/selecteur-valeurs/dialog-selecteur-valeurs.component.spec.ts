@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { SelecteurValeursComponent } from './selecteur-valeurs.component';
+import { DialogSelecteurValeursComponent } from './dialog-selecteur-valeurs.component';
 import {TranslateModule} from '@ngx-translate/core';
 import {ValeursService} from '../../../../services/valeurs/valeurs.service';
 import {of} from 'rxjs';
@@ -10,15 +10,15 @@ import {PORTEFEUILLES} from '../../../../services/jdd/jdd-portefeuilles.dataset'
 import {provideAnimations} from '@angular/platform-browser/animations';
 
 describe('SelecteurValeursComponent', () => {
-  let component: SelecteurValeursComponent;
-  let fixture: ComponentFixture<SelecteurValeursComponent>;
+  let component: DialogSelecteurValeursComponent;
+  let fixture: ComponentFixture<DialogSelecteurValeursComponent>;
 
   const mockValeursService = jasmine.createSpyObj('ValeursService', ['chargerValeurs']);
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [
-        SelecteurValeursComponent,
+        DialogSelecteurValeursComponent,
         TranslateModule.forRoot({})
       ],
       providers: [
@@ -28,7 +28,7 @@ describe('SelecteurValeursComponent', () => {
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(SelecteurValeursComponent);
+    fixture = TestBed.createComponent(DialogSelecteurValeursComponent);
     component = fixture.componentInstance;
   });
 

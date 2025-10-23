@@ -11,7 +11,7 @@ import {InputText} from 'primeng/inputtext';
 import {CoursService} from '../../../../services/cours/cours.service';
 
 @Component({
-  selector: 'app-editeur-condition-filtre',
+  selector: 'app-dialog-editeur-condition-filtre',
   imports: [
     Dialog,
     TranslatePipe,
@@ -22,10 +22,10 @@ import {CoursService} from '../../../../services/cours/cours.service';
     Button,
     InputText
   ],
-  templateUrl: './editeur-condition-filtre.component.html',
-  styleUrls: ['../../../portefeuilles/gestion-portefeuilles/editeur-alertes/editeur-condition-alerte/dialog-editeur-condition-alerte.component.sass', './editeur-condition-filtre.component.sass']
+  templateUrl: './dialog-editeur-condition-filtre.component.html',
+  styleUrls: ['../../../portefeuilles/gestion-portefeuilles/editeur-alertes/editeur-condition-alerte/dialog-editeur-condition-alerte.component.sass', './dialog-editeur-condition-filtre.component.sass']
 })
-export class EditeurConditionFiltreComponent {
+export class DialogEditeurConditionFiltreComponent {
   // injections
   private formBuilder = inject(FormBuilder);
 

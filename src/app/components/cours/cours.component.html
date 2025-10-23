@@ -5,7 +5,7 @@
 @if (date) {
   <div class="titre">
     <span>{{ 'COMPOSANTS.COURS.MARCHES_DATE' | translate: {jour: date | date: 'dd/MM/yyyy'} }}</span>
-    <app-actualites></app-actualites>
+    <app-dialog-actualites></app-dialog-actualites>
     <app-dialog-import-export></app-dialog-import-export>
     <app-selecteur-filtre (selection)="appliquerFiltre($event)"></app-selecteur-filtre>
   </div>

@@ -19,7 +19,7 @@ import {SelecteurFiltreComponent} from './selecteur-filtre/selecteur-filtre.comp
 import {FiltreDecore} from './selecteur-filtre/filtre-decore.class';
 import {DialogImportExportComponent} from './editeur-filtres/import-export/dialog-import-export.component';
 import {PortefeuillesService} from '../../services/portefeuilles/portefeuilles.service';
-import {ActualitesComponent} from './actualites/actualites.component';
+import {DialogActualitesComponent} from './actualites/dialog-actualites.component';
 
 @Component({
   selector: 'app-cours',
@@ -40,7 +40,7 @@ import {ActualitesComponent} from './actualites/actualites.component';
     AjoutAuPortefeuilleComponent,
     SelecteurFiltreComponent,
     DialogImportExportComponent,
-    ActualitesComponent
+    DialogActualitesComponent
   ],
   templateUrl: './cours.component.html',
   styleUrls: ['../portefeuilles/accordion-chart.sass', './cours.component.sass']
