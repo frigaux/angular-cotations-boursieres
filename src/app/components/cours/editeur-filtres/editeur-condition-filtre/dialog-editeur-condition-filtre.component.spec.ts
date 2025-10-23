@@ -7,7 +7,7 @@ import {provideAnimations} from '@angular/platform-browser/animations';
 import {provideHttpClient} from '@angular/common/http';
 import {provideHttpClientTesting} from '@angular/common/http/testing';
 
-describe('EditeurConditionFiltreComponent', () => {
+describe('DialogEditeurConditionFiltreComponent', () => {
   let component: DialogEditeurConditionFiltreComponent;
   let fixture: ComponentFixture<DialogEditeurConditionFiltreComponent>;
 

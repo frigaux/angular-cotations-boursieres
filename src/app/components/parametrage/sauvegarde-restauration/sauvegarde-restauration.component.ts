@@ -6,8 +6,8 @@ import {ParametrageService} from '../../../services/parametrage/parametrage.serv
 import {TranslatePipe, TranslateService} from '@ngx-translate/core';
 import {LoaderComponent} from '../../loader/loader.component';
 import {JsonPipe} from '@angular/common';
-import {DialogSauvegarde} from './dialog-sauvegarde/dialog-sauvegarde.component';
-import {DialogRestauration} from './dialog-restauration/dialog-restauration.component';
+import {DialogSauvegardeComponent} from './dialog-sauvegarde/dialog-sauvegarde.component';
+import {DialogRestaurationComponent} from './dialog-restauration/dialog-restauration.component';
 import {DTORestauration} from '../../../services/parametrage/dto-restauration.class';
 
 @Component({
@@ -17,8 +17,8 @@ import {DTORestauration} from '../../../services/parametrage/dto-restauration.cl
     TranslatePipe,
     LoaderComponent,
     JsonPipe,
-    DialogSauvegarde,
-    DialogRestauration
+    DialogSauvegardeComponent,
+    DialogRestaurationComponent
   ],
   templateUrl: './sauvegarde-restauration.component.html',
   styleUrl: './sauvegarde-restauration.component.sass'

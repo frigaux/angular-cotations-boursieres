@@ -7,7 +7,7 @@ import {PORTEFEUILLES} from '../../../../services/jdd/jdd-portefeuilles.dataset'
 import {DTOAlerte} from '../../../../services/portefeuilles/dto-alerte.interface';
 import {provideAnimations} from '@angular/platform-browser/animations';
 
-describe('EditeurAlertesComponent', () => {
+describe('DialogEditeurAlertesComponent', () => {
   let component: DialogEditeurAlertesComponent;
   let fixture: ComponentFixture<DialogEditeurAlertesComponent>;
   const clonePORTEFEUILLES: Function = () => JSON.parse(JSON.stringify(PORTEFEUILLES));

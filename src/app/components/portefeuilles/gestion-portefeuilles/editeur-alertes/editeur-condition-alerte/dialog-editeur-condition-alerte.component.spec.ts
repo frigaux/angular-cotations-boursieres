@@ -5,7 +5,7 @@ import {TranslateModule} from '@ngx-translate/core';
 import {PORTEFEUILLES} from '../../../../../services/jdd/jdd-portefeuilles.dataset';
 import {provideAnimations} from '@angular/platform-browser/animations';
 
-describe('EditeurConditionAlerteComponent', () => {
+describe('DialogEditeurConditionAlerteComponent', () => {
   let component: DialogEditeurConditionAlerteComponent;
   let fixture: ComponentFixture<DialogEditeurConditionAlerteComponent>;
   const clonePORTEFEUILLES: Function = () => JSON.parse(JSON.stringify(PORTEFEUILLES));

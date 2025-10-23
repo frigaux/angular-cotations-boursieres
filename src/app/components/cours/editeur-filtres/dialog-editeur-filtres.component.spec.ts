@@ -8,7 +8,7 @@ import {DTOAlerte} from '../../../services/portefeuilles/dto-alerte.interface';
 import {FILTRES} from '../../../services/jdd/jdd-cours.dataset';
 import {provideAnimations} from '@angular/platform-browser/animations';
 
-describe('EditeurFiltreComponent', () => {
+describe('DialogEditeurFiltreComponent', () => {
   let component: DialogEditeurFiltresComponent;
   let fixture: ComponentFixture<DialogEditeurFiltresComponent>;
 

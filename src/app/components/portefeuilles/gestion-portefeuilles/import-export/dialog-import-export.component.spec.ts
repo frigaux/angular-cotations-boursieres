@@ -4,7 +4,7 @@ import {DialogImportExportComponent} from './dialog-import-export.component';
 import {TranslateModule} from '@ngx-translate/core';
 import {PORTEFEUILLES} from '../../../../services/jdd/jdd-portefeuilles.dataset';
 
-describe('ImportExportComponent', () => {
+describe('DialogImportExportComponent', () => {
   let component: DialogImportExportComponent;
   let fixture: ComponentFixture<DialogImportExportComponent>;
 

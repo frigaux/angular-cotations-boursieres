@@ -1,22 +1,22 @@
 import {ComponentFixture, TestBed} from '@angular/core/testing';
-import {DialogSauvegarde} from './dialog-sauvegarde.component';
+import {DialogSauvegardeComponent} from './dialog-sauvegarde.component';
 import {TranslateModule} from '@ngx-translate/core';
 
 
-describe('DialogSauvegarde', () => {
-  let component: DialogSauvegarde;
-  let fixture: ComponentFixture<DialogSauvegarde>;
+describe('DialogSauvegardeComponent', () => {
+  let component: DialogSauvegardeComponent;
+  let fixture: ComponentFixture<DialogSauvegardeComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [
-        DialogSauvegarde,
+        DialogSauvegardeComponent,
         TranslateModule.forRoot({})
       ]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(DialogSauvegarde);
+    fixture = TestBed.createComponent(DialogSauvegardeComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

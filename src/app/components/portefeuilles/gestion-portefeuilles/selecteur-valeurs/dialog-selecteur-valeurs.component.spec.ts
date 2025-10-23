@@ -9,7 +9,7 @@ import {COURS_CROISSANT} from '../../../../services/jdd/jdd-cours.dataset';
 import {PORTEFEUILLES} from '../../../../services/jdd/jdd-portefeuilles.dataset';
 import {provideAnimations} from '@angular/platform-browser/animations';
 
-describe('SelecteurValeursComponent', () => {
+describe('DialogSelecteurValeursComponent', () => {
   let component: DialogSelecteurValeursComponent;
   let fixture: ComponentFixture<DialogSelecteurValeursComponent>;
 

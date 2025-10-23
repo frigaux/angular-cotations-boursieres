@@ -7,7 +7,7 @@ import {DTOActualites} from '../../../services/abc-bourse/dto-actualites.class';
 import {of} from 'rxjs';
 import {DTOTransaction} from '../../../services/abc-bourse/dto-transaction.class';
 
-describe('ActualitesComponent', () => {
+describe('DialogActualitesComponent', () => {
   let component: DialogActualitesComponent;
   let fixture: ComponentFixture<DialogActualitesComponent>;
 

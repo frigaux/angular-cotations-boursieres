@@ -5,7 +5,7 @@ import {TranslateModule} from '@ngx-translate/core';
 import {PORTEFEUILLE, PORTEFEUILLES} from '../../../../services/jdd/jdd-portefeuilles.dataset';
 import {provideAnimations} from '@angular/platform-browser/animations';
 
-describe('FormulaireModificationComponent', () => {
+describe('DialogFormulaireModificationComponent', () => {
   let component: DialogFormulaireModificationComponent;
   let fixture: ComponentFixture<DialogFormulaireModificationComponent>;
   const clonePORTEFEUILLES: Function = () => JSON.parse(JSON.stringify(PORTEFEUILLES))

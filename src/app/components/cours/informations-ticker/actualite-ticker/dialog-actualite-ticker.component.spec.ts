@@ -6,7 +6,7 @@ import {of} from 'rxjs';
 import {DTOActualiteTicker} from '../../../../services/abc-bourse/dto-actualite-ticker.class';
 import {provideAnimations} from '@angular/platform-browser/animations';
 
-describe('ActualiteComponent', () => {
+describe('DialogActualiteTickerComponent', () => {
   let component: DialogActualiteTickerComponent;
   let fixture: ComponentFixture<DialogActualiteTickerComponent>;
 

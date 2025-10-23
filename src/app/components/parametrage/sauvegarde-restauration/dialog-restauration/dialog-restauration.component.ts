@@ -18,7 +18,7 @@ import {DTORestauration} from '../../../../services/parametrage/dto-restauration
   templateUrl: './dialog-restauration.component.html',
   styleUrls: ['./dialog-restauration.component.sass', '../dialog-sauvegarde/dialog-sauvegarde.component.sass']
 })
-export class DialogRestauration {
+export class DialogRestaurationComponent {
   visible = model<boolean>(false);
   outputRestauration = output<DTORestauration>({alias: 'restauration'});
   dtoRestauration: DTORestauration = new DTORestauration();

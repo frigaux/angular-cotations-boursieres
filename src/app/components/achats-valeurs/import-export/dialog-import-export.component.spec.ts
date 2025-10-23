@@ -6,7 +6,7 @@ import {provideHttpClientTesting} from '@angular/common/http/testing';
 import {TranslateModule} from '@ngx-translate/core';
 import {ACHATS} from '../../../services/jdd/jdd-valeurs.dataset';
 
-describe('ImportExportComponent', () => {
+describe('DialogImportExportComponent', () => {
   let component: DialogImportExportComponent;
   let fixture: ComponentFixture<DialogImportExportComponent>;
 

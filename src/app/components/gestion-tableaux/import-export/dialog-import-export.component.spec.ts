@@ -7,7 +7,7 @@ import {TABLEAUX} from '../../../services/jdd/jdd-tableaux.dataset';
 import {provideHttpClient} from '@angular/common/http';
 import {provideHttpClientTesting} from '@angular/common/http/testing';
 
-describe('ImportExportComponent', () => {
+describe('DialogImportExportComponent', () => {
   let component: DialogImportExportComponent;
   let fixture: ComponentFixture<DialogImportExportComponent>;
 

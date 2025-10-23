@@ -15,7 +15,7 @@ import {TranslatePipe} from '@ngx-translate/core';
   templateUrl: './dialog-sauvegarde.component.html',
   styleUrl: './dialog-sauvegarde.component.sass'
 })
-export class DialogSauvegarde {
+export class DialogSauvegardeComponent {
   visible = model<boolean>(false);
   outputSauvegarde = output<void>({alias: 'sauvegarde'});
 

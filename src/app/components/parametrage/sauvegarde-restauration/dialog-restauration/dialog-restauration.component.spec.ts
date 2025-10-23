@@ -1,22 +1,22 @@
 import {ComponentFixture, TestBed} from '@angular/core/testing';
-import {DialogRestauration} from './dialog-restauration.component';
+import {DialogRestaurationComponent} from './dialog-restauration.component';
 import {TranslateModule} from '@ngx-translate/core';
 
 
-describe('DialogRestauration', () => {
-  let component: DialogRestauration;
-  let fixture: ComponentFixture<DialogRestauration>;
+describe('DialogRestaurationComponent', () => {
+  let component: DialogRestaurationComponent;
+  let fixture: ComponentFixture<DialogRestaurationComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [
-        DialogRestauration,
+        DialogRestaurationComponent,
         TranslateModule.forRoot({})
       ]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(DialogRestauration);
+    fixture = TestBed.createComponent(DialogRestaurationComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

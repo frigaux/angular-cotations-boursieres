@@ -1,6 +1,7 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { PanneauAchatsValeurComponent } from './panneau-achats-valeur-component';
+import {PanneauAchatsValeurComponent} from './panneau-achats-valeur-component';
+import {TranslateModule} from '@ngx-translate/core';
 
 describe('PanneauAchatsValeur', () => {
   let component: PanneauAchatsValeurComponent;
@@ -8,9 +9,12 @@ describe('PanneauAchatsValeur', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [PanneauAchatsValeurComponent]
+      imports: [
+        PanneauAchatsValeurComponent,
+        TranslateModule.forRoot({})
+      ]
     })
-    .compileComponents();
+      .compileComponents();
 
     fixture = TestBed.createComponent(PanneauAchatsValeurComponent);
     component = fixture.componentInstance;
