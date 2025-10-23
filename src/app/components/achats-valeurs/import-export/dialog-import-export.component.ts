@@ -9,7 +9,7 @@ import {TranslatePipe} from "@ngx-translate/core";
 import {ValeursService} from '../../../services/valeurs/valeurs.service';
 
 @Component({
-  selector: 'app-import-export',
+  selector: 'app-dialog-import-export',
   imports: [
     Button,
     Dialog,
@@ -20,10 +20,10 @@ import {ValeursService} from '../../../services/valeurs/valeurs.service';
     FormsModule,
     NgClass
   ],
-  templateUrl: './import-export.component.html',
-  styleUrls: ['../../portefeuilles/gestion-portefeuilles/import-export/import-export.component.sass', './import-export.component.sass']
+  templateUrl: './dialog-import-export.component.html',
+  styleUrls: ['../../portefeuilles/gestion-portefeuilles/import-export/dialog-import-export.component.sass', './dialog-import-export.component.sass']
 })
-export class ImportExportComponent {
+export class DialogImportExportComponent {
   visible: boolean = false;
   achats: string = '';
   erreur: string | undefined;

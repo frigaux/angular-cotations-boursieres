@@ -6,7 +6,7 @@ import {DTOPortefeuille} from '../../../services/portefeuilles/dto-portefeuille.
 import {SelecteurValeursComponent} from './selecteur-valeurs/selecteur-valeurs.component';
 import {FormulaireCreationComponent} from './formulaire-creation/formulaire-creation.component';
 import {FormulaireModificationComponent} from './formulaire-modification/formulaire-modification.component';
-import {ImportExportComponent} from './import-export/import-export.component';
+import {DialogImportExportComponent} from './import-export/dialog-import-export.component';
 import {PortefeuillesService} from '../../../services/portefeuilles/portefeuilles.service';
 import {EditeurAlertesComponent} from './editeur-alertes/editeur-alertes.component';
 import {DTOAlerte} from '../../../services/portefeuilles/dto-alerte.interface';
@@ -24,7 +24,7 @@ import {ConfirmationService} from 'primeng/api';
     SelecteurValeursComponent,
     FormulaireCreationComponent,
     FormulaireModificationComponent,
-    ImportExportComponent,
+    DialogImportExportComponent,
     EditeurAlertesComponent,
     ConfigurationPortefeuilleComponent,
     CdkDropList,

@@ -9,7 +9,7 @@ import {TableauxService} from '../../../services/tableaux/tableaux.service';
 import {FloatLabel} from 'primeng/floatlabel';
 
 @Component({
-  selector: 'app-import-export',
+  selector: 'app-dialog-import-export',
   imports: [
     Button,
     Dialog,
@@ -20,10 +20,10 @@ import {FloatLabel} from 'primeng/floatlabel';
     NgClass,
     FloatLabel
   ],
-  templateUrl: './import-export.component.html',
-  styleUrls: ['../../portefeuilles/gestion-portefeuilles/import-export/import-export.component.sass', './import-export.component.sass']
+  templateUrl: './dialog-import-export.component.html',
+  styleUrls: ['../../portefeuilles/gestion-portefeuilles/import-export/dialog-import-export.component.sass', './dialog-import-export.component.sass']
 })
-export class ImportExportComponent {
+export class DialogImportExportComponent {
   visible: boolean = false;
   configurationTableaux: string = '';
   erreur: string | undefined;

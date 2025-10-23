@@ -9,7 +9,7 @@ import {Textarea} from 'primeng/textarea';
 import {FloatLabel} from 'primeng/floatlabel';
 
 @Component({
-  selector: 'app-import-export',
+  selector: 'app-dialog-import-export',
   imports: [
     TranslatePipe,
     Dialog,
@@ -19,10 +19,10 @@ import {FloatLabel} from 'primeng/floatlabel';
     Textarea,
     FloatLabel
   ],
-  templateUrl: './import-export.component.html',
-  styleUrl: './import-export.component.sass'
+  templateUrl: './dialog-import-export.component.html',
+  styleUrl: './dialog-import-export.component.sass'
 })
-export class ImportExportComponent {
+export class DialogImportExportComponent {
   visible: boolean = false;
   configurationPortefeuilles: string = '';
   erreur: string | undefined;

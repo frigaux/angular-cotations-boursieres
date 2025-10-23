@@ -1,6 +1,6 @@
 import {ComponentFixture, fakeAsync, TestBed} from '@angular/core/testing';
 
-import {ImportExportComponent} from './import-export.component';
+import {DialogImportExportComponent} from './dialog-import-export.component';
 import {TranslateModule} from '@ngx-translate/core';
 import {CurrencyPipe, DatePipe, DecimalPipe, PercentPipe} from '@angular/common';
 import {TABLEAUX} from '../../../services/jdd/jdd-tableaux.dataset';
@@ -8,15 +8,15 @@ import {provideHttpClient} from '@angular/common/http';
 import {provideHttpClientTesting} from '@angular/common/http/testing';
 
 describe('ImportExportComponent', () => {
-  let component: ImportExportComponent;
-  let fixture: ComponentFixture<ImportExportComponent>;
+  let component: DialogImportExportComponent;
+  let fixture: ComponentFixture<DialogImportExportComponent>;
 
   const tableaux = JSON.stringify(TABLEAUX, null, 2);
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [
-        ImportExportComponent,
+        DialogImportExportComponent,
         TranslateModule.forRoot({})
       ],
       providers: [
@@ -30,7 +30,7 @@ describe('ImportExportComponent', () => {
     })
       .compileComponents();
 
-    fixture = TestBed.createComponent(ImportExportComponent);
+    fixture = TestBed.createComponent(DialogImportExportComponent);
     component = fixture.componentInstance;
   });
 

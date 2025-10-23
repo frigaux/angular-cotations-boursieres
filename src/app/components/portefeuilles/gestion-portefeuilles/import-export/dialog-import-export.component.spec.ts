@@ -1,25 +1,25 @@
 import {ComponentFixture, fakeAsync, TestBed} from '@angular/core/testing';
 
-import {ImportExportComponent} from './import-export.component';
+import {DialogImportExportComponent} from './dialog-import-export.component';
 import {TranslateModule} from '@ngx-translate/core';
 import {PORTEFEUILLES} from '../../../../services/jdd/jdd-portefeuilles.dataset';
 
 describe('ImportExportComponent', () => {
-  let component: ImportExportComponent;
-  let fixture: ComponentFixture<ImportExportComponent>;
+  let component: DialogImportExportComponent;
+  let fixture: ComponentFixture<DialogImportExportComponent>;
 
   const portefeuilles = JSON.stringify(PORTEFEUILLES, null, 2);
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [
-        ImportExportComponent,
+        DialogImportExportComponent,
         TranslateModule.forRoot({})
       ]
     })
       .compileComponents();
 
-    fixture = TestBed.createComponent(ImportExportComponent);
+    fixture = TestBed.createComponent(DialogImportExportComponent);
     component = fixture.componentInstance;
   });
 

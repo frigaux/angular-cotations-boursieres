@@ -1,21 +1,21 @@
 import {ComponentFixture, fakeAsync, TestBed} from '@angular/core/testing';
 
-import {ImportExportComponent} from './import-export.component';
+import {DialogImportExportComponent} from './dialog-import-export.component';
 import {provideHttpClient} from '@angular/common/http';
 import {provideHttpClientTesting} from '@angular/common/http/testing';
 import {TranslateModule} from '@ngx-translate/core';
-import {FILTRES} from '../../../../services/jdd/jdd-cours.dataset';
+import {ACHATS} from '../../../services/jdd/jdd-valeurs.dataset';
 
 describe('ImportExportComponent', () => {
-  let component: ImportExportComponent;
-  let fixture: ComponentFixture<ImportExportComponent>;
+  let component: DialogImportExportComponent;
+  let fixture: ComponentFixture<DialogImportExportComponent>;
 
-  const filtres = JSON.stringify(FILTRES, null, 2);
+  const achats = JSON.stringify(ACHATS, null, 2);
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [
-        ImportExportComponent,
+        DialogImportExportComponent,
         TranslateModule.forRoot({})
       ],
       providers: [
@@ -25,7 +25,7 @@ describe('ImportExportComponent', () => {
     })
       .compileComponents();
 
-    fixture = TestBed.createComponent(ImportExportComponent);
+    fixture = TestBed.createComponent(DialogImportExportComponent);
     component = fixture.componentInstance;
   });
 
@@ -33,17 +33,17 @@ describe('ImportExportComponent', () => {
     expect(component).toBeDefined();
   });
 
-  describe('Given des filtres', () => {
+  describe('Given des achats', () => {
     beforeEach(() => {
-      component.filtres = filtres;
+      component.achats = achats;
       fixture.detectChanges();
     });
 
-    it('when on #importer then #exporter renvoie les filtres importés', fakeAsync(() => {
+    it('when on #importer then #exporter renvoie les achats importés', fakeAsync(() => {
       component.importer();
       component.reinitialiserVue();
       component.exporter();
-      expect(component.filtres).toEqual(filtres);
+      expect(component.achats).toEqual(achats);
     }));
   });
 });

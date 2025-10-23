@@ -5,7 +5,7 @@ import {ConfigurationTableauComponent} from './configuration-tableau/configurati
 import {TypesColonnes} from '../../services/tableaux/types-colonnes.enum.ts';
 import {TranslatePipe, TranslateService} from '@ngx-translate/core';
 import {Card} from 'primeng/card';
-import {ImportExportComponent} from './import-export/import-export.component';
+import {DialogImportExportComponent} from './import-export/dialog-import-export.component';
 
 @Component({
   selector: 'app-gestion-tableaux',
@@ -13,7 +13,7 @@ import {ImportExportComponent} from './import-export/import-export.component';
     ConfigurationTableauComponent,
     TranslatePipe,
     Card,
-    ImportExportComponent
+    DialogImportExportComponent
   ],
   templateUrl: './gestion-tableaux.component.html',
   styleUrl: './gestion-tableaux.component.sass'

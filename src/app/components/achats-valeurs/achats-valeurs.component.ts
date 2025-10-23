@@ -6,7 +6,7 @@ import {AchatsValeurDecores} from './achats-valeur-decores.class';
 import {AchatDecore} from '../valeurs/details-valeur/achats-valeur/achat-decore.class';
 import {TranslatePipe, TranslateService} from '@ngx-translate/core';
 import {LoaderComponent} from '../loader/loader.component';
-import {ImportExportComponent} from './import-export/import-export.component';
+import {DialogImportExportComponent} from './import-export/dialog-import-export.component';
 import {ConfirmationService} from 'primeng/api';
 import {DialogueService} from '../../services/dialogue/dialogue.service';
 import {TableauAchats} from './tableau-achats/tableau-achats';
@@ -18,7 +18,7 @@ import {CurrencyPipe, PercentPipe} from '@angular/common';
   imports: [
     TranslatePipe,
     LoaderComponent,
-    ImportExportComponent,
+    DialogImportExportComponent,
     TableauAchats,
     CurrencyPipe,
     PercentPipe

@@ -26,7 +26,7 @@
       </span>
       <span class="pi pi-plus-circle" (click)="afficherCreation = true"
             title="{{ 'COMPOSANTS.PORTEFEUILLES.GESTION_PORTEFEUILLES.CREER' | translate }}"></span>
-      <app-import-export></app-import-export>
+      <app-dialog-import-export></app-dialog-import-export>
     </div>
 
     <div cdkDropList class="liste" (cdkDropListDropped)="dropColonne($event)">
