@@ -23,7 +23,7 @@ import {CoursService} from '../../../../services/cours/cours.service';
     InputText
   ],
   templateUrl: './editeur-condition-filtre.component.html',
-  styleUrls: ['../../../portefeuilles/gestion-portefeuilles/editeur-alertes/editeur-condition-alerte/editeur-condition-alerte.component.sass', './editeur-condition-filtre.component.sass']
+  styleUrls: ['../../../portefeuilles/gestion-portefeuilles/editeur-alertes/editeur-condition-alerte/dialog-editeur-condition-alerte.component.sass', './editeur-condition-filtre.component.sass']
 })
 export class EditeurConditionFiltreComponent {
   // injections

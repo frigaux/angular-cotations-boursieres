@@ -14,7 +14,7 @@ import {AlertesComponent} from './alertes/alertes.component';
 import {Skeleton} from 'primeng/skeleton';
 import {LoaderComponent} from '../loader/loader.component';
 import {DTOCoursAvecListeAllege} from '../../services/cours/dto-cours-avec-liste-allege.interface';
-import {ActionsValeurComponent} from './actions-valeur/actions-valeur.component';
+import {PopoverActionsValeurComponent} from './actions-valeur/popover-actions-valeur.component';
 import {Cours} from '../cours/cours.class';
 import {DTOPortefeuille} from '../../services/portefeuilles/dto-portefeuille.interface';
 import {TableauxService} from '../../services/tableaux/tableaux.service';
@@ -39,7 +39,7 @@ import {ActualitesComponent} from '../cours/actualites/actualites.component';
     NgClass,
     Skeleton,
     LoaderComponent,
-    ActionsValeurComponent,
+    PopoverActionsValeurComponent,
     NgStyle,
     CurrencyPipe,
     PercentPipe,
@@ -50,7 +50,7 @@ import {ActualitesComponent} from '../cours/actualites/actualites.component';
   styleUrls: ['./accordion-chart.sass', './portefeuilles.component.sass']
 })
 export class PortefeuillesComponent implements OnInit {
-  private actionsValeur = viewChild(ActionsValeurComponent);
+  private actionsValeur = viewChild(PopoverActionsValeurComponent);
 
   // chargement des valeurs et cours
   loading: boolean = true;

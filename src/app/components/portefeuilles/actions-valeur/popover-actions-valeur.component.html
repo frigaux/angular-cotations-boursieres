@@ -1,3 +1,5 @@
+<app-panneau-achats-valeur [cours]="cours" [(visible)]="achatsVisible"></app-panneau-achats-valeur>
+
 <p-popover>
   @if (cours) {
     <div class="actions-valeur">
@@ -42,18 +44,3 @@
     </div>
   }
 </p-popover>
-
-
-@if (achatsVisible) {
-  <p-panel>
-    <ng-template #header>
-      <div class="titre">
-        <span>{{ titre }}</span>
-        <span class="pi pi-times-circle" (click)="achatsVisible=false"></span>
-      </div>
-    </ng-template>
-    @if (cours) {
-      <app-achats-valeur [valeur]="{ticker: cours.ticker, cloture: cours.cloture}"></app-achats-valeur>
-    }
-  </p-panel>
-}

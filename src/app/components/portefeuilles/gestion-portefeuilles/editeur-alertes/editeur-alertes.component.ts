@@ -7,7 +7,7 @@ import {Button} from 'primeng/button';
 import {FloatLabel} from 'primeng/floatlabel';
 import {InputText} from 'primeng/inputtext';
 import {FormArray, FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms';
-import {EditeurConditionAlerteComponent} from './editeur-condition-alerte/editeur-condition-alerte.component';
+import {DialogEditeurConditionAlerteComponent} from './editeur-condition-alerte/dialog-editeur-condition-alerte.component';
 import {DialogueService} from '../../../../services/dialogue/dialogue.service';
 import {ConfirmationService} from 'primeng/api';
 import {PortefeuillesService} from '../../../../services/portefeuilles/portefeuilles.service';
@@ -21,7 +21,7 @@ import {PortefeuillesService} from '../../../../services/portefeuilles/portefeui
     FloatLabel,
     InputText,
     ReactiveFormsModule,
-    EditeurConditionAlerteComponent
+    DialogEditeurConditionAlerteComponent
   ],
   templateUrl: './editeur-alertes.component.html',
   styleUrl: './editeur-alertes.component.sass'

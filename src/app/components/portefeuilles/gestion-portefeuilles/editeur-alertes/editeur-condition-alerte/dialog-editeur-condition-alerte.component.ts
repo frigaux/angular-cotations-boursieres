@@ -11,7 +11,7 @@ import {Card} from 'primeng/card';
 import {PortefeuillesService} from '../../../../../services/portefeuilles/portefeuilles.service';
 
 @Component({
-  selector: 'app-editeur-condition-alerte',
+  selector: 'app-dialog-editeur-condition-alerte',
   imports: [
     Dialog,
     Button,
@@ -23,10 +23,10 @@ import {PortefeuillesService} from '../../../../../services/portefeuilles/portef
     AutoFocus,
     Card
   ],
-  templateUrl: './editeur-condition-alerte.component.html',
-  styleUrl: './editeur-condition-alerte.component.sass'
+  templateUrl: './dialog-editeur-condition-alerte.component.html',
+  styleUrl: './dialog-editeur-condition-alerte.component.sass'
 })
-export class EditeurConditionAlerteComponent {
+export class DialogEditeurConditionAlerteComponent {
   // injections
   private formBuilder = inject(FormBuilder);
 

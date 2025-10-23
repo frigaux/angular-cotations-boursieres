@@ -4,35 +4,30 @@ import {Cours} from '../../cours/cours.class';
 import {TranslatePipe, TranslateService} from '@ngx-translate/core';
 import {PortefeuillesService} from '../../../services/portefeuilles/portefeuilles.service';
 import {DTOPortefeuille} from '../../../services/portefeuilles/dto-portefeuille.interface';
-import {AchatsValeurComponent} from '../../valeurs/details-valeur/achats-valeur/achats-valeur.component';
-import {Panel} from 'primeng/panel';
 import {ConfirmationService} from 'primeng/api';
 import {DialogueService} from '../../../services/dialogue/dialogue.service';
 import {Select} from 'primeng/select';
 import {FormsModule} from '@angular/forms';
+import {PanneauAchatsValeurComponent} from './panneau-achats-valeur/panneau-achats-valeur-component';
 
 @Component({
-  selector: 'actions-valeur',
+  selector: 'app-popover-actions-valeur',
   imports: [
     Popover,
     TranslatePipe,
-    AchatsValeurComponent,
-    Panel,
     Select,
-    FormsModule
+    FormsModule,
+    PanneauAchatsValeurComponent
   ],
-  templateUrl: './actions-valeur.component.html',
-  styleUrl: './actions-valeur.component.sass'
+  templateUrl: './popover-actions-valeur.component.html',
+  styleUrl: './popover-actions-valeur.component.sass'
 })
-export class ActionsValeurComponent {
+export class PopoverActionsValeurComponent {
   private popover = viewChild(Popover);
 
   // paramètres
   cours?: Cours;
   portefeuilleAffiche?: DTOPortefeuille;
-
-  // données pour la vue
-  titre?: string;
 
   // affichage ou pas du panneau des achats
   achatsVisible: boolean = false;
@@ -50,7 +45,6 @@ export class ActionsValeurComponent {
   afficher(event: MouseEvent, cours: Cours, portefeuille: DTOPortefeuille) {
     this.achatsVisible = false;
     this.portefeuilleAffiche = portefeuille;
-    this.titre = this.translateService.instant('COMPOSANTS.PORTEFEUILLES.ACTIONS_VALEUR.ACHATS_VALEUR', {'nom': cours.libelle});
     this.nomsPortefeuillesDisponibles = this.portefeuillesService.charger()
       .map(p => p.nom)
       .filter(nom => nom !== portefeuille.nom);

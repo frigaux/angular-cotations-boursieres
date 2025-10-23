@@ -1,19 +1,19 @@
 import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import {EditeurConditionAlerteComponent} from './editeur-condition-alerte.component';
+import {DialogEditeurConditionAlerteComponent} from './dialog-editeur-condition-alerte.component';
 import {TranslateModule} from '@ngx-translate/core';
 import {PORTEFEUILLES} from '../../../../../services/jdd/jdd-portefeuilles.dataset';
 import {provideAnimations} from '@angular/platform-browser/animations';
 
 describe('EditeurConditionAlerteComponent', () => {
-  let component: EditeurConditionAlerteComponent;
-  let fixture: ComponentFixture<EditeurConditionAlerteComponent>;
+  let component: DialogEditeurConditionAlerteComponent;
+  let fixture: ComponentFixture<DialogEditeurConditionAlerteComponent>;
   const clonePORTEFEUILLES: Function = () => JSON.parse(JSON.stringify(PORTEFEUILLES));
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [
-        EditeurConditionAlerteComponent,
+        DialogEditeurConditionAlerteComponent,
         TranslateModule.forRoot({})
       ],
       providers: [
@@ -22,7 +22,7 @@ describe('EditeurConditionAlerteComponent', () => {
     })
       .compileComponents();
 
-    fixture = TestBed.createComponent(EditeurConditionAlerteComponent);
+    fixture = TestBed.createComponent(DialogEditeurConditionAlerteComponent);
     component = fixture.componentInstance;
   });
 

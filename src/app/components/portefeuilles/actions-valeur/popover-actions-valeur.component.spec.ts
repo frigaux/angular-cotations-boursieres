@@ -1,6 +1,6 @@
 import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import {ActionsValeurComponent} from './actions-valeur.component';
+import {PopoverActionsValeurComponent} from './popover-actions-valeur.component';
 import {TranslateModule} from '@ngx-translate/core';
 import {DTOPortefeuille} from '../../../services/portefeuilles/dto-portefeuille.interface';
 import {Cours} from '../../cours/cours.class';
@@ -12,8 +12,8 @@ import {DialogueService} from '../../../services/dialogue/dialogue.service';
 
 describe('ActionsValeurComponent', () => {
   let dialogueService: DialogueService;
-  let component: ActionsValeurComponent;
-  let fixture: ComponentFixture<ActionsValeurComponent>;
+  let component: PopoverActionsValeurComponent;
+  let fixture: ComponentFixture<PopoverActionsValeurComponent>;
 
   const clonePORTEFEUILLES: Function = () => JSON.parse(JSON.stringify(PORTEFEUILLES));
   const mockPortefeuillesService = jasmine.createSpyObj('PortefeuillesService', ['charger', 'enregistrer']);
@@ -21,7 +21,7 @@ describe('ActionsValeurComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [
-        ActionsValeurComponent,
+        PopoverActionsValeurComponent,
         TranslateModule.forRoot({})
       ],
       providers: [
@@ -32,7 +32,7 @@ describe('ActionsValeurComponent', () => {
       .compileComponents();
 
     dialogueService = TestBed.inject(DialogueService);
-    fixture = TestBed.createComponent(ActionsValeurComponent);
+    fixture = TestBed.createComponent(PopoverActionsValeurComponent);
     component = fixture.componentInstance;
   });
 
