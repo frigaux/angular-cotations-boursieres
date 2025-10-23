@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {forkJoin, Observable} from 'rxjs';
-import {DTOInformationsTicker} from './dto-informations-ticker.class';
+import {DTOInformationsTickerABCBourse} from './dto-informations-ticker-abc-bourse.class';
 import {DTOActualiteTicker} from './dto-actualite-ticker.class';
 import {DTODividende} from './dto-dividende.class';
 import {DTOVariation} from './dto-variation.class';
@@ -22,7 +22,7 @@ export class AbcBourseService {
   constructor(private http: HttpClient) {
   }
 
-  public chargerInformationsTicker(ticker: string): Observable<DTOInformationsTicker> {
+  public chargerInformationsTicker(ticker: string): Observable<DTOInformationsTickerABCBourse> {
     return new Observable(observer => {
       this.http.get(`/abcbourse/cotation/${ticker}p`, {
         headers: AbcBourseService.HEADERS,
@@ -40,8 +40,8 @@ export class AbcBourseService {
     });
   }
 
-  private parseAndMapInformations(html: string, ticker: string): DTOInformationsTicker {
-    const result = new DTOInformationsTicker(ticker);
+  private parseAndMapInformations(html: string, ticker: string): DTOInformationsTickerABCBourse {
+    const result = new DTOInformationsTickerABCBourse(ticker);
 
     ParseUtil.execRegexpAndMap(
       result.actualites,
@@ -98,7 +98,7 @@ export class AbcBourseService {
     }
   }
 
-  private mapIndicateurs(result: DTOInformationsTicker, elTable: Element) {
+  private mapIndicateurs(result: DTOInformationsTickerABCBourse, elTable: Element) {
     const elTrs: NodeListOf<HTMLTableCellElement> = elTable.querySelectorAll('tbody > tr');
 
     const elTdVariation: HTMLTableCellElement | null = elTrs[0].querySelector('td:nth-child(2)');

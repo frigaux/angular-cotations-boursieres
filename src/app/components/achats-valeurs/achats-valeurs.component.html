@@ -1,14 +1,14 @@
 <div class="titre">
   <span>{{ 'COMPOSANTS.ACHATS_VALEURS.ACHATS_VALEURS' | translate }}</span>
   @if (achatsNonRevendus && achatsNonRevendus.length > 0) {
-    <span class="pi pi-refresh" (click)="recupererCoursValeursNonRevendues()"
+    <span class="pi pi-info-circle" (click)="recupererCoursValeursNonRevendues()"
           title="{{ 'COMPOSANTS.ACHATS_VALEURS.RECUPERER_COURS' | translate }}"></span>
   }
   <app-import-export></app-import-export>
 </div>
 
 <app-loader [affiche]="loading" [configuration]="[
-  {marginLeft: '0', marginTop: '1rem', height: '20vh', width: '70%'}
+  {marginLeft: '0', marginTop: '1rem', height: '20vh', width: '50%'}
 ]"></app-loader>
 
 @if (coursNonRevendus) {
@@ -20,7 +20,8 @@
       <th>{{ 'COMPOSANTS.ACHATS_VALEURS.PRIX_ACHAT' | translate }}</th>
       <th>{{ 'COMPOSANTS.ACHATS_VALEURS.COURS' | translate }}</th>
       <th>{{ 'COMPOSANTS.ACHATS_VALEURS.VARIATION_ACHAT' | translate }}</th>
-      <th>{{ 'COMPOSANTS.ACHATS_VALEURS.VARIATION_HAUT_BAS' | translate }}</th>
+      <th>{{ 'COMPOSANTS.ACHATS_VALEURS.VARIATION_HAUT' | translate }}</th>
+      <th>{{ 'COMPOSANTS.ACHATS_VALEURS.VARIATION_BAS' | translate }}</th>
     </tr>
     </thead>
     <tbody>
@@ -33,7 +34,8 @@
             <td [class]="evolutionVariation(achatDecore.variationAchat)">
               {{ achatDecore.variationAchat | percent:'1.2-2' }}
             </td>
-            <td>{{ achatDecore.variationHaut | percent:'1.2-2' }} / {{ achatDecore.variationBas | percent:'1.2-2' }}</td>
+            <td>{{ achatDecore.variationHaut | percent:'1.2-2' }}</td>
+            <td>{{ achatDecore.variationBas | percent:'1.2-2' }}</td>
           </tr>
         }
       }

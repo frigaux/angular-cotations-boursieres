@@ -1,4 +1,4 @@
-export interface DtoObjBoursorama {
+export interface DTOObjBoursorama {
   o: number,
   h: number,
   l: number,

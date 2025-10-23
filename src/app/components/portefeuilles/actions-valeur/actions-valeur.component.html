@@ -7,6 +7,18 @@
           <span>{{ 'COMPOSANTS.PORTEFEUILLES.ACTIONS_VALEUR.SUPPRIMER_DU_PORTEFEUILLE' | translate }}</span>
         </div>
       }
+      <div class="libelle" (click)="achats()">
+        <span class="pi pi-shopping-bag"></span>
+        <span>{{ 'COMPOSANTS.PORTEFEUILLES.ACTIONS_VALEUR.ACHATS' | translate }}</span>
+      </div>
+      <div class="libelle" (click)="abcBourse()">
+        <span class="pi pi-external-link"></span>
+        <span>{{ 'COMPOSANTS.PORTEFEUILLES.ACTIONS_VALEUR.ABCBOURSE' | translate }}</span>
+      </div>
+      <div class="libelle" (click)="boursorama()">
+        <span class="pi pi-external-link"></span>
+        <span>{{ 'COMPOSANTS.PORTEFEUILLES.ACTIONS_VALEUR.BOURSORAMA' | translate }}</span>
+      </div>
       @if (nomsPortefeuillesDisponibles && nomsPortefeuillesDisponibles.length > 0) {
         <div>
           <div class="libelle" (click)="ajouterAuPortefeuille()">
@@ -27,10 +39,6 @@
           </div>
         }
       }
-      <div class="libelle" (click)="achats()">
-        <span class="pi pi-shopping-bag"></span>
-        <span>{{ 'COMPOSANTS.PORTEFEUILLES.ACTIONS_VALEUR.ACHATS' | translate }}</span>
-      </div>
     </div>
   }
 </p-popover>

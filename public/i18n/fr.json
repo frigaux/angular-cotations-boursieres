@@ -95,14 +95,14 @@
       },
       "DETAILS_VALEUR": {
         "COURBE_MM": "Courbe des moyennes mobiles : {{valeur}} ({{ticker}})",
-        "INFORMATIONS_DETAILLEES": "Informations détaillées : {{valeur}} ({{ticker}})",
+        "INFORMATIONS_DETAILLEES": "Informations détaillées ABCBourse : {{valeur}} ({{ticker}})",
         "VALEUR_PRECEDENTE": "Valeur précédente",
         "VALEUR_SUIVANTE": "Valeur suivante",
         "ABCBOURSE": "Lien vers ABCBourse",
         "BOURSORAMA": "Lien vers Boursorama"
       },
       "ACTUALITES": {
-        "ACTUALITES": "Actualités",
+        "ACTUALITES": "Actualités ABCBourse",
         "ANALYSES": {
           "ANALYSES": "Dernières analyses",
           "DATE": "Date",
@@ -217,7 +217,7 @@
     },
     "ACHATS_VALEURS": {
       "ACHATS_VALEURS": "Liste des achats de valeurs",
-      "RECUPERER_COURS": "Récupérer les cours pour les valeurs non revendues",
+      "RECUPERER_COURS": "Récupérer les cours pour les valeurs non revendues sur Boursorama",
       "CONFIRMATION_SUPPRESSION": "Confirmez-vous la suppression de l'achat ?",
       "NON_REVENDUES": "Non revendues",
       "REVENDUES": "Revendues",
@@ -226,7 +226,8 @@
       "PRIX_ACHAT": "Prix achat",
       "COURS": "Cours",
       "VARIATION_ACHAT": "Var/Ac",
-      "VARIATION_HAUT_BAS": "Var/Haut/Bas",
+      "VARIATION_HAUT": "Var/Haut",
+      "VARIATION_BAS": "Var/Bas",
       "TABLEAU": {
         "TOTAUX": "Totaux",
         "VALEUR": "Valeur",
@@ -247,7 +248,7 @@
       "DETAILS_VALEUR": {
         "DETAILS_VALEUR": "{{valeur}} ({{ticker}}, {{marche}})",
         "COURBES": "Courbes : {{valeur}} ({{ticker}}, {{marche}})",
-        "INFORMATIONS_DETAILLEES": "Informations détaillées : {{valeur}} ({{ticker}}, {{marche}})",
+        "INFORMATIONS_DETAILLEES": "Informations détaillées ABCBourse : {{valeur}} ({{ticker}}, {{marche}})",
         "ABCBOURSE": "Lien vers ABCBourse",
         "BOURSORAMA": "Lien vers Boursorama"
       },
@@ -256,6 +257,8 @@
         "AJOUTER_AU_PORTEFEUILLE": "Ajouter la valeur au portefeuille",
         "DEPLACER_DANS_PORTEFEUILLE": "Déplacer la valeur dans le portefeuille",
         "ACHATS": "Achats de la valeur",
+        "ABCBOURSE": "ABCBourse",
+        "BOURSORAMA": "Boursorama",
         "ACHATS_VALEUR": "Achats de la valeur {{nom}}",
         "CONFIRMATION_SUPPRESSION": "Confirmez-vous la suppression de la valeur {{valeur}} du portefeuille {{nomPortefeuille}} ?"
       },

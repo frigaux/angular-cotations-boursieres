@@ -1,5 +1,5 @@
 import {Component, input, InputSignal} from '@angular/core';
-import {DTOInformationsTicker} from '../../../services/abc-bourse/dto-informations-ticker.class';
+import {DTOInformationsTickerABCBourse} from '../../../services/abc-bourse/dto-informations-ticker-abc-bourse.class';
 import {AbcBourseService} from '../../../services/abc-bourse/abc-bourse.service';
 import {Fieldset} from 'primeng/fieldset';
 import {LoaderComponent} from '../../loader/loader.component';
@@ -40,7 +40,7 @@ export class InformationsTickerComponent {
   cours?: Cours;
 
   // données pour la vue
-  informationsTicker?: DTOInformationsTicker;
+  informationsTicker?: DTOInformationsTickerABCBourse;
   pourcentageDividendes?: number;
   actualiteCourante?: DTOActualiteTicker
 

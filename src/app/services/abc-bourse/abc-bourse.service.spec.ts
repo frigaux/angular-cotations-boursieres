@@ -3,7 +3,7 @@ import {TestBed} from '@angular/core/testing';
 import {AbcBourseService} from './abc-bourse.service';
 import {HttpErrorResponse, HttpInterceptorFn, provideHttpClient, withInterceptors} from '@angular/common/http';
 import {firstValueFrom, lastValueFrom} from 'rxjs';
-import {DTOInformationsTicker} from './dto-informations-ticker.class';
+import {DTOInformationsTickerABCBourse} from './dto-informations-ticker-abc-bourse.class';
 import {DTOActualites} from './dto-actualites.class';
 
 describe('AbcBourseService', () => {
@@ -29,7 +29,7 @@ describe('AbcBourseService', () => {
   });
 
   it('given le ticker AI when #chargerInformationsTicker then on doit récupérer les informations pour le ticker', async () => {
-    const promiseInformationsTicker: Promise<DTOInformationsTicker> = firstValueFrom(service.chargerInformationsTicker('AI'));
+    const promiseInformationsTicker: Promise<DTOInformationsTickerABCBourse> = firstValueFrom(service.chargerInformationsTicker('AI'));
     const informationsTicker = await promiseInformationsTicker;
     expect(informationsTicker.ticker).toBe('AI');
     expect(informationsTicker.actualites.length).toBeGreaterThan(0);
@@ -46,7 +46,7 @@ describe('AbcBourseService', () => {
   });
 
   it('given le ticker ABVX when #chargerInformationsTicker then on doit récupérer une partie des informations pour le ticker', async () => {
-    const promiseInformationsTicker: Promise<DTOInformationsTicker> = firstValueFrom(service.chargerInformationsTicker('ABVX'));
+    const promiseInformationsTicker: Promise<DTOInformationsTickerABCBourse> = firstValueFrom(service.chargerInformationsTicker('ABVX'));
     const informationsTicker = await promiseInformationsTicker;
     expect(informationsTicker.ticker).toBe('ABVX');
     expect(informationsTicker.actualites.length).toBeGreaterThan(0);
@@ -60,7 +60,7 @@ describe('AbcBourseService', () => {
 
 
   it('given le ticker BIOS when #chargerInformationsTicker then on récupère une erreur car aucune information', async () => {
-    const promiseInformationsTicker: Promise<DTOInformationsTicker> = lastValueFrom(service.chargerInformationsTicker('BIOS'));
+    const promiseInformationsTicker: Promise<DTOInformationsTickerABCBourse> = lastValueFrom(service.chargerInformationsTicker('BIOS'));
     try {
       await promiseInformationsTicker;
     } catch (error: unknown) {

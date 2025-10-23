@@ -3,7 +3,7 @@ import {DTODividende} from './dto-dividende.class';
 import {DTOVariation} from './dto-variation.class';
 import {DTORatio} from './dto-ratio.class';
 
-export class DTOInformationsTicker {
+export class DTOInformationsTickerABCBourse {
   ticker: string;
   actualites: Array<DTOActualiteTicker>;
   variations: Array<DTOVariation>;

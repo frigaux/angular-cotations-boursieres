@@ -113,7 +113,7 @@ export class AchatsValeursComponent implements OnInit {
       this.loading = true;
       const tickers = this.achatsNonRevendus.map(achat => achat.valeur.ticker);
       this.coursNonRevendus = JSON.parse(JSON.stringify(this.achatsNonRevendus));
-      this.boursoramaService.recupererCours(tickers)
+      this.boursoramaService.chargerCours(tickers)
         .subscribe(liste => {
           this.coursNonRevendus?.forEach(achats => {
             const cours = liste.find(c => c.ticker === achats.valeur.ticker);

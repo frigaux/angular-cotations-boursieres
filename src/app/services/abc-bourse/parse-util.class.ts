@@ -12,6 +12,7 @@ export class ParseUtil {
   static parseNumber(str: string): number {
     const match = str
       .replaceAll(/&[\w#]+;/g, '')
+      .replaceAll(/\s+/g, '')
       .match(ParseUtil.REGEXP_NUMBER);
     if (match) {
       return Number(match[0].replace(',', '.'));

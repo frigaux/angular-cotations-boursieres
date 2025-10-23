@@ -1,5 +1,5 @@
-import {DtoObjBoursorama} from './dto-obj-boursorama.interface';
+import {DTOObjBoursorama} from './dto-obj-boursorama.interface';
 
-export interface DtoCoursBoursorama {
-  d: Array<DtoObjBoursorama>;
+export interface DTOCoursBoursorama {
+  d: Array<DTOObjBoursorama>;
 }
