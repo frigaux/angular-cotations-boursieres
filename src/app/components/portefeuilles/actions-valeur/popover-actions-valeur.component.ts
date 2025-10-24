@@ -8,7 +8,8 @@ import {ConfirmationService} from 'primeng/api';
 import {DialogueService} from '../../../services/dialogue/dialogue.service';
 import {Select} from 'primeng/select';
 import {FormsModule} from '@angular/forms';
-import {PanneauAchatsValeurComponent} from './panneau-achats-valeur/panneau-achats-valeur-component';
+import {PanneauAchatsValeurComponent} from './panneau-achats-valeur/panneau-achats-valeur.component';
+import {DialogCoursTickerComponent} from './dialog-cours-ticker/dialog-cours-ticker.component';
 
 @Component({
   selector: 'app-popover-actions-valeur',
@@ -17,13 +18,15 @@ import {PanneauAchatsValeurComponent} from './panneau-achats-valeur/panneau-acha
     TranslatePipe,
     Select,
     FormsModule,
-    PanneauAchatsValeurComponent
+    PanneauAchatsValeurComponent,
+    DialogCoursTickerComponent
   ],
   templateUrl: './popover-actions-valeur.component.html',
   styleUrl: './popover-actions-valeur.component.sass'
 })
 export class PopoverActionsValeurComponent {
   private popover = viewChild(Popover);
+  private dialogCoursTickerComponent = viewChild(DialogCoursTickerComponent);
 
   // paramètres
   cours?: Cours;
@@ -115,13 +118,18 @@ export class PopoverActionsValeurComponent {
     this.popover()?.hide();
   }
 
-  boursorama() {
-    window.open(`https://www.boursorama.com/cours/1rP${this.cours?.ticker}/`);
+  protected boursorama() {
+    window.open(`https://www.boursorama.com/cours/1rP${this.cours!.ticker}/`);
     this.popover()?.hide();
   }
 
-  abcBourse() {
-    window.open(`https://www.abcbourse.com/cotation/${this.cours?.ticker}p`);
+  protected abcBourse() {
+    window.open(`https://www.abcbourse.com/cotation/${this.cours!.ticker}p`);
+    this.popover()?.hide();
+  }
+
+  protected coursBoursorama() {
+    this.dialogCoursTickerComponent()?.afficherCours(this.cours!);
     this.popover()?.hide();
   }
 }

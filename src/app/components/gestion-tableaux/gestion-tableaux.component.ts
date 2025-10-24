@@ -5,7 +5,7 @@ import {ConfigurationTableauComponent} from './configuration-tableau/configurati
 import {TypesColonnes} from '../../services/tableaux/types-colonnes.enum.ts';
 import {TranslatePipe, TranslateService} from '@ngx-translate/core';
 import {Card} from 'primeng/card';
-import {DialogImportExportComponent} from './import-export/dialog-import-export.component';
+import {DialogImportExportComponent} from './dialog-import-export/dialog-import-export.component';
 
 @Component({
   selector: 'app-gestion-tableaux',

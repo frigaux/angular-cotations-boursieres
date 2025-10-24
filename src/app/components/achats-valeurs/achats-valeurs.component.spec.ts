@@ -1,8 +1,6 @@
 import {ComponentFixture, TestBed} from '@angular/core/testing';
 
 import {AchatsValeursComponent} from './achats-valeurs.component';
-import {provideHttpClient} from '@angular/common/http';
-import {provideHttpClientTesting} from '@angular/common/http/testing';
 import {TranslateModule} from '@ngx-translate/core';
 import {ConfirmationService} from 'primeng/api';
 import {ValeursService} from '../../services/valeurs/valeurs.service';
@@ -11,6 +9,7 @@ import {ACHATS, VALEURS} from '../../services/jdd/jdd-valeurs.dataset';
 import {DialogueService} from '../../services/dialogue/dialogue.service';
 import {CoursService} from '../../services/cours/cours.service';
 import {LISTE_COURS_AVEC_LISTE_ALLEGEE} from '../../services/jdd/jdd-cours.dataset';
+import {BoursoramaService} from '../../services/boursorama/boursorama.service';
 
 describe('AchatsValeursComponent', () => {
   let dialogueService: DialogueService;
@@ -21,6 +20,7 @@ describe('AchatsValeursComponent', () => {
 
   const mockValeursService = jasmine.createSpyObj('ValeursService', ['onImportAchats', 'chargerValeurs', 'chargerAchats', 'enregistrerAchatsTicker']);
   const mockCoursService = jasmine.createSpyObj('CoursService', ['chargerCoursTickersWithLimit']);
+  const mockBoursoramaService = jasmine.createSpyObj('BoursoramaService', ['chargerCoursTickers']);
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
@@ -31,8 +31,7 @@ describe('AchatsValeursComponent', () => {
       providers: [
         {provide: ValeursService, useValue: mockValeursService},
         {provide: CoursService, useValue: mockCoursService},
-        provideHttpClient(),
-        provideHttpClientTesting(),
+        {provide: BoursoramaService, useValue: mockBoursoramaService},
         ConfirmationService
       ]
     })

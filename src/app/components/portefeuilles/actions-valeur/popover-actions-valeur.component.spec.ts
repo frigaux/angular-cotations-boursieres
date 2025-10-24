@@ -9,14 +9,16 @@ import {PORTEFEUILLES} from '../../../services/jdd/jdd-portefeuilles.dataset';
 import {PortefeuillesService} from '../../../services/portefeuilles/portefeuilles.service';
 import {ConfirmationService} from 'primeng/api';
 import {DialogueService} from '../../../services/dialogue/dialogue.service';
+import {BoursoramaService} from '../../../services/boursorama/boursorama.service';
 
-describe('ActionsValeurComponent', () => {
+describe('PopoverActionsValeurComponent', () => {
   let dialogueService: DialogueService;
   let component: PopoverActionsValeurComponent;
   let fixture: ComponentFixture<PopoverActionsValeurComponent>;
 
   const clonePORTEFEUILLES: Function = () => JSON.parse(JSON.stringify(PORTEFEUILLES));
   const mockPortefeuillesService = jasmine.createSpyObj('PortefeuillesService', ['charger', 'enregistrer']);
+  const mockBoursoramaService = jasmine.createSpyObj('BoursoramaService', ['chargerCoursTicker']);
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
@@ -26,6 +28,7 @@ describe('ActionsValeurComponent', () => {
       ],
       providers: [
         {provide: PortefeuillesService, useValue: mockPortefeuillesService},
+        {provide: BoursoramaService, useValue: mockBoursoramaService},
         ConfirmationService
       ]
     })

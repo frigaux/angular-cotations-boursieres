@@ -3,10 +3,10 @@ import {ValeursService} from '../../services/valeurs/valeurs.service';
 import {DTOAchatsTicker} from '../../services/valeurs/dto-achats-ticker.interface';
 import {DTOValeur} from '../../services/valeurs/dto-valeur.interface';
 import {AchatsValeurDecores} from './achats-valeur-decores.class';
-import {AchatDecore} from '../valeurs/details-valeur/achats-valeur/achat-decore.class';
+import {AchatDecore} from '../valeurs/achats-valeur/achat-decore.class';
 import {TranslatePipe, TranslateService} from '@ngx-translate/core';
 import {LoaderComponent} from '../loader/loader.component';
-import {DialogImportExportComponent} from './import-export/dialog-import-export.component';
+import {DialogImportExportComponent} from './dialog-import-export/dialog-import-export.component';
 import {ConfirmationService} from 'primeng/api';
 import {DialogueService} from '../../services/dialogue/dialogue.service';
 import {TableauAchats} from './tableau-achats/tableau-achats';
@@ -113,7 +113,7 @@ export class AchatsValeursComponent implements OnInit {
       this.loading = true;
       const tickers = this.achatsNonRevendus.map(achat => achat.valeur.ticker);
       this.coursNonRevendus = JSON.parse(JSON.stringify(this.achatsNonRevendus));
-      this.boursoramaService.chargerCours(tickers)
+      this.boursoramaService.chargerCoursTickers(tickers)
         .subscribe(liste => {
           this.coursNonRevendus?.forEach(achats => {
             const cours = liste.find(c => c.ticker === achats.valeur.ticker);

@@ -21,7 +21,7 @@ import {FloatLabel} from 'primeng/floatlabel';
     FloatLabel
   ],
   templateUrl: './dialog-import-export.component.html',
-  styleUrls: ['../../portefeuilles/gestion-portefeuilles/import-export/dialog-import-export.component.sass', './dialog-import-export.component.sass']
+  styleUrls: ['../../portefeuilles/gestion-portefeuilles/dialog-import-export/dialog-import-export.component.sass', './dialog-import-export.component.sass']
 })
 export class DialogImportExportComponent {
   visible: boolean = false;

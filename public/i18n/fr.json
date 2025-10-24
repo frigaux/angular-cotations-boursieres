@@ -38,23 +38,16 @@
       "LIBELLE": "Libellé",
       "MARCHE": "Marché",
       "TICKER": "Ticker",
+      "ACHATS_VALEUR": {
+        "AJOUTER_ACHAT": "Ajouter un achat",
+        "ENREGISTREMENT_REUSSI": "Enregistrement réussi",
+        "DATE": "Date",
+        "QUANTITE": "Quantite",
+        "PRIX": "Prix",
+        "REVENDU": "Revendu",
+        "CONFIRMATION_SUPPRESSION": "Confirmez-vous la suppression de l'achat ?"
+      },
       "DETAILS_VALEUR": {
-        "ACHATS_VALEUR": {
-          "AJOUTER_ACHAT": "Ajouter un achat",
-          "ENREGISTRER": "Enregistrer les achats",
-          "ENREGISTREMENT_REUSSI": "Enregistrement réussi",
-          "DATE": "Date",
-          "QUANTITE": "Quantite",
-          "PRIX": "Prix",
-          "REVENDU": "Revendu",
-          "CONFIRMATION_SUPPRESSION": "Confirmez-vous la suppression de l'achat ?",
-          "IMPORT_EXPORT": {
-            "IMPORT_EXPORT": "Import/export des achats",
-            "CONFIGURATION": "Configuration au format JSON",
-            "EXPORTER": "Exporter",
-            "IMPORTER": "Importer"
-          }
-        },
         "ENCARTS_VALEUR": {
           "DETAILS": "Détails au",
           "LIBELLE": "Libellé",
@@ -240,6 +233,12 @@
         "TOTAL_CLOTURE": "Total",
         "SUPPRESSION": "Suppression de l'achat",
         "REVENTE": "Revente"
+      },
+      "IMPORT_EXPORT": {
+        "IMPORT_EXPORT": "Import/export des achats",
+        "CONFIGURATION": "Configuration au format JSON",
+        "EXPORTER": "Exporter",
+        "IMPORTER": "Importer"
       }
     },
     "PORTEFEUILLES": {
@@ -259,8 +258,15 @@
         "ACHATS": "Achats de la valeur",
         "ABCBOURSE": "ABCBourse",
         "BOURSORAMA": "Boursorama",
+        "COURS_BOURSORAMA": "Cours depuis Boursorama",
         "ACHATS_VALEUR": "Achats de la valeur \"{{nom}}\"",
-        "CONFIRMATION_SUPPRESSION": "Confirmez-vous la suppression de la valeur \"{{valeur}}\" du portefeuille \"{{nomPortefeuille}}\" ?"
+        "CONFIRMATION_SUPPRESSION": "Confirmez-vous la suppression de la valeur \"{{valeur}}\" du portefeuille \"{{nomPortefeuille}}\" ?",
+        "DIALOG_COURS_TICKER": {
+          "COURS_TICKER": "Cours et ordres pour la valeur {{valeur}} ({{ticker}})",
+          "ORDRES": "Ordres",
+          "ACHATS": "Achats",
+          "VENTES": "Ventes"
+        }
       },
       "GESTION_PORTEFEUILLES": {
         "CREER": "Créer un portefeuille",

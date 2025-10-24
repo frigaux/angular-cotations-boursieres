@@ -1,4 +1,5 @@
 <app-panneau-achats-valeur [cours]="cours" [(visible)]="achatsVisible"></app-panneau-achats-valeur>
+<app-dialog-cours-ticker></app-dialog-cours-ticker>
 
 <p-popover>
   @if (cours) {
@@ -20,6 +21,10 @@
       <div class="libelle" (click)="boursorama()">
         <span class="pi pi-external-link"></span>
         <span>{{ 'COMPOSANTS.PORTEFEUILLES.ACTIONS_VALEUR.BOURSORAMA' | translate }}</span>
+      </div>
+      <div class="libelle" (click)="coursBoursorama()">
+        <span class="pi pi-cloud-download"></span>
+        <span>{{ 'COMPOSANTS.PORTEFEUILLES.ACTIONS_VALEUR.COURS_BOURSORAMA' | translate }}</span>
       </div>
       @if (nomsPortefeuillesDisponibles && nomsPortefeuillesDisponibles.length > 0) {
         <div>

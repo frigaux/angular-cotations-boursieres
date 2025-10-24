@@ -2,7 +2,7 @@ import {Component, input, InputSignal, output} from '@angular/core';
 import {CurrencyPipe, DatePipe, DecimalPipe, PercentPipe} from "@angular/common";
 import {TranslatePipe} from "@ngx-translate/core";
 import {AchatsValeurDecores} from '../achats-valeur-decores.class';
-import {AchatDecore} from '../../valeurs/details-valeur/achats-valeur/achat-decore.class';
+import {AchatDecore} from '../../valeurs/achats-valeur/achat-decore.class';
 import {CoursService} from '../../../services/cours/cours.service';
 
 @Component({

@@ -6,17 +6,19 @@ import {CoursService} from '../../../services/cours/cours.service';
 import {of} from 'rxjs';
 import {provideAnimations} from '@angular/platform-browser/animations';
 import {COURS_TICKER, LISTE_COURS_TICKER_ALLEGE} from '../../../services/jdd/jdd-cours.dataset';
-import {VALEUR} from '../../../services/jdd/jdd-valeurs.dataset';
-import {provideHttpClient} from '@angular/common/http';
-import {provideHttpClientTesting} from '@angular/common/http/testing';
+import {ACHATS, VALEUR} from '../../../services/jdd/jdd-valeurs.dataset';
 import {DatePipe} from '@angular/common';
 import {ConfirmationService} from 'primeng/api';
+import {ValeursService} from '../../../services/valeurs/valeurs.service';
 
 describe('DetailsValeurComponent', () => {
   let component: DetailsValeurComponent;
   let fixture: ComponentFixture<DetailsValeurComponent>;
 
+  const cloneACHATS: Function = () => JSON.parse(JSON.stringify(ACHATS));
+
   const mockCoursService = jasmine.createSpyObj('CoursService', ['chargerCoursTicker', 'chargerCoursTickerWithLimit']);
+  const mockValeursService = jasmine.createSpyObj('ValeursService', ['chargerAchatsTicker', 'enregistrerAchatsTicker', 'onImportAchats']);
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
@@ -26,9 +28,8 @@ describe('DetailsValeurComponent', () => {
       ],
       providers: [
         {provide: CoursService, useValue: mockCoursService},
+        {provide: ValeursService, useValue: mockValeursService},
         provideAnimations(),
-        provideHttpClient(),
-        provideHttpClientTesting(),
         ConfirmationService,
         DatePipe
       ]
@@ -47,6 +48,8 @@ describe('DetailsValeurComponent', () => {
     beforeEach(() => {
       mockCoursService.chargerCoursTicker.and.returnValue(of(COURS_TICKER));
       mockCoursService.chargerCoursTickerWithLimit.and.returnValue(of(LISTE_COURS_TICKER_ALLEGE));
+      mockValeursService.chargerAchatsTicker.and.returnValue(cloneACHATS()[0].achats);
+      mockValeursService.enregistrerAchatsTicker.and.returnValue(undefined);
     });
 
     it('when l\'input ticker est définie then le composant <p-panel> est rendu', () => {

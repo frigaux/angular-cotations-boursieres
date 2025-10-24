@@ -32,7 +32,7 @@ import {CoursService} from '../../../services/cours/cours.service';
     DialogEditeurConditionFiltreComponent
   ],
   templateUrl: './dialog-editeur-filtres.component.html',
-  styleUrls: ['../../portefeuilles/gestion-portefeuilles/editeur-alertes/dialog-editeur-alertes.component.sass', './dialog-editeur-filtres.component.sass']
+  styleUrls: ['../../portefeuilles/gestion-portefeuilles/dialog-editeur-alertes/dialog-editeur-alertes.component.sass', './dialog-editeur-filtres.component.sass']
 })
 export class DialogEditeurFiltresComponent {
   private formBuilder = inject(FormBuilder);

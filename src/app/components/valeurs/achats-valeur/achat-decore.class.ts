@@ -1,4 +1,4 @@
-import {DTOAchat} from '../../../../services/valeurs/dto-achat.interface';
+import {DTOAchat} from '../../../services/valeurs/dto-achat.interface';
 
 export class AchatDecore {
   id: number;

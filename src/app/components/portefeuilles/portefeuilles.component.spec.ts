@@ -14,6 +14,7 @@ import {ConfirmationService} from 'primeng/api';
 import {DTOAchat} from '../../services/valeurs/dto-achat.interface';
 import {CurrencyPipe, DatePipe, DecimalPipe, PercentPipe} from '@angular/common';
 import {AbcBourseService} from '../../services/abc-bourse/abc-bourse.service';
+import {BoursoramaService} from '../../services/boursorama/boursorama.service';
 
 describe('PortefeuillesComponent', () => {
   let component: PortefeuillesComponent;
@@ -25,6 +26,7 @@ describe('PortefeuillesComponent', () => {
   const mockValeursService = jasmine.createSpyObj('ValeursService', ['chargerValeurs', 'chargerAchatsByTicker', 'chargerAchatsTicker', 'onImportAchats', 'onUpdateAchats', 'chargerAchats']);
   const mockCoursService = jasmine.createSpyObj('CoursService', ['chargerCoursTickersWithLimit']);
   const mockAbcBourseService = jasmine.createSpyObj('AbcBourseService', ['chargerActualites']);
+  const mockBoursoramaService = jasmine.createSpyObj('BoursoramaService', ['chargerCoursTicker']);
 
   const achatsByTicker = new Map<string, Array<DTOAchat>>();
 
@@ -40,6 +42,7 @@ describe('PortefeuillesComponent', () => {
         {provide: ValeursService, useValue: mockValeursService},
         {provide: CoursService, useValue: mockCoursService},
         {provide: AbcBourseService, useValue: mockAbcBourseService},
+        {provide: BoursoramaService, useValue: mockBoursoramaService},
         ConfirmationService,
         DatePipe,
         PercentPipe,

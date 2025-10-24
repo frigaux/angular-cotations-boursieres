@@ -1,6 +1,6 @@
 import {Component, input, InputSignal, OnInit} from '@angular/core';
-import {ValeursService} from '../../../../services/valeurs/valeurs.service';
-import {DTOAchat} from '../../../../services/valeurs/dto-achat.interface';
+import {ValeursService} from '../../../services/valeurs/valeurs.service';
+import {DTOAchat} from '../../../services/valeurs/dto-achat.interface';
 import {TranslatePipe, TranslateService} from '@ngx-translate/core';
 import {FormsModule} from '@angular/forms';
 import {ToggleSwitch} from 'primeng/toggleswitch';
@@ -9,7 +9,7 @@ import {InputText} from 'primeng/inputtext';
 import {DatePicker} from 'primeng/datepicker';
 import {DatePipe} from '@angular/common';
 import {ConfirmationService} from 'primeng/api';
-import {DialogueService} from '../../../../services/dialogue/dialogue.service';
+import {DialogueService} from '../../../services/dialogue/dialogue.service';
 
 @Component({
   selector: 'app-achats-valeur',
@@ -82,7 +82,7 @@ export class AchatsValeurComponent implements OnInit {
     this.dialogueService.confirmationSuppression(
       this.confirmationService,
       event,
-      this.translateService.instant('COMPOSANTS.VALEURS.DETAILS_VALEUR.ACHATS_VALEUR.CONFIRMATION_SUPPRESSION'),
+      this.translateService.instant('COMPOSANTS.VALEURS.ACHATS_VALEUR.CONFIRMATION_SUPPRESSION'),
       () => {
         this.supprimerAchat(achat);
       }
@@ -115,7 +115,7 @@ export class AchatsValeurComponent implements OnInit {
     if (this.valeur) {
       this.erreur = this.valeursService.enregistrerAchatsTicker(this.valeur.ticker, this.achats);
       if (this.erreur === undefined) {
-        this.succes = this.translateService.instant('COMPOSANTS.VALEURS.DETAILS_VALEUR.ACHATS_VALEUR.ENREGISTREMENT_REUSSI');
+        this.succes = this.translateService.instant('COMPOSANTS.VALEURS.ACHATS_VALEUR.ENREGISTREMENT_REUSSI');
         setTimeout(() => this.succes = undefined, 1500);
       }
     }

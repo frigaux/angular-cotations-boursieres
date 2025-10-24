@@ -1,5 +1,5 @@
 import {DTOValeur} from '../../services/valeurs/dto-valeur.interface';
-import {AchatDecore} from '../valeurs/details-valeur/achats-valeur/achat-decore.class';
+import {AchatDecore} from '../valeurs/achats-valeur/achat-decore.class';
 import {DTOAchatsTicker} from '../../services/valeurs/dto-achats-ticker.interface';
 
 export class AchatsValeurDecores {

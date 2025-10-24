@@ -1,10 +1,10 @@
 import {ComponentFixture, TestBed} from '@angular/core/testing';
 
 import {AchatsValeurComponent} from './achats-valeur.component';
-import {ValeursService} from '../../../../services/valeurs/valeurs.service';
+import {ValeursService} from '../../../services/valeurs/valeurs.service';
 import {TranslateModule} from '@ngx-translate/core';
-import {ACHATS} from '../../../../services/jdd/jdd-valeurs.dataset';
-import {DTOAchatsTicker} from '../../../../services/valeurs/dto-achats-ticker.interface';
+import {ACHATS} from '../../../services/jdd/jdd-valeurs.dataset';
+import {DTOAchatsTicker} from '../../../services/valeurs/dto-achats-ticker.interface';
 import {DatePipe} from '@angular/common';
 import {ConfirmationService} from 'primeng/api';
 

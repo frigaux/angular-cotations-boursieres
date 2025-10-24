@@ -4,7 +4,7 @@ import {Cours} from '../../../cours/cours.class';
 import {TranslatePipe, TranslateService} from '@ngx-translate/core';
 import {DatePipe, DecimalPipe, NgClass} from '@angular/common';
 import {Fieldset} from 'primeng/fieldset';
-import {AchatsValeurComponent} from '../achats-valeur/achats-valeur.component';
+import {AchatsValeurComponent} from '../../achats-valeur/achats-valeur.component';
 
 @Component({
   selector: 'app-encarts-valeur',

@@ -22,7 +22,7 @@ import {DTOColonne} from '../../services/tableaux/dto-colonne-portefeuille.inter
 import {TypesColonnesPortefeuille} from '../../services/tableaux/types-colonnes-portefeuille.enum';
 import {ColonneDecoree} from './colonne-decoree.class';
 import {BreakpointObserver} from '@angular/cdk/layout';
-import {DialogActualitesComponent} from '../cours/actualites/dialog-actualites.component';
+import {DialogActualitesComponent} from '../cours/dialog-actualites/dialog-actualites.component';
 
 @Component({
   selector: 'app-portefeuilles',

@@ -1,6 +1,6 @@
 import {Component, input, InputSignal, model} from '@angular/core';
 import {Panel} from 'primeng/panel';
-import {AchatsValeurComponent} from '../../../valeurs/details-valeur/achats-valeur/achats-valeur.component';
+import {AchatsValeurComponent} from '../../../valeurs/achats-valeur/achats-valeur.component';
 import {Cours} from '../../../cours/cours.class';
 import {TranslateService} from '@ngx-translate/core';
 
@@ -10,7 +10,7 @@ import {TranslateService} from '@ngx-translate/core';
     Panel,
     AchatsValeurComponent
   ],
-  templateUrl: './panneau-achats-valeur-component.html',
+  templateUrl: './panneau-achats-valeur.component.html',
   styleUrl: './panneau-achats-valeur.component.sass'
 })
 export class PanneauAchatsValeurComponent {

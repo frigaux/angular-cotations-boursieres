@@ -17,9 +17,9 @@ import {AjoutAuPortefeuilleComponent} from './ajout-au-portefeuille/ajout-au-por
 import {SortEvent} from 'primeng/api';
 import {SelecteurFiltreComponent} from './selecteur-filtre/selecteur-filtre.component';
 import {FiltreDecore} from './selecteur-filtre/filtre-decore.class';
-import {DialogImportExportComponent} from './editeur-filtres/import-export/dialog-import-export.component';
+import {DialogImportExportComponent} from './dialog-editeur-filtres/import-export/dialog-import-export.component';
 import {PortefeuillesService} from '../../services/portefeuilles/portefeuilles.service';
-import {DialogActualitesComponent} from './actualites/dialog-actualites.component';
+import {DialogActualitesComponent} from './dialog-actualites/dialog-actualites.component';
 
 @Component({
   selector: 'app-cours',

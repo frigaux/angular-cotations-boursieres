@@ -6,7 +6,7 @@ import {NgClass} from "@angular/common";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {Textarea} from "primeng/textarea";
 import {TranslatePipe} from "@ngx-translate/core";
-import {CoursService} from '../../../../services/cours/cours.service';
+import {ValeursService} from '../../../services/valeurs/valeurs.service';
 
 @Component({
   selector: 'app-dialog-import-export',
@@ -21,34 +21,29 @@ import {CoursService} from '../../../../services/cours/cours.service';
     NgClass
   ],
   templateUrl: './dialog-import-export.component.html',
-  styleUrls: ['../../../portefeuilles/gestion-portefeuilles/import-export/dialog-import-export.component.sass', './dialog-import-export.component.sass']
+  styleUrls: ['../../portefeuilles/gestion-portefeuilles/dialog-import-export/dialog-import-export.component.sass', './dialog-import-export.component.sass']
 })
 export class DialogImportExportComponent {
   visible: boolean = false;
-  filtres: string = '';
+  achats: string = '';
   erreur: string | undefined;
 
-  constructor(private coursService: CoursService) {
+  constructor(private valeursService: ValeursService) {
   }
 
   reinitialiserVue() {
-    this.filtres = '';
+    this.achats = '';
     this.erreur = undefined;
   }
 
   exporter() {
-    this.filtres = JSON.stringify(this.coursService.chargerFiltres(), null, 2);
+    this.achats = JSON.stringify(this.valeursService.chargerAchats(), null, 2);
   }
 
   importer() {
-    this.erreur = this.coursService.importFiltres(this.filtres);
+    this.erreur = this.valeursService.importAchats(this.achats);
     if (this.erreur === undefined) {
       this.visible = false;
     }
-  }
-
-  exemple() {
-    this.reinitialiserVue();
-    this.filtres = JSON.stringify(CoursService.CONFIGURATION_INITIALE_FILTRE, null, 2);
   }
 }

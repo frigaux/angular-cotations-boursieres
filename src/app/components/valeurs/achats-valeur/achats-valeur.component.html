@@ -2,7 +2,7 @@
   <div class="actions">
     <div (click)="ajouterAchat()">
       <span class="pi pi-plus-circle"></span>
-      <span>{{ 'COMPOSANTS.VALEURS.DETAILS_VALEUR.ACHATS_VALEUR.AJOUTER_ACHAT' | translate }}</span>
+      <span>{{ 'COMPOSANTS.VALEURS.ACHATS_VALEUR.AJOUTER_ACHAT' | translate }}</span>
     </div>
     <span class="message">{{ succes }}</span>
   </div>
@@ -16,10 +16,10 @@
     <div class="liste">
       <div class="entetes">
         <span></span>
-        <span>{{ 'COMPOSANTS.VALEURS.DETAILS_VALEUR.ACHATS_VALEUR.DATE' | translate }}</span>
-        <span>{{ 'COMPOSANTS.VALEURS.DETAILS_VALEUR.ACHATS_VALEUR.PRIX' | translate }}</span>
-        <span>{{ 'COMPOSANTS.VALEURS.DETAILS_VALEUR.ACHATS_VALEUR.QUANTITE' | translate }}</span>
-        <span>{{ 'COMPOSANTS.VALEURS.DETAILS_VALEUR.ACHATS_VALEUR.REVENDU' | translate }}</span>
+        <span>{{ 'COMPOSANTS.VALEURS.ACHATS_VALEUR.DATE' | translate }}</span>
+        <span>{{ 'COMPOSANTS.VALEURS.ACHATS_VALEUR.PRIX' | translate }}</span>
+        <span>{{ 'COMPOSANTS.VALEURS.ACHATS_VALEUR.QUANTITE' | translate }}</span>
+        <span>{{ 'COMPOSANTS.VALEURS.ACHATS_VALEUR.REVENDU' | translate }}</span>
       </div>
       @for (achatDecore of achatsDecores; track achatDecore.id) {
         <div class="element">

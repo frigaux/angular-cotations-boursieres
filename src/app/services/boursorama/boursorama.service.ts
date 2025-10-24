@@ -5,7 +5,7 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {DTOCoursBoursorama} from './dto-cours-boursorama.interface';
 import {DTOOrdre} from './dto-ordre.interface';
 import {ParseUtil} from '../abc-bourse/parse-util.class';
-import {DtoInformationsTickerBoursorama} from './dto-informations-ticker-boursorama.interface';
+import {DtoCoursTickerBoursorama} from './dto-informations-ticker-boursorama.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -14,14 +14,12 @@ export class BoursoramaService {
   private static readonly HEADERS_JSON = new HttpHeaders()
     .set('Accept', 'application/json');
   private static readonly HEADERS_HTML = new HttpHeaders()
-    .set('Accept', 'text/html')
-    .set('Cache-Control', 'max-age=0');
-
+    .set('Accept', 'text/html');
 
   constructor(private http: HttpClient) {
   }
 
-  public chargerCours(tickers: Array<string>): Observable<Array<DTOCours>> {
+  public chargerCoursTickers(tickers: Array<string>): Observable<Array<DTOCours>> {
     return new Observable(observer => {
       forkJoin(tickers.map(ticker =>
         this.http.get<DTOCoursBoursorama>(`/boursorama/bourse/action/graph/ws/UpdateCharts?symbol=1rP${ticker}&period=-1`,
@@ -51,10 +49,10 @@ export class BoursoramaService {
     });
   }
 
-  public chargerInformationsTicker(ticker: string): Observable<DtoInformationsTickerBoursorama> {
+  public chargerCoursTicker(ticker: string): Observable<DtoCoursTickerBoursorama> {
     return new Observable(observer => {
       this.http.get(`/boursorama/cours/1rP${ticker}/`, {
-        headers: BoursoramaService.HEADERS_HTML.set('Referer', `https://www.boursorama.com/cours/1rP${ticker}/`),
+        headers: BoursoramaService.HEADERS_HTML,
         responseType: 'text'
       }).subscribe({
         error: httpResponseError => {
@@ -62,58 +60,52 @@ export class BoursoramaService {
           observer.complete();
         },
         next: html => {
-          const dto = this.parseAndMapInformations(html);
-          dto ? observer.next(dto) : observer.error({
-            message: 'Impossible de récupérer les informations dans le html',
-            html: html
-          });
+          const dto = this.parseAndMapCours(html);
+          if (dto) {
+            observer.next(dto);
+          } else {
+            observer.error({
+              message: 'Impossible de récupérer les informations dans le html',
+              html: html
+            })
+          }
           observer.complete();
         }
       });
     });
   }
 
-  private parseAndMapInformations(html: string): DtoInformationsTickerBoursorama | undefined {
+  private parseAndMapCours(html: string): DtoCoursTickerBoursorama | undefined {
     const document = new DOMParser()
       .parseFromString(html, 'text/html');
 
     const elDIV = document.querySelector('div.c-faceplate__price');
     const elLIs = document.querySelectorAll('li.c-list-info__item');
-    if (elDIV && elLIs.length === 16) {
+
+    if (elDIV && elLIs.length === 18) {
       const cours = this.parseNumber(elDIV, 'span.c-instrument');
 
-      const ouverture = this.parseNumber(elLIs[0], 'span.c-instrument');
-      const cloture = this.parseNumber(elLIs[1], 'span.c-instrument');
-      const plusHaut = this.parseNumber(elLIs[2], 'span.c-instrument');
-      const plusBas = this.parseNumber(elLIs[3], 'span.c-instrument');
-      const volume = this.parseNumber(elLIs[4], 'span.c-instrument');
+      const ouverture = this.parseNumber(elLIs[2], 'span.c-instrument');
+      const cloture = this.parseNumber(elLIs[3], 'span.c-instrument');
+      const plusHaut = this.parseNumber(elLIs[4], 'span.c-instrument');
+      const plusBas = this.parseNumber(elLIs[5], 'span.c-instrument');
+      const volume = this.parseNumber(elLIs[6], 'span.c-instrument');
 
-      const pourcentageCapitalEchange = this.parseNumber(elLIs[5], 'p.c-list-info__value');
-      const valorisation = this.parseNumber(elLIs[6], 'p.c-list-info__value');
+      const pourcentageCapitalEchange = this.parseNumber(elLIs[7], 'p.c-list-info__value');
+      const valorisation = this.parseString(elLIs[8], 'p.c-list-info__value');
 
-      const limiteBaisse = this.parseNumber(elLIs[8], 'p.c-list-info__value');
-      const limiteHausse = this.parseNumber(elLIs[9], 'p.c-list-info__value');
-      const pourcentageRendementEstime = this.parseNumber(elLIs[10], 'p.c-list-info__value');
-      const perEstime = this.parseNumber(elLIs[11], 'p.c-list-info__value');
-      const dernierDividende = this.parseNumber(elLIs[12], 'p.c-list-info__value');
-      const dateDernierDividende = this.parseNumber(elLIs[13], 'p.c-list-info__value');
+      const limiteBaisse = this.parseNumber(elLIs[10], 'p.c-list-info__value');
+      const limiteHausse = this.parseNumber(elLIs[11], 'p.c-list-info__value');
+      const pourcentageRendementEstime = this.parseNumber(elLIs[12], 'p.c-list-info__value');
+      const perEstime = this.parseNumber(elLIs[13], 'p.c-list-info__value');
+      const dernierDividende = this.parseNumber(elLIs[14], 'p.c-list-info__value');
+      const dateDernierDividende = this.parseNumber(elLIs[15], 'p.c-list-info__value');
 
-      const risqueESG = this.parseString(elLIs[15], 'p.c-list-info__value');
+      const risqueESG = this.parseString(elLIs[17], 'p.c-list-info__value');
 
       const achats: Array<DTOOrdre> = [];
       const ventes: Array<DTOOrdre> = [];
-      this.parseAndMapAchatsVentes(document, achats, ventes);
-
-      // <li class="c-list-info__item
-
-      // 5x <span class="c-instrument
-      // 2x <p class="c-list-info__value
-      // 1x -
-      // 2x <p class="c-list-info__value
-      // 2x <p class="c-list-info__value
-      // 2x <p class="c-list-info__value
-      // 1x -
-      // 1x <p class="c-list-info__value
+      this.parseAndMapOrdres(document, achats, ventes);
 
       return {
         cours, ouverture, cloture, plusHaut, plusBas, volume, pourcentageCapitalEchange,
@@ -124,7 +116,7 @@ export class BoursoramaService {
     return undefined;
   }
 
-  private parseAndMapAchatsVentes(document: Document, achats: Array<DTOOrdre>, ventes: Array<DTOOrdre>) {
+  private parseAndMapOrdres(document: Document, achats: Array<DTOOrdre>, ventes: Array<DTOOrdre>) {
     const elTABLEs = document.querySelectorAll('table.c-orderbook__table');
 
     if (elTABLEs.length === 2) {

@@ -1,7 +1,7 @@
 import {Component, OnInit, output} from '@angular/core';
 import {CoursService} from '../../../services/cours/cours.service';
 import {TranslatePipe} from '@ngx-translate/core';
-import {DialogEditeurFiltresComponent} from '../editeur-filtres/dialog-editeur-filtres.component';
+import {DialogEditeurFiltresComponent} from '../dialog-editeur-filtres/dialog-editeur-filtres.component';
 import {FiltreDecore} from './filtre-decore.class';
 import {NgClass} from '@angular/common';
 

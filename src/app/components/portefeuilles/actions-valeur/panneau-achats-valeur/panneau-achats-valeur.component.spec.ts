@@ -1,9 +1,9 @@
 import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import {PanneauAchatsValeurComponent} from './panneau-achats-valeur-component';
+import {PanneauAchatsValeurComponent} from './panneau-achats-valeur.component';
 import {TranslateModule} from '@ngx-translate/core';
 
-describe('PanneauAchatsValeur', () => {
+describe('PanneauAchatsValeurComponent', () => {
   let component: PanneauAchatsValeurComponent;
   let fixture: ComponentFixture<PanneauAchatsValeurComponent>;
 

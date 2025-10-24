@@ -1,0 +1,13 @@
+<p-dialog
+  header="{{ 'COMPOSANTS.PORTEFEUILLES.ACTIONS_VALEUR.DIALOG_COURS_TICKER.COURS_TICKER' | translate : {valeur: cours?.libelle, ticker:  cours?.ticker} }}"
+  [modal]="true" [(visible)]="visible">
+  <app-loader [affiche]="loading" [configuration]="[
+        {marginLeft: '0', marginTop: '0', height: '70vh', width: '100%'}
+      ]"></app-loader>
+
+  @if (!loading && coursBoursorama) {
+    <p-fieldset legend="{{ 'COMPOSANTS.PORTEFEUILLES.ACTIONS_VALEUR.DIALOG_COURS_TICKER.ORDRES' | translate }}">
+      <p-chart type="doughnut" [data]="data"/>
+    </p-fieldset>
+  }
+</p-dialog>
