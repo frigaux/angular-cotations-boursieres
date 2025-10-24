@@ -63,7 +63,7 @@ export class PortefeuillesComponent implements OnInit {
   // données pour la vue
   protected date?: string;
   portefeuillesAvecCours: Array<PortefeuilleAvecCours> = [];
-  protected idxPortefeuilleCourant: number = -1;
+  idxPortefeuilleCourant: number = -1;
   protected scrollHeight: string = 'calc(100vh - 14rem)';
 
   // cours pour lequel afficher les courbes
@@ -91,9 +91,19 @@ export class PortefeuillesComponent implements OnInit {
   ngOnInit(): void {
     this.valeursService.chargerValeurs().subscribe(valeurs => {
       valeurs.forEach(valeur => this.valeurByTicker.set(valeur.ticker, valeur));
-      this.idxPortefeuilleCourant = this.portefeuillesService.indexPortefeuilleParDefaut();
+      this.determinerIdxPortefeuilleCourant();
       this.chargerPortefeuilleCourant();
     });
+  }
+
+  private determinerIdxPortefeuilleCourant() {
+    if (this.tickersNonRevendus().length > 0) {
+      this.idxPortefeuilleCourant = this.portefeuillesService.charger()
+        .filter(portefeuille => portefeuille.tickers.length > 0)
+        .length;
+    } else {
+      this.idxPortefeuilleCourant = this.portefeuillesService.indexPortefeuilleParDefaut();
+    }
   }
 
   onOpenAccordion(e: AccordionTabOpenEvent) {
@@ -116,20 +126,23 @@ export class PortefeuillesComponent implements OnInit {
 
   private chargerPortefeuillesAvecPortefeuilleAchats() {
     const portefeuilles = this.portefeuillesService.charger();
-    const tickersNonRevendus = this.valeursService.chargerAchats()
-      .filter(achats => achats.achats.find(achat => !achat.revendu) !== undefined)
-      .map(achats => achats.ticker);
+    const tickersNonRevendus = this.tickersNonRevendus();
     if (tickersNonRevendus.length > 0) {
-      portefeuilles.forEach(portefeuille => portefeuille.parDefaut = false);
-      portefeuilles.unshift({
+      portefeuilles.push({
         nom: 'Achats',
-        parDefaut: true,
+        parDefaut: false,
         tickers: tickersNonRevendus,
         alertes: PortefeuillesService.CONFIGURATION_INITIALE[0].alertes,
       });
     }
     return portefeuilles.filter(portefeuille => portefeuille.tickers.length > 0)
       .map(portefeuille => new PortefeuilleAvecCours(portefeuille));
+  }
+
+  private tickersNonRevendus() {
+    return this.valeursService.chargerAchats()
+      .filter(achats => achats.achats.find(achat => !achat.revendu) !== undefined)
+      .map(achats => achats.ticker);
   }
 
   afficherPortefeuilleCourant(): void {

@@ -117,9 +117,11 @@ export class PopoverActionsValeurComponent {
 
   boursorama() {
     window.open(`https://www.boursorama.com/cours/1rP${this.cours?.ticker}/`);
+    this.popover()?.hide();
   }
 
   abcBourse() {
     window.open(`https://www.abcbourse.com/cotation/${this.cours?.ticker}p`);
+    this.popover()?.hide();
   }
 }

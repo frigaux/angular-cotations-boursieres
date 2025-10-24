@@ -143,9 +143,9 @@
         "NOM": "Nom du filtre",
         "EDITER_CONDITION": "Edition de la condition du filtre",
         "SUPPRIMER": "Supprimer le filtre",
-        "CONFIRMATION_SUPPRESSION": "Confirmez-vous la suppression du filtre {{nom}} ?",
+        "CONFIRMATION_SUPPRESSION": "Confirmez-vous la suppression du filtre \"{{nom}}\" ?",
         "EDITEUR_CONDITION_FILTRE": {
-          "MODIFICATION_CONDITION": "Modification de la condition du filtre {{nom}}",
+          "MODIFICATION_CONDITION": "Modification de la condition du filtre \"{{nom}}\"",
           "DOCUMENTATION": "Comment écrire une condition ?",
           "DOCUMENTATION_OPERATEURS": "Une condition est une expression booléenne utilisant des opérateurs :",
           "DOCUMENTATION_OPERATEURS_COMPARAISON": "de comparaison : ==, !=, <, >, <=, >=,",
@@ -259,8 +259,8 @@
         "ACHATS": "Achats de la valeur",
         "ABCBOURSE": "ABCBourse",
         "BOURSORAMA": "Boursorama",
-        "ACHATS_VALEUR": "Achats de la valeur {{nom}}",
-        "CONFIRMATION_SUPPRESSION": "Confirmez-vous la suppression de la valeur {{valeur}} du portefeuille {{nomPortefeuille}} ?"
+        "ACHATS_VALEUR": "Achats de la valeur \"{{nom}}\"",
+        "CONFIRMATION_SUPPRESSION": "Confirmez-vous la suppression de la valeur \"{{valeur}}\" du portefeuille \"{{nomPortefeuille}}\" ?"
       },
       "GESTION_PORTEFEUILLES": {
         "CREER": "Créer un portefeuille",
@@ -271,17 +271,17 @@
         "EDITER_ALERTES": "Editer les alertes du portefeuille",
         "RENOMMER": "Renommer le portefeuille",
         "SUPPRIMER": "Supprimer le portefeuille",
-        "CONFIRMATION_SUPPRESSION": "Confirmez-vous la suppression du portefeuille {{nom}} ?",
+        "CONFIRMATION_SUPPRESSION": "Confirmez-vous la suppression du portefeuille \"{{nom}}\" ?",
         "EDITEUR_ALERTES": {
-          "MODIFICATION_PORTEFEUILLE": "Modification des alertes du portefeuille {{nom}}",
+          "MODIFICATION_PORTEFEUILLE": "Modification des alertes du portefeuille \"{{nom}}\"",
           "AJOUTER": "Ajouter une alerte",
           "AUCUNE_ALERTE": "Cliquez sur le PLUS pour ajouter une alerte",
           "NOM": "Nom de l'alerte",
           "EDITER_CONDITION": "Edition de la condition de lancement de l'alerte",
           "SUPPRIMER": "Supprimer l'alerte",
-          "CONFIRMATION_SUPPRESSION": "Confirmez-vous la suppression de l'alerte {{nom}} ?",
+          "CONFIRMATION_SUPPRESSION": "Confirmez-vous la suppression de l'alerte \"{{nom}}\" ?",
           "EDITEUR_CONDITION_ALERTE": {
-            "MODIFICATION_CONDITION": "Modification de la condition de l'alerte {{nom}}",
+            "MODIFICATION_CONDITION": "Modification de la condition de l'alerte \"{{nom}}\"",
             "DOCUMENTATION": "Comment écrire une condition ?",
             "DOCUMENTATION_OPERATEURS": "Une condition est une expression utilisant des opérateurs :",
             "DOCUMENTATION_OPERATEURS_COMPARAISON": "de comparaison : ==, !=, <, >, <=, >=,",
@@ -301,7 +301,7 @@
           "CREER": "Créer le portefeuille"
         },
         "FORMULAIRE_MODIFICATION": {
-          "MODIFICATION_NOM": "Modification du nom du portefeuille {{nom}}",
+          "MODIFICATION_NOM": "Modification du nom du portefeuille \"{{nom}}\"",
           "NOM": "Nouveau nom du portefeuille",
           "RENOMMER": "Renommer le portefeuille"
         },
@@ -320,7 +320,7 @@
           "PORTEFEUILLE_SANS_ALERTE": "ATTENTION ! le portefeuille n'a pas d'alerte"
         },
         "SELECTEUR_VALEURS": {
-          "MODIFICATION_PORTEFEUILLE": "Modification des valeurs du portefeuille {{nom}}",
+          "MODIFICATION_PORTEFEUILLE": "Modification des valeurs du portefeuille \"{{nom}}\"",
           "RECHERCHE": "Recherche par libellé",
           "SOURCE": "Valeurs disponibles",
           "TARGET": "Valeurs du portefeuille"

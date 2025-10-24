@@ -53,12 +53,7 @@ describe('PortefeuillesComponent', () => {
     component = fixture.componentInstance;
 
     // construction JDD
-    const ticker = LISTE_COURS_AVEC_LISTE_ALLEGEE[0].ticker;
-    const achats = ACHATS
-      .filter(achat => achat.ticker === ticker)
-      .map(achat => achat.achats)
-      .flat();
-    achatsByTicker.set(ticker, achats);
+    ACHATS.forEach(achat => achatsByTicker.set(achat.ticker, achat.achats));
   });
 
   it('should create', () => {
@@ -69,7 +64,7 @@ describe('PortefeuillesComponent', () => {
     beforeEach(() => {
       mockPortefeuillesService.charger.and.returnValue([clonePORTEFEUILLE()]);
       mockPortefeuillesService.indexPortefeuilleParDefaut.and.returnValue(0);
-      mockValeursService.chargerValeurs.and.returnValue(of([VALEURS[0]]));
+      mockValeursService.chargerValeurs.and.returnValue(of(VALEURS));
       mockValeursService.chargerAchatsByTicker.and.returnValue(achatsByTicker);
       mockValeursService.chargerAchatsTicker.and.returnValue(ACHATS[0].achats);
       mockValeursService.chargerAchats.and.returnValue([ACHATS[0]]);
@@ -85,9 +80,11 @@ describe('PortefeuillesComponent', () => {
 
       expect(component).toBeDefined();
       expect(component.loading).toBeFalse();
-      component.basculerAffichageCours(component.portefeuillesAvecCours[0].cours[0]);
-      expect(component.coursSelectionne).toBeDefined();
       expect(component.portefeuillesAvecCours).toHaveSize(2);
+      expect(component.idxPortefeuilleCourant).toBe(1);
+      expect(component.portefeuillesAvecCours[1].portefeuille.nom).toBe('Achats');
+      component.basculerAffichageCours(component.portefeuillesAvecCours[1].cours[0]);
+      expect(component.coursSelectionne).toBeDefined();
     });
   });
 });

@@ -24,14 +24,14 @@ export class AjoutAuPortefeuilleComponent implements OnInit {
 
   // données pour la vue
   portefeuilles?: Array<DTOPortefeuille>;
-  portefeuille?: DTOPortefeuille;
+  portefeuilleSelectionne?: DTOPortefeuille;
 
   constructor(private portefeuillesService: PortefeuillesService) {
   }
 
   ngOnInit(): void {
     this.portefeuilles = this.portefeuillesService.charger();
-    this.portefeuille = this.portefeuilles.find(portefeuille => portefeuille.parDefaut)
+    this.portefeuilleSelectionne = this.portefeuilles.find(portefeuille => portefeuille.parDefaut)
   }
 
   afficher(event: MouseEvent, ticker: string) {
@@ -40,9 +40,9 @@ export class AjoutAuPortefeuilleComponent implements OnInit {
   }
 
   ajouterAuPortefeuille() {
-    if (this.portefeuilles && this.portefeuille && this.ticker) {
-      if (!this.portefeuille.tickers.includes(this.ticker)) {
-        this.portefeuille.tickers.push(this.ticker);
+    if (this.portefeuilles && this.portefeuilleSelectionne && this.ticker) {
+      if (!this.portefeuilleSelectionne.tickers.includes(this.ticker)) {
+        this.portefeuilleSelectionne.tickers.push(this.ticker);
         this.portefeuillesService.enregistrer(this.portefeuilles);
       }
     }

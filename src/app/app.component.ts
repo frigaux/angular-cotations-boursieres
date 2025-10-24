@@ -14,8 +14,10 @@ import {PrimeNG} from 'primeng/config';
 import {PickList} from 'primeng/picklist';
 import {NavigationBar} from '@squareetlabs/capacitor-navigation-bar';
 
-// TODO : edition des alertes : reprendre l'exemple
-// TODO : achats : récupérer aussi la liste des achats / ventes en cours sur boursorama
+// TODO : service ABCBourse de récupération des informations pour un ticker : récupérer la pré-ouverture ?
+// TODO : achats : récupérer aussi les ordres d'achats / ventes en cours sur boursorama
+// TODO : récupérer les évenements boursier sur https://www.zonebourse.com/actualite-bourse/regions/locales/ : possibilité ajout dans un portefeuille des tickers
+// TODO : edition des alertes d'un portefeuille : possibilité d'initialiser avec un exemple
 // TODO : nouvelle page dividende : date dernier import, un dividende par ticker avec date, type, montant, rendement (https://abcbourse.com/marches/dividendes)
 // TODO : nouvelles opérandes pour les alertes du portefeuille/cours min/max/moyenne/nombre vagues
 // TODO : coverage
