@@ -32,13 +32,14 @@ describe('AbcBourseService', () => {
     const promiseInformationsTicker: Promise<DTOInformationsTickerABCBourse> = firstValueFrom(service.chargerInformationsTicker('AI'));
     const informationsTicker = await promiseInformationsTicker;
     expect(informationsTicker.ticker).toBe('AI');
+    expect(informationsTicker.cotations).toBeDefined();
     expect(informationsTicker.actualites.length).toBeGreaterThan(0);
     expect(informationsTicker.variations.length).toBeGreaterThan(0);
     expect(informationsTicker.dividendes.length).toBeGreaterThan(0);
-    expect(informationsTicker.ratios.length).toBeGreaterThan(0);
-    expect(informationsTicker.variationCAC).toBeDefined();
-    expect(informationsTicker.correlationCAC).toBeDefined();
-    expect(informationsTicker.qualiteFinanciere).toBeDefined();
+    expect(informationsTicker.ratios.indicateurs.length).toBeGreaterThan(0);
+    expect(informationsTicker.ratios.variationCAC).toBeDefined();
+    expect(informationsTicker.ratios.correlationCAC).toBeDefined();
+    expect(informationsTicker.ratios.qualiteFinanciere).toBeDefined();
 
     const promiseActualiteTicker: Promise<string> = firstValueFrom(service.chargerLien(informationsTicker.actualites[0].pathname));
     const actualiteTicker = await promiseActualiteTicker;
@@ -52,10 +53,10 @@ describe('AbcBourseService', () => {
     expect(informationsTicker.actualites.length).toBeGreaterThan(0);
     expect(informationsTicker.variations.length).toBeGreaterThan(0);
     expect(informationsTicker.dividendes.length).toBe(0);
-    expect(informationsTicker.ratios.length).toBeGreaterThan(0);
-    expect(informationsTicker.variationCAC).toBeDefined();
-    expect(informationsTicker.correlationCAC).toBeDefined();
-    expect(informationsTicker.qualiteFinanciere).toBeUndefined();
+    expect(informationsTicker.ratios.indicateurs.length).toBeGreaterThan(0);
+    expect(informationsTicker.ratios.variationCAC).toBeDefined();
+    expect(informationsTicker.ratios.correlationCAC).toBeDefined();
+    expect(informationsTicker.ratios.qualiteFinanciere).toBeUndefined();
   });
 
 

@@ -5,12 +5,13 @@ import {DTOInformationsTickerABCBourse} from './dto-informations-ticker-abc-bour
 import {DTOActualiteTicker} from './dto-actualite-ticker.class';
 import {DTODividende} from './dto-dividende.class';
 import {DTOVariation} from './dto-variation.class';
-import {DTORatio} from './dto-ratio.class';
+import {DTOIndicateur} from './dto-ratio.class';
 import {ParseUtil} from './parse-util.class';
 import {DTOActualites} from './dto-actualites.class';
 import {DTOLien} from './dto-lien.class';
 import {DTOVentesADecouvert} from './dto-ventes-a-decouvert.class';
 import {DTOTransaction} from './dto-transaction.class';
+import {DTOCotations} from './dto-cotations.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -43,6 +44,10 @@ export class AbcBourseService {
   private parseAndMapInformations(html: string, ticker: string): DTOInformationsTickerABCBourse {
     const result = new DTOInformationsTickerABCBourse(ticker);
 
+    const document = new DOMParser().parseFromString(html, 'text/html');
+
+    result.cotations = this.parseAndMapCotations(document);
+
     ParseUtil.execRegexpAndMap(
       result.actualites,
       html,
@@ -50,23 +55,44 @@ export class AbcBourseService {
       (matches) => new DTOActualiteTicker(ParseUtil.parseAndMapTo8601(matches[1]), matches[3], matches[2])
     );
 
-    const elTables = new DOMParser()
-      .parseFromString(html, 'text/html')
-      .querySelectorAll('table.tableDis');
+    const elTables = document.querySelectorAll('table.tableDis');
 
     if (elTables.length === 4) {
       this.mapVariations(result.variations, elTables[0]);
       this.mapDividendes(result.dividendes, elTables[1]);
-      this.mapRatios(result.ratios, elTables[2]);
+      this.mapRatios(result.ratios.indicateurs, elTables[2]);
       this.mapIndicateurs(result, elTables[3]);
     }
     if (elTables.length === 3) { // bloc dividende facultatif
       this.mapVariations(result.variations, elTables[0]);
-      this.mapRatios(result.ratios, elTables[1]);
+      this.mapRatios(result.ratios.indicateurs, elTables[1]);
       this.mapIndicateurs(result, elTables[2]);
     }
 
     return result;
+  }
+
+  private parseAndMapCotations(document: Document): DTOCotations | undefined {
+    const elDiv = document.querySelector('div.disqzone');
+    const elTables = document.querySelectorAll('table.mar6');
+    const elTrs0 = elTables[0].querySelectorAll('tr');
+    const elTrs1 = elTables[1].querySelectorAll('tr');
+    if (elDiv && elTables.length === 3 && elTrs0.length === 6 && elTrs1.length === 5) {
+      const cours = ParseUtil.queryAndParseNumber(elDiv, '#lastcx');
+      const volume = ParseUtil.queryAndParseNumber(elTrs0[0], 'td.alri');
+      const ouverture = ParseUtil.queryAndParseNumber(elTrs0[1], 'td.alri');
+      const plusHaut = ParseUtil.queryAndParseNumber(elTrs0[2], 'td.alri');
+      const plusBas = ParseUtil.queryAndParseNumber(elTrs0[3], 'td.alri');
+      const cloture = ParseUtil.queryAndParseNumber(elTrs0[4], 'td.alri');
+      const pourcentageVolatilite = ParseUtil.queryAndParseNumber(elTrs0[5], 'td.alri');
+      const pourcentageCapitalEchange = ParseUtil.queryAndParseNumber(elTrs1[0], 'td.alri');
+      const valorisation = ParseUtil.queryAndParseString(elTrs1[1], 'td.alri');
+      return {
+        cours, volume, ouverture, plusHaut, plusBas, cloture,
+        pourcentageVolatilite, pourcentageCapitalEchange, valorisation
+      };
+    }
+    return undefined;
   }
 
   private mapVariations(variations: DTOVariation[], elTable: Element) {
@@ -85,12 +111,12 @@ export class AbcBourseService {
       });
   }
 
-  private mapRatios(ratios: DTORatio[], elTable: Element) {
+  private mapRatios(ratios: DTOIndicateur[], elTable: Element) {
     const elThsAnnees: NodeListOf<HTMLTableCellElement> = elTable.querySelectorAll('thead > tr > th:not(:first-child)');
     const elTdsBnpa: NodeListOf<HTMLTableCellElement> = elTable.querySelectorAll('tbody > tr:nth-child(1) > td:not(:first-child)');
     const elTdsPer: NodeListOf<HTMLTableCellElement> = elTable.querySelectorAll('tbody > tr:nth-child(2) > td:not(:first-child)');
     for (let i = 0; i < elThsAnnees.length; i++) {
-      ratios.unshift(new DTORatio(
+      ratios.unshift(new DTOIndicateur(
         ParseUtil.parseYear(elThsAnnees[i].innerText),
         ParseUtil.parseNumber(elTdsBnpa[i].innerText),
         ParseUtil.parseNumber(elTdsPer[i].innerText))
@@ -103,18 +129,18 @@ export class AbcBourseService {
 
     const elTdVariation: HTMLTableCellElement | null = elTrs[0].querySelector('td:nth-child(2)');
     if (elTdVariation) {
-      result.variationCAC = ParseUtil.parseNumber(elTdVariation.innerText);
+      result.ratios.variationCAC = ParseUtil.parseNumber(elTdVariation.innerText);
     }
 
     const elTdCorrelation: HTMLTableCellElement | null = elTrs[1].querySelector('td:nth-child(2)');
     if (elTdCorrelation) {
-      result.correlationCAC = ParseUtil.parseNumber(elTdCorrelation.innerText) / 100;
+      result.ratios.correlationCAC = ParseUtil.parseNumber(elTdCorrelation.innerText) / 100;
     }
 
     // qualité financière facultative
     const elSpanQualite: HTMLSpanElement | null = elTrs[2]?.querySelector('td:nth-child(2) > span');
     if (elSpanQualite) {
-      result.qualiteFinanciere = elSpanQualite.innerText;
+      result.ratios.qualiteFinanciere = elSpanQualite.innerText;
     }
   }
 

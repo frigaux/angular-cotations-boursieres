@@ -38,9 +38,9 @@ describe('InformationsTickerComponent', () => {
   describe('Given #chargerInformationsTicker renvoie les informations pour un ticker', () => {
     beforeEach(() => {
       const informationsTicker = new DTOInformationsTickerABCBourse('GLE');
-      informationsTicker.variationCAC = 0;
-      informationsTicker.correlationCAC = 0;
-      informationsTicker.qualiteFinanciere = '';
+      informationsTicker.ratios.variationCAC = 0;
+      informationsTicker.ratios.correlationCAC = 0;
+      informationsTicker.ratios.qualiteFinanciere = '';
       mockAbcBourseService.chargerInformationsTicker.and.returnValue(of(informationsTicker));
     });
 

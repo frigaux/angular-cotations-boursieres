@@ -179,6 +179,7 @@
           "ANNEE": "Année",
           "BNPA": "BNPA",
           "PER": "PER",
+          "COURS": "Cours",
           "VARIATION_CAC": "Variation / CAC40",
           "CORRELATION_CAC": "Corrélation / CAC40",
           "QUALITE": "Qualité financière"

@@ -1,4 +1,4 @@
-export class DTORatio {
+export class DTOIndicateur {
   annee: number;
   bnpa: number;
   per: number;

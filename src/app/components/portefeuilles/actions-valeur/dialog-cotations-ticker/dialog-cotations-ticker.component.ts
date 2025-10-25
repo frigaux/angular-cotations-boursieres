@@ -5,12 +5,12 @@ import {TableModule} from 'primeng/table';
 import {TranslatePipe, TranslateService} from '@ngx-translate/core';
 import {Cours} from '../../../cours/cours.class';
 import {BoursoramaService} from '../../../../services/boursorama/boursorama.service';
-import {DtoCoursTickerBoursorama} from '../../../../services/boursorama/dto-informations-ticker-boursorama.interface';
+import {DtoCotationsTickerBoursorama} from '../../../../services/boursorama/dto-cotations-ticker-boursorama.interface';
 import {UIChart} from 'primeng/chart';
 import {Fieldset} from 'primeng/fieldset';
 
 @Component({
-  selector: 'app-dialog-cours-ticker',
+  selector: 'app-dialog-cotations-ticker',
   imports: [
     Dialog,
     LoaderComponent,
@@ -19,17 +19,17 @@ import {Fieldset} from 'primeng/fieldset';
     UIChart,
     Fieldset
   ],
-  templateUrl: './dialog-cours-ticker.component.html',
-  styleUrl: './dialog-cours-ticker.component.sass'
+  templateUrl: './dialog-cotations-ticker.component.html',
+  styleUrl: './dialog-cotations-ticker.component.sass'
 })
-export class DialogCoursTickerComponent {
+export class DialogCotationsTickerComponent {
 
   // données pour la vue
   visible: boolean = false;
   loading: boolean = false;
   ticker?: string;
   cours?: Cours;
-  coursBoursorama?: DtoCoursTickerBoursorama;
+  coursBoursorama?: DtoCotationsTickerBoursorama;
   data?: any;
 
   constructor(private translateService: TranslateService, private boursoramaService: BoursoramaService) {

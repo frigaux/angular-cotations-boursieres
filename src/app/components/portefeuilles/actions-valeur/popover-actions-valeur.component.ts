@@ -9,7 +9,7 @@ import {DialogueService} from '../../../services/dialogue/dialogue.service';
 import {Select} from 'primeng/select';
 import {FormsModule} from '@angular/forms';
 import {PanneauAchatsValeurComponent} from './panneau-achats-valeur/panneau-achats-valeur.component';
-import {DialogCoursTickerComponent} from './dialog-cours-ticker/dialog-cours-ticker.component';
+import {DialogCotationsTickerComponent} from './dialog-cotations-ticker/dialog-cotations-ticker.component';
 
 @Component({
   selector: 'app-popover-actions-valeur',
@@ -19,14 +19,14 @@ import {DialogCoursTickerComponent} from './dialog-cours-ticker/dialog-cours-tic
     Select,
     FormsModule,
     PanneauAchatsValeurComponent,
-    DialogCoursTickerComponent
+    DialogCotationsTickerComponent
   ],
   templateUrl: './popover-actions-valeur.component.html',
   styleUrl: './popover-actions-valeur.component.sass'
 })
 export class PopoverActionsValeurComponent {
   private popover = viewChild(Popover);
-  private dialogCoursTickerComponent = viewChild(DialogCoursTickerComponent);
+  private dialogCoursTickerComponent = viewChild(DialogCotationsTickerComponent);
 
   // paramètres
   cours?: Cours;

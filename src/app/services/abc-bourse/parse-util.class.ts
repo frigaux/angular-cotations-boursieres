@@ -55,4 +55,20 @@ export class ParseUtil {
   static isMobile(): boolean {
     return window.navigator.userAgent.toLowerCase().includes('mobile');
   }
+
+  static queryAndParseNumber(parent: ParentNode, selector: string): number {
+    const el = parent.querySelector(selector);
+    if (el) {
+      return ParseUtil.parseNumber(el.innerHTML);
+    }
+    return NaN;
+  }
+
+  static queryAndParseString(parent: ParentNode, selector: string): string {
+    const el = parent.querySelector(selector);
+    if (el) {
+      return el.innerHTML.trim();
+    }
+    return '';
+  }
 }

@@ -25,7 +25,7 @@ export class AppInitializerService {
             observer.complete();
           })
           .catch(error => {
-            console.log(error);
+            console.error(error);
             observer.error(error);
             observer.complete();
           })

@@ -5,7 +5,7 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {DTOCoursBoursorama} from './dto-cours-boursorama.interface';
 import {DTOOrdre} from './dto-ordre.interface';
 import {ParseUtil} from '../abc-bourse/parse-util.class';
-import {DtoCoursTickerBoursorama} from './dto-informations-ticker-boursorama.interface';
+import {DtoCotationsTickerBoursorama} from './dto-cotations-ticker-boursorama.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -49,7 +49,7 @@ export class BoursoramaService {
     });
   }
 
-  public chargerCoursTicker(ticker: string): Observable<DtoCoursTickerBoursorama> {
+  public chargerCoursTicker(ticker: string): Observable<DtoCotationsTickerBoursorama> {
     return new Observable(observer => {
       this.http.get(`/boursorama/cours/1rP${ticker}/`, {
         headers: BoursoramaService.HEADERS_HTML,
@@ -75,7 +75,7 @@ export class BoursoramaService {
     });
   }
 
-  private parseAndMapCours(html: string): DtoCoursTickerBoursorama | undefined {
+  private parseAndMapCours(html: string): DtoCotationsTickerBoursorama | undefined {
     const document = new DOMParser()
       .parseFromString(html, 'text/html');
 
@@ -83,25 +83,25 @@ export class BoursoramaService {
     const elLIs = document.querySelectorAll('li.c-list-info__item');
 
     if (elDIV && elLIs.length === 18) {
-      const cours = this.parseNumber(elDIV, 'span.c-instrument');
+      const cours = ParseUtil.queryAndParseNumber(elDIV, 'span.c-instrument');
 
-      const ouverture = this.parseNumber(elLIs[2], 'span.c-instrument');
-      const cloture = this.parseNumber(elLIs[3], 'span.c-instrument');
-      const plusHaut = this.parseNumber(elLIs[4], 'span.c-instrument');
-      const plusBas = this.parseNumber(elLIs[5], 'span.c-instrument');
-      const volume = this.parseNumber(elLIs[6], 'span.c-instrument');
+      const ouverture = ParseUtil.queryAndParseNumber(elLIs[2], 'span.c-instrument');
+      const cloture = ParseUtil.queryAndParseNumber(elLIs[3], 'span.c-instrument');
+      const plusHaut = ParseUtil.queryAndParseNumber(elLIs[4], 'span.c-instrument');
+      const plusBas = ParseUtil.queryAndParseNumber(elLIs[5], 'span.c-instrument');
+      const volume = ParseUtil.queryAndParseNumber(elLIs[6], 'span.c-instrument');
 
-      const pourcentageCapitalEchange = this.parseNumber(elLIs[7], 'p.c-list-info__value');
-      const valorisation = this.parseString(elLIs[8], 'p.c-list-info__value');
+      const pourcentageCapitalEchange = ParseUtil.queryAndParseNumber(elLIs[7], 'p.c-list-info__value');
+      const valorisation = ParseUtil.queryAndParseString(elLIs[8], 'p.c-list-info__value');
 
-      const limiteBaisse = this.parseNumber(elLIs[10], 'p.c-list-info__value');
-      const limiteHausse = this.parseNumber(elLIs[11], 'p.c-list-info__value');
-      const pourcentageRendementEstime = this.parseNumber(elLIs[12], 'p.c-list-info__value');
-      const perEstime = this.parseNumber(elLIs[13], 'p.c-list-info__value');
-      const dernierDividende = this.parseNumber(elLIs[14], 'p.c-list-info__value');
-      const dateDernierDividende = this.parseNumber(elLIs[15], 'p.c-list-info__value');
+      const limiteBaisse = ParseUtil.queryAndParseNumber(elLIs[10], 'p.c-list-info__value');
+      const limiteHausse = ParseUtil.queryAndParseNumber(elLIs[11], 'p.c-list-info__value');
+      const pourcentageRendementEstime = ParseUtil.queryAndParseNumber(elLIs[12], 'p.c-list-info__value');
+      const perEstime = ParseUtil.queryAndParseNumber(elLIs[13], 'p.c-list-info__value');
+      const dernierDividende = ParseUtil.queryAndParseNumber(elLIs[14], 'p.c-list-info__value');
+      const dateDernierDividende = ParseUtil.queryAndParseNumber(elLIs[15], 'p.c-list-info__value');
 
-      const risqueESG = this.parseString(elLIs[17], 'p.c-list-info__value');
+      const risqueESG = ParseUtil.queryAndParseString(elLIs[17], 'p.c-list-info__value');
 
       const achats: Array<DTOOrdre> = [];
       const ventes: Array<DTOOrdre> = [];
@@ -136,21 +136,5 @@ export class BoursoramaService {
         }
       });
     }
-  }
-
-  private parseNumber(parent: Element, selector: string): number {
-    const el = parent.querySelector(selector);
-    if (el) {
-      return ParseUtil.parseNumber(el.innerHTML);
-    }
-    return NaN;
-  }
-
-  private parseString(parent: Element, selector: string): string {
-    const el = parent.querySelector(selector);
-    if (el) {
-      return el.innerHTML.trim();
-    }
-    return '';
   }
 }

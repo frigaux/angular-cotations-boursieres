@@ -79,7 +79,7 @@
           <div class="ratios">
             <div>
               <p-table size="small"
-                       [value]="informationsTicker.ratios"
+                       [value]="informationsTicker.ratios.indicateurs"
                        [loading]="loading">
                 <ng-template #header>
                   <tr>
@@ -101,16 +101,20 @@
             </div>
             <div>
               <div>
+                <label>{{ 'COMPOSANTS.COURS.INFORMATIONS_TICKER.RATIOS.COURS' | translate }}</label>
+                <span>{{ informationsTicker.cotations?.cours | currency:'€' }}</span>
+              </div>
+              <div>
                 <label>{{ 'COMPOSANTS.COURS.INFORMATIONS_TICKER.RATIOS.VARIATION_CAC' | translate }}</label>
-                <span>{{ informationsTicker.variationCAC | percent:'1.2-2' }}</span>
+                <span>{{ informationsTicker.ratios.variationCAC | percent:'1.2-2' }}</span>
               </div>
               <div>
                 <label>{{ 'COMPOSANTS.COURS.INFORMATIONS_TICKER.RATIOS.CORRELATION_CAC' | translate }}</label>
-                <span>{{ informationsTicker.correlationCAC | percent:'1.2-2' }}</span>
+                <span>{{ informationsTicker.ratios.correlationCAC | percent:'1.2-2' }}</span>
               </div>
               <div>
                 <label>{{ 'COMPOSANTS.COURS.INFORMATIONS_TICKER.RATIOS.QUALITE' | translate }}</label>
-                <span>{{ informationsTicker.qualiteFinanciere }}</span>
+                <span>{{ informationsTicker.ratios.qualiteFinanciere }}</span>
               </div>
             </div>
           </div>
