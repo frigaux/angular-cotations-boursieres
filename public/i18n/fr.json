@@ -264,9 +264,26 @@
         "CONFIRMATION_SUPPRESSION": "Confirmez-vous la suppression de la valeur \"{{valeur}}\" du portefeuille \"{{nomPortefeuille}}\" ?",
         "DIALOG_COURS_TICKER": {
           "COURS_TICKER": "Cours et ordres pour la valeur {{valeur}} ({{ticker}})",
+          "COTATIONS": "Cotations",
+          "COURS": "Cours",
+          "OUVERTURE": "Ouverture",
+          "CLOTURE": "Clôture",
+          "PLUS_HAUT": "Plus haut",
+          "PLUS_BAS": "Plus bas",
+          "VOLUME": "Volume",
+          "INDICATEURS": "Indicateurs",
+          "CAPITAL_ECHANGE": "Capital échangé",
+          "VALORISATION": "Valorisation",
+          "LIMITE_BAISSE": "Limite à la baisse",
+          "LIMITE_HAUSSE": "Limite à la hausse",
+          "RENDEMENT_ESTIME": "Rendement estimé",
+          "PER_ESTIME": "PER estimé",
+          "DERNIER_DIVIDENDE": "Dernier dividende",
+          "DATE_DERNIER_DIVIDENDE": "Date dernier dividende",
+          "RISQUE_ESG": "Risque ESG",
           "ORDRES": "Ordres",
-          "ACHATS": "Achats",
-          "VENTES": "Ventes"
+          "ACHATS": "Achats ({{quantite}})",
+          "VENTES": "Ventes ({{quantite}})"
         }
       },
       "GESTION_PORTEFEUILLES": {

@@ -1,0 +1,25 @@
+div.ligne
+  display: flex
+  flex-direction: row
+
+  & > div.colonne
+    display: flex
+    flex-direction: column
+    margin: 1rem
+
+    p-fieldset:nth-child(n+2)
+      margin-top: 1rem
+
+    .cotations
+      & > div
+        margin: 0.5rem
+
+        label
+          display: inline-block
+          width: 12rem
+          font-weight: bold
+
+        span
+          display: inline-block
+          width: 8rem
+          text-align: right

@@ -8,6 +8,7 @@ import {BoursoramaService} from '../../../../services/boursorama/boursorama.serv
 import {DtoCotationsTickerBoursorama} from '../../../../services/boursorama/dto-cotations-ticker-boursorama.interface';
 import {UIChart} from 'primeng/chart';
 import {Fieldset} from 'primeng/fieldset';
+import {CurrencyPipe, DecimalPipe, PercentPipe} from '@angular/common';
 
 @Component({
   selector: 'app-dialog-cotations-ticker',
@@ -17,7 +18,10 @@ import {Fieldset} from 'primeng/fieldset';
     TableModule,
     TranslatePipe,
     UIChart,
-    Fieldset
+    Fieldset,
+    CurrencyPipe,
+    DecimalPipe,
+    PercentPipe
   ],
   templateUrl: './dialog-cotations-ticker.component.html',
   styleUrl: './dialog-cotations-ticker.component.sass'
@@ -49,8 +53,8 @@ export class DialogCotationsTickerComponent {
         const pourcentageAchats = Math.round((qtAchats / (qtAchats + qtVentes)) * 100);
         this.data = {
           labels: [
-            this.translateService.instant('COMPOSANTS.PORTEFEUILLES.ACTIONS_VALEUR.DIALOG_COURS_TICKER.ACHATS'),
-            this.translateService.instant('COMPOSANTS.PORTEFEUILLES.ACTIONS_VALEUR.DIALOG_COURS_TICKER.VENTES')
+            this.translateService.instant('COMPOSANTS.PORTEFEUILLES.ACTIONS_VALEUR.DIALOG_COURS_TICKER.ACHATS', {quantite: qtAchats}),
+            this.translateService.instant('COMPOSANTS.PORTEFEUILLES.ACTIONS_VALEUR.DIALOG_COURS_TICKER.VENTES', {quantite: qtVentes})
           ],
           datasets: [
             {
