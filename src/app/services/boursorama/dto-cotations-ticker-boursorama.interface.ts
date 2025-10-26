@@ -1,6 +1,6 @@
 import {DTOOrdre} from './dto-ordre.interface';
 
-export interface DtoCotationsTickerBoursorama {
+export interface DTOCotationsTickerBoursorama {
   cours: number;
   ouverture: number;
   cloture: number;

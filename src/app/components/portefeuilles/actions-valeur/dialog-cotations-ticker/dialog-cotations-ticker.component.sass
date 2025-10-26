@@ -1,3 +1,18 @@
+.barre-superieure
+  width: 100%
+  display: flex
+  flex-direction: row
+  align-items: center
+
+  h2
+    width: calc(100% - 6rem)
+
+  .pi
+    cursor: pointer
+
+  span
+    margin-left: 1rem
+
 div.ligne
   display: flex
   flex-direction: row
@@ -14,12 +29,45 @@ div.ligne
       & > div
         margin: 0.5rem
 
-        label
+        & > label
           display: inline-block
           width: 12rem
           font-weight: bold
 
-        span
+        & > span
           display: inline-block
           width: 8rem
           text-align: right
+
+          &.positive
+            color: var(--p-green-600)
+
+          &.negative
+            color: var(--p-red-600)
+
+      .position-cours
+        div
+          & > span
+            display: inline-block
+            width: 10rem
+            font-weight: lighter
+
+          & > span:nth-child(1)
+            text-align: left
+
+          & > span:nth-child(2)
+            text-align: right
+
+        .barre
+          width: 20rem
+          height: 1rem
+          border: 1px solid black
+
+          div
+            height: 100%
+
+            &.rouge
+              background-color: var(--p-red-700)
+
+            &.vert
+              background-color: var(--p-green-700)

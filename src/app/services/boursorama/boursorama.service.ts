@@ -5,7 +5,7 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {DTOCoursBoursorama} from './dto-cours-boursorama.interface';
 import {DTOOrdre} from './dto-ordre.interface';
 import {ParseUtil} from '../abc-bourse/parse-util.class';
-import {DtoCotationsTickerBoursorama} from './dto-cotations-ticker-boursorama.interface';
+import {DTOCotationsTickerBoursorama} from './dto-cotations-ticker-boursorama.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -49,7 +49,7 @@ export class BoursoramaService {
     });
   }
 
-  public chargerCoursTicker(ticker: string): Observable<DtoCotationsTickerBoursorama> {
+  public chargerCoursTicker(ticker: string): Observable<DTOCotationsTickerBoursorama> {
     return new Observable(observer => {
       this.http.get(`/boursorama/cours/1rP${ticker}/`, {
         headers: BoursoramaService.HEADERS_HTML,
@@ -75,7 +75,7 @@ export class BoursoramaService {
     });
   }
 
-  private parseAndMapCours(html: string): DtoCotationsTickerBoursorama | undefined {
+  private parseAndMapCours(html: string): DTOCotationsTickerBoursorama | undefined {
     const document = new DOMParser()
       .parseFromString(html, 'text/html');
 
