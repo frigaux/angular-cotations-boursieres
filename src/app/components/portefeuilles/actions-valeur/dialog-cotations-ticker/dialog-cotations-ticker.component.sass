@@ -26,8 +26,10 @@ div.ligne
       margin-top: 1rem
 
     .cotations
-      & > div
+      & > div, app-jauge
         margin: 0.5rem
+        width: 20rem
+        display: block
 
         & > label
           display: inline-block
@@ -44,30 +46,3 @@ div.ligne
 
           &.negative
             color: var(--p-red-600)
-
-      .position-cours
-        div
-          & > span
-            display: inline-block
-            width: 10rem
-            font-weight: lighter
-
-          & > span:nth-child(1)
-            text-align: left
-
-          & > span:nth-child(2)
-            text-align: right
-
-        .barre
-          width: 20rem
-          height: 1rem
-          border: 1px solid black
-
-          div
-            height: 100%
-
-            &.rouge
-              background-color: var(--p-red-700)
-
-            &.vert
-              background-color: var(--p-green-700)

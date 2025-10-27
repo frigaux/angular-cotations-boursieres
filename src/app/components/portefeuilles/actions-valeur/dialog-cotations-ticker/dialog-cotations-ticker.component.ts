@@ -7,8 +7,9 @@ import {Cours} from '../../../cours/cours.class';
 import {BoursoramaService} from '../../../../services/boursorama/boursorama.service';
 import {UIChart} from 'primeng/chart';
 import {Fieldset} from 'primeng/fieldset';
-import {CurrencyPipe, DecimalPipe, NgClass, PercentPipe} from '@angular/common';
+import {CurrencyPipe, DatePipe, DecimalPipe, PercentPipe} from '@angular/common';
 import {CotationsTickerBoursoramaDecore} from './cotations-ticker-boursorama-genere.class';
+import {JaugeComponent} from '../../../commun/jauge/jauge.component';
 
 @Component({
   selector: 'app-dialog-cotations-ticker',
@@ -22,7 +23,8 @@ import {CotationsTickerBoursoramaDecore} from './cotations-ticker-boursorama-gen
     CurrencyPipe,
     DecimalPipe,
     PercentPipe,
-    NgClass
+    DatePipe,
+    JaugeComponent
   ],
   templateUrl: './dialog-cotations-ticker.component.html',
   styleUrl: './dialog-cotations-ticker.component.sass'

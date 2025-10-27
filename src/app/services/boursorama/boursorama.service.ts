@@ -4,7 +4,7 @@ import {DTOCours} from '../cours/dto-cours.interface';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {DTOCoursBoursorama} from './dto-cours-boursorama.interface';
 import {DTOOrdre} from './dto-ordre.interface';
-import {ParseUtil} from '../abc-bourse/parse-util.class';
+import {ParseUtil} from '../commun/parse-util.class';
 import {DTOCotationsTickerBoursorama} from './dto-cotations-ticker-boursorama.interface';
 
 @Injectable({
@@ -99,7 +99,7 @@ export class BoursoramaService {
       const pourcentageRendementEstime = ParseUtil.queryAndParseNumber(elLIs[12], 'p.c-list-info__value');
       const perEstime = ParseUtil.queryAndParseNumber(elLIs[13], 'p.c-list-info__value');
       const dernierDividende = ParseUtil.queryAndParseNumber(elLIs[14], 'p.c-list-info__value');
-      const dateDernierDividende = ParseUtil.queryAndParseString(elLIs[15], 'p.c-list-info__value');
+      const dateDernierDividende = ParseUtil.queryAndParseDate(elLIs[15], 'p.c-list-info__value');
 
       const risqueESG = ParseUtil.queryAndParseString(elLIs[17], 'p.c-list-info__value');
 
@@ -119,8 +119,8 @@ export class BoursoramaService {
   private parseAndMapOrdres(document: Document, achats: Array<DTOOrdre>, ventes: Array<DTOOrdre>) {
     const elTABLEs = document.querySelectorAll('table.c-orderbook__table');
 
-    if (elTABLEs.length === 2) {
-      elTABLEs[1].querySelectorAll('tbody > tr.c-table__row').forEach(elTR => {
+    if (elTABLEs.length > 0) {
+      elTABLEs[elTABLEs.length - 1].querySelectorAll('tbody > tr.c-table__row').forEach(elTR => {
         const elTDs = elTR.querySelectorAll('td');
         if (elTDs.length === 6) {
           achats.push({

@@ -1,15 +1,17 @@
 <p-dialog [showHeader]="false" [modal]="true" [(visible)]="visible">
   <div class="barre-superieure">
     <h2>
-          {{
+      {{
         'COMPOSANTS.PORTEFEUILLES.ACTIONS_VALEUR.DIALOG_COURS_TICKER.COURS_TICKER' | translate : {
           valeur: cours?.libelle,
           ticker: cours?.ticker
         }
       }}
     </h2>
-    <span class="pi pi-refresh" (click)="rafraichir()" title="{{ 'COMPOSANTS.PORTEFEUILLES.ACTIONS_VALEUR.DIALOG_COURS_TICKER.RAFRAICHIR' | translate }}"></span>
-    <span class="pi pi-times-circle" (click)="fermer()" title="{{ 'COMPOSANTS.PORTEFEUILLES.ACTIONS_VALEUR.DIALOG_COURS_TICKER.FERMER' | translate }}"></span>
+    <span class="pi pi-refresh" (click)="rafraichir()"
+          title="{{ 'COMPOSANTS.PORTEFEUILLES.ACTIONS_VALEUR.DIALOG_COURS_TICKER.RAFRAICHIR' | translate }}"></span>
+    <span class="pi pi-times-circle" (click)="fermer()"
+          title="{{ 'COMPOSANTS.PORTEFEUILLES.ACTIONS_VALEUR.DIALOG_COURS_TICKER.FERMER' | translate }}"></span>
   </div>
 
   <app-loader [affiche]="loading" [configuration]="[
@@ -25,17 +27,10 @@
               <label>{{ 'COMPOSANTS.PORTEFEUILLES.ACTIONS_VALEUR.DIALOG_COURS_TICKER.COURS' | translate }}</label>
               <span>{{ coursBoursoramaDecore.dto.cours | currency:'€' }}</span>
             </div>
-            <div class="position-cours">
-              <div>
-                <span>{{ 'COMPOSANTS.PORTEFEUILLES.ACTIONS_VALEUR.DIALOG_COURS_TICKER.PLUS_BAS' | translate }}</span>
-                <span>{{ 'COMPOSANTS.PORTEFEUILLES.ACTIONS_VALEUR.DIALOG_COURS_TICKER.PLUS_HAUT' | translate }}</span>
-              </div>
-              <div class="barre">
-                <div
-                  [ngClass]="{'rouge': coursBoursoramaDecore.pourcentageCours < 50, 'vert': coursBoursoramaDecore.pourcentageCours >= 50}"
-                  [style]="{ width: `${coursBoursoramaDecore.pourcentageCours}%` }"></div>
-              </div>
-            </div>
+            <app-jauge
+              [cleMinimum]="'COMPOSANTS.PORTEFEUILLES.ACTIONS_VALEUR.DIALOG_COURS_TICKER.PLUS_BAS'"
+              [cleMaximum]="'COMPOSANTS.PORTEFEUILLES.ACTIONS_VALEUR.DIALOG_COURS_TICKER.PLUS_HAUT'"
+              [pourcentage]="coursBoursoramaDecore.pourcentageCours"></app-jauge>
             <div>
               <label>{{ 'COMPOSANTS.PORTEFEUILLES.ACTIONS_VALEUR.DIALOG_COURS_TICKER.VAR_OUVERTURE' | translate }}</label>
               <span
@@ -49,7 +44,7 @@
           </div>
         </p-fieldset>
         <p-fieldset legend="{{ 'COMPOSANTS.PORTEFEUILLES.ACTIONS_VALEUR.DIALOG_COURS_TICKER.ORDRES' | translate }}">
-          <p-chart type="doughnut" [data]="coursBoursoramaDecore.ordres"/>
+          <p-chart type="doughnut" [data]="coursBoursoramaDecore.ordres" height="12rem"/>
         </p-fieldset>
       </div>
       <div class="colonne">
@@ -90,7 +85,7 @@
             </div>
             <div>
               <label>{{ 'COMPOSANTS.PORTEFEUILLES.ACTIONS_VALEUR.DIALOG_COURS_TICKER.DATE_DERNIER_DIVIDENDE' | translate }}</label>
-              <span>{{ coursBoursoramaDecore.dto.dateDernierDividende }}</span>
+              <span>{{ coursBoursoramaDecore.dto.dateDernierDividende | date: 'dd/MM/yyyy' }}</span>
             </div>
             <div>
               <label>{{ 'COMPOSANTS.PORTEFEUILLES.ACTIONS_VALEUR.DIALOG_COURS_TICKER.RISQUE_ESG' | translate }}</label>

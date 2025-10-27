@@ -6,7 +6,7 @@ import {DTOActualiteTicker} from './dto-actualite-ticker.class';
 import {DTODividende} from './dto-dividende.class';
 import {DTOVariation} from './dto-variation.class';
 import {DTOIndicateur} from './dto-ratio.class';
-import {ParseUtil} from './parse-util.class';
+import {ParseUtil} from '../commun/parse-util.class';
 import {DTOActualites} from './dto-actualites.class';
 import {DTOLien} from './dto-lien.class';
 import {DTOVentesADecouvert} from './dto-ventes-a-decouvert.class';

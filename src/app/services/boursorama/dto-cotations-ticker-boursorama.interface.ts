@@ -15,7 +15,7 @@ export interface DTOCotationsTickerBoursorama {
   pourcentageRendementEstime: number;
   perEstime: number;
   dernierDividende: number;
-  dateDernierDividende: string;
+  dateDernierDividende: string; // ISO 8601 : yyyy-MM-dd
   risqueESG: string;
 
   achats: Array<DTOOrdre>;

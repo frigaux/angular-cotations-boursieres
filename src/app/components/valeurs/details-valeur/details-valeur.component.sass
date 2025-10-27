@@ -1,11 +1,19 @@
-h1
+.barre-superieure
   width: 100%
-  text-align: center
+  display: flex
+  flex-direction: row
+  align-items: center
 
-.pi-times-circle
-  margin: 0 1rem 0 1rem
-  float: right
-  cursor: pointer
+  h1
+    width: calc(100% - 3rem)
+    text-align: center
+
+  .pi
+    cursor: pointer
+
+  span
+    margin-left: 1rem
+
 
 .pi-arrow-circle-up
   color: var(--p-green-600)

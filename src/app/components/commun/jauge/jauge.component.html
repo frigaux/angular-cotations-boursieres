@@ -1,0 +1,13 @@
+<div>
+  <div class="libelles">
+    <span>{{ cleMinimum | translate }}</span>
+    <span>{{ cleMaximum | translate }}</span>
+  </div>
+  <div class="jauge">
+    @if (pourcentage) {
+      <div class="pourcentage"
+           [ngClass]="{'rouge': pourcentage < 50, 'vert': pourcentage >= 50}"
+           [style]="{ width: `${pourcentage}%` }"></div>
+    }
+  </div>
+</div>

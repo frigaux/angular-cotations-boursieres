@@ -29,7 +29,7 @@ export class ParseUtil {
   }
 
   static parseAndMapTo8601(dateFr: string): string {
-    const regexp = /(\d{2})\/(\d{2})\/(\d{2,4})/g;
+    const regexp = /(\d{2})[\/\.]{1}(\d{2})[\/\.]{1}(\d{2,4})/g;
     const match = regexp.exec(dateFr);
     if (match) {
       if (match[3].length === 4) {
@@ -68,6 +68,14 @@ export class ParseUtil {
     const el = parent.querySelector(selector);
     if (el) {
       return el.innerHTML.trim();
+    }
+    return '';
+  }
+
+  static queryAndParseDate(parent: ParentNode, selector: string): string {
+    const el = parent.querySelector(selector);
+    if (el) {
+      return this.parseAndMapTo8601(el.innerHTML.trim());
     }
     return '';
   }

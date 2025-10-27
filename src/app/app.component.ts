@@ -15,12 +15,12 @@ import {PickList} from 'primeng/picklist';
 import {NavigationBar} from '@squareetlabs/capacitor-navigation-bar';
 
 // TODO : service ABCBourse de récupération des informations pour un ticker : récupérer la pré-ouverture ?
-// TODO : achats : récupérer aussi les ordres d'achats / ventes en cours sur boursorama
+// TODO : depuis un portefeuille : afficher les ordres
 // TODO : récupérer les évenements boursier sur https://www.zonebourse.com/actualite-bourse/regions/locales/ : possibilité ajout dans un portefeuille des tickers
 // TODO : edition des alertes d'un portefeuille : possibilité d'initialiser avec un exemple
 // TODO : nouvelle page dividende : date dernier import, un dividende par ticker avec date, type, montant, rendement (https://abcbourse.com/marches/dividendes)
 // TODO : nouvelles opérandes pour les alertes du portefeuille/cours min/max/moyenne/nombre vagues
-// TODO : uniformiser les "barres de titre" : H1 dans details-valeur.component.html ! + chercher les <div class="titre"> (s'inspirer dialog-cotations-ticker.component.html)
+// TODO : uniformiser les "barres de titre" : chercher les <div class="titre"> (s'inspirer dialog-cotations-ticker.component.html)
 // TODO : coverage
 // TODO : examiner les logs du debugger android studio
 @Component({

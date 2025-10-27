@@ -1,0 +1,24 @@
+.libelles
+  & > span
+    display: inline-block
+    width: 50%
+    font-weight: lighter
+
+  & > span:nth-child(1)
+    text-align: left
+
+  & > span:nth-child(2)
+    text-align: right
+
+.jauge
+  height: 1rem
+  border: 1px solid black
+
+  .pourcentage
+    height: 100%
+
+    &.rouge
+      background-color: var(--p-red-700)
+
+    &.vert
+      background-color: var(--p-green-700)
