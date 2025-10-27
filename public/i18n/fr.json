@@ -260,10 +260,11 @@
         "ABCBOURSE": "ABCBourse",
         "BOURSORAMA": "Boursorama",
         "COURS_BOURSORAMA": "Cours depuis Boursorama",
+        "COURS_BOURSORAMA_PORTEFEUILLE": "Cours du portefeuille depuis Boursorama",
         "ACHATS_VALEUR": "Achats de la valeur \"{{nom}}\"",
         "CONFIRMATION_SUPPRESSION": "Confirmez-vous la suppression de la valeur \"{{valeur}}\" du portefeuille \"{{nomPortefeuille}}\" ?",
-        "DIALOG_COURS_TICKER": {
-          "COURS_TICKER": "Cours et ordres pour la valeur {{valeur}} ({{ticker}})",
+        "DIALOG_COTATIONS_TICKER": {
+          "COTATIONS_TICKER": "Cours et ordres pour la valeur {{valeur}} ({{ticker}})",
           "RAFRAICHIR": "Rafraîchir",
           "FERMER": "Fermer",
           "COTATIONS": "Cotations",
@@ -286,6 +287,11 @@
           "ORDRES": "Ordres",
           "ACHATS": "Achats ({{quantite}})",
           "VENTES": "Ventes ({{quantite}})"
+        },
+        "DIALOG_COTATIONS_TICKERS_TICKER": {
+          "COTATIONS_TICKERS_PORTEFEUILLE": "Cours et ordres pour les valeurs du portefeuille {{nom}}",
+          "RAFRAICHIR": "Rafraîchir",
+          "FERMER": "Fermer"
         }
       },
       "GESTION_PORTEFEUILLES": {

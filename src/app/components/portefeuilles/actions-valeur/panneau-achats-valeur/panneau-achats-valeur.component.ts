@@ -1,8 +1,8 @@
 import {Component, input, InputSignal, model} from '@angular/core';
 import {Panel} from 'primeng/panel';
 import {AchatsValeurComponent} from '../../../valeurs/achats-valeur/achats-valeur.component';
-import {Cours} from '../../../cours/cours.class';
 import {TranslateService} from '@ngx-translate/core';
+import {CoursPortefeuille} from '../../cours-portefeuille.class';
 
 @Component({
   selector: 'app-panneau-achats-valeur',
@@ -16,17 +16,17 @@ import {TranslateService} from '@ngx-translate/core';
 export class PanneauAchatsValeurComponent {
   // input/output
   visible = model<boolean>(false);
-  inputCours: InputSignal<Cours | undefined> = input(undefined,
+  inputCours: InputSignal<CoursPortefeuille | undefined> = input(undefined,
     {transform: o => this.intercepteurCours(o), alias: 'cours'});
 
   // données pour la vue
-  cours?: Cours;
+  cours?: CoursPortefeuille;
   titre?: string;
 
   constructor(private translateService: TranslateService) {
   }
 
-  private intercepteurCours(cours: Cours | undefined) {
+  private intercepteurCours(cours: CoursPortefeuille | undefined) {
     this.cours = cours;
     if (cours) {
       this.titre = this.translateService.instant('COMPOSANTS.PORTEFEUILLES.ACTIONS_VALEUR.ACHATS_VALEUR', {'nom': cours.libelle});

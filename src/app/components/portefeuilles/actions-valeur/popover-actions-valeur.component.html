@@ -1,10 +1,11 @@
 <app-panneau-achats-valeur [cours]="cours" [(visible)]="achatsVisible"></app-panneau-achats-valeur>
 <app-dialog-cotations-ticker></app-dialog-cotations-ticker>
+<app-dialog-cotations-tickers-portefeuille></app-dialog-cotations-tickers-portefeuille>
 
 <p-popover>
   @if (cours) {
     <div class="actions-valeur">
-      @if (portefeuilleAffiche && portefeuilleAffiche.tickers.length > 1) {
+      @if (portefeuilleAffiche && portefeuilleAffiche.tickers.length > 1 && !portefeuilleAchats) {
         <div class="libelle" (click)="suppressionDuPortefeuille($event)">
           <span class="pi pi-minus-circle"></span>
           <span>{{ 'COMPOSANTS.PORTEFEUILLES.ACTIONS_VALEUR.SUPPRIMER_DU_PORTEFEUILLE' | translate }}</span>
@@ -26,7 +27,11 @@
         <span class="pi pi-cloud-download"></span>
         <span>{{ 'COMPOSANTS.PORTEFEUILLES.ACTIONS_VALEUR.COURS_BOURSORAMA' | translate }}</span>
       </div>
-      @if (nomsPortefeuillesDisponibles && nomsPortefeuillesDisponibles.length > 0) {
+      <div class="libelle" (click)="coursBoursoramaPortefeuille()">
+        <span class="pi pi-cloud-download"></span>
+        <span>{{ 'COMPOSANTS.PORTEFEUILLES.ACTIONS_VALEUR.COURS_BOURSORAMA_PORTEFEUILLE' | translate }}</span>
+      </div>
+      @if (nomsPortefeuillesDisponibles && nomsPortefeuillesDisponibles.length > 0 && !portefeuilleAchats) {
         <div>
           <div class="libelle" (click)="ajouterAuPortefeuille()">
             <span class="pi pi-plus-circle"></span>

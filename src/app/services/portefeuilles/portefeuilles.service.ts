@@ -8,6 +8,7 @@ import {TranslateService} from '@ngx-translate/core';
 })
 export class PortefeuillesService {
   private static readonly PORTEFEUILLES: string = 'portefeuilles';
+  public static readonly PORTEFEUILLE_ACHATS: string = 'Achats';
   private static readonly OBSERVERS_IMPORT: Array<Subscriber<Array<DTOPortefeuille>>> = [];
   private static readonly OBSERVERS_UPDATE: Array<Subscriber<Array<DTOPortefeuille>>> = [];
   private static readonly OBSERVABLE_IMPORT: Observable<Array<DTOPortefeuille>> = new Observable(observer => {

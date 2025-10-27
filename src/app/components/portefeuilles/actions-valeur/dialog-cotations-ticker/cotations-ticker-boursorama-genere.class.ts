@@ -23,8 +23,8 @@ export class CotationsTickerBoursoramaDecore {
     const pourcentageAchats = Math.round((qtAchats / (qtAchats + qtVentes)) * 100);
     return {
       labels: [
-        this.translateService.instant('COMPOSANTS.PORTEFEUILLES.ACTIONS_VALEUR.DIALOG_COURS_TICKER.ACHATS', {quantite: qtAchats}),
-        this.translateService.instant('COMPOSANTS.PORTEFEUILLES.ACTIONS_VALEUR.DIALOG_COURS_TICKER.VENTES', {quantite: qtVentes})
+        this.translateService.instant('COMPOSANTS.PORTEFEUILLES.ACTIONS_VALEUR.DIALOG_COTATIONS_TICKER.ACHATS', {quantite: qtAchats}),
+        this.translateService.instant('COMPOSANTS.PORTEFEUILLES.ACTIONS_VALEUR.DIALOG_COTATIONS_TICKER.VENTES', {quantite: qtVentes})
       ],
       datasets: [
         {

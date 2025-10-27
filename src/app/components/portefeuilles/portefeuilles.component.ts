@@ -15,8 +15,6 @@ import {Skeleton} from 'primeng/skeleton';
 import {LoaderComponent} from '../loader/loader.component';
 import {DTOCoursAvecListeAllege} from '../../services/cours/dto-cours-avec-liste-allege.interface';
 import {PopoverActionsValeurComponent} from './actions-valeur/popover-actions-valeur.component';
-import {Cours} from '../cours/cours.class';
-import {DTOPortefeuille} from '../../services/portefeuilles/dto-portefeuille.interface';
 import {TableauxService} from '../../services/tableaux/tableaux.service';
 import {DTOColonne} from '../../services/tableaux/dto-colonne-portefeuille.interface';
 import {TypesColonnesPortefeuille} from '../../services/tableaux/types-colonnes-portefeuille.enum';
@@ -129,7 +127,7 @@ export class PortefeuillesComponent implements OnInit {
     const tickersNonRevendus = this.tickersNonRevendus();
     if (tickersNonRevendus.length > 0) {
       portefeuilles.push({
-        nom: 'Achats',
+        nom: PortefeuillesService.PORTEFEUILLE_ACHATS,
         parDefaut: false,
         tickers: tickersNonRevendus,
         alertes: PortefeuillesService.CONFIGURATION_INITIALE[0].alertes,
@@ -200,13 +198,13 @@ export class PortefeuillesComponent implements OnInit {
     }
   }
 
-  private afficherActions(event: MouseEvent, cours: Cours, portefeuille: DTOPortefeuille) {
-    this.actionsValeur()?.afficher(event, cours, portefeuille);
+  private afficherActions(event: MouseEvent, cours: CoursPortefeuille, portefeuilleAvecCours: PortefeuilleAvecCours) {
+    this.actionsValeur()?.afficher(event, cours, portefeuilleAvecCours);
   }
 
-  protected onClickCours(event: MouseEvent, cours: any, portefeuille: DTOPortefeuille) {
+  protected onClickCours(event: MouseEvent, cours: CoursPortefeuille, portefeuilleAvecCours: PortefeuilleAvecCours) {
     if (event.target instanceof Element && event.target.tagName === 'SPAN' && event.target.className.indexOf('pi') !== -1) {
-      this.afficherActions(event, cours, portefeuille);
+      this.afficherActions(event, cours, portefeuilleAvecCours);
     } else {
       this.basculerAffichageCours(cours);
     }

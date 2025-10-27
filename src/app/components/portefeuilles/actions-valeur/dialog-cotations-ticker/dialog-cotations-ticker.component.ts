@@ -3,13 +3,13 @@ import {Dialog} from 'primeng/dialog';
 import {LoaderComponent} from '../../../loader/loader.component';
 import {TableModule} from 'primeng/table';
 import {TranslatePipe, TranslateService} from '@ngx-translate/core';
-import {Cours} from '../../../cours/cours.class';
 import {BoursoramaService} from '../../../../services/boursorama/boursorama.service';
 import {UIChart} from 'primeng/chart';
 import {Fieldset} from 'primeng/fieldset';
 import {CurrencyPipe, DatePipe, DecimalPipe, PercentPipe} from '@angular/common';
 import {CotationsTickerBoursoramaDecore} from './cotations-ticker-boursorama-genere.class';
 import {JaugeComponent} from '../../../commun/jauge/jauge.component';
+import {CoursPortefeuille} from '../../cours-portefeuille.class';
 
 @Component({
   selector: 'app-dialog-cotations-ticker',
@@ -27,26 +27,26 @@ import {JaugeComponent} from '../../../commun/jauge/jauge.component';
     JaugeComponent
   ],
   templateUrl: './dialog-cotations-ticker.component.html',
-  styleUrl: './dialog-cotations-ticker.component.sass'
+  styleUrls: ['./dialog-cotations-ticker.component.sass', '../../../commun/barre-superieure/barre-superieure.component.sass']
 })
 export class DialogCotationsTickerComponent {
 
   // données pour la vue
   visible: boolean = false;
   loading: boolean = false;
-  cours?: Cours;
-  coursBoursoramaDecore?: CotationsTickerBoursoramaDecore;
+  cours?: CoursPortefeuille;
+  cotationsTickerDecore?: CotationsTickerBoursoramaDecore;
 
   constructor(private translateService: TranslateService, private boursoramaService: BoursoramaService) {
   }
 
-  afficherCours(cours: Cours) {
+  afficherCours(cours: CoursPortefeuille) {
     this.cours = cours;
     this.visible = true;
     this.loading = true;
-    this.boursoramaService.chargerCoursTicker(cours.ticker).subscribe(
-      coursBoursorama => {
-        this.coursBoursoramaDecore = new CotationsTickerBoursoramaDecore(this.translateService, coursBoursorama);
+    this.boursoramaService.chargerCotationsTicker(cours.ticker).subscribe(
+      cotationsTickerBoursorama => {
+        this.cotationsTickerDecore = new CotationsTickerBoursoramaDecore(this.translateService, cotationsTickerBoursorama);
         this.loading = false;
       }
     )

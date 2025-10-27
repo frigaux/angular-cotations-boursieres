@@ -1,16 +1,20 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { JaugeComponent } from './jauge.component';
+import {JaugeComponent} from './jauge.component';
+import {TranslateModule} from '@ngx-translate/core';
 
-describe('Jauge', () => {
+describe('JaugeComponent', () => {
   let component: JaugeComponent;
   let fixture: ComponentFixture<JaugeComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [JaugeComponent]
+      imports: [
+        JaugeComponent,
+        TranslateModule.forRoot({})
+      ]
     })
-    .compileComponents();
+      .compileComponents();
 
     fixture = TestBed.createComponent(JaugeComponent);
     component = fixture.componentInstance;

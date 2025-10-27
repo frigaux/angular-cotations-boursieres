@@ -2,94 +2,94 @@
   <div class="barre-superieure">
     <h2>
       {{
-        'COMPOSANTS.PORTEFEUILLES.ACTIONS_VALEUR.DIALOG_COURS_TICKER.COURS_TICKER' | translate : {
+        'COMPOSANTS.PORTEFEUILLES.ACTIONS_VALEUR.DIALOG_COTATIONS_TICKER.COTATIONS_TICKER' | translate : {
           valeur: cours?.libelle,
           ticker: cours?.ticker
         }
       }}
     </h2>
     <span class="pi pi-refresh" (click)="rafraichir()"
-          title="{{ 'COMPOSANTS.PORTEFEUILLES.ACTIONS_VALEUR.DIALOG_COURS_TICKER.RAFRAICHIR' | translate }}"></span>
+          title="{{ 'COMPOSANTS.PORTEFEUILLES.ACTIONS_VALEUR.DIALOG_COTATIONS_TICKER.RAFRAICHIR' | translate }}"></span>
     <span class="pi pi-times-circle" (click)="fermer()"
-          title="{{ 'COMPOSANTS.PORTEFEUILLES.ACTIONS_VALEUR.DIALOG_COURS_TICKER.FERMER' | translate }}"></span>
+          title="{{ 'COMPOSANTS.PORTEFEUILLES.ACTIONS_VALEUR.DIALOG_COTATIONS_TICKER.FERMER' | translate }}"></span>
   </div>
 
   <app-loader [affiche]="loading" [configuration]="[
         {marginLeft: '0', marginTop: '0', height: '60vh', width: '50rem'}
       ]"></app-loader>
 
-  @if (!loading && coursBoursoramaDecore) {
+  @if (!loading && cotationsTickerDecore) {
     <div class="ligne">
       <div class="colonne">
-        <p-fieldset legend="{{ 'COMPOSANTS.PORTEFEUILLES.ACTIONS_VALEUR.DIALOG_COURS_TICKER.COTATIONS' | translate }}">
+        <p-fieldset legend="{{ 'COMPOSANTS.PORTEFEUILLES.ACTIONS_VALEUR.DIALOG_COTATIONS_TICKER.COTATIONS' | translate }}">
           <div class="cotations">
             <div>
-              <label>{{ 'COMPOSANTS.PORTEFEUILLES.ACTIONS_VALEUR.DIALOG_COURS_TICKER.COURS' | translate }}</label>
-              <span>{{ coursBoursoramaDecore.dto.cours | currency:'€' }}</span>
+              <label>{{ 'COMPOSANTS.PORTEFEUILLES.ACTIONS_VALEUR.DIALOG_COTATIONS_TICKER.COURS' | translate }}</label>
+              <span>{{ cotationsTickerDecore.dto.cours | currency:'€' }}</span>
             </div>
             <app-jauge
-              [cleMinimum]="'COMPOSANTS.PORTEFEUILLES.ACTIONS_VALEUR.DIALOG_COURS_TICKER.PLUS_BAS'"
-              [cleMaximum]="'COMPOSANTS.PORTEFEUILLES.ACTIONS_VALEUR.DIALOG_COURS_TICKER.PLUS_HAUT'"
-              [pourcentage]="coursBoursoramaDecore.pourcentageCours"></app-jauge>
+              [cleMinimum]="'COMPOSANTS.PORTEFEUILLES.ACTIONS_VALEUR.DIALOG_COTATIONS_TICKER.PLUS_BAS'"
+              [cleMaximum]="'COMPOSANTS.PORTEFEUILLES.ACTIONS_VALEUR.DIALOG_COTATIONS_TICKER.PLUS_HAUT'"
+              [pourcentage]="cotationsTickerDecore.pourcentageCours"></app-jauge>
             <div>
-              <label>{{ 'COMPOSANTS.PORTEFEUILLES.ACTIONS_VALEUR.DIALOG_COURS_TICKER.VAR_OUVERTURE' | translate }}</label>
+              <label>{{ 'COMPOSANTS.PORTEFEUILLES.ACTIONS_VALEUR.DIALOG_COTATIONS_TICKER.VAR_OUVERTURE' | translate }}</label>
               <span
-                [class]="evolutionVariation(coursBoursoramaDecore.variationOuverture)">{{ coursBoursoramaDecore.variationOuverture  | percent:'1.2-2' }}</span>
+                [class]="evolutionVariation(cotationsTickerDecore.variationOuverture)">{{ cotationsTickerDecore.variationOuverture  | percent:'1.2-2' }}</span>
             </div>
             <div>
-              <label>{{ 'COMPOSANTS.PORTEFEUILLES.ACTIONS_VALEUR.DIALOG_COURS_TICKER.VAR_CLOTURE' | translate }}</label>
+              <label>{{ 'COMPOSANTS.PORTEFEUILLES.ACTIONS_VALEUR.DIALOG_COTATIONS_TICKER.VAR_CLOTURE' | translate }}</label>
               <span
-                [class]="evolutionVariation(coursBoursoramaDecore.variationCloture)">{{ coursBoursoramaDecore.variationCloture  | percent:'1.2-2' }}</span>
+                [class]="evolutionVariation(cotationsTickerDecore.variationCloture)">{{ cotationsTickerDecore.variationCloture  | percent:'1.2-2' }}</span>
             </div>
           </div>
         </p-fieldset>
-        <p-fieldset legend="{{ 'COMPOSANTS.PORTEFEUILLES.ACTIONS_VALEUR.DIALOG_COURS_TICKER.ORDRES' | translate }}">
-          <p-chart type="doughnut" [data]="coursBoursoramaDecore.ordres" height="12rem"/>
+        <p-fieldset legend="{{ 'COMPOSANTS.PORTEFEUILLES.ACTIONS_VALEUR.DIALOG_COTATIONS_TICKER.ORDRES' | translate }}">
+          <p-chart type="doughnut" [data]="cotationsTickerDecore.ordres" height="12rem"/>
         </p-fieldset>
       </div>
       <div class="colonne">
         <p-fieldset
-          legend="{{ 'COMPOSANTS.PORTEFEUILLES.ACTIONS_VALEUR.DIALOG_COURS_TICKER.INDICATEURS' | translate }}">
+          legend="{{ 'COMPOSANTS.PORTEFEUILLES.ACTIONS_VALEUR.DIALOG_COTATIONS_TICKER.INDICATEURS' | translate }}">
           <div class="cotations">
             <div>
-              <label>{{ 'COMPOSANTS.PORTEFEUILLES.ACTIONS_VALEUR.DIALOG_COURS_TICKER.VOLUME' | translate }}</label>
-              <span>{{ coursBoursoramaDecore.dto.volume | number }}</span>
+              <label>{{ 'COMPOSANTS.PORTEFEUILLES.ACTIONS_VALEUR.DIALOG_COTATIONS_TICKER.VOLUME' | translate }}</label>
+              <span>{{ cotationsTickerDecore.dto.volume | number }}</span>
             </div>
             <div>
-              <label>{{ 'COMPOSANTS.PORTEFEUILLES.ACTIONS_VALEUR.DIALOG_COURS_TICKER.CAPITAL_ECHANGE' | translate }}</label>
-              <span>{{ coursBoursoramaDecore.dto.pourcentageCapitalEchange  | percent:'1.2-2' }}</span>
+              <label>{{ 'COMPOSANTS.PORTEFEUILLES.ACTIONS_VALEUR.DIALOG_COTATIONS_TICKER.CAPITAL_ECHANGE' | translate }}</label>
+              <span>{{ cotationsTickerDecore.dto.pourcentageCapitalEchange  | percent:'1.2-2' }}</span>
             </div>
             <div>
-              <label>{{ 'COMPOSANTS.PORTEFEUILLES.ACTIONS_VALEUR.DIALOG_COURS_TICKER.VALORISATION' | translate }}</label>
-              <span>{{ coursBoursoramaDecore.dto.valorisation }}</span>
+              <label>{{ 'COMPOSANTS.PORTEFEUILLES.ACTIONS_VALEUR.DIALOG_COTATIONS_TICKER.VALORISATION' | translate }}</label>
+              <span>{{ cotationsTickerDecore.dto.valorisation }}</span>
             </div>
             <div>
-              <label>{{ 'COMPOSANTS.PORTEFEUILLES.ACTIONS_VALEUR.DIALOG_COURS_TICKER.LIMITE_BAISSE' | translate }}</label>
-              <span>{{ coursBoursoramaDecore.dto.limiteBaisse | currency:'€' }}</span>
+              <label>{{ 'COMPOSANTS.PORTEFEUILLES.ACTIONS_VALEUR.DIALOG_COTATIONS_TICKER.LIMITE_BAISSE' | translate }}</label>
+              <span>{{ cotationsTickerDecore.dto.limiteBaisse | currency:'€' }}</span>
             </div>
             <div>
-              <label>{{ 'COMPOSANTS.PORTEFEUILLES.ACTIONS_VALEUR.DIALOG_COURS_TICKER.LIMITE_HAUSSE' | translate }}</label>
-              <span>{{ coursBoursoramaDecore.dto.limiteHausse | currency:'€' }}</span>
+              <label>{{ 'COMPOSANTS.PORTEFEUILLES.ACTIONS_VALEUR.DIALOG_COTATIONS_TICKER.LIMITE_HAUSSE' | translate }}</label>
+              <span>{{ cotationsTickerDecore.dto.limiteHausse | currency:'€' }}</span>
             </div>
             <div>
-              <label>{{ 'COMPOSANTS.PORTEFEUILLES.ACTIONS_VALEUR.DIALOG_COURS_TICKER.RENDEMENT_ESTIME' | translate }}</label>
-              <span>{{ coursBoursoramaDecore.dto.pourcentageRendementEstime  | percent:'1.2-2' }}</span>
+              <label>{{ 'COMPOSANTS.PORTEFEUILLES.ACTIONS_VALEUR.DIALOG_COTATIONS_TICKER.RENDEMENT_ESTIME' | translate }}</label>
+              <span>{{ cotationsTickerDecore.dto.pourcentageRendementEstime  | percent:'1.2-2' }}</span>
             </div>
             <div>
-              <label>{{ 'COMPOSANTS.PORTEFEUILLES.ACTIONS_VALEUR.DIALOG_COURS_TICKER.PER_ESTIME' | translate }}</label>
-              <span>{{ coursBoursoramaDecore.dto.perEstime | number }}</span>
+              <label>{{ 'COMPOSANTS.PORTEFEUILLES.ACTIONS_VALEUR.DIALOG_COTATIONS_TICKER.PER_ESTIME' | translate }}</label>
+              <span>{{ cotationsTickerDecore.dto.perEstime | number }}</span>
             </div>
             <div>
-              <label>{{ 'COMPOSANTS.PORTEFEUILLES.ACTIONS_VALEUR.DIALOG_COURS_TICKER.DERNIER_DIVIDENDE' | translate }}</label>
-              <span>{{ coursBoursoramaDecore.dto.dernierDividende | currency:'€' }}</span>
+              <label>{{ 'COMPOSANTS.PORTEFEUILLES.ACTIONS_VALEUR.DIALOG_COTATIONS_TICKER.DERNIER_DIVIDENDE' | translate }}</label>
+              <span>{{ cotationsTickerDecore.dto.dernierDividende | currency:'€' }}</span>
             </div>
             <div>
-              <label>{{ 'COMPOSANTS.PORTEFEUILLES.ACTIONS_VALEUR.DIALOG_COURS_TICKER.DATE_DERNIER_DIVIDENDE' | translate }}</label>
-              <span>{{ coursBoursoramaDecore.dto.dateDernierDividende | date: 'dd/MM/yyyy' }}</span>
+              <label>{{ 'COMPOSANTS.PORTEFEUILLES.ACTIONS_VALEUR.DIALOG_COTATIONS_TICKER.DATE_DERNIER_DIVIDENDE' | translate }}</label>
+              <span>{{ cotationsTickerDecore.dto.dateDernierDividende | date: 'dd/MM/yyyy' }}</span>
             </div>
             <div>
-              <label>{{ 'COMPOSANTS.PORTEFEUILLES.ACTIONS_VALEUR.DIALOG_COURS_TICKER.RISQUE_ESG' | translate }}</label>
-              <span>{{ coursBoursoramaDecore.dto.risqueESG }}</span>
+              <label>{{ 'COMPOSANTS.PORTEFEUILLES.ACTIONS_VALEUR.DIALOG_COTATIONS_TICKER.RISQUE_ESG' | translate }}</label>
+              <span>{{ cotationsTickerDecore.dto.risqueESG }}</span>
             </div>
           </div>
         </p-fieldset>

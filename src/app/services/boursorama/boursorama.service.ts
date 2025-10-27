@@ -6,6 +6,7 @@ import {DTOCoursBoursorama} from './dto-cours-boursorama.interface';
 import {DTOOrdre} from './dto-ordre.interface';
 import {ParseUtil} from '../commun/parse-util.class';
 import {DTOCotationsTickerBoursorama} from './dto-cotations-ticker-boursorama.interface';
+import {CoursPortefeuille} from '../../components/portefeuilles/cours-portefeuille.class';
 
 @Injectable({
   providedIn: 'root'
@@ -30,9 +31,9 @@ export class BoursoramaService {
           observer.complete();
         },
         next: objects => {
-          const result: Array<DTOCours> = [];
+          const resultat: Array<DTOCours> = [];
           objects.forEach((cours: DTOCoursBoursorama, i: number) => {
-            result.push({
+            resultat.push({
               ticker: tickers[i],
               ouverture: cours.d[0].o,
               plusHaut: cours.d[0].h,
@@ -42,14 +43,14 @@ export class BoursoramaService {
               moyennesMobiles: []
             });
           });
-          observer.next(result);
+          observer.next(resultat);
           observer.complete();
         }
       });
     });
   }
 
-  public chargerCoursTicker(ticker: string): Observable<DTOCotationsTickerBoursorama> {
+  public chargerCotationsTicker(ticker: string): Observable<DTOCotationsTickerBoursorama> {
     return new Observable(observer => {
       this.http.get(`/boursorama/cours/1rP${ticker}/`, {
         headers: BoursoramaService.HEADERS_HTML,
@@ -60,7 +61,7 @@ export class BoursoramaService {
           observer.complete();
         },
         next: html => {
-          const dto = this.parseAndMapCours(html);
+          const dto = this.parseAndMapCours(ticker, html);
           if (dto) {
             observer.next(dto);
           } else {
@@ -75,7 +76,39 @@ export class BoursoramaService {
     });
   }
 
-  private parseAndMapCours(html: string): DTOCotationsTickerBoursorama | undefined {
+  public chargerCotationsTickers(tickers: Array<string>): Observable<Array<DTOCotationsTickerBoursorama>> {
+    return new Observable(observer => {
+      forkJoin(tickers.map(ticker =>
+        this.http.get(`/boursorama/cours/1rP${ticker}/`, {
+          headers: BoursoramaService.HEADERS_HTML,
+          responseType: 'text'
+        })
+      )).subscribe({
+        error: httpResponseError => {
+          observer.error(httpResponseError);
+          observer.complete();
+        },
+        next: objects => {
+          const resultat: Array<DTOCotationsTickerBoursorama> = [];
+          objects.forEach((html: string, i: number) => {
+            const dto = this.parseAndMapCours(tickers[i], html);
+            if (dto) {
+              resultat.push(dto);
+            } else {
+              observer.error({
+                message: 'Impossible de récupérer les informations dans le html',
+                html: html
+              })
+            }
+          });
+          observer.next(resultat);
+          observer.complete();
+        }
+      });
+    });
+  }
+
+  private parseAndMapCours(ticker: string, html: string): DTOCotationsTickerBoursorama | undefined {
     const document = new DOMParser()
       .parseFromString(html, 'text/html');
 
@@ -108,7 +141,7 @@ export class BoursoramaService {
       this.parseAndMapOrdres(document, achats, ventes);
 
       return {
-        cours, ouverture, cloture, plusHaut, plusBas, volume, pourcentageCapitalEchange,
+        ticker, cours, ouverture, cloture, plusHaut, plusBas, volume, pourcentageCapitalEchange,
         valorisation, limiteBaisse, limiteHausse, pourcentageRendementEstime,
         perEstime, dernierDividende, dateDernierDividende, risqueESG, achats, ventes
       };
