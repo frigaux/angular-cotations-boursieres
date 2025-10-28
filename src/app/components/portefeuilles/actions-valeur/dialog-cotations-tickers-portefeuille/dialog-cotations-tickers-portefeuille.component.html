@@ -2,21 +2,57 @@
   <div class="barre-superieure">
     <h2>
       {{
-        'COMPOSANTS.PORTEFEUILLES.ACTIONS_VALEUR.DIALOG_COTATIONS_TICKERS_TICKER.COTATIONS_TICKERS_PORTEFEUILLE' | translate : {
-          nom: portefeuilleAvecCours?.portefeuille?.nom
+        'COMPOSANTS.PORTEFEUILLES.ACTIONS_VALEUR.DIALOG_COTATIONS_TICKERS_PORTEFEUILLE.COTATIONS_TICKERS_PORTEFEUILLE' | translate : {
+          nomPortefeuille: portefeuilleAvecCours?.portefeuille?.nom
         }
       }}
     </h2>
     <span class="pi pi-refresh" (click)="rafraichir()"
-          title="{{ 'COMPOSANTS.PORTEFEUILLES.ACTIONS_VALEUR.DIALOG_COTATIONS_TICKERS_TICKER.RAFRAICHIR' | translate }}"></span>
+          title="{{ 'COMPOSANTS.PORTEFEUILLES.ACTIONS_VALEUR.DIALOG_COTATIONS_TICKERS_PORTEFEUILLE.RAFRAICHIR' | translate }}"></span>
     <span class="pi pi-times-circle" (click)="fermer()"
-          title="{{ 'COMPOSANTS.PORTEFEUILLES.ACTIONS_VALEUR.DIALOG_COTATIONS_TICKERS_TICKER.FERMER' | translate }}"></span>
+          title="{{ 'COMPOSANTS.PORTEFEUILLES.ACTIONS_VALEUR.DIALOG_COTATIONS_TICKERS_PORTEFEUILLE.FERMER' | translate }}"></span>
   </div>
 
   <app-loader [affiche]="loading" [configuration]="[
-        {marginLeft: '0', marginTop: '0', height: '60vh', width: '50rem'}
+        {marginLeft: '0', marginTop: '0', height: '30vh', width: '50rem'}
       ]"></app-loader>
 
-  @if (!loading && coursTickersDecores) {
+  @if (!loading && cotationsTickersDecores) {
+    <p-table size="small"
+             [value]="cotationsTickersDecores"
+             [loading]="loading">
+      <ng-template #header>
+        <tr>
+          <th>{{ 'COMPOSANTS.PORTEFEUILLES.ACTIONS_VALEUR.DIALOG_COTATIONS_TICKERS_PORTEFEUILLE.VALEUR' | translate }}</th>
+          <th>{{ 'COMPOSANTS.PORTEFEUILLES.ACTIONS_VALEUR.DIALOG_COTATIONS_TICKERS_PORTEFEUILLE.COURS' | translate }}</th>
+          <th>{{ 'COMPOSANTS.PORTEFEUILLES.ACTIONS_VALEUR.DIALOG_COTATIONS_TICKERS_PORTEFEUILLE.JAUGE_PLUS_HAUT_BAS' | translate }}</th>
+          <th>{{ 'COMPOSANTS.PORTEFEUILLES.ACTIONS_VALEUR.DIALOG_COTATIONS_TICKERS_PORTEFEUILLE.ORDRES' | translate }}</th>
+          <th>{{ 'COMPOSANTS.PORTEFEUILLES.ACTIONS_VALEUR.DIALOG_COTATIONS_TICKERS_PORTEFEUILLE.VAR_OUVERTURE' | translate }}</th>
+          <th>{{ 'COMPOSANTS.PORTEFEUILLES.ACTIONS_VALEUR.DIALOG_COTATIONS_TICKERS_PORTEFEUILLE.VAR_CLOTURE' | translate }}</th>
+        </tr>
+      </ng-template>
+      <ng-template #body let-cotationsTickerDecore>
+        <tr>
+          <td>{{ cotationsTickerDecore.dto.libelle }}</td>
+          <td>{{ cotationsTickerDecore.dto.cours | currency:'€' }}</td>
+          <td>
+            <app-jauge
+              [cleMinimum]="'COMPOSANTS.PORTEFEUILLES.ACTIONS_VALEUR.DIALOG_COTATIONS_TICKERS_PORTEFEUILLE.PLUS_BAS'"
+              [cleMaximum]="'COMPOSANTS.PORTEFEUILLES.ACTIONS_VALEUR.DIALOG_COTATIONS_TICKERS_PORTEFEUILLE.PLUS_HAUT'"
+              [pourcentage]="cotationsTickerDecore.pourcentageCours"></app-jauge>
+          </td>
+          <td>
+            <p-chart type="bar" [data]="cotationsTickerDecore.ordresBarChart"
+                     [options]="cotationsTickerDecore.optionsBarChart" height="4rem" width="12rem"/>
+          </td>
+          <td [class]="evolutionVariation(cotationsTickerDecore.variationOuverture)">
+            {{ cotationsTickerDecore.variationOuverture  | percent:'1.2-2' }}
+          </td>
+          <td [class]="evolutionVariation(cotationsTickerDecore.variationCloture)">
+            {{ cotationsTickerDecore.variationCloture  | percent:'1.2-2' }}
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
   }
 </p-dialog>

@@ -2,21 +2,39 @@ import {DTOCotationsTickerBoursorama} from '../../../../services/boursorama/dto-
 import {TranslateService} from '@ngx-translate/core';
 
 export class CotationsTickerBoursoramaDecore {
+  id: number;
   dto: DTOCotationsTickerBoursorama;
   pourcentageCours: number;
   variationOuverture: number;
   variationCloture: number;
-  ordres?: any;
+  ordresDoughnut?: any;
+  ordresBarChart?: any;
+  optionsBarChart?: any;
 
-  constructor(private translateService: TranslateService, dto: DTOCotationsTickerBoursorama) {
+  constructor(private translateService: TranslateService, id: number, dto: DTOCotationsTickerBoursorama) {
+    this.id = id;
     this.dto = dto;
     this.pourcentageCours = Math.round(100 * (dto.cours - dto.plusBas) / (dto.plusHaut - dto.plusBas));
     this.variationOuverture = (dto.cours / dto.ouverture) - 1;
     this.variationCloture = (dto.cours / dto.cloture) - 1;
-    this.ordres = this.construireOrdres(dto);
+    this.ordresDoughnut = this.construireOrdresDoughnut(dto);
+    this.ordresBarChart = this.construireOrdresBarChart(dto);
+    this.optionsBarChart = {
+      indexAxis: 'y',
+      plugins: {
+        legend: {
+          display: false
+        }
+      },
+      scales: {
+        x: {
+          display: false
+        }
+      }
+    };
   }
 
-  private construireOrdres(dto: DTOCotationsTickerBoursorama) {
+  private construireOrdresDoughnut(dto: DTOCotationsTickerBoursorama) {
     const documentStyle = getComputedStyle(document.documentElement);
     const qtAchats = dto.achats.reduce((accumulator, achat) => accumulator + achat.quantite, 0);
     const qtVentes = dto.ventes.reduce((accumulator, vente) => accumulator + vente.quantite, 0);
@@ -35,5 +53,28 @@ export class CotationsTickerBoursoramaDecore {
       ]
     };
 
+  }
+
+  private construireOrdresBarChart(dto: DTOCotationsTickerBoursorama) {
+    const documentStyle = getComputedStyle(document.documentElement);
+    const qtAchats = dto.achats.reduce((accumulator, achat) => accumulator + achat.quantite, 0);
+    const qtVentes = dto.ventes.reduce((accumulator, vente) => accumulator + vente.quantite, 0);
+    return {
+      labels: [''],
+      datasets: [
+        {
+          label: this.translateService.instant('COMPOSANTS.PORTEFEUILLES.ACTIONS_VALEUR.DIALOG_COTATIONS_TICKERS_PORTEFEUILLE.ACHATS'),
+          backgroundColor: documentStyle.getPropertyValue('--p-green-500'),
+          borderColor: documentStyle.getPropertyValue('--p-green-700'),
+          data: [qtAchats]
+        },
+        {
+          label: this.translateService.instant('COMPOSANTS.PORTEFEUILLES.ACTIONS_VALEUR.DIALOG_COTATIONS_TICKERS_PORTEFEUILLE.VENTES'),
+          backgroundColor: documentStyle.getPropertyValue('--p-red-500'),
+          borderColor: documentStyle.getPropertyValue('--p-red-700'),
+          data: [qtVentes]
+        }
+      ]
+    };
   }
 }

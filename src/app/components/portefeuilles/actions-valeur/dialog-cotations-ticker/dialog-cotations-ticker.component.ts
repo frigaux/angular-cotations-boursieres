@@ -44,9 +44,9 @@ export class DialogCotationsTickerComponent {
     this.cours = cours;
     this.visible = true;
     this.loading = true;
-    this.boursoramaService.chargerCotationsTicker(cours.ticker).subscribe(
+    this.boursoramaService.chargerCotationsTicker(cours).subscribe(
       cotationsTickerBoursorama => {
-        this.cotationsTickerDecore = new CotationsTickerBoursoramaDecore(this.translateService, cotationsTickerBoursorama);
+        this.cotationsTickerDecore = new CotationsTickerBoursoramaDecore(this.translateService, 0, cotationsTickerBoursorama);
         this.loading = false;
       }
     )

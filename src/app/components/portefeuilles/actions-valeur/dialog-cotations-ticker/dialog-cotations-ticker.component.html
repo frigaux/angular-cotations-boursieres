@@ -21,7 +21,8 @@
   @if (!loading && cotationsTickerDecore) {
     <div class="ligne">
       <div class="colonne">
-        <p-fieldset legend="{{ 'COMPOSANTS.PORTEFEUILLES.ACTIONS_VALEUR.DIALOG_COTATIONS_TICKER.COTATIONS' | translate }}">
+        <p-fieldset
+          legend="{{ 'COMPOSANTS.PORTEFEUILLES.ACTIONS_VALEUR.DIALOG_COTATIONS_TICKER.COTATIONS' | translate }}">
           <div class="cotations">
             <div>
               <label>{{ 'COMPOSANTS.PORTEFEUILLES.ACTIONS_VALEUR.DIALOG_COTATIONS_TICKER.COURS' | translate }}</label>
@@ -44,13 +45,11 @@
           </div>
         </p-fieldset>
         <p-fieldset legend="{{ 'COMPOSANTS.PORTEFEUILLES.ACTIONS_VALEUR.DIALOG_COTATIONS_TICKER.ORDRES' | translate }}">
-          <p-chart type="doughnut" [data]="cotationsTickerDecore.ordres" height="12rem"/>
+          <p-chart type="doughnut" [data]="cotationsTickerDecore.ordresDoughnut" height="14rem" width="20rem"/>
         </p-fieldset>
-      </div>
-      <div class="colonne">
         <p-fieldset
           legend="{{ 'COMPOSANTS.PORTEFEUILLES.ACTIONS_VALEUR.DIALOG_COTATIONS_TICKER.INDICATEURS' | translate }}">
-          <div class="cotations">
+          <div class="indicateurs">
             <div>
               <label>{{ 'COMPOSANTS.PORTEFEUILLES.ACTIONS_VALEUR.DIALOG_COTATIONS_TICKER.VOLUME' | translate }}</label>
               <span>{{ cotationsTickerDecore.dto.volume | number }}</span>
@@ -91,6 +90,30 @@
               <label>{{ 'COMPOSANTS.PORTEFEUILLES.ACTIONS_VALEUR.DIALOG_COTATIONS_TICKER.RISQUE_ESG' | translate }}</label>
               <span>{{ cotationsTickerDecore.dto.risqueESG }}</span>
             </div>
+          </div>
+        </p-fieldset>
+      </div>
+      <div class="colonne">
+        <p-fieldset
+          legend="{{ 'COMPOSANTS.PORTEFEUILLES.ACTIONS_VALEUR.DIALOG_COTATIONS_TICKER.ACTUALITES' | translate }}">
+          <div class="actualites">
+            @for (actualite of cotationsTickerDecore.dto.actualites; track actualite.id) {
+              <div>
+                <span>{{ actualite.date }}</span>
+                <span>{{ actualite.titre }}</span>
+              </div>
+            }
+          </div>
+        </p-fieldset>
+        <p-fieldset
+          legend="{{ 'COMPOSANTS.PORTEFEUILLES.ACTIONS_VALEUR.DIALOG_COTATIONS_TICKER.ANALYSES' | translate }}">
+          <div class="analyses">
+            @for (analyse of cotationsTickerDecore.dto.analyses; track analyse.id) {
+              <div>
+                <span>{{ analyse.date }}</span>
+                <span>{{ analyse.titre }}</span>
+              </div>
+            }
           </div>
         </p-fieldset>
       </div>

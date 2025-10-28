@@ -1,7 +1,9 @@
 import {DTOOrdre} from './dto-ordre.interface';
+import {DTOInformation} from './dto-information.interface';
 
 export interface DTOCotationsTickerBoursorama {
   ticker: string;
+  libelle: string;
   cours: number;
   ouverture: number;
   cloture: number;
@@ -21,4 +23,6 @@ export interface DTOCotationsTickerBoursorama {
 
   achats: Array<DTOOrdre>;
   ventes: Array<DTOOrdre>;
+  actualites: Array<DTOInformation>;
+  analyses: Array<DTOInformation>;
 }

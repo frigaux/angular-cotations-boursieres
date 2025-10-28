@@ -285,13 +285,25 @@
           "DATE_DERNIER_DIVIDENDE": "Date dernier dividende",
           "RISQUE_ESG": "Risque ESG",
           "ORDRES": "Ordres",
+          "ACTUALITES": "Actualités",
+          "ANALYSES": "Analyses",
           "ACHATS": "Achats ({{quantite}})",
           "VENTES": "Ventes ({{quantite}})"
         },
-        "DIALOG_COTATIONS_TICKERS_TICKER": {
-          "COTATIONS_TICKERS_PORTEFEUILLE": "Cours et ordres pour les valeurs du portefeuille {{nom}}",
+        "DIALOG_COTATIONS_TICKERS_PORTEFEUILLE": {
+          "COTATIONS_TICKERS_PORTEFEUILLE": "Cours et ordres pour les valeurs du portefeuille \"{{nomPortefeuille}}\"",
           "RAFRAICHIR": "Rafraîchir",
-          "FERMER": "Fermer"
+          "FERMER": "Fermer",
+          "VALEUR": "Valeur",
+          "COURS": "Cours",
+          "JAUGE_PLUS_HAUT_BAS": "Jauge",
+          "PLUS_BAS": "Plus bas",
+          "PLUS_HAUT": "Plus haut",
+          "ORDRES": "Ordres",
+          "ACHATS": "Achats",
+          "VENTES": "Ventes",
+          "VAR_OUVERTURE": "Var/Ouverture",
+          "VAR_CLOTURE": "Var/Clôture"
         }
       },
       "GESTION_PORTEFEUILLES": {

@@ -10,7 +10,7 @@ div.ligne
     p-fieldset:nth-child(n+2)
       margin-top: 1rem
 
-    .cotations
+    .cotations, .indicateurs
       & > div, app-jauge
         margin: 0.5rem
         width: 20rem
@@ -31,3 +31,27 @@ div.ligne
 
           &.negative
             color: var(--p-red-600)
+
+    .actualites, .analyses
+      div
+        margin: 0.5rem
+        width: 30rem
+        display: block
+
+        & > span
+          display: inline-block
+
+        & > span:nth-child(1)
+          font-weight: bold
+          width: 5rem
+          vertical-align: top
+
+        & > span:nth-child(2)
+          width: 25rem
+
+
+// orientation verticale
+@media screen and (orientation: portrait)
+  div.ligne
+    flex-direction: column
+
