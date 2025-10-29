@@ -60,7 +60,7 @@
                         [class]="evolutionColonne(colonneDecoree, cours)">
                         @if (colonneDecoree.id === 0) {
                           <span class="pi"
-                                [class]="iconeVariation(cours.var1)"
+                                [class]="VueUtil.iconeVariation(cours.var1)"
                                 title="{{ 'COMPOSANTS.PORTEFEUILLES.ACTIONS' | translate }}"></span>
                         }
                         @switch (colonneDecoree.colonne.type) {

@@ -6,7 +6,7 @@ export class CotationsTickerBoursoramaDecore {
   dto: DTOCotationsTickerBoursorama;
   pourcentageCours: number;
   variationOuverture: number;
-  variationCloture: number;
+  variationClotureVeille: number;
   ordresDoughnut?: any;
   ordresBarChart?: any;
   optionsBarChart?: any;
@@ -16,10 +16,14 @@ export class CotationsTickerBoursoramaDecore {
     this.dto = dto;
     this.pourcentageCours = Math.round(100 * (dto.cours - dto.plusBas) / (dto.plusHaut - dto.plusBas));
     this.variationOuverture = (dto.cours / dto.ouverture) - 1;
-    this.variationCloture = (dto.cours / dto.cloture) - 1;
+    this.variationClotureVeille = (dto.cours / dto.clotureVeille) - 1;
     this.ordresDoughnut = this.construireOrdresDoughnut(dto);
     this.ordresBarChart = this.construireOrdresBarChart(dto);
-    this.optionsBarChart = {
+    this.optionsBarChart = this.construireOptionsBarChart();
+  }
+
+  private construireOptionsBarChart() {
+    return {
       indexAxis: 'y',
       plugins: {
         legend: {

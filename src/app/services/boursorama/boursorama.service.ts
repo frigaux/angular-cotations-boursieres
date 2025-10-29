@@ -113,42 +113,41 @@ export class BoursoramaService {
     const document = new DOMParser()
       .parseFromString(html, 'text/html');
 
-    const elDIV = document.querySelector('div.c-faceplate__price');
-    const elLIs = document.querySelectorAll('li.c-list-info__item');
-    const elULs = document.querySelectorAll('ul.c-list-news');
+    const elDIVCours = document.querySelector('div.c-faceplate__price');
+    const elLIsCotations = document.querySelectorAll('li.c-list-info__item');
+    const elULsNouvelles = document.querySelectorAll('ul.c-list-news');
 
-    if (elDIV && elLIs.length === 18 && elULs.length === 3) {
-      const cours = ParseUtil.queryAndParseNumber(elDIV, 'span.c-instrument');
+    if (elDIVCours && elLIsCotations.length === 18 && elULsNouvelles.length === 3) {
+      const cours = ParseUtil.queryAndParseNumber(elDIVCours, 'span.c-instrument');
 
-      const ouverture = ParseUtil.queryAndParseNumber(elLIs[2], 'span.c-instrument');
-      const cloture = ParseUtil.queryAndParseNumber(elLIs[3], 'span.c-instrument');
-      const plusHaut = ParseUtil.queryAndParseNumber(elLIs[4], 'span.c-instrument');
-      const plusBas = ParseUtil.queryAndParseNumber(elLIs[5], 'span.c-instrument');
-      const volume = ParseUtil.queryAndParseNumber(elLIs[6], 'span.c-instrument');
+      const ouverture = ParseUtil.queryAndParseNumber(elLIsCotations[2], 'span.c-instrument');
+      const cloture = ParseUtil.queryAndParseNumber(elLIsCotations[3], 'span.c-instrument');
+      const plusHaut = ParseUtil.queryAndParseNumber(elLIsCotations[4], 'span.c-instrument');
+      const plusBas = ParseUtil.queryAndParseNumber(elLIsCotations[5], 'span.c-instrument');
+      const volume = ParseUtil.queryAndParseNumber(elLIsCotations[6], 'span.c-instrument');
 
-      const pourcentageCapitalEchange = ParseUtil.queryAndParseNumber(elLIs[7], 'p.c-list-info__value');
-      const valorisation = ParseUtil.queryAndParseString(elLIs[8], 'p.c-list-info__value');
+      const pourcentageCapitalEchange = ParseUtil.queryAndParseNumber(elLIsCotations[7], 'p.c-list-info__value');
+      const valorisation = ParseUtil.queryAndParseString(elLIsCotations[8], 'p.c-list-info__value');
 
-      const limiteBaisse = ParseUtil.queryAndParseNumber(elLIs[10], 'p.c-list-info__value');
-      const limiteHausse = ParseUtil.queryAndParseNumber(elLIs[11], 'p.c-list-info__value');
-      const pourcentageRendementEstime = ParseUtil.queryAndParseNumber(elLIs[12], 'p.c-list-info__value');
-      const perEstime = ParseUtil.queryAndParseNumber(elLIs[13], 'p.c-list-info__value');
-      const dernierDividende = ParseUtil.queryAndParseNumber(elLIs[14], 'p.c-list-info__value');
-      const dateDernierDividende = ParseUtil.queryAndParseDate(elLIs[15], 'p.c-list-info__value');
+      const limiteBaisse = ParseUtil.queryAndParseNumber(elLIsCotations[10], 'p.c-list-info__value');
+      const limiteHausse = ParseUtil.queryAndParseNumber(elLIsCotations[11], 'p.c-list-info__value');
+      const pourcentageRendementEstime = ParseUtil.queryAndParseNumber(elLIsCotations[12], 'p.c-list-info__value');
+      const perEstime = ParseUtil.queryAndParseNumber(elLIsCotations[13], 'p.c-list-info__value');
+      const dernierDividende = ParseUtil.queryAndParseNumber(elLIsCotations[14], 'p.c-list-info__value');
+      const dateDernierDividende = ParseUtil.queryAndParseDate(elLIsCotations[15], 'p.c-list-info__value');
 
-      const risqueESG = ParseUtil.queryAndParseString(elLIs[17], 'p.c-list-info__value');
+      const risqueESG = ParseUtil.queryAndParseString(elLIsCotations[17], 'p.c-list-info__value');
 
       const achats: Array<DTOOrdre> = [];
       const ventes: Array<DTOOrdre> = [];
       this.parseAndMapOrdres(document, achats, ventes);
 
-      const actualites = this.parseAndMapInformations(elULs[1]);
-      const analyses = this.parseAndMapInformations(elULs[2]);
+      const actualites = this.parseAndMapInformations(elULsNouvelles[1]);
+      const analyses = this.parseAndMapInformations(elULsNouvelles[2]);
 
       return {
-        ticker: coursPortefeuille.ticker, libelle: coursPortefeuille.libelle,
-        cours, ouverture, cloture, plusHaut, plusBas, volume, pourcentageCapitalEchange,
-        valorisation, limiteBaisse, limiteHausse, pourcentageRendementEstime,
+        coursPortefeuille, cours, ouverture, clotureVeille: cloture, plusHaut, plusBas, volume,
+        pourcentageCapitalEchange, valorisation, limiteBaisse, limiteHausse, pourcentageRendementEstime,
         perEstime, dernierDividende, dateDernierDividende, risqueESG, achats, ventes, actualites, analyses
       };
     }
@@ -156,10 +155,10 @@ export class BoursoramaService {
   }
 
   private parseAndMapOrdres(document: Document, achats: Array<DTOOrdre>, ventes: Array<DTOOrdre>) {
-    const elTABLEs = document.querySelectorAll('table.c-orderbook__table');
+    const elTABLEsOrdres = document.querySelectorAll('table.c-orderbook__table');
 
-    if (elTABLEs.length > 0) {
-      elTABLEs[elTABLEs.length - 1].querySelectorAll('tbody > tr.c-table__row').forEach(elTR => {
+    if (elTABLEsOrdres.length > 0) {
+      elTABLEsOrdres[elTABLEsOrdres.length - 1].querySelectorAll('tbody > tr.c-table__row').forEach(elTR => {
         const elTDs = elTR.querySelectorAll('td');
         if (elTDs.length === 6) {
           achats.push({
@@ -177,10 +176,10 @@ export class BoursoramaService {
     }
   }
 
-  private parseAndMapInformations(elUL: Element): Array<DTOInformation> {
+  private parseAndMapInformations(elULNouvelles: Element): Array<DTOInformation> {
     const resultat: Array<DTOInformation> = [];
     let id = 0;
-    elUL.querySelectorAll('li.c-list-news__line')
+    elULNouvelles.querySelectorAll('li.c-list-news__line')
       .forEach(elLI => {
         const elSPAN = elLI.querySelector('span.c-list-news__date');
         const elA = elLI.querySelector('a');

@@ -4,7 +4,7 @@ export interface DTOCotations {
   ouverture: number;
   plusHaut: number;
   plusBas: number;
-  cloture: number;
+  clotureVeille: number;
   pourcentageVolatilite: number;
   pourcentageCapitalEchange: number;
   valorisation: string;

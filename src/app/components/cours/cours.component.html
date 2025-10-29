@@ -70,7 +70,7 @@
                           title="{{ 'COMPOSANTS.COURS.AJOUTER_AU_PORTEFEUILLE' | translate }}"></span>
                     {{ cours.libelle }}
                   </td>
-                  <td [class]="evolutionVariation(cours.var1)">
+                  <td [class]="VueUtil.evolutionVariation(cours.var1)">
                     {{ cours.var1 | percent:'1.2-2' }}
                   </td>
                   <td>{{ cours.cloture | currency:'€' }}</td>

@@ -21,6 +21,7 @@ import {TypesColonnesPortefeuille} from '../../services/tableaux/types-colonnes-
 import {ColonneDecoree} from './colonne-decoree.class';
 import {BreakpointObserver} from '@angular/cdk/layout';
 import {DialogActualitesComponent} from '../cours/dialog-actualites/dialog-actualites.component';
+import {VueUtil} from '../commun/vue-util.class';
 
 @Component({
   selector: 'app-portefeuilles',
@@ -63,6 +64,7 @@ export class PortefeuillesComponent implements OnInit {
   portefeuillesAvecCours: Array<PortefeuilleAvecCours> = [];
   idxPortefeuilleCourant: number = -1;
   protected scrollHeight: string = 'calc(100vh - 14rem)';
+  protected readonly VueUtil = VueUtil;
 
   // cours pour lequel afficher les courbes
   coursSelectionne: CoursPortefeuille | undefined = undefined;
@@ -166,16 +168,6 @@ export class PortefeuillesComponent implements OnInit {
     return colonnes.map(colonne =>
       new ColonneDecoree(i++, colonne, this.tableauxService.valeurPourUnCours(colonne))
     );
-  }
-
-  protected iconeVariation(variation: number): string {
-    if (variation == 0) {
-      return 'pi-arrow-circle-right';
-    } else if (variation > 0) {
-      return 'pi-arrow-circle-up';
-    } else {
-      return 'pi-arrow-circle-down';
-    }
   }
 
   protected evolutionColonne(colonneDecoree: ColonneDecoree, cours: CoursPortefeuille): string {

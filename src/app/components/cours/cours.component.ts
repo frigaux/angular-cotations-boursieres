@@ -20,6 +20,7 @@ import {FiltreDecore} from './selecteur-filtre/filtre-decore.class';
 import {DialogImportExportComponent} from './dialog-editeur-filtres/import-export/dialog-import-export.component';
 import {PortefeuillesService} from '../../services/portefeuilles/portefeuilles.service';
 import {DialogActualitesComponent} from './dialog-actualites/dialog-actualites.component';
+import {VueUtil} from '../commun/vue-util.class';
 
 @Component({
   selector: 'app-cours',
@@ -55,6 +56,7 @@ export class CoursComponent implements OnInit {
   date?: string;
   marches?: CoursMarche[];
   idxMarcheCourant: number = -1;
+  protected readonly VueUtil = VueUtil;
 
   // cours pour lequel afficher les moyennes mobiles
   coursSelectionne: Cours | undefined = undefined;
@@ -138,10 +140,6 @@ export class CoursComponent implements OnInit {
 
   private afficherAjoutAuPortefeuille(event: MouseEvent, cours: Cours) {
     this.ajoutAuPortefeuille()?.afficher(event, cours.ticker);
-  }
-
-  evolutionVariation(variation: number): string {
-    return variation >= 0 ? 'positive' : 'negative';
   }
 
   evolutionCours(cloture: number, cours: number) {

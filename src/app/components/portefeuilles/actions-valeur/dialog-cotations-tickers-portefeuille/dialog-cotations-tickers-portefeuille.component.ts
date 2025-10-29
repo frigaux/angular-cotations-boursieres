@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, viewChild} from '@angular/core';
 import {TranslatePipe, TranslateService} from '@ngx-translate/core';
 import {BoursoramaService} from '../../../../services/boursorama/boursorama.service';
 import {CotationsTickerBoursoramaDecore} from '../dialog-cotations-ticker/cotations-ticker-boursorama-genere.class';
@@ -9,6 +9,9 @@ import {JaugeComponent} from '../../../commun/jauge/jauge.component';
 import {CurrencyPipe, PercentPipe} from '@angular/common';
 import {UIChart} from 'primeng/chart';
 import {TableModule} from 'primeng/table';
+import {CoursPortefeuille} from '../../cours-portefeuille.class';
+import {DialogCotationsTickerComponent} from '../dialog-cotations-ticker/dialog-cotations-ticker.component';
+import {VueUtil} from '../../../commun/vue-util.class';
 
 @Component({
   selector: 'app-dialog-cotations-tickers-portefeuille',
@@ -27,17 +30,21 @@ import {TableModule} from 'primeng/table';
 })
 export class DialogCotationsTickersPortefeuilleComponent {
 
+  private dialogCoursTickerComponent?: DialogCotationsTickerComponent;
+
   // données pour la vue
   visible: boolean = false;
   loading: boolean = false;
   portefeuilleAvecCours?: PortefeuilleAvecCours;
   cotationsTickersDecores?: Array<CotationsTickerBoursoramaDecore>;
+  protected readonly VueUtil = VueUtil;
 
   constructor(private translateService: TranslateService, private boursoramaService: BoursoramaService) {
   }
 
-  afficherPortefeuille(portefeuilleAvecCours: PortefeuilleAvecCours) {
+  afficherPortefeuille(portefeuilleAvecCours: PortefeuilleAvecCours, dialogCoursTickerComponent?: DialogCotationsTickerComponent) {
     this.portefeuilleAvecCours = portefeuilleAvecCours;
+    this.dialogCoursTickerComponent = dialogCoursTickerComponent;
     this.visible = true;
     this.loading = true;
     this.boursoramaService.chargerCotationsTickers(portefeuilleAvecCours.cours).subscribe(
@@ -51,17 +58,19 @@ export class DialogCotationsTickersPortefeuilleComponent {
     )
   }
 
-  evolutionVariation(variation: number): string {
-    return variation >= 0 ? 'positive' : 'negative';
-  }
-
   protected fermer() {
     this.visible = false;
   }
 
   protected rafraichir() {
-    if (this.portefeuilleAvecCours) {
-      this.afficherPortefeuille(this.portefeuilleAvecCours);
+    if (this.portefeuilleAvecCours && this.dialogCoursTickerComponent) {
+      this.afficherPortefeuille(this.portefeuilleAvecCours, this.dialogCoursTickerComponent);
+    }
+  }
+
+  protected vueDetaillee(cotationsTickerDecore: CotationsTickerBoursoramaDecore) {
+    if (this.dialogCoursTickerComponent) {
+      this.dialogCoursTickerComponent.afficherCotationsTickerBoursoramaDecore(cotationsTickerDecore);
     }
   }
 }

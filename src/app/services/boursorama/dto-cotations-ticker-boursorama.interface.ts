@@ -1,12 +1,12 @@
 import {DTOOrdre} from './dto-ordre.interface';
 import {DTOInformation} from './dto-information.interface';
+import {CoursPortefeuille} from '../../components/portefeuilles/cours-portefeuille.class';
 
 export interface DTOCotationsTickerBoursorama {
-  ticker: string;
-  libelle: string;
+  coursPortefeuille: CoursPortefeuille;
   cours: number;
   ouverture: number;
-  cloture: number;
+  clotureVeille: number;
   plusHaut: number;
   plusBas: number;
   volume: number;

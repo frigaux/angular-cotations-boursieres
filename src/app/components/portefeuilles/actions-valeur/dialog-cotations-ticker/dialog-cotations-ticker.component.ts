@@ -10,6 +10,7 @@ import {CurrencyPipe, DatePipe, DecimalPipe, PercentPipe} from '@angular/common'
 import {CotationsTickerBoursoramaDecore} from './cotations-ticker-boursorama-genere.class';
 import {JaugeComponent} from '../../../commun/jauge/jauge.component';
 import {CoursPortefeuille} from '../../cours-portefeuille.class';
+import {VueUtil} from '../../../commun/vue-util.class';
 
 @Component({
   selector: 'app-dialog-cotations-ticker',
@@ -34,14 +35,13 @@ export class DialogCotationsTickerComponent {
   // données pour la vue
   visible: boolean = false;
   loading: boolean = false;
-  cours?: CoursPortefeuille;
   cotationsTickerDecore?: CotationsTickerBoursoramaDecore;
+  protected readonly VueUtil = VueUtil;
 
   constructor(private translateService: TranslateService, private boursoramaService: BoursoramaService) {
   }
 
   afficherCours(cours: CoursPortefeuille) {
-    this.cours = cours;
     this.visible = true;
     this.loading = true;
     this.boursoramaService.chargerCotationsTicker(cours).subscribe(
@@ -52,8 +52,9 @@ export class DialogCotationsTickerComponent {
     )
   }
 
-  evolutionVariation(variation: number): string {
-    return variation >= 0 ? 'positive' : 'negative';
+  afficherCotationsTickerBoursoramaDecore(cotationsTickerDecore: CotationsTickerBoursoramaDecore) {
+    this.visible = true;
+    this.cotationsTickerDecore = cotationsTickerDecore;
   }
 
   protected fermer() {
@@ -61,8 +62,8 @@ export class DialogCotationsTickerComponent {
   }
 
   protected rafraichir() {
-    if (this.cours) {
-      this.afficherCours(this.cours);
+    if (this.cotationsTickerDecore) {
+      this.afficherCours(this.cotationsTickerDecore.dto.coursPortefeuille);
     }
   }
 }

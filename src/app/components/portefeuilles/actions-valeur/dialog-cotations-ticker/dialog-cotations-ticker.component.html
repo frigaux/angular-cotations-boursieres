@@ -3,8 +3,8 @@
     <h2>
       {{
         'COMPOSANTS.PORTEFEUILLES.ACTIONS_VALEUR.DIALOG_COTATIONS_TICKER.COTATIONS_TICKER' | translate : {
-          valeur: cours?.libelle,
-          ticker: cours?.ticker
+          valeur: cotationsTickerDecore?.dto?.coursPortefeuille?.libelle,
+          ticker: cotationsTickerDecore?.dto?.coursPortefeuille?.ticker
         }
       }}
     </h2>
@@ -35,12 +35,12 @@
             <div>
               <label>{{ 'COMPOSANTS.PORTEFEUILLES.ACTIONS_VALEUR.DIALOG_COTATIONS_TICKER.VAR_OUVERTURE' | translate }}</label>
               <span
-                [class]="evolutionVariation(cotationsTickerDecore.variationOuverture)">{{ cotationsTickerDecore.variationOuverture  | percent:'1.2-2' }}</span>
+                [class]="VueUtil.evolutionVariation(cotationsTickerDecore.variationOuverture)">{{ cotationsTickerDecore.variationOuverture  | percent:'1.2-2' }}</span>
             </div>
             <div>
-              <label>{{ 'COMPOSANTS.PORTEFEUILLES.ACTIONS_VALEUR.DIALOG_COTATIONS_TICKER.VAR_CLOTURE' | translate }}</label>
+              <label>{{ 'COMPOSANTS.PORTEFEUILLES.ACTIONS_VALEUR.DIALOG_COTATIONS_TICKER.VAR_CLOTURE_VEILLE' | translate }}</label>
               <span
-                [class]="evolutionVariation(cotationsTickerDecore.variationCloture)">{{ cotationsTickerDecore.variationCloture  | percent:'1.2-2' }}</span>
+                [class]="VueUtil.evolutionVariation(cotationsTickerDecore.variationClotureVeille)">{{ cotationsTickerDecore.variationClotureVeille  | percent:'1.2-2' }}</span>
             </div>
           </div>
         </p-fieldset>

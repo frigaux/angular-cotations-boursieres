@@ -1,6 +1,16 @@
 p-table
   margin: 1rem
 
+  .pi
+    vertical-align: middle
+    margin-right: 1rem
+
+  .pi-arrow-circle-up
+    color: var(--p-green-600)
+
+  .pi-arrow-circle-down
+    color: var(--p-red-600)
+
   th:nth-child(1), th:nth-child(3), th:nth-child(4)
     text-align: left
 
@@ -20,6 +30,8 @@ p-table
     width: 12rem
 
   td
+    cursor: pointer
+
     &.positive
       color: var(--p-green-600)
 

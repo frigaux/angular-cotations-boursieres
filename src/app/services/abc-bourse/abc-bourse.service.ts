@@ -88,7 +88,7 @@ export class AbcBourseService {
       const pourcentageCapitalEchange = ParseUtil.queryAndParseNumber(elTrs1[0], 'td.alri');
       const valorisation = ParseUtil.queryAndParseString(elTrs1[1], 'td.alri');
       return {
-        cours, volume, ouverture, plusHaut, plusBas, cloture,
+        cours, volume, ouverture, plusHaut, plusBas, clotureVeille: cloture,
         pourcentageVolatilite, pourcentageCapitalEchange, valorisation
       };
     }

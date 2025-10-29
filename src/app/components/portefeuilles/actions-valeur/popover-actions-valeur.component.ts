@@ -146,7 +146,7 @@ export class PopoverActionsValeurComponent {
   }
 
   protected coursBoursoramaPortefeuille() {
-    this.dialogCotationsTickersPortefeuilleComponent()?.afficherPortefeuille(this.portefeuilleAvecCoursAffiche!);
+    this.dialogCotationsTickersPortefeuilleComponent()?.afficherPortefeuille(this.portefeuilleAvecCoursAffiche!, this.dialogCoursTickerComponent());
     this.popover()?.hide();
   }
 }

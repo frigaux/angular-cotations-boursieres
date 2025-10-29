@@ -28,12 +28,15 @@
           <th>{{ 'COMPOSANTS.PORTEFEUILLES.ACTIONS_VALEUR.DIALOG_COTATIONS_TICKERS_PORTEFEUILLE.JAUGE_PLUS_HAUT_BAS' | translate }}</th>
           <th>{{ 'COMPOSANTS.PORTEFEUILLES.ACTIONS_VALEUR.DIALOG_COTATIONS_TICKERS_PORTEFEUILLE.ORDRES' | translate }}</th>
           <th>{{ 'COMPOSANTS.PORTEFEUILLES.ACTIONS_VALEUR.DIALOG_COTATIONS_TICKERS_PORTEFEUILLE.VAR_OUVERTURE' | translate }}</th>
-          <th>{{ 'COMPOSANTS.PORTEFEUILLES.ACTIONS_VALEUR.DIALOG_COTATIONS_TICKERS_PORTEFEUILLE.VAR_CLOTURE' | translate }}</th>
+          <th>{{ 'COMPOSANTS.PORTEFEUILLES.ACTIONS_VALEUR.DIALOG_COTATIONS_TICKERS_PORTEFEUILLE.VAR_CLOTURE_VEILLE' | translate }}</th>
         </tr>
       </ng-template>
       <ng-template #body let-cotationsTickerDecore>
-        <tr>
-          <td>{{ cotationsTickerDecore.dto.libelle }}</td>
+        <tr (click)="vueDetaillee(cotationsTickerDecore)">
+          <td>
+            <span class="pi" [class]="VueUtil.iconeVariation(cotationsTickerDecore.variationOuverture)"></span>
+            {{ cotationsTickerDecore.dto.coursPortefeuille.libelle }}
+          </td>
           <td>{{ cotationsTickerDecore.dto.cours | currency:'€' }}</td>
           <td>
             <app-jauge
@@ -45,11 +48,11 @@
             <p-chart type="bar" [data]="cotationsTickerDecore.ordresBarChart"
                      [options]="cotationsTickerDecore.optionsBarChart" height="4rem" width="12rem"/>
           </td>
-          <td [class]="evolutionVariation(cotationsTickerDecore.variationOuverture)">
+          <td [class]="VueUtil.evolutionVariation(cotationsTickerDecore.variationOuverture)">
             {{ cotationsTickerDecore.variationOuverture  | percent:'1.2-2' }}
           </td>
-          <td [class]="evolutionVariation(cotationsTickerDecore.variationCloture)">
-            {{ cotationsTickerDecore.variationCloture  | percent:'1.2-2' }}
+          <td [class]="VueUtil.evolutionVariation(cotationsTickerDecore.variationClotureVeille)">
+            {{ cotationsTickerDecore.variationClotureVeille  | percent:'1.2-2' }}
           </td>
         </tr>
       </ng-template>
