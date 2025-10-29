@@ -26,7 +26,7 @@ import {VueUtil} from '../../../commun/vue-util.class';
     TableModule
   ],
   templateUrl: './dialog-cotations-tickers-portefeuille.component.html',
-  styleUrls: ['./dialog-cotations-tickers-portefeuille.component.sass', '../../../commun/barre-superieure/barre-superieure.component.sass']
+  styleUrls: ['./dialog-cotations-tickers-portefeuille.component.sass', '../../../commun/barre-superieure.sass']
 })
 export class DialogCotationsTickersPortefeuilleComponent {
 

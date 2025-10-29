@@ -28,7 +28,7 @@ import {VueUtil} from '../../../commun/vue-util.class';
     JaugeComponent
   ],
   templateUrl: './dialog-cotations-ticker.component.html',
-  styleUrls: ['./dialog-cotations-ticker.component.sass', '../../../commun/barre-superieure/barre-superieure.component.sass']
+  styleUrls: ['./dialog-cotations-ticker.component.sass', '../../../commun/barre-superieure.sass']
 })
 export class DialogCotationsTickerComponent {
 
