@@ -218,11 +218,9 @@ export class PortefeuillesService {
     return portefeuilleAvecAuMoinsUneValeur !== undefined;
   }
 
-  public indexPortefeuilleParDefaut(): number {
-    const idxPortefeuilleCourant = this.charger()
-      .filter(portefeuille => portefeuille.tickers.length > 0)
-      .findIndex(portefeuille => portefeuille.parDefaut);
-    return idxPortefeuilleCourant !== -1 ? idxPortefeuilleCourant : 0;
+  public portefeuilleParDefaut(): DTOPortefeuille | undefined {
+    return this.charger()
+      .find(portefeuille => portefeuille.parDefaut);
   }
 
   public validerAlertes(alertes: any): string | undefined {

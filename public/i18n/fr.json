@@ -342,6 +342,7 @@
         },
         "FORMULAIRE_CREATION": {
           "NOM": "Nom du portefeuille",
+          "INITIALISER_ALERTES": "Initialiser les alertes avec celles du portefeuille par défaut",
           "CREER": "Créer le portefeuille"
         },
         "FORMULAIRE_MODIFICATION": {

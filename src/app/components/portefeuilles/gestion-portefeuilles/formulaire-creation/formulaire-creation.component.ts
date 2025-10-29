@@ -7,6 +7,7 @@ import {DTOPortefeuille} from '../../../../services/portefeuilles/dto-portefeuil
 import {pasDeNomEnDoublonValidator} from '../pas-de-nom-en-doublon.validator';
 import {InputText} from 'primeng/inputtext';
 import {AutoFocus} from 'primeng/autofocus';
+import {Checkbox} from 'primeng/checkbox';
 
 @Component({
   selector: 'app-formulaire-creation',
@@ -16,7 +17,8 @@ import {AutoFocus} from 'primeng/autofocus';
     Button,
     TranslatePipe,
     InputText,
-    AutoFocus
+    AutoFocus,
+    Checkbox
   ],
   templateUrl: './formulaire-creation.component.html',
   styleUrl: './formulaire-creation.component.sass'
@@ -27,11 +29,12 @@ export class FormulaireCreationComponent implements OnInit {
 
   // input/output
   portefeuilles: InputSignal<Array<DTOPortefeuille> | undefined> = input();
-  cree = output<string>();
+  cree = output<{ nom: string, initialiserAlertes: boolean }>();
 
   // formulaires
   formulaire = this.formBuilder.group({
-    nom: ['', [Validators.required]]
+    nom: ['', [Validators.required]],
+    initialiserAlertes: [true, [Validators.required]],
   });
 
   ngOnInit(): void {
@@ -44,8 +47,11 @@ export class FormulaireCreationComponent implements OnInit {
   creerPortefeuille() {
     // au second submit du même nom, il faut s'assurer que l'on ne crée pas un doublon
     this.formulaire.get('nom')?.updateValueAndValidity();
-    if (this.formulaire.valid && this.formulaire.value.nom) {
-      this.cree.emit(this.formulaire.value.nom);
+    if (this.formulaire.valid && this.formulaire.value.nom && typeof this.formulaire.value.initialiserAlertes === "boolean") {
+      this.cree.emit({
+        nom: this.formulaire.value.nom,
+        initialiserAlertes: this.formulaire.value.initialiserAlertes
+      });
     }
   }
 }

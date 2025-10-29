@@ -1,11 +1,17 @@
 <form [formGroup]="formulaire" (ngSubmit)="creerPortefeuille()">
-  <div>
-    <p-floatlabel>
-      <input pInputText [pAutoFocus]="true" id="nom" formControlName="nom" autocomplete="off"/>
-      <label for="nom">{{ 'COMPOSANTS.PORTEFEUILLES.GESTION_PORTEFEUILLES.FORMULAIRE_CREATION.NOM' | translate }}</label>
-    </p-floatlabel>
+  <div class="cocher">
+    <p-checkbox formControlName="initialiserAlertes" binary="true" inputId="initialiserAlertes"  />
+    <label for="initialiserAlertes">{{ 'COMPOSANTS.PORTEFEUILLES.GESTION_PORTEFEUILLES.FORMULAIRE_CREATION.INITIALISER_ALERTES' | translate }}</label>
   </div>
-  <div>
-    <p-button label="{{ 'COMPOSANTS.PORTEFEUILLES.GESTION_PORTEFEUILLES.FORMULAIRE_CREATION.CREER' | translate }}" type="submit"/>
+  <div class="nom-bouton">
+    <div>
+      <p-floatlabel>
+        <input pInputText [pAutoFocus]="true" id="nom" formControlName="nom" autocomplete="off"/>
+        <label for="nom">{{ 'COMPOSANTS.PORTEFEUILLES.GESTION_PORTEFEUILLES.FORMULAIRE_CREATION.NOM' | translate }}</label>
+      </p-floatlabel>
+    </div>
+    <div>
+      <p-button label="{{ 'COMPOSANTS.PORTEFEUILLES.GESTION_PORTEFEUILLES.FORMULAIRE_CREATION.CREER' | translate }}" type="submit"/>
+    </div>
   </div>
 </form>

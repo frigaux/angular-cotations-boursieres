@@ -102,8 +102,15 @@ export class PortefeuillesComponent implements OnInit {
         .filter(portefeuille => portefeuille.tickers.length > 0)
         .length;
     } else {
-      this.idxPortefeuilleCourant = this.portefeuillesService.indexPortefeuilleParDefaut();
+      this.idxPortefeuilleCourant = this.indexPortefeuilleCourant();
     }
+  }
+
+  private indexPortefeuilleCourant(): number {
+    const idxPortefeuilleCourant = this.portefeuillesService.charger()
+      .filter(portefeuille => portefeuille.tickers.length > 0)
+      .findIndex(portefeuille => portefeuille.parDefaut);
+    return idxPortefeuilleCourant !== -1 ? idxPortefeuilleCourant : 0;
   }
 
   onOpenAccordion(e: AccordionTabOpenEvent) {

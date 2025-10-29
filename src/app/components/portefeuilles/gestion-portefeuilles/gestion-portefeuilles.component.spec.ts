@@ -51,7 +51,7 @@ describe('GestionPortefeuillesComponent', () => {
 
     it('when #creerPortefeuille then un nouveau portefeuille est crée', () => {
       fixture.detectChanges(); // appelle le ngOnInit
-      component.creerPortefeuille('nomUnique');
+      component.creerPortefeuille({nom: 'nomUnique', initialiserAlertes: false});
       const expected = clonePORTEFEUILLES().concat({nom: 'nomUnique', parDefaut: false, tickers: [], alertes: []});
       expect(component.portefeuilles).toEqual(expected);
     });

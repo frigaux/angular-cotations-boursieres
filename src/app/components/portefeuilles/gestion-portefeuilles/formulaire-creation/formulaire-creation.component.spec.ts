@@ -48,7 +48,7 @@ describe('FormulaireCreationComponent', () => {
     it('when #creerPortefeuille avec un nom unique then il y a création d\'un nouveau portefeuille', () => {
       component.formulaire.get('nom')?.setValue('nomUnique');
       component.creerPortefeuille();
-      expect(component.cree.emit).toHaveBeenCalledWith('nomUnique');
+      expect(component.cree.emit).toHaveBeenCalledWith({nom: 'nomUnique', initialiserAlertes: true});
     });
   });
 });

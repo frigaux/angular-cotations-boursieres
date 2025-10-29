@@ -5,7 +5,9 @@ import {TranslatePipe, TranslateService} from '@ngx-translate/core';
 import {DTOPortefeuille} from '../../../services/portefeuilles/dto-portefeuille.interface';
 import {DialogSelecteurValeursComponent} from './dialog-selecteur-valeurs/dialog-selecteur-valeurs.component';
 import {FormulaireCreationComponent} from './formulaire-creation/formulaire-creation.component';
-import {DialogFormulaireModificationComponent} from './dialog-formulaire-modification/dialog-formulaire-modification.component';
+import {
+  DialogFormulaireModificationComponent
+} from './dialog-formulaire-modification/dialog-formulaire-modification.component';
 import {DialogImportExportComponent} from './dialog-import-export/dialog-import-export.component';
 import {PortefeuillesService} from '../../../services/portefeuilles/portefeuilles.service';
 import {DialogEditeurAlertesComponent} from './dialog-editeur-alertes/dialog-editeur-alertes.component';
@@ -52,9 +54,13 @@ export class GestionPortefeuillesComponent implements OnInit {
     this.portefeuillesService.onImport(portefeuilles => this.portefeuilles = portefeuilles);
   }
 
-  creerPortefeuille(nom: string) {
+  creerPortefeuille(parametres: { nom: string, initialiserAlertes: boolean }) {
     const premierParDefaut: boolean = this.portefeuilles.length === 0;
-    this.portefeuilles.push({nom, parDefaut: premierParDefaut, tickers: [], alertes: []});
+    let alertes: DTOAlerte[] = [];
+    if (parametres.initialiserAlertes) {
+      alertes = this.portefeuillesService.portefeuilleParDefaut()?.alertes || [];
+    }
+    this.portefeuilles.push({nom: parametres.nom, parDefaut: premierParDefaut, tickers: [], alertes});
     this.portefeuillesService.enregistrer(this.portefeuilles);
     this.afficherCreation = false;
   }
