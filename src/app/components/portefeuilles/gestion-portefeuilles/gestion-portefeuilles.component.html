@@ -21,9 +21,9 @@
 @if (portefeuilles.length != 0) {
   <p-card>
     <div class="titre">
-      <span>
+      <h2>
         {{ 'COMPOSANTS.PORTEFEUILLES.GESTION_PORTEFEUILLES.PORTEFEUILLES' | translate }}
-      </span>
+      </h2>
       <span class="pi pi-plus-circle" (click)="afficherCreation = true"
             title="{{ 'COMPOSANTS.PORTEFEUILLES.GESTION_PORTEFEUILLES.CREER' | translate }}"></span>
       <app-dialog-import-export></app-dialog-import-export>

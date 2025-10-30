@@ -44,7 +44,7 @@ import {VueUtil} from '../commun/vue-util.class';
     DialogActualitesComponent
   ],
   templateUrl: './cours.component.html',
-  styleUrls: ['../portefeuilles/accordion-chart.sass', './cours.component.sass']
+  styleUrls: ['../portefeuilles/accordion-chart.sass', './cours.component.sass', '../commun/titre.sass']
 })
 export class CoursComponent implements OnInit {
   private ajoutAuPortefeuille = viewChild(AjoutAuPortefeuilleComponent);

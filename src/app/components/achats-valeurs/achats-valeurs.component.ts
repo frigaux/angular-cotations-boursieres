@@ -24,7 +24,7 @@ import {CurrencyPipe, PercentPipe} from '@angular/common';
     PercentPipe
   ],
   templateUrl: './achats-valeurs.component.html',
-  styleUrl: './achats-valeurs.component.sass'
+  styleUrls: ['./achats-valeurs.component.sass', '../commun/titre.sass']
 })
 export class AchatsValeursComponent implements OnInit {
   // chargement des valeurs

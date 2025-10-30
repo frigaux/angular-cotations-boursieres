@@ -46,7 +46,7 @@ import {VueUtil} from '../commun/vue-util.class';
     DialogActualitesComponent
   ],
   templateUrl: './portefeuilles.component.html',
-  styleUrls: ['./accordion-chart.sass', './portefeuilles.component.sass']
+  styleUrls: ['./accordion-chart.sass', './portefeuilles.component.sass', '../commun/titre.sass']
 })
 export class PortefeuillesComponent implements OnInit {
   private actionsValeur = viewChild(PopoverActionsValeurComponent);

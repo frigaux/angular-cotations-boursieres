@@ -16,7 +16,7 @@ import {DialogImportExportComponent} from './dialog-import-export/dialog-import-
     DialogImportExportComponent
   ],
   templateUrl: './gestion-tableaux.component.html',
-  styleUrl: './gestion-tableaux.component.sass'
+  styleUrls: ['./gestion-tableaux.component.sass', '../commun/titre.sass']
 })
 export class GestionTableauxComponent implements OnInit {
   // données pour la vue

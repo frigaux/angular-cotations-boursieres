@@ -33,7 +33,7 @@ import {ConfirmationService} from 'primeng/api';
     CdkDrag
   ],
   templateUrl: './gestion-portefeuilles.component.html',
-  styleUrl: './gestion-portefeuilles.component.sass'
+  styleUrls: ['./gestion-portefeuilles.component.sass', '../../commun/titre.sass']
 })
 export class GestionPortefeuillesComponent implements OnInit {
   // données pour la vue

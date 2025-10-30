@@ -19,7 +19,7 @@ import {Panel} from 'primeng/panel';
     Panel
   ],
   templateUrl: './details-valeur.component.html',
-  styleUrl: './details-valeur.component.sass'
+  styleUrls: ['./details-valeur.component.sass', '../../commun/titre.sass']
 })
 export class DetailsValeurComponent {
   // input/output

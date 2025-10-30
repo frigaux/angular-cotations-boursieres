@@ -1,4 +1,4 @@
-import {Component, viewChild} from '@angular/core';
+import {Component} from '@angular/core';
 import {TranslatePipe, TranslateService} from '@ngx-translate/core';
 import {BoursoramaService} from '../../../../services/boursorama/boursorama.service';
 import {CotationsTickerBoursoramaDecore} from '../dialog-cotations-ticker/cotations-ticker-boursorama-genere.class';
@@ -9,7 +9,6 @@ import {JaugeComponent} from '../../../commun/jauge/jauge.component';
 import {CurrencyPipe, PercentPipe} from '@angular/common';
 import {UIChart} from 'primeng/chart';
 import {TableModule} from 'primeng/table';
-import {CoursPortefeuille} from '../../cours-portefeuille.class';
 import {DialogCotationsTickerComponent} from '../dialog-cotations-ticker/dialog-cotations-ticker.component';
 import {VueUtil} from '../../../commun/vue-util.class';
 

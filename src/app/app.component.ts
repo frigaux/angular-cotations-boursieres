@@ -15,7 +15,6 @@ import {PickList} from 'primeng/picklist';
 import {NavigationBar} from '@squareetlabs/capacitor-navigation-bar';
 
 // TODO : vérifier crontab et job successfull
-// TODO : transformer PanneauAchatsValeurComponent en dialog avec methode afficher
 // TODO : uniformiser les "barres de titre" : chercher les <div class="titre"> (s'inspirer dialog-cotations-ticker.component.html)
 // TODO : service ABCBourse de récupération des informations pour un ticker : récupérer la pré-ouverture ?
 // TODO : récupérer les événements boursier sur https://www.zonebourse.com/actualite-bourse/regions/locales/ : possibilité ajout dans un portefeuille des tickers

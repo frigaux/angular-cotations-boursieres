@@ -1,12 +1,12 @@
 @if (valeur) {
   <p-panel>
     <ng-template #header>
-      <div class="barre-superieure">
+      <div class="titre">
         @if (!loading) {
-          <h1>
+          <h2 class="une-icone">
             <span class="pi" [class]="cours!.iconeVariation()"></span>
             {{ cours!.libelle }} ({{ cours!.date | date:'dd/MM/yyyy' }})
-          </h1>
+          </h2>
           <span class="pi pi-times-circle" (click)="this.ferme.emit()"></span>
         }
       </div>
