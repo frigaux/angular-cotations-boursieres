@@ -7,7 +7,7 @@ import {DTODividende} from './dto-dividende.class';
 import {DTOVariation} from './dto-variation.class';
 import {DTOIndicateur} from './dto-ratio.class';
 import {ParseUtil} from '../commun/parse-util.class';
-import {DTOActualites} from './dto-actualites.class';
+import {DTOActualitesABCBourse} from './dto-actualites-abc-bourse.class';
 import {DTOLien} from './dto-lien.class';
 import {DTOVentesADecouvert} from './dto-ventes-a-decouvert.class';
 import {DTOTransaction} from './dto-transaction.class';
@@ -165,7 +165,7 @@ export class AbcBourseService {
     });
   }
 
-  public chargerActualites(): Observable<DTOActualites> {
+  public chargerActualites(): Observable<DTOActualitesABCBourse> {
     return new Observable(observer => {
       this.http.get('/abcbourse', {headers: AbcBourseService.HEADERS, responseType: 'text'}).subscribe({
         error: httpResponseError => {
@@ -188,9 +188,9 @@ export class AbcBourseService {
     });
   }
 
-  private parseActualites(html: string): Observable<DTOActualites> {
+  private parseActualites(html: string): Observable<DTOActualitesABCBourse> {
     return new Observable(observer => {
-      const result = new DTOActualites();
+      const result = new DTOActualitesABCBourse();
       this.parseAndMapLiens(html, result);
 
       let pathnameMarches = new RegExp('<span>Marchés<\\/span>\\s*<\\/div>\\s*<div class="hptit">\\s*<a href="([^"]+)"', 'gm');
@@ -228,7 +228,7 @@ export class AbcBourseService {
     });
   }
 
-  private parseAndMapLiens(html: string, result: DTOActualites) {
+  private parseAndMapLiens(html: string, result: DTOActualitesABCBourse) {
     if (ParseUtil.isMobile()) {
       const elDivs = new DOMParser()
         .parseFromString(html, 'text/html')

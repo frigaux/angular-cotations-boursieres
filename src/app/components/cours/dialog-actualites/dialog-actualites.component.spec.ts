@@ -3,7 +3,7 @@ import {ComponentFixture, TestBed} from '@angular/core/testing';
 import {DialogActualitesComponent} from './dialog-actualites.component';
 import {AbcBourseService} from '../../../services/abc-bourse/abc-bourse.service';
 import {TranslateModule} from '@ngx-translate/core';
-import {DTOActualites} from '../../../services/abc-bourse/dto-actualites.class';
+import {DTOActualitesABCBourse} from '../../../services/abc-bourse/dto-actualites-abc-bourse.class';
 import {of} from 'rxjs';
 import {DTOTransaction} from '../../../services/abc-bourse/dto-transaction.class';
 
@@ -35,7 +35,7 @@ describe('DialogActualitesComponent', () => {
 
   describe('Given #chargerActualites renvoie les actualités', () => {
     beforeEach(() => {
-      const actualites = new DTOActualites();
+      const actualites = new DTOActualitesABCBourse();
       actualites.marches = '';
       actualites.transactionsDirigeants = [
         new DTOTransaction(0, '', '', '', 'Acquisition', '', 6, '', '', 3, 2),

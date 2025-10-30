@@ -2,7 +2,7 @@ import {Component} from '@angular/core';
 import {Dialog} from 'primeng/dialog';
 import {TranslatePipe} from '@ngx-translate/core';
 import {AbcBourseService} from '../../../services/abc-bourse/abc-bourse.service';
-import {DTOActualites} from '../../../services/abc-bourse/dto-actualites.class';
+import {DTOActualitesABCBourse} from '../../../services/abc-bourse/dto-actualites-abc-bourse.class';
 import {LoaderComponent} from '../../loader/loader.component';
 import {Fieldset} from 'primeng/fieldset';
 import {CurrencyPipe, DatePipe, DecimalPipe, NgClass, PercentPipe} from '@angular/common';
@@ -34,7 +34,7 @@ export class DialogActualitesComponent {
 
   // données pour la vue
   visible: boolean = false;
-  actualites?: DTOActualites;
+  actualites?: DTOActualitesABCBourse;
   acquisitions?: Array<DTOTransaction>;
   cessions?: Array<DTOTransaction>;
 

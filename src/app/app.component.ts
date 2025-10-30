@@ -15,7 +15,6 @@ import {PickList} from 'primeng/picklist';
 import {NavigationBar} from '@squareetlabs/capacitor-navigation-bar';
 
 // TODO : vérifier crontab et job successfull
-// TODO : uniformiser les "barres de titre" : chercher les <div class="titre"> (s'inspirer dialog-cotations-ticker.component.html)
 // TODO : service ABCBourse de récupération des informations pour un ticker : récupérer la pré-ouverture ?
 // TODO : récupérer les événements boursier sur https://www.zonebourse.com/actualite-bourse/regions/locales/ : possibilité ajout dans un portefeuille des tickers
 // TODO : nouvelle page dividende : date dernier import, un dividende par ticker avec date, type, montant, rendement (https://abcbourse.com/marches/dividendes)
@@ -23,6 +22,7 @@ import {NavigationBar} from '@squareetlabs/capacitor-navigation-bar';
 // TODO : capacitor android : proxy obligatoire pour autres domaines ? problème CORS ou pas ?
 // TODO : coverage
 // TODO : examiner les logs du debugger android studio
+// TODO : intégrer tailwind ?
 @Component({
   selector: 'app-root',
   standalone: true,

@@ -4,7 +4,7 @@ import {AbcBourseService} from './abc-bourse.service';
 import {HttpErrorResponse, HttpInterceptorFn, provideHttpClient, withInterceptors} from '@angular/common/http';
 import {firstValueFrom, lastValueFrom} from 'rxjs';
 import {DTOInformationsTickerABCBourse} from './dto-informations-ticker-abc-bourse.class';
-import {DTOActualites} from './dto-actualites.class';
+import {DTOActualitesABCBourse} from './dto-actualites-abc-bourse.class';
 
 describe('AbcBourseService', () => {
   let service: AbcBourseService;
@@ -71,7 +71,7 @@ describe('AbcBourseService', () => {
   });
 
   it('given AbcBourseService when #chargerActualites then on doit récupérer les actualités', async () => {
-    const promiseActualites: Promise<DTOActualites> = firstValueFrom(service.chargerActualites());
+    const promiseActualites: Promise<DTOActualitesABCBourse> = firstValueFrom(service.chargerActualites());
     const actualites = await promiseActualites;
     expect(actualites.marches).toBeDefined();
     expect(actualites.analyses.length).toBeGreaterThan(0);
