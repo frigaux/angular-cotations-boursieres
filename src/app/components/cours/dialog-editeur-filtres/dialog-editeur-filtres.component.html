@@ -3,7 +3,7 @@
                               (modifie)="modifierConditionFiltre($event)"></app-dialog-editeur-condition-filtre>
 
 <p-dialog [header]="'COMPOSANTS.COURS.EDITEUR_FILTRES.MODIFICATION_FILTRES' | translate" [modal]="true"
-          [visible]="visible" closable="false">
+          [visible]="visible" [closable]="false">
   @if (erreur !== undefined) {
     <div class="erreur">
       <span class="pi pi-exclamation-circle"></span>

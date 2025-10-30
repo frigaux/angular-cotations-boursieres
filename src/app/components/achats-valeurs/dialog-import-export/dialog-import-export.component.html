@@ -1,7 +1,7 @@
 <span class="pi pi-sync" (click)="visible = true"
       title="{{ 'COMPOSANTS.ACHATS_VALEURS.IMPORT_EXPORT.IMPORT_EXPORT' | translate }}"></span>
 
-<p-dialog header="{{ 'COMPOSANTS.ACHATS_VALEURS.IMPORT_EXPORT.IMPORT_EXPORT' | translate }}"
+<p-dialog [header]="'COMPOSANTS.ACHATS_VALEURS.IMPORT_EXPORT.IMPORT_EXPORT' | translate"
           [modal]="true" (onShow)="reinitialiserVue()" [(visible)]="visible">
 
   <div class="conteneur">

@@ -1,4 +1,4 @@
-<p-dialog [header]="titre" [modal]="true" [visible]="portefeuilleEnModification !== undefined" closable="false">
+<p-dialog [header]="titre" [modal]="true" [visible]="portefeuilleEnModification !== undefined" [closable]="false">
   @if (portefeuilleEnModification !== undefined) {
     <form [formGroup]="formulaire"
           (ngSubmit)="modifierNomPortefeuille()">

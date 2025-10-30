@@ -1,8 +1,8 @@
-<p-dialog [header]="titre" [modal]="true" [visible]="filtre !== undefined" closable="false">
+<p-dialog [header]="titre" [modal]="true" [visible]="filtre !== undefined" [closable]="false">
   <div class="documentation">
     <span class="pi pi-question-circle"></span>
     <p-card
-      header="{{ 'COMPOSANTS.COURS.EDITEUR_FILTRES.EDITEUR_CONDITION_FILTRE.DOCUMENTATION' | translate }}">
+      [header]="'COMPOSANTS.COURS.EDITEUR_FILTRES.EDITEUR_CONDITION_FILTRE.DOCUMENTATION' | translate">
       <P>
         {{ 'COMPOSANTS.COURS.EDITEUR_FILTRES.EDITEUR_CONDITION_FILTRE.DOCUMENTATION_OPERATEURS' | translate }}
       </P>
@@ -23,7 +23,7 @@
   @if (erreur !== undefined) {
     <div class="erreur">
       <span class="pi pi-exclamation-circle"></span>
-      <span>{{erreur}}</span>
+      <span>{{ erreur }}</span>
     </div>
   }
   @if (filtre !== undefined) {

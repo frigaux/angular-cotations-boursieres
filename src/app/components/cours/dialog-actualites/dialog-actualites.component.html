@@ -1,7 +1,7 @@
 <span class="pi pi-info-circle" (click)="visible = true"
       title="{{ 'COMPOSANTS.COURS.ACTUALITES.ACTUALITES' | translate }}"></span>
 
-<p-dialog header="{{ 'COMPOSANTS.COURS.ACTUALITES.ACTUALITES' | translate }}"
+<p-dialog [header]="'COMPOSANTS.COURS.ACTUALITES.ACTUALITES' | translate"
           [modal]="true" (onShow)="reinitialiserVue()" [(visible)]="visible" [style]="{ width: '90vw' }">
   <app-loader [affiche]="loading" [configuration]="[
         {marginLeft: '0', marginTop: '0', height: '70vh', width: '100%'}

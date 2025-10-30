@@ -31,6 +31,7 @@ import {
 })
 export class PopoverActionsValeurComponent {
   private popover = viewChild(Popover);
+  private panneauAchatsValeurComponent = viewChild(PanneauAchatsValeurComponent);
   private dialogCoursTickerComponent = viewChild(DialogCotationsTickerComponent);
   private dialogCotationsTickersPortefeuilleComponent = viewChild(DialogCotationsTickersPortefeuilleComponent);
 
@@ -38,9 +39,6 @@ export class PopoverActionsValeurComponent {
   cours?: CoursPortefeuille;
   portefeuilleAvecCoursAffiche?: PortefeuilleAvecCours;
   portefeuilleAffiche?: DTOPortefeuille;
-
-  // affichage ou pas du panneau des achats
-  achatsVisible: boolean = false;
 
   // pour l'ajout de la valeur dans un portefeuille
   nomsPortefeuillesDisponibles?: Array<string>;
@@ -56,7 +54,6 @@ export class PopoverActionsValeurComponent {
   }
 
   afficher(event: MouseEvent, cours: CoursPortefeuille, portefeuilleAvecCours: PortefeuilleAvecCours) {
-    this.achatsVisible = false;
     this.cours = cours;
     this.portefeuilleAvecCoursAffiche = portefeuilleAvecCours;
     this.portefeuilleAffiche = portefeuilleAvecCours.portefeuille;
@@ -97,7 +94,9 @@ export class PopoverActionsValeurComponent {
   }
 
   achats() {
-    this.achatsVisible = true;
+    if (this.cours) {
+      this.panneauAchatsValeurComponent()?.afficherCours(this.cours);
+    }
     this.popover()?.hide();
   }
 

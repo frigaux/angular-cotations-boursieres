@@ -1,7 +1,7 @@
 <span class="pi pi-sync" (click)="visible = true"
       title="{{ 'COMPOSANTS.GESTION_TABLEAUX.IMPORT_EXPORT.IMPORT_EXPORT' | translate }}"></span>
 
-<p-dialog header="{{ 'COMPOSANTS.GESTION_TABLEAUX.IMPORT_EXPORT.IMPORT_EXPORT' | translate }}"
+<p-dialog [header]="'COMPOSANTS.GESTION_TABLEAUX.IMPORT_EXPORT.IMPORT_EXPORT' | translate"
           [modal]="true" (onShow)="reinitialiserVue()" [(visible)]="visible">
 
   <div class="conteneur">
@@ -15,9 +15,12 @@
     </p-floatlabel>
 
     <div class="exemples">
-      <span (click)="exemple('DESKTOP')">{{ 'COMPOSANTS.GESTION_TABLEAUX.IMPORT_EXPORT.EXEMPLE_DESKTOP' | translate }}</span>
-      <span (click)="exemple('TABLETTE')">{{ 'COMPOSANTS.GESTION_TABLEAUX.IMPORT_EXPORT.EXEMPLE_TABLETTE' | translate }}</span>
-      <span (click)="exemple('MOBILE')">{{ 'COMPOSANTS.GESTION_TABLEAUX.IMPORT_EXPORT.EXEMPLE_MOBILE' | translate }}</span>
+      <span
+        (click)="exemple('DESKTOP')">{{ 'COMPOSANTS.GESTION_TABLEAUX.IMPORT_EXPORT.EXEMPLE_DESKTOP' | translate }}</span>
+      <span
+        (click)="exemple('TABLETTE')">{{ 'COMPOSANTS.GESTION_TABLEAUX.IMPORT_EXPORT.EXEMPLE_TABLETTE' | translate }}</span>
+      <span
+        (click)="exemple('MOBILE')">{{ 'COMPOSANTS.GESTION_TABLEAUX.IMPORT_EXPORT.EXEMPLE_MOBILE' | translate }}</span>
     </div>
 
     @if (erreur !== undefined) {

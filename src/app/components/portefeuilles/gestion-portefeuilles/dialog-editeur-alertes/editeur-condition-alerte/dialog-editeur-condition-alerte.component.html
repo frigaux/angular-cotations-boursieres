@@ -1,8 +1,8 @@
-<p-dialog [header]="titre" [modal]="true" [visible]="alerteEnModification !== undefined" closable="false">
+<p-dialog [header]="titre" [modal]="true" [visible]="alerteEnModification !== undefined" [closable]="false">
   <div class="documentation">
     <span class="pi pi-question-circle"></span>
     <p-card
-      header="{{ 'COMPOSANTS.PORTEFEUILLES.GESTION_PORTEFEUILLES.EDITEUR_ALERTES.EDITEUR_CONDITION_ALERTE.DOCUMENTATION' | translate }}">
+      [header]="'COMPOSANTS.PORTEFEUILLES.GESTION_PORTEFEUILLES.EDITEUR_ALERTES.EDITEUR_CONDITION_ALERTE.DOCUMENTATION' | translate">
       <P>
         {{ 'COMPOSANTS.PORTEFEUILLES.GESTION_PORTEFEUILLES.EDITEUR_ALERTES.EDITEUR_CONDITION_ALERTE.DOCUMENTATION_OPERATEURS' | translate }}
       </P>
@@ -27,7 +27,7 @@
   @if (erreur !== undefined) {
     <div class="erreur">
       <span class="pi pi-exclamation-circle"></span>
-      <span>{{erreur}}</span>
+      <span>{{ erreur }}</span>
     </div>
   }
   @if (alerteEnModification !== undefined) {

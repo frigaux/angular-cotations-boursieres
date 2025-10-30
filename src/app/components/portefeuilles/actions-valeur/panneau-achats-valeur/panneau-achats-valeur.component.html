@@ -1,13 +1,7 @@
-@if (visible()) {
-  <p-panel>
-    <ng-template #header>
-      <div class="titre">
-        <span>{{ titre }}</span>
-        <span class="pi pi-times-circle" (click)="visible.set(false)"></span>
-      </div>
-    </ng-template>
-    @if (cours) {
-      <app-achats-valeur [valeur]="{ticker: cours.ticker, cloture: cours.cloture}"></app-achats-valeur>
-    }
-  </p-panel>
-}
+<p-dialog [modal]="true" [(visible)]="visible"
+          [header]="'COMPOSANTS.PORTEFEUILLES.ACTIONS_VALEUR.ACHATS_VALEUR' | translate : {'nom': cours?.libelle}">
+  @if (cours) {
+    <app-achats-valeur [valeur]="{ticker: cours.ticker, cloture: cours.cloture}"></app-achats-valeur>
+    <div class="espace-datepicker"></div>
+  }
+</p-dialog>

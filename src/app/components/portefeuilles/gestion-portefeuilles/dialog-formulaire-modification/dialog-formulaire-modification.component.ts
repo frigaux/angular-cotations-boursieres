@@ -21,7 +21,7 @@ import {Dialog} from 'primeng/dialog';
     Dialog
   ],
   templateUrl: './dialog-formulaire-modification.component.html',
-  styleUrls: ['./dialog-formulaire-modification.component.sass', '../formulaire-creation/formulaire-creation.component.sass']
+  styleUrls: ['./dialog-formulaire-modification.component.sass']
 })
 export class DialogFormulaireModificationComponent {
   // injections
