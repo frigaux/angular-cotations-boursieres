@@ -14,7 +14,6 @@ import {PrimeNG} from 'primeng/config';
 import {PickList} from 'primeng/picklist';
 import {NavigationBar} from '@squareetlabs/capacitor-navigation-bar';
 
-// TODO : vérifier crontab et job successfull
 // TODO : service ABCBourse de récupération des informations pour un ticker : récupérer la pré-ouverture ?
 // TODO : récupérer les événements boursier sur https://www.zonebourse.com/actualite-bourse/regions/locales/ : possibilité ajout dans un portefeuille des tickers
 // TODO : nouvelle page dividende : date dernier import, un dividende par ticker avec date, type, montant, rendement (https://abcbourse.com/marches/dividendes)

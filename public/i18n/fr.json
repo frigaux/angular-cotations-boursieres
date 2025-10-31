@@ -71,8 +71,9 @@
       "MM5": "MM5",
       "MM20": "MM20",
       "MM50": "MM50",
-      "AJOUT_AU_PORTEFEUILLE": {
-        "AJOUT_AU_PORTEFEUILLE": "Ajout de la valeur au portefeuille",
+      "ACTIONS_VALEUR": {
+        "ABCBOURSE": "Cotations ABCBourse",
+        "BOURSORAMA": "Cotations Boursorama",
         "AJOUTER_AU_PORTEFEUILLE": "Ajouter la valeur au portefeuille"
       },
       "CHART_COURS": {
@@ -254,13 +255,13 @@
       },
       "ACTIONS_VALEUR": {
         "SUPPRIMER_DU_PORTEFEUILLE": "Supprimer la valeur du portefeuille",
-        "AJOUTER_AU_PORTEFEUILLE": "Ajouter la valeur au portefeuille",
-        "DEPLACER_DANS_PORTEFEUILLE": "Déplacer la valeur dans le portefeuille",
         "ACHATS": "Achats de la valeur",
-        "ABCBOURSE": "ABCBourse",
-        "BOURSORAMA": "Boursorama",
+        "ABCBOURSE": "Cotations ABCBourse",
+        "BOURSORAMA": "Cotations Boursorama",
         "COURS_BOURSORAMA": "Cours depuis Boursorama",
         "COURS_BOURSORAMA_PORTEFEUILLE": "Cours du portefeuille depuis Boursorama",
+        "AJOUTER_AU_PORTEFEUILLE": "Ajouter la valeur au portefeuille",
+        "DEPLACER_DANS_PORTEFEUILLE": "Déplacer la valeur dans le portefeuille",
         "ACHATS_VALEUR": "Achats pour la valeur \"{{nom}}\"",
         "CONFIRMATION_SUPPRESSION": "Confirmez-vous la suppression de la valeur \"{{valeur}}\" du portefeuille \"{{nomPortefeuille}}\" ?",
         "DIALOG_COTATIONS_TICKER": {

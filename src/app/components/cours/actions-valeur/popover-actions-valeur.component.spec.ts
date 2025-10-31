@@ -1,14 +1,14 @@
 import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import {AjoutAuPortefeuilleComponent} from './ajout-au-portefeuille.component';
+import {PopoverActionsValeurComponent} from './popover-actions-valeur.component';
 import {TranslateModule} from '@ngx-translate/core';
 import {PortefeuillesService} from '../../../services/portefeuilles/portefeuilles.service';
 import {PORTEFEUILLES} from '../../../services/jdd/jdd-portefeuilles.dataset';
 import {DTOPortefeuille} from '../../../services/portefeuilles/dto-portefeuille.interface';
 
 describe('AjoutAuPortefeuilleComponent', () => {
-  let component: AjoutAuPortefeuilleComponent;
-  let fixture: ComponentFixture<AjoutAuPortefeuilleComponent>;
+  let component: PopoverActionsValeurComponent;
+  let fixture: ComponentFixture<PopoverActionsValeurComponent>;
 
   const clonePORTEFEUILLES: Function = () => JSON.parse(JSON.stringify(PORTEFEUILLES));
   const mockPortefeuillesService = jasmine.createSpyObj('PortefeuillesService', ['charger', 'enregistrer']);
@@ -16,7 +16,7 @@ describe('AjoutAuPortefeuilleComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [
-        AjoutAuPortefeuilleComponent,
+        PopoverActionsValeurComponent,
         TranslateModule.forRoot({})
       ],
       providers: [
@@ -25,7 +25,7 @@ describe('AjoutAuPortefeuilleComponent', () => {
     })
       .compileComponents();
 
-    fixture = TestBed.createComponent(AjoutAuPortefeuilleComponent);
+    fixture = TestBed.createComponent(PopoverActionsValeurComponent);
     component = fixture.componentInstance;
   });
 

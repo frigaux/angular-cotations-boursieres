@@ -1,0 +1,23 @@
+<app-dialog-cotations-ticker></app-dialog-cotations-ticker>
+
+<p-popover>
+  @if (ticker) {
+    <div class="actions-valeur">
+      <div class="libelle" (click)="abcBourse()">
+        <span class="pi pi-external-link"></span>
+        <span>{{ 'COMPOSANTS.COURS.ACTIONS_VALEUR.ABCBOURSE' | translate }}</span>
+      </div>
+      <div class="libelle" (click)="boursorama()">
+        <span class="pi pi-external-link"></span>
+        <span>{{ 'COMPOSANTS.COURS.ACTIONS_VALEUR.BOURSORAMA' | translate }}</span>
+      </div>
+      <div>
+        <div class="libelle" (click)="ajouterAuPortefeuille()">
+          <span class="pi pi-plus-circle"></span>
+          <span>{{ 'COMPOSANTS.COURS.ACTIONS_VALEUR.AJOUTER_AU_PORTEFEUILLE' | translate }}</span>
+        </div>
+        <p-select [options]="portefeuilles" [(ngModel)]="portefeuilleSelectionne" optionLabel="nom"></p-select>
+      </div>
+    </div>
+  }
+</p-popover>

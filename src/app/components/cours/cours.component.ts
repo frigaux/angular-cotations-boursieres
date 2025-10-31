@@ -13,7 +13,7 @@ import {DetailsValeurComponent} from './details-valeur/details-valeur.component'
 import {CurrencyPipe, DatePipe, NgClass, PercentPipe} from '@angular/common';
 import {Skeleton} from 'primeng/skeleton';
 import {LoaderComponent} from '../loader/loader.component';
-import {AjoutAuPortefeuilleComponent} from './ajout-au-portefeuille/ajout-au-portefeuille.component';
+import {PopoverActionsValeurComponent} from './actions-valeur/popover-actions-valeur.component';
 import {SortEvent} from 'primeng/api';
 import {SelecteurFiltreComponent} from './selecteur-filtre/selecteur-filtre.component';
 import {FiltreDecore} from './selecteur-filtre/filtre-decore.class';
@@ -38,7 +38,7 @@ import {VueUtil} from '../commun/vue-util.class';
     Skeleton,
     LoaderComponent,
     PercentPipe,
-    AjoutAuPortefeuilleComponent,
+    PopoverActionsValeurComponent,
     SelecteurFiltreComponent,
     DialogImportExportComponent,
     DialogActualitesComponent
@@ -47,7 +47,7 @@ import {VueUtil} from '../commun/vue-util.class';
   styleUrls: ['../portefeuilles/accordion-chart.sass', './cours.component.sass', '../commun/titre.sass']
 })
 export class CoursComponent implements OnInit {
-  private ajoutAuPortefeuille = viewChild(AjoutAuPortefeuilleComponent);
+  private ajoutAuPortefeuille = viewChild(PopoverActionsValeurComponent);
 
   // chargement des cours
   loading: boolean = true;

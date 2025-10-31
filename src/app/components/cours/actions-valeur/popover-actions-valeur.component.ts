@@ -5,19 +5,23 @@ import {Select} from 'primeng/select';
 import {DTOPortefeuille} from '../../../services/portefeuilles/dto-portefeuille.interface';
 import {FormsModule} from '@angular/forms';
 import {TranslatePipe} from '@ngx-translate/core';
+import {
+  DialogCotationsTickerComponent
+} from '../../portefeuilles/actions-valeur/dialog-cotations-ticker/dialog-cotations-ticker.component';
 
 @Component({
-  selector: 'app-ajout-au-portefeuille',
+  selector: 'app-popover-actions-valeur',
   imports: [
     Popover,
     Select,
     FormsModule,
-    TranslatePipe
+    TranslatePipe,
+    DialogCotationsTickerComponent
   ],
-  templateUrl: './ajout-au-portefeuille.component.html',
-  styleUrl: './ajout-au-portefeuille.component.sass'
+  templateUrl: './popover-actions-valeur.component.html',
+  styleUrls: ['./popover-actions-valeur.component.sass', '../../portefeuilles/actions-valeur/popover-actions-valeur.component.sass']
 })
-export class AjoutAuPortefeuilleComponent implements OnInit {
+export class PopoverActionsValeurComponent implements OnInit {
   private popover = viewChild(Popover);
 
   ticker?: string;
@@ -46,6 +50,16 @@ export class AjoutAuPortefeuilleComponent implements OnInit {
         this.portefeuillesService.enregistrer(this.portefeuilles);
       }
     }
+    this.popover()?.hide();
+  }
+
+  protected boursorama() {
+    window.open(`https://www.boursorama.com/cours/1rP${this.ticker}/`);
+    this.popover()?.hide();
+  }
+
+  protected abcBourse() {
+    window.open(`https://www.abcbourse.com/cotation/${this.ticker}p`);
     this.popover()?.hide();
   }
 }
