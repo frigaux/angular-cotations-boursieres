@@ -127,6 +127,15 @@
           "PRIX": "Prix"
         }
       },
+      "EVALUATION_ACTUALITES": {
+        "EVALUATION": "Evaluation des actualités",
+        "EVALUATION_DATE": "Evaluation des actualités à {{heure}}",
+        "RAFRAICHIR": "Rafraîchir",
+        "FERMER": "Fermer",
+        "SCORE": "Score",
+        "DATE": "Date",
+        "TITRE": "Titre"
+      },
       "SELECTEUR_FILTRE": {
         "EDITER_FILTRE": "Editer les filtres des cours"
       },

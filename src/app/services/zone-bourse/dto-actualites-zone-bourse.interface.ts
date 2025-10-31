@@ -3,4 +3,5 @@ export interface DTOActualitesZoneBourse {
   ticker: string;
   titre: string;
   pathname: string;
+  score: number;
 }

@@ -14,7 +14,7 @@ import {AlertesComponent} from './alertes/alertes.component';
 import {Skeleton} from 'primeng/skeleton';
 import {LoaderComponent} from '../loader/loader.component';
 import {DTOCoursAvecListeAllege} from '../../services/cours/dto-cours-avec-liste-allege.interface';
-import {PopoverActionsValeurComponent} from './actions-valeur/popover-actions-valeur.component';
+import {PopoverActionsValeurComponent} from './popover-actions-valeur/popover-actions-valeur.component';
 import {TableauxService} from '../../services/tableaux/tableaux.service';
 import {DTOColonne} from '../../services/tableaux/dto-colonne-portefeuille.interface';
 import {TypesColonnesPortefeuille} from '../../services/tableaux/types-colonnes-portefeuille.enum';
@@ -22,6 +22,9 @@ import {ColonneDecoree} from './colonne-decoree.class';
 import {BreakpointObserver} from '@angular/cdk/layout';
 import {DialogActualitesComponent} from '../cours/dialog-actualites/dialog-actualites.component';
 import {VueUtil} from '../commun/vue-util.class';
+import {
+  DialogEvaluationActualitesComponent
+} from '../cours/dialog-evaluation-actualites/dialog-evaluation-actualites.component';
 
 @Component({
   selector: 'app-portefeuilles',
@@ -43,7 +46,8 @@ import {VueUtil} from '../commun/vue-util.class';
     CurrencyPipe,
     PercentPipe,
     DecimalPipe,
-    DialogActualitesComponent
+    DialogActualitesComponent,
+    DialogEvaluationActualitesComponent
   ],
   templateUrl: './portefeuilles.component.html',
   styleUrls: ['./accordion-chart.sass', './portefeuilles.component.sass', '../commun/titre.sass']

@@ -15,6 +15,7 @@ import {DTOAchat} from '../../services/valeurs/dto-achat.interface';
 import {CurrencyPipe, DatePipe, DecimalPipe, PercentPipe} from '@angular/common';
 import {AbcBourseService} from '../../services/abc-bourse/abc-bourse.service';
 import {BoursoramaService} from '../../services/boursorama/boursorama.service';
+import {ZoneBourseService} from '../../services/zone-bourse/zone-bourse.service';
 
 describe('PortefeuillesComponent', () => {
   let component: PortefeuillesComponent;
@@ -27,6 +28,7 @@ describe('PortefeuillesComponent', () => {
   const mockCoursService = jasmine.createSpyObj('CoursService', ['chargerCoursTickersWithLimit']);
   const mockAbcBourseService = jasmine.createSpyObj('AbcBourseService', ['chargerActualites']);
   const mockBoursoramaService = jasmine.createSpyObj('BoursoramaService', ['chargerCoursTicker']);
+  const mockZoneBourseService = jasmine.createSpyObj('ZoneBourseService', ['chargerActualites']);
 
   const achatsByTicker = new Map<string, Array<DTOAchat>>();
 
@@ -43,6 +45,7 @@ describe('PortefeuillesComponent', () => {
         {provide: CoursService, useValue: mockCoursService},
         {provide: AbcBourseService, useValue: mockAbcBourseService},
         {provide: BoursoramaService, useValue: mockBoursoramaService},
+        {provide: ZoneBourseService, useValue: mockZoneBourseService},
         ConfirmationService,
         DatePipe,
         PercentPipe,

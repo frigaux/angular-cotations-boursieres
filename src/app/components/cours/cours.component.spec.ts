@@ -10,6 +10,7 @@ import {VALEUR} from '../../services/jdd/jdd-valeurs.dataset';
 import {FILTRES, LISTE_COURS} from '../../services/jdd/jdd-cours.dataset';
 import {ConfirmationService, SortEvent} from 'primeng/api';
 import {AbcBourseService} from '../../services/abc-bourse/abc-bourse.service';
+import {ZoneBourseService} from '../../services/zone-bourse/zone-bourse.service';
 
 describe('CoursComponent', () => {
   let component: CoursComponent;
@@ -19,6 +20,7 @@ describe('CoursComponent', () => {
   const mockCoursService = jasmine.createSpyObj('CoursService', ['chargerCours', 'chargerFiltres',
     'onImportFiltres', 'onUpdateFiltres']);
   const mockAbcBourseService = jasmine.createSpyObj('AbcBourseService', ['chargerActualites']);
+  const mockZoneBourseService = jasmine.createSpyObj('ZoneBourseService', ['chargerActualites']);
 
   beforeEach(async () => {
     TestBed.configureTestingModule({
@@ -30,6 +32,7 @@ describe('CoursComponent', () => {
         {provide: ValeursService, useValue: mockValeursService},
         {provide: CoursService, useValue: mockCoursService},
         {provide: AbcBourseService, useValue: mockAbcBourseService},
+        {provide: ZoneBourseService, useValue: mockZoneBourseService},
         provideAnimations(),
         ConfirmationService
       ]

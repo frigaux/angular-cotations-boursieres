@@ -30,7 +30,7 @@ import {BlocLiensComponent} from './bloc-liens/bloc-liens.component';
 })
 export class DialogActualitesComponent {
   // chargement des actualités
-  loading: boolean = true;
+  loading: boolean = false;
 
   // données pour la vue
   visible: boolean = false;
@@ -42,6 +42,7 @@ export class DialogActualitesComponent {
   }
 
   reinitialiserVue() {
+    this.loading = true;
     this.abcBourseService.chargerActualites()
       .subscribe({
           error: httpResponseError => {

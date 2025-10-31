@@ -1,0 +1,41 @@
+<span class="pi pi-eye" (click)="visible = true"
+      title="{{ 'COMPOSANTS.COURS.EVALUATION_ACTUALITES.EVALUATION' | translate }}"></span>
+
+<app-popover-actions-valeur></app-popover-actions-valeur>
+
+<p-dialog [showHeader]="false" [modal]="true" [(visible)]="visible"
+          (onShow)="reinitialiserVue()" [style]="{ width: '90vw' }">
+  <div class="barre-superieure-sticky">
+    <h2>{{ 'COMPOSANTS.COURS.EVALUATION_ACTUALITES.EVALUATION_DATE' | translate: {heure: heure | date : 'HH:mm'} }} </h2>
+    <span class="pi pi-refresh" (click)="reinitialiserVue()"
+          title="{{ 'COMPOSANTS.COURS.EVALUATION_ACTUALITES.RAFRAICHIR' | translate }}"></span>
+    <span class="pi pi-times-circle" (click)="visible = false"
+          title="{{ 'COMPOSANTS.COURS.EVALUATION_ACTUALITES.FERMER' | translate }}"></span>
+  </div>
+
+  <app-loader [affiche]="loading" [configuration]="[
+        {marginLeft: '0', marginTop: '0', height: '70vh', width: '100%'}
+      ]"></app-loader>
+
+  @if (!loading && actualites) {
+    <p-table size="small" sortField="score" [sortOrder]="1" [value]="actualites">
+      <ng-template #header>
+        <tr>
+          <th pSortableColumn="score">
+            {{ 'COMPOSANTS.COURS.EVALUATION_ACTUALITES.SCORE' | translate }}
+            <p-sortIcon field="score"/>
+          </th>
+          <th>{{ 'COMPOSANTS.COURS.EVALUATION_ACTUALITES.DATE' | translate }}</th>
+          <th>{{ 'COMPOSANTS.COURS.EVALUATION_ACTUALITES.TITRE' | translate }}</th>
+        </tr>
+      </ng-template>
+      <ng-template #body let-actualite>
+        <tr (click)="onClickTicker($event, actualite)">
+          <td>{{ actualite.score }}</td>
+          <td>{{ actualite.date }}</td>
+          <td>{{ actualite.titre }}</td>
+        </tr>
+      </ng-template>
+    </p-table>
+  }
+</p-dialog>

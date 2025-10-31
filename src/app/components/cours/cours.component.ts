@@ -13,7 +13,7 @@ import {DetailsValeurComponent} from './details-valeur/details-valeur.component'
 import {CurrencyPipe, DatePipe, NgClass, PercentPipe} from '@angular/common';
 import {Skeleton} from 'primeng/skeleton';
 import {LoaderComponent} from '../loader/loader.component';
-import {PopoverActionsValeurComponent} from './actions-valeur/popover-actions-valeur.component';
+import {PopoverActionsValeurComponent} from './popover-actions-valeur/popover-actions-valeur.component';
 import {SortEvent} from 'primeng/api';
 import {SelecteurFiltreComponent} from './selecteur-filtre/selecteur-filtre.component';
 import {FiltreDecore} from './selecteur-filtre/filtre-decore.class';
@@ -21,6 +21,7 @@ import {DialogImportExportComponent} from './dialog-editeur-filtres/import-expor
 import {PortefeuillesService} from '../../services/portefeuilles/portefeuilles.service';
 import {DialogActualitesComponent} from './dialog-actualites/dialog-actualites.component';
 import {VueUtil} from '../commun/vue-util.class';
+import {DialogEvaluationActualitesComponent} from './dialog-evaluation-actualites/dialog-evaluation-actualites.component';
 
 @Component({
   selector: 'app-cours',
@@ -41,13 +42,14 @@ import {VueUtil} from '../commun/vue-util.class';
     PopoverActionsValeurComponent,
     SelecteurFiltreComponent,
     DialogImportExportComponent,
-    DialogActualitesComponent
+    DialogActualitesComponent,
+    DialogEvaluationActualitesComponent
   ],
   templateUrl: './cours.component.html',
   styleUrls: ['../portefeuilles/accordion-chart.sass', './cours.component.sass', '../commun/titre.sass']
 })
 export class CoursComponent implements OnInit {
-  private ajoutAuPortefeuille = viewChild(PopoverActionsValeurComponent);
+  private actionsValeur = viewChild(PopoverActionsValeurComponent);
 
   // chargement des cours
   loading: boolean = true;
@@ -139,7 +141,7 @@ export class CoursComponent implements OnInit {
   }
 
   private afficherAjoutAuPortefeuille(event: MouseEvent, cours: Cours) {
-    this.ajoutAuPortefeuille()?.afficher(event, cours.ticker);
+    this.actionsValeur()?.afficher(event, cours.ticker);
   }
 
   evolutionCours(cloture: number, cours: number) {

@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {Observable} from 'rxjs';
+import {forkJoin, Observable} from 'rxjs';
 import {DTOActualitesZoneBourse} from './dto-actualites-zone-bourse.interface';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 
@@ -10,28 +10,66 @@ export class ZoneBourseService {
   private static readonly HEADERS_HTML = new HttpHeaders()
     .set('Accept', 'text/html');
 
+  private static readonly SCORE: Array<{ positif: string, negatif: string }> = [
+    {positif: 'optimiste', negatif: 'pessimiste'},
+    {positif: 'optimisme', negatif: 'pessimisme'},
+    {positif: 'positif', negatif: 'negatif'},
+    {positif: 'positive', negatif: 'negative'},
+    {positif: 'hausse', negatif: 'baisse'},
+    {positif: 'rehausse', negatif: 'rabaisse'},
+    {positif: 'essor', negatif: 'chute'},
+    {positif: 'reprise', negatif: 'rechute'},
+    {positif: 'favorable', negatif: 'defavorable'},
+    {positif: 'gain', negatif: 'perte'},
+    {positif: 'soutenu', negatif: 'ralenti'},
+    {positif: 'renforce', negatif: 'degrade'},
+    {positif: 'allege', negatif: 'pese'},
+    {positif: 'encourageant', negatif: 'decevant'},
+    {positif: 'performance', negatif: 'repli'},
+    {positif: 'accroit', negatif: 'plonge'},
+    {positif: 'conforte', negatif: 'divise'},
+    {positif: 'repond', negatif: 'decoit'},
+    {positif: 'progres', negatif: 'recul'},
+    {positif: 'stabilite', negatif: 'volatilite'},
+    {positif: 'remarquable', negatif: 'mediocre'},
+    {positif: 'exceptionnel', negatif: 'catastrophique'},
+    {positif: 'croissant', negatif: 'decroissant'},
+    {positif: 'croissante', negatif: 'decroissante'},
+    {positif: 'solide', negatif: 'fragile'},
+    {positif: 'progresse', negatif: 'devisse'},
+    {positif: 'progresse', negatif: 'decevant'},
+    {positif: 'achat', negatif: 'vente'}
+  ];
+
   constructor(private http: HttpClient) {
   }
 
-  public chargerActualites(): Observable<Array<DTOActualitesZoneBourse>> {
+  public chargerActualites(nombrePages: number): Observable<Array<DTOActualitesZoneBourse>> {
     return new Observable(observer => {
-      this.http.get('/zonebourse/actualite-bourse/regions/locales/', {
-        headers: ZoneBourseService.HEADERS_HTML,
-        responseType: 'text'
-      }).subscribe({
+      forkJoin(
+        Array.from({length: nombrePages}, (v, i) => i + 1)
+          .map(numeroPage =>
+            this.http.get(`/zonebourse/actualite-bourse/regions/locales/?p=${numeroPage}`, {
+              headers: ZoneBourseService.HEADERS_HTML,
+              responseType: 'text'
+            })
+          )).subscribe({
         error: httpResponseError => {
           observer.error(httpResponseError);
           observer.complete();
         },
-        next: html => {
-          const dto = this.parseAndMapActualites(html);
-          if (dto) {
-            observer.next(dto);
+        next: htmls => {
+          let resultat: Array<DTOActualitesZoneBourse> = [];
+          htmls.forEach(html => {
+            resultat = resultat.concat(this.parseAndMapActualites(html));
+          });
+          if (resultat.length !== 0) {
+            observer.next(resultat);
           } else {
             observer.error({
               message: 'Impossible de récupérer les actualités dans le html',
-              html: html
-            })
+              html: htmls[0]
+            });
           }
           observer.complete();
         }
@@ -39,12 +77,12 @@ export class ZoneBourseService {
     });
   }
 
-  private parseAndMapActualites(html: string): Array<DTOActualitesZoneBourse> | undefined {
+  private parseAndMapActualites(html: string): Array<DTOActualitesZoneBourse> {
+    const resultat: Array<DTOActualitesZoneBourse> = [];
     const document = new DOMParser().parseFromString(html, 'text/html');
     const elTBody = document.querySelector('#newsScreener > tbody');
     if (elTBody) {
       const elTRs = elTBody.querySelectorAll('tr');
-      const resultat: Array<DTOActualitesZoneBourse> = [];
       elTRs.forEach(elTR => {
         const elAs = elTR.querySelectorAll('a');
         const elSpanTicker = elTR.querySelector('span.txt-s1');
@@ -54,11 +92,31 @@ export class ZoneBourseService {
           const ticker = elSpanTicker.innerHTML.trim();
           const titre = elAs[0].innerText.trim();
           const pathname = elAs[0].pathname;
-          resultat.push({date, ticker, titre, pathname});
+          const score = this.calculerScore(titre);
+          resultat.push({date, ticker, titre, pathname, score});
         }
       });
-      return resultat;
     }
-    return undefined;
+    return resultat;
+  }
+
+  private calculerScore(titre: string): number {
+    let score = 0;
+    const sansAccent = titre.normalize('NFD')
+      .replace(/[\u0300-\u036f]/g, '');
+    const nettoye = sansAccent
+      .replace(/[^\w]/g, ' ')
+      .trim()
+      .toLowerCase();
+    const normalise = ` ${nettoye} `;
+    ZoneBourseService.SCORE.forEach(mots => {
+      if (nettoye.indexOf(` ${mots.negatif} `) !== -1) {
+        score--;
+      }
+      if (nettoye.indexOf(` ${mots.positif} `) !== -1) {
+        score++;
+      }
+    });
+    return score;
   }
 }

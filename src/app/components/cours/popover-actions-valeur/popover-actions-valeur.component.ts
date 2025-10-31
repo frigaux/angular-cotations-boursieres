@@ -5,9 +5,6 @@ import {Select} from 'primeng/select';
 import {DTOPortefeuille} from '../../../services/portefeuilles/dto-portefeuille.interface';
 import {FormsModule} from '@angular/forms';
 import {TranslatePipe} from '@ngx-translate/core';
-import {
-  DialogCotationsTickerComponent
-} from '../../portefeuilles/actions-valeur/dialog-cotations-ticker/dialog-cotations-ticker.component';
 
 @Component({
   selector: 'app-popover-actions-valeur',
@@ -15,11 +12,10 @@ import {
     Popover,
     Select,
     FormsModule,
-    TranslatePipe,
-    DialogCotationsTickerComponent
+    TranslatePipe
   ],
   templateUrl: './popover-actions-valeur.component.html',
-  styleUrls: ['./popover-actions-valeur.component.sass', '../../portefeuilles/actions-valeur/popover-actions-valeur.component.sass']
+  styleUrls: ['./popover-actions-valeur.component.sass', '../../portefeuilles/popover-actions-valeur/popover-actions-valeur.component.sass']
 })
 export class PopoverActionsValeurComponent implements OnInit {
   private popover = viewChild(Popover);
