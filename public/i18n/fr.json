@@ -419,7 +419,7 @@
           "TABLEAUX": "le paramétrage des colonnes des tableaux",
           "PORTEFEUILLES": "les portefeuilles avec leurs valeurs et alertes",
           "FILTRES": "les filtres des cours",
-          "ACHATS": "la liste des achats",
+          "ACHATS": "la liste des achats de valeurs",
           "SAUVEGARDER": "Sauvegarder"
         },
         "SAUVEGARDE_REUSSI": "Sauvegarde réussie !",
@@ -428,7 +428,7 @@
           "TABLEAUX": "le paramétrage des colonnes des tableaux",
           "PORTEFEUILLES": "les portefeuilles avec leurs valeurs et alertes",
           "FILTRES": "les filtres des cours",
-          "ACHATS": "la liste des achats",
+          "ACHATS": "la liste des achats de valeurs",
           "RESTAURER": "Restaurer"
         },
         "RESTAURATION_REUSSIE": "Restauration réussie !"

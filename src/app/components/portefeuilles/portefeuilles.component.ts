@@ -75,7 +75,7 @@ export class PortefeuillesComponent implements OnInit {
 
   // privé
   private listeCours?: DTOCoursAvecListeAllege[];
-  private readonly valeurByTicker = new Map<string, DTOValeur>();
+  protected readonly valeurByTicker = new Map<string, DTOValeur>();
 
   constructor(private portefeuillesService: PortefeuillesService,
               private valeursService: ValeursService,
@@ -85,7 +85,7 @@ export class PortefeuillesComponent implements OnInit {
     portefeuillesService.onUpdate(portefeuilles => this.chargerPortefeuilleCourant());
     valeursService.onImportAchats(achatsTickers => this.afficherPortefeuilleCourant());
     valeursService.onUpdateAchats(achatsTickers => this.afficherPortefeuilleCourant());
-    // cet observable émet immédiatement une correspondance !
+    // cet observable émet initialement une correspondance !
     breakpointObserver.observe([
       '(orientation: portrait)',
       '(orientation: landscape)',

@@ -59,13 +59,13 @@ export class CoursComponent implements OnInit {
   marches?: CoursMarche[];
   idxMarcheCourant: number = -1;
   protected readonly VueUtil = VueUtil;
+  protected readonly valeurByTicker: Map<string, DTOValeur> = new Map<string, DTOValeur>();
 
   // cours pour lequel afficher les moyennes mobiles
   coursSelectionne: Cours | undefined = undefined;
 
   // private
   private translateService = inject(TranslateService);
-  private valeurByTicker?: Map<string, DTOValeur>;
   private liste?: DTOListeCours;
   private filtreActif?: FiltreDecore;
   private portefeuilles: boolean;
@@ -83,7 +83,6 @@ export class CoursComponent implements OnInit {
   }
 
   chargerCours(valeurs: DTOValeur[]): void {
-    this.valeurByTicker = new Map<string, DTOValeur>();
     for (const valeur of valeurs) {
       this.valeurByTicker.set(valeur.ticker, valeur);
     }

@@ -2,13 +2,17 @@ import {Injectable} from '@angular/core';
 import {forkJoin, Observable} from 'rxjs';
 import {DTOActualitesZoneBourse} from './dto-actualites-zone-bourse.interface';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {DTOValeur} from '../valeurs/dto-valeur.interface';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ZoneBourseService {
   private static readonly HEADERS_HTML = new HttpHeaders()
-    .set('Accept', 'text/html');
+    .set('Accept', 'text/html')
+    .set('Accept-Encoding', 'gzip, deflate')
+    .set('Accept-Language', 'fr-FR,fr;q=0.9,en-US;q=0.8,en;q=0.7')
+    .set('User-Agent', 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36');
 
   private static readonly SCORE: Array<{ positif: string, negatif: string }> = [
     {positif: 'optimiste', negatif: 'pessimiste'},
@@ -44,7 +48,7 @@ export class ZoneBourseService {
   constructor(private http: HttpClient) {
   }
 
-  public chargerActualites(nombrePages: number): Observable<Array<DTOActualitesZoneBourse>> {
+  public chargerActualites(nombrePages: number, valeurByTicker: Map<string, DTOValeur>): Observable<Array<DTOActualitesZoneBourse>> {
     return new Observable(observer => {
       forkJoin(
         Array.from({length: nombrePages}, (v, i) => i + 1)
@@ -61,7 +65,7 @@ export class ZoneBourseService {
         next: htmls => {
           let resultat: Array<DTOActualitesZoneBourse> = [];
           htmls.forEach(html => {
-            resultat = resultat.concat(this.parseAndMapActualites(html));
+            resultat = resultat.concat(this.parseAndMapActualites(html, valeurByTicker));
           });
           if (resultat.length !== 0) {
             observer.next(resultat);
@@ -77,7 +81,7 @@ export class ZoneBourseService {
     });
   }
 
-  private parseAndMapActualites(html: string): Array<DTOActualitesZoneBourse> {
+  private parseAndMapActualites(html: string, valeurByTicker: Map<string, DTOValeur>): Array<DTOActualitesZoneBourse> {
     const resultat: Array<DTOActualitesZoneBourse> = [];
     const document = new DOMParser().parseFromString(html, 'text/html');
     const elTBody = document.querySelector('#newsScreener > tbody');
@@ -89,7 +93,10 @@ export class ZoneBourseService {
         const elSpanDate = elTR.querySelector('span.js-date-relative');
         if (elAs.length === 2 && elSpanTicker && elSpanDate) {
           const date = elSpanDate.innerHTML.trim();
-          const ticker = elSpanTicker.innerHTML.trim();
+          let ticker = undefined;
+          if (valeurByTicker.has(elSpanTicker.innerHTML.trim())) {
+            ticker = elSpanTicker.innerHTML.trim();
+          }
           const titre = elAs[0].innerText.trim();
           const pathname = elAs[0].pathname;
           const score = this.calculerScore(titre);
