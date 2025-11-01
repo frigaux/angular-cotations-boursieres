@@ -1,10 +1,10 @@
 <div class="titre">
   <h2>{{ 'COMPOSANTS.ACHATS_VALEURS.ACHATS_VALEURS' | translate }}</h2>
+  <app-dialog-import-export></app-dialog-import-export>
   @if (achatsNonRevendus && achatsNonRevendus.length > 0) {
     <span class="pi pi-cloud-download" (click)="recupererCoursValeursNonRevendues()"
           title="{{ 'COMPOSANTS.ACHATS_VALEURS.RECUPERER_COURS' | translate }}"></span>
   }
-  <app-dialog-import-export></app-dialog-import-export>
 </div>
 
 <app-loader [affiche]="loading" [configuration]="[

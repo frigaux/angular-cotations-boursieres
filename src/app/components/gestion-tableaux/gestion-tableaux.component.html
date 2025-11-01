@@ -2,9 +2,9 @@
   <p-card>
     <div class="titre">
       <h2>{{ 'COMPOSANTS.GESTION_TABLEAUX.TABLEAUX' | translate }}</h2>
+      <app-dialog-import-export></app-dialog-import-export>
       <span class="pi pi-save" (click)="enregistrer()"
             title="{{ 'COMPOSANTS.GESTION_TABLEAUX.ENREGISTRER' | translate }}"></span>
-      <app-dialog-import-export></app-dialog-import-export>
       <span class="message">{{ succes }}</span>
     </div>
     @if (erreur !== undefined) {

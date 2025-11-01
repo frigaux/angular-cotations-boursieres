@@ -29,7 +29,7 @@ describe('ZoneBourseService', () => {
 
   it('given ZoneBourseService when #chargerActualites then on doit récupérer les actualités', async () => {
     const promiseActualites: Promise<Array<DTOActualitesZoneBourse>> = firstValueFrom(service.chargerActualites(1));
-    const actualites = await promiseActualites;console.log(actualites);
+    const actualites = await promiseActualites;
     expect(actualites.length).toBeGreaterThan(0);
     actualites.forEach(actualite => {
       expect(actualite.date).toBeDefined();

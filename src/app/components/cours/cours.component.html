@@ -4,10 +4,10 @@
 
 @if (date) {
   <div class="titre">
-    <h2>{{ 'COMPOSANTS.COURS.MARCHES_DATE' | translate: {jour: date | date: 'dd/MM/yyyy'} }}</h2>
+    <h3>{{ 'COMPOSANTS.COURS.MARCHES_DATE' | translate: {jour: date | date: 'dd/MM/yyyy'} }}</h3>
+    <app-dialog-import-export></app-dialog-import-export>
     <app-dialog-actualites></app-dialog-actualites>
     <app-dialog-evaluation-actualites></app-dialog-evaluation-actualites>
-    <app-dialog-import-export></app-dialog-import-export>
     <app-selecteur-filtre (selection)="appliquerFiltre($event)"></app-selecteur-filtre>
   </div>
 }
