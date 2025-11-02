@@ -1,4 +1,4 @@
-export class DTOVariation {
+export class DTOVariationTicker {
   duree: string;
   pourcentage: number;
 

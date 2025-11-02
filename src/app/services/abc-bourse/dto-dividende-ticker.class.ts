@@ -1,4 +1,4 @@
-export class DTODividende {
+export class DTODividendeTicker {
   annee: number;
   montant: number;
 

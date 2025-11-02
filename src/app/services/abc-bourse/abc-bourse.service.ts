@@ -3,8 +3,8 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {forkJoin, Observable} from 'rxjs';
 import {DTOInformationsTickerABCBourse} from './dto-informations-ticker-abc-bourse.class';
 import {DTOActualiteTicker} from './dto-actualite-ticker.class';
-import {DTODividende} from './dto-dividende.class';
-import {DTOVariation} from './dto-variation.class';
+import {DTODividendeTicker} from './dto-dividende-ticker.class';
+import {DTOVariationTicker} from './dto-variation-ticker.class';
 import {DTOIndicateur} from './dto-ratio.class';
 import {ParseUtil} from '../commun/parse-util.class';
 import {DTOActualitesABCBourse} from './dto-actualites-abc-bourse.class';
@@ -12,6 +12,9 @@ import {DTOLien} from './dto-lien.class';
 import {DTOVentesADecouvert} from './dto-ventes-a-decouvert.class';
 import {DTOTransaction} from './dto-transaction.class';
 import {DTOCotations} from './dto-cotations.interface';
+import {DTODividendes} from '../dividendes/dto-dividendes.class';
+import {DTODividende} from '../dividendes/dto-dividende.interface';
+import {TypeDividende} from '../dividendes/type-dividende.enum';
 
 @Injectable({
   providedIn: 'root'
@@ -95,19 +98,19 @@ export class AbcBourseService {
     return undefined;
   }
 
-  private mapVariations(variations: DTOVariation[], elTable: Element) {
+  private mapVariations(variations: DTOVariationTicker[], elTable: Element) {
     elTable.querySelectorAll('tbody > tr:not(:last-child)')
       .forEach(elTr => {
         const elTds = elTr.querySelectorAll('td');
-        variations.push(new DTOVariation(elTds[0].innerText, ParseUtil.parseNumber(elTds[4].innerText) / 100));
+        variations.push(new DTOVariationTicker(elTds[0].innerText, ParseUtil.parseNumber(elTds[4].innerText) / 100));
       });
   }
 
-  private mapDividendes(dividendes: DTODividende[], elTable: Element) {
+  private mapDividendes(dividendes: DTODividendeTicker[], elTable: Element) {
     elTable.querySelectorAll('tr:not(:first-child)')
       .forEach(elTr => {
         const elTds: NodeListOf<HTMLTableCellElement> = elTr.querySelectorAll('td');
-        dividendes.push(new DTODividende(ParseUtil.parseYear(elTds[0].innerText), ParseUtil.parseNumber(elTds[1].innerText)));
+        dividendes.push(new DTODividendeTicker(ParseUtil.parseYear(elTds[0].innerText), ParseUtil.parseNumber(elTds[1].innerText)));
       });
   }
 
@@ -283,5 +286,62 @@ export class AbcBourseService {
         m2[1], ParseUtil.parseAndMapTo8601(m2[2]), ParseUtil.parseNumber(m2[3]), ParseUtil.parseNumber(m2[4])));
     }
     return result;
+  }
+
+  public chargerDividendes(): Observable<DTODividendes> {
+    const resultat = new DTODividendes();
+    return new Observable(observer => {
+      this.http.get(`/abcbourse/marches/dividendes`, {
+        headers: AbcBourseService.HEADERS,
+        responseType: 'text'
+      }).subscribe({
+        error: httpResponseError => {
+          observer.error(httpResponseError);
+          observer.complete();
+        },
+        next: html => {
+          if (this.parseAndMapDividendes(html, resultat.dividendes)) {
+            observer.next(resultat);
+          } else {
+            observer.error({
+              message: 'Impossible de récupérer les dividendes dans le html',
+              html: html
+            });
+          }
+          observer.complete();
+        }
+      });
+    });
+  }
+
+  private parseAndMapDividendes(html: string, dividendes: Array<DTODividende>): boolean {
+    const document = new DOMParser().parseFromString(html, 'text/html');
+    const elTABLE = document.querySelector('table.tablesorter > tbody');
+    if (!elTABLE) {
+      return false;
+    } else {
+      const elTRs = elTABLE.querySelectorAll('tr');
+      for (const elTR of elTRs) {
+        const elTDs = elTR.querySelectorAll('td');
+        if (elTDs.length !== 5) {
+          return false;
+        } else {
+          const elA = elTDs[1].querySelector('a');
+          if (elA) {
+            const date = ParseUtil.parseAndMapTo8601(elTDs[0].innerText);
+            const matchTicker = /\/([A-Z]+)p/.exec(elA.href);
+            const type: TypeDividende = elTDs[2].innerText.toLowerCase() as TypeDividende;
+            const montant = ParseUtil.parseNumber(elTDs[3].innerText);
+            const pourcentageRendement = ParseUtil.parseNumber(elTDs[4].innerText);
+            if (!matchTicker) {
+              return false;
+            } else {
+              dividendes.push({date, ticker: matchTicker[1], type, montant, pourcentageRendement});
+            }
+          }
+        }
+      }
+    }
+    return true;
   }
 }

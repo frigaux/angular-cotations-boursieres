@@ -99,7 +99,7 @@ export class BoursoramaService {
               observer.error({
                 message: 'Impossible de récupérer les informations dans le html',
                 html: html
-              })
+              });
             }
           });
           observer.next(resultat);
