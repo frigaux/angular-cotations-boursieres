@@ -31,10 +31,12 @@ describe('DialogFormulaireModificationComponent', () => {
   });
 
   describe('Given des portefeuilles existants', () => {
+    const portefeuilles = clonePORTEFEUILLES();
+
     beforeEach(() => {
       spyOn(component.modifie, "emit");
-      fixture.componentRef.setInput('portefeuilles', clonePORTEFEUILLES());
-      fixture.componentRef.setInput('portefeuille', PORTEFEUILLE);
+      fixture.componentRef.setInput('donnees',
+        {portefeuilles, portefeuilleNomEnModification: portefeuilles[0]});
       fixture.detectChanges(); // appelle le ngOnInit
     });
 
@@ -45,7 +47,7 @@ describe('DialogFormulaireModificationComponent', () => {
     });
 
     it('when #modifierPortefeuille avec un nom en doublon then il n\'y a pas de modification du portefeuille', () => {
-      component.formulaire.get('nom')?.setValue(PORTEFEUILLES[0].nom);
+      component.formulaire.get('nom')?.setValue(portefeuilles[1].nom);
       component.modifierNomPortefeuille();
       expect(component.modifie.emit).toHaveBeenCalledTimes(0);
     });

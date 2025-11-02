@@ -1,4 +1,4 @@
-<app-dialog-formulaire-modification [portefeuilles]="portefeuilles" [portefeuille]="portefeuilleNomEnModification"
+<app-dialog-formulaire-modification [donnees]="{portefeuilles, portefeuilleNomEnModification}"
                              (abandon)="portefeuilleNomEnModification = undefined"
                              (modifie)="modifierNomPortefeuille($event)"></app-dialog-formulaire-modification>
 

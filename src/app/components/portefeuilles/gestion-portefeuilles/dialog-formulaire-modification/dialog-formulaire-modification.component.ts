@@ -28,10 +28,11 @@ export class DialogFormulaireModificationComponent {
   private formBuilder = inject(FormBuilder);
 
   // input/output
-  portefeuilles: InputSignal<Array<DTOPortefeuille> | undefined> = input(undefined,
-    {transform: o => this.intercepteurPortefeuilles(o)});
-  portefeuille: InputSignal<DTOPortefeuille | undefined> = input(undefined,
-    {transform: o => this.intercepteurPortefeuille(o)});
+  inputDonnees: InputSignal<{
+    portefeuilles: Array<DTOPortefeuille>,
+    portefeuilleNomEnModification: DTOPortefeuille | undefined
+  }> = input({portefeuilles: [], portefeuilleNomEnModification: undefined},
+    {transform: o => this.intercepteurDonnees(o), alias: 'donnees'});
   modifie = output<string>();
   abandon = output<void>();
 
@@ -42,25 +43,22 @@ export class DialogFormulaireModificationComponent {
 
   //données pour la vue
   portefeuilleEnModification: DTOPortefeuille | undefined;
-  titre: string | undefined;
 
   constructor(private translateService: TranslateService) {
   }
 
-  intercepteurPortefeuilles(portefeuilles: DTOPortefeuille[] | undefined) {
-    if (portefeuilles) {
-      this.formulaire.get('nom')?.addValidators(pasDeNomEnDoublonValidator(portefeuilles));
-    }
-    return portefeuilles;
-  }
-
-  intercepteurPortefeuille(portefeuille: DTOPortefeuille | undefined) {
-    this.portefeuilleEnModification = portefeuille;
+  intercepteurDonnees(donnees: {
+    portefeuilles: Array<DTOPortefeuille>,
+    portefeuilleNomEnModification: DTOPortefeuille | undefined
+  }) {
+    this.portefeuilleEnModification = donnees.portefeuilleNomEnModification;
     if (this.portefeuilleEnModification) {
-      this.titre = this.translateService.instant('COMPOSANTS.PORTEFEUILLES.GESTION_PORTEFEUILLES.FORMULAIRE_MODIFICATION.MODIFICATION_NOM', {'nom': this.portefeuilleEnModification.nom});
+      const autresPortefeuilles = donnees.portefeuilles
+        .filter(p => p.nom !== this.portefeuilleEnModification!.nom);
+      this.formulaire.get('nom')?.addValidators(pasDeNomEnDoublonValidator(autresPortefeuilles));
       this.formulaire.get('nom')?.setValue(this.portefeuilleEnModification.nom);
     }
-    return portefeuille;
+    return donnees;
   }
 
   modifierNomPortefeuille() {

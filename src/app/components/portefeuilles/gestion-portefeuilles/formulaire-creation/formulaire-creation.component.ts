@@ -23,12 +23,13 @@ import {Checkbox} from 'primeng/checkbox';
   templateUrl: './formulaire-creation.component.html',
   styleUrl: './formulaire-creation.component.sass'
 })
-export class FormulaireCreationComponent implements OnInit {
+export class FormulaireCreationComponent {
   // injections
   private formBuilder = inject(FormBuilder);
 
   // input/output
-  portefeuilles: InputSignal<Array<DTOPortefeuille> | undefined> = input();
+  portefeuilles: InputSignal<Array<DTOPortefeuille> | undefined> = input(undefined,
+    {transform: o => this.intercepteurPortefeuilles(o)});
   cree = output<{ nom: string, initialiserAlertes: boolean }>();
 
   // formulaires
@@ -37,11 +38,11 @@ export class FormulaireCreationComponent implements OnInit {
     initialiserAlertes: [true, [Validators.required]],
   });
 
-  ngOnInit(): void {
-    const portefeuilles = this.portefeuilles();
+  intercepteurPortefeuilles(portefeuilles: DTOPortefeuille[] | undefined) {
     if (portefeuilles) {
       this.formulaire.get('nom')?.addValidators(pasDeNomEnDoublonValidator(portefeuilles));
     }
+    return portefeuilles;
   }
 
   creerPortefeuille() {

@@ -19,7 +19,6 @@ import {NavigationBar} from '@squareetlabs/capacitor-navigation-bar';
 // TODO : nouvelles opérandes pour les alertes du portefeuille/cours min/max/moyenne/nombre vagues
 // TODO : capacitor android : proxy obligatoire pour autres domaines ? problème CORS ou pas ?
 // TODO : détails d'une valeur depuis la liste des cours : bouton précédent/suivant affichés même si pas de précédent/suivant
-// TODO : renommer un portefeuille en modifiant juste un accent bloqué
 // TODO : modification des valeurs d'un portefeuille : utilité de vérifier l'existence du ticker ?
 // TODO : coverage
 // TODO : examiner les logs du debugger android studio
