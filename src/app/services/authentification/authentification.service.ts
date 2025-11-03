@@ -36,8 +36,8 @@ export class AuthentificationService {
         {identifiant: 'anonymous', motDePasse: 'anonymous'},
         {context: new HttpContext().set(AUTHENTIFICATION_REQUISE, false)}
       ).subscribe({
-        error: httpResponseError => {
-          observer.error(httpResponseError);
+        error: httpErrorResponse => {
+          observer.error(httpErrorResponse);
           observer.complete();
         },
         next: jwt => {

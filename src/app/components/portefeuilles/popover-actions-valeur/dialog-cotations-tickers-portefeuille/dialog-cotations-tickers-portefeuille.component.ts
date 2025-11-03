@@ -46,13 +46,17 @@ export class DialogCotationsTickersPortefeuilleComponent {
     this.dialogCoursTickerComponent = dialogCoursTickerComponent;
     this.visible = true;
     this.loading = true;
-    this.boursoramaService.chargerCotationsTickers(portefeuilleAvecCours.cours).subscribe(
-      cotationsTickersBoursorama => {
-        let i = 0;
-        this.cotationsTickersDecores = cotationsTickersBoursorama.map(cotationsTickerBoursorama =>
-          new CotationsTickerBoursoramaDecore(this.translateService, i++, cotationsTickerBoursorama)
-        );
-        this.loading = false;
+    this.boursoramaService.chargerCotationsTickers(portefeuilleAvecCours.cours).subscribe({
+        next:
+          cotationsTickersBoursorama => {
+            let i = 0;
+            this.cotationsTickersDecores = cotationsTickersBoursorama.map(cotationsTickerBoursorama =>
+              new CotationsTickerBoursoramaDecore(this.translateService, i++, cotationsTickerBoursorama)
+            );
+            this.loading = false;
+          },
+        error:
+          httpErrorResponse => this.loading = false
       }
     )
   }

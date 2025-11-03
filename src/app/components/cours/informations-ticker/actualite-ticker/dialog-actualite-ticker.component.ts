@@ -28,7 +28,7 @@ export class DialogActualiteTickerComponent {
     this.actualite = actualite;
     if (actualite) {
       this.abcBourseService.chargerLien(actualite.pathname).subscribe({
-        error: httpResponseError => {
+        error: httpErrorResponse => {
         },
         next: html => {
           this.html = html;

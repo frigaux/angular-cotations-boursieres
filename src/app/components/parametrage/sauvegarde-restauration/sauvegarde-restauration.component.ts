@@ -9,6 +9,7 @@ import {JsonPipe} from '@angular/common';
 import {DialogSauvegardeComponent} from './dialog-sauvegarde/dialog-sauvegarde.component';
 import {DialogRestaurationComponent} from './dialog-restauration/dialog-restauration.component';
 import {DTORestauration} from '../../../services/parametrage/dto-restauration.class';
+import {HttpErrorResponse} from '@angular/common/http';
 
 @Component({
   selector: 'app-sauvegarde-restauration',
@@ -29,7 +30,7 @@ export class SauvegardeRestaurationComponent implements OnInit {
   afficherFormulaireUrlSauvegardeRestauration: boolean = false;
   loading: boolean = false;
   succes?: string;
-  httpResponseError?: any;
+  httpErrorResponse?: HttpErrorResponse;
   dialogSauvegardeVisible: boolean = false;
   dialogRestaurationVisible: boolean = false;
 
@@ -45,11 +46,11 @@ export class SauvegardeRestaurationComponent implements OnInit {
 
   sauvegarder() {
     this.loading = true;
-    this.httpResponseError = undefined;
+    this.httpErrorResponse = undefined;
     this.succes = undefined;
     this.parametrageService.sauvegarder().subscribe({
-      error: httpResponseError => {
-        this.httpResponseError = httpResponseError;
+      error: httpErrorResponse => {
+        this.httpErrorResponse = httpErrorResponse;
         this.loading = false;
       },
       next: () => {
@@ -61,11 +62,11 @@ export class SauvegardeRestaurationComponent implements OnInit {
 
   restaurer(dtoRestauration: DTORestauration) {
     this.loading = true;
-    this.httpResponseError = undefined;
+    this.httpErrorResponse = undefined;
     this.succes = undefined;
     this.parametrageService.restaurer(dtoRestauration).subscribe({
-      error: httpResponseError => {
-        this.httpResponseError = httpResponseError;
+      error: httpErrorResponse => {
+        this.httpErrorResponse = httpErrorResponse;
         this.loading = false;
       },
       next: () => {

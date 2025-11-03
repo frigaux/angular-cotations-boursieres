@@ -4,7 +4,8 @@
 
 <app-dialog-sauvegarde [(visible)]="dialogSauvegardeVisible" (sauvegarde)="sauvegarder()"></app-dialog-sauvegarde>
 
-<app-dialog-restauration [(visible)]="dialogRestaurationVisible" (restauration)="restaurer($event)"></app-dialog-restauration>
+<app-dialog-restauration [(visible)]="dialogRestaurationVisible"
+                         (restauration)="restaurer($event)"></app-dialog-restauration>
 
 <app-loader [affiche]="loading" [configuration]="[
         {marginLeft: '0', marginTop: '0', height: '4rem', width: '15rem'}
@@ -19,6 +20,10 @@
     <span class="pi pi-cloud-download" (click)="dialogRestaurationVisible = true"
           title="{{ 'COMPOSANTS.PARAMETRAGE.SAUVEGARDE_RESTAURATION.RESTAURATION' | translate }}"></span>
   </div>
-  <div class="succes">{{ succes }}</div>
-  <pre class="erreur">{{ httpResponseError | json }}</pre>
+  @if (succes) {
+    <div class="succes">{{ succes }}</div>
+  }
+  @if (httpErrorResponse) {
+    <pre class="erreur">{{ httpErrorResponse | json }}</pre>
+  }
 }

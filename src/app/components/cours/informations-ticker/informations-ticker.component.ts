@@ -55,7 +55,7 @@ export class InformationsTickerComponent {
       this.loading = true;
 
       this.abcBourseService.chargerInformationsTicker(cours.ticker).subscribe({
-        error: httpResponseError => {
+        error: httpErrorResponse => {
           this.loading = false;
         },
         next: dto => {

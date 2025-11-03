@@ -27,8 +27,8 @@ export class BoursoramaService {
         this.http.get<DTOCoursBoursorama>(`/boursorama/bourse/action/graph/ws/UpdateCharts?symbol=1rP${ticker}&period=-1`,
           {headers: BoursoramaService.HEADERS_JSON})
       )).subscribe({
-        error: httpResponseError => {
-          observer.error(httpResponseError);
+        error: httpErrorResponse => {
+          observer.error(httpErrorResponse);
           observer.complete();
         },
         next: objects => {
@@ -57,8 +57,8 @@ export class BoursoramaService {
         headers: BoursoramaService.HEADERS_HTML,
         responseType: 'text'
       }).subscribe({
-        error: httpResponseError => {
-          observer.error(httpResponseError);
+        error: httpErrorResponse => {
+          observer.error(httpErrorResponse);
           observer.complete();
         },
         next: html => {
@@ -68,7 +68,7 @@ export class BoursoramaService {
           } else {
             observer.error({
               message: 'Impossible de récupérer les informations dans le html',
-              html: html
+              error: html
             })
           }
           observer.complete();
@@ -85,24 +85,26 @@ export class BoursoramaService {
           responseType: 'text'
         })
       )).subscribe({
-        error: httpResponseError => {
-          observer.error(httpResponseError);
+        error: httpErrorResponse => {
+          observer.error(httpErrorResponse);
           observer.complete();
         },
-        next: objects => {
+        next: htmls => {
           const resultat: Array<DTOCotationsTickerBoursorama> = [];
-          objects.forEach((html: string, i: number) => {
+          htmls.forEach((html: string, i: number) => {
             const dto = this.parseAndMapCours(coursPortefeuille[i], html);
             if (dto) {
               resultat.push(dto);
-            } else {
-              observer.error({
-                message: 'Impossible de récupérer les informations dans le html',
-                html: html
-              });
             }
           });
-          observer.next(resultat);
+          if (resultat.length !== 0) {
+            observer.next(resultat);
+          } else {
+            observer.error({
+              message: 'Impossible de récupérer les informations dans le html',
+              error: htmls[0]
+            });
+          }
           observer.complete();
         }
       });

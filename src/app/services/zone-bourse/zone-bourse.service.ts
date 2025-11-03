@@ -58,8 +58,8 @@ export class ZoneBourseService {
               responseType: 'text'
             })
           )).subscribe({
-        error: httpResponseError => {
-          observer.error(httpResponseError);
+        error: httpErrorResponse => {
+          observer.error(httpErrorResponse);
           observer.complete();
         },
         next: htmls => {
@@ -72,7 +72,7 @@ export class ZoneBourseService {
           } else {
             observer.error({
               message: 'Impossible de récupérer les actualités dans le html',
-              html: htmls[0]
+              error: htmls[0]
             });
           }
           observer.complete();

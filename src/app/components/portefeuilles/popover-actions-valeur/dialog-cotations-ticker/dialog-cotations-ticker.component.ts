@@ -6,7 +6,7 @@ import {TranslatePipe, TranslateService} from '@ngx-translate/core';
 import {BoursoramaService} from '../../../../services/boursorama/boursorama.service';
 import {UIChart} from 'primeng/chart';
 import {Fieldset} from 'primeng/fieldset';
-import {CurrencyPipe, DatePipe, DecimalPipe, PercentPipe} from '@angular/common';
+import {CurrencyPipe, DatePipe, DecimalPipe, JsonPipe, PercentPipe} from '@angular/common';
 import {CotationsTickerBoursoramaDecore} from './cotations-ticker-boursorama-genere.class';
 import {JaugeComponent} from '../../../commun/jauge/jauge.component';
 import {CoursPortefeuille} from '../../cours-portefeuille.class';
@@ -25,7 +25,8 @@ import {VueUtil} from '../../../commun/vue-util.class';
     DecimalPipe,
     PercentPipe,
     DatePipe,
-    JaugeComponent
+    JaugeComponent,
+    JsonPipe
   ],
   templateUrl: './dialog-cotations-ticker.component.html',
   styleUrls: ['./dialog-cotations-ticker.component.sass', '../../../commun/barre-superieure.sass']
@@ -33,21 +34,28 @@ import {VueUtil} from '../../../commun/vue-util.class';
 export class DialogCotationsTickerComponent {
 
   // données pour la vue
-  visible: boolean = false;
-  loading: boolean = false;
-  cotationsTickerDecore?: CotationsTickerBoursoramaDecore;
+  protected visible: boolean = false;
+  protected loading: boolean = false;
+  protected cours?: CoursPortefeuille;
+  protected cotationsTickerDecore?: CotationsTickerBoursoramaDecore;
   protected readonly VueUtil = VueUtil;
 
   constructor(private translateService: TranslateService, private boursoramaService: BoursoramaService) {
   }
 
   afficherCours(cours: CoursPortefeuille) {
+    this.cours = cours;
+    this.cotationsTickerDecore = undefined;
     this.visible = true;
     this.loading = true;
-    this.boursoramaService.chargerCotationsTicker(cours).subscribe(
-      cotationsTickerBoursorama => {
-        this.cotationsTickerDecore = new CotationsTickerBoursoramaDecore(this.translateService, 0, cotationsTickerBoursorama);
-        this.loading = false;
+    this.boursoramaService.chargerCotationsTicker(cours).subscribe({
+        next:
+          cotationsTickerBoursorama => {
+            this.cotationsTickerDecore = new CotationsTickerBoursoramaDecore(this.translateService, 0, cotationsTickerBoursorama);
+            this.loading = false;
+          },
+      error:
+        httpErrorResponse => this.loading = false
       }
     )
   }
@@ -62,8 +70,8 @@ export class DialogCotationsTickerComponent {
   }
 
   protected rafraichir() {
-    if (this.cotationsTickerDecore) {
-      this.afficherCours(this.cotationsTickerDecore.dto.coursPortefeuille);
+    if (this.cours) {
+      this.afficherCours(this.cours);
     }
   }
 }

@@ -32,8 +32,8 @@ export class AbcBourseService {
         headers: AbcBourseService.HEADERS,
         responseType: 'text'
       }).subscribe({
-        error: httpResponseError => {
-          observer.error(httpResponseError);
+        error: httpErrorResponse => {
+          observer.error(httpErrorResponse);
           observer.complete();
         },
         next: html => {
@@ -156,8 +156,8 @@ export class AbcBourseService {
         headers: AbcBourseService.HEADERS,
         responseType: 'text'
       }).subscribe({
-        error: httpResponseError => {
-          observer.error(httpResponseError);
+        error: httpErrorResponse => {
+          observer.error(httpErrorResponse);
           observer.complete();
         },
         next: html => {
@@ -171,14 +171,14 @@ export class AbcBourseService {
   public chargerActualites(): Observable<DTOActualitesABCBourse> {
     return new Observable(observer => {
       this.http.get('/abcbourse', {headers: AbcBourseService.HEADERS, responseType: 'text'}).subscribe({
-        error: httpResponseError => {
-          observer.error(httpResponseError);
+        error: httpErrorResponse => {
+          observer.error(httpErrorResponse);
           observer.complete();
         },
         next: html => {
           this.parseActualites(html).subscribe({
-            error: httpResponseError => {
-              observer.error(httpResponseError);
+            error: httpErrorResponse => {
+              observer.error(httpErrorResponse);
               observer.complete();
             },
             next: dto => {
@@ -210,8 +210,8 @@ export class AbcBourseService {
             responseType: 'text'
           })
         ]).subscribe({
-          error: httpResponseError => {
-            observer.error(httpResponseError);
+          error: httpErrorResponse => {
+            observer.error(httpErrorResponse);
             observer.complete();
           },
           next: htmls => {
@@ -295,8 +295,8 @@ export class AbcBourseService {
         headers: AbcBourseService.HEADERS,
         responseType: 'text'
       }).subscribe({
-        error: httpResponseError => {
-          observer.error(httpResponseError);
+        error: httpErrorResponse => {
+          observer.error(httpErrorResponse);
           observer.complete();
         },
         next: html => {
@@ -305,7 +305,7 @@ export class AbcBourseService {
           } else {
             observer.error({
               message: 'Impossible de récupérer les dividendes dans le html',
-              html: html
+              error: html
             });
           }
           observer.complete();

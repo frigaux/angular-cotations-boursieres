@@ -45,7 +45,7 @@ export class DialogActualitesComponent {
     this.loading = true;
     this.abcBourseService.chargerActualites()
       .subscribe({
-          error: httpResponseError => {
+          error: httpErrorResponse => {
             this.loading = false;
           },
           next: dto => {
