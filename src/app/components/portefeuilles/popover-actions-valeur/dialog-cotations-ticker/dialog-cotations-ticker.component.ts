@@ -6,7 +6,7 @@ import {TranslatePipe, TranslateService} from '@ngx-translate/core';
 import {BoursoramaService} from '../../../../services/boursorama/boursorama.service';
 import {UIChart} from 'primeng/chart';
 import {Fieldset} from 'primeng/fieldset';
-import {CurrencyPipe, DatePipe, DecimalPipe, JsonPipe, PercentPipe} from '@angular/common';
+import {CurrencyPipe, DatePipe, DecimalPipe, PercentPipe} from '@angular/common';
 import {CotationsTickerBoursoramaDecore} from './cotations-ticker-boursorama-genere.class';
 import {JaugeComponent} from '../../../commun/jauge/jauge.component';
 import {CoursPortefeuille} from '../../cours-portefeuille.class';
@@ -25,8 +25,7 @@ import {VueUtil} from '../../../commun/vue-util.class';
     DecimalPipe,
     PercentPipe,
     DatePipe,
-    JaugeComponent,
-    JsonPipe
+    JaugeComponent
   ],
   templateUrl: './dialog-cotations-ticker.component.html',
   styleUrls: ['./dialog-cotations-ticker.component.sass', '../../../commun/barre-superieure.sass']

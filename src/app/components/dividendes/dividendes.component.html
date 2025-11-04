@@ -1,0 +1,54 @@
+<div class="titre">
+  <h2>{{ 'COMPOSANTS.DIVIDENDES.DIVIDENDES' | translate }}</h2>
+  <span class="pi pi-cloud-download" (click)="recupererDividendesABCBourse()"
+        title="{{ 'COMPOSANTS.DIVIDENDES.RECUPERER_DIVIDENDES_ABCBOURSE' | translate }}"></span>
+  @if (dateRecuperation) {
+    <span>{{ 'COMPOSANTS.DIVIDENDES.DATE_DERNIERE_RECUPERATION' | translate : {date: dateRecuperation | date: 'dd/MM/yyyy'} }}</span>
+  }
+</div>
+
+<app-loader [affiche]="loading" [configuration]="[
+  {marginLeft: '0', marginTop: '1rem', height: '80vh', width: '50%'}
+]"></app-loader>
+
+@if (!loading && dividendesDecores) {
+  <p-table [value]="dividendesDecores"
+           sortField="dividende.date" [sortOrder]="-1"
+           [scrollable]="true" scrollHeight="calc(100vh - 16rem)"
+           [style]="{ margin: '1rem' }"
+           [tableStyle]="{'table-layout': 'fixed'}"
+           [loading]="loading">
+    <ng-template #header>
+      <tr>
+        <th pSortableColumn="dividende.date">
+          {{ 'COMPOSANTS.DIVIDENDES.DATE' | translate }}
+          <p-sortIcon field="dividende.date"/>
+        </th>
+        <th>{{ 'COMPOSANTS.DIVIDENDES.TICKER' | translate }}</th>
+        <th pSortableColumn="valeur.libelle">
+          {{ 'COMPOSANTS.DIVIDENDES.LIBELLE' | translate }}
+          <p-sortIcon field="valeur.libelle"/>
+        </th>
+        <th>{{ 'COMPOSANTS.DIVIDENDES.TYPE' | translate }}</th>
+        <th pSortableColumn="dividende.montant">
+          {{ 'COMPOSANTS.DIVIDENDES.MONTANT' | translate }}
+          <p-sortIcon field="dividende.montant"/>
+        </th>
+        <th pSortableColumn="dividende.pourcentageRendement">
+          {{ 'COMPOSANTS.DIVIDENDES.POURCENTAGE_RENDEMENT' | translate }}
+          <p-sortIcon field="dividende.pourcentageRendement"/>
+        </th>
+      </tr>
+    </ng-template>
+    <ng-template #body let-dividendeDecore>
+      <tr>
+        <td>{{ dividendeDecore.dividende.date | date: 'dd/MM/yyyy' }}</td>
+        <td>{{ dividendeDecore.dividende.ticker }}</td>
+        <td>{{ dividendeDecore.valeur?.libelle }}</td>
+        <td>{{ dividendeDecore.dividende.type }}</td>
+        <td> {{ dividendeDecore.dividende.montant | currency:'€' }}</td>
+        <td> {{ dividendeDecore.dividende.pourcentageRendement | percent:'1.2-2' }}</td>
+      </tr>
+    </ng-template>
+  </p-table>
+}

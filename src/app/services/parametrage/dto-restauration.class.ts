@@ -3,4 +3,5 @@ export class DTORestauration {
   portefeuilles: boolean = true;
   filtres: boolean = true;
   achats: boolean = true;
+  dividendes: boolean = true;
 }

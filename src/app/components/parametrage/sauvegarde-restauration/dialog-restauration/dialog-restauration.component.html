@@ -23,6 +23,11 @@
       <label
         for="achats">{{ 'COMPOSANTS.PARAMETRAGE.SAUVEGARDE_RESTAURATION.DIALOG_RESTAURATION.ACHATS' | translate }}</label>
     </div>
+    <div class="cocher">
+      <p-checkbox inputId="achats" [(ngModel)]="dtoRestauration.dividendes" binary="true"/>
+      <label
+        for="achats">{{ 'COMPOSANTS.PARAMETRAGE.SAUVEGARDE_RESTAURATION.DIALOG_RESTAURATION.DIVIDENDES' | translate }}</label>
+    </div>
 
     <div class="boutons">
       <p-button

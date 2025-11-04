@@ -87,8 +87,8 @@ export class AbcBourseService {
       const plusHaut = ParseUtil.queryAndParseNumber(elTrs0[2], 'td.alri');
       const plusBas = ParseUtil.queryAndParseNumber(elTrs0[3], 'td.alri');
       const cloture = ParseUtil.queryAndParseNumber(elTrs0[4], 'td.alri');
-      const pourcentageVolatilite = ParseUtil.queryAndParseNumber(elTrs0[5], 'td.alri');
-      const pourcentageCapitalEchange = ParseUtil.queryAndParseNumber(elTrs1[0], 'td.alri');
+      const pourcentageVolatilite = ParseUtil.queryAndParseNumber(elTrs0[5], 'td.alri') / 100;
+      const pourcentageCapitalEchange = ParseUtil.queryAndParseNumber(elTrs1[0], 'td.alri') / 100;
       const valorisation = ParseUtil.queryAndParseString(elTrs1[1], 'td.alri');
       return {
         cours, volume, ouverture, plusHaut, plusBas, clotureVeille: cloture,
@@ -289,24 +289,95 @@ export class AbcBourseService {
   }
 
   public chargerDividendes(): Observable<DTODividendes> {
-    const resultat = new DTODividendes();
     return new Observable(observer => {
       this.http.get(`/abcbourse/marches/dividendes`, {
         headers: AbcBourseService.HEADERS,
-        responseType: 'text'
+        responseType: 'text',
+        withCredentials: true
       }).subscribe({
         error: httpErrorResponse => {
           observer.error(httpErrorResponse);
           observer.complete();
         },
         next: html => {
-          if (this.parseAndMapDividendes(html, resultat.dividendes)) {
-            observer.next(resultat);
-          } else {
+          const listeParametres = this.parseAndMapParametresFormulaire(html);
+          if (listeParametres) {
+            this.chargerDividendesPourParametres(listeParametres).subscribe({
+              error: httpErrorResponse => {
+                observer.error(httpErrorResponse);
+                observer.complete();
+              },
+              next: dividendes => {
+                observer.next(dividendes);
+                observer.complete();
+              }
+            });
+          }
+        }
+      });
+    });
+  }
+
+  private parseAndMapParametresFormulaire(html: string)
+    : Array<Record<'DlDate' | 'DlZone' | '__RequestVerificationToken', string>> | undefined {
+    const resultat = [];
+    const document = new DOMParser().parseFromString(html, 'text/html');
+    const elFORM = document.querySelector('form');
+    if (elFORM && elFORM.elements.length === 3) {
+      const elements = elFORM.elements;
+      if (elements.item(0)?.tagName === 'SELECT'
+        && elements.item(1)?.tagName === 'SELECT'
+        && elements.item(2)?.tagName === 'INPUT') {
+        const elSELECT = elements.item(1) as HTMLSelectElement;
+        const DlZone = elSELECT.options.item(0)!.value;
+        const elINPUT = elements.item(2) as HTMLInputElement;
+        const __RequestVerificationToken = elINPUT.value;
+        const elSELECT2 = elements.item(0) as HTMLSelectElement;
+        const options = elSELECT2.options;
+        if (options.length > 12) {
+          for (let i = options.length - 12; i < options.length; i++) {
+            const option = options.item(i);
+            resultat.push({
+              DlDate: option!.value, DlZone, __RequestVerificationToken
+            })
+          }
+        }
+      }
+      return resultat;
+    }
+    return undefined;
+  }
+
+  public chargerDividendesPourParametres(listeParametres: Array<Record<'DlDate' | 'DlZone' | '__RequestVerificationToken', string>>): Observable<DTODividendes> {
+    const resultat = new DTODividendes();
+    return new Observable(observer => {
+      const headers = new HttpHeaders()
+        .set('Accept', 'text/html; charset=utf-8')
+        .set('Content-Type', 'application/x-www-form-urlencoded');
+      forkJoin(
+        listeParametres.map(parametres => {
+          // Construire un corps en x-www-form-urlencoded pour éviter la preflight CORS
+          const body = new URLSearchParams(parametres).toString();
+          return this.http.post(`/abcbourse/marches/dividendes`, body, {
+            headers,
+            responseType: 'text',
+            withCredentials: true
+          });
+        })
+      ).subscribe({
+        error: httpErrorResponse => {
+          observer.error(httpErrorResponse);
+          observer.complete();
+        },
+        next: htmls => {
+          const htmlErreur = htmls.find(html => !this.parseAndMapDividendes(html, resultat.dividendes));
+          if (htmlErreur) {
             observer.error({
               message: 'Impossible de récupérer les dividendes dans le html',
-              error: html
+              error: htmlErreur
             });
+          } else {
+            observer.next(resultat);
           }
           observer.complete();
         }
@@ -316,24 +387,27 @@ export class AbcBourseService {
 
   private parseAndMapDividendes(html: string, dividendes: Array<DTODividende>): boolean {
     const document = new DOMParser().parseFromString(html, 'text/html');
-    const elTABLE = document.querySelector('table.tablesorter > tbody');
-    if (!elTABLE) {
+    const elTBODY = document.querySelector('table.tablesorter > tbody');
+    if (!elTBODY) {
+      console.error('tbody introuvable');
       return false;
     } else {
-      const elTRs = elTABLE.querySelectorAll('tr');
+      const elTRs = elTBODY.querySelectorAll('tr');
       for (const elTR of elTRs) {
         const elTDs = elTR.querySelectorAll('td');
         if (elTDs.length !== 5) {
+          console.error('le TR n\'a pas 5 TD', elTR, elTDs.length);
           return false;
         } else {
           const elA = elTDs[1].querySelector('a');
           if (elA) {
             const date = ParseUtil.parseAndMapTo8601(elTDs[0].innerText);
-            const matchTicker = /\/([A-Z]+)p/.exec(elA.href);
+            const matchTicker = /\/([A-Z0-9]+)p/.exec(elA.href);
             const type: TypeDividende = elTDs[2].innerText.toLowerCase() as TypeDividende;
             const montant = ParseUtil.parseNumber(elTDs[3].innerText);
-            const pourcentageRendement = ParseUtil.parseNumber(elTDs[4].innerText);
+            const pourcentageRendement = ParseUtil.parseNumber(elTDs[4].innerText) / 100;
             if (!matchTicker) {
+              console.error('ticker introuvable dans : %s', elA.href);
               return false;
             } else {
               dividendes.push({date, ticker: matchTicker[1], type, montant, pourcentageRendement});

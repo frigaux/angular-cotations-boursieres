@@ -67,14 +67,7 @@ export class ZoneBourseService {
           htmls.forEach(html => {
             resultat = resultat.concat(this.parseAndMapActualites(html, valeurByTicker));
           });
-          if (resultat.length !== 0) {
-            observer.next(resultat);
-          } else {
-            observer.error({
-              message: 'Impossible de récupérer les actualités dans le html',
-              error: htmls[0]
-            });
-          }
+          observer.next(resultat);
           observer.complete();
         }
       });

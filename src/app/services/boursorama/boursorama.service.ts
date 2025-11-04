@@ -97,14 +97,7 @@ export class BoursoramaService {
               resultat.push(dto);
             }
           });
-          if (resultat.length !== 0) {
-            observer.next(resultat);
-          } else {
-            observer.error({
-              message: 'Impossible de récupérer les informations dans le html',
-              error: htmls[0]
-            });
-          }
+          observer.next(resultat);
           observer.complete();
         }
       });
@@ -128,12 +121,12 @@ export class BoursoramaService {
       const plusBas = ParseUtil.queryAndParseNumber(elLIsCotations[5], 'span.c-instrument');
       const volume = ParseUtil.queryAndParseNumber(elLIsCotations[6], 'span.c-instrument');
 
-      const pourcentageCapitalEchange = ParseUtil.queryAndParseNumber(elLIsCotations[7], 'p.c-list-info__value');
+      const pourcentageCapitalEchange = ParseUtil.queryAndParseNumber(elLIsCotations[7], 'p.c-list-info__value') / 100;
       const valorisation = ParseUtil.queryAndParseString(elLIsCotations[8], 'p.c-list-info__value');
 
       const limiteBaisse = ParseUtil.queryAndParseNumber(elLIsCotations[10], 'p.c-list-info__value');
       const limiteHausse = ParseUtil.queryAndParseNumber(elLIsCotations[11], 'p.c-list-info__value');
-      const pourcentageRendementEstime = ParseUtil.queryAndParseNumber(elLIsCotations[12], 'p.c-list-info__value');
+      const pourcentageRendementEstime = ParseUtil.queryAndParseNumber(elLIsCotations[12], 'p.c-list-info__value') / 100;
       const perEstime = ParseUtil.queryAndParseNumber(elLIsCotations[13], 'p.c-list-info__value');
       const dernierDividende = ParseUtil.queryAndParseNumber(elLIsCotations[14], 'p.c-list-info__value');
       const dateDernierDividende = ParseUtil.queryAndParseDate(elLIsCotations[15], 'p.c-list-info__value');

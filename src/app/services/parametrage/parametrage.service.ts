@@ -10,6 +10,7 @@ import {Observable} from 'rxjs';
 import {
   DTORestauration
 } from './dto-restauration.class';
+import {DividendesService} from '../dividendes/dividendes.service';
 
 @Injectable({
   providedIn: 'root'
@@ -23,7 +24,8 @@ export class ParametrageService {
               private valeursService: ValeursService,
               private coursService: CoursService,
               private portefeuillesService: PortefeuillesService,
-              private tableauxService: TableauxService) {
+              private tableauxService: TableauxService,
+              private dividendesService: DividendesService) {
   }
 
   public chargerUrlSauvegardeRestauration(): string | undefined {
@@ -39,7 +41,8 @@ export class ParametrageService {
       achats: this.valeursService.chargerAchats(),
       filtres: this.coursService.chargerFiltres(),
       portefeuilles: this.portefeuillesService.charger(),
-      tableaux: this.tableauxService.charger()
+      tableaux: this.tableauxService.charger(),
+      dividendes: this.dividendesService.charger()
     };
     const url = this.chargerUrlSauvegardeRestauration();
     if (url && URL.canParse(url)) {
@@ -72,6 +75,9 @@ export class ParametrageService {
           }
           if (dtoRestauration.tableaux) {
             this.tableauxService.enregistrer(dto.tableaux);
+          }
+          if (dtoRestauration.dividendes && dto.dividendes) {
+            this.dividendesService.enregistrer(dto.dividendes);
           }
         });
         return o;

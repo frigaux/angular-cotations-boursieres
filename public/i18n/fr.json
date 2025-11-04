@@ -5,6 +5,7 @@
     "VALEURS": "Liste des valeurs",
     "COURS": "Cotation des valeurs",
     "ACHATS_VALEURS": "Achats de valeurs",
+    "DIVIDENDES": "Dividendes",
     "PORTEFEUILLES": "Portefeuilles",
     "GESTION_PORTEFEUILLES": "Gestion des portefeuilles",
     "GESTION_TABLEAUX": "Gestion des tableaux",
@@ -26,6 +27,7 @@
       "VALEURS": "Valeurs",
       "COURS": "Cours",
       "ACHATS_VALEURS": "Achats",
+      "DIVIDENDES": "Dividendes",
       "PORTEFEUILLES": "Portefeuilles",
       "PARAMETRAGE": "Paramétrage",
       "/PARAMETRAGE": {
@@ -128,7 +130,7 @@
         }
       },
       "EVALUATION_ACTUALITES": {
-        "EVALUATION": "Evaluation des actualités",
+        "EVALUATION": "Evaluation des actualités zonebourse",
         "EVALUATION_DATE": "Evaluation des actualités à {{heure}}",
         "RAFRAICHIR": "Rafraîchir",
         "FERMER": "Fermer",
@@ -251,6 +253,17 @@
         "EXPORTER": "Exporter",
         "IMPORTER": "Importer"
       }
+    },
+    "DIVIDENDES": {
+      "DIVIDENDES": "Dividendes",
+      "RECUPERER_DIVIDENDES_ABCBOURSE": "Récupérer les dividendes depuis ABCBourse",
+      "DATE_DERNIERE_RECUPERATION": "Date de dernière récupération : {{date}}",
+      "DATE": "Date",
+      "TICKER": "Ticker",
+      "LIBELLE": "Libellé",
+      "TYPE": "Type",
+      "MONTANT": "Montant",
+      "POURCENTAGE_RENDEMENT": "Rendement"
     },
     "PORTEFEUILLES": {
       "PORTEFEUILLES_DATE": "Portefeuilles à la date du {{jour}}",
@@ -420,6 +433,7 @@
           "PORTEFEUILLES": "les portefeuilles avec leurs valeurs et alertes",
           "FILTRES": "les filtres des cours",
           "ACHATS": "la liste des achats de valeurs",
+          "DIVIDENDES": "la liste des dividendes",
           "SAUVEGARDER": "Sauvegarder"
         },
         "SAUVEGARDE_REUSSI": "Sauvegarde réussie !",
@@ -429,6 +443,7 @@
           "PORTEFEUILLES": "les portefeuilles avec leurs valeurs et alertes",
           "FILTRES": "les filtres des cours",
           "ACHATS": "la liste des achats de valeurs",
+          "DIVIDENDES": "la liste des dividendes",
           "RESTAURER": "Restaurer"
         },
         "RESTAURATION_REUSSIE": "Restauration réussie !"
@@ -522,6 +537,18 @@
           "NOM_REQUIS": "Attribut nom manquant",
           "CONDITION_REQUISE": "Attribut condition manquante",
           "CONDITION_INVALIDE": "Attribut condition invalide"
+        }
+      }
+    },
+    "DIVIDENDES": {
+      "ERREURS": {
+        "DIVIDENDES": {
+          "DATE_RECUPERATION_REQUISE": "Date de récupération manquante",
+          "DATE_REQUISE": "Date dividende manquante",
+          "TICKER_REQUIS": "Ticker dividende manquant",
+          "TYPE_DIVIDENDE_REQUIS": "Type dividende manquant",
+          "MONTANT_REQUIS": "Montant dividende manquant",
+          "POURCENTAGE_RENDEMENT_REQUIS": "Pourcentage rendement dividende manquant"
         }
       }
     }

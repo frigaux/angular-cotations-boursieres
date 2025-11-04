@@ -14,6 +14,7 @@ import {AchatsValeursComponent} from './components/achats-valeurs/achats-valeurs
 import {
   SauvegardeRestaurationComponent
 } from './components/parametrage/sauvegarde-restauration/sauvegarde-restauration.component';
+import {DividendesComponent} from './components/dividendes/dividendes.component';
 
 export const routes: Routes = [
   {
@@ -37,6 +38,11 @@ export const routes: Routes = [
   {
     path: 'achats-valeurs',
     component: AchatsValeursComponent,
+    canActivate: [authentificationGuard]
+  },
+  {
+    path: 'dividendes',
+    component: DividendesComponent,
     canActivate: [authentificationGuard]
   },
   {

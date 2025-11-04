@@ -49,9 +49,13 @@ export class DialogEvaluationActualitesComponent {
     this.loading = true;
     this.heure = new Date();
     this.zoneBourseService.chargerActualites(2, this.valeurByTicker)
-      .subscribe(actualites => {
-        this.actualites = actualites;
-        this.loading = false;
+      .subscribe({
+        next: actualites => {
+          this.actualites = actualites;
+          this.loading = false;
+        },
+        error:
+          httpErrorResponse => this.loading = false
       });
   }
 
