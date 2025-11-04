@@ -8,7 +8,6 @@ import {ValeursService} from '../../services/valeurs/valeurs.service';
 import {DTOValeur} from '../../services/valeurs/dto-valeur.interface';
 import {AbcBourseService} from '../../services/abc-bourse/abc-bourse.service';
 import {DividendeDecore} from './dividende-decore.interface';
-import {VueUtil} from '../commun/vue-util.class';
 
 @Component({
   selector: 'app-dividendes',
@@ -48,7 +47,7 @@ export class DividendesComponent implements OnInit {
       },
       error:
         httpErrorResponse => {
-        console.error(httpErrorResponse);
+          console.error(httpErrorResponse);
           this.loading = false
         }
     });
@@ -74,6 +73,4 @@ export class DividendesComponent implements OnInit {
       });
     }
   }
-
-  protected readonly VueUtil = VueUtil;
 }

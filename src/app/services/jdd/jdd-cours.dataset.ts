@@ -7,22 +7,34 @@ import {CoursPortefeuille} from '../../components/portefeuilles/cours-portefeuil
 import {VALEUR} from './jdd-valeurs.dataset';
 import {DTOFiltre} from '../cours/dto-filtre.interface';
 
+export const COURS_GLE = {
+  "ticker": "GLE",
+  "ouverture": 46.23,
+  "plusHaut": 46.82,
+  "plusBas": 46.06,
+  "cloture": 46.8,
+  "volume": 2141570,
+  "moyennesMobiles": [
+    46.8,
+    46.68
+  ]
+};
+
+export const COURS_BNP = {
+  "ticker": "BNP",
+  "ouverture": 76.64,
+  "plusHaut": 76.83,
+  "plusBas": 76.06,
+  "cloture": 76.36,
+  "volume": 1620728,
+  "moyennesMobiles": [
+    76.26, 76.36
+  ]
+};
+
 export const LISTE_COURS: DTOListeCours = {
   "date": "2025-05-09",
-  "cours": [
-    {
-      "ticker": "GLE",
-      "ouverture": 46.23,
-      "plusHaut": 46.82,
-      "plusBas": 46.06,
-      "cloture": 46.8,
-      "volume": 2141570,
-      "moyennesMobiles": [
-        46.8,
-        46.68
-      ]
-    }
-  ]
+  "cours": [COURS_GLE]
 };
 
 export const COURS_TICKER: DTOCoursTicker = {

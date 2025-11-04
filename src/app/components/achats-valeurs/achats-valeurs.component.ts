@@ -102,7 +102,7 @@ export class AchatsValeursComponent implements OnInit {
     this.construireVue();
   }
 
-  revendreAchat(data: { event: MouseEvent; achatsValeurDecores: AchatsValeurDecores; achatDecore: AchatDecore }) {
+  revendreAchat(data: { event: MouseEvent, achatsValeurDecores: AchatsValeurDecores, achatDecore: AchatDecore }) {
     data.achatDecore.achat.revendu = true;
     this.valeursService.enregistrerAchatsTicker(data.achatsValeurDecores.achatsTicker.ticker, data.achatsValeurDecores.achatsTicker.achats);
     this.construireVue();
