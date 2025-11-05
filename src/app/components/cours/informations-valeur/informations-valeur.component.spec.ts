@@ -7,12 +7,14 @@ import {of} from 'rxjs';
 import {COURS_CROISSANT} from '../../../services/jdd/jdd-cours.dataset';
 import {provideAnimations} from '@angular/platform-browser/animations';
 import {TranslateModule} from '@ngx-translate/core';
+import {BoursoramaService} from '../../../services/boursorama/boursorama.service';
 
-describe('InformationsTickerComponent', () => {
+describe('InformationsValeurComponent', () => {
   let component: InformationsValeurComponent;
   let fixture: ComponentFixture<InformationsValeurComponent>;
 
-  const mockAbcBourseService = jasmine.createSpyObj('AbcBourseService', ['chargerInformationsTicker']);
+  const mockBoursoramaService = jasmine.createSpyObj('BoursoramaService', ['chargerLien']);
+  const mockAbcBourseService = jasmine.createSpyObj('AbcBourseService', ['chargerInformationsTicker', 'chargerLien']);
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
@@ -21,6 +23,7 @@ describe('InformationsTickerComponent', () => {
         TranslateModule.forRoot({})
       ],
       providers: [
+        {provide: BoursoramaService, useValue: mockBoursoramaService},
         {provide: AbcBourseService, useValue: mockAbcBourseService},
         provideAnimations()
       ]

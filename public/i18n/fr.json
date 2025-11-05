@@ -281,7 +281,7 @@
         "ABCBOURSE": "Cotations ABCBourse",
         "BOURSORAMA": "Cotations Boursorama",
         "COURS_BOURSORAMA": "Cours depuis Boursorama",
-        "COURS_BOURSORAMA_PORTEFEUILLE": "Cours du portefeuille depuis Boursorama",
+        "COURS_BOURSORAMA_PORTEFEUILLE": "Cours des valeurs du portefeuille depuis Boursorama",
         "AJOUTER_AU_PORTEFEUILLE": "Ajouter la valeur au portefeuille",
         "DEPLACER_DANS_PORTEFEUILLE": "Déplacer la valeur dans le portefeuille",
         "ACHATS_VALEUR": "Achats pour la valeur \"{{nom}}\"",
@@ -326,7 +326,12 @@
           "ACHATS": "Achats",
           "VENTES": "Ventes",
           "VAR_OUVERTURE": "Var/Ouverture",
-          "VAR_CLOTURE_VEILLE": "Var/Clôture veille"
+          "VAR_CLOTURE_VEILLE": "Var/Clôture veille",
+          "ACTIONS_VALEUR": {
+            "ABCBOURSE": "Cotations ABCBourse",
+            "BOURSORAMA": "Cotations Boursorama",
+            "COURS_BOURSORAMA": "Cours depuis Boursorama"
+          }
         }
       },
       "GESTION_PORTEFEUILLES": {

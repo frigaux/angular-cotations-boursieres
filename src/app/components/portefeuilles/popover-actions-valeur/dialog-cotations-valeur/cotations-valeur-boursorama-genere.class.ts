@@ -45,8 +45,8 @@ export class CotationsValeurBoursoramaDecore {
     const pourcentageAchats = Math.round((qtAchats / (qtAchats + qtVentes)) * 100);
     return {
       labels: [
-        this.translateService.instant('COMPOSANTS.PORTEFEUILLES.ACTIONS_VALEUR.DIALOG_COTATIONS_TICKER.ACHATS', {quantite: qtAchats}),
-        this.translateService.instant('COMPOSANTS.PORTEFEUILLES.ACTIONS_VALEUR.DIALOG_COTATIONS_TICKER.VENTES', {quantite: qtVentes})
+        this.translateService.instant('COMPOSANTS.PORTEFEUILLES.ACTIONS_VALEUR.DIALOG_COTATIONS_VALEUR.ACHATS', {quantite: qtAchats}),
+        this.translateService.instant('COMPOSANTS.PORTEFEUILLES.ACTIONS_VALEUR.DIALOG_COTATIONS_VALEUR.VENTES', {quantite: qtVentes})
       ],
       datasets: [
         {
@@ -67,13 +67,13 @@ export class CotationsValeurBoursoramaDecore {
       labels: [''],
       datasets: [
         {
-          label: this.translateService.instant('COMPOSANTS.PORTEFEUILLES.ACTIONS_VALEUR.DIALOG_COTATIONS_TICKERS_PORTEFEUILLE.ACHATS'),
+          label: this.translateService.instant('COMPOSANTS.PORTEFEUILLES.ACTIONS_VALEUR.DIALOG_COTATIONS_VALEURS_PORTEFEUILLE.ACHATS'),
           backgroundColor: documentStyle.getPropertyValue('--p-green-500'),
           borderColor: documentStyle.getPropertyValue('--p-green-700'),
           data: [qtAchats]
         },
         {
-          label: this.translateService.instant('COMPOSANTS.PORTEFEUILLES.ACTIONS_VALEUR.DIALOG_COTATIONS_TICKERS_PORTEFEUILLE.VENTES'),
+          label: this.translateService.instant('COMPOSANTS.PORTEFEUILLES.ACTIONS_VALEUR.DIALOG_COTATIONS_VALEURS_PORTEFEUILLE.VENTES'),
           backgroundColor: documentStyle.getPropertyValue('--p-red-500'),
           borderColor: documentStyle.getPropertyValue('--p-red-700'),
           data: [qtVentes]

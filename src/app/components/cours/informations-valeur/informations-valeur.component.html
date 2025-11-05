@@ -1,8 +1,8 @@
-<app-dialog-actualite-valeur [actualite]="actualiteCourante"></app-dialog-actualite-valeur>
+<app-dialog-actualite-valeur></app-dialog-actualite-valeur>
 
 @if (cours !== undefined) {
   <app-loader [affiche]="loading" [configuration]="[
-        {marginLeft: '0', marginTop: '0', height: 'calc(100vh - 23rem)', width: '100%'}
+        {marginLeft: '0', marginTop: '0', height: '80vh', width: '100%'}
       ]"></app-loader>
 
   @if (!loading && informationsTicker) {

@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, viewChild} from '@angular/core';
 import {TranslatePipe, TranslateService} from '@ngx-translate/core';
 import {BoursoramaService} from '../../../../services/boursorama/boursorama.service';
 import {CotationsValeurBoursoramaDecore} from '../dialog-cotations-valeur/cotations-valeur-boursorama-genere.class';
@@ -11,6 +11,7 @@ import {UIChart} from 'primeng/chart';
 import {TableModule} from 'primeng/table';
 import {DialogCotationsValeurComponent} from '../dialog-cotations-valeur/dialog-cotations-valeur.component';
 import {VueUtil} from '../../../commun/vue-util.class';
+import {PopoverActionsValeurComponent} from './popover-actions-valeur/popover-actions-valeur.component';
 
 @Component({
   selector: 'app-dialog-cotations-valeurs-portefeuille',
@@ -22,12 +23,14 @@ import {VueUtil} from '../../../commun/vue-util.class';
     PercentPipe,
     UIChart,
     CurrencyPipe,
-    TableModule
+    TableModule,
+    PopoverActionsValeurComponent
   ],
   templateUrl: './dialog-cotations-valeurs-portefeuille.component.html',
   styleUrls: ['./dialog-cotations-valeurs-portefeuille.component.sass', '../../../commun/barre-superieure.sass']
 })
 export class DialogCotationsValeursPortefeuilleComponent {
+  private actionsValeur = viewChild(PopoverActionsValeurComponent);
 
   private dialogCoursTickerComponent?: DialogCotationsValeurComponent;
 
@@ -71,9 +74,15 @@ export class DialogCotationsValeursPortefeuilleComponent {
     }
   }
 
-  protected vueDetaillee(cotationsTickerDecore: CotationsValeurBoursoramaDecore) {
-    if (this.dialogCoursTickerComponent) {
-      this.dialogCoursTickerComponent.afficherCotationsTickerBoursoramaDecore(cotationsTickerDecore);
+  private afficherActions(event: MouseEvent, cotationsTickerDecore: CotationsValeurBoursoramaDecore) {
+    this.actionsValeur()?.afficher(event, cotationsTickerDecore, this.dialogCoursTickerComponent);
+  }
+
+  protected onClickCours(event: MouseEvent, cotationsTickerDecore: CotationsValeurBoursoramaDecore) {
+    if (event.target instanceof Element && event.target.tagName === 'SPAN' && event.target.className.indexOf('pi') !== -1) {
+      this.afficherActions(event, cotationsTickerDecore);
+    } else {
+      this.dialogCoursTickerComponent?.afficherCotationsTickerBoursoramaDecore(cotationsTickerDecore);
     }
   }
 }

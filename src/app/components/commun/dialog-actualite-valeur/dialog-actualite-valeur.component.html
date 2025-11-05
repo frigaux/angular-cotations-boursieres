@@ -1,0 +1,9 @@
+<p-dialog [header]="`${actualite?.date} : ${actualite?.titre}`" [modal]="true" [(visible)]="visible" [style]="{ width: '50vw' }">
+  <app-loader [affiche]="loading" [configuration]="[
+        {marginLeft: '0', marginTop: '0', height: '50vh', width: '100%'}
+      ]"></app-loader>
+
+  @if (!loading && html) {
+    <div [innerHTML]="html"></div>
+  }
+</p-dialog>

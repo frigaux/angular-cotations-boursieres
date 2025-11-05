@@ -1,3 +1,5 @@
+<app-dialog-actualite-valeur></app-dialog-actualite-valeur>
+
 <p-dialog [showHeader]="false" [modal]="true" [(visible)]="visible">
   <div class="barre-superieure-sticky">
     <h2>
@@ -102,7 +104,7 @@
               @for (actualite of cotationsTickerDecore.dto.actualites; track actualite.id) {
                 <div>
                   <span>{{ actualite.date }}</span>
-                  <span>{{ actualite.titre }}</span>
+                  <span (click)="afficherInformation(actualite)">{{ actualite.titre }}</span>
                 </div>
               }
             </div>
@@ -113,7 +115,7 @@
               @for (analyse of cotationsTickerDecore.dto.analyses; track analyse.id) {
                 <div>
                   <span>{{ analyse.date }}</span>
-                  <span>{{ analyse.titre }}</span>
+                  <span (click)="afficherInformation(analyse)">{{ analyse.titre }}</span>
                 </div>
               }
             </div>

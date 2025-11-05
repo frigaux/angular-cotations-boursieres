@@ -1,4 +1,4 @@
-import {Component, input, InputSignal} from '@angular/core';
+import {Component, input, InputSignal, viewChild} from '@angular/core';
 import {DTOInformationsTickerABCBourse} from '../../../services/abc-bourse/dto-informations-ticker-abc-bourse.class';
 import {AbcBourseService} from '../../../services/abc-bourse/abc-bourse.service';
 import {Fieldset} from 'primeng/fieldset';
@@ -8,8 +8,9 @@ import {CurrencyPipe, DatePipe, DecimalPipe, NgClass, PercentPipe} from '@angula
 import {TranslatePipe} from '@ngx-translate/core';
 import {Cours} from '../cours.class';
 import {DTOActualiteTicker} from '../../../services/abc-bourse/dto-actualite-ticker.class';
-import {DialogActualiteValeurComponent} from './dialog-actualite-valeur/dialog-actualite-valeur.component';
+import {DialogActualiteValeurComponent} from '../../commun/dialog-actualite-valeur/dialog-actualite-valeur.component';
 import {ConseilsGeminiValeurComponent} from '../conseils-gemini-valeur/conseils-gemini-valeur.component';
+import {PopoverActionsValeurComponent} from '../popover-actions-valeur/popover-actions-valeur.component';
 
 @Component({
   selector: 'app-informations-ticker',
@@ -30,6 +31,8 @@ import {ConseilsGeminiValeurComponent} from '../conseils-gemini-valeur/conseils-
   styleUrl: './informations-valeur.component.sass'
 })
 export class InformationsValeurComponent {
+  private dialogActualiteValeurComponent = viewChild(DialogActualiteValeurComponent);
+
   // chargement des informations pour le ticker
   loading: boolean = true;
 
@@ -42,7 +45,6 @@ export class InformationsValeurComponent {
   // données pour la vue
   informationsTicker?: DTOInformationsTickerABCBourse;
   pourcentageDividendes?: number;
-  actualiteCourante?: DTOActualiteTicker
 
   constructor(private abcBourseService: AbcBourseService) {
   }
@@ -69,6 +71,6 @@ export class InformationsValeurComponent {
   }
 
   afficherActualite(actualite: DTOActualiteTicker) {
-    this.actualiteCourante = actualite;
+    this.dialogActualiteValeurComponent()?.afficherActualiteABCBourse(actualite);
   }
 }

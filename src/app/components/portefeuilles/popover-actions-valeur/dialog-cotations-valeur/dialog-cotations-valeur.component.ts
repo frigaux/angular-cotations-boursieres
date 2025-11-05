@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, viewChild} from '@angular/core';
 import {Dialog} from 'primeng/dialog';
 import {LoaderComponent} from '../../../loader/loader.component';
 import {TableModule} from 'primeng/table';
@@ -11,6 +11,10 @@ import {CotationsValeurBoursoramaDecore} from './cotations-valeur-boursorama-gen
 import {JaugeComponent} from '../../../commun/jauge/jauge.component';
 import {CoursPortefeuille} from '../../cours-portefeuille.class';
 import {VueUtil} from '../../../commun/vue-util.class';
+import {
+  DialogActualiteValeurComponent
+} from '../../../commun/dialog-actualite-valeur/dialog-actualite-valeur.component';
+import {DTOInformation} from '../../../../services/boursorama/dto-information.interface';
 
 @Component({
   selector: 'app-dialog-cotations-valeur',
@@ -25,12 +29,14 @@ import {VueUtil} from '../../../commun/vue-util.class';
     DecimalPipe,
     PercentPipe,
     DatePipe,
-    JaugeComponent
+    JaugeComponent,
+    DialogActualiteValeurComponent
   ],
   templateUrl: './dialog-cotations-valeur.component.html',
   styleUrls: ['./dialog-cotations-valeur.component.sass', '../../../commun/barre-superieure.sass']
 })
 export class DialogCotationsValeurComponent {
+  private dialogActualiteValeurComponent = viewChild(DialogActualiteValeurComponent);
 
   // données pour la vue
   protected visible: boolean = false;
@@ -73,5 +79,9 @@ export class DialogCotationsValeurComponent {
     if (this.cours) {
       this.afficherCours(this.cours);
     }
+  }
+
+  protected afficherInformation(actualite: DTOInformation) {
+    this.dialogActualiteValeurComponent()?.afficherInformationBoursorama(actualite);
   }
 }

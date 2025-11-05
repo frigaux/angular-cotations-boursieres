@@ -8,7 +8,7 @@ import {REPONSE_API_GEMINI} from '../../../services/jdd/jdd-ia.dataset';
 import {COURS_CROISSANT} from '../../../services/jdd/jdd-cours.dataset';
 import {TranslateModule} from '@ngx-translate/core';
 
-describe('ConseilsGeminiTickerComponent', () => {
+describe('ConseilsGeminiValeurComponent', () => {
   let component: ConseilsGeminiValeurComponent;
   let fixture: ComponentFixture<ConseilsGeminiValeurComponent>;
 

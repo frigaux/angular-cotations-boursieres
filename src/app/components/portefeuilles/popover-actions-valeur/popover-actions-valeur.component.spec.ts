@@ -3,15 +3,14 @@ import {ComponentFixture, TestBed} from '@angular/core/testing';
 import {PopoverActionsValeurComponent} from './popover-actions-valeur.component';
 import {TranslateModule} from '@ngx-translate/core';
 import {DTOPortefeuille} from '../../../services/portefeuilles/dto-portefeuille.interface';
-import {Cours} from '../../cours/cours.class';
 import {COURS_PORTEFEUILLE} from '../../../services/jdd/jdd-cours.dataset';
 import {PORTEFEUILLES} from '../../../services/jdd/jdd-portefeuilles.dataset';
 import {PortefeuillesService} from '../../../services/portefeuilles/portefeuilles.service';
 import {ConfirmationService} from 'primeng/api';
 import {DialogueService} from '../../../services/dialogue/dialogue.service';
 import {BoursoramaService} from '../../../services/boursorama/boursorama.service';
-import {CoursPortefeuille} from '../cours-portefeuille.class';
 import {PortefeuilleAvecCours} from '../portefeuille-avec-cours.class';
+import {AbcBourseService} from '../../../services/abc-bourse/abc-bourse.service';
 
 describe('PopoverActionsValeurComponent', () => {
   let dialogueService: DialogueService;
@@ -21,6 +20,7 @@ describe('PopoverActionsValeurComponent', () => {
   const clonePORTEFEUILLES: Function = () => JSON.parse(JSON.stringify(PORTEFEUILLES));
   const mockPortefeuillesService = jasmine.createSpyObj('PortefeuillesService', ['charger', 'enregistrer']);
   const mockBoursoramaService = jasmine.createSpyObj('BoursoramaService', ['chargerCoursTicker']);
+  const mockAbcBourseService = jasmine.createSpyObj('AbcBourseService', ['chargerCotationsTicker', 'chargerCotationsTickers']);
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
@@ -31,6 +31,7 @@ describe('PopoverActionsValeurComponent', () => {
       providers: [
         {provide: PortefeuillesService, useValue: mockPortefeuillesService},
         {provide: BoursoramaService, useValue: mockBoursoramaService},
+        {provide: AbcBourseService, useValue: mockAbcBourseService},
         ConfirmationService
       ]
     })

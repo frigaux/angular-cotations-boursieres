@@ -189,4 +189,25 @@ export class BoursoramaService {
       });
     return resultat;
   }
+
+  public chargerLien(pathname: string): Observable<string> {
+    return new Observable(observer => {
+      if (!pathname.startsWith('/')) {
+        pathname = '/' + pathname;
+      }
+      this.http.get(`/boursorama${pathname}`, {
+        headers: BoursoramaService.HEADERS_HTML,
+        responseType: 'text'
+      }).subscribe({
+        error: httpErrorResponse => {
+          observer.error(httpErrorResponse);
+          observer.complete();
+        },
+        next: html => {
+          observer.next(ParseUtil.parseAndMapTagArticle(html));
+          observer.complete();
+        }
+      });
+    });
+  }
 }
