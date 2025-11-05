@@ -8,8 +8,8 @@ import {CurrencyPipe, DatePipe, DecimalPipe, NgClass, PercentPipe} from '@angula
 import {TranslatePipe} from '@ngx-translate/core';
 import {Cours} from '../cours.class';
 import {DTOActualiteTicker} from '../../../services/abc-bourse/dto-actualite-ticker.class';
-import {DialogActualiteTickerComponent} from './actualite-ticker/dialog-actualite-ticker.component';
-import {ConseilsGeminiTickerComponent} from '../conseils-gemini-ticker/conseils-gemini-ticker.component';
+import {DialogActualiteValeurComponent} from './dialog-actualite-valeur/dialog-actualite-valeur.component';
+import {ConseilsGeminiValeurComponent} from '../conseils-gemini-valeur/conseils-gemini-valeur.component';
 
 @Component({
   selector: 'app-informations-ticker',
@@ -22,14 +22,14 @@ import {ConseilsGeminiTickerComponent} from '../conseils-gemini-ticker/conseils-
     DecimalPipe,
     CurrencyPipe,
     NgClass,
-    DialogActualiteTickerComponent,
+    DialogActualiteValeurComponent,
     DatePipe,
-    ConseilsGeminiTickerComponent
+    ConseilsGeminiValeurComponent
   ],
-  templateUrl: './informations-ticker.component.html',
-  styleUrl: './informations-ticker.component.sass'
+  templateUrl: './informations-valeur.component.html',
+  styleUrl: './informations-valeur.component.sass'
 })
-export class InformationsTickerComponent {
+export class InformationsValeurComponent {
   // chargement des informations pour le ticker
   loading: boolean = true;
 

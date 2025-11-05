@@ -1,7 +1,7 @@
 import {DTOCotationsTickerBoursorama} from '../../../../services/boursorama/dto-cotations-ticker-boursorama.interface';
 import {TranslateService} from '@ngx-translate/core';
 
-export class CotationsTickerBoursoramaDecore {
+export class CotationsValeurBoursoramaDecore {
   id: number;
   dto: DTOCotationsTickerBoursorama;
   pourcentageCours: number;

@@ -1,4 +1,4 @@
-<app-dialog-actualite-ticker [actualite]="actualiteCourante"></app-dialog-actualite-ticker>
+<app-dialog-actualite-valeur [actualite]="actualiteCourante"></app-dialog-actualite-valeur>
 
 @if (cours !== undefined) {
   <app-loader [affiche]="loading" [configuration]="[
@@ -8,15 +8,15 @@
   @if (!loading && informationsTicker) {
     <div class="ligne">
       <div class="colonne">
-        <p-fieldset legend="{{ 'COMPOSANTS.COURS.INFORMATIONS_TICKER.VARIATIONS.VARIATIONS' | translate }}">
+        <p-fieldset legend="{{ 'COMPOSANTS.COURS.INFORMATIONS_VALEUR.VARIATIONS.VARIATIONS' | translate }}">
           <p-table size="small"
                    [value]="informationsTicker.variations"
                    [loading]="loading">
             <ng-template #header>
               <tr>
-                <th>{{ 'COMPOSANTS.COURS.INFORMATIONS_TICKER.VARIATIONS.DUREE' | translate }}</th>
+                <th>{{ 'COMPOSANTS.COURS.INFORMATIONS_VALEUR.VARIATIONS.DUREE' | translate }}</th>
                 <th
-                  style="text-align: right">{{ 'COMPOSANTS.COURS.INFORMATIONS_TICKER.VARIATIONS.VARIATION' | translate }}
+                  style="text-align: right">{{ 'COMPOSANTS.COURS.INFORMATIONS_VALEUR.VARIATIONS.VARIATION' | translate }}
                 </th>
               </tr>
             </ng-template>
@@ -33,15 +33,15 @@
 
         @if (informationsTicker.dividendes.length > 0) {
           <p-fieldset
-            legend="{{ 'COMPOSANTS.COURS.INFORMATIONS_TICKER.DIVIDENDES.DIVIDENDES' | translate: { pourcentage: pourcentageDividendes | percent:'1.2-2' } }}">
+            legend="{{ 'COMPOSANTS.COURS.INFORMATIONS_VALEUR.DIVIDENDES.DIVIDENDES' | translate: { pourcentage: pourcentageDividendes | percent:'1.2-2' } }}">
             <p-table size="small"
                      [value]="informationsTicker.dividendes"
                      [loading]="loading">
               <ng-template #header>
                 <tr>
-                  <th>{{ 'COMPOSANTS.COURS.INFORMATIONS_TICKER.DIVIDENDES.ANNEE' | translate }}</th>
+                  <th>{{ 'COMPOSANTS.COURS.INFORMATIONS_VALEUR.DIVIDENDES.ANNEE' | translate }}</th>
                   <th
-                    style="text-align: right">{{ 'COMPOSANTS.COURS.INFORMATIONS_TICKER.DIVIDENDES.MONTANT' | translate }}
+                    style="text-align: right">{{ 'COMPOSANTS.COURS.INFORMATIONS_VALEUR.DIVIDENDES.MONTANT' | translate }}
                   </th>
                 </tr>
               </ng-template>
@@ -56,14 +56,14 @@
         }
       </div>
       <div class="colonne">
-        <p-fieldset legend="{{ 'COMPOSANTS.COURS.INFORMATIONS_TICKER.ACTUALITES.ACTUALITES' | translate }}">
+        <p-fieldset legend="{{ 'COMPOSANTS.COURS.INFORMATIONS_VALEUR.ACTUALITES.ACTUALITES' | translate }}">
           <p-table size="small"
                    [value]="informationsTicker.actualites"
                    [loading]="loading">
             <ng-template #header>
               <tr>
-                <th>{{ 'COMPOSANTS.COURS.INFORMATIONS_TICKER.ACTUALITES.DATE' | translate }}</th>
-                <th>{{ 'COMPOSANTS.COURS.INFORMATIONS_TICKER.ACTUALITES.TITRE' | translate }}</th>
+                <th>{{ 'COMPOSANTS.COURS.INFORMATIONS_VALEUR.ACTUALITES.DATE' | translate }}</th>
+                <th>{{ 'COMPOSANTS.COURS.INFORMATIONS_VALEUR.ACTUALITES.TITRE' | translate }}</th>
               </tr>
             </ng-template>
             <ng-template #body let-actualite>
@@ -75,7 +75,7 @@
           </p-table>
         </p-fieldset>
 
-        <p-fieldset legend="{{ 'COMPOSANTS.COURS.INFORMATIONS_TICKER.RATIOS.RATIOS' | translate }}">
+        <p-fieldset legend="{{ 'COMPOSANTS.COURS.INFORMATIONS_VALEUR.RATIOS.RATIOS' | translate }}">
           <div class="ratios">
             <div>
               <p-table size="small"
@@ -83,10 +83,10 @@
                        [loading]="loading">
                 <ng-template #header>
                   <tr>
-                    <th>{{ 'COMPOSANTS.COURS.INFORMATIONS_TICKER.RATIOS.ANNEE' | translate }}</th>
-                    <th style="text-align: right">{{ 'COMPOSANTS.COURS.INFORMATIONS_TICKER.RATIOS.BNPA' | translate }}
+                    <th>{{ 'COMPOSANTS.COURS.INFORMATIONS_VALEUR.RATIOS.ANNEE' | translate }}</th>
+                    <th style="text-align: right">{{ 'COMPOSANTS.COURS.INFORMATIONS_VALEUR.RATIOS.BNPA' | translate }}
                     </th>
-                    <th style="text-align: right">{{ 'COMPOSANTS.COURS.INFORMATIONS_TICKER.RATIOS.PER' | translate }}
+                    <th style="text-align: right">{{ 'COMPOSANTS.COURS.INFORMATIONS_VALEUR.RATIOS.PER' | translate }}
                     </th>
                   </tr>
                 </ng-template>
@@ -101,27 +101,27 @@
             </div>
             <div>
               <div>
-                <label>{{ 'COMPOSANTS.COURS.INFORMATIONS_TICKER.RATIOS.COURS' | translate }}</label>
+                <label>{{ 'COMPOSANTS.COURS.INFORMATIONS_VALEUR.RATIOS.COURS' | translate }}</label>
                 <span>{{ informationsTicker.cotations?.cours | currency:'€' }}</span>
               </div>
               <div>
-                <label>{{ 'COMPOSANTS.COURS.INFORMATIONS_TICKER.RATIOS.VARIATION_CAC' | translate }}</label>
+                <label>{{ 'COMPOSANTS.COURS.INFORMATIONS_VALEUR.RATIOS.VARIATION_CAC' | translate }}</label>
                 <span>{{ informationsTicker.ratios.variationCAC | percent:'1.2-2' }}</span>
               </div>
               <div>
-                <label>{{ 'COMPOSANTS.COURS.INFORMATIONS_TICKER.RATIOS.CORRELATION_CAC' | translate }}</label>
+                <label>{{ 'COMPOSANTS.COURS.INFORMATIONS_VALEUR.RATIOS.CORRELATION_CAC' | translate }}</label>
                 <span>{{ informationsTicker.ratios.correlationCAC | percent:'1.2-2' }}</span>
               </div>
               <div>
-                <label>{{ 'COMPOSANTS.COURS.INFORMATIONS_TICKER.RATIOS.QUALITE' | translate }}</label>
+                <label>{{ 'COMPOSANTS.COURS.INFORMATIONS_VALEUR.RATIOS.QUALITE' | translate }}</label>
                 <span>{{ informationsTicker.ratios.qualiteFinanciere }}</span>
               </div>
             </div>
           </div>
         </p-fieldset>
 
-        <p-fieldset legend="{{ 'COMPOSANTS.COURS.INFORMATIONS_TICKER.IA.GEMINI' | translate }}">
-          <app-conseils-gemini-ticker [cours]="cours"></app-conseils-gemini-ticker>
+        <p-fieldset legend="{{ 'COMPOSANTS.COURS.INFORMATIONS_VALEUR.IA.GEMINI' | translate }}">
+          <app-conseils-gemini-valeur [cours]="cours"></app-conseils-gemini-valeur>
         </p-fieldset>
       </div>
     </div>

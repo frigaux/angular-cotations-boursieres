@@ -14,6 +14,10 @@ import {PrimeNG} from 'primeng/config';
 import {PickList} from 'primeng/picklist';
 import {NavigationBar} from '@squareetlabs/capacitor-navigation-bar';
 
+// TODO : DialogCotationsTickersPortefeuilleComponent :
+// - ajouter la popup des actions (lien vers boursorama, abc, DialogCotationsTickerComponent)
+// - pouvoir charger les liens dans DialogCotationsTickerComponent
+// TODO : JAVA est en zulutime dans le cache et les logs :/
 // TODO : service ABCBourse de récupération des informations pour un ticker : récupérer la pré-ouverture ?
 // TODO : vue portefeuille : nouvelles colonnes dividendes : montant et date ?
 // TODO : nouvelles opérandes pour les alertes du portefeuille/cours min/max/moyenne/nombre vagues

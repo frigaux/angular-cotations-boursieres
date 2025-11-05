@@ -170,7 +170,7 @@
           "EXEMPLE": "Exemple de filtres"
         }
       },
-      "INFORMATIONS_TICKER": {
+      "INFORMATIONS_VALEUR": {
         "VARIATIONS": {
           "VARIATIONS": "Variations",
           "DUREE": "Durée",
@@ -200,7 +200,7 @@
           "GEMINI": "IA Google Gemini"
         }
       },
-      "CONSEILS_GEMINI_TICKER": {
+      "CONSEILS_GEMINI_VALEUR": {
         "EDITER_CLE_API_GEMINI": "Editer la clé d'API Gemini",
         "REQUETE_API": "Effectuer la requête Gemini",
         "FORMULAIRE": {
@@ -286,8 +286,8 @@
         "DEPLACER_DANS_PORTEFEUILLE": "Déplacer la valeur dans le portefeuille",
         "ACHATS_VALEUR": "Achats pour la valeur \"{{nom}}\"",
         "CONFIRMATION_SUPPRESSION": "Confirmez-vous la suppression de la valeur \"{{valeur}}\" du portefeuille \"{{nomPortefeuille}}\" ?",
-        "DIALOG_COTATIONS_TICKER": {
-          "COTATIONS_TICKER": "Cours et ordres pour la valeur {{valeur}} ({{ticker}})",
+        "DIALOG_COTATIONS_VALEUR": {
+          "COTATIONS_VALEUR": "Cours et ordres pour la valeur {{valeur}} ({{ticker}})",
           "RAFRAICHIR": "Rafraîchir",
           "FERMER": "Fermer",
           "COTATIONS": "Cotations",
@@ -313,8 +313,8 @@
           "ACHATS": "Achats ({{quantite}})",
           "VENTES": "Ventes ({{quantite}})"
         },
-        "DIALOG_COTATIONS_TICKERS_PORTEFEUILLE": {
-          "COTATIONS_TICKERS_PORTEFEUILLE": "Cours et ordres pour les valeurs du portefeuille \"{{nomPortefeuille}}\"",
+        "DIALOG_COTATIONS_VALEURS_PORTEFEUILLE": {
+          "COTATIONS_VALEURS_PORTEFEUILLE": "Cours et ordres pour les valeurs du portefeuille \"{{nomPortefeuille}}\"",
           "RAFRAICHIR": "Rafraîchir",
           "FERMER": "Fermer",
           "VALEUR": "Valeur",

@@ -6,7 +6,7 @@ import {Cours} from '../../cours/cours.class';
 import {AlertesComponent} from '../alertes/alertes.component';
 import {Alerte} from '../alerte.class';
 import {TranslatePipe} from '@ngx-translate/core';
-import {InformationsTickerComponent} from '../../cours/informations-ticker/informations-ticker.component';
+import {InformationsValeurComponent} from '../../cours/informations-valeur/informations-valeur.component';
 import {NgClass} from '@angular/common';
 
 @Component({
@@ -16,7 +16,7 @@ import {NgClass} from '@angular/common';
     ChartsComponent,
     AlertesComponent,
     TranslatePipe,
-    InformationsTickerComponent,
+    InformationsValeurComponent,
     NgClass
   ],
   templateUrl: './details-valeur.component.html',

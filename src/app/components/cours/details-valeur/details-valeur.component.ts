@@ -3,7 +3,7 @@ import {TranslatePipe} from '@ngx-translate/core';
 import {Panel} from 'primeng/panel';
 import {ChartMoyennesMobilesComponent} from '../chart-moyennes-mobiles/chart-moyennes-mobiles.component';
 import {Cours} from '../cours.class';
-import {InformationsTickerComponent} from '../informations-ticker/informations-ticker.component';
+import {InformationsValeurComponent} from '../informations-valeur/informations-valeur.component';
 import {NgClass} from '@angular/common';
 
 @Component({
@@ -12,7 +12,7 @@ import {NgClass} from '@angular/common';
     Panel,
     TranslatePipe,
     ChartMoyennesMobilesComponent,
-    InformationsTickerComponent,
+    InformationsValeurComponent,
     NgClass,
   ],
   templateUrl: './details-valeur.component.html',

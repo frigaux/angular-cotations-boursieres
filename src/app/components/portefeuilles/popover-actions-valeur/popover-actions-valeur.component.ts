@@ -8,12 +8,12 @@ import {DialogueService} from '../../../services/dialogue/dialogue.service';
 import {Select} from 'primeng/select';
 import {FormsModule} from '@angular/forms';
 import {PanneauAchatsValeurComponent} from './panneau-achats-valeur/panneau-achats-valeur.component';
-import {DialogCotationsTickerComponent} from './dialog-cotations-ticker/dialog-cotations-ticker.component';
+import {DialogCotationsValeurComponent} from './dialog-cotations-valeur/dialog-cotations-valeur.component';
 import {CoursPortefeuille} from '../cours-portefeuille.class';
 import {PortefeuilleAvecCours} from '../portefeuille-avec-cours.class';
 import {
-  DialogCotationsTickersPortefeuilleComponent
-} from './dialog-cotations-tickers-portefeuille/dialog-cotations-tickers-portefeuille.component';
+  DialogCotationsValeursPortefeuilleComponent
+} from './dialog-cotations-valeurs-portefeuille/dialog-cotations-valeurs-portefeuille.component';
 
 @Component({
   selector: 'app-popover-actions-valeur',
@@ -23,8 +23,8 @@ import {
     Select,
     FormsModule,
     PanneauAchatsValeurComponent,
-    DialogCotationsTickerComponent,
-    DialogCotationsTickersPortefeuilleComponent
+    DialogCotationsValeurComponent,
+    DialogCotationsValeursPortefeuilleComponent
   ],
   templateUrl: './popover-actions-valeur.component.html',
   styleUrl: './popover-actions-valeur.component.sass'
@@ -32,8 +32,8 @@ import {
 export class PopoverActionsValeurComponent {
   private popover = viewChild(Popover);
   private panneauAchatsValeurComponent = viewChild(PanneauAchatsValeurComponent);
-  private dialogCoursTickerComponent = viewChild(DialogCotationsTickerComponent);
-  private dialogCotationsTickersPortefeuilleComponent = viewChild(DialogCotationsTickersPortefeuilleComponent);
+  private dialogCoursTickerComponent = viewChild(DialogCotationsValeurComponent);
+  private dialogCotationsTickersPortefeuilleComponent = viewChild(DialogCotationsValeursPortefeuilleComponent);
 
   // paramètres
   cours?: CoursPortefeuille;

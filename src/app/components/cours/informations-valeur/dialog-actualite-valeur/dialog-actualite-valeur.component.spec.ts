@@ -1,20 +1,20 @@
 import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import {DialogActualiteTickerComponent} from './dialog-actualite-ticker.component';
+import {DialogActualiteValeurComponent} from './dialog-actualite-valeur.component';
 import {AbcBourseService} from '../../../../services/abc-bourse/abc-bourse.service';
 import {of} from 'rxjs';
 import {DTOActualiteTicker} from '../../../../services/abc-bourse/dto-actualite-ticker.class';
 import {provideAnimations} from '@angular/platform-browser/animations';
 
 describe('DialogActualiteTickerComponent', () => {
-  let component: DialogActualiteTickerComponent;
-  let fixture: ComponentFixture<DialogActualiteTickerComponent>;
+  let component: DialogActualiteValeurComponent;
+  let fixture: ComponentFixture<DialogActualiteValeurComponent>;
 
   const mockAbcBourseService = jasmine.createSpyObj('AbcBourseService', ['chargerLien']);
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [DialogActualiteTickerComponent],
+      imports: [DialogActualiteValeurComponent],
       providers: [
         {provide: AbcBourseService, useValue: mockAbcBourseService},
         provideAnimations()
@@ -22,7 +22,7 @@ describe('DialogActualiteTickerComponent', () => {
     })
       .compileComponents();
 
-    fixture = TestBed.createComponent(DialogActualiteTickerComponent);
+    fixture = TestBed.createComponent(DialogActualiteValeurComponent);
     component = fixture.componentInstance;
   });
 

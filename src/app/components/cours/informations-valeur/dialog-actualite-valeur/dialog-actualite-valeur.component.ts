@@ -4,14 +4,14 @@ import {DTOActualiteTicker} from '../../../../services/abc-bourse/dto-actualite-
 import {AbcBourseService} from '../../../../services/abc-bourse/abc-bourse.service';
 
 @Component({
-  selector: 'app-dialog-actualite-ticker',
+  selector: 'app-dialog-actualite-valeur',
   imports: [
     Dialog
   ],
-  templateUrl: './dialog-actualite-ticker.component.html',
-  styleUrl: './dialog-actualite-ticker.component.sass'
+  templateUrl: './dialog-actualite-valeur.component.html',
+  styleUrl: './dialog-actualite-valeur.component.sass'
 })
-export class DialogActualiteTickerComponent {
+export class DialogActualiteValeurComponent {
   // input/output
   inputActualite: InputSignal<DTOActualiteTicker | undefined> = input(undefined,
     {transform: o => this.intercepteurActualite(o), alias: 'actualite'});

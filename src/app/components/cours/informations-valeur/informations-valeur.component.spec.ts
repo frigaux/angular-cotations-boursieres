@@ -1,6 +1,6 @@
 import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import {InformationsTickerComponent} from './informations-ticker.component';
+import {InformationsValeurComponent} from './informations-valeur.component';
 import {AbcBourseService} from '../../../services/abc-bourse/abc-bourse.service';
 import {DTOInformationsTickerABCBourse} from '../../../services/abc-bourse/dto-informations-ticker-abc-bourse.class';
 import {of} from 'rxjs';
@@ -9,15 +9,15 @@ import {provideAnimations} from '@angular/platform-browser/animations';
 import {TranslateModule} from '@ngx-translate/core';
 
 describe('InformationsTickerComponent', () => {
-  let component: InformationsTickerComponent;
-  let fixture: ComponentFixture<InformationsTickerComponent>;
+  let component: InformationsValeurComponent;
+  let fixture: ComponentFixture<InformationsValeurComponent>;
 
   const mockAbcBourseService = jasmine.createSpyObj('AbcBourseService', ['chargerInformationsTicker']);
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [
-        InformationsTickerComponent,
+        InformationsValeurComponent,
         TranslateModule.forRoot({})
       ],
       providers: [
@@ -27,7 +27,7 @@ describe('InformationsTickerComponent', () => {
     })
       .compileComponents();
 
-    fixture = TestBed.createComponent(InformationsTickerComponent);
+    fixture = TestBed.createComponent(InformationsValeurComponent);
     component = fixture.componentInstance;
   });
 

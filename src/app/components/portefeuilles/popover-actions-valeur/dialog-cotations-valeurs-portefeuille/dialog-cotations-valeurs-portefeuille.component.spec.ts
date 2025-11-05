@@ -1,19 +1,19 @@
 import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import {DialogCotationsTickerComponent} from './dialog-cotations-ticker.component';
+import {DialogCotationsValeursPortefeuilleComponent} from './dialog-cotations-valeurs-portefeuille.component';
 import {TranslateModule} from '@ngx-translate/core';
 import {BoursoramaService} from '../../../../services/boursorama/boursorama.service';
 
-describe('DialogCoursTickerComponent', () => {
-  let component: DialogCotationsTickerComponent;
-  let fixture: ComponentFixture<DialogCotationsTickerComponent>;
+describe('DialogCotationsTickersPortefeuille', () => {
+  let component: DialogCotationsValeursPortefeuilleComponent;
+  let fixture: ComponentFixture<DialogCotationsValeursPortefeuilleComponent>;
 
-  const mockBoursoramaService = jasmine.createSpyObj('BoursoramaService', ['chargerCoursTicker']);
+  const mockBoursoramaService = jasmine.createSpyObj('BoursoramaService', ['chargerCotationsTickers']);
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [
-        DialogCotationsTickerComponent,
+        DialogCotationsValeursPortefeuilleComponent,
         TranslateModule.forRoot({})
       ],
       providers: [
@@ -22,7 +22,7 @@ describe('DialogCoursTickerComponent', () => {
     })
       .compileComponents();
 
-    fixture = TestBed.createComponent(DialogCotationsTickerComponent);
+    fixture = TestBed.createComponent(DialogCotationsValeursPortefeuilleComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

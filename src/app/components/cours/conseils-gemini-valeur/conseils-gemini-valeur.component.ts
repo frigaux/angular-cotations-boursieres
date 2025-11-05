@@ -9,7 +9,7 @@ import {ResultatApiGeminiComponent} from './resultat-api-gemini/resultat-api-gem
 import {TranslatePipe} from '@ngx-translate/core';
 
 @Component({
-  selector: 'app-conseils-gemini-ticker',
+  selector: 'app-conseils-gemini-valeur',
   imports: [
     LoaderComponent,
     ReactiveFormsModule,
@@ -17,10 +17,10 @@ import {TranslatePipe} from '@ngx-translate/core';
     ResultatApiGeminiComponent,
     TranslatePipe
   ],
-  templateUrl: './conseils-gemini-ticker.component.html',
-  styleUrl: './conseils-genkit-ticker.component.sass'
+  templateUrl: './conseils-gemini-valeur.component.html',
+  styleUrl: './conseils-genkit-valeur.component.sass'
 })
-export class ConseilsGeminiTickerComponent implements OnInit {
+export class ConseilsGeminiValeurComponent implements OnInit {
   // chargement des informations pour le ticker
   loading: boolean = false;
 

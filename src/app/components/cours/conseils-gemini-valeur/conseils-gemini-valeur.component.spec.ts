@@ -1,6 +1,6 @@
 import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import {ConseilsGeminiTickerComponent} from './conseils-gemini-ticker.component';
+import {ConseilsGeminiValeurComponent} from './conseils-gemini-valeur.component';
 import {IAService} from '../../../services/IA/ia.service';
 import {of} from 'rxjs';
 import {DTOConseilsGeminiTicker} from '../../../services/IA/dto-conseils-gemini-ticker.class';
@@ -9,15 +9,15 @@ import {COURS_CROISSANT} from '../../../services/jdd/jdd-cours.dataset';
 import {TranslateModule} from '@ngx-translate/core';
 
 describe('ConseilsGeminiTickerComponent', () => {
-  let component: ConseilsGeminiTickerComponent;
-  let fixture: ComponentFixture<ConseilsGeminiTickerComponent>;
+  let component: ConseilsGeminiValeurComponent;
+  let fixture: ComponentFixture<ConseilsGeminiValeurComponent>;
 
   const mockIAService = jasmine.createSpyObj('IAService', ['chargerCleAPIGemini', 'interrogerApiGemini']);
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [
-        ConseilsGeminiTickerComponent,
+        ConseilsGeminiValeurComponent,
         TranslateModule.forRoot({})
       ],
       providers: [
@@ -26,7 +26,7 @@ describe('ConseilsGeminiTickerComponent', () => {
     })
       .compileComponents();
 
-    fixture = TestBed.createComponent(ConseilsGeminiTickerComponent);
+    fixture = TestBed.createComponent(ConseilsGeminiValeurComponent);
     component = fixture.componentInstance;
   });
 
