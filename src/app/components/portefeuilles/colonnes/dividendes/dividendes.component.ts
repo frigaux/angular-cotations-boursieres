@@ -17,9 +17,9 @@ export class DividendesComponent {
     {transform: o => this.intercepteurDividendes(o), alias: 'dividendes'});
 
   // données pour la vue
-  dividendes: Array<DTODividende> | undefined;
+  dividendes?: Array<DTODividende>;
 
-  private intercepteurDividendes(dividendes: Array<DTODividende> | undefined) {
+  private intercepteurDividendes(dividendes?: Array<DTODividende>) {
     this.dividendes = dividendes?.sort((d1, d2) => d1.date.localeCompare(d2.date));
     return dividendes;
   }
