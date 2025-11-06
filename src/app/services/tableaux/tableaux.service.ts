@@ -9,6 +9,7 @@ import {CurrencyPipe, DatePipe, DecimalPipe, PercentPipe} from '@angular/common'
 import {TypesColonnesCours} from './types-colonnes-cours.enum';
 import {Observable, Subscriber} from 'rxjs';
 import {ValeursService} from '../valeurs/valeurs.service';
+import {DividendesService} from '../dividendes/dividendes.service';
 
 @Injectable({
   providedIn: 'root'
@@ -65,13 +66,13 @@ export class TableauxService {
             nom: 'Ticker',
             type: TypesColonnesPortefeuille.TICKER,
             tri: true,
-            largeur: 7
+            largeur: 6
           },
           {
-            nom: 'Marché',
-            type: TypesColonnesPortefeuille.MARCHE,
-            tri: true,
-            largeur: 7
+            nom: 'Dividendes',
+            type: TypesColonnesPortefeuille.DIVIDENDES,
+            tri: false,
+            largeur: 8
           },
           {
             nom: 'MM5',
@@ -328,7 +329,8 @@ export class TableauxService {
               private percentPipe: PercentPipe,
               private currencyPipe: CurrencyPipe,
               private decimalPipe: DecimalPipe,
-              private valeursService: ValeursService) {
+              private valeursService: ValeursService,
+              private dividendesService: DividendesService) {
   }
 
   public charger(): DTOTableaux {
@@ -410,6 +412,8 @@ export class TableauxService {
         return (cours: CoursPortefeuille) => this.currencyPipe.transform(cours.moyennesMobiles[colonne.parametre! - 1], '€');
       case TypesColonnesPortefeuille.VARIATION:
         return (cours: CoursPortefeuille) => this.percentPipe.transform(cours.calculerVariation(colonne.parametre!), '1.2-2');
+      case TypesColonnesPortefeuille.DIVIDENDES:
+        return (cours: CoursPortefeuille) => cours.trouverDividendes(this.dividendesService);
       default:
         throw new Error(`Colonne non gérée ${colonne.type}`);
     }
@@ -445,6 +449,8 @@ export class TableauxService {
         return (cours: CoursPortefeuille) => cours.moyennesMobiles[colonne.parametre! - 1]
       case TypesColonnesPortefeuille.VARIATION:
         return (cours: CoursPortefeuille) => cours.calculerVariation(colonne.parametre!);
+      case TypesColonnesPortefeuille.DIVIDENDES:
+        return (cours: CoursPortefeuille) => cours.trouverDividendes(this.dividendesService);
       default:
         throw new Error(`Colonne non gérée ${colonne.type}`);
     }

@@ -14,6 +14,8 @@ import {PrimeNG} from 'primeng/config';
 import {PickList} from 'primeng/picklist';
 import {NavigationBar} from '@squareetlabs/capacitor-navigation-bar';
 
+// TODO : font-size : enlever les rems et mettre du relatif
+// TODO : vue DialogEvaluationActualitesComponent : lien en bleu avec possibilité charger actu
 // TODO : vue portefeuille : nouvelles colonnes dividendes : montant et date ?
 // TODO : service ABCBourse de récupération des informations pour un ticker : récupérer la pré-ouverture ?
 // TODO : nouvelles opérandes pour les alertes du portefeuille/cours min/max/moyenne/nombre vagues

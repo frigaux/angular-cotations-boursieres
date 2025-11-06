@@ -101,6 +101,9 @@
                           @case (TypesColonnesPortefeuille.VARIATION) {
                             {{ cours[colonneDecoree.id] | percent:'1.2-2' }}
                           }
+                          @case (TypesColonnesPortefeuille.DIVIDENDES) {
+                            <app-dividendes [dividendes]="cours[colonneDecoree.id]"></app-dividendes>
+                          }
                           @default {
                             {{ cours[colonneDecoree.id] }}
                           }

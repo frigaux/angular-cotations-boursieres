@@ -7,6 +7,7 @@ import {Marches} from '../../services/valeurs/marches.enum';
 import {ValeursService} from '../../services/valeurs/valeurs.service';
 import {DTOAchat} from '../../services/valeurs/dto-achat.interface';
 import {ColonneDecoree} from './colonne-decoree.class';
+import {DividendesService} from '../../services/dividendes/dividendes.service';
 
 export class CoursPortefeuille {
   date: string; // ISO 8601 : yyyy-MM-dd
@@ -51,6 +52,11 @@ export class CoursPortefeuille {
     } else {
       return undefined;
     }
+  }
+
+  public trouverDividendes(dividendesService: DividendesService) {
+    return dividendesService.charger()?.dividendes
+      .filter(dividende => dividende.ticker === this.ticker);
   }
 
   evaluerAlertes(): Alerte[] {

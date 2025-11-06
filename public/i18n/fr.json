@@ -476,7 +476,8 @@
         "VARIATION_ACHATS": "variation / achats",
         "COURS": "cours pour un jour",
         "MOYENNE_MOBILE": "MM sur x jours",
-        "VARIATION": "variation sur x jours"
+        "VARIATION": "variation sur x jours",
+        "DIVIDENDES": "dividendes (dates et montants)"
       }
     }
   },

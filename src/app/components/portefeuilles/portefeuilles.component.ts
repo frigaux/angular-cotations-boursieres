@@ -10,7 +10,7 @@ import {PortefeuilleAvecCours} from './portefeuille-avec-cours.class';
 import {CoursPortefeuille} from './cours-portefeuille.class';
 import {TranslatePipe} from '@ngx-translate/core';
 import {DetailsValeurComponent} from './details-valeur/details-valeur.component';
-import {AlertesComponent} from './alertes/alertes.component';
+import {AlertesComponent} from './colonnes/alertes/alertes.component';
 import {Skeleton} from 'primeng/skeleton';
 import {LoaderComponent} from '../loader/loader.component';
 import {DTOCoursAvecListeAllege} from '../../services/cours/dto-cours-avec-liste-allege.interface';
@@ -25,6 +25,7 @@ import {VueUtil} from '../commun/vue-util.class';
 import {
   DialogEvaluationActualitesComponent
 } from '../cours/dialog-evaluation-actualites/dialog-evaluation-actualites.component';
+import {DividendesComponent} from './colonnes/dividendes/dividendes.component';
 
 @Component({
   selector: 'app-portefeuilles',
@@ -47,7 +48,8 @@ import {
     PercentPipe,
     DecimalPipe,
     DialogActualitesComponent,
-    DialogEvaluationActualitesComponent
+    DialogEvaluationActualitesComponent,
+    DividendesComponent
   ],
   templateUrl: './portefeuilles.component.html',
   styleUrls: ['./accordion-chart.sass', './portefeuilles.component.sass', '../commun/titre.sass']
