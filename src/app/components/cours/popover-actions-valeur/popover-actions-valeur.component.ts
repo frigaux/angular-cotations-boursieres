@@ -34,6 +34,11 @@ export class PopoverActionsValeurComponent implements OnInit {
     this.portefeuilleSelectionne = this.portefeuilles.find(portefeuille => portefeuille.parDefaut)
   }
 
+  /**
+   *
+   * @param event
+   * @param ticker le ticker doit appartenir à la liste renvoyée par ValeursService.chargerValeurs
+   */
   afficher(event: MouseEvent, ticker: string) {
     this.ticker = ticker;
     this.popover()?.toggle(event);

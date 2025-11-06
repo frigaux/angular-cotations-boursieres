@@ -14,9 +14,8 @@ import {PrimeNG} from 'primeng/config';
 import {PickList} from 'primeng/picklist';
 import {NavigationBar} from '@squareetlabs/capacitor-navigation-bar';
 
-// TODO : modification des valeurs d'un portefeuille : utilité de vérifier l'existence du ticker ?
-// TODO : service ABCBourse de récupération des informations pour un ticker : récupérer la pré-ouverture ?
 // TODO : nouvelles opérandes pour les alertes du portefeuille/cours min/max/moyenne/nombre vagues
+// TODO : service ABCBourse de récupération des informations pour un ticker : récupérer la pré-ouverture ?
 // TODO : capacitor android : proxy obligatoire pour requêter les autres domaines ? problème CORS ou pas ?
 // TODO : détails d'une valeur depuis la liste des cours : bouton précédent/suivant affichés même si pas de précédent/suivant
 // TODO : coverage

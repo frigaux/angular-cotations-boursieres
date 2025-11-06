@@ -1,5 +1,5 @@
 <ul class="dividendes">
-  @for (dividende of dividendes; track dividende.ticker) {
+  @for (dividende of dividendes; track dividende.date) {
     <li>
       <span class="date">{{ dividende.date  | date: 'dd/MM/yyyy' }}</span>
       <span class="montant">{{ dividende.montant | currency:'€' }}</span>

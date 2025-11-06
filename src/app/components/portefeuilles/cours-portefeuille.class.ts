@@ -22,6 +22,9 @@ export class CoursPortefeuille {
   moyennesMobiles: number[];
   coursAlleges: DTOCoursTickerAllege[];
   alertes: { alerte: DTOAlerte, evaluer: Function }[];
+  coursMinimum: number;
+  coursMaximum: number;
+  coursMoyen: number;
 
   constructor(valeur: DTOValeur, dto: DTOCoursAvecListeAllege,
               alertes: { alerte: DTOAlerte, evaluer: Function }[],
@@ -38,6 +41,11 @@ export class CoursPortefeuille {
     this.moyennesMobiles = dto.moyennesMobiles;
     this.coursAlleges = dto.cours;
     this.alertes = alertes;
+    this.coursMinimum = Math.min(...this.coursAlleges.map(cours => cours.cloture));
+    this.coursMaximum = Math.max(...this.coursAlleges.map(cours => cours.cloture));
+    this.coursMoyen = this.coursAlleges
+        .reduce((accumulator, cours) => accumulator + cours.cloture, 0)
+      / this.coursAlleges.length;
 
     Object.assign(this, {var1: this.calculerVariation(1)});
 
@@ -61,7 +69,7 @@ export class CoursPortefeuille {
 
   evaluerAlertes(): Alerte[] {
     return this.alertes.map(dto =>
-      new Alerte(dto.alerte, dto.evaluer(this.coursAlleges, this.moyennesMobiles))
+      new Alerte(dto.alerte, dto.evaluer(this.coursAlleges, this.moyennesMobiles, this.coursMinimum, this.coursMaximum, this.coursMoyen))
     );
   }
 

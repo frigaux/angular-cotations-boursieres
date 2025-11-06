@@ -20,6 +20,6 @@ export class PortefeuilleAvecCours {
       .replaceAll(/M(\d+)/gi, (match, token) => {
         return `moyennes[${token-1}]`;
       });
-    return {alerte, evaluer: new Function('cours', 'moyennes', `return ${condition};`)};
+    return {alerte, evaluer: new Function('cours', 'moyennes', 'MIN', 'MAX', 'MOY', `return ${condition};`)};
   }
 }

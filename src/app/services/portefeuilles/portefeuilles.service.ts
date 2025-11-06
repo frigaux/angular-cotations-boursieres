@@ -133,6 +133,10 @@ export class PortefeuillesService {
     return [];
   }
 
+  /**
+   *
+   * @param portefeuilles les tickers doivent appartenir à la liste renvoyée par ValeursService.chargerValeurs
+   */
   public enregistrer(portefeuilles: Array<DTOPortefeuille>): string | undefined {
     if (this.validerPortefeuilles(portefeuilles)) {
       window.localStorage.setItem(PortefeuillesService.PORTEFEUILLES, JSON.stringify(portefeuilles));
@@ -252,11 +256,13 @@ export class PortefeuillesService {
         return `M[${token - 1}]`;
       });
     try {
-      new Function(
+      const evaluerCondition = new Function(
         'const C = Array.from({ length: 300 }, (v, i) => i);'
         + 'const M = Array.from({ length: 300 }, (v, i) => i);'
+        + 'const MIN = 0; const MAX = 299; const MOY = 149.5;'
         + 'return ' + conditionAvecSubstitution + ';'
       );
+      evaluerCondition();
     } catch (e: unknown) {
       return (e as SyntaxError).message;
     }
