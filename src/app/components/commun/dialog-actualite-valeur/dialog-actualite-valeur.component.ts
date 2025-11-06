@@ -5,6 +5,9 @@ import {AbcBourseService} from '../../../services/abc-bourse/abc-bourse.service'
 import {LoaderComponent} from '../../loader/loader.component';
 import {DTOInformation} from '../../../services/boursorama/dto-information.interface';
 import {BoursoramaService} from '../../../services/boursorama/boursorama.service';
+import {DTOActualitesZoneBourse} from '../../../services/zone-bourse/dto-actualites-zone-bourse.interface';
+import {Observable} from 'rxjs';
+import {ZoneBourseService} from '../../../services/zone-bourse/zone-bourse.service';
 
 @Component({
   selector: 'app-dialog-actualite-valeur',
@@ -19,36 +22,33 @@ export class DialogActualiteValeurComponent {
   // données pour la vue
   loading: boolean = false;
   visible: boolean | WritableSignal<boolean> = false;
-  actualite?: DTOActualiteTicker | DTOInformation;
+  actualite?: DTOActualiteTicker | DTOInformation | DTOActualitesZoneBourse;
   html?: string;
 
   constructor(private abcBourseService: AbcBourseService,
-              private boursoramaService: BoursoramaService) {
+              private boursoramaService: BoursoramaService,
+              private zoneBourseService: ZoneBourseService) {
   }
 
   afficherActualiteABCBourse(actualite: DTOActualiteTicker) {
-    this.loading = true;
-    this.visible = true;
-    this.actualite = actualite;
-    if (actualite) {
-      this.abcBourseService.chargerLien(actualite.pathname).subscribe({
-        error: httpErrorResponse => {
-          this.loading = false;
-        },
-        next: html => {
-          this.html = html;
-          this.loading = false;
-        }
-      });
-    }
+    this.afficherActualite(actualite, (pathname: string) => this.abcBourseService.chargerLien(pathname));
   }
 
   afficherInformationBoursorama(actualite: DTOInformation) {
+    this.afficherActualite(actualite, (pathname: string) => this.boursoramaService.chargerLien(pathname));
+  }
+
+  afficherActualiteZoneBourse(actualite: DTOActualitesZoneBourse) {
+    this.afficherActualite(actualite, (pathname: string) => this.zoneBourseService.chargerLien(pathname));
+  }
+
+  private afficherActualite(actualite: DTOActualiteTicker | DTOInformation | DTOActualitesZoneBourse,
+                            chargerLien: (pathname: string) => Observable<string>) {
     this.loading = true;
     this.visible = true;
     this.actualite = actualite;
     if (actualite) {
-      this.boursoramaService.chargerLien(actualite.pathname).subscribe({
+      chargerLien(actualite.pathname).subscribe({
         error: httpErrorResponse => {
           this.loading = false;
         },

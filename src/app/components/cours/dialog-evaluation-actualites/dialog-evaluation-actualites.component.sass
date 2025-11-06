@@ -1,4 +1,4 @@
-span.pi
+span.pi-eye
   cursor: pointer
   color: var(--p-blue-700)
 
@@ -11,7 +11,27 @@ p-table
     width: 6rem
 
   td:nth-child(1)
-    text-align: right
+    div
+      display: flex
+      flex-direction: row
+      align-items: center
 
-  td
+      span:nth-child(1)
+        flex: 0
+        cursor: pointer
+
+        &.pi-arrow-circle-up
+          color: var(--p-green-600)
+
+        &.pi-arrow-circle-down
+          color: var(--p-red-600)
+
+      span:nth-child(2)
+        flex: auto
+        text-align: right
+
+
+  td:nth-child(3)
     cursor: pointer
+    color: var(--p-blue-700)
+

@@ -8,6 +8,8 @@ import {TableModule} from 'primeng/table';
 import {DatePipe} from '@angular/common';
 import {PopoverActionsValeurComponent} from '../popover-actions-valeur/popover-actions-valeur.component';
 import {DTOValeur} from '../../../services/valeurs/dto-valeur.interface';
+import {VueUtil} from '../../commun/vue-util.class';
+import {DialogActualiteValeurComponent} from '../../commun/dialog-actualite-valeur/dialog-actualite-valeur.component';
 
 @Component({
   selector: 'app-dialog-evaluation-actualites',
@@ -17,18 +19,21 @@ import {DTOValeur} from '../../../services/valeurs/dto-valeur.interface';
     TranslatePipe,
     TableModule,
     DatePipe,
-    PopoverActionsValeurComponent
+    PopoverActionsValeurComponent,
+    DialogActualiteValeurComponent
   ],
   templateUrl: './dialog-evaluation-actualites.component.html',
   styleUrls: ['./dialog-evaluation-actualites.component.sass', '../../commun/barre-superieure.sass']
 })
 export class DialogEvaluationActualitesComponent {
+  private actionsValeur = viewChild(PopoverActionsValeurComponent);
+  private dialogActualiteValeurComponent = viewChild(DialogActualiteValeurComponent);
+
   // input/output
   inputValeurs: InputSignal<Map<string, DTOValeur>> = input(new Map<string, DTOValeur>(),
     {transform: o => this.intercepteurValeurs(o), alias: 'valeurs'});
 
   // private
-  private actionsValeur = viewChild(PopoverActionsValeurComponent);
   private valeurByTicker: Map<string, DTOValeur> = new Map<string, DTOValeur>();
 
   // données pour la vue
@@ -36,6 +41,7 @@ export class DialogEvaluationActualitesComponent {
   loading: boolean = false;
   heure?: Date;
   actualites?: Array<DTOActualitesZoneBourse>;
+  protected readonly VueUtil = VueUtil;
 
   constructor(private zoneBourseService: ZoneBourseService) {
   }
@@ -59,9 +65,13 @@ export class DialogEvaluationActualitesComponent {
       });
   }
 
-  protected onClickTicker(event: MouseEvent, actualite: DTOActualitesZoneBourse) {
+  protected afficherActions(event: MouseEvent, actualite: DTOActualitesZoneBourse) {
     if (actualite.ticker) {
       this.actionsValeur()?.afficher(event, actualite.ticker);
     }
+  }
+
+  protected afficherActualite(actualite: DTOActualitesZoneBourse) {
+    this.dialogActualiteValeurComponent()?.afficherActualiteZoneBourse(actualite);
   }
 }

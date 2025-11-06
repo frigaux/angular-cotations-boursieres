@@ -4,6 +4,7 @@ import {DialogCotationsValeurComponent} from './dialog-cotations-valeur.componen
 import {TranslateModule} from '@ngx-translate/core';
 import {BoursoramaService} from '../../../../services/boursorama/boursorama.service';
 import {AbcBourseService} from '../../../../services/abc-bourse/abc-bourse.service';
+import {ZoneBourseService} from '../../../../services/zone-bourse/zone-bourse.service';
 
 describe('DialogCotationsValeurComponent', () => {
   let component: DialogCotationsValeurComponent;
@@ -11,6 +12,7 @@ describe('DialogCotationsValeurComponent', () => {
 
   const mockBoursoramaService = jasmine.createSpyObj('BoursoramaService', ['chargerCoursTicker', 'chargerLien']);
   const mockAbcBourseService = jasmine.createSpyObj('AbcBourseService', ['chargerLien']);
+  const mockZoneBourseService = jasmine.createSpyObj('ZoneBourseService', ['chargerLien']);
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
@@ -20,7 +22,8 @@ describe('DialogCotationsValeurComponent', () => {
       ],
       providers: [
         {provide: BoursoramaService, useValue: mockBoursoramaService},
-        {provide: AbcBourseService, useValue: mockAbcBourseService}
+        {provide: AbcBourseService, useValue: mockAbcBourseService},
+        {provide: ZoneBourseService, useValue: mockZoneBourseService}
       ]
     })
       .compileComponents();

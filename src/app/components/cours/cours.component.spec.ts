@@ -11,6 +11,7 @@ import {FILTRES, LISTE_COURS} from '../../services/jdd/jdd-cours.dataset';
 import {ConfirmationService, SortEvent} from 'primeng/api';
 import {AbcBourseService} from '../../services/abc-bourse/abc-bourse.service';
 import {ZoneBourseService} from '../../services/zone-bourse/zone-bourse.service';
+import {BoursoramaService} from '../../services/boursorama/boursorama.service';
 
 describe('CoursComponent', () => {
   let component: CoursComponent;
@@ -20,6 +21,7 @@ describe('CoursComponent', () => {
   const mockCoursService = jasmine.createSpyObj('CoursService', ['chargerCours', 'chargerFiltres',
     'onImportFiltres', 'onUpdateFiltres']);
   const mockAbcBourseService = jasmine.createSpyObj('AbcBourseService', ['chargerActualites']);
+  const mockBoursoramaService = jasmine.createSpyObj('BoursoramaService', ['chargerLien']);
   const mockZoneBourseService = jasmine.createSpyObj('ZoneBourseService', ['chargerActualites']);
 
   beforeEach(async () => {
@@ -32,6 +34,7 @@ describe('CoursComponent', () => {
         {provide: ValeursService, useValue: mockValeursService},
         {provide: CoursService, useValue: mockCoursService},
         {provide: AbcBourseService, useValue: mockAbcBourseService},
+        {provide: BoursoramaService, useValue: mockBoursoramaService},
         {provide: ZoneBourseService, useValue: mockZoneBourseService},
         provideAnimations(),
         ConfirmationService

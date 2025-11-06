@@ -1,3 +1,5 @@
+<app-dialog-actualite-valeur></app-dialog-actualite-valeur>
+
 <span class="pi pi-eye" (click)="visible = true"
       title="{{ 'COMPOSANTS.COURS.EVALUATION_ACTUALITES.EVALUATION' | translate }}"></span>
 
@@ -30,10 +32,18 @@
         </tr>
       </ng-template>
       <ng-template #body let-actualite>
-        <tr (click)="onClickTicker($event, actualite)">
-          <td>{{ actualite.score }}</td>
+        <tr>
+          <td>
+            <div>
+              <span class="pi"
+                    [class]="VueUtil.iconeVariation(actualite.score)"
+                    title="{{ 'COMPOSANTS.COURS.EVALUATION_ACTUALITES.ACTIONS' | translate }}"
+                    (click)="afficherActions($event, actualite)"></span>
+              <span>{{ actualite.score }}</span>
+            </div>
+          </td>
           <td>{{ actualite.date }}</td>
-          <td>{{ actualite.titre }}</td>
+          <td (click)="afficherActualite(actualite)">{{ actualite.titre }}</td>
         </tr>
       </ng-template>
     </p-table>

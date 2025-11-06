@@ -119,4 +119,34 @@ export class ZoneBourseService {
     });
     return score;
   }
+
+  public chargerLien(pathname: string): Observable<string> {
+    return new Observable(observer => {
+      if (!pathname.startsWith('/')) {
+        pathname = '/' + pathname;
+      }
+      this.http.get(`/zonebourse${pathname}`, {
+        headers: ZoneBourseService.HEADERS_HTML,
+        responseType: 'text'
+      }).subscribe({
+        error: httpErrorResponse => {
+          observer.error(httpErrorResponse);
+          observer.complete();
+        },
+        next: html => {
+          observer.next(this.parseArticle(html));
+          observer.complete();
+        }
+      });
+    });
+  }
+
+  private parseArticle(html: string): string {
+    const document = new DOMParser().parseFromString(html, 'text/html');
+    const elDIV = document.querySelector('div.article-text');
+    if (elDIV) {
+      return elDIV.innerHTML;
+    }
+    return '';
+  }
 }

@@ -11,6 +11,7 @@ import {DialogueService} from '../../../services/dialogue/dialogue.service';
 import {BoursoramaService} from '../../../services/boursorama/boursorama.service';
 import {PortefeuilleAvecCours} from '../portefeuille-avec-cours.class';
 import {AbcBourseService} from '../../../services/abc-bourse/abc-bourse.service';
+import {ZoneBourseService} from '../../../services/zone-bourse/zone-bourse.service';
 
 describe('PopoverActionsValeurComponent', () => {
   let dialogueService: DialogueService;
@@ -21,6 +22,7 @@ describe('PopoverActionsValeurComponent', () => {
   const mockPortefeuillesService = jasmine.createSpyObj('PortefeuillesService', ['charger', 'enregistrer']);
   const mockBoursoramaService = jasmine.createSpyObj('BoursoramaService', ['chargerCoursTicker']);
   const mockAbcBourseService = jasmine.createSpyObj('AbcBourseService', ['chargerCotationsTicker', 'chargerCotationsTickers']);
+  const mockZoneBourseService = jasmine.createSpyObj('ZoneBourseService', ['chargerActualites']);
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
@@ -32,6 +34,7 @@ describe('PopoverActionsValeurComponent', () => {
         {provide: PortefeuillesService, useValue: mockPortefeuillesService},
         {provide: BoursoramaService, useValue: mockBoursoramaService},
         {provide: AbcBourseService, useValue: mockAbcBourseService},
+        {provide: ZoneBourseService, useValue: mockZoneBourseService},
         ConfirmationService
       ]
     })

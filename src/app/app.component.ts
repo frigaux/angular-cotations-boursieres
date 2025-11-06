@@ -14,14 +14,11 @@ import {PrimeNG} from 'primeng/config';
 import {PickList} from 'primeng/picklist';
 import {NavigationBar} from '@squareetlabs/capacitor-navigation-bar';
 
-// TODO : font-size : enlever les rems et mettre du relatif
-// TODO : vue DialogEvaluationActualitesComponent : lien en bleu avec possibilité charger actu
-// TODO : vue portefeuille : nouvelles colonnes dividendes : montant et date ?
+// TODO : modification des valeurs d'un portefeuille : utilité de vérifier l'existence du ticker ?
 // TODO : service ABCBourse de récupération des informations pour un ticker : récupérer la pré-ouverture ?
 // TODO : nouvelles opérandes pour les alertes du portefeuille/cours min/max/moyenne/nombre vagues
 // TODO : capacitor android : proxy obligatoire pour requêter les autres domaines ? problème CORS ou pas ?
 // TODO : détails d'une valeur depuis la liste des cours : bouton précédent/suivant affichés même si pas de précédent/suivant
-// TODO : modification des valeurs d'un portefeuille : utilité de vérifier l'existence du ticker ?
 // TODO : coverage
 // TODO : examiner les logs du debugger android studio
 // TODO : intégrer tailwind ?

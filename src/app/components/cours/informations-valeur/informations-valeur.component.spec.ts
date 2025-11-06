@@ -8,6 +8,7 @@ import {COURS_CROISSANT} from '../../../services/jdd/jdd-cours.dataset';
 import {provideAnimations} from '@angular/platform-browser/animations';
 import {TranslateModule} from '@ngx-translate/core';
 import {BoursoramaService} from '../../../services/boursorama/boursorama.service';
+import {ZoneBourseService} from '../../../services/zone-bourse/zone-bourse.service';
 
 describe('InformationsValeurComponent', () => {
   let component: InformationsValeurComponent;
@@ -15,6 +16,7 @@ describe('InformationsValeurComponent', () => {
 
   const mockBoursoramaService = jasmine.createSpyObj('BoursoramaService', ['chargerLien']);
   const mockAbcBourseService = jasmine.createSpyObj('AbcBourseService', ['chargerInformationsTicker', 'chargerLien']);
+  const mockZoneBourseService = jasmine.createSpyObj('ZoneBourseService', ['chargerLien']);
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
@@ -25,6 +27,7 @@ describe('InformationsValeurComponent', () => {
       providers: [
         {provide: BoursoramaService, useValue: mockBoursoramaService},
         {provide: AbcBourseService, useValue: mockAbcBourseService},
+        {provide: ZoneBourseService, useValue: mockZoneBourseService},
         provideAnimations()
       ]
     })
