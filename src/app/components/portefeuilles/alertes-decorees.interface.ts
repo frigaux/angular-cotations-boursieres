@@ -5,4 +5,5 @@ export interface AlertesDecorees {
   avecOperandeMIN: boolean;
   avecOperandeMAX: boolean;
   avecOperandeMOY: boolean;
+  avecOperandeNBV: boolean;
 }

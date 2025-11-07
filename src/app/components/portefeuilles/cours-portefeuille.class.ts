@@ -25,6 +25,7 @@ export class CoursPortefeuille {
   coursMinimum?: number;
   coursMaximum?: number;
   coursMoyen?: number;
+  nbVagues?: number;
 
   constructor(valeur: DTOValeur, dto: DTOCoursAvecListeAllege,
               alertes: AlertesDecorees,
@@ -52,6 +53,9 @@ export class CoursPortefeuille {
           .reduce((accumulator, cours) => accumulator + cours.cloture, 0)
         / this.coursAlleges.length;
     }
+    if (alertes.avecOperandeNBV) {
+      this.nbVagues = this.estimerNbVagues();
+    }
 
     Object.assign(this, {var1: this.calculerVariation(1)});
 
@@ -75,7 +79,8 @@ export class CoursPortefeuille {
 
   evaluerAlertes(): AlerteAvecSonEvaluation[] {
     return this.alertes.alertesDecorees.map(dto =>
-      new AlerteAvecSonEvaluation(dto.alerte, dto.evaluer(this.coursAlleges, this.moyennesMobiles, this.coursMinimum, this.coursMaximum, this.coursMoyen))
+      new AlerteAvecSonEvaluation(dto.alerte,
+        dto.evaluer(this.coursAlleges, this.moyennesMobiles, this.coursMinimum, this.coursMaximum, this.coursMoyen, this.nbVagues))
     );
   }
 
@@ -95,5 +100,47 @@ export class CoursPortefeuille {
       totalPrix += achat.prix * achat.quantite;
     }
     return (this.cloture / (totalPrix / totalQuantites)) - 1;
+  }
+
+  private estimerNbVagues() {
+    if (this.coursAlleges.length > 100) {
+      const nbJoursMM = 15;
+      const moyennesMobilesGlissantes = this.calculerMoyennesMobilesGlissantes(nbJoursMM);
+      return this.calculerNbVagues(moyennesMobilesGlissantes, nbJoursMM);
+    }
+    return 0;
+  }
+
+  private calculerNbVagues(moyennesMobilesGlissantes: Array<number>, nbJours: number) {
+    let auDessus: boolean | undefined = undefined;
+    let nbVagues = 0;
+    moyennesMobilesGlissantes.forEach((moyenneMobileGlissante, i) => {
+      if (moyenneMobileGlissante > this.moyennesMobiles[i + nbJours - 1]) {
+        if (auDessus !== undefined && !auDessus) {
+          nbVagues++;
+        }
+        auDessus = true;
+      } else {
+        if (auDessus !== undefined && auDessus) {
+          nbVagues++;
+        }
+        auDessus = false;
+      }
+    });
+    return nbVagues;
+  }
+
+  private calculerMoyennesMobilesGlissantes(nbJours: number) {
+    const moyennesMobiles: Array<number> = [];
+    let somme = 0;
+    for (let i = 0; i < nbJours; i++) {
+      somme += this.coursAlleges[i].cloture;
+    }
+    moyennesMobiles.push(somme / nbJours);
+    for (let j = nbJours; j < this.coursAlleges.length; j++) {
+      somme = somme - this.coursAlleges[j - nbJours].cloture + this.coursAlleges[j].cloture;
+      moyennesMobiles.push(somme / nbJours);
+    }
+    return moyennesMobiles;
   }
 }

@@ -18,7 +18,9 @@ export class PortefeuilleAvecCours {
       .find(alerte => alerte.condition.includes('MAX')) !== undefined;
     const avecOperandeMOY = portefeuille.alertes
       .find(alerte => alerte.condition.includes('MOY')) !== undefined;
-    this.alertes = {alertesDecorees, avecOperandeMIN, avecOperandeMAX, avecOperandeMOY};
+    const avecOperandeNBV = portefeuille.alertes
+      .find(alerte => alerte.condition.includes('NBV')) !== undefined;
+    this.alertes = {alertesDecorees, avecOperandeMIN, avecOperandeMAX, avecOperandeMOY, avecOperandeNBV};
   }
 
   private genererFonctionAlerte(alerte: DTOAlerte): AlerteDecoree {
@@ -29,6 +31,6 @@ export class PortefeuilleAvecCours {
       .replaceAll(/M(\d+)/gi, (match, token) => {
         return `moyennes[${token - 1}]`;
       });
-    return {alerte, evaluer: new Function('cours', 'moyennes', 'MIN', 'MAX', 'MOY', `return ${condition};`)};
+    return {alerte, evaluer: new Function('cours', 'moyennes', 'MIN', 'MAX', 'MOY', 'NBV', `return ${condition};`)};
   }
 }

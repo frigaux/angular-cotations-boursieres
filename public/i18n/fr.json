@@ -365,6 +365,7 @@
             "DOCUMENTATION_OPERANDES_COURS": "cours (Cx, x = 1 pour le dernier cours)",
             "DOCUMENTATION_OPERANDES_MM": "moyennes mobiles (Mx, x = 1 pour la moyenne mobile sur le dernier jour)",
             "DOCUMENTATION_OPERANDES_STATISTIQUES": "cours minimum (MIN), maximum (MAX) et moyenne des cours (MOY)",
+            "DOCUMENTATION_OPERANDES_VAGUES": "une estimation du nombre de vagues (NBV)",
             "DOCUMENTATION_EXEMPLE": "Par exemple : C1 < M5 && C1 < M10.",
             "CONDITION": "Condition",
             "MODIFIER": "Modifier la condition de l'alerte"
