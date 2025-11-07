@@ -1,6 +1,6 @@
 import {DTOAlerte} from '../../services/portefeuilles/dto-alerte.interface';
 
-export class Alerte {
+export class AlerteAvecSonEvaluation {
   alerte: DTOAlerte;
   evaluation: boolean;
 

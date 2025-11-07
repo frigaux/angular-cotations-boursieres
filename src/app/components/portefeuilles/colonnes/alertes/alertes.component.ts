@@ -1,5 +1,5 @@
 import {Component, input, InputSignal} from '@angular/core';
-import {Alerte} from '../../alerte.class';
+import {AlerteAvecSonEvaluation} from '../../alerte-avec-son-evaluation.class';
 
 @Component({
   selector: 'app-alertes',
@@ -10,13 +10,13 @@ import {Alerte} from '../../alerte.class';
 })
 export class AlertesComponent {
   // input/output
-  inputAlertes: InputSignal<Alerte[] | undefined> = input([],
+  inputAlertes: InputSignal<AlerteAvecSonEvaluation[] | undefined> = input([],
     {transform: o => this.intercepteurAlertes(o), alias: 'alertes'});
 
   // données pour la vue
-  alertes: Alerte[] | undefined;
+  alertes: AlerteAvecSonEvaluation[] | undefined;
 
-  private intercepteurAlertes(alertes: Alerte[] | undefined) {
+  private intercepteurAlertes(alertes: AlerteAvecSonEvaluation[] | undefined) {
     if (alertes) {
       this.alertes = alertes;
     }

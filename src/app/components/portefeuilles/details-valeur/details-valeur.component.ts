@@ -4,7 +4,7 @@ import {Panel} from 'primeng/panel';
 import {ChartsComponent} from '../../cours/charts/charts.component';
 import {Cours} from '../../cours/cours.class';
 import {AlertesComponent} from '../colonnes/alertes/alertes.component';
-import {Alerte} from '../alerte.class';
+import {AlerteAvecSonEvaluation} from '../alerte-avec-son-evaluation.class';
 import {TranslatePipe} from '@ngx-translate/core';
 import {InformationsValeurComponent} from '../../cours/informations-valeur/informations-valeur.component';
 import {NgClass} from '@angular/common';
@@ -29,7 +29,7 @@ export class DetailsValeurComponent {
   ferme = output<void>();
 
   // données pour la vue
-  alertes: Alerte[] | undefined;
+  alertes: AlerteAvecSonEvaluation[] | undefined;
   coursPortefeuille?: CoursPortefeuille;
   cours: Cours | undefined;
   informationsDetaillees: boolean = false;

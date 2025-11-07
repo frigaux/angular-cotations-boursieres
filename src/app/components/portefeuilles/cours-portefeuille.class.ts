@@ -1,13 +1,13 @@
 import {DTOCoursAvecListeAllege} from '../../services/cours/dto-cours-avec-liste-allege.interface';
 import {DTOCoursTickerAllege} from '../../services/cours/dto-cours-ticker-allege.interface';
-import {Alerte} from './alerte.class';
-import {DTOAlerte} from '../../services/portefeuilles/dto-alerte.interface';
+import {AlerteAvecSonEvaluation} from './alerte-avec-son-evaluation.class';
 import {DTOValeur} from '../../services/valeurs/dto-valeur.interface';
 import {Marches} from '../../services/valeurs/marches.enum';
 import {ValeursService} from '../../services/valeurs/valeurs.service';
 import {DTOAchat} from '../../services/valeurs/dto-achat.interface';
 import {ColonneDecoree} from './colonne-decoree.class';
 import {DividendesService} from '../../services/dividendes/dividendes.service';
+import {AlertesDecorees} from './alertes-decorees.interface';
 
 export class CoursPortefeuille {
   date: string; // ISO 8601 : yyyy-MM-dd
@@ -21,13 +21,13 @@ export class CoursPortefeuille {
   volume: number;
   moyennesMobiles: number[];
   coursAlleges: DTOCoursTickerAllege[];
-  alertes: { alerte: DTOAlerte, evaluer: Function }[];
-  coursMinimum: number;
-  coursMaximum: number;
-  coursMoyen: number;
+  alertes: AlertesDecorees;
+  coursMinimum?: number;
+  coursMaximum?: number;
+  coursMoyen?: number;
 
   constructor(valeur: DTOValeur, dto: DTOCoursAvecListeAllege,
-              alertes: { alerte: DTOAlerte, evaluer: Function }[],
+              alertes: AlertesDecorees,
               colonnesDecorees: ColonneDecoree[]) {
     this.date = dto.cours[0].date;
     this.ticker = dto.ticker;
@@ -41,11 +41,17 @@ export class CoursPortefeuille {
     this.moyennesMobiles = dto.moyennesMobiles;
     this.coursAlleges = dto.cours;
     this.alertes = alertes;
-    this.coursMinimum = Math.min(...this.coursAlleges.map(cours => cours.cloture));
-    this.coursMaximum = Math.max(...this.coursAlleges.map(cours => cours.cloture));
-    this.coursMoyen = this.coursAlleges
-        .reduce((accumulator, cours) => accumulator + cours.cloture, 0)
-      / this.coursAlleges.length;
+    if (alertes.avecOperandeMIN) {
+      this.coursMinimum = Math.min(...this.coursAlleges.map(cours => cours.cloture));
+    }
+    if (alertes.avecOperandeMAX) {
+      this.coursMaximum = Math.max(...this.coursAlleges.map(cours => cours.cloture));
+    }
+    if (alertes.avecOperandeMOY) {
+      this.coursMoyen = this.coursAlleges
+          .reduce((accumulator, cours) => accumulator + cours.cloture, 0)
+        / this.coursAlleges.length;
+    }
 
     Object.assign(this, {var1: this.calculerVariation(1)});
 
@@ -67,9 +73,9 @@ export class CoursPortefeuille {
       .filter(dividende => dividende.ticker === this.ticker);
   }
 
-  evaluerAlertes(): Alerte[] {
-    return this.alertes.map(dto =>
-      new Alerte(dto.alerte, dto.evaluer(this.coursAlleges, this.moyennesMobiles, this.coursMinimum, this.coursMaximum, this.coursMoyen))
+  evaluerAlertes(): AlerteAvecSonEvaluation[] {
+    return this.alertes.alertesDecorees.map(dto =>
+      new AlerteAvecSonEvaluation(dto.alerte, dto.evaluer(this.coursAlleges, this.moyennesMobiles, this.coursMinimum, this.coursMaximum, this.coursMoyen))
     );
   }
 
