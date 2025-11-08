@@ -25,7 +25,7 @@ export class CoursPortefeuille {
   coursMinimum?: number;
   coursMaximum?: number;
   coursMoyen?: number;
-  nbVagues?: number;
+  coursNbVagues?: number;
 
   constructor(valeur: DTOValeur, dto: DTOCoursAvecListeAllege,
               alertes: AlertesDecorees,
@@ -54,7 +54,7 @@ export class CoursPortefeuille {
         / this.coursAlleges.length;
     }
     if (alertes.avecOperandeNBV) {
-      this.nbVagues = this.estimerNbVagues();
+      this.coursNbVagues = this.estimerNbVagues();
     }
 
     Object.assign(this, {var1: this.calculerVariation(1)});
@@ -80,7 +80,7 @@ export class CoursPortefeuille {
   evaluerAlertes(): AlerteAvecSonEvaluation[] {
     return this.alertes.alertesDecorees.map(dto =>
       new AlerteAvecSonEvaluation(dto.alerte,
-        dto.evaluer(this.coursAlleges, this.moyennesMobiles, this.coursMinimum, this.coursMaximum, this.coursMoyen, this.nbVagues))
+        dto.evaluer(this.coursAlleges, this.moyennesMobiles, this.coursMinimum, this.coursMaximum, this.coursMoyen, this.coursNbVagues))
     );
   }
 

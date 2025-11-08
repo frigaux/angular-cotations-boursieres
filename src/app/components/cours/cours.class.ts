@@ -57,4 +57,18 @@ export class Cours {
     }
     return '';
   }
+
+  public calculerMinimumMM(): number {
+    return Math.min(...this.moyennesMobiles);
+  }
+
+  public calculerMaximumMM(): number {
+    return Math.max(...this.moyennesMobiles);
+  }
+
+  public calculerMoyenneMM(): number {
+    return this.moyennesMobiles
+        .reduce((accumulator, mm) => accumulator + mm, 0)
+      / this.moyennesMobiles.length;
+  }
 }

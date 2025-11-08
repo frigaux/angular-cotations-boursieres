@@ -14,7 +14,7 @@ import {PrimeNG} from 'primeng/config';
 import {PickList} from 'primeng/picklist';
 import {NavigationBar} from '@squareetlabs/capacitor-navigation-bar';
 
-// TODO : nouvelles opérandes pour les alertes du portefeuille/cours min/max/moyenne/nombre vagues
+// TODO : nouvelles opérandes pour les filtres sur les cours avec min/max/moyenne
 // TODO : service ABCBourse de récupération des informations pour un ticker : récupérer la pré-ouverture ?
 // TODO : capacitor android : proxy obligatoire pour requêter les autres domaines ? problème CORS ou pas ?
 // TODO : détails d'une valeur depuis la liste des cours : bouton précédent/suivant affichés même si pas de précédent/suivant

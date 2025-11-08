@@ -157,7 +157,9 @@
           "DOCUMENTATION_OPERATEURS_ARITHMETIQUES": "arithmétiques : %, +, -, /, *,",
           "DOCUMENTATION_OPERATEURS_LOGIQUES": "logiques : &&, ||, !,",
           "DOCUMENTATION_OPERATEURS_GROUPEMENT": "et de groupement : les parenthèses.",
-          "DOCUMENTATION_OPERANDES": "Ces opérateurs peuvent s'appliquer sur les moyennes mobiles (Mx).",
+          "DOCUMENTATION_OPERANDES": "Ces opérateurs peuvent s'appliquer sur les opérandes",
+          "DOCUMENTATION_OPERANDES_MM": "moyennes mobiles (Mx, x = 1 pour la moyenne mobile sur le dernier jour)",
+          "DOCUMENTATION_OPERANDES_STATISTIQUES": "cours minimum (MIN), maximum (MAX) et moyenne des cours (MOY)",
           "DOCUMENTATION_EXEMPLE": "Par exemple : M50 < M20 && M20 < M10",
           "CONDITION": "Condition",
           "MODIFIER": "Modifier la condition du filtre"

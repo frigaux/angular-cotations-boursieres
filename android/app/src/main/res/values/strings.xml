@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='utf-8'?>
 <resources>
-    <string name="app_name">angular-cotations-boursieres</string>
-    <string name="title_activity_main">angular-cotations-boursieres</string>
+    <string name="app_name">Bourse</string>
+    <string name="title_activity_main">Bourse</string>
     <string name="package_name">fr.fabien.cotations</string>
     <string name="custom_url_scheme">fr.fabien.cotations</string>
 </resources>

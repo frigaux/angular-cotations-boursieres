@@ -21,7 +21,9 @@ import {DialogImportExportComponent} from './dialog-editeur-filtres/import-expor
 import {PortefeuillesService} from '../../services/portefeuilles/portefeuilles.service';
 import {DialogActualitesComponent} from './dialog-actualites/dialog-actualites.component';
 import {VueUtil} from '../commun/vue-util.class';
-import {DialogEvaluationActualitesComponent} from './dialog-evaluation-actualites/dialog-evaluation-actualites.component';
+import {
+  DialogEvaluationActualitesComponent
+} from './dialog-evaluation-actualites/dialog-evaluation-actualites.component';
 
 @Component({
   selector: 'app-cours',
@@ -102,12 +104,19 @@ export class CoursComponent implements OnInit {
       const coursByMarche = new Map<Marches, Cours[]>();
 
       this.liste.cours
-        .filter(c => {
-          return !this.filtreActif || this.filtreActif.evaluer(c.moyennesMobiles);
-        })
         .map(dto => {
           const valeur = this.valeurByTicker!.get(dto.ticker);
           return Cours.fromDTOCours(this.liste!.date, valeur!.libelle, dto)
+        })
+        .filter(c => {
+          if (!this.filtreActif) {
+            return true;
+          } else {
+            return this.filtreActif.evaluer(c.moyennesMobiles,
+              this.filtreActif.avecOperandeMIN ? c.calculerMinimumMM() : undefined,
+              this.filtreActif.avecOperandeMAX ? c.calculerMaximumMM() : undefined,
+              this.filtreActif.avecOperandeMOY ? c.calculerMoyenneMM() : undefined);
+          }
         })
         .forEach(cours => {
           const marche = this.valeurByTicker!.get(cours.ticker)!.marche;

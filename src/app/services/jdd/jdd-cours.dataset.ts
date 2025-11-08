@@ -108,7 +108,13 @@ export const LISTE_COURS_AVEC_LISTE_ALLEGEE: DTOCoursAvecListeAllege[] = [
   }
 ];
 
-export const AUCUNE_ALERTE = {alertesDecorees: [], avecOperandeMIN: false, avecOperandeMAX: false, avecOperandeMOY: false};
+export const AUCUNE_ALERTE = {
+  alertesDecorees: [],
+  avecOperandeMIN: false,
+  avecOperandeMAX: false,
+  avecOperandeMOY: false,
+  avecOperandeNBV: false
+};
 
 export const COURS_PORTEFEUILLE = new CoursPortefeuille(VALEUR, LISTE_COURS_AVEC_LISTE_ALLEGEE[0], AUCUNE_ALERTE, []);
 

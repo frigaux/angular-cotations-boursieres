@@ -162,10 +162,12 @@ export class CoursService {
         return `M[${token - 1}]`;
       });
     try {
-      new Function(
+      const evaluerCondition = new Function(
         'const M = Array.from({ length: 300 }, (v, i) => i);'
+        + 'const MIN = 0; const MAX = 299; const MOY = 149.5;'
         + 'return ' + conditionAvecSubstitution + ';'
       );
+      evaluerCondition();
     } catch (e: unknown) {
       return (e as SyntaxError).message;
     }
