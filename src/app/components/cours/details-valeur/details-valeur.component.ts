@@ -20,27 +20,27 @@ import {NgClass} from '@angular/common';
 })
 export class DetailsValeurComponent {
   // input/output
-  inputCours: InputSignal<Cours | undefined> = input(undefined,
+  inputCours: InputSignal<{ cours: Cours, premier: boolean, dernier: boolean } | undefined> = input(undefined,
     {transform: o => this.intercepteurCours(o), alias: 'cours'});
   ferme = output<void>();
   precedent = output<void>();
   suivant = output<void>();
 
   // données pour la vue
-  cours?: Cours;
+  cours?: { cours: Cours, premier: boolean, dernier: boolean };
   informationsDetaillees: boolean = false;
 
-  private intercepteurCours(cours: Cours | undefined) {
+  private intercepteurCours(cours?: { cours: Cours, premier: boolean, dernier: boolean }) {
     this.informationsDetaillees = false;
     this.cours = cours;
     return cours;
   }
 
   boursorama() {
-    window.open(`https://www.boursorama.com/cours/1rP${this.cours?.ticker}/`);
+    window.open(`https://www.boursorama.com/cours/1rP${this.cours?.cours.ticker}/`);
   }
 
   abcBourse() {
-    window.open(`https://www.abcbourse.com/cotation/${this.cours?.ticker}p`);
+    window.open(`https://www.abcbourse.com/cotation/${this.cours?.cours.ticker}p`);
   }
 }

@@ -64,13 +64,14 @@ export class CoursComponent implements OnInit {
   protected readonly valeurByTicker: Map<string, DTOValeur> = new Map<string, DTOValeur>();
 
   // cours pour lequel afficher les moyennes mobiles
-  coursSelectionne: Cours | undefined = undefined;
+  coursSelectionne?: { cours: Cours, premier: boolean, dernier: boolean };
 
   // private
   private translateService = inject(TranslateService);
   private liste?: DTOListeCours;
   private filtreActif?: FiltreDecore;
   private portefeuilles: boolean;
+  private marcheSelectionne?: CoursMarche;
 
   constructor(private valeursService: ValeursService,
               private coursService: CoursService,
@@ -98,6 +99,7 @@ export class CoursComponent implements OnInit {
 
   private decorerCours() {
     this.marches = [];
+    this.coursSelectionne = undefined;
 
     if (this.liste && this.valeurByTicker) {
       this.date = this.liste.date;
@@ -132,18 +134,25 @@ export class CoursComponent implements OnInit {
     }
   }
 
-  onClickCours(event: MouseEvent, cours: Cours) {
+  onClickCours(event: MouseEvent, marche: CoursMarche, cours: Cours) {
     if (event.target instanceof Element && event.target.tagName === 'SPAN' && this.portefeuilles) {
       this.afficherAjoutAuPortefeuille(event, cours);
     } else {
-      this.basculerAffichageCours(cours);
+      this.basculerAffichageCours(marche, cours);
     }
   }
 
-  private basculerAffichageCours(cours: Cours) {
-    if (this.coursSelectionne === undefined || this.coursSelectionne.ticker !== cours.ticker) {
-      this.coursSelectionne = cours;
+  private basculerAffichageCours(marche: CoursMarche, cours: Cours) {
+    if (this.coursSelectionne === undefined || this.coursSelectionne.cours.ticker !== cours.ticker) {
+      this.marcheSelectionne = marche;
+      const idxCours = this.marcheSelectionne.cours.indexOf(cours);
+      this.coursSelectionne = {
+        cours,
+        premier: idxCours === 0,
+        dernier: idxCours === this.marcheSelectionne.cours.length - 1
+      };
     } else {
+      this.marcheSelectionne = undefined;
       this.coursSelectionne = undefined;
     }
   }
@@ -173,26 +182,30 @@ export class CoursComponent implements OnInit {
     });
   }
 
-  private marcheSelectionne() {
-    return this.marches!.find(marche => marche.cours.indexOf(this.coursSelectionne!) !== -1);
-  }
-
   valeurPrecedente() {
-    const marcheSelectionne: CoursMarche | undefined = this.marcheSelectionne();
-    if (marcheSelectionne) {
-      const idxCours = marcheSelectionne.cours.indexOf(this.coursSelectionne!);
+    if (this.marcheSelectionne) {
+      const idxCours = this.marcheSelectionne.cours.indexOf(this.coursSelectionne!.cours);
       if (idxCours > 0) {
-        this.coursSelectionne = marcheSelectionne.cours[idxCours - 1];
+        const cours = this.marcheSelectionne.cours[idxCours - 1];
+        this.coursSelectionne = {
+          cours,
+          premier: idxCours - 1 === 0,
+          dernier: false
+        };
       }
     }
   }
 
   valeurSuivante() {
-    const marcheSelectionne: CoursMarche | undefined = this.marcheSelectionne();
-    if (marcheSelectionne) {
-      const idxCours = marcheSelectionne.cours.indexOf(this.coursSelectionne!);
-      if (idxCours !== -1 && idxCours + 1 < marcheSelectionne.cours.length) {
-        this.coursSelectionne = marcheSelectionne.cours[idxCours + 1];
+    if (this.marcheSelectionne) {
+      const idxCours = this.marcheSelectionne.cours.indexOf(this.coursSelectionne!.cours);
+      if (idxCours !== -1 && idxCours + 1 < this.marcheSelectionne.cours.length) {
+        const cours = this.marcheSelectionne.cours[idxCours + 1];
+        this.coursSelectionne = {
+          cours,
+          premier: false,
+          dernier: idxCours + 1 === this.marcheSelectionne.cours.length - 1
+        };
       }
     }
   }

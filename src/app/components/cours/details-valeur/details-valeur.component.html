@@ -4,12 +4,14 @@
       <h2>
         {{
           (informationsDetaillees ? 'COMPOSANTS.COURS.DETAILS_VALEUR.INFORMATIONS_DETAILLEES' : 'COMPOSANTS.COURS.DETAILS_VALEUR.COURBE_MM')
-            | translate : {valeur: cours.libelle, ticker: cours.ticker}
+            | translate : {valeur: cours.cours.libelle, ticker: cours.cours.ticker}
         }}
       </h2>
-      <span class="pi pi-caret-left" (click)="this.precedent.emit()"
+      <span class="pi" [ngClass]="{'pi-caret-left': !cours.premier, 'pi-ban': cours.premier}"
+            (click)="this.precedent.emit()"
             title="{{ 'COMPOSANTS.COURS.DETAILS_VALEUR.VALEUR_PRECEDENTE' | translate}}"></span>
-      <span class="pi pi-caret-right" (click)="this.suivant.emit()"
+      <span class="pi" [ngClass]="{'pi-caret-right': !cours.dernier, 'pi-ban': cours.dernier}"
+            (click)="this.suivant.emit()"
             title="{{ 'COMPOSANTS.COURS.DETAILS_VALEUR.VALEUR_SUIVANTE' | translate}}"></span>
       <span class="lien-bandeau" (click)="abcBourse()"
             title="{{ 'COMPOSANTS.COURS.DETAILS_VALEUR.ABCBOURSE' | translate}}">A</span>
@@ -19,14 +21,14 @@
             (click)="informationsDetaillees = !informationsDetaillees"
             title="{{
           (informationsDetaillees ? 'COMPOSANTS.COURS.DETAILS_VALEUR.COURBE_MM' : 'COMPOSANTS.COURS.DETAILS_VALEUR.INFORMATIONS_DETAILLEES')
-            | translate : {valeur: cours.libelle, ticker: cours.ticker}
+            | translate : {valeur: cours.cours.libelle, ticker: cours.cours.ticker}
         }}"></span>
       <span class="pi pi-times-circle" (click)="this.ferme.emit()"></span>
     </ng-template>
     @if (informationsDetaillees) {
-      <app-informations-ticker [cours]="cours"></app-informations-ticker>
+      <app-informations-ticker [cours]="cours.cours"></app-informations-ticker>
     } @else {
-      <app-chart-moyennes-mobiles [cours]="cours"></app-chart-moyennes-mobiles>
+      <app-chart-moyennes-mobiles [cours]="cours.cours"></app-chart-moyennes-mobiles>
     }
   </p-panel>
 }

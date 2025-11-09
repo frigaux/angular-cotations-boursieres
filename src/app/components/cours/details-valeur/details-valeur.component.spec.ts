@@ -35,7 +35,7 @@ describe('DetailsValeurComponent', () => {
 
   it('Given un cours when le composant est rendu then le <p-panel> et <p-chart> sont rendus', () => {
     const element: HTMLElement = fixture.nativeElement;
-    fixture.componentRef.setInput('cours', COURS_CROISSANT);
+    fixture.componentRef.setInput('cours', {cours: COURS_CROISSANT, premier: true, dernier: true});
     fixture.detectChanges();
     const elPanel = element.querySelector('p-panel');
     expect(elPanel).toBeTruthy();

@@ -60,14 +60,15 @@ describe('CoursComponent', () => {
       fixture.detectChanges(); // appelle le ngOnInit
       expect(component).toBeDefined();
       expect(component.loading).toBeFalse();
-      const cours = component.marches![0].cours[0];
-      component.onClickCours(new MouseEvent('click'), cours);
+      const marche = component.marches![0];
+      const cours = marche.cours[0];
+      component.onClickCours(new MouseEvent('click'), marche, cours);
       component.valeurSuivante();
       component.valeurPrecedente();
       component.trierColonne({field: 'libelle'}, component.marches![0]);
       component.trierColonne({field: 'cloture'}, component.marches![0]);
       component.trierColonne({field: 'var1'}, component.marches![0]);
-      expect(component.coursSelectionne).toEqual(cours);
+      expect(component.coursSelectionne).toEqual({cours, premier: true, dernier: true});
     });
   });
 });

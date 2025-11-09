@@ -159,7 +159,7 @@
           "DOCUMENTATION_OPERATEURS_GROUPEMENT": "et de groupement : les parenthèses.",
           "DOCUMENTATION_OPERANDES": "Ces opérateurs peuvent s'appliquer sur les opérandes",
           "DOCUMENTATION_OPERANDES_MM": "moyennes mobiles (Mx, x = 1 pour la moyenne mobile sur le dernier jour)",
-          "DOCUMENTATION_OPERANDES_STATISTIQUES": "cours minimum (MIN), maximum (MAX) et moyenne des cours (MOY)",
+          "DOCUMENTATION_OPERANDES_STATISTIQUES_MM": "moyenne mobile minimum (MIN), maximum (MAX) et moyenne des moyennes mobiles (MOY)",
           "DOCUMENTATION_EXEMPLE": "Par exemple : M50 < M20 && M20 < M10",
           "CONDITION": "Condition",
           "MODIFIER": "Modifier la condition du filtre"
@@ -366,8 +366,8 @@
             "DOCUMENTATION_OPERANDES": "Ces opérateurs peuvent s'appliquer sur les opérandes",
             "DOCUMENTATION_OPERANDES_COURS": "cours (Cx, x = 1 pour le dernier cours)",
             "DOCUMENTATION_OPERANDES_MM": "moyennes mobiles (Mx, x = 1 pour la moyenne mobile sur le dernier jour)",
-            "DOCUMENTATION_OPERANDES_STATISTIQUES": "cours minimum (MIN), maximum (MAX) et moyenne des cours (MOY)",
-            "DOCUMENTATION_OPERANDES_VAGUES": "une estimation du nombre de vagues (NBV)",
+            "DOCUMENTATION_OPERANDES_STATISTIQUES_COURS": "cours minimum (MIN), maximum (MAX) et moyenne des cours (MOY)",
+            "DOCUMENTATION_OPERANDES_VAGUES_COURS": "une estimation du nombre de vagues sur les cours (NBV)",
             "DOCUMENTATION_EXEMPLE": "Par exemple : C1 < M5 && C1 < M10.",
             "CONDITION": "Condition",
             "MODIFIER": "Modifier la condition de l'alerte"
