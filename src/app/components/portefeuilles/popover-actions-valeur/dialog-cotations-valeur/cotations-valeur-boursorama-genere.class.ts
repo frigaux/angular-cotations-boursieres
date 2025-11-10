@@ -1,9 +1,9 @@
-import {DTOCotationsTickerBoursorama} from '../../../../services/boursorama/dto-cotations-ticker-boursorama.interface';
+import {DTOInformationsTickerBoursorama} from '../../../../services/boursorama/dto-informations-ticker-boursorama.interface';
 import {TranslateService} from '@ngx-translate/core';
 
 export class CotationsValeurBoursoramaDecore {
   id: number;
-  dto: DTOCotationsTickerBoursorama;
+  dto: DTOInformationsTickerBoursorama;
   pourcentageCours: number;
   variationOuverture: number;
   variationClotureVeille: number;
@@ -11,12 +11,12 @@ export class CotationsValeurBoursoramaDecore {
   ordresBarChart?: any;
   optionsBarChart?: any;
 
-  constructor(private translateService: TranslateService, id: number, dto: DTOCotationsTickerBoursorama) {
+  constructor(private translateService: TranslateService, id: number, dto: DTOInformationsTickerBoursorama) {
     this.id = id;
     this.dto = dto;
-    this.pourcentageCours = Math.round(100 * (dto.cours - dto.plusBas) / (dto.plusHaut - dto.plusBas));
-    this.variationOuverture = (dto.cours / dto.ouverture) - 1;
-    this.variationClotureVeille = (dto.cours / dto.clotureVeille) - 1;
+    this.pourcentageCours = Math.round(100 * (dto.cotations.cours - dto.cotations.plusBas) / (dto.cotations.plusHaut - dto.cotations.plusBas));
+    this.variationOuverture = (dto.cotations.cours / dto.cotations.ouverture) - 1;
+    this.variationClotureVeille = (dto.cotations.cours / dto.cotations.clotureVeille) - 1;
     this.ordresDoughnut = this.construireOrdresDoughnut(dto);
     this.ordresBarChart = this.construireOrdresBarChart(dto);
     this.optionsBarChart = this.construireOptionsBarChart();
@@ -38,7 +38,7 @@ export class CotationsValeurBoursoramaDecore {
     };
   }
 
-  private construireOrdresDoughnut(dto: DTOCotationsTickerBoursorama) {
+  private construireOrdresDoughnut(dto: DTOInformationsTickerBoursorama) {
     const documentStyle = getComputedStyle(document.documentElement);
     const qtAchats = dto.achats.reduce((accumulator, achat) => accumulator + achat.quantite, 0);
     const qtVentes = dto.ventes.reduce((accumulator, vente) => accumulator + vente.quantite, 0);
@@ -59,7 +59,7 @@ export class CotationsValeurBoursoramaDecore {
 
   }
 
-  private construireOrdresBarChart(dto: DTOCotationsTickerBoursorama) {
+  private construireOrdresBarChart(dto: DTOInformationsTickerBoursorama) {
     const documentStyle = getComputedStyle(document.documentElement);
     const qtAchats = dto.achats.reduce((accumulator, achat) => accumulator + achat.quantite, 0);
     const qtVentes = dto.ventes.reduce((accumulator, vente) => accumulator + vente.quantite, 0);

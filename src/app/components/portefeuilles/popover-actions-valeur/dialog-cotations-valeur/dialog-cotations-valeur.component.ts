@@ -9,12 +9,12 @@ import {Fieldset} from 'primeng/fieldset';
 import {CurrencyPipe, DatePipe, DecimalPipe, PercentPipe} from '@angular/common';
 import {CotationsValeurBoursoramaDecore} from './cotations-valeur-boursorama-genere.class';
 import {JaugeComponent} from '../../../commun/jauge/jauge.component';
-import {CoursPortefeuille} from '../../cours-portefeuille.class';
 import {VueUtil} from '../../../commun/vue-util.class';
 import {
   DialogActualiteValeurComponent
 } from '../../../commun/dialog-actualite-valeur/dialog-actualite-valeur.component';
 import {DTOInformation} from '../../../../services/boursorama/dto-information.interface';
+import {DTOValeur} from '../../../../services/boursorama/dto-valeur.interface';
 
 @Component({
   selector: 'app-dialog-cotations-valeur',
@@ -41,19 +41,19 @@ export class DialogCotationsValeurComponent {
   // données pour la vue
   protected visible: boolean = false;
   protected loading: boolean = false;
-  protected cours?: CoursPortefeuille;
+  protected valeur?: DTOValeur;
   protected cotationsTickerDecore?: CotationsValeurBoursoramaDecore;
   protected readonly VueUtil = VueUtil;
 
   constructor(private translateService: TranslateService, private boursoramaService: BoursoramaService) {
   }
 
-  afficherCours(cours: CoursPortefeuille) {
-    this.cours = cours;
+  afficherCours(valeur: DTOValeur) {
+    this.valeur = valeur;
     this.cotationsTickerDecore = undefined;
     this.visible = true;
     this.loading = true;
-    this.boursoramaService.chargerCotationsTicker(cours).subscribe({
+    this.boursoramaService.chargerInformationsTicker(valeur).subscribe({
         next:
           cotationsTickerBoursorama => {
             this.cotationsTickerDecore = new CotationsValeurBoursoramaDecore(this.translateService, 0, cotationsTickerBoursorama);
@@ -67,7 +67,7 @@ export class DialogCotationsValeurComponent {
 
   afficherCotationsTickerBoursoramaDecore(cotationsTickerDecore: CotationsValeurBoursoramaDecore) {
     this.visible = true;
-    this.cours = cotationsTickerDecore.dto.coursPortefeuille;
+    this.valeur = cotationsTickerDecore.dto.valeur;
     this.cotationsTickerDecore = cotationsTickerDecore;
   }
 
@@ -76,8 +76,8 @@ export class DialogCotationsValeurComponent {
   }
 
   protected rafraichir() {
-    if (this.cours) {
-      this.afficherCours(this.cours);
+    if (this.valeur) {
+      this.afficherCours(this.valeur);
     }
   }
 

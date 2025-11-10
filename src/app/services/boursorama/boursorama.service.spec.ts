@@ -6,7 +6,7 @@ import {firstValueFrom} from 'rxjs';
 import {VALEURS} from '../jdd/jdd-valeurs.dataset';
 import {DTOCours} from '../cours/dto-cours.interface';
 import {COURS_PORTEFEUILLE} from '../jdd/jdd-cours.dataset';
-import {DTOCotationsTickerBoursorama} from './dto-cotations-ticker-boursorama.interface';
+import {DTOInformationsTickerBoursorama} from './dto-informations-ticker-boursorama.interface';
 
 describe('BoursoramaService', () => {
   let service: BoursoramaService;
@@ -41,9 +41,9 @@ describe('BoursoramaService', () => {
   });
 
   it('given un ticker when #chargerCotationsTicker then on doit récupérer la cotation pour le ticker', async () => {
-    const promiseCotationsTicker: Promise<DTOCotationsTickerBoursorama> = firstValueFrom(service.chargerCotationsTicker(COURS_PORTEFEUILLE));
+    const promiseCotationsTicker: Promise<DTOInformationsTickerBoursorama> = firstValueFrom(service.chargerInformationsTicker(COURS_PORTEFEUILLE));
     const dto = await promiseCotationsTicker;
-    expect(dto.coursPortefeuille).toEqual(COURS_PORTEFEUILLE);
+    expect(dto.valeur).toEqual(COURS_PORTEFEUILLE);
     expect(dto.achats.length).toBeGreaterThan(0);
     expect(dto.ventes.length).toBeGreaterThan(0);
     expect(dto.actualites.length).toBeGreaterThan(0);

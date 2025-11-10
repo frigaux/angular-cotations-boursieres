@@ -5,9 +5,11 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {DTOCoursBoursorama} from './dto-cours-boursorama.interface';
 import {DTOOrdre} from './dto-ordre.interface';
 import {ParseUtil} from '../commun/parse-util.class';
-import {DTOCotationsTickerBoursorama} from './dto-cotations-ticker-boursorama.interface';
-import {CoursPortefeuille} from '../../components/portefeuilles/cours-portefeuille.class';
+import {DTOInformationsTickerBoursorama} from './dto-informations-ticker-boursorama.interface';
 import {DTOInformation} from './dto-information.interface';
+import {DTOCotations} from './dto-cotations.interface';
+import {DTOValeur} from './dto-valeur.interface';
+import {DTOPoint} from './dto-point.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -51,9 +53,9 @@ export class BoursoramaService {
     });
   }
 
-  public chargerCotationsTicker(cours: CoursPortefeuille): Observable<DTOCotationsTickerBoursorama> {
+  public chargerInformationsTicker(valeur: DTOValeur): Observable<DTOInformationsTickerBoursorama> {
     return new Observable(observer => {
-      this.http.get(`/boursorama/cours/1rP${cours.ticker}/`, {
+      this.http.get(`/boursorama/cours/1rP${valeur.ticker}/`, {
         headers: BoursoramaService.HEADERS_HTML,
         responseType: 'text'
       }).subscribe({
@@ -62,7 +64,7 @@ export class BoursoramaService {
           observer.complete();
         },
         next: html => {
-          const dto = this.parseAndMapCours(cours, html);
+          const dto = this.parseAndMapInformationsTicker(valeur, html);
           if (dto) {
             observer.next(dto);
           } else {
@@ -77,9 +79,9 @@ export class BoursoramaService {
     });
   }
 
-  public chargerCotationsTickers(coursPortefeuille: Array<CoursPortefeuille>): Observable<Array<DTOCotationsTickerBoursorama>> {
+  public chargerInformationsTickers(valeurs: Array<DTOValeur>): Observable<Array<DTOInformationsTickerBoursorama>> {
     return new Observable(observer => {
-      forkJoin(coursPortefeuille.map(cours =>
+      forkJoin(valeurs.map(cours =>
         this.http.get(`/boursorama/cours/1rP${cours.ticker}/`, {
           headers: BoursoramaService.HEADERS_HTML,
           responseType: 'text'
@@ -90,9 +92,9 @@ export class BoursoramaService {
           observer.complete();
         },
         next: htmls => {
-          const resultat: Array<DTOCotationsTickerBoursorama> = [];
+          const resultat: Array<DTOInformationsTickerBoursorama> = [];
           htmls.forEach((html: string, i: number) => {
-            const dto = this.parseAndMapCours(coursPortefeuille[i], html);
+            const dto = this.parseAndMapInformationsTicker(valeurs[i], html);
             if (dto) {
               resultat.push(dto);
             }
@@ -104,7 +106,7 @@ export class BoursoramaService {
     });
   }
 
-  private parseAndMapCours(coursPortefeuille: CoursPortefeuille, html: string): DTOCotationsTickerBoursorama | undefined {
+  private parseAndMapInformationsTicker(valeur: DTOValeur, html: string): DTOInformationsTickerBoursorama | undefined {
     const document = new DOMParser()
       .parseFromString(html, 'text/html');
 
@@ -140,10 +142,16 @@ export class BoursoramaService {
       const actualites = this.parseAndMapInformations(elULsNouvelles[1]);
       const analyses = this.parseAndMapInformations(elULsNouvelles[2]);
 
-      return {
-        coursPortefeuille, cours, ouverture, clotureVeille: cloture, plusHaut, plusBas, volume,
+      const courbeCours = this.parseAndMapChart(html);
+
+      const cotations: DTOCotations = {
+        cours, ouverture, clotureVeille: cloture, plusHaut, plusBas, volume,
         pourcentageCapitalEchange, valorisation, limiteBaisse, limiteHausse, pourcentageRendementEstime,
-        perEstime, dernierDividende, dateDernierDividende, risqueESG, achats, ventes, actualites, analyses
+        perEstime, dernierDividende, dateDernierDividende, risqueESG
+      };
+
+      return {
+        valeur, cotations, courbeCours, achats, ventes, actualites, analyses
       };
     }
     return undefined;
@@ -209,5 +217,22 @@ export class BoursoramaService {
         }
       });
     });
+  }
+
+  private parseAndMapChart(html: string): Array<DTOPoint> {
+    const regexp = /var chart\s*= JSON.parse\('([^']+)'\);/gm;
+    const matches = regexp.exec(html);
+    if (matches) {
+      const json = matches[1];
+      const config = JSON.parse(json);
+      if (config && config.data && config.data.amChartConfig.graphs && config.data.amChartData) {
+        const id = config.data.amChartConfig.graphs[0].id;
+        const datas = config.data.amChartData[id];
+        return datas.map((data: any) => {
+          return {heure: data.period, cours: data.value}
+        });
+      }
+    }
+    return [];
   }
 }

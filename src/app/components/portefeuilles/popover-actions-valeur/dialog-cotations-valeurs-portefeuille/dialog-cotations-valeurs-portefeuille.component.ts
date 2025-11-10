@@ -49,7 +49,7 @@ export class DialogCotationsValeursPortefeuilleComponent {
     this.dialogCoursTickerComponent = dialogCoursTickerComponent;
     this.visible = true;
     this.loading = true;
-    this.boursoramaService.chargerCotationsTickers(portefeuilleAvecCours.cours).subscribe({
+    this.boursoramaService.chargerInformationsTickers(portefeuilleAvecCours.cours).subscribe({
         next:
           cotationsTickersBoursorama => {
             let i = 0;

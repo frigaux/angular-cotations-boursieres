@@ -5,8 +5,8 @@
     <h2>
       {{
         'COMPOSANTS.PORTEFEUILLES.ACTIONS_VALEUR.DIALOG_COTATIONS_VALEUR.COTATIONS_VALEUR' | translate : {
-          valeur: cours?.libelle,
-          ticker: cours?.ticker
+          valeur: valeur?.libelle,
+          ticker: valeur?.ticker
         }
       }}
     </h2>
@@ -29,7 +29,7 @@
             <div class="cotations">
               <div>
                 <label>{{ 'COMPOSANTS.PORTEFEUILLES.ACTIONS_VALEUR.DIALOG_COTATIONS_VALEUR.COURS' | translate }}</label>
-                <span>{{ cotationsTickerDecore.dto.cours | currency:'€' }}</span>
+                <span>{{ cotationsTickerDecore.dto.cotations.cours | currency:'€' }}</span>
               </div>
               <app-jauge
                 [cleMinimum]="'COMPOSANTS.PORTEFEUILLES.ACTIONS_VALEUR.DIALOG_COTATIONS_VALEUR.PLUS_BAS'"
@@ -56,43 +56,43 @@
             <div class="indicateurs">
               <div>
                 <label>{{ 'COMPOSANTS.PORTEFEUILLES.ACTIONS_VALEUR.DIALOG_COTATIONS_VALEUR.VOLUME' | translate }}</label>
-                <span>{{ cotationsTickerDecore.dto.volume | number }}</span>
+                <span>{{ cotationsTickerDecore.dto.cotations.volume | number }}</span>
               </div>
               <div>
                 <label>{{ 'COMPOSANTS.PORTEFEUILLES.ACTIONS_VALEUR.DIALOG_COTATIONS_VALEUR.CAPITAL_ECHANGE' | translate }}</label>
-                <span>{{ cotationsTickerDecore.dto.pourcentageCapitalEchange  | percent:'1.2-2' }}</span>
+                <span>{{ cotationsTickerDecore.dto.cotations.pourcentageCapitalEchange  | percent:'1.2-2' }}</span>
               </div>
               <div>
                 <label>{{ 'COMPOSANTS.PORTEFEUILLES.ACTIONS_VALEUR.DIALOG_COTATIONS_VALEUR.VALORISATION' | translate }}</label>
-                <span>{{ cotationsTickerDecore.dto.valorisation }}</span>
+                <span>{{ cotationsTickerDecore.dto.cotations.valorisation }}</span>
               </div>
               <div>
                 <label>{{ 'COMPOSANTS.PORTEFEUILLES.ACTIONS_VALEUR.DIALOG_COTATIONS_VALEUR.LIMITE_BAISSE' | translate }}</label>
-                <span>{{ cotationsTickerDecore.dto.limiteBaisse | currency:'€' }}</span>
+                <span>{{ cotationsTickerDecore.dto.cotations.limiteBaisse | currency:'€' }}</span>
               </div>
               <div>
                 <label>{{ 'COMPOSANTS.PORTEFEUILLES.ACTIONS_VALEUR.DIALOG_COTATIONS_VALEUR.LIMITE_HAUSSE' | translate }}</label>
-                <span>{{ cotationsTickerDecore.dto.limiteHausse | currency:'€' }}</span>
+                <span>{{ cotationsTickerDecore.dto.cotations.limiteHausse | currency:'€' }}</span>
               </div>
               <div>
                 <label>{{ 'COMPOSANTS.PORTEFEUILLES.ACTIONS_VALEUR.DIALOG_COTATIONS_VALEUR.RENDEMENT_ESTIME' | translate }}</label>
-                <span>{{ cotationsTickerDecore.dto.pourcentageRendementEstime  | percent:'1.2-2' }}</span>
+                <span>{{ cotationsTickerDecore.dto.cotations.pourcentageRendementEstime  | percent:'1.2-2' }}</span>
               </div>
               <div>
                 <label>{{ 'COMPOSANTS.PORTEFEUILLES.ACTIONS_VALEUR.DIALOG_COTATIONS_VALEUR.PER_ESTIME' | translate }}</label>
-                <span>{{ cotationsTickerDecore.dto.perEstime | number }}</span>
+                <span>{{ cotationsTickerDecore.dto.cotations.perEstime | number }}</span>
               </div>
               <div>
                 <label>{{ 'COMPOSANTS.PORTEFEUILLES.ACTIONS_VALEUR.DIALOG_COTATIONS_VALEUR.DERNIER_DIVIDENDE' | translate }}</label>
-                <span>{{ cotationsTickerDecore.dto.dernierDividende | currency:'€' }}</span>
+                <span>{{ cotationsTickerDecore.dto.cotations.dernierDividende | currency:'€' }}</span>
               </div>
               <div>
                 <label>{{ 'COMPOSANTS.PORTEFEUILLES.ACTIONS_VALEUR.DIALOG_COTATIONS_VALEUR.DATE_DERNIER_DIVIDENDE' | translate }}</label>
-                <span>{{ cotationsTickerDecore.dto.dateDernierDividende | date: 'dd/MM/yyyy' }}</span>
+                <span>{{ cotationsTickerDecore.dto.cotations.dateDernierDividende | date: 'dd/MM/yyyy' }}</span>
               </div>
               <div>
                 <label>{{ 'COMPOSANTS.PORTEFEUILLES.ACTIONS_VALEUR.DIALOG_COTATIONS_VALEUR.RISQUE_ESG' | translate }}</label>
-                <span>{{ cotationsTickerDecore.dto.risqueESG }}</span>
+                <span>{{ cotationsTickerDecore.dto.cotations.risqueESG }}</span>
               </div>
             </div>
           </p-fieldset>

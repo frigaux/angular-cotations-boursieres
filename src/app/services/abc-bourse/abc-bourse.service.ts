@@ -348,7 +348,7 @@ export class AbcBourseService {
     return undefined;
   }
 
-  public chargerDividendesPourParametres(listeParametres: Array<Record<'DlDate' | 'DlZone' | '__RequestVerificationToken', string>>): Observable<DTODividendes> {
+  private chargerDividendesPourParametres(listeParametres: Array<Record<'DlDate' | 'DlZone' | '__RequestVerificationToken', string>>): Observable<DTODividendes> {
     const resultat = new DTODividendes();
     return new Observable(observer => {
       const headers = new HttpHeaders()
