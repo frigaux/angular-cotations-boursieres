@@ -1,17 +1,20 @@
 import {DTOOrdre} from './dto-ordre.interface';
 import {DTOInformation} from './dto-information.interface';
-import {CoursPortefeuille} from '../../components/portefeuilles/cours-portefeuille.class';
 import {DTOCotations} from './dto-cotations.interface';
-import {Marches} from '../valeurs/marches.enum';
 import {DTOValeur} from './dto-valeur.interface';
-import {DTOPoint} from './dto-point.interface';
+import {DtoTransaction} from './dto-transaction.interface';
+import {DTOHistoriqueJour} from './dto-historique-jour.interface';
+import {DTOHistoriquePeriode} from './dto-historique-periode.interface';
 
 export interface DTOInformationsTickerBoursorama {
   valeur: DTOValeur;
   cotations: DTOCotations;
-  courbeCours: Array<DTOPoint>;
   achats: Array<DTOOrdre>;
   ventes: Array<DTOOrdre>;
   actualites: Array<DTOInformation>;
   analyses: Array<DTOInformation>;
+  chartData?: Object;
+  transactions: Array<DtoTransaction>;
+  historiqueJours: Array<DTOHistoriqueJour>;
+  historiquePeriodes: Array<DTOHistoriquePeriode>;
 }

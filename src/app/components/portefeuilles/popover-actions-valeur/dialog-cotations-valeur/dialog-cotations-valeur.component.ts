@@ -55,7 +55,7 @@ export class DialogCotationsValeurComponent {
     this.loading = true;
     this.boursoramaService.chargerInformationsTicker(valeur).subscribe({
         next:
-          cotationsTickerBoursorama => {
+          cotationsTickerBoursorama => {console.log(cotationsTickerBoursorama);
             this.cotationsTickerDecore = new CotationsValeurBoursoramaDecore(this.translateService, 0, cotationsTickerBoursorama);
             this.loading = false;
           },

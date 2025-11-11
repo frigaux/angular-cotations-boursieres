@@ -7,6 +7,8 @@ import {VALEURS} from '../jdd/jdd-valeurs.dataset';
 import {DTOCours} from '../cours/dto-cours.interface';
 import {COURS_PORTEFEUILLE} from '../jdd/jdd-cours.dataset';
 import {DTOInformationsTickerBoursorama} from './dto-informations-ticker-boursorama.interface';
+import {RouterModule} from '@angular/router';
+import {TranslateModule} from '@ngx-translate/core';
 
 describe('BoursoramaService', () => {
   let service: BoursoramaService;
@@ -16,6 +18,9 @@ describe('BoursoramaService', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
+      imports: [
+        TranslateModule.forRoot({})
+      ],
       providers: [
         BoursoramaService,
         provideHttpClient(

@@ -4,6 +4,7 @@ import {UIChart} from 'primeng/chart';
 import {Cours} from '../cours.class';
 import {DatePipe} from '@angular/common';
 
+// TODO : code mort
 @Component({
   selector: 'app-chart-cours',
   imports: [
