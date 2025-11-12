@@ -55,12 +55,12 @@ export class DialogCotationsValeurComponent {
     this.loading = true;
     this.boursoramaService.chargerInformationsTicker(valeur).subscribe({
         next:
-          cotationsTickerBoursorama => {console.log(cotationsTickerBoursorama);
+          cotationsTickerBoursorama => {
             this.cotationsTickerDecore = new CotationsValeurBoursoramaDecore(this.translateService, 0, cotationsTickerBoursorama);
             this.loading = false;
           },
-      error:
-        httpErrorResponse => this.loading = false
+        error:
+          httpErrorResponse => this.loading = false
       }
     )
   }

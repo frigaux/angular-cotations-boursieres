@@ -64,19 +64,19 @@ export class ParseUtil {
     return NaN;
   }
 
-  static queryAndParseString(parent: ParentNode, selector: string): string {
+  static queryAndParseString(parent: ParentNode, selector: string): string | undefined {
     const el = parent.querySelector(selector);
     if (el) {
       return el.innerHTML.trim();
     }
-    return '';
+    return undefined;
   }
 
-  static queryAndParseDate(parent: ParentNode, selector: string): string {
+  static queryAndParseDate(parent: ParentNode, selector: string): string | undefined {
     const el = parent.querySelector(selector);
     if (el) {
       return this.parseAndMapTo8601(el.innerHTML.trim());
     }
-    return '';
+    return undefined;
   }
 }

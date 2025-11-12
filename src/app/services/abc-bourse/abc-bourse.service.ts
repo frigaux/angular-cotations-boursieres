@@ -66,7 +66,7 @@ export class AbcBourseService {
       this.mapRatios(result.ratios.indicateurs, elTables[2]);
       this.mapIndicateurs(result, elTables[3]);
     }
-    if (elTables.length === 3) { // bloc dividende facultatif
+    if (elTables.length === 3) { // le bloc dividende est facultatif
       this.mapVariations(result.variations, elTables[0]);
       this.mapRatios(result.ratios.indicateurs, elTables[1]);
       this.mapIndicateurs(result, elTables[2]);
@@ -94,6 +94,8 @@ export class AbcBourseService {
         cours, volume, ouverture, plusHaut, plusBas, clotureVeille: cloture,
         pourcentageVolatilite, pourcentageCapitalEchange, valorisation
       };
+    } else {
+      console.error('Impossible de récupérer les cotations', document);
     }
     return undefined;
   }
@@ -312,6 +314,12 @@ export class AbcBourseService {
                 observer.complete();
               }
             });
+          } else {
+            observer.error({
+              message: 'Impossible de récupérer les paramètres du formulaire dans le html',
+              error: html
+            });
+            observer.complete();
           }
         }
       });
@@ -344,8 +352,10 @@ export class AbcBourseService {
         }
       }
       return resultat;
+    } else {
+      console.error('Impossible de récupérer les paramètres du formulaire dans le html', html);
+      return undefined;
     }
-    return undefined;
   }
 
   private chargerDividendesPourParametres(listeParametres: Array<Record<'DlDate' | 'DlZone' | '__RequestVerificationToken', string>>): Observable<DTODividendes> {

@@ -13,6 +13,10 @@ import {TranslateService} from '@ngx-translate/core';
 import {DtoTransaction} from './dto-transaction.interface';
 import {DTOHistoriqueJour} from './dto-historique-jour.interface';
 import {DTOHistoriquePeriode} from './dto-historique-periode.interface';
+import {DTORisqueESG} from './dto-risque-esg.interface';
+import {DTOConsensus} from './dto-consensus.interface';
+import {Conseil} from './conseil.enum';
+import {DTOPrevision} from './dto-prevision.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -119,10 +123,11 @@ export class BoursoramaService {
     const elULsNouvelles = document.querySelectorAll('ul.c-list-news');
     const elTableTransactions = document.querySelector('table[data-ist-last-transactions]');
     const elTables = document.querySelectorAll('table.c-table--generic');
+    const elDIVsGauges = document.querySelectorAll('div.c-median-gauge');
 
     if (elDIVCours && elLIsCotations.length === 18 && elULsNouvelles.length === 3 && elTableTransactions
-      && elTables.length >= 4) {
-      const cotations = this.parseAndMapCotations(elDIVCours, elLIsCotations);
+      && elTables.length >= 4 && elDIVsGauges.length === 2) {
+      const cotations = this.parseAndMapCotations(elDIVCours, elLIsCotations, elTables[3]);
       const ordres = this.parseAndMapOrdres(document);
       const actualites = this.parseAndMapInformations(elULsNouvelles[1]);
       const analyses = this.parseAndMapInformations(elULsNouvelles[2]);
@@ -130,6 +135,10 @@ export class BoursoramaService {
       const transactions = this.parseAndMapTransactions(elTableTransactions);
       const historiqueJours = this.parseAndMapHistoriqueJours(elTables[0]);
       const historiquePeriodes = this.parseAndMapHistoriquePeriodes(elTables[3]);
+      const risqueESG = this.parseAndMapRisqueESG(document, elDIVsGauges[0]);
+      const consensus = this.parseAndMapConsensus(document, elDIVsGauges[1], elTables[1]);
+      const evenements = this.parseAndMapEvenements(document);
+      const communiques = this.parseAndMapInformations(elULsNouvelles[0]);
 
       return {
         valeur,
@@ -141,13 +150,17 @@ export class BoursoramaService {
         chartData,
         transactions,
         historiqueJours,
-        historiquePeriodes
+        historiquePeriodes,
+        risqueESG,
+        consensus,
+        evenements,
+        communiques
       };
     }
     return undefined;
   }
 
-  private parseAndMapCotations(elDIVCours: Element, elLIsCotations: NodeListOf<Element>): DTOCotations {
+  private parseAndMapCotations(elDIVCours: Element, elLIsCotations: NodeListOf<Element>, elTable: Element): DTOCotations {
     const cours = ParseUtil.queryAndParseNumber(elDIVCours, 'span.c-instrument');
 
     const ouverture = ParseUtil.queryAndParseNumber(elLIsCotations[2], 'span.c-instrument');
@@ -167,10 +180,24 @@ export class BoursoramaService {
     const dateDernierDividende = ParseUtil.queryAndParseDate(elLIsCotations[15], 'p.c-list-info__value');
 
     const risqueESG = ParseUtil.queryAndParseString(elLIsCotations[17], 'p.c-list-info__value');
+
+    const valeurs: Array<number> = [];
+    elTable.querySelectorAll('tbody > tr.c-table__row')
+      .forEach(elTr => {
+        const elTDs = elTr.querySelectorAll('td.c-table__cell');
+        if (elTDs.length === 4) {
+          valeurs.push(ParseUtil.parseNumber(elTDs[3].innerHTML));
+        }
+      });
+    const MM20 = valeurs.length > 0 ? valeurs[0] : NaN;
+    const MM50 = valeurs.length > 1 ? valeurs[1] : NaN;
+    const MM100 = valeurs.length > 2 ? valeurs[2] : NaN;
+    const RSI14 = valeurs.length > 3 ? valeurs[3] : NaN;
+
     return {
       cours, ouverture, clotureVeille: cloture, plusHaut, plusBas, volume,
       pourcentageCapitalEchange, valorisation, limiteBaisse, limiteHausse, pourcentageRendementEstime,
-      perEstime, dernierDividende, dateDernierDividende, risqueESG
+      perEstime, dernierDividende, dateDernierDividende, risqueESG, MM20, MM50, MM100, RSI14
     };
   }
 
@@ -193,6 +220,8 @@ export class BoursoramaService {
             prix: ParseUtil.parseNumber(elTDs[3].innerText),
             quantite: ParseUtil.parseNumber(elTDs[4].innerText)
           });
+        } else {
+          console.error('Impossible de récupérer les ordres', elTDs);
         }
       });
     }
@@ -215,6 +244,8 @@ export class BoursoramaService {
             titre: elA.innerHTML,
             pathname: elA.pathname
           });
+        } else {
+          console.error('Impossible de récupérer l\'information', elLI);
         }
       });
     return resultat;
@@ -268,6 +299,8 @@ export class BoursoramaService {
           ]
         };
       }
+    } else {
+      console.error('Impossible de trouver les données de la courbe des cours dans le html', html);
     }
     return undefined;
   }
@@ -281,6 +314,8 @@ export class BoursoramaService {
         const cours = ParseUtil.parseNumber(elTDs[1].innerHTML);
         const quantite = ParseUtil.parseNumber(elTDs[2].innerHTML);
         transactions.push({heure, cours, quantite});
+      } else {
+        console.error('Impossible de récupérer la transaction', elTDs);
       }
     });
     return transactions;
@@ -321,6 +356,8 @@ export class BoursoramaService {
           plusBas: plusBas[i],
           volume: volumes[i]
         }));
+      } else {
+        console.error('Impossible de récupérer l\'historique', elSPANs, elTRs);
       }
     }
     return [];
@@ -341,5 +378,92 @@ export class BoursoramaService {
         }
       });
     return historiques;
+  }
+
+  private parseAndMapRisqueESG(document: Document, elDIVGauge: Element): DTORisqueESG {
+    const elDIV = elDIVGauge.querySelector('div.c-median-gauge__tooltip');
+    const elSTRONGs = document.querySelectorAll('strong.o-flex-stretch__item');
+    const score = elDIV ? elDIV.innerHTML.trim() : undefined;
+    const tonnesCO2 = elSTRONGs.length > 0 ? ParseUtil.parseNumber(elSTRONGs[0].innerHTML) : NaN;
+    const niveauControverse = elSTRONGs.length > 1 ? elSTRONGs[1].innerHTML.trim() : undefined;
+    const implicationsPositives = elSTRONGs.length > 2 ? elSTRONGs[2].innerHTML.trim() : undefined;
+    const implicationsNegatives = elSTRONGs.length > 3 ? elSTRONGs[3].innerHTML.trim() : undefined;
+    return {score, tonnesCO2, niveauControverse, implicationsPositives, implicationsNegatives};
+  }
+
+  private parseAndMapConsensus(document: Document, elDIVGauge: Element, elTable: Element): DTOConsensus {
+    const elDIV = elDIVGauge.querySelector('div.c-median-gauge__tooltip');
+    const elSPANs = elDIVGauge.parentElement?.querySelectorAll('p > span');
+    const score = elDIV ? ParseUtil.parseNumber(elDIV.innerHTML) : NaN;
+    const conseil = score ? Math.floor(score) as Conseil : undefined;
+    const objectif3mois = elSPANs && elSPANs.length > 0 ? ParseUtil.parseNumber(elSPANs[0].innerHTML) : NaN;
+    const pourcentagePotentiel = elSPANs && elSPANs.length > 1 ? ParseUtil.parseNumber(elSPANs[1].innerHTML) : NaN;
+    const previsions = this.parsePrevisions(elTable);
+    return {score, conseil, objectif3mois, pourcentagePotentiel, previsions};
+  }
+
+  private parsePrevisionsString(accumulateur: Array<string>, elements: NodeListOf<Element>) {
+    if (elements.length === 4) {
+      accumulateur.push(elements[1].innerHTML.trim());
+      accumulateur.push(elements[2].innerHTML.trim());
+      accumulateur.push(elements[3].innerHTML.trim());
+    }
+  }
+
+  private parsePrevisionsNumber(accumulateur: Array<number>, elements: NodeListOf<Element>) {
+    if (elements.length === 4) {
+      accumulateur.push(ParseUtil.parseNumber(elements[1].innerHTML));
+      accumulateur.push(ParseUtil.parseNumber(elements[2].innerHTML));
+      accumulateur.push(ParseUtil.parseNumber(elements[3].innerHTML));
+    }
+  }
+
+  private parsePrevisions(elTable: Element): Array<DTOPrevision> {
+    const annees: Array<string> = [];
+    const dividendes: Array<number> = [];
+    const pourcentageRendements: Array<number> = [];
+    const benefices: Array<number> = [];
+    const pers: Array<number> = [];
+    const elH3s = elTable.querySelectorAll('thead > tr > th > h3');
+    this.parsePrevisionsString(annees, elH3s);
+    const elTRs = elTable.querySelectorAll('tbody > tr');
+    if (elTRs.length === 4) {
+      this.parsePrevisionsNumber(dividendes, elTRs[0].querySelectorAll('td.c-table__cell'));
+      this.parsePrevisionsNumber(pourcentageRendements, elTRs[1].querySelectorAll('td.c-table__cell'));
+      this.parsePrevisionsNumber(benefices, elTRs[2].querySelectorAll('td.c-table__cell'));
+      this.parsePrevisionsNumber(pers, elTRs[3].querySelectorAll('td.c-table__cell'));
+    }
+    if (annees.length === 3 && dividendes.length === 3 && pourcentageRendements.length === 3
+      && benefices.length === 3 && pers.length === 3) {
+      return annees.map((annee, i) => {
+        return {
+          annee,
+          dividende: dividendes[i],
+          pourcentageRendement: pourcentageRendements[i],
+          benefice: benefices[i],
+          per: pers[i]
+        };
+      })
+    } else {
+      return [];
+    }
+  }
+
+  private parseAndMapEvenements(document: Document): Array<DTOInformation> {
+    const resultat: Array<DTOInformation> = [];
+    let id = 0;
+    document.querySelectorAll('a.c-event-card')
+      .forEach(elA => {
+        const pathname = (elA as HTMLAnchorElement).pathname;
+        const elDIVday = elA.querySelector('div.c-event-card__day');
+        const elDIVmonth = elA.querySelector('div.c-event-card__month');
+        const elDIVtext = elA.querySelector('div.c-event-card__text');
+        if (elDIVday && elDIVmonth && elDIVtext) {
+          const date = elDIVday.innerHTML.trim() + ' ' + elDIVmonth.innerHTML.trim();
+          const titre = elDIVtext.innerHTML.trim();
+          resultat.push({id: id++, date, titre, pathname});
+        }
+      });
+    return resultat;
   }
 }

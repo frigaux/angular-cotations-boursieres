@@ -7,12 +7,17 @@ export interface DTOCotations {
   volume: number;
 
   pourcentageCapitalEchange: number;
-  valorisation: string;
+  valorisation?: string;
   limiteBaisse: number;
   limiteHausse: number;
   pourcentageRendementEstime: number;
   perEstime: number;
   dernierDividende: number;
-  dateDernierDividende: string; // ISO 8601 : yyyy-MM-dd
-  risqueESG: string;
+  dateDernierDividende?: string; // ISO 8601 : yyyy-MM-dd
+  risqueESG?: string;
+
+  MM20: number;
+  MM50: number;
+  MM100: number;
+  RSI14: number;
 }

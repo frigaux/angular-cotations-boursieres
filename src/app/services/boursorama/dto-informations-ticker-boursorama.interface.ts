@@ -5,6 +5,8 @@ import {DTOValeur} from './dto-valeur.interface';
 import {DtoTransaction} from './dto-transaction.interface';
 import {DTOHistoriqueJour} from './dto-historique-jour.interface';
 import {DTOHistoriquePeriode} from './dto-historique-periode.interface';
+import {DTORisqueESG} from './dto-risque-esg.interface';
+import {DTOConsensus} from './dto-consensus.interface';
 
 export interface DTOInformationsTickerBoursorama {
   valeur: DTOValeur;
@@ -17,4 +19,8 @@ export interface DTOInformationsTickerBoursorama {
   transactions: Array<DtoTransaction>;
   historiqueJours: Array<DTOHistoriqueJour>;
   historiquePeriodes: Array<DTOHistoriquePeriode>;
+  risqueESG: DTORisqueESG;
+  consensus: DTOConsensus;
+  evenements: Array<DTOInformation>;
+  communiques: Array<DTOInformation>;
 }

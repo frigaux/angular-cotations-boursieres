@@ -7,5 +7,5 @@ export interface DTOCotations {
   clotureVeille: number;
   pourcentageVolatilite: number;
   pourcentageCapitalEchange: number;
-  valorisation: string;
+  valorisation?: string;
 }
