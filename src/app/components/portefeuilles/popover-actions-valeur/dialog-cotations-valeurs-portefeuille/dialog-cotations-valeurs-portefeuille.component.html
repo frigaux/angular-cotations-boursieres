@@ -41,7 +41,7 @@
                   title="{{ 'COMPOSANTS.PORTEFEUILLES.ACTIONS_VALEUR.DIALOG_COTATIONS_VALEURS_PORTEFEUILLE.ACTIONS' | translate }}"></span>
             {{ cotationsTickerDecore.dto.valeur.libelle }}
           </td>
-          <td>{{ cotationsTickerDecore.dto.cours | currency:'€' }}</td>
+          <td>{{ cotationsTickerDecore.dto.cotations.cours | currency:'€' }}</td>
           <td>
             <app-jauge
               [cleMinimum]="'COMPOSANTS.PORTEFEUILLES.ACTIONS_VALEUR.DIALOG_COTATIONS_VALEURS_PORTEFEUILLE.PLUS_BAS'"

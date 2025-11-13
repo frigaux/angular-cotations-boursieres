@@ -14,7 +14,8 @@ import {PrimeNG} from 'primeng/config';
 import {PickList} from 'primeng/picklist';
 import {NavigationBar} from '@squareetlabs/capacitor-navigation-bar';
 
-// TODO : portefeuille, popup actions : enrichir "Cours depuis boursorama" puis fusionner avec "informations détaillées ABC" + courbe du jour depuis Boursorama
+// TODO : portefeuille, popup actions : enrichir "Cours depuis boursorama" : risqueESG,consensus,evenements,communiques
+// TODO : fusionner "Cours depuis boursorama" dans "informations détaillées ABC" (appel ABC & boursorama)
 // TODO : service ABCBourse de récupération des informations pour un ticker : récupérer la pré-ouverture ?
 // TODO : capacitor android : proxy obligatoire pour requêter les autres domaines ? problème CORS ou pas ?
 // TODO : coverage

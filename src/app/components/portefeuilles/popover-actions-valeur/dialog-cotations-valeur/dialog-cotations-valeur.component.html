@@ -23,6 +23,9 @@
   @if (!loading) {
     @if (cotationsTickerDecore) {
       <div class="ligne">
+        <p-chart type="line" [data]="cotationsTickerDecore.dto.chartData" [options]="chartOptions" class="chartLine"/>
+      </div>
+      <div class="ligne">
         <div class="colonne">
           <p-fieldset
             legend="{{ 'COMPOSANTS.PORTEFEUILLES.ACTIONS_VALEUR.DIALOG_COTATIONS_VALEUR.COTATIONS' | translate }}">

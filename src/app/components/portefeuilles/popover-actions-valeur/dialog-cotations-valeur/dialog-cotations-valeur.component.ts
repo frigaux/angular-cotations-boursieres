@@ -43,9 +43,11 @@ export class DialogCotationsValeurComponent {
   protected loading: boolean = false;
   protected valeur?: DTOValeur;
   protected cotationsTickerDecore?: CotationsValeurBoursoramaDecore;
+  protected chartOptions: any; // https://www.chartjs.org/
   protected readonly VueUtil = VueUtil;
 
   constructor(private translateService: TranslateService, private boursoramaService: BoursoramaService) {
+    this.chartOptions = this.wrapChartOptions();
   }
 
   afficherCours(valeur: DTOValeur) {
@@ -83,5 +85,39 @@ export class DialogCotationsValeurComponent {
 
   protected afficherInformation(actualite: DTOInformation) {
     this.dialogActualiteValeurComponent()?.afficherInformationBoursorama(actualite);
+  }
+
+  private wrapChartOptions() {
+    return {
+      scales: {
+        x: {
+          title: {
+            display: false
+          }
+        },
+        y: {
+          ticks: {
+            callback: function (value: number) {
+              return new Intl.NumberFormat('fr-FR', {style: 'currency', currency: 'EUR'}).format(value);
+            }
+          }
+        }
+      },
+      plugins: {
+        legend: {
+          display: false
+        },
+        tooltip: {
+          callbacks: {
+            title: function (context: any) {
+              return context[0].label;
+            },
+            label: function (context: any) {
+              return new Intl.NumberFormat('fr-FR', {style: 'currency', currency: 'EUR'}).format(context.parsed.y);
+            }
+          }
+        }
+      }
+    };
   }
 }
