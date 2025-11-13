@@ -5,6 +5,6 @@ export interface DTOConsensus {
   score: number;
   conseil?: Conseil;
   objectif3mois: number;
-  pourcentagePotentiel: number;
+  pourcentagePotentiel3mois: number;
   previsions: Array<DTOPrevision>;
 }

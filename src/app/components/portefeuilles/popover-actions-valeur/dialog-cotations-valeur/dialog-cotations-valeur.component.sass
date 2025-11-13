@@ -1,5 +1,4 @@
-.chartLine
-  width: 100%
+p-chart
   margin: 1rem
 
 div.ligne
@@ -17,17 +16,17 @@ div.ligne
     .cotations, .indicateurs
       & > div, app-jauge
         margin: 0.5rem
-        width: 20rem
+        width: 22rem
         display: block
 
         & > label
           display: inline-block
-          width: 12rem
+          width: 13rem
           font-weight: bold
 
         & > span
           display: inline-block
-          width: 8rem
+          width: 9rem
           text-align: right
 
           &.positive
@@ -36,10 +35,10 @@ div.ligne
           &.negative
             color: var(--p-red-600)
 
-    .actualites, .analyses
+    .actualites, .analyses, .previsions
       div
         margin: 0.5rem
-        width: 30rem
+        width: calc(70vw - 22rem - 10rem)
         display: block
 
         & > span
@@ -51,7 +50,7 @@ div.ligne
           vertical-align: top
 
         & > span:nth-child(2)
-          width: 25rem
+          width: calc(70vw - 22rem - 10rem - 5rem)
           cursor: pointer
           color: var(--p-blue-700)
 

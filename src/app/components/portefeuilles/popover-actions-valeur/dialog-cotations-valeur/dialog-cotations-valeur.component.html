@@ -22,11 +22,13 @@
 
   @if (!loading) {
     @if (cotationsTickerDecore) {
-      <div class="ligne">
-        <p-chart type="line" [data]="cotationsTickerDecore.dto.chartData" [options]="chartOptions" class="chartLine"/>
-      </div>
+      <p-chart type="line" [data]="cotationsTickerDecore.dto.chartData" [options]="chartOptions"/>
       <div class="ligne">
         <div class="colonne">
+          <p-fieldset
+            legend="{{ 'COMPOSANTS.PORTEFEUILLES.ACTIONS_VALEUR.DIALOG_COTATIONS_VALEUR.ORDRES' | translate }}">
+            <p-chart type="doughnut" [data]="cotationsTickerDecore.ordresDoughnut" height="14rem" width="20rem"/>
+          </p-fieldset>
           <p-fieldset
             legend="{{ 'COMPOSANTS.PORTEFEUILLES.ACTIONS_VALEUR.DIALOG_COTATIONS_VALEUR.COTATIONS' | translate }}">
             <div class="cotations">
@@ -49,10 +51,6 @@
                   [class]="VueUtil.evolutionVariation(cotationsTickerDecore.variationClotureVeille)">{{ cotationsTickerDecore.variationClotureVeille  | percent:'1.2-2' }}</span>
               </div>
             </div>
-          </p-fieldset>
-          <p-fieldset
-            legend="{{ 'COMPOSANTS.PORTEFEUILLES.ACTIONS_VALEUR.DIALOG_COTATIONS_VALEUR.ORDRES' | translate }}">
-            <p-chart type="doughnut" [data]="cotationsTickerDecore.ordresDoughnut" height="14rem" width="20rem"/>
           </p-fieldset>
           <p-fieldset
             legend="{{ 'COMPOSANTS.PORTEFEUILLES.ACTIONS_VALEUR.DIALOG_COTATIONS_VALEUR.INDICATEURS' | translate }}">
@@ -79,7 +77,7 @@
               </div>
               <div>
                 <label>{{ 'COMPOSANTS.PORTEFEUILLES.ACTIONS_VALEUR.DIALOG_COTATIONS_VALEUR.RENDEMENT_ESTIME' | translate }}</label>
-                <span>{{ cotationsTickerDecore.dto.cotations.pourcentageRendementEstime  | percent:'1.2-2' }}</span>
+                <span>{{ cotationsTickerDecore.dto.cotations.pourcentageRendementEstime | percent:'1.2-2' }}</span>
               </div>
               <div>
                 <label>{{ 'COMPOSANTS.PORTEFEUILLES.ACTIONS_VALEUR.DIALOG_COTATIONS_VALEUR.PER_ESTIME' | translate }}</label>
@@ -96,6 +94,34 @@
               <div>
                 <label>{{ 'COMPOSANTS.PORTEFEUILLES.ACTIONS_VALEUR.DIALOG_COTATIONS_VALEUR.RISQUE_ESG' | translate }}</label>
                 <span>{{ cotationsTickerDecore.dto.cotations.risqueESG }}</span>
+              </div>
+              <div>
+                <label>{{ 'COMPOSANTS.PORTEFEUILLES.ACTIONS_VALEUR.DIALOG_COTATIONS_VALEUR.TONNES_CO2' | translate }}</label>
+                <span>{{ cotationsTickerDecore.dto.risqueESG.tonnesCO2 | number }}</span>
+              </div>
+              <div>
+                <label>{{ 'COMPOSANTS.PORTEFEUILLES.ACTIONS_VALEUR.DIALOG_COTATIONS_VALEUR.NIVEAU_CONTROVERSE' | translate }}</label>
+                <span>{{ cotationsTickerDecore.dto.risqueESG.niveauControverse }}</span>
+              </div>
+              <div>
+                <label>{{ 'COMPOSANTS.PORTEFEUILLES.ACTIONS_VALEUR.DIALOG_COTATIONS_VALEUR.IMPACT_POSITIF' | translate }}</label>
+                <span>{{ cotationsTickerDecore.dto.risqueESG.impactPositif }}</span>
+              </div>
+              <div>
+                <label>{{ 'COMPOSANTS.PORTEFEUILLES.ACTIONS_VALEUR.DIALOG_COTATIONS_VALEUR.IMPACT_NEGATIF' | translate }}</label>
+                <span>{{ cotationsTickerDecore.dto.risqueESG.impactNegatif }}</span>
+              </div>
+              <div>
+                <label>{{ 'COMPOSANTS.PORTEFEUILLES.ACTIONS_VALEUR.DIALOG_COTATIONS_VALEUR.CONSENSUS' | translate }}</label>
+                <span>{{ cotationsTickerDecore.dto.consensus.conseil }}</span>
+              </div>
+              <div>
+                <label>{{ 'COMPOSANTS.PORTEFEUILLES.ACTIONS_VALEUR.DIALOG_COTATIONS_VALEUR.OBJECTIF_3MOIS' | translate }}</label>
+                <span>{{ cotationsTickerDecore.dto.consensus.objectif3mois | currency:'€' }}</span>
+              </div>
+              <div>
+                <label>{{ 'COMPOSANTS.PORTEFEUILLES.ACTIONS_VALEUR.DIALOG_COTATIONS_VALEUR.POTENTIEL_3MOIS' | translate }}</label>
+                <span>{{ cotationsTickerDecore.dto.consensus.pourcentagePotentiel3mois | percent:'1.2-2' }}</span>
               </div>
             </div>
           </p-fieldset>
@@ -120,6 +146,59 @@
                   <span>{{ analyse.date }}</span>
                   <span (click)="afficherInformation(analyse)">{{ analyse.titre }}</span>
                 </div>
+              }
+            </div>
+          </p-fieldset>
+          <p-fieldset
+            legend="{{ 'COMPOSANTS.PORTEFEUILLES.ACTIONS_VALEUR.DIALOG_COTATIONS_VALEUR.PREVISIONS' | translate }}">
+            <div class="previsions">
+              <p-table size="small"
+                       [value]="cotationsTickerDecore.dto.consensus.previsions"
+                       [loading]="loading">
+                <ng-template #header>
+                  <tr>
+                    <th>{{ 'COMPOSANTS.PORTEFEUILLES.ACTIONS_VALEUR.DIALOG_COTATIONS_VALEUR.ANNEE' | translate }}</th>
+                    <th
+                      style="text-align: right">{{ 'COMPOSANTS.PORTEFEUILLES.ACTIONS_VALEUR.DIALOG_COTATIONS_VALEUR.DIVIDENDE' | translate }}
+                    </th>
+                    <th
+                      style="text-align: right">{{ 'COMPOSANTS.PORTEFEUILLES.ACTIONS_VALEUR.DIALOG_COTATIONS_VALEUR.RENDEMENT' | translate }}
+                    </th>
+                    <th
+                      style="text-align: right">{{ 'COMPOSANTS.PORTEFEUILLES.ACTIONS_VALEUR.DIALOG_COTATIONS_VALEUR.BENEFICE' | translate }}
+                    </th>
+                    <th
+                      style="text-align: right">{{ 'COMPOSANTS.PORTEFEUILLES.ACTIONS_VALEUR.DIALOG_COTATIONS_VALEUR.PER' | translate }}
+                    </th>
+                  </tr>
+                </ng-template>
+                <ng-template #body let-prevision>
+                  <tr>
+                    <td>{{ prevision.annee }}</td>
+                    <td style="text-align: right">{{ prevision.dividende  | currency:'€' }}</td>
+                    <td style="text-align: right">{{ prevision.pourcentageRendement | percent:'1.2-2' }}</td>
+                    <td style="text-align: right">{{ prevision.benefice  | currency:'€' }}</td>
+                    <td style="text-align: right">{{ prevision.per | number }}</td>
+                  </tr>
+                </ng-template>
+              </p-table>
+              @if (cotationsTickerDecore.dto.evenements.length > 0) {
+                <h3>{{ 'COMPOSANTS.PORTEFEUILLES.ACTIONS_VALEUR.DIALOG_COTATIONS_VALEUR.EVENEMENTS' | translate }}</h3>
+                @for (evenement of cotationsTickerDecore.dto.evenements; track evenement.id) {
+                  <div>
+                    <span>{{ evenement.date }}</span>
+                    <span (click)="afficherInformation(evenement)">{{ evenement.titre }}</span>
+                  </div>
+                }
+              }
+              @if (cotationsTickerDecore.dto.communiques.length > 0) {
+                <h3>{{ 'COMPOSANTS.PORTEFEUILLES.ACTIONS_VALEUR.DIALOG_COTATIONS_VALEUR.COMMUNIQUES' | translate }}</h3>
+                @for (communique of cotationsTickerDecore.dto.communiques; track communique.id) {
+                  <div>
+                    <span>{{ communique.date }}</span>
+                    <span (click)="afficherInformation(communique)">{{ communique.titre }}</span>
+                  </div>
+                }
               }
             </div>
           </p-fieldset>

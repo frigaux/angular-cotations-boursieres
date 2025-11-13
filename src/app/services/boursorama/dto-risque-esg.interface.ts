@@ -1,7 +1,10 @@
+import {RisqueESG} from './risque-esg.enum';
+
 export interface DTORisqueESG {
-  score?: string;
+  pourcentage: number;
+  risque?: RisqueESG;
   tonnesCO2: number;
   niveauControverse?: string;
-  implicationsPositives?: string;
-  implicationsNegatives?: string;
+  impactPositif?: string;
+  impactNegatif?: string;
 }

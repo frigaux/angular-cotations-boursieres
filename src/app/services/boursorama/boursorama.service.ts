@@ -17,6 +17,7 @@ import {DTORisqueESG} from './dto-risque-esg.interface';
 import {DTOConsensus} from './dto-consensus.interface';
 import {Conseil} from './conseil.enum';
 import {DTOPrevision} from './dto-prevision.interface';
+import {RisqueESG} from './risque-esg.enum';
 
 @Injectable({
   providedIn: 'root'
@@ -350,7 +351,7 @@ export class BoursoramaService {
         return jours.map((jour, i) => ({
           jour,
           cloture: clotures[i],
-          pourcentageVariation: pourcentagesVariations[i],
+          pourcentageVariation: pourcentagesVariations[i] / 100,
           ouverture: ouvertures[i],
           plusHaut: plusHauts[i],
           plusBas: plusBas[i],
@@ -371,7 +372,7 @@ export class BoursoramaService {
         const elTDs = elTr.querySelectorAll('td.c-table__cell');
         if (elTH && elTDs.length === 3) {
           const periode = elTH.innerHTML.trim();
-          const pourcentageVariation = ParseUtil.parseNumber(elTDs[0].innerHTML);
+          const pourcentageVariation = ParseUtil.parseNumber(elTDs[0].innerHTML) / 100;
           const plusHaut = ParseUtil.parseNumber(elTDs[1].innerHTML);
           const plusBas = ParseUtil.parseNumber(elTDs[2].innerHTML);
           historiques.push({periode, pourcentageVariation, plusHaut, plusBas});
@@ -383,12 +384,13 @@ export class BoursoramaService {
   private parseAndMapRisqueESG(document: Document, elDIVGauge: Element): DTORisqueESG {
     const elDIV = elDIVGauge.querySelector('div.c-median-gauge__tooltip');
     const elSTRONGs = document.querySelectorAll('strong.o-flex-stretch__item');
-    const score = elDIV ? elDIV.innerHTML.trim() : undefined;
+    const pourcentage = elDIV ? ParseUtil.parseNumber(elDIV.innerHTML.replace('/100', '')) / 100 : NaN;
+    const risque = pourcentage ? Math.floor(pourcentage / 10) as RisqueESG : undefined;
     const tonnesCO2 = elSTRONGs.length > 0 ? ParseUtil.parseNumber(elSTRONGs[0].innerHTML) : NaN;
     const niveauControverse = elSTRONGs.length > 1 ? elSTRONGs[1].innerHTML.trim() : undefined;
-    const implicationsPositives = elSTRONGs.length > 2 ? elSTRONGs[2].innerHTML.trim() : undefined;
-    const implicationsNegatives = elSTRONGs.length > 3 ? elSTRONGs[3].innerHTML.trim() : undefined;
-    return {score, tonnesCO2, niveauControverse, implicationsPositives, implicationsNegatives};
+    const impactPositif = elSTRONGs.length > 2 ? elSTRONGs[2].innerHTML.trim() : undefined;
+    const impactNegatif = elSTRONGs.length > 3 ? elSTRONGs[3].innerHTML.trim() : undefined;
+    return {pourcentage, risque, tonnesCO2, niveauControverse, impactPositif, impactNegatif};
   }
 
   private parseAndMapConsensus(document: Document, elDIVGauge: Element, elTable: Element): DTOConsensus {
@@ -397,9 +399,9 @@ export class BoursoramaService {
     const score = elDIV ? ParseUtil.parseNumber(elDIV.innerHTML) : NaN;
     const conseil = score ? Math.floor(score) as Conseil : undefined;
     const objectif3mois = elSPANs && elSPANs.length > 0 ? ParseUtil.parseNumber(elSPANs[0].innerHTML) : NaN;
-    const pourcentagePotentiel = elSPANs && elSPANs.length > 1 ? ParseUtil.parseNumber(elSPANs[1].innerHTML) : NaN;
-    const previsions = this.parsePrevisions(elTable);
-    return {score, conseil, objectif3mois, pourcentagePotentiel, previsions};
+    const pourcentagePotentiel3mois = elSPANs && elSPANs.length > 1 ? ParseUtil.parseNumber(elSPANs[1].innerHTML) / 100 : NaN;
+    const previsions = this.parsePrevisions(elTable).reverse();
+    return {score, conseil, objectif3mois, pourcentagePotentiel3mois, previsions};
   }
 
   private parsePrevisionsString(accumulateur: Array<string>, elements: NodeListOf<Element>) {
@@ -439,7 +441,7 @@ export class BoursoramaService {
         return {
           annee,
           dividende: dividendes[i],
-          pourcentageRendement: pourcentageRendements[i],
+          pourcentageRendement: pourcentageRendements[i] / 100,
           benefice: benefices[i],
           per: pers[i]
         };
