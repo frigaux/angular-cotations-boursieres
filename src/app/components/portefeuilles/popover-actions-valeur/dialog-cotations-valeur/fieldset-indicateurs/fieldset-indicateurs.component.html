@@ -1,0 +1,75 @@
+@if (dto) {
+  <p-fieldset
+    legend="{{ 'COMPOSANTS.PORTEFEUILLES.ACTIONS_VALEUR.DIALOG_COTATIONS_VALEUR.INDICATEURS.INDICATEURS' | translate }}">
+    <div class="indicateurs">
+      <div>
+        <label>{{ 'COMPOSANTS.PORTEFEUILLES.ACTIONS_VALEUR.DIALOG_COTATIONS_VALEUR.INDICATEURS.VOLUME' | translate }}</label>
+        <span>{{ dto.cotations.volume | number }}</span>
+      </div>
+      <div>
+        <label>{{ 'COMPOSANTS.PORTEFEUILLES.ACTIONS_VALEUR.DIALOG_COTATIONS_VALEUR.INDICATEURS.CAPITAL_ECHANGE' | translate }}</label>
+        <span>{{ dto.cotations.pourcentageCapitalEchange  | percent:'1.2-2' }}</span>
+      </div>
+      <div>
+        <label>{{ 'COMPOSANTS.PORTEFEUILLES.ACTIONS_VALEUR.DIALOG_COTATIONS_VALEUR.INDICATEURS.VALORISATION' | translate }}</label>
+        <span>{{ dto.cotations.valorisation }}</span>
+      </div>
+      <div>
+        <label>{{ 'COMPOSANTS.PORTEFEUILLES.ACTIONS_VALEUR.DIALOG_COTATIONS_VALEUR.INDICATEURS.LIMITE_BAISSE' | translate }}</label>
+        <span>{{ dto.cotations.limiteBaisse | currency:'€' }}</span>
+      </div>
+      <div>
+        <label>{{ 'COMPOSANTS.PORTEFEUILLES.ACTIONS_VALEUR.DIALOG_COTATIONS_VALEUR.INDICATEURS.LIMITE_HAUSSE' | translate }}</label>
+        <span>{{ dto.cotations.limiteHausse | currency:'€' }}</span>
+      </div>
+      <div>
+        <label>{{ 'COMPOSANTS.PORTEFEUILLES.ACTIONS_VALEUR.DIALOG_COTATIONS_VALEUR.INDICATEURS.RENDEMENT_ESTIME' | translate }}</label>
+        <span>{{ dto.cotations.pourcentageRendementEstime | percent:'1.2-2' }}</span>
+      </div>
+      <div>
+        <label>{{ 'COMPOSANTS.PORTEFEUILLES.ACTIONS_VALEUR.DIALOG_COTATIONS_VALEUR.INDICATEURS.PER_ESTIME' | translate }}</label>
+        <span>{{ dto.cotations.perEstime | number }}</span>
+      </div>
+      <div>
+        <label>{{ 'COMPOSANTS.PORTEFEUILLES.ACTIONS_VALEUR.DIALOG_COTATIONS_VALEUR.INDICATEURS.DERNIER_DIVIDENDE' | translate }}</label>
+        <span>{{ dto.cotations.dernierDividende | currency:'€' }}</span>
+      </div>
+      <div>
+        <label>{{ 'COMPOSANTS.PORTEFEUILLES.ACTIONS_VALEUR.DIALOG_COTATIONS_VALEUR.INDICATEURS.DATE_DERNIER_DIVIDENDE' | translate }}</label>
+        <span>{{ dto.cotations.dateDernierDividende | date: 'dd/MM/yyyy' }}</span>
+      </div>
+      <div>
+        <label>{{ 'COMPOSANTS.PORTEFEUILLES.ACTIONS_VALEUR.DIALOG_COTATIONS_VALEUR.INDICATEURS.RISQUE_ESG' | translate }}</label>
+        <span>{{ dto.cotations.risqueESG }}</span>
+      </div>
+      <div>
+        <label>{{ 'COMPOSANTS.PORTEFEUILLES.ACTIONS_VALEUR.DIALOG_COTATIONS_VALEUR.INDICATEURS.TONNES_CO2' | translate }}</label>
+        <span>{{ dto.risqueESG.tonnesCO2 | number }}</span>
+      </div>
+      <div>
+        <label>{{ 'COMPOSANTS.PORTEFEUILLES.ACTIONS_VALEUR.DIALOG_COTATIONS_VALEUR.INDICATEURS.NIVEAU_CONTROVERSE' | translate }}</label>
+        <span>{{ dto.risqueESG.niveauControverse }}</span>
+      </div>
+      <div>
+        <label>{{ 'COMPOSANTS.PORTEFEUILLES.ACTIONS_VALEUR.DIALOG_COTATIONS_VALEUR.INDICATEURS.IMPACT_POSITIF' | translate }}</label>
+        <span>{{ dto.risqueESG.impactPositif }}</span>
+      </div>
+      <div>
+        <label>{{ 'COMPOSANTS.PORTEFEUILLES.ACTIONS_VALEUR.DIALOG_COTATIONS_VALEUR.INDICATEURS.IMPACT_NEGATIF' | translate }}</label>
+        <span>{{ dto.risqueESG.impactNegatif }}</span>
+      </div>
+      <div>
+        <label>{{ 'COMPOSANTS.PORTEFEUILLES.ACTIONS_VALEUR.DIALOG_COTATIONS_VALEUR.INDICATEURS.CONSENSUS' | translate }}</label>
+        <span>{{ `ENUMERATIONS.CONSEIL.${dto.consensus.conseil}` | translate }}</span>
+      </div>
+      <div>
+        <label>{{ 'COMPOSANTS.PORTEFEUILLES.ACTIONS_VALEUR.DIALOG_COTATIONS_VALEUR.INDICATEURS.OBJECTIF_3MOIS' | translate }}</label>
+        <span>{{ dto.consensus.objectif3mois | currency:'€' }}</span>
+      </div>
+      <div>
+        <label>{{ 'COMPOSANTS.PORTEFEUILLES.ACTIONS_VALEUR.DIALOG_COTATIONS_VALEUR.INDICATEURS.POTENTIEL_3MOIS' | translate }}</label>
+        <span>{{ dto.consensus.pourcentagePotentiel3mois | percent:'1.2-2' }}</span>
+      </div>
+    </div>
+  </p-fieldset>
+}

@@ -6,15 +6,16 @@ import {TranslatePipe, TranslateService} from '@ngx-translate/core';
 import {BoursoramaService} from '../../../../services/boursorama/boursorama.service';
 import {UIChart} from 'primeng/chart';
 import {Fieldset} from 'primeng/fieldset';
-import {CurrencyPipe, DatePipe, DecimalPipe, PercentPipe} from '@angular/common';
 import {CotationsValeurBoursoramaDecore} from './cotations-valeur-boursorama-genere.class';
-import {JaugeComponent} from '../../../commun/jauge/jauge.component';
 import {VueUtil} from '../../../commun/vue-util.class';
-import {
-  DialogActualiteValeurComponent
-} from '../../../commun/dialog-actualite-valeur/dialog-actualite-valeur.component';
+import {DialogChargerLienComponent} from '../../../commun/dialog-charger-lien/dialog-charger-lien.component';
 import {DTOInformation} from '../../../../services/boursorama/dto-information.interface';
 import {DTOValeur} from '../../../../services/boursorama/dto-valeur.interface';
+import {FieldsetIndicateursComponent} from './fieldset-indicateurs/fieldset-indicateurs.component';
+import {FieldsetCotationsComponent} from './fieldset-cotations/fieldset-cotations.component';
+import {FieldsetActualitesComponent} from './fieldset-actualites/fieldset-actualites.component';
+import {FieldsetAnalysesComponent} from './fieldset-analyses/fieldset-analyses.component';
+import {FieldsetPrevisionsComponent} from './fieldset-previsions/fieldset-previsions.component';
 
 @Component({
   selector: 'app-dialog-cotations-valeur',
@@ -25,18 +26,18 @@ import {DTOValeur} from '../../../../services/boursorama/dto-valeur.interface';
     TranslatePipe,
     UIChart,
     Fieldset,
-    CurrencyPipe,
-    DecimalPipe,
-    PercentPipe,
-    DatePipe,
-    JaugeComponent,
-    DialogActualiteValeurComponent
+    DialogChargerLienComponent,
+    FieldsetIndicateursComponent,
+    FieldsetCotationsComponent,
+    FieldsetActualitesComponent,
+    FieldsetAnalysesComponent,
+    FieldsetPrevisionsComponent
   ],
   templateUrl: './dialog-cotations-valeur.component.html',
   styleUrls: ['./dialog-cotations-valeur.component.sass', '../../../commun/barre-superieure.sass']
 })
 export class DialogCotationsValeurComponent {
-  private dialogActualiteValeurComponent = viewChild(DialogActualiteValeurComponent);
+  private dialogActualiteValeurComponent = viewChild(DialogChargerLienComponent);
 
   // données pour la vue
   protected visible: boolean = false;
@@ -83,8 +84,8 @@ export class DialogCotationsValeurComponent {
     }
   }
 
-  protected afficherInformation(actualite: DTOInformation) {
-    this.dialogActualiteValeurComponent()?.afficherInformationBoursorama(actualite);
+  protected afficherInformation(information: DTOInformation) {
+    this.dialogActualiteValeurComponent()?.afficherInformationBoursorama(information);
   }
 
   private wrapChartOptions() {

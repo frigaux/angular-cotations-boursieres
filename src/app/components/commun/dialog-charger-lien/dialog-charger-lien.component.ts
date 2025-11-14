@@ -10,15 +10,15 @@ import {Observable} from 'rxjs';
 import {ZoneBourseService} from '../../../services/zone-bourse/zone-bourse.service';
 
 @Component({
-  selector: 'app-dialog-actualite-valeur',
+  selector: 'app-dialog-charger-lien',
   imports: [
     Dialog,
     LoaderComponent
   ],
-  templateUrl: './dialog-actualite-valeur.component.html',
-  styleUrl: './dialog-actualite-valeur.component.sass'
+  templateUrl: './dialog-charger-lien.component.html',
+  styleUrl: './dialog-charger-lien.component.sass'
 })
-export class DialogActualiteValeurComponent {
+export class DialogChargerLienComponent {
   // données pour la vue
   loading: boolean = false;
   visible: boolean | WritableSignal<boolean> = false;
@@ -31,18 +31,18 @@ export class DialogActualiteValeurComponent {
   }
 
   afficherActualiteABCBourse(actualite: DTOActualiteTicker) {
-    this.afficherActualite(actualite, (pathname: string) => this.abcBourseService.chargerLien(pathname));
+    this.chargerEtAfficher(actualite, (pathname: string) => this.abcBourseService.chargerLien(pathname));
   }
 
   afficherInformationBoursorama(actualite: DTOInformation) {
-    this.afficherActualite(actualite, (pathname: string) => this.boursoramaService.chargerLien(pathname));
+    this.chargerEtAfficher(actualite, (pathname: string) => this.boursoramaService.chargerLien(pathname));
   }
 
   afficherActualiteZoneBourse(actualite: DTOActualitesZoneBourse) {
-    this.afficherActualite(actualite, (pathname: string) => this.zoneBourseService.chargerLien(pathname));
+    this.chargerEtAfficher(actualite, (pathname: string) => this.zoneBourseService.chargerLien(pathname));
   }
 
-  private afficherActualite(actualite: DTOActualiteTicker | DTOInformation | DTOActualitesZoneBourse,
+  private chargerEtAfficher(actualite: DTOActualiteTicker | DTOInformation | DTOActualitesZoneBourse,
                             chargerLien: (pathname: string) => Observable<string>) {
     this.loading = true;
     this.visible = true;

@@ -9,7 +9,7 @@ import {DatePipe} from '@angular/common';
 import {PopoverActionsValeurComponent} from '../popover-actions-valeur/popover-actions-valeur.component';
 import {DTOValeur} from '../../../services/valeurs/dto-valeur.interface';
 import {VueUtil} from '../../commun/vue-util.class';
-import {DialogActualiteValeurComponent} from '../../commun/dialog-actualite-valeur/dialog-actualite-valeur.component';
+import {DialogChargerLienComponent} from '../../commun/dialog-charger-lien/dialog-charger-lien.component';
 
 @Component({
   selector: 'app-dialog-evaluation-actualites',
@@ -20,14 +20,14 @@ import {DialogActualiteValeurComponent} from '../../commun/dialog-actualite-vale
     TableModule,
     DatePipe,
     PopoverActionsValeurComponent,
-    DialogActualiteValeurComponent
+    DialogChargerLienComponent
   ],
   templateUrl: './dialog-evaluation-actualites.component.html',
   styleUrls: ['./dialog-evaluation-actualites.component.sass', '../../commun/barre-superieure.sass']
 })
 export class DialogEvaluationActualitesComponent {
   private actionsValeur = viewChild(PopoverActionsValeurComponent);
-  private dialogActualiteValeurComponent = viewChild(DialogActualiteValeurComponent);
+  private dialogActualiteValeurComponent = viewChild(DialogChargerLienComponent);
 
   // input/output
   inputValeurs: InputSignal<Map<string, DTOValeur>> = input(new Map<string, DTOValeur>(),

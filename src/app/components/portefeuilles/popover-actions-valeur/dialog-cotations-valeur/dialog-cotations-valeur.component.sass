@@ -10,49 +10,8 @@ div.ligne
     flex-direction: column
     margin: 1rem
 
-    p-fieldset:nth-child(n+2)
+    app-fieldset-cotations, app-fieldset-indicateurs, app-fieldset-analyses, app-fieldset-previsions
       margin-top: 1rem
-
-    .cotations, .indicateurs
-      & > div, app-jauge
-        margin: 0.5rem
-        width: 22rem
-        display: block
-
-        & > label
-          display: inline-block
-          width: 13rem
-          font-weight: bold
-
-        & > span
-          display: inline-block
-          width: 9rem
-          text-align: right
-
-          &.positive
-            color: var(--p-green-600)
-
-          &.negative
-            color: var(--p-red-600)
-
-    .actualites, .analyses, .previsions
-      div
-        margin: 0.5rem
-        width: calc(70vw - 22rem - 10rem)
-        display: block
-
-        & > span
-          display: inline-block
-
-        & > span:nth-child(1)
-          font-weight: bold
-          width: 5rem
-          vertical-align: top
-
-        & > span:nth-child(2)
-          width: calc(70vw - 22rem - 10rem - 5rem)
-          cursor: pointer
-          color: var(--p-blue-700)
 
 
 // orientation verticale

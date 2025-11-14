@@ -1,0 +1,54 @@
+@if (dto) {
+  <p-fieldset
+    legend="{{ 'COMPOSANTS.PORTEFEUILLES.ACTIONS_VALEUR.DIALOG_COTATIONS_VALEUR.PREVISIONS.PREVISIONS' | translate }}">
+    <div class="previsions">
+      <p-table size="small"
+               [value]="dto.consensus.previsions">
+        <ng-template #header>
+          <tr>
+            <th>{{ 'COMPOSANTS.PORTEFEUILLES.ACTIONS_VALEUR.DIALOG_COTATIONS_VALEUR.PREVISIONS.ANNEE' | translate }}</th>
+            <th
+              style="text-align: right">{{ 'COMPOSANTS.PORTEFEUILLES.ACTIONS_VALEUR.DIALOG_COTATIONS_VALEUR.PREVISIONS.DIVIDENDE' | translate }}
+            </th>
+            <th
+              style="text-align: right">{{ 'COMPOSANTS.PORTEFEUILLES.ACTIONS_VALEUR.DIALOG_COTATIONS_VALEUR.PREVISIONS.RENDEMENT' | translate }}
+            </th>
+            <th
+              style="text-align: right">{{ 'COMPOSANTS.PORTEFEUILLES.ACTIONS_VALEUR.DIALOG_COTATIONS_VALEUR.PREVISIONS.BENEFICE' | translate }}
+            </th>
+            <th
+              style="text-align: right">{{ 'COMPOSANTS.PORTEFEUILLES.ACTIONS_VALEUR.DIALOG_COTATIONS_VALEUR.PREVISIONS.PER' | translate }}
+            </th>
+          </tr>
+        </ng-template>
+        <ng-template #body let-prevision>
+          <tr>
+            <td>{{ prevision.annee }}</td>
+            <td style="text-align: right">{{ prevision.dividende  | currency:'€' }}</td>
+            <td style="text-align: right">{{ prevision.pourcentageRendement | percent:'1.2-2' }}</td>
+            <td style="text-align: right">{{ prevision.benefice  | currency:'€' }}</td>
+            <td style="text-align: right">{{ prevision.per | number }}</td>
+          </tr>
+        </ng-template>
+      </p-table>
+      @if (dto.evenements.length > 0) {
+        <h3>{{ 'COMPOSANTS.PORTEFEUILLES.ACTIONS_VALEUR.DIALOG_COTATIONS_VALEUR.PREVISIONS.EVENEMENTS' | translate }}</h3>
+        @for (evenement of dto.evenements; track evenement.id) {
+          <div>
+            <span>{{ evenement.date }}</span>
+            <span (click)="afficherInformation.emit(evenement)">{{ evenement.titre }}</span>
+          </div>
+        }
+      }
+      @if (dto.communiques.length > 0) {
+        <h3>{{ 'COMPOSANTS.PORTEFEUILLES.ACTIONS_VALEUR.DIALOG_COTATIONS_VALEUR.PREVISIONS.COMMUNIQUES' | translate }}</h3>
+        @for (communique of dto.communiques; track communique.id) {
+          <div>
+            <span>{{ communique.date }}</span>
+            <span (click)="afficherInformation.emit(communique)">{{ communique.titre }}</span>
+          </div>
+        }
+      }
+    </div>
+  </p-fieldset>
+}

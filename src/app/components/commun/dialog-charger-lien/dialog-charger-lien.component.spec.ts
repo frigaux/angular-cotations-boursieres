@@ -1,6 +1,6 @@
 import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import {DialogActualiteValeurComponent} from './dialog-actualite-valeur.component';
+import {DialogChargerLienComponent} from './dialog-charger-lien.component';
 import {AbcBourseService} from '../../../services/abc-bourse/abc-bourse.service';
 import {of} from 'rxjs';
 import {DTOActualiteTicker} from '../../../services/abc-bourse/dto-actualite-ticker.class';
@@ -8,9 +8,9 @@ import {provideAnimations} from '@angular/platform-browser/animations';
 import {BoursoramaService} from '../../../services/boursorama/boursorama.service';
 import {ZoneBourseService} from '../../../services/zone-bourse/zone-bourse.service';
 
-describe('DialogActualiteValeurComponent', () => {
-  let component: DialogActualiteValeurComponent;
-  let fixture: ComponentFixture<DialogActualiteValeurComponent>;
+describe('DialogChargerLienComponent', () => {
+  let component: DialogChargerLienComponent;
+  let fixture: ComponentFixture<DialogChargerLienComponent>;
 
   const mockBoursoramaService = jasmine.createSpyObj('BoursoramaService', ['chargerLien']);
   const mockAbcBourseService = jasmine.createSpyObj('AbcBourseService', ['chargerLien']);
@@ -18,7 +18,7 @@ describe('DialogActualiteValeurComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [DialogActualiteValeurComponent],
+      imports: [DialogChargerLienComponent],
       providers: [
         {provide: BoursoramaService, useValue: mockBoursoramaService},
         {provide: AbcBourseService, useValue: mockAbcBourseService},
@@ -28,7 +28,7 @@ describe('DialogActualiteValeurComponent', () => {
     })
       .compileComponents();
 
-    fixture = TestBed.createComponent(DialogActualiteValeurComponent);
+    fixture = TestBed.createComponent(DialogChargerLienComponent);
     component = fixture.componentInstance;
   });
 

@@ -8,7 +8,7 @@ import {CurrencyPipe, DatePipe, DecimalPipe, NgClass, PercentPipe} from '@angula
 import {TranslatePipe} from '@ngx-translate/core';
 import {Cours} from '../cours.class';
 import {DTOActualiteTicker} from '../../../services/abc-bourse/dto-actualite-ticker.class';
-import {DialogActualiteValeurComponent} from '../../commun/dialog-actualite-valeur/dialog-actualite-valeur.component';
+import {DialogChargerLienComponent} from '../../commun/dialog-charger-lien/dialog-charger-lien.component';
 import {ConseilsGeminiValeurComponent} from '../conseils-gemini-valeur/conseils-gemini-valeur.component';
 import {PopoverActionsValeurComponent} from '../popover-actions-valeur/popover-actions-valeur.component';
 
@@ -23,7 +23,7 @@ import {PopoverActionsValeurComponent} from '../popover-actions-valeur/popover-a
     DecimalPipe,
     CurrencyPipe,
     NgClass,
-    DialogActualiteValeurComponent,
+    DialogChargerLienComponent,
     DatePipe,
     ConseilsGeminiValeurComponent
   ],
@@ -31,7 +31,7 @@ import {PopoverActionsValeurComponent} from '../popover-actions-valeur/popover-a
   styleUrl: './informations-valeur.component.sass'
 })
 export class InformationsValeurComponent {
-  private dialogActualiteValeurComponent = viewChild(DialogActualiteValeurComponent);
+  private dialogActualiteValeurComponent = viewChild(DialogChargerLienComponent);
 
   // chargement des informations pour le ticker
   loading: boolean = true;

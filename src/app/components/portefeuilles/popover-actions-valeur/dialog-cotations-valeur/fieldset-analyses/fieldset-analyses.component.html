@@ -1,0 +1,13 @@
+@if (dto) {
+  <p-fieldset
+    legend="{{ 'COMPOSANTS.PORTEFEUILLES.ACTIONS_VALEUR.DIALOG_COTATIONS_VALEUR.ANALYSES' | translate }}">
+    <div>
+      @for (analyse of dto.analyses; track analyse.id) {
+        <div>
+          <span>{{ analyse.date }}</span>
+          <span (click)="afficherInformation.emit(analyse)">{{ analyse.titre }}</span>
+        </div>
+      }
+    </div>
+  </p-fieldset>
+}

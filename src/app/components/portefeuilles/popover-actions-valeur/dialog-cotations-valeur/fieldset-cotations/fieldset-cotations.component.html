@@ -1,0 +1,25 @@
+@if (cotationsTickerDecore) {
+  <p-fieldset
+    legend="{{ 'COMPOSANTS.PORTEFEUILLES.ACTIONS_VALEUR.DIALOG_COTATIONS_VALEUR.COTATIONS.COTATIONS' | translate }}">
+    <div class="cotations">
+      <div>
+        <label>{{ 'COMPOSANTS.PORTEFEUILLES.ACTIONS_VALEUR.DIALOG_COTATIONS_VALEUR.COTATIONS.COURS' | translate }}</label>
+        <span>{{ cotationsTickerDecore.dto.cotations.cours | currency:'€' }}</span>
+      </div>
+      <app-jauge
+        [cleMinimum]="'COMPOSANTS.PORTEFEUILLES.ACTIONS_VALEUR.DIALOG_COTATIONS_VALEUR.COTATIONS.PLUS_BAS'"
+        [cleMaximum]="'COMPOSANTS.PORTEFEUILLES.ACTIONS_VALEUR.DIALOG_COTATIONS_VALEUR.COTATIONS.PLUS_HAUT'"
+        [pourcentage]="cotationsTickerDecore.pourcentageCours"></app-jauge>
+      <div>
+        <label>{{ 'COMPOSANTS.PORTEFEUILLES.ACTIONS_VALEUR.DIALOG_COTATIONS_VALEUR.COTATIONS.VAR_OUVERTURE' | translate }}</label>
+        <span
+          [class]="VueUtil.evolutionVariation(cotationsTickerDecore.variationOuverture)">{{ cotationsTickerDecore.variationOuverture  | percent:'1.2-2' }}</span>
+      </div>
+      <div>
+        <label>{{ 'COMPOSANTS.PORTEFEUILLES.ACTIONS_VALEUR.DIALOG_COTATIONS_VALEUR.COTATIONS.VAR_CLOTURE_VEILLE' | translate }}</label>
+        <span
+          [class]="VueUtil.evolutionVariation(cotationsTickerDecore.variationClotureVeille)">{{ cotationsTickerDecore.variationClotureVeille  | percent:'1.2-2' }}</span>
+      </div>
+    </div>
+  </p-fieldset>
+}
