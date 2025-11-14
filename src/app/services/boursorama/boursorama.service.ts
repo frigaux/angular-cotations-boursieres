@@ -122,18 +122,17 @@ export class BoursoramaService {
     const elDIVCours = document.querySelector('div.c-faceplate__price');
     const elLIsCotations = document.querySelectorAll('li.c-list-info__item');
     const elULsNouvelles = document.querySelectorAll('ul.c-list-news');
-    const elTableTransactions = document.querySelector('table[data-ist-last-transactions]');
     const elTables = document.querySelectorAll('table.c-table--generic');
     const elDIVsGauges = document.querySelectorAll('div.c-median-gauge');
 
-    if (elDIVCours && elLIsCotations.length === 18 && elULsNouvelles.length === 3 && elTableTransactions
+    if (elDIVCours && elLIsCotations.length === 18 && elULsNouvelles.length === 3
       && elTables.length >= 4 && elDIVsGauges.length === 2) {
       const cotations = this.parseAndMapCotations(elDIVCours, elLIsCotations, elTables[3]);
       const ordres = this.parseAndMapOrdres(document);
       const actualites = this.parseAndMapInformations(elULsNouvelles[1]);
       const analyses = this.parseAndMapInformations(elULsNouvelles[2]);
       const chartData = this.parseAndMapChart(html);
-      const transactions = this.parseAndMapTransactions(elTableTransactions);
+      const transactions = this.parseAndMapTransactions(document);
       const historiqueJours = this.parseAndMapHistoriqueJours(elTables[0]);
       const historiquePeriodes = this.parseAndMapHistoriquePeriodes(elTables[3]);
       const risqueESG = this.parseAndMapRisqueESG(document, elDIVsGauges[0]);
@@ -306,20 +305,24 @@ export class BoursoramaService {
     return undefined;
   }
 
-  private parseAndMapTransactions(elTableTransactions: Element): Array<DtoTransaction> {
-    const transactions: Array<DtoTransaction> = [];
-    elTableTransactions.querySelectorAll('tbody > tr.c-table__row').forEach(elTR => {
-      const elTDs = elTR.querySelectorAll('td.c-table__cell');
-      if (elTDs.length === 3) {
-        const heure = elTDs[0].innerHTML.trim();
-        const cours = ParseUtil.parseNumber(elTDs[1].innerHTML);
-        const quantite = ParseUtil.parseNumber(elTDs[2].innerHTML);
-        transactions.push({heure, cours, quantite});
-      } else {
-        console.error('Impossible de récupérer la transaction', elTDs);
-      }
-    });
-    return transactions;
+  private parseAndMapTransactions(document: Document): Array<DtoTransaction> {
+    const elTableTransactions = document.querySelector('table[data-ist-last-transactions]');
+    if (elTableTransactions) {
+      const transactions: Array<DtoTransaction> = [];
+      elTableTransactions.querySelectorAll('tbody > tr.c-table__row').forEach(elTR => {
+        const elTDs = elTR.querySelectorAll('td.c-table__cell');
+        if (elTDs.length === 3) {
+          const heure = elTDs[0].innerHTML.trim();
+          const cours = ParseUtil.parseNumber(elTDs[1].innerHTML);
+          const quantite = ParseUtil.parseNumber(elTDs[2].innerHTML);
+          transactions.push({heure, cours, quantite});
+        } else {
+          console.error('Impossible de récupérer la transaction', elTDs);
+        }
+      });
+      return transactions;
+    }
+    return [];
   }
 
   private parseAndMapHistoriqueJours(elTable: Element): Array<DTOHistoriqueJour> {

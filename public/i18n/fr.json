@@ -174,8 +174,8 @@
       },
       "INFORMATIONS_VALEUR": {
         "VARIATIONS": {
-          "VARIATIONS": "Variations",
-          "DUREE": "Durée",
+          "VARIATIONS_COURS": "Variations du cours",
+          "DATE": "Date",
           "VARIATION": "Variation"
         },
         "DIVIDENDES": {
@@ -499,6 +499,13 @@
         "VARIATION": "variation sur x jours",
         "DIVIDENDES": "dividendes (dates et montants)"
       }
+    },
+    "CONSEIL": {
+      "1": "acheter",
+      "2": "renforcer",
+      "3": "conserver",
+      "4": "alléger",
+      "5": "vendre"
     }
   },
   "SERVICES": {

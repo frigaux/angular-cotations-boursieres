@@ -8,13 +8,13 @@
   @if (!loading && informationsTicker) {
     <div class="ligne">
       <div class="colonne">
-        <p-fieldset legend="{{ 'COMPOSANTS.COURS.INFORMATIONS_VALEUR.VARIATIONS.VARIATIONS' | translate }}">
+        <p-fieldset legend="{{ 'COMPOSANTS.COURS.INFORMATIONS_VALEUR.VARIATIONS.VARIATIONS_COURS' | translate }}">
           <p-table size="small"
                    [value]="informationsTicker.variations"
                    [loading]="loading">
             <ng-template #header>
               <tr>
-                <th>{{ 'COMPOSANTS.COURS.INFORMATIONS_VALEUR.VARIATIONS.DUREE' | translate }}</th>
+                <th>{{ 'COMPOSANTS.COURS.INFORMATIONS_VALEUR.VARIATIONS.DATE' | translate }}</th>
                 <th
                   style="text-align: right">{{ 'COMPOSANTS.COURS.INFORMATIONS_VALEUR.VARIATIONS.VARIATION' | translate }}
                 </th>
