@@ -1,0 +1,45 @@
+@if (dto) {
+  <p-fieldset legend="{{ 'COMPOSANTS.COURS.INFORMATIONS_VALEUR.RATIOS.RATIOS' | translate }}">
+    <div class="ratios">
+      <div>
+        <p-table size="small"
+                 [value]="dto.ratios.indicateurs">
+          <ng-template #header>
+            <tr>
+              <th>{{ 'COMPOSANTS.COURS.INFORMATIONS_VALEUR.RATIOS.ANNEE' | translate }}</th>
+              <th style="text-align: right">{{ 'COMPOSANTS.COURS.INFORMATIONS_VALEUR.RATIOS.BNPA' | translate }}
+              </th>
+              <th style="text-align: right">{{ 'COMPOSANTS.COURS.INFORMATIONS_VALEUR.RATIOS.PER' | translate }}
+              </th>
+            </tr>
+          </ng-template>
+          <ng-template #body let-ratio>
+            <tr>
+              <td>{{ ratio.annee }}</td>
+              <td style="text-align: right">{{ ratio.bnpa | number }}</td>
+              <td style="text-align: right">{{ ratio.per | number }}</td>
+            </tr>
+          </ng-template>
+        </p-table>
+      </div>
+      <div>
+        <div>
+          <label>{{ 'COMPOSANTS.COURS.INFORMATIONS_VALEUR.RATIOS.COURS' | translate }}</label>
+          <span>{{ dto.cotations?.cours | currency:'€' }}</span>
+        </div>
+        <div>
+          <label>{{ 'COMPOSANTS.COURS.INFORMATIONS_VALEUR.RATIOS.VARIATION_CAC' | translate }}</label>
+          <span>{{ dto.ratios.variationCAC | percent:'1.2-2' }}</span>
+        </div>
+        <div>
+          <label>{{ 'COMPOSANTS.COURS.INFORMATIONS_VALEUR.RATIOS.CORRELATION_CAC' | translate }}</label>
+          <span>{{ dto.ratios.correlationCAC | percent:'1.2-2' }}</span>
+        </div>
+        <div>
+          <label>{{ 'COMPOSANTS.COURS.INFORMATIONS_VALEUR.RATIOS.QUALITE' | translate }}</label>
+          <span>{{ dto.ratios.qualiteFinanciere }}</span>
+        </div>
+      </div>
+    </div>
+  </p-fieldset>
+}

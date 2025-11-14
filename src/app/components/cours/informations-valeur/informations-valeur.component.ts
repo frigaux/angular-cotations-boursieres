@@ -11,6 +11,9 @@ import {DTOActualiteTicker} from '../../../services/abc-bourse/dto-actualite-tic
 import {DialogChargerLienComponent} from '../../commun/dialog-charger-lien/dialog-charger-lien.component';
 import {ConseilsGeminiValeurComponent} from '../conseils-gemini-valeur/conseils-gemini-valeur.component';
 import {PopoverActionsValeurComponent} from '../popover-actions-valeur/popover-actions-valeur.component';
+import {FieldsetDividendesComponent} from './fieldset-dividendes/fieldset-dividendes.component';
+import {FieldsetVariationsComponent} from './fieldset-variations/fieldset-variations.component';
+import {FieldsetRatiosComponent} from './fieldset-ratios/fieldset-ratios.component';
 
 @Component({
   selector: 'app-informations-ticker',
@@ -25,13 +28,16 @@ import {PopoverActionsValeurComponent} from '../popover-actions-valeur/popover-a
     NgClass,
     DialogChargerLienComponent,
     DatePipe,
-    ConseilsGeminiValeurComponent
+    ConseilsGeminiValeurComponent,
+    FieldsetDividendesComponent,
+    FieldsetVariationsComponent,
+    FieldsetRatiosComponent
   ],
   templateUrl: './informations-valeur.component.html',
   styleUrl: './informations-valeur.component.sass'
 })
 export class InformationsValeurComponent {
-  private dialogActualiteValeurComponent = viewChild(DialogChargerLienComponent);
+  private dialogChargerLienComponent = viewChild(DialogChargerLienComponent);
 
   // chargement des informations pour le ticker
   loading: boolean = true;
@@ -44,7 +50,6 @@ export class InformationsValeurComponent {
 
   // données pour la vue
   informationsTicker?: DTOInformationsTickerABCBourse;
-  pourcentageDividendes?: number;
 
   constructor(private abcBourseService: AbcBourseService) {
   }
@@ -53,7 +58,6 @@ export class InformationsValeurComponent {
     this.cours = cours;
     if (cours) {
       this.informationsTicker = undefined;
-      this.pourcentageDividendes = undefined;
       this.loading = true;
 
       this.abcBourseService.chargerInformationsTicker(cours.ticker).subscribe({
@@ -62,7 +66,6 @@ export class InformationsValeurComponent {
         },
         next: dto => {
           this.informationsTicker = dto;
-          this.pourcentageDividendes = dto.dividendes.length > 0 ? dto.dividendes[0].montant / cours.cloture : 0;
           this.loading = false;
         }
       });
@@ -70,7 +73,7 @@ export class InformationsValeurComponent {
     return cours;
   }
 
-  afficherActualite(actualite: DTOActualiteTicker) {
-    this.dialogActualiteValeurComponent()?.afficherActualiteABCBourse(actualite);
-  }
+  // afficherActualite(actualite: DTOActualiteTicker) {
+  //   this.dialogChargerLienComponent()?.afficherActualiteABCBourse(actualite);
+  // }
 }

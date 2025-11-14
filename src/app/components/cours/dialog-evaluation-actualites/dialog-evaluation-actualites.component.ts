@@ -27,7 +27,7 @@ import {DialogChargerLienComponent} from '../../commun/dialog-charger-lien/dialo
 })
 export class DialogEvaluationActualitesComponent {
   private actionsValeur = viewChild(PopoverActionsValeurComponent);
-  private dialogActualiteValeurComponent = viewChild(DialogChargerLienComponent);
+  private dialogChargerLienComponent = viewChild(DialogChargerLienComponent);
 
   // input/output
   inputValeurs: InputSignal<Map<string, DTOValeur>> = input(new Map<string, DTOValeur>(),
@@ -72,6 +72,6 @@ export class DialogEvaluationActualitesComponent {
   }
 
   protected afficherActualite(actualite: DTOActualitesZoneBourse) {
-    this.dialogActualiteValeurComponent()?.afficherActualiteZoneBourse(actualite);
+    this.dialogChargerLienComponent()?.afficherActualiteZoneBourse(actualite);
   }
 }

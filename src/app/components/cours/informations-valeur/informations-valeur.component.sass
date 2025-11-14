@@ -5,44 +5,10 @@ div.ligne
   & > div.colonne:nth-child(1)
     width: 16rem
 
-  & > div.colonne:nth-child(2)
-    & > p-fieldset:nth-child(1)
-      tr > td:nth-child(2)
-        cursor: pointer
-        color: var(--p-blue-700)
-
   & > div.colonne
     display: flex
     flex-direction: column
     margin: 1rem
 
-    .positive
-      color: var(--p-green-600)
-
-    .negative
-      color: var(--p-red-600)
-
-    p-fieldset:nth-child(n+2)
+    app-fieldset-variations, p-fieldset
       margin-top: 1rem
-
-    div.ratios
-      display: flex
-      flex-direction: row
-
-      & > div:nth-child(2)
-        margin-left: 1rem
-        border-left: 1px solid var(--p-gray-400)
-        padding: 0 0 0 1rem
-
-        & > div
-          margin: 0.5rem
-
-          label
-            display: inline-block
-            width: 10rem
-            font-weight: bold
-
-          span
-            display: inline-block
-            width: 5rem
-            text-align: right

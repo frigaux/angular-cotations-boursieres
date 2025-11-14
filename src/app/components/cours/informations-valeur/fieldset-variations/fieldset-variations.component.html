@@ -1,0 +1,23 @@
+@if (variations) {
+  <p-fieldset legend="{{ 'COMPOSANTS.COURS.INFORMATIONS_VALEUR.VARIATIONS.VARIATIONS_COURS' | translate }}">
+    <p-table size="small"
+             [value]="variations">
+      <ng-template #header>
+        <tr>
+          <th>{{ 'COMPOSANTS.COURS.INFORMATIONS_VALEUR.VARIATIONS.DATE' | translate }}</th>
+          <th
+            style="text-align: right">{{ 'COMPOSANTS.COURS.INFORMATIONS_VALEUR.VARIATIONS.VARIATION' | translate }}
+          </th>
+        </tr>
+      </ng-template>
+      <ng-template #body let-variation>
+        <tr>
+          <td>{{ variation.duree }}</td>
+          <td style="text-align: right"
+              [ngClass]="{'positive': variation.pourcentage > 0, 'negative': variation.pourcentage < 0}">{{ variation.pourcentage | percent:'1.2-2' }}
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </p-fieldset>
+}

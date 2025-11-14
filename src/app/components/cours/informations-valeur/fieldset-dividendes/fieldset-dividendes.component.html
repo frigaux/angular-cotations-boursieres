@@ -1,0 +1,22 @@
+@if (dividendes && dividendes.length > 0) {
+  <p-fieldset
+    legend="{{ 'COMPOSANTS.COURS.INFORMATIONS_VALEUR.DIVIDENDES.DIVIDENDES' | translate: { pourcentage: pourcentageDividendes | percent:'1.2-2' } }}">
+    <p-table size="small"
+             [value]="dividendes">
+      <ng-template #header>
+        <tr>
+          <th>{{ 'COMPOSANTS.COURS.INFORMATIONS_VALEUR.DIVIDENDES.ANNEE' | translate }}</th>
+          <th
+            style="text-align: right">{{ 'COMPOSANTS.COURS.INFORMATIONS_VALEUR.DIVIDENDES.MONTANT' | translate }}
+          </th>
+        </tr>
+      </ng-template>
+      <ng-template #body let-dividende>
+        <tr>
+          <td>{{ dividende.annee }}</td>
+          <td style="text-align: right">{{ dividende.montant | currency:'€' }}</td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </p-fieldset>
+}

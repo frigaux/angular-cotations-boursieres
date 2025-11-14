@@ -37,7 +37,7 @@ import {FieldsetPrevisionsComponent} from './fieldset-previsions/fieldset-previs
   styleUrls: ['./dialog-cotations-valeur.component.sass', '../../../commun/barre-superieure.sass']
 })
 export class DialogCotationsValeurComponent {
-  private dialogActualiteValeurComponent = viewChild(DialogChargerLienComponent);
+  private dialogChargerLienComponent = viewChild(DialogChargerLienComponent);
 
   // données pour la vue
   protected visible: boolean = false;
@@ -85,7 +85,7 @@ export class DialogCotationsValeurComponent {
   }
 
   protected afficherInformation(information: DTOInformation) {
-    this.dialogActualiteValeurComponent()?.afficherInformationBoursorama(information);
+    this.dialogChargerLienComponent()?.afficherInformationBoursorama(information);
   }
 
   private wrapChartOptions() {
