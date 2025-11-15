@@ -4,13 +4,10 @@ import {AbcBourseService} from '../../../services/abc-bourse/abc-bourse.service'
 import {Fieldset} from 'primeng/fieldset';
 import {LoaderComponent} from '../../loader/loader.component';
 import {TableModule} from 'primeng/table';
-import {CurrencyPipe, DatePipe, DecimalPipe, NgClass, PercentPipe} from '@angular/common';
 import {TranslatePipe} from '@ngx-translate/core';
 import {Cours} from '../cours.class';
-import {DTOActualiteTicker} from '../../../services/abc-bourse/dto-actualite-ticker.class';
 import {DialogChargerLienComponent} from '../../commun/dialog-charger-lien/dialog-charger-lien.component';
 import {ConseilsGeminiValeurComponent} from '../conseils-gemini-valeur/conseils-gemini-valeur.component';
-import {PopoverActionsValeurComponent} from '../popover-actions-valeur/popover-actions-valeur.component';
 import {FieldsetDividendesComponent} from './fieldset-dividendes/fieldset-dividendes.component';
 import {FieldsetVariationsComponent} from './fieldset-variations/fieldset-variations.component';
 import {FieldsetRatiosComponent} from './fieldset-ratios/fieldset-ratios.component';
@@ -21,13 +18,8 @@ import {FieldsetRatiosComponent} from './fieldset-ratios/fieldset-ratios.compone
     Fieldset,
     LoaderComponent,
     TableModule,
-    PercentPipe,
     TranslatePipe,
-    DecimalPipe,
-    CurrencyPipe,
-    NgClass,
     DialogChargerLienComponent,
-    DatePipe,
     ConseilsGeminiValeurComponent,
     FieldsetDividendesComponent,
     FieldsetVariationsComponent,

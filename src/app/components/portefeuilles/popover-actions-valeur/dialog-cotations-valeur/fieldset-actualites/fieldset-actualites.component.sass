@@ -1,16 +1,15 @@
 div
   & > div
     margin: 0.5rem
-    display: block
-
-    & > span
-      display: inline-block
+    display: flex
+    flex-direction: row
 
     & > span:nth-child(1)
+      flex: 0 1 5rem
       font-weight: bold
-      width: 5rem
       vertical-align: top
 
     & > span:nth-child(2)
+      flex: 1
       cursor: pointer
       color: var(--p-blue-700)
