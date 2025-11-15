@@ -15,7 +15,7 @@ export interface DTOInformationsTickerBoursorama {
   ventes: Array<DTOOrdre>;
   actualites: Array<DTOInformation>;
   analyses: Array<DTOInformation>;
-  chartData?: Object;
+  cours: Array<{ label: string, data: number }>;
   transactions: Array<DtoTransaction>;
   historiqueJours: Array<DTOHistoriqueJour>;
   historiquePeriodes: Array<DTOHistoriquePeriode>;

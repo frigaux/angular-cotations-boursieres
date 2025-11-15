@@ -131,7 +131,7 @@ export class BoursoramaService {
       const ordres = this.parseAndMapOrdres(document);
       const actualites = this.parseAndMapInformations(elULsNouvelles[1]);
       const analyses = this.parseAndMapInformations(elULsNouvelles[2]);
-      const chartData = this.parseAndMapChart(html);
+      const cours = this.parseAndMapChart(html);
       const transactions = this.parseAndMapTransactions(document);
       const historiqueJours = this.parseAndMapHistoriqueJours(elTables[0]);
       const historiquePeriodes = this.parseAndMapHistoriquePeriodes(elTables[3]);
@@ -147,7 +147,7 @@ export class BoursoramaService {
         ventes: ordres.ventes,
         actualites,
         analyses,
-        chartData,
+        cours,
         transactions,
         historiqueJours,
         historiquePeriodes,
@@ -272,7 +272,7 @@ export class BoursoramaService {
     });
   }
 
-  private parseAndMapChart(html: string): Object | undefined {
+  private parseAndMapChart(html: string): Array<{ label: string, data: number }> {
     const regexp = /var chart\s*= JSON.parse\('([^']+)'\);/gm;
     const matches = regexp.exec(html);
     if (matches) {
@@ -282,27 +282,15 @@ export class BoursoramaService {
         const id = config.data.amChartConfig.graphs[0].id;
         const chartData = config.data.amChartData[id];
 
-        const labels: Array<string> = [];
-        const data: Array<number> = [];
-        chartData.forEach((chartData: any) => {
-          labels.push(chartData.period);
-          data.push(chartData.value);
-        });
-        return {
-          labels,
-          datasets: [
-            {
-              label: this.translateService.instant('SERVICES.BOURSORAMA.COURS'),
-              data,
-              tension: 0.4
-            }
-          ]
-        };
+        return chartData
+          .map((item: any) => {
+            return {label: item.period, data: item.value};
+          });
       }
     } else {
       console.error('Impossible de trouver les données de la courbe des cours dans le html', html);
     }
-    return undefined;
+    return [];
   }
 
   private parseAndMapTransactions(document: Document): Array<DtoTransaction> {

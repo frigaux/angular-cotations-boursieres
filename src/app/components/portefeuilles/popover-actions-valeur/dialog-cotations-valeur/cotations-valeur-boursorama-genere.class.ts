@@ -1,4 +1,6 @@
-import {DTOInformationsTickerBoursorama} from '../../../../services/boursorama/dto-informations-ticker-boursorama.interface';
+import {
+  DTOInformationsTickerBoursorama
+} from '../../../../services/boursorama/dto-informations-ticker-boursorama.interface';
 import {TranslateService} from '@ngx-translate/core';
 
 export class CotationsValeurBoursoramaDecore {
@@ -7,9 +9,11 @@ export class CotationsValeurBoursoramaDecore {
   pourcentageCours: number;
   variationOuverture: number;
   variationClotureVeille: number;
-  ordresDoughnut?: any;
-  ordresBarChart?: any;
-  optionsBarChart?: any;
+  ordresDataDoughnut?: any;
+  ordresDataBarChart?: any;
+  ordresOptionsBarChart: any;
+  coursDataChartLine: any;
+  coursOptionsChartLine: any; // https://www.chartjs.org/
 
   constructor(private translateService: TranslateService, id: number, dto: DTOInformationsTickerBoursorama) {
     this.id = id;
@@ -17,9 +21,11 @@ export class CotationsValeurBoursoramaDecore {
     this.pourcentageCours = Math.round(100 * (dto.cotations.cours - dto.cotations.plusBas) / (dto.cotations.plusHaut - dto.cotations.plusBas));
     this.variationOuverture = (dto.cotations.cours / dto.cotations.ouverture) - 1;
     this.variationClotureVeille = (dto.cotations.cours / dto.cotations.clotureVeille) - 1;
-    this.ordresDoughnut = this.construireOrdresDoughnut(dto);
-    this.ordresBarChart = this.construireOrdresBarChart(dto);
-    this.optionsBarChart = this.construireOptionsBarChart();
+    this.ordresDataDoughnut = this.construireOrdresDoughnut(dto);
+    this.ordresDataBarChart = this.construireOrdresBarChart(dto);
+    this.ordresOptionsBarChart = this.construireOptionsBarChart();
+    this.coursDataChartLine = this.wrapCoursDataChartLine(dto);
+    this.coursOptionsChartLine = this.wrapCoursOptionsChartLine();
   }
 
   private construireOptionsBarChart() {
@@ -79,6 +85,60 @@ export class CotationsValeurBoursoramaDecore {
           data: [qtVentes]
         }
       ]
+    };
+  }
+
+  private wrapCoursDataChartLine(dto: DTOInformationsTickerBoursorama) {
+    const labels: Array<string> = [];
+    const data: Array<number> = [];
+
+    dto.cours.forEach((item: { label: string, data: number }) => {
+      labels.push(item.label);
+      data.push(item.data);
+    });
+    return {
+      labels,
+      datasets: [
+        {
+          label: this.translateService.instant('SERVICES.BOURSORAMA.COURS'),
+          data,
+          tension: 0.4
+        }
+      ]
+    };
+  }
+
+  private wrapCoursOptionsChartLine() {
+    return {
+      scales: {
+        x: {
+          title: {
+            display: false
+          }
+        },
+        y: {
+          ticks: {
+            callback: function (value: number) {
+              return new Intl.NumberFormat('fr-FR', {style: 'currency', currency: 'EUR'}).format(value);
+            }
+          }
+        }
+      },
+      plugins: {
+        legend: {
+          display: false
+        },
+        tooltip: {
+          callbacks: {
+            title: function (context: any) {
+              return context[0].label;
+            },
+            label: function (context: any) {
+              return new Intl.NumberFormat('fr-FR', {style: 'currency', currency: 'EUR'}).format(context.parsed.y);
+            }
+          }
+        }
+      }
     };
   }
 }

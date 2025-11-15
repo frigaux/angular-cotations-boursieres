@@ -49,8 +49,8 @@
               [pourcentage]="cotationsTickerDecore.pourcentageCours"></app-jauge>
           </td>
           <td>
-            <p-chart type="bar" [data]="cotationsTickerDecore.ordresBarChart"
-                     [options]="cotationsTickerDecore.optionsBarChart" height="4rem" width="12rem"/>
+            <p-chart type="bar" [data]="cotationsTickerDecore.ordresDataBarChart"
+                     [options]="cotationsTickerDecore.ordresOptionsBarChart" height="4rem" width="12rem"/>
           </td>
           <td [class]="VueUtil.evolutionVariation(cotationsTickerDecore.variationOuverture)">
             {{ cotationsTickerDecore.variationOuverture  | percent:'1.2-2' }}

@@ -5,14 +5,16 @@
         {marginLeft: '0', marginTop: '0', height: '80vh', width: '100%'}
       ]"></app-loader>
 
-  @if (!loading && informationsTicker) {
+  @if (!loading && dtoAbcBourse && dtoBoursoramaDecore) {
+    <p-chart type="line" [data]="dtoBoursoramaDecore.coursDataChartLine"
+             [options]="dtoBoursoramaDecore.coursOptionsChartLine"/>
     <div class="ligne">
       <div class="colonne">
-        <app-fieldset-dividendes [data]="{dividendes: informationsTicker.dividendes, cours}"></app-fieldset-dividendes>
-        <app-fieldset-variations [variations]="informationsTicker.variations"></app-fieldset-variations>
+        <app-fieldset-dividendes [data]="{dividendes: dtoAbcBourse.dividendes, cours}"></app-fieldset-dividendes>
+        <app-fieldset-variations [variations]="dtoAbcBourse.variations"></app-fieldset-variations>
       </div>
       <div class="colonne">
-        <app-fieldset-ratios [dto]="informationsTicker"></app-fieldset-ratios>
+        <app-fieldset-ratios [dto]="dtoAbcBourse"></app-fieldset-ratios>
         <p-fieldset legend="{{ 'COMPOSANTS.COURS.INFORMATIONS_VALEUR.IA.GEMINI' | translate }}">
           <app-conseils-gemini-valeur [cours]="cours"></app-conseils-gemini-valeur>
         </p-fieldset>

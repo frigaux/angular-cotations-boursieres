@@ -22,12 +22,12 @@
 
   @if (!loading) {
     @if (cotationsTickerDecore) {
-      <p-chart type="line" [data]="cotationsTickerDecore.dto.chartData" [options]="chartOptions"/>
+      <p-chart type="line" [data]="cotationsTickerDecore.coursDataChartLine" [options]="cotationsTickerDecore.coursOptionsChartLine"/>
       <div class="ligne">
         <div class="colonne">
           <p-fieldset
             legend="{{ 'COMPOSANTS.PORTEFEUILLES.ACTIONS_VALEUR.DIALOG_COTATIONS_VALEUR.ORDRES' | translate }}">
-            <p-chart type="doughnut" [data]="cotationsTickerDecore.ordresDoughnut" height="14rem" width="22rem"/>
+            <p-chart type="doughnut" [data]="cotationsTickerDecore.ordresDataDoughnut" height="14rem" width="22rem"/>
           </p-fieldset>
           <app-fieldset-cotations [dto]="cotationsTickerDecore"></app-fieldset-cotations>
           <app-fieldset-indicateurs [dto]="cotationsTickerDecore.dto"></app-fieldset-indicateurs>
