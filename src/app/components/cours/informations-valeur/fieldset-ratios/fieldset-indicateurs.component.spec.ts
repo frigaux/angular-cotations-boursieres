@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { FieldsetRatiosComponent } from './fieldset-ratios.component';
+import { FieldsetIndicateursComponent } from './fieldset-indicateurs.component';
 
 describe('FieldsetRatiosComponent', () => {
-  let component: FieldsetRatiosComponent;
-  let fixture: ComponentFixture<FieldsetRatiosComponent>;
+  let component: FieldsetIndicateursComponent;
+  let fixture: ComponentFixture<FieldsetIndicateursComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [FieldsetRatiosComponent]
+      imports: [FieldsetIndicateursComponent]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(FieldsetRatiosComponent);
+    fixture = TestBed.createComponent(FieldsetIndicateursComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

@@ -378,7 +378,7 @@ export class BoursoramaService {
     const pourcentage = elDIV ? ParseUtil.parseNumber(elDIV.innerHTML.replace('/100', '')) / 100 : NaN;
     const risque = pourcentage ? Math.floor(pourcentage / 10) as RisqueESG : undefined;
     const tonnesCO2 = elSTRONGs.length > 0 ? ParseUtil.parseNumber(elSTRONGs[0].innerHTML) : NaN;
-    const niveauControverse = elSTRONGs.length > 1 ? elSTRONGs[1].innerHTML.trim() : undefined;
+    const niveauControverse = elSTRONGs.length > 1 ? elSTRONGs[1].innerHTML.trim().toLowerCase() : undefined;
     const impactPositif = elSTRONGs.length > 2 ? elSTRONGs[2].innerHTML.trim() : undefined;
     const impactNegatif = elSTRONGs.length > 3 ? elSTRONGs[3].innerHTML.trim() : undefined;
     return {pourcentage, risque, tonnesCO2, niveauControverse, impactPositif, impactNegatif};

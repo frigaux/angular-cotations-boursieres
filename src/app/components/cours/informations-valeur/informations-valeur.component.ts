@@ -10,16 +10,26 @@ import {DialogChargerLienComponent} from '../../commun/dialog-charger-lien/dialo
 import {ConseilsGeminiValeurComponent} from '../conseils-gemini-valeur/conseils-gemini-valeur.component';
 import {FieldsetDividendesComponent} from './fieldset-dividendes/fieldset-dividendes.component';
 import {FieldsetVariationsComponent} from './fieldset-variations/fieldset-variations.component';
-import {FieldsetRatiosComponent} from './fieldset-ratios/fieldset-ratios.component';
+import {FieldsetIndicateursComponent} from './fieldset-ratios/fieldset-indicateurs.component';
 import {forkJoin} from 'rxjs';
 import {BoursoramaService} from '../../../services/boursorama/boursorama.service';
-import {
-  DTOInformationsTickerBoursorama
-} from '../../../services/boursorama/dto-informations-ticker-boursorama.interface';
 import {
   CotationsValeurBoursoramaDecore
 } from '../../portefeuilles/popover-actions-valeur/dialog-cotations-valeur/cotations-valeur-boursorama-genere.class';
 import {UIChart} from 'primeng/chart';
+import {
+  FieldsetCotationsComponent
+} from '../../portefeuilles/popover-actions-valeur/dialog-cotations-valeur/fieldset-cotations/fieldset-cotations.component';
+import {
+  FieldsetActualitesComponent
+} from '../../portefeuilles/popover-actions-valeur/dialog-cotations-valeur/fieldset-actualites/fieldset-actualites.component';
+import {
+  FieldsetAnalysesComponent
+} from '../../portefeuilles/popover-actions-valeur/dialog-cotations-valeur/fieldset-analyses/fieldset-analyses.component';
+import {
+  FieldsetPrevisionsComponent
+} from '../../portefeuilles/popover-actions-valeur/dialog-cotations-valeur/fieldset-previsions/fieldset-previsions.component';
+import {DTOInformation} from '../../../services/boursorama/dto-information.interface';
 
 @Component({
   selector: 'app-informations-ticker',
@@ -32,8 +42,12 @@ import {UIChart} from 'primeng/chart';
     ConseilsGeminiValeurComponent,
     FieldsetDividendesComponent,
     FieldsetVariationsComponent,
-    FieldsetRatiosComponent,
-    UIChart
+    FieldsetIndicateursComponent,
+    UIChart,
+    FieldsetCotationsComponent,
+    FieldsetActualitesComponent,
+    FieldsetAnalysesComponent,
+    FieldsetPrevisionsComponent
   ],
   templateUrl: './informations-valeur.component.html',
   styleUrl: './informations-valeur.component.sass'
@@ -74,6 +88,7 @@ export class InformationsValeurComponent {
           this.loading = false;
         },
         next: ([dtoAbcBourse, dtoBoursorama]) => {
+          console.log(dtoAbcBourse, dtoBoursorama);
           this.dtoAbcBourse = dtoAbcBourse;
           this.dtoBoursoramaDecore = new CotationsValeurBoursoramaDecore(this.translateService, 0, dtoBoursorama);
           this.loading = false;
@@ -83,7 +98,7 @@ export class InformationsValeurComponent {
     return cours;
   }
 
-  // afficherActualite(actualite: DTOActualiteTicker) {
-  //   this.dialogChargerLienComponent()?.afficherActualiteABCBourse(actualite);
-  // }
+  protected afficherInformation(information: DTOInformation) {
+    this.dialogChargerLienComponent()?.afficherInformationBoursorama(information);
+  }
 }

@@ -24,7 +24,7 @@ import {ValeursService} from '../valeurs/valeurs.service';
 import {ACHATS} from '../jdd/jdd-valeurs.dataset';
 import {DTOAchat} from '../valeurs/dto-achat.interface';
 import {DividendesService} from '../dividendes/dividendes.service';
-import {DIVIDENDES_TICKER_GLE} from '../jdd/jdd-dividendes';
+import {DIVIDENDES_TICKER_GLE} from '../jdd/jdd-dividendes.dataset';
 
 describe('TableauxService', () => {
   let service: TableauxService;

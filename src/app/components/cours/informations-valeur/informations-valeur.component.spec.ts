@@ -2,19 +2,20 @@ import {ComponentFixture, TestBed} from '@angular/core/testing';
 
 import {InformationsValeurComponent} from './informations-valeur.component';
 import {AbcBourseService} from '../../../services/abc-bourse/abc-bourse.service';
-import {DTOInformationsTickerABCBourse} from '../../../services/abc-bourse/dto-informations-ticker-abc-bourse.class';
 import {of} from 'rxjs';
 import {COURS_CROISSANT} from '../../../services/jdd/jdd-cours.dataset';
 import {provideAnimations} from '@angular/platform-browser/animations';
 import {TranslateModule} from '@ngx-translate/core';
 import {BoursoramaService} from '../../../services/boursorama/boursorama.service';
 import {ZoneBourseService} from '../../../services/zone-bourse/zone-bourse.service';
+import {DTO_INFORMATIONS_TICKER_ABCBOURSE} from '../../../services/jdd/jdd-abcbourse.dataset';
+import {DTO_INFORMATIONS_TICKER_BOURSORAMA} from '../../../services/jdd/jdd-boursorama.dataset';
 
 describe('InformationsValeurComponent', () => {
   let component: InformationsValeurComponent;
   let fixture: ComponentFixture<InformationsValeurComponent>;
 
-  const mockBoursoramaService = jasmine.createSpyObj('BoursoramaService', ['chargerLien']);
+  const mockBoursoramaService = jasmine.createSpyObj('BoursoramaService', ['chargerInformationsTicker', 'chargerLien']);
   const mockAbcBourseService = jasmine.createSpyObj('AbcBourseService', ['chargerInformationsTicker', 'chargerLien']);
   const mockZoneBourseService = jasmine.createSpyObj('ZoneBourseService', ['chargerLien']);
 
@@ -43,11 +44,12 @@ describe('InformationsValeurComponent', () => {
 
   describe('Given #chargerInformationsTicker renvoie les informations pour un ticker', () => {
     beforeEach(() => {
-      const informationsTicker = new DTOInformationsTickerABCBourse('GLE');
-      informationsTicker.ratios.variationCAC = 0;
-      informationsTicker.ratios.correlationCAC = 0;
-      informationsTicker.ratios.qualiteFinanciere = '';
-      mockAbcBourseService.chargerInformationsTicker.and.returnValue(of(informationsTicker));
+      // const dtoAbcBourse = new DTOInformationsTickerABCBourse('GLE');
+      // dtoAbcBourse.ratios.variationCAC = 0;
+      // dtoAbcBourse.ratios.correlationCAC = 0;
+      // dtoAbcBourse.ratios.qualiteFinanciere = '';
+      mockAbcBourseService.chargerInformationsTicker.and.returnValue(of(DTO_INFORMATIONS_TICKER_ABCBOURSE));
+      mockBoursoramaService.chargerInformationsTicker.and.returnValue(of(DTO_INFORMATIONS_TICKER_BOURSORAMA));
     });
 
     it('when input cours then le composant est chargé', () => {

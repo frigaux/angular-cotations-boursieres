@@ -1,0 +1,37 @@
+div.indicateurs
+  display: flex
+  flex-direction: row
+
+  & > div.ratios
+    flex: 0 1 13rem
+
+    p-table
+      th:nth-child(1)
+        width: 5rem
+
+      th:nth-child(2), th:nth-child(3)
+        width: 4rem
+
+  & > div.conteneur
+    flex: 1
+    margin-left: 1rem
+    border-left: 1px solid var(--p-gray-400)
+
+    & > div.bloc
+      display: inline-block
+      margin-left: 1rem
+      vertical-align: top
+
+      & > div
+        margin: 0.5rem
+
+        label, span
+          display: inline-block
+
+        label
+          width: 10rem
+          font-weight: bold
+
+        span
+          width: 6rem
+          text-align: right

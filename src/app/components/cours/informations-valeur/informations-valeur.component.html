@@ -6,15 +6,31 @@
       ]"></app-loader>
 
   @if (!loading && dtoAbcBourse && dtoBoursoramaDecore) {
-    <p-chart type="line" [data]="dtoBoursoramaDecore.coursDataChartLine"
-             [options]="dtoBoursoramaDecore.coursOptionsChartLine"/>
+    <div class="chart">
+      <p-fieldset
+        legend="{{ 'COMPOSANTS.COURS.INFORMATIONS_VALEUR.COURS' | translate }}">
+        <p-chart type="line" [data]="dtoBoursoramaDecore.coursDataChartLine"
+                 [options]="dtoBoursoramaDecore.coursOptionsChartLine"/>
+      </p-fieldset>
+    </div>
     <div class="ligne">
       <div class="colonne">
         <app-fieldset-dividendes [data]="{dividendes: dtoAbcBourse.dividendes, cours}"></app-fieldset-dividendes>
         <app-fieldset-variations [variations]="dtoAbcBourse.variations"></app-fieldset-variations>
+        <p-fieldset
+          legend="{{ 'COMPOSANTS.COURS.INFORMATIONS_VALEUR.ORDRES' | translate }}">
+          <p-chart type="doughnut" [data]="dtoBoursoramaDecore.ordresDataDoughnut" height="13rem" width="13rem"/>
+        </p-fieldset>
+        <app-fieldset-cotations [dto]="dtoBoursoramaDecore"></app-fieldset-cotations>
       </div>
       <div class="colonne">
-        <app-fieldset-ratios [dto]="dtoAbcBourse"></app-fieldset-ratios>
+        <app-fieldset-indicateurs [data]="{dtoAbcBourse, dtoBoursorama: dtoBoursoramaDecore.dto}"></app-fieldset-indicateurs>
+        <app-fieldset-actualites [dto]="dtoBoursoramaDecore.dto"
+                                 (afficherInformation)="afficherInformation($event)"></app-fieldset-actualites>
+        <app-fieldset-analyses [dto]="dtoBoursoramaDecore.dto"
+                               (afficherInformation)="afficherInformation($event)"></app-fieldset-analyses>
+        <app-fieldset-previsions [dto]="dtoBoursoramaDecore.dto"
+                                 (afficherInformation)="afficherInformation($event)"></app-fieldset-previsions>
         <p-fieldset legend="{{ 'COMPOSANTS.COURS.INFORMATIONS_VALEUR.IA.GEMINI' | translate }}">
           <app-conseils-gemini-valeur [cours]="cours"></app-conseils-gemini-valeur>
         </p-fieldset>

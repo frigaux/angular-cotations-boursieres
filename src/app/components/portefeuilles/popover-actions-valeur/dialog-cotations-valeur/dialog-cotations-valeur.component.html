@@ -22,7 +22,13 @@
 
   @if (!loading) {
     @if (cotationsTickerDecore) {
-      <p-chart type="line" [data]="cotationsTickerDecore.coursDataChartLine" [options]="cotationsTickerDecore.coursOptionsChartLine"/>
+      <div class="chart">
+        <p-fieldset
+          legend="{{ 'COMPOSANTS.PORTEFEUILLES.ACTIONS_VALEUR.DIALOG_COTATIONS_VALEUR.COURS' | translate }}">
+          <p-chart type="line" [data]="cotationsTickerDecore.coursDataChartLine"
+                   [options]="cotationsTickerDecore.coursOptionsChartLine"/>
+        </p-fieldset>
+      </div>
       <div class="ligne">
         <div class="colonne">
           <p-fieldset

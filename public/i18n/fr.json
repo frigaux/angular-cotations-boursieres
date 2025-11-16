@@ -173,6 +173,8 @@
         }
       },
       "INFORMATIONS_VALEUR": {
+        "COURS": "Cours",
+        "ORDRES": "Ordres",
         "VARIATIONS": {
           "VARIATIONS_COURS": "Variations du cours",
           "DATE": "Date",
@@ -187,11 +189,24 @@
           "RATIOS": "Ratios financiers",
           "ANNEE": "Année",
           "BNPA": "BNPA",
+          "DETAILS_BNPA": "Bénéfice net par action",
           "PER": "PER",
+          "DETAILS_PER": "Price earning ratio : rapport du cours et du BNPA",
           "COURS": "Cours",
+          "VOLATILITE": "Volatilité",
+          "POURCENTAGE_CAPITAL_ECHANGE": "Capital échangé",
+          "VALORISATION": "Valorisation",
           "VARIATION_CAC": "Variation / CAC40",
           "CORRELATION_CAC": "Corrélation / CAC40",
-          "QUALITE": "Qualité financière"
+          "QUALITE": "Qualité financière",
+          "RENDEMENT_ESTIME": "Rendement estimé",
+          "PER_ESTIME": "PER estimé",
+          "DERNIER_DIVIDENDE": "Dernier dividende",
+          "RISQUE_ESG": "Risque ESG",
+          "TONNES_CO2": "Tonnes de CO2",
+          "IMPACT_POSITIF": "Impact positif",
+          "IMPACT_NEGATIF": "Impact négatif",
+          "CONSENSUS": "Consensus"
         },
         "IA": {
           "GEMINI": "IA Google Gemini"
@@ -287,6 +302,7 @@
           "COTATIONS_VALEUR": "Cours et ordres pour la valeur {{valeur}} ({{ticker}})",
           "RAFRAICHIR": "Rafraîchir",
           "FERMER": "Fermer",
+          "COURS": "Cours",
           "ACHATS": "Achats ({{quantite}})",
           "VENTES": "Ventes ({{quantite}})",
           "COTATIONS": {
@@ -320,7 +336,7 @@
           "ORDRES": "Ordres",
           "ACTUALITES": "Actualités",
           "ANALYSES": "Analyses",
-          "PREVISIONS" : {
+          "PREVISIONS": {
             "PREVISIONS": "Prévisions",
             "ANNEE": "Année",
             "DIVIDENDE": "Dividende",

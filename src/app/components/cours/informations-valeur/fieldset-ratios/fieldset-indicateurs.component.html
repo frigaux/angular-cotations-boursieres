@@ -1,0 +1,100 @@
+@if (dtoAbcBourse && dtoBoursorama) {
+  <p-fieldset legend="{{ 'COMPOSANTS.COURS.INFORMATIONS_VALEUR.RATIOS.RATIOS' | translate }}">
+    <div class="indicateurs">
+      <div class="ratios">
+        <p-table size="small"
+                 [value]="dtoAbcBourse.ratios.indicateurs">
+          <ng-template #header>
+            <tr>
+              <th>{{ 'COMPOSANTS.COURS.INFORMATIONS_VALEUR.RATIOS.ANNEE' | translate }}</th>
+              <th style="text-align: right"
+                  title="{{ 'COMPOSANTS.COURS.INFORMATIONS_VALEUR.RATIOS.DETAILS_BNPA' | translate }}">
+                {{ 'COMPOSANTS.COURS.INFORMATIONS_VALEUR.RATIOS.BNPA' | translate }}
+              </th>
+              <th style="text-align: right"
+                  title="{{ 'COMPOSANTS.COURS.INFORMATIONS_VALEUR.RATIOS.DETAILS_PER' | translate }}">
+                {{ 'COMPOSANTS.COURS.INFORMATIONS_VALEUR.RATIOS.PER' | translate }}
+              </th>
+            </tr>
+          </ng-template>
+          <ng-template #body let-ratio>
+            <tr>
+              <td>{{ ratio.annee }}</td>
+              <td style="text-align: right">{{ ratio.bnpa | currency:'€' }}</td>
+              <td style="text-align: right">{{ ratio.per | number }}</td>
+            </tr>
+          </ng-template>
+        </p-table>
+      </div>
+      <div class="conteneur">
+        <div class="bloc">
+          <div>
+            <label>{{ 'COMPOSANTS.COURS.INFORMATIONS_VALEUR.RATIOS.COURS' | translate }}</label>
+            <span>{{ dtoAbcBourse.cotations?.cours | currency:'€' }}</span>
+          </div>
+          <div>
+            <label>{{ 'COMPOSANTS.COURS.INFORMATIONS_VALEUR.RATIOS.VOLATILITE' | translate }}</label>
+            <span>{{ dtoAbcBourse.cotations?.pourcentageVolatilite  | percent:'1.2-2' }}</span>
+          </div>
+          <div>
+            <label>{{ 'COMPOSANTS.COURS.INFORMATIONS_VALEUR.RATIOS.POURCENTAGE_CAPITAL_ECHANGE' | translate }}</label>
+            <span>{{ dtoAbcBourse.cotations?.pourcentageCapitalEchange  | percent:'1.2-2' }}</span>
+          </div>
+          <div>
+            <label>{{ 'COMPOSANTS.COURS.INFORMATIONS_VALEUR.RATIOS.VALORISATION' | translate }}</label>
+            <span>{{ dtoAbcBourse.cotations?.valorisation }}</span>
+          </div>
+          <div>
+            <label>{{ 'COMPOSANTS.COURS.INFORMATIONS_VALEUR.RATIOS.VARIATION_CAC' | translate }}</label>
+            <span>{{ dtoAbcBourse.ratios.variationCAC | percent:'1.2-2' }}</span>
+          </div>
+          <div>
+            <label>{{ 'COMPOSANTS.COURS.INFORMATIONS_VALEUR.RATIOS.CORRELATION_CAC' | translate }}</label>
+            <span>{{ dtoAbcBourse.ratios.correlationCAC | percent:'1.2-2' }}</span>
+          </div>
+          <div>
+            <label>{{ 'COMPOSANTS.COURS.INFORMATIONS_VALEUR.RATIOS.QUALITE' | translate }}</label>
+            <span>{{ dtoAbcBourse.ratios.qualiteFinanciere }}</span>
+          </div>
+        </div>
+        <div class="bloc">
+          <div>
+            <label>{{ 'COMPOSANTS.COURS.INFORMATIONS_VALEUR.RATIOS.RENDEMENT_ESTIME' | translate }}</label>
+            <span>{{ dtoBoursorama.cotations.pourcentageRendementEstime | percent:'1.2-2' }}</span>
+          </div>
+          <div>
+            <label>{{ 'COMPOSANTS.COURS.INFORMATIONS_VALEUR.RATIOS.PER_ESTIME' | translate }}</label>
+            <span>{{ dtoBoursorama.cotations.perEstime | number }}</span>
+          </div>
+          <div>
+            <label>{{ 'COMPOSANTS.COURS.INFORMATIONS_VALEUR.RATIOS.DERNIER_DIVIDENDE' | translate }}</label>
+            <span>
+              {{ dtoBoursorama.cotations.dernierDividende | currency:'€' }}
+              {{ dtoBoursorama.cotations.dateDernierDividende | date: 'dd/MM/yyyy' }}
+            </span>
+          </div>
+          <div>
+            <label>{{ 'COMPOSANTS.COURS.INFORMATIONS_VALEUR.RATIOS.RISQUE_ESG' | translate }}</label>
+            <span>{{ dtoBoursorama.cotations.risqueESG }}</span>
+          </div>
+          <div>
+            <label>{{ 'COMPOSANTS.COURS.INFORMATIONS_VALEUR.RATIOS.TONNES_CO2' | translate }}</label>
+            <span>{{ dtoBoursorama.risqueESG.tonnesCO2 | number }}</span>
+          </div>
+          <div>
+            <label>{{ 'COMPOSANTS.COURS.INFORMATIONS_VALEUR.RATIOS.IMPACT_POSITIF' | translate }}</label>
+            <span>{{ dtoBoursorama.risqueESG.impactPositif }}</span>
+          </div>
+          <div>
+            <label>{{ 'COMPOSANTS.COURS.INFORMATIONS_VALEUR.RATIOS.IMPACT_NEGATIF' | translate }}</label>
+            <span>{{ dtoBoursorama.risqueESG.impactNegatif }}</span>
+          </div>
+          <div>
+            <label>{{ 'COMPOSANTS.COURS.INFORMATIONS_VALEUR.RATIOS.CONSENSUS' | translate }}</label>
+            <span>{{ `ENUMERATIONS.CONSEIL.${dtoBoursorama.consensus.conseil}` | translate }}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </p-fieldset>
+}
