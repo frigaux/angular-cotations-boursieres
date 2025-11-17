@@ -1,6 +1,7 @@
 import {Component, input, InputSignal} from '@angular/core';
 import {DTODividende} from '../../../../services/dividendes/dto-dividende.interface';
 import {CurrencyPipe, DatePipe} from '@angular/common';
+import {DividendeDecore} from './dividende-decore.class';
 
 @Component({
   selector: 'app-dividendes',
@@ -17,10 +18,11 @@ export class DividendesComponent {
     {transform: o => this.intercepteurDividendes(o), alias: 'dividendes'});
 
   // données pour la vue
-  dividendes?: Array<DTODividende>;
+  dividendesDecores?: Array<DividendeDecore>;
 
   private intercepteurDividendes(dividendes?: Array<DTODividende>) {
-    this.dividendes = dividendes?.sort((d1, d2) => d1.date.localeCompare(d2.date));
+    this.dividendesDecores = dividendes?.sort((d1, d2) => d1.date.localeCompare(d2.date))
+      .map((dividende, id) => new DividendeDecore(id, dividende));
     return dividendes;
   }
 }

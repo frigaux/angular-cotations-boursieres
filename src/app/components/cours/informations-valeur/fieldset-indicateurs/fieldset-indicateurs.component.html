@@ -89,10 +89,12 @@
             <label>{{ 'COMPOSANTS.COURS.INFORMATIONS_VALEUR.RATIOS.IMPACT_NEGATIF' | translate }}</label>
             <span>{{ dtoBoursorama.risqueESG.impactNegatif }}</span>
           </div>
-          <div>
-            <label>{{ 'COMPOSANTS.COURS.INFORMATIONS_VALEUR.RATIOS.CONSENSUS' | translate }}</label>
-            <span>{{ `ENUMERATIONS.CONSEIL.${dtoBoursorama.consensus.conseil}` | translate }}</span>
-          </div>
+          @if (dtoBoursorama.consensus) {
+            <div>
+              <label>{{ 'COMPOSANTS.COURS.INFORMATIONS_VALEUR.RATIOS.CONSENSUS' | translate }}</label>
+              <span>{{ `ENUMERATIONS.CONSEIL.${dtoBoursorama.consensus.conseil}` | translate }}</span>
+            </div>
+          }
         </div>
       </div>
     </div>

@@ -58,18 +58,20 @@
         <label>{{ 'COMPOSANTS.PORTEFEUILLES.ACTIONS_VALEUR.DIALOG_COTATIONS_VALEUR.INDICATEURS.IMPACT_NEGATIF' | translate }}</label>
         <span>{{ dto.risqueESG.impactNegatif }}</span>
       </div>
-      <div>
-        <label>{{ 'COMPOSANTS.PORTEFEUILLES.ACTIONS_VALEUR.DIALOG_COTATIONS_VALEUR.INDICATEURS.CONSENSUS' | translate }}</label>
-        <span>{{ `ENUMERATIONS.CONSEIL.${dto.consensus.conseil}` | translate }}</span>
-      </div>
-      <div>
-        <label>{{ 'COMPOSANTS.PORTEFEUILLES.ACTIONS_VALEUR.DIALOG_COTATIONS_VALEUR.INDICATEURS.OBJECTIF_3MOIS' | translate }}</label>
-        <span>{{ dto.consensus.objectif3mois | currency:'€' }}</span>
-      </div>
-      <div>
-        <label>{{ 'COMPOSANTS.PORTEFEUILLES.ACTIONS_VALEUR.DIALOG_COTATIONS_VALEUR.INDICATEURS.POTENTIEL_3MOIS' | translate }}</label>
-        <span>{{ dto.consensus.pourcentagePotentiel3mois | percent:'1.2-2' }}</span>
-      </div>
+      @if (dto.consensus) {
+        <div>
+          <label>{{ 'COMPOSANTS.PORTEFEUILLES.ACTIONS_VALEUR.DIALOG_COTATIONS_VALEUR.INDICATEURS.CONSENSUS' | translate }}</label>
+          <span>{{ `ENUMERATIONS.CONSEIL.${dto.consensus.conseil}` | translate }}</span>
+        </div>
+        <div>
+          <label>{{ 'COMPOSANTS.PORTEFEUILLES.ACTIONS_VALEUR.DIALOG_COTATIONS_VALEUR.INDICATEURS.OBJECTIF_3MOIS' | translate }}</label>
+          <span>{{ dto.consensus.objectif3mois | currency:'€' }}</span>
+        </div>
+        <div>
+          <label>{{ 'COMPOSANTS.PORTEFEUILLES.ACTIONS_VALEUR.DIALOG_COTATIONS_VALEUR.INDICATEURS.POTENTIEL_3MOIS' | translate }}</label>
+          <span>{{ dto.consensus.pourcentagePotentiel3mois | percent:'1.2-2' }}</span>
+        </div>
+      }
     </div>
   </p-fieldset>
 }

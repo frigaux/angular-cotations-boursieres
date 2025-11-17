@@ -1,36 +1,38 @@
-@if (dto) {
+@if (dto && (dto.consensus || dto.evenements.length > 0 || dto.communiques.length > 0)) {
   <p-fieldset
     legend="{{ 'COMPOSANTS.PORTEFEUILLES.ACTIONS_VALEUR.DIALOG_COTATIONS_VALEUR.PREVISIONS.PREVISIONS' | translate }}">
     <div class="previsions">
-      <p-table size="small"
-               [value]="dto.consensus.previsions">
-        <ng-template #header>
-          <tr>
-            <th>{{ 'COMPOSANTS.PORTEFEUILLES.ACTIONS_VALEUR.DIALOG_COTATIONS_VALEUR.PREVISIONS.ANNEE' | translate }}</th>
-            <th
-              style="text-align: right">{{ 'COMPOSANTS.PORTEFEUILLES.ACTIONS_VALEUR.DIALOG_COTATIONS_VALEUR.PREVISIONS.DIVIDENDE' | translate }}
-            </th>
-            <th
-              style="text-align: right">{{ 'COMPOSANTS.PORTEFEUILLES.ACTIONS_VALEUR.DIALOG_COTATIONS_VALEUR.PREVISIONS.RENDEMENT' | translate }}
-            </th>
-            <th
-              style="text-align: right">{{ 'COMPOSANTS.PORTEFEUILLES.ACTIONS_VALEUR.DIALOG_COTATIONS_VALEUR.PREVISIONS.BENEFICE' | translate }}
-            </th>
-            <th
-              style="text-align: right">{{ 'COMPOSANTS.PORTEFEUILLES.ACTIONS_VALEUR.DIALOG_COTATIONS_VALEUR.PREVISIONS.PER' | translate }}
-            </th>
-          </tr>
-        </ng-template>
-        <ng-template #body let-prevision>
-          <tr>
-            <td>{{ prevision.annee }}</td>
-            <td style="text-align: right">{{ prevision.dividende  | currency:'€' }}</td>
-            <td style="text-align: right">{{ prevision.pourcentageRendement | percent:'1.2-2' }}</td>
-            <td style="text-align: right">{{ prevision.benefice  | currency:'€' }}</td>
-            <td style="text-align: right">{{ prevision.per | number }}</td>
-          </tr>
-        </ng-template>
-      </p-table>
+      @if (dto.consensus) {
+        <p-table size="small"
+                 [value]="dto.consensus.previsions">
+          <ng-template #header>
+            <tr>
+              <th>{{ 'COMPOSANTS.PORTEFEUILLES.ACTIONS_VALEUR.DIALOG_COTATIONS_VALEUR.PREVISIONS.ANNEE' | translate }}</th>
+              <th
+                style="text-align: right">{{ 'COMPOSANTS.PORTEFEUILLES.ACTIONS_VALEUR.DIALOG_COTATIONS_VALEUR.PREVISIONS.DIVIDENDE' | translate }}
+              </th>
+              <th
+                style="text-align: right">{{ 'COMPOSANTS.PORTEFEUILLES.ACTIONS_VALEUR.DIALOG_COTATIONS_VALEUR.PREVISIONS.RENDEMENT' | translate }}
+              </th>
+              <th
+                style="text-align: right">{{ 'COMPOSANTS.PORTEFEUILLES.ACTIONS_VALEUR.DIALOG_COTATIONS_VALEUR.PREVISIONS.BENEFICE' | translate }}
+              </th>
+              <th
+                style="text-align: right">{{ 'COMPOSANTS.PORTEFEUILLES.ACTIONS_VALEUR.DIALOG_COTATIONS_VALEUR.PREVISIONS.PER' | translate }}
+              </th>
+            </tr>
+          </ng-template>
+          <ng-template #body let-prevision>
+            <tr>
+              <td>{{ prevision.annee }}</td>
+              <td style="text-align: right">{{ prevision.dividende  | currency:'€' }}</td>
+              <td style="text-align: right">{{ prevision.pourcentageRendement | percent:'1.2-2' }}</td>
+              <td style="text-align: right">{{ prevision.benefice  | currency:'€' }}</td>
+              <td style="text-align: right">{{ prevision.per | number }}</td>
+            </tr>
+          </ng-template>
+        </p-table>
+      }
       @if (dto.evenements.length > 0) {
         <h3>{{ 'COMPOSANTS.PORTEFEUILLES.ACTIONS_VALEUR.DIALOG_COTATIONS_VALEUR.PREVISIONS.EVENEMENTS' | translate }}</h3>
         @for (evenement of dto.evenements; track evenement.id) {

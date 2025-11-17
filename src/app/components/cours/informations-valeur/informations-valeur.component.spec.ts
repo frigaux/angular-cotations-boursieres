@@ -44,10 +44,6 @@ describe('InformationsValeurComponent', () => {
 
   describe('Given #chargerInformationsTicker renvoie les informations pour un ticker', () => {
     beforeEach(() => {
-      // const dtoAbcBourse = new DTOInformationsTickerABCBourse('GLE');
-      // dtoAbcBourse.ratios.variationCAC = 0;
-      // dtoAbcBourse.ratios.correlationCAC = 0;
-      // dtoAbcBourse.ratios.qualiteFinanciere = '';
       mockAbcBourseService.chargerInformationsTicker.and.returnValue(of(DTO_INFORMATIONS_TICKER_ABCBOURSE));
       mockBoursoramaService.chargerInformationsTicker.and.returnValue(of(DTO_INFORMATIONS_TICKER_BOURSORAMA));
     });

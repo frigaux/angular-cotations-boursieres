@@ -5,9 +5,6 @@ import {TableModule} from 'primeng/table';
 import {TranslatePipe} from '@ngx-translate/core';
 import {DTOInformationsTickerABCBourse} from '../../../../services/abc-bourse/dto-informations-ticker-abc-bourse.class';
 import {
-  CotationsValeurBoursoramaDecore
-} from '../../../portefeuilles/popover-actions-valeur/dialog-cotations-valeur/cotations-valeur-boursorama-genere.class';
-import {
   DTOInformationsTickerBoursorama
 } from '../../../../services/boursorama/dto-informations-ticker-boursorama.interface';
 

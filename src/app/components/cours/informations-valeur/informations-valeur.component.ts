@@ -10,7 +10,7 @@ import {DialogChargerLienComponent} from '../../commun/dialog-charger-lien/dialo
 import {ConseilsGeminiValeurComponent} from '../conseils-gemini-valeur/conseils-gemini-valeur.component';
 import {FieldsetDividendesComponent} from './fieldset-dividendes/fieldset-dividendes.component';
 import {FieldsetVariationsComponent} from './fieldset-variations/fieldset-variations.component';
-import {FieldsetIndicateursComponent} from './fieldset-ratios/fieldset-indicateurs.component';
+import {FieldsetIndicateursComponent} from './fieldset-indicateurs/fieldset-indicateurs.component';
 import {forkJoin} from 'rxjs';
 import {BoursoramaService} from '../../../services/boursorama/boursorama.service';
 import {
@@ -88,7 +88,6 @@ export class InformationsValeurComponent {
           this.loading = false;
         },
         next: ([dtoAbcBourse, dtoBoursorama]) => {
-          console.log(dtoAbcBourse, dtoBoursorama);
           this.dtoAbcBourse = dtoAbcBourse;
           this.dtoBoursoramaDecore = new CotationsValeurBoursoramaDecore(this.translateService, 0, dtoBoursorama);
           this.loading = false;

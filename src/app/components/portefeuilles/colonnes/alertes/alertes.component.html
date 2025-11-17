@@ -1,4 +1,4 @@
-@for (dto of alertes; track dto.alerte.nom) {
+@for (dto of alertes; track dto.id) {
   @if (dto.evaluation) {
     <span title="{{ dto.alerte.condition }}">{{ dto.alerte.nom }}</span>
   }

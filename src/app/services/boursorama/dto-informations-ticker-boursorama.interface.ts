@@ -20,7 +20,7 @@ export interface DTOInformationsTickerBoursorama {
   historiqueJours: Array<DTOHistoriqueJour>;
   historiquePeriodes: Array<DTOHistoriquePeriode>;
   risqueESG: DTORisqueESG;
-  consensus: DTOConsensus;
+  consensus?: DTOConsensus;
   evenements: Array<DTOInformation>;
   communiques: Array<DTOInformation>;
 }

@@ -122,21 +122,25 @@ export class BoursoramaService {
     const elDIVCours = document.querySelector('div.c-faceplate__price');
     const elLIsCotations = document.querySelectorAll('li.c-list-info__item');
     const elULsNouvelles = document.querySelectorAll('ul.c-list-news');
-    const elTables = document.querySelectorAll('table.c-table--generic');
+    const elTableByLabel = this.queryTables(document);
+    const elTableFiveDaysHistory = elTableByLabel.get('five-days-history');
+    const elTableForecastsPreview = elTableByLabel.get('forecasts-preview');
+    const elTableHistoricalData = elTableByLabel.get('historical-data');
     const elDIVsGauges = document.querySelectorAll('div.c-median-gauge');
 
     if (elDIVCours && elLIsCotations.length === 18 && elULsNouvelles.length === 3
-      && elTables.length >= 4 && elDIVsGauges.length === 2) {
-      const cotations = this.parseAndMapCotations(elDIVCours, elLIsCotations, elTables[3]);
+      && elTableFiveDaysHistory && elTableHistoricalData
+      && elDIVsGauges.length >= 1) {
+      const cotations = this.parseAndMapCotations(elDIVCours, elLIsCotations, elTableHistoricalData);
       const ordres = this.parseAndMapOrdres(document);
       const actualites = this.parseAndMapInformations(elULsNouvelles[1]);
       const analyses = this.parseAndMapInformations(elULsNouvelles[2]);
       const cours = this.parseAndMapChart(html);
       const transactions = this.parseAndMapTransactions(document);
-      const historiqueJours = this.parseAndMapHistoriqueJours(elTables[0]);
-      const historiquePeriodes = this.parseAndMapHistoriquePeriodes(elTables[3]);
+      const historiqueJours = this.parseAndMapHistoriqueJours(elTableFiveDaysHistory);
+      const historiquePeriodes = this.parseAndMapHistoriquePeriodes(elTableHistoricalData);
       const risqueESG = this.parseAndMapRisqueESG(document, elDIVsGauges[0]);
-      const consensus = this.parseAndMapConsensus(document, elDIVsGauges[1], elTables[1]);
+      const consensus = elDIVsGauges.length == 2 && elTableForecastsPreview ? this.parseAndMapConsensus(elDIVsGauges[1], elTableForecastsPreview) : undefined;
       const evenements = this.parseAndMapEvenements(document);
       const communiques = this.parseAndMapInformations(elULsNouvelles[0]);
 
@@ -158,6 +162,18 @@ export class BoursoramaService {
       };
     }
     return undefined;
+  }
+
+  private queryTables(document: Document): Map<string, HTMLTableElement> {
+    const elTableByLabel: Map<string, HTMLTableElement> = new Map();
+    document.querySelectorAll('table.c-table--generic')
+      .forEach(elTable => {
+        const ariaLabel = elTable.getAttribute('aria-labelledby');
+        if (ariaLabel) {
+          elTableByLabel.set(ariaLabel.replace(/-\d+/, ''), elTable as HTMLTableElement);
+        }
+      });
+    return elTableByLabel;
   }
 
   private parseAndMapCotations(elDIVCours: Element, elLIsCotations: NodeListOf<Element>, elTable: Element): DTOCotations {
@@ -384,7 +400,7 @@ export class BoursoramaService {
     return {pourcentage, risque, tonnesCO2, niveauControverse, impactPositif, impactNegatif};
   }
 
-  private parseAndMapConsensus(document: Document, elDIVGauge: Element, elTable: Element): DTOConsensus {
+  private parseAndMapConsensus(elDIVGauge: Element, elTable: Element): DTOConsensus {
     const elDIV = elDIVGauge.querySelector('div.c-median-gauge__tooltip');
     const elSPANs = elDIVGauge.parentElement?.querySelectorAll('p > span');
     const score = elDIV ? ParseUtil.parseNumber(elDIV.innerHTML) : NaN;

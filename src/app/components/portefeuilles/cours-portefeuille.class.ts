@@ -78,8 +78,8 @@ export class CoursPortefeuille {
   }
 
   evaluerAlertes(): AlerteAvecSonEvaluation[] {
-    return this.alertes.alertesDecorees.map(dto =>
-      new AlerteAvecSonEvaluation(dto.alerte,
+    return this.alertes.alertesDecorees.map((dto, id) =>
+      new AlerteAvecSonEvaluation(id, dto.alerte,
         dto.evaluer(this.coursAlleges, this.moyennesMobiles, this.coursMinimum, this.coursMaximum, this.coursMoyen, this.coursNbVagues))
     );
   }

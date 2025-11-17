@@ -1,8 +1,8 @@
 <ul class="dividendes">
-  @for (dividende of dividendes; track dividende.date) {
+  @for (dividendeDecore of dividendesDecores; track dividendeDecore.id) {
     <li>
-      <span class="date">{{ dividende.date  | date: 'dd/MM/yyyy' }}</span>
-      <span class="montant">{{ dividende.montant | currency:'€' }}</span>
+      <span class="date">{{ dividendeDecore.dividende.date  | date: 'dd/MM/yyyy' }}</span>
+      <span class="montant">{{ dividendeDecore.dividende.montant | currency:'€' }}</span>
     </li>
   }
 </ul>
