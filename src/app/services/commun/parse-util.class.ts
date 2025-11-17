@@ -67,7 +67,12 @@ export class ParseUtil {
   static queryAndParseString(parent: ParentNode, selector: string): string | undefined {
     const el = parent.querySelector(selector);
     if (el) {
-      return el.innerHTML.trim().replaceAll(/&[\w#]+;/g, ' ');
+      return el.innerHTML.trim()
+        .replaceAll('&nbsp;', ' ')
+        .replaceAll('&lt;', '<')
+        .replaceAll('&gt;', '>')
+        .replaceAll('&euro;', '€')
+        .replaceAll('&apos;', '\'');
     }
     return undefined;
   }
