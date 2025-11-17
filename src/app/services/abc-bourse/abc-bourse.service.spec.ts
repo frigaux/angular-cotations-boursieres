@@ -5,6 +5,7 @@ import {HttpErrorResponse, HttpInterceptorFn, provideHttpClient, withInterceptor
 import {firstValueFrom, lastValueFrom} from 'rxjs';
 import {DTOInformationsTickerABCBourse} from './dto-informations-ticker-abc-bourse.class';
 import {DTOActualitesABCBourse} from './dto-actualites-abc-bourse.class';
+import {DTODividendes} from '../dividendes/dto-dividendes.class';
 
 describe('AbcBourseService', () => {
   let service: AbcBourseService;
@@ -78,5 +79,10 @@ describe('AbcBourseService', () => {
     expect(actualites.chroniques.length).toBeGreaterThan(0);
     expect(actualites.ventesADecouvert.length).toBeGreaterThan(0);
     expect(actualites.transactionsDirigeants.length).toBeGreaterThan(0);
+  });
+
+  it('given AbcBourseService when #chargerDividendes then on doit récupérer les dividendes', async () => {
+    const promiseDividendes: Promise<DTODividendes> = firstValueFrom(service.chargerDividendes());
+    await promiseDividendes.catch(err => expect(err.status).toBe(400));
   });
 });

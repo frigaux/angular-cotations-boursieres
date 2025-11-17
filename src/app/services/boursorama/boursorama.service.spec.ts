@@ -3,11 +3,10 @@ import {TestBed} from '@angular/core/testing';
 import {BoursoramaService} from './boursorama.service';
 import {HttpInterceptorFn, provideHttpClient, withInterceptors} from '@angular/common/http';
 import {firstValueFrom} from 'rxjs';
-import {VALEURS} from '../jdd/jdd-valeurs.dataset';
+import {VALEUR, VALEURS} from '../jdd/jdd-valeurs.dataset';
 import {DTOCours} from '../cours/dto-cours.interface';
 import {COURS_PORTEFEUILLE} from '../jdd/jdd-cours.dataset';
 import {DTOInformationsTickerBoursorama} from './dto-informations-ticker-boursorama.interface';
-import {RouterModule} from '@angular/router';
 import {TranslateModule} from '@ngx-translate/core';
 
 describe('BoursoramaService', () => {
@@ -46,12 +45,22 @@ describe('BoursoramaService', () => {
   });
 
   it('given un ticker when #chargerCotationsTicker then on doit récupérer la cotation pour le ticker', async () => {
-    const promiseCotationsTicker: Promise<DTOInformationsTickerBoursorama> = firstValueFrom(service.chargerInformationsTicker(COURS_PORTEFEUILLE));
+    const promiseCotationsTicker: Promise<DTOInformationsTickerBoursorama> = firstValueFrom(service.chargerInformationsTicker(VALEUR));
     const dto = await promiseCotationsTicker;
-    expect(dto.valeur).toEqual(COURS_PORTEFEUILLE);
+    expect(dto.valeur).toEqual(VALEUR);
     expect(dto.achats.length).toBeGreaterThan(0);
     expect(dto.ventes.length).toBeGreaterThan(0);
     expect(dto.actualites.length).toBeGreaterThan(0);
     expect(dto.analyses.length).toBeGreaterThan(0);
+
+    const promiseActualiteTicker: Promise<string> = firstValueFrom(service.chargerLien(dto.actualites[0].pathname));
+    const actualiteTicker = await promiseActualiteTicker;
+    expect(actualiteTicker).toBeDefined();
+  });
+
+  it('given un ticker when #chargerInformationsTickers then on doit récupérer la cotation pour le ticker', async () => {
+    const promiseCotationsTickers: Promise<Array<DTOInformationsTickerBoursorama>> = firstValueFrom(service.chargerInformationsTickers([VALEUR]));
+    const dto = await promiseCotationsTickers;
+    expect(dto).toHaveSize(1);
   });
 });
