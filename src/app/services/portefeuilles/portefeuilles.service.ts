@@ -153,7 +153,6 @@ export class PortefeuillesService {
       if (this.validerPortefeuilles(portefeuilles)) {
         window.localStorage.setItem(PortefeuillesService.PORTEFEUILLES, JSON.stringify(portefeuilles));
         PortefeuillesService.OBSERVERS_IMPORT.forEach(observer => observer.next(portefeuilles));
-        PortefeuillesService.OBSERVERS_UPDATE.forEach(observer => observer.next(portefeuilles));
         return undefined;
       } else {
         return this.translateService.instant(this.cleMessageErreur!);

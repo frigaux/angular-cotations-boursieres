@@ -289,11 +289,10 @@
       },
       "ACTIONS_VALEUR": {
         "SUPPRIMER_DU_PORTEFEUILLE": "Supprimer la valeur du portefeuille",
+        "COURS_BOURSORAMA_PORTEFEUILLE": "Cours des valeurs du portefeuille depuis Boursorama",
         "ACHATS": "Achats de la valeur",
         "ABCBOURSE": "Cotations ABCBourse",
         "BOURSORAMA": "Cotations Boursorama",
-        "COURS_BOURSORAMA": "Cours depuis Boursorama",
-        "COURS_BOURSORAMA_PORTEFEUILLE": "Cours des valeurs du portefeuille depuis Boursorama",
         "AJOUTER_AU_PORTEFEUILLE": "Ajouter la valeur au portefeuille",
         "DEPLACER_DANS_PORTEFEUILLE": "Déplacer la valeur dans le portefeuille",
         "ACHATS_VALEUR": "Achats pour la valeur \"{{nom}}\"",
@@ -467,7 +466,7 @@
         "SAUVEGARDE": "Sauvegarder les paramètres",
         "RESTAURATION": "Restaurer les paramètres",
         "FORMULAIRE": {
-          "URL": "URL"
+          "URL": "URL de sauvegarde/restauration"
         },
         "DIALOG_SAUVEGARDE": {
           "CONFIRMATION_SAUVEGARDE": "Confirmez-vous la sauvegarde des paramètres ?",

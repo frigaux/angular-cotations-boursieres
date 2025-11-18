@@ -5,6 +5,10 @@
 <p-popover>
   @if (cours) {
     <div class="actions-valeur">
+      <div class="libelle" (click)="coursBoursoramaPortefeuille()">
+        <span class="pi pi-cloud-download"></span>
+        <span>{{ 'COMPOSANTS.PORTEFEUILLES.ACTIONS_VALEUR.COURS_BOURSORAMA_PORTEFEUILLE' | translate }}</span>
+      </div>
       <div class="libelle" (click)="achats()">
         <span class="pi pi-shopping-bag"></span>
         <span>{{ 'COMPOSANTS.PORTEFEUILLES.ACTIONS_VALEUR.ACHATS' | translate }}</span>
@@ -16,14 +20,6 @@
       <div class="libelle" (click)="boursorama()">
         <span class="pi pi-external-link"></span>
         <span>{{ 'COMPOSANTS.PORTEFEUILLES.ACTIONS_VALEUR.BOURSORAMA' | translate }}</span>
-      </div>
-      <div class="libelle" (click)="coursBoursorama()">
-        <span class="pi pi-cloud-download"></span>
-        <span>{{ 'COMPOSANTS.PORTEFEUILLES.ACTIONS_VALEUR.COURS_BOURSORAMA' | translate }}</span>
-      </div>
-      <div class="libelle" (click)="coursBoursoramaPortefeuille()">
-        <span class="pi pi-cloud-download"></span>
-        <span>{{ 'COMPOSANTS.PORTEFEUILLES.ACTIONS_VALEUR.COURS_BOURSORAMA_PORTEFEUILLE' | translate }}</span>
       </div>
       @if (!portefeuilleAchats && portefeuilleAffiche && portefeuilleAffiche.tickers.length > 1) {
         <div class="libelle" (click)="suppressionDuPortefeuille($event)">

@@ -8,7 +8,7 @@ describe('SauvegardeRestaurationComponent', () => {
   let component: SauvegardeRestaurationComponent;
   let fixture: ComponentFixture<SauvegardeRestaurationComponent>;
 
-  let mockParametrageService = jasmine.createSpyObj('ParametrageService', ['chargerUrlSauvegardeRestauration', 'sauvegarder', 'restaurer']);
+  const mockParametrageService = jasmine.createSpyObj('ParametrageService', ['chargerUrlSauvegardeRestauration', 'sauvegarder', 'restaurer']);
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({

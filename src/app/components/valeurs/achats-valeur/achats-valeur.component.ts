@@ -116,7 +116,7 @@ export class AchatsValeurComponent implements OnInit {
       this.erreur = this.valeursService.enregistrerAchatsTicker(this.valeur.ticker, this.achats);
       if (this.erreur === undefined) {
         this.succes = this.translateService.instant('COMPOSANTS.VALEURS.ACHATS_VALEUR.ENREGISTREMENT_REUSSI');
-        setTimeout(() => this.succes = undefined, 1500);
+        setTimeout(() => this.succes = undefined, 2000);
       }
     }
   }

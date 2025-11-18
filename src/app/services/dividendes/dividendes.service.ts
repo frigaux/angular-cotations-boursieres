@@ -9,9 +9,9 @@ import {TypeDividende} from './type-dividende.enum';
 })
 export class DividendesService {
   private static readonly DIVIDENDES: string = 'dividendes';
-  private static readonly OBSERVERS_IMPORT_DIVIDENDES: Array<Subscriber<DTODividendes>> = [];
-  private static readonly OBSERVABLE_IMPORT_DIVIDENDES: Observable<DTODividendes> = new Observable(observer => {
-    DividendesService.OBSERVERS_IMPORT_DIVIDENDES.push(observer);
+  private static readonly OBSERVERS_UPDATE: Array<Subscriber<DTODividendes>> = [];
+  private static readonly OBSERVABLE_UPDATE: Observable<DTODividendes> = new Observable(observer => {
+    DividendesService.OBSERVERS_UPDATE.push(observer);
   });
 
   private cleMessageErreur: string | undefined;
@@ -65,14 +65,14 @@ export class DividendesService {
     return true;
   }
 
-  public onImportDividendes(handler: ((value: DTODividendes) => void)): void {
-    DividendesService.OBSERVABLE_IMPORT_DIVIDENDES.subscribe(handler);
+  public onUpdate(handler: ((value: DTODividendes) => void)): void {
+    DividendesService.OBSERVABLE_UPDATE.subscribe(handler);
   }
 
   public enregistrer(dividendes: DTODividendes): string | undefined {
     if (this.validerDividendes(dividendes)) {
       window.localStorage.setItem(DividendesService.DIVIDENDES, JSON.stringify(dividendes));
-      DividendesService.OBSERVERS_IMPORT_DIVIDENDES.forEach(observer => observer.next(dividendes));
+      DividendesService.OBSERVERS_UPDATE.forEach(observer => observer.next(dividendes));
       return undefined;
     } else {
       return this.translateService.instant(this.cleMessageErreur!);

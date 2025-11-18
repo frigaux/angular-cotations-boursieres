@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, input, InputSignal, OnInit} from '@angular/core';
 import {
   FormulaireUrlSauvegardeRestaurationComponent
 } from './formulaire-url-sauvegarde-restauration/formulaire-url-sauvegarde-restauration.component';
@@ -10,6 +10,7 @@ import {DialogSauvegardeComponent} from './dialog-sauvegarde/dialog-sauvegarde.c
 import {DialogRestaurationComponent} from './dialog-restauration/dialog-restauration.component';
 import {DTORestauration} from '../../../services/parametrage/dto-restauration.class';
 import {HttpErrorResponse} from '@angular/common/http';
+import {CoursPortefeuille} from '../../portefeuilles/cours-portefeuille.class';
 
 @Component({
   selector: 'app-sauvegarde-restauration',
@@ -25,6 +26,9 @@ import {HttpErrorResponse} from '@angular/common/http';
   styleUrl: './sauvegarde-restauration.component.sass'
 })
 export class SauvegardeRestaurationComponent implements OnInit {
+  // input/output
+  inputPetit: InputSignal<boolean | undefined> = input(undefined,
+    {transform: o => this.intercepteurPetit(o), alias: 'petit'});
 
   // données pour la vue
   afficherFormulaireUrlSauvegardeRestauration: boolean = false;
@@ -33,6 +37,7 @@ export class SauvegardeRestaurationComponent implements OnInit {
   httpErrorResponse?: HttpErrorResponse;
   dialogSauvegardeVisible: boolean = false;
   dialogRestaurationVisible: boolean = false;
+  petit?: boolean;
 
   constructor(private translateService: TranslateService,
               private parametrageService: ParametrageService) {
@@ -55,6 +60,7 @@ export class SauvegardeRestaurationComponent implements OnInit {
       },
       next: () => {
         this.succes = this.translateService.instant('COMPOSANTS.PARAMETRAGE.SAUVEGARDE_RESTAURATION.SAUVEGARDE_REUSSI');
+        setTimeout(() => this.succes = undefined, 2000);
         this.loading = false;
       }
     });
@@ -71,8 +77,14 @@ export class SauvegardeRestaurationComponent implements OnInit {
       },
       next: () => {
         this.succes = this.translateService.instant('COMPOSANTS.PARAMETRAGE.SAUVEGARDE_RESTAURATION.RESTAURATION_REUSSIE');
+        setTimeout(() => this.succes = undefined, 2000);
         this.loading = false;
       }
     });
+  }
+
+  private intercepteurPetit(petit: boolean | undefined) {
+    this.petit = petit;
+    return petit;
   }
 }

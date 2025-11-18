@@ -16,6 +16,10 @@ import {DividendesService} from '../dividendes/dividendes.service';
 })
 export class TableauxService {
   private static readonly TABLEAUX: string = 'tableaux';
+  private static readonly OBSERVERS_UPDATE: Array<Subscriber<DTOTableaux>> = [];
+  private static readonly OBSERVABLE_UPDATE: Observable<DTOTableaux> = new Observable(observer => {
+    TableauxService.OBSERVERS_UPDATE.push(observer);
+  });
   private static readonly OBSERVERS_IMPORT: Array<Subscriber<DTOTableaux>> = [];
   private static readonly OBSERVABLE_IMPORT: Observable<DTOTableaux> = new Observable(observer => {
     TableauxService.OBSERVERS_IMPORT.push(observer);
@@ -351,6 +355,7 @@ export class TableauxService {
   public enregistrer(tableaux: DTOTableaux): string | undefined {
     if (this.validerTableaux(tableaux)) {
       window.localStorage.setItem(TableauxService.TABLEAUX, JSON.stringify(tableaux));
+      TableauxService.OBSERVERS_UPDATE.forEach(observer => observer.next(tableaux));
       return undefined;
     } else {
       return this.translateService.instant(this.cleMessageErreur!);
@@ -370,6 +375,10 @@ export class TableauxService {
     } catch (e) { // JSON mal formé
       return (e as SyntaxError).message;
     }
+  }
+
+  public onUpdate(handler: ((value: DTOTableaux) => void)): void {
+    TableauxService.OBSERVABLE_UPDATE.subscribe(handler);
   }
 
   public onImport(handler: ((value: DTOTableaux) => void)): void {

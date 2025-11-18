@@ -26,6 +26,10 @@ import {
   DialogEvaluationActualitesComponent
 } from '../cours/dialog-evaluation-actualites/dialog-evaluation-actualites.component';
 import {DividendesComponent} from './colonnes/dividendes/dividendes.component';
+import {
+  SauvegardeRestaurationComponent
+} from '../parametrage/sauvegarde-restauration/sauvegarde-restauration.component';
+import {DividendesService} from '../../services/dividendes/dividendes.service';
 
 @Component({
   selector: 'app-portefeuilles',
@@ -49,7 +53,8 @@ import {DividendesComponent} from './colonnes/dividendes/dividendes.component';
     DecimalPipe,
     DialogActualitesComponent,
     DialogEvaluationActualitesComponent,
-    DividendesComponent
+    DividendesComponent,
+    SauvegardeRestaurationComponent
   ],
   templateUrl: './portefeuilles.component.html',
   styleUrls: ['./accordion-chart.sass', './portefeuilles.component.sass', '../commun/titre.sass']
@@ -83,10 +88,14 @@ export class PortefeuillesComponent implements OnInit {
               private valeursService: ValeursService,
               private coursService: CoursService,
               private tableauxService: TableauxService,
+              private dividendesService: DividendesService,
               private breakpointObserver: BreakpointObserver) {
     portefeuillesService.onUpdate(portefeuilles => this.chargerPortefeuilleCourant());
     valeursService.onImportAchats(achatsTickers => this.afficherPortefeuilleCourant());
     valeursService.onUpdateAchats(achatsTickers => this.afficherPortefeuilleCourant());
+    tableauxService.onUpdate(tableaux => this.afficherPortefeuilleCourant());
+    dividendesService.onUpdate(dividendes => this.afficherPortefeuilleCourant());
+
     // cet observable émet initialement une correspondance !
     breakpointObserver.observe([
       '(orientation: portrait)',

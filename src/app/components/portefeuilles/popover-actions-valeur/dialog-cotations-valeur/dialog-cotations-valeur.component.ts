@@ -50,24 +50,7 @@ export class DialogCotationsValeurComponent {
               private boursoramaService: BoursoramaService) {
   }
 
-  afficherCours(valeur: DTOValeur) {
-    this.valeur = valeur;
-    this.cotationsTickerDecore = undefined;
-    this.visible = true;
-    this.loading = true;
-    this.boursoramaService.chargerInformationsTicker(valeur).subscribe({
-        next:
-          cotationsTickerBoursorama => {
-            this.cotationsTickerDecore = new CotationsValeurBoursoramaDecore(this.translateService, 0, cotationsTickerBoursorama);
-            this.loading = false;
-          },
-        error:
-          httpErrorResponse => this.loading = false
-      }
-    )
-  }
-
-  afficherCotationsTickerBoursoramaDecore(cotationsTickerDecore: CotationsValeurBoursoramaDecore) {
+  public afficherCotationsTickerBoursoramaDecore(cotationsTickerDecore: CotationsValeurBoursoramaDecore) {
     this.visible = true;
     this.valeur = cotationsTickerDecore.dto.valeur;
     this.cotationsTickerDecore = cotationsTickerDecore;
@@ -79,7 +62,19 @@ export class DialogCotationsValeurComponent {
 
   protected rafraichir() {
     if (this.valeur) {
-      this.afficherCours(this.valeur);
+      this.cotationsTickerDecore = undefined;
+      this.visible = true;
+      this.loading = true;
+      this.boursoramaService.chargerInformationsTicker(this.valeur).subscribe({
+          next:
+            cotationsTickerBoursorama => {
+              this.cotationsTickerDecore = new CotationsValeurBoursoramaDecore(this.translateService, 0, cotationsTickerBoursorama);
+              this.loading = false;
+            },
+          error:
+            httpErrorResponse => this.loading = false
+        }
+      )
     }
   }
 

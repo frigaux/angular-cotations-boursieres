@@ -17,6 +17,7 @@ export class HeaderComponent {
 
   constructor(private translateService: TranslateService, private portefeuillesService: PortefeuillesService) {
     portefeuillesService.onUpdate(portefeuilles => this.makeItems(translateService))
+    portefeuillesService.onImport(portefeuilles => this.makeItems(translateService))
     this.makeItems(translateService);
   }
 

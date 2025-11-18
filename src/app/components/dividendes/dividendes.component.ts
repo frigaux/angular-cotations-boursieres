@@ -54,7 +54,7 @@ export class DividendesComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.dividendesService.onImportDividendes(dividendes => this.construireVue());
+    this.dividendesService.onUpdate(dividendes => this.construireVue());
     this.valeursService.chargerValeurs().subscribe(valeurs => {
       this.valeurByTicker = new Map<string, DTOValeur>();
       valeurs.forEach(valeur => this.valeurByTicker!.set(valeur.ticker, valeur));

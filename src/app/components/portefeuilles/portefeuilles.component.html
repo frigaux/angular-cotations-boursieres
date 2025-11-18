@@ -7,6 +7,7 @@
     <h2>{{ 'COMPOSANTS.PORTEFEUILLES.PORTEFEUILLES_DATE' | translate: {jour: date | date: 'dd/MM/yyyy'} }}</h2>
     <app-dialog-actualites></app-dialog-actualites>
     <app-dialog-evaluation-actualites [valeurs]="valeurByTicker"></app-dialog-evaluation-actualites>
+    <app-sauvegarde-restauration [petit]="true"></app-sauvegarde-restauration>
   </div>
 }
 

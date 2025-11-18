@@ -8,22 +8,48 @@
                          (restauration)="restaurer($event)"></app-dialog-restauration>
 
 <app-loader [affiche]="loading" [configuration]="[
-        {marginLeft: '0', marginTop: '0', height: '4rem', width: '15rem'}
+        {marginLeft: '1rem', marginTop: '0', height: '1.5rem', width: '15rem'}
       ]"></app-loader>
 
 @if (!afficherFormulaireUrlSauvegardeRestauration && !loading) {
-  <div class="boutons">
+  @if (petit) {
     <span class="pi pi-pencil" (click)="afficherFormulaireUrlSauvegardeRestauration=true"
           title="{{ 'COMPOSANTS.PARAMETRAGE.SAUVEGARDE_RESTAURATION.EDITER_URL' | translate }}"></span>
     <span class="pi pi-cloud-upload" (click)="dialogSauvegardeVisible = true"
           title="{{ 'COMPOSANTS.PARAMETRAGE.SAUVEGARDE_RESTAURATION.SAUVEGARDE' | translate }}"></span>
     <span class="pi pi-cloud-download" (click)="dialogRestaurationVisible = true"
           title="{{ 'COMPOSANTS.PARAMETRAGE.SAUVEGARDE_RESTAURATION.RESTAURATION' | translate }}"></span>
-  </div>
-  @if (succes) {
-    <div class="succes">{{ succes }}</div>
-  }
-  @if (httpErrorResponse) {
-    <pre class="erreur">{{ httpErrorResponse | json }}</pre>
+    @if (succes) {
+      <span class="succes">{{ succes }}</span>
+    }
+    @if (httpErrorResponse) {
+      <pre class="erreur">{{ httpErrorResponse | json }}</pre>
+    }
+  } @else {
+    <div class="boutons">
+      <div (click)="afficherFormulaireUrlSauvegardeRestauration=true">
+        <span class="pi pi-pencil"
+              title="{{ 'COMPOSANTS.PARAMETRAGE.SAUVEGARDE_RESTAURATION.EDITER_URL' | translate }}"></span>
+        <span>{{ 'COMPOSANTS.PARAMETRAGE.SAUVEGARDE_RESTAURATION.EDITER_URL' | translate }}</span>
+      </div>
+      <div (click)="dialogSauvegardeVisible = true">
+        <span class="pi pi-cloud-upload"
+              title="{{ 'COMPOSANTS.PARAMETRAGE.SAUVEGARDE_RESTAURATION.SAUVEGARDE' | translate }}"></span>
+        <span>{{ 'COMPOSANTS.PARAMETRAGE.SAUVEGARDE_RESTAURATION.SAUVEGARDE' | translate }}</span>
+      </div>
+      <div (click)="dialogRestaurationVisible = true">
+        <span class="pi pi-cloud-download"
+              title="{{ 'COMPOSANTS.PARAMETRAGE.SAUVEGARDE_RESTAURATION.RESTAURATION' | translate }}"></span>
+        <span>{{ 'COMPOSANTS.PARAMETRAGE.SAUVEGARDE_RESTAURATION.RESTAURATION' | translate }}</span>
+      </div>
+    </div>
+    <div class="message">
+      @if (succes) {
+        <span class="succes">{{ succes }}</span>
+      }
+      @if (httpErrorResponse) {
+        <pre class="erreur">{{ httpErrorResponse | json }}</pre>
+      }
+    </div>
   }
 }
