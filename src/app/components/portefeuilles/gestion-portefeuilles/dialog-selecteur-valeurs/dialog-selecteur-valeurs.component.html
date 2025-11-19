@@ -6,14 +6,12 @@
     ]"></app-loader>
 
     @if (!loading) {
-      <div class="header-picklist">
-        <div>{{ 'COMPOSANTS.PORTEFEUILLES.GESTION_PORTEFEUILLES.SELECTEUR_VALEURS.SOURCE' | translate }}</div>
-        <div>{{ 'COMPOSANTS.PORTEFEUILLES.GESTION_PORTEFEUILLES.SELECTEUR_VALEURS.TARGET' | translate }}</div>
-      </div>
       <p-picklist [source]="valeursSource" [target]="valeursTarget"
                   [showSourceControls]="false" [showTargetControls]="false"
                   [dragdrop]="true" [responsive]="true"
                   filterBy="libelle"
+                  sourceHeader="{{ 'COMPOSANTS.PORTEFEUILLES.GESTION_PORTEFEUILLES.SELECTEUR_VALEURS.SOURCE' | translate }}"
+                  targetHeader="{{ 'COMPOSANTS.PORTEFEUILLES.GESTION_PORTEFEUILLES.SELECTEUR_VALEURS.TARGET' | translate }}"
                   sourceFilterPlaceholder="{{ 'COMPOSANTS.PORTEFEUILLES.GESTION_PORTEFEUILLES.SELECTEUR_VALEURS.RECHERCHE' | translate }}"
                   targetFilterPlaceholder="{{ 'COMPOSANTS.PORTEFEUILLES.GESTION_PORTEFEUILLES.SELECTEUR_VALEURS.RECHERCHE' | translate }}">
         <ng-template let-valeur #item>

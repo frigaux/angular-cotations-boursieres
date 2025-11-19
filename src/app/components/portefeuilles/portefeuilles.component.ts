@@ -1,7 +1,6 @@
 import {Component, OnInit, viewChild} from '@angular/core';
 import {CurrencyPipe, DatePipe, DecimalPipe, NgClass, NgStyle, PercentPipe} from '@angular/common';
 import {PortefeuillesService} from '../../services/portefeuilles/portefeuilles.service';
-import {Accordion, AccordionContent, AccordionHeader, AccordionPanel, AccordionTabOpenEvent} from 'primeng/accordion';
 import {TableModule} from 'primeng/table';
 import {ValeursService} from '../../services/valeurs/valeurs.service';
 import {CoursService} from '../../services/cours/cours.service';
@@ -30,14 +29,11 @@ import {
   SauvegardeRestaurationComponent
 } from '../parametrage/sauvegarde-restauration/sauvegarde-restauration.component';
 import {DividendesService} from '../../services/dividendes/dividendes.service';
+import {Tab, TabList, TabPanel, TabPanels, Tabs} from 'primeng/tabs';
 
 @Component({
   selector: 'app-portefeuilles',
   imports: [
-    Accordion,
-    AccordionContent,
-    AccordionHeader,
-    AccordionPanel,
     TableModule,
     TranslatePipe,
     DatePipe,
@@ -54,10 +50,15 @@ import {DividendesService} from '../../services/dividendes/dividendes.service';
     DialogActualitesComponent,
     DialogEvaluationActualitesComponent,
     DividendesComponent,
-    SauvegardeRestaurationComponent
+    SauvegardeRestaurationComponent,
+    Tabs,
+    TabList,
+    Tab,
+    TabPanels,
+    TabPanel
   ],
   templateUrl: './portefeuilles.component.html',
-  styleUrls: ['./accordion-chart.sass', './portefeuilles.component.sass', '../commun/titre.sass']
+  styleUrls: ['./tabs-panel.sass', './portefeuilles.component.sass', '../commun/titre.sass']
 })
 export class PortefeuillesComponent implements OnInit {
   private actionsValeur = viewChild(PopoverActionsValeurComponent);
@@ -74,7 +75,6 @@ export class PortefeuillesComponent implements OnInit {
   protected date?: string;
   portefeuillesAvecCours: Array<PortefeuilleAvecCours> = [];
   idxPortefeuilleCourant: number = -1;
-  protected scrollHeight: string = 'calc(100vh - 14rem)';
   protected readonly VueUtil = VueUtil;
 
   // cours pour lequel afficher les courbes
@@ -91,16 +91,16 @@ export class PortefeuillesComponent implements OnInit {
               private dividendesService: DividendesService,
               private breakpointObserver: BreakpointObserver) {
     portefeuillesService.onUpdate(portefeuilles => this.chargerPortefeuilleCourant());
-    valeursService.onImportAchats(achatsTickers => this.afficherPortefeuilleCourant());
-    valeursService.onUpdateAchats(achatsTickers => this.afficherPortefeuilleCourant());
-    tableauxService.onUpdate(tableaux => this.afficherPortefeuilleCourant());
-    dividendesService.onUpdate(dividendes => this.afficherPortefeuilleCourant());
+    valeursService.onImportAchats(achatsTickers => this.definirCoursPortefeuilleCourant());
+    valeursService.onUpdateAchats(achatsTickers => this.definirCoursPortefeuilleCourant());
+    tableauxService.onUpdate(tableaux => this.definirCoursPortefeuilleCourant());
+    dividendesService.onUpdate(dividendes => this.definirCoursPortefeuilleCourant());
 
     // cet observable émet initialement une correspondance !
     breakpointObserver.observe([
       '(orientation: portrait)',
       '(orientation: landscape)',
-    ]).subscribe(matches => this.afficherPortefeuilleCourant());
+    ]).subscribe(matches => this.definirCoursPortefeuilleCourant());
   }
 
   ngOnInit(): void {
@@ -128,26 +128,26 @@ export class PortefeuillesComponent implements OnInit {
     return idxPortefeuilleCourant !== -1 ? idxPortefeuilleCourant : 0;
   }
 
-  onOpenAccordion(e: AccordionTabOpenEvent) {
+  protected onClickTab() {
     this.coursSelectionne = undefined;
     this.chargerPortefeuilleCourant();
   }
 
-  chargerPortefeuilleCourant(): void {
-    this.portefeuillesAvecCours = this.chargerPortefeuillesAvecPortefeuilleAchats();
-    this.scrollHeight = `calc(100vh - ${14 + 4 * this.portefeuillesAvecCours.length}rem)`;
+  private chargerPortefeuilleCourant(): void {
+    this.portefeuillesAvecCours = this.chargerPortefeuilles();
     const portefeuilleAvecCours: PortefeuilleAvecCours = this.portefeuillesAvecCours[this.idxPortefeuilleCourant];
     this.loading = true;
     this.coursService.chargerCoursTickersWithLimit(portefeuilleAvecCours.portefeuille.tickers, 300)
       .subscribe(liste => {
         this.listeCours = liste;
-        this.afficherPortefeuilleCourant();
+        this.definirCoursPortefeuilleCourant();
         this.loading = false;
       });
   }
 
-  private chargerPortefeuillesAvecPortefeuilleAchats() {
+  private chargerPortefeuilles() {
     const portefeuilles = this.portefeuillesService.charger();
+    // ajout éventuel du portefeuille des achats
     const tickersNonRevendus = this.tickersNonRevendus();
     if (tickersNonRevendus.length > 0) {
       portefeuilles.push({
@@ -167,7 +167,7 @@ export class PortefeuillesComponent implements OnInit {
       .map(achats => achats.ticker);
   }
 
-  afficherPortefeuilleCourant(): void {
+  private definirCoursPortefeuilleCourant(): void {
     if (this.listeCours) {
       this.date = this.listeCours.length > 0 ? this.listeCours[0].date : undefined;
 
@@ -204,7 +204,7 @@ export class PortefeuillesComponent implements OnInit {
     return '';
   }
 
-  basculerAffichageCours(cours: CoursPortefeuille) {
+  _basculerAffichageCours(cours: CoursPortefeuille) {
     if (this.coursSelectionne === undefined || this.coursSelectionne.ticker !== cours.ticker) {
       this.coursSelectionne = cours;
     } else {
@@ -220,7 +220,7 @@ export class PortefeuillesComponent implements OnInit {
     if (event.target instanceof Element && event.target.tagName === 'SPAN' && event.target.className.indexOf('pi') !== -1) {
       this.afficherActions(event, cours, portefeuilleAvecCours);
     } else {
-      this.basculerAffichageCours(cours);
+      this._basculerAffichageCours(cours);
     }
   }
 }

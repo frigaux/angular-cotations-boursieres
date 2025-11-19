@@ -10,7 +10,6 @@ import {DialogSauvegardeComponent} from './dialog-sauvegarde/dialog-sauvegarde.c
 import {DialogRestaurationComponent} from './dialog-restauration/dialog-restauration.component';
 import {DTORestauration} from '../../../services/parametrage/dto-restauration.class';
 import {HttpErrorResponse} from '@angular/common/http';
-import {CoursPortefeuille} from '../../portefeuilles/cours-portefeuille.class';
 
 @Component({
   selector: 'app-sauvegarde-restauration',

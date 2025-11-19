@@ -29,7 +29,8 @@
                           size="small" showIcon iconDisplay="input"
                           [inputStyle]="{'width': '8rem'}"
                           readonlyInput="true"
-                          (onSelect)="onSelectDate(achatDecore)"/>
+                          (onSelect)="onSelectDate(achatDecore)"
+                          [autofocus]="false"/>
           </span>
           <span>
             <input pInputText [(ngModel)]="achatDecore.achat.prix" autocomplete="off" required type="number"

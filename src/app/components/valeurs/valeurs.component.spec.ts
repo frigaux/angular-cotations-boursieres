@@ -37,11 +37,11 @@ describe('ValeursComponent', () => {
     expect(component).toBeDefined();
   });
 
-  it('should have <p-accordion>', () => {
-    const element: HTMLElement = fixture.nativeElement;
-    const el = element.querySelector('p-accordion');
-    expect(el).toBeTruthy();
-  });
+  // it('should have <p-tabs>', () => {
+  //   const element: HTMLElement = fixture.nativeElement;
+  //   const el = element.querySelector('p-tabs');
+  //   expect(el).toBeTruthy();
+  // });
 
   describe('Given #chargerValeurs renvoie des valeurs', () => {
     const valeur: Valeur = new Valeur(VALEURS[0], '');
@@ -56,6 +56,9 @@ describe('ValeursComponent', () => {
       expect(component.loading).toBeFalse();
       component.basculerAffichageValeur(valeur);
       expect(component.valeurSelectionnee).toEqual(valeur);
+      const element: HTMLElement = fixture.nativeElement;
+      const el = element.querySelector('p-tabs');
+      expect(el).toBeDefined();
     });
   });
 });

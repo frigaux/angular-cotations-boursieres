@@ -13,9 +13,11 @@ div.conteneur
   p-table
     td
       cursor: pointer
-      white-space: nowrap
-      overflow: hidden
-      text-overflow: ellipsis
+
+      &.libelle
+        white-space: nowrap
+        overflow: hidden
+        text-overflow: ellipsis
 
       span.pi
         vertical-align: middle
@@ -30,7 +32,7 @@ div.conteneur
     app-details-valeur
       display: none
 
-    p-accordion
+    p-tabs
       width: 100%
 
 // orientation verticale
@@ -43,23 +45,22 @@ div.conteneur
     flex-direction: row
 
     &.avec-details
-      p-accordion
+      p-tabs
         p-table
           tr
             th:nth-child(n+3), td:nth-child(n+3)
               display: none
               width: 0
 
-      @media screen and (max-aspect-ratio: 2.1)
-        app-details-valeur
-          width: 70%
+      app-details-valeur
+        width: 70%
 
-        p-accordion
-          width: 30%
+      p-tabs
+        width: 30%
 
-      @media screen and (min-aspect-ratio: 2.1)
-        app-details-valeur
-          width: 60%
-
-        p-accordion
-          width: 40%
+    //@media screen and (min-aspect-ratio: 2.1)
+    //  app-details-valeur
+    //    width: 60%
+    //
+    //  p-tabs
+    //    width: 40%

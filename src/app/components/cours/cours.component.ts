@@ -7,11 +7,9 @@ import {DTOValeur} from '../../services/valeurs/dto-valeur.interface';
 import {CoursMarche} from './cours-marche.class';
 import {Marches} from '../../services/valeurs/marches.enum';
 import {DTOListeCours} from '../../services/cours/dto-liste-cours.interface';
-import {Accordion, AccordionContent, AccordionHeader, AccordionPanel} from 'primeng/accordion';
 import {Cours} from './cours.class';
 import {DetailsValeurComponent} from './details-valeur/details-valeur.component';
 import {CurrencyPipe, DatePipe, NgClass, PercentPipe} from '@angular/common';
-import {Skeleton} from 'primeng/skeleton';
 import {LoaderComponent} from '../loader/loader.component';
 import {PopoverActionsValeurComponent} from './popover-actions-valeur/popover-actions-valeur.component';
 import {SortEvent} from 'primeng/api';
@@ -24,31 +22,32 @@ import {VueUtil} from '../commun/vue-util.class';
 import {
   DialogEvaluationActualitesComponent
 } from './dialog-evaluation-actualites/dialog-evaluation-actualites.component';
+import {Tab, TabList, TabPanel, TabPanels, Tabs} from 'primeng/tabs';
 
 @Component({
   selector: 'app-cours',
   imports: [
     TableModule,
     TranslatePipe,
-    Accordion,
-    AccordionPanel,
-    AccordionHeader,
-    AccordionContent,
     DetailsValeurComponent,
     DatePipe,
     NgClass,
     CurrencyPipe,
-    Skeleton,
     LoaderComponent,
     PercentPipe,
     PopoverActionsValeurComponent,
     SelecteurFiltreComponent,
     DialogImportExportComponent,
     DialogActualitesComponent,
-    DialogEvaluationActualitesComponent
+    DialogEvaluationActualitesComponent,
+    Tab,
+    TabList,
+    TabPanel,
+    TabPanels,
+    Tabs
   ],
   templateUrl: './cours.component.html',
-  styleUrls: ['../portefeuilles/accordion-chart.sass', './cours.component.sass', '../commun/titre.sass']
+  styleUrls: ['../portefeuilles/tabs-panel.sass', './cours.component.sass', '../commun/titre.sass']
 })
 export class CoursComponent implements OnInit {
   private actionsValeur = viewChild(PopoverActionsValeurComponent);

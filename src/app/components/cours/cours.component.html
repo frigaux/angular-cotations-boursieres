@@ -1,6 +1,7 @@
-@if (date === undefined) {
-  <p-skeleton shape="rectangle" borderRadius="0" width="24rem" height="2rem"/>
-}
+<app-loader [affiche]="loading" [configuration]="[
+  {marginLeft: '0', marginTop: '0rem', height: '2rem', width: '100%'},
+  {marginLeft: '0', marginTop: '1rem', height: '4rem', width: '100%'}
+]"></app-loader>
 
 @if (date) {
   <div class="titre">
@@ -12,21 +13,21 @@
   </div>
 }
 
-<app-loader [affiche]="loading" [configuration]="[
-  {marginLeft: '0', marginTop: '1rem', height: '3rem', width: '100%'},
-  {marginLeft: '0', marginTop: '1rem', height: '3rem', width: '100%'},
-  {marginLeft: '0', marginTop: '1rem', height: '3rem', width: '100%'}
-]"></app-loader>
-
 <app-popover-actions-valeur></app-popover-actions-valeur>
 
 <div class="conteneur" [ngClass]="{'avec-details': coursSelectionne !== undefined}">
   @if (!loading && marches) {
-    <p-accordion [(value)]="idxMarcheCourant">
-      @for (marche of marches; track marche.libelle; let i = $index) {
-        <p-accordion-panel [value]="i">
-          <p-accordion-header>{{ marche.libelle }}</p-accordion-header>
-          <p-accordion-content>
+    <p-tabs [(value)]="idxMarcheCourant">
+      <p-tablist>
+        @for (marche of marches; track marche.libelle; let i = $index) {
+          <p-tab [value]="i">
+            {{ marche.libelle }}
+          </p-tab>
+        }
+      </p-tablist>
+      <p-tabpanels>
+        @for (marche of marches; track marche.libelle; let i = $index) {
+          <p-tabpanel [value]="i">
             <p-table
               sortField="libelle"
               (sortFunction)="trierColonne($event, marche)" [customSort]="true"
@@ -65,7 +66,7 @@
               </ng-template>
               <ng-template #body let-cours>
                 <tr (click)="onClickCours($event, marche, cours)">
-                  <td>
+                  <td class="libelle">
                     <span class="pi"
                           [class]="cours.iconeVariation()"
                           title="{{ 'COMPOSANTS.COURS.ACTIONS' | translate }}"></span>
@@ -87,10 +88,10 @@
                 </tr>
               </ng-template>
             </p-table>
-          </p-accordion-content>
-        </p-accordion-panel>
-      }
-    </p-accordion>
+          </p-tabpanel>
+        }
+      </p-tabpanels>
+    </p-tabs>
 
     <app-details-valeur [cours]="coursSelectionne" (ferme)="coursSelectionne = undefined"
                         (precedent)="valeurPrecedente()" (suivant)="valeurSuivante()"></app-details-valeur>

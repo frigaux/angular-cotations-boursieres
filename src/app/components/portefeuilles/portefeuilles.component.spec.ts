@@ -92,7 +92,7 @@ describe('PortefeuillesComponent', () => {
       expect(component.portefeuillesAvecCours).toHaveSize(2);
       expect(component.idxPortefeuilleCourant).toBe(1);
       expect(component.portefeuillesAvecCours[1].portefeuille.nom).toBe('Achats');
-      component.basculerAffichageCours(component.portefeuillesAvecCours[1].cours[0]);
+      component._basculerAffichageCours(component.portefeuillesAvecCours[1].cours[0]);
       expect(component.coursSelectionne).toBeDefined();
     });
   });

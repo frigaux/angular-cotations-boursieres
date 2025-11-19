@@ -8,9 +8,8 @@ import {Marches} from '../../services/valeurs/marches.enum';
 import {DetailsValeurComponent} from './details-valeur/details-valeur.component';
 import {ValeurMarche} from './valeur-marche.class';
 import {DTOValeur} from '../../services/valeurs/dto-valeur.interface';
-import {Accordion, AccordionContent, AccordionHeader, AccordionPanel} from 'primeng/accordion';
 import {LoaderComponent} from '../loader/loader.component';
-import {CoursPortefeuille} from '../portefeuilles/cours-portefeuille.class';
+import {Tab, TabList, TabPanel, TabPanels, Tabs} from 'primeng/tabs';
 
 @Component({
   selector: 'app-valeurs',
@@ -19,21 +18,22 @@ import {CoursPortefeuille} from '../portefeuilles/cours-portefeuille.class';
     CommonModule,
     TranslatePipe,
     DetailsValeurComponent,
-    Accordion,
-    AccordionContent,
-    AccordionHeader,
-    AccordionPanel,
-    LoaderComponent
+    LoaderComponent,
+    Tab,
+    TabList,
+    TabPanel,
+    TabPanels,
+    Tabs
   ],
   templateUrl: './valeurs.component.html',
-  styleUrls: ['../portefeuilles/accordion-chart.sass', './valeurs.component.sass']
+  styleUrls: ['../portefeuilles/tabs-panel.sass', './valeurs.component.sass']
 })
 export class ValeursComponent implements OnInit {
   // chargement des valeurs
   loading: boolean = true;
 
   // données pour la vue
-  marches: ValeurMarche[] = [];
+  marches?: ValeurMarche[];
 
   // valeur pour laquelle afficher les détails
   valeurSelectionnee: Valeur | undefined = undefined;
@@ -51,6 +51,7 @@ export class ValeursComponent implements OnInit {
   }
 
   mapValeurs(valeurs: DTOValeur[]): void {
+    this.marches = [];
     const valeurByMarche = new Map<Marches, DTOValeur[]>();
     valeurs.forEach(valeur => {
       if (!valeurByMarche.has(valeur.marche)) {
@@ -59,7 +60,7 @@ export class ValeursComponent implements OnInit {
       valeurByMarche.get(valeur.marche)!.push(valeur);
     })
     valeurByMarche.forEach((valeurs, marche) => {
-      this.marches.push(new ValeurMarche(marche, this.translateService, valeurs));
+      this.marches!.push(new ValeurMarche(marche, this.translateService, valeurs));
     });
   }
 
