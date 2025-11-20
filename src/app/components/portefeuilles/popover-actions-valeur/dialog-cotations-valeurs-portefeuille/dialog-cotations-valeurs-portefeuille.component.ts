@@ -12,6 +12,8 @@ import {TableModule} from 'primeng/table';
 import {DialogCotationsValeurComponent} from '../dialog-cotations-valeur/dialog-cotations-valeur.component';
 import {VueUtil} from '../../../commun/vue-util.class';
 import {PopoverActionsValeurComponent} from './popover-actions-valeur/popover-actions-valeur.component';
+import {ColonneDividendesComponent} from '../../colonnes/dividendes/colonne-dividendes.component';
+import {DividendesService} from '../../../../services/dividendes/dividendes.service';
 
 @Component({
   selector: 'app-dialog-cotations-valeurs-portefeuille',
@@ -24,7 +26,8 @@ import {PopoverActionsValeurComponent} from './popover-actions-valeur/popover-ac
     UIChart,
     CurrencyPipe,
     TableModule,
-    PopoverActionsValeurComponent
+    PopoverActionsValeurComponent,
+    ColonneDividendesComponent
   ],
   templateUrl: './dialog-cotations-valeurs-portefeuille.component.html',
   styleUrls: ['./dialog-cotations-valeurs-portefeuille.component.sass', '../../../commun/barre-superieure.sass']
@@ -41,7 +44,9 @@ export class DialogCotationsValeursPortefeuilleComponent {
   cotationsTickersDecores?: Array<CotationsValeurBoursoramaDecore>;
   protected readonly VueUtil = VueUtil;
 
-  constructor(private translateService: TranslateService, private boursoramaService: BoursoramaService) {
+  constructor(private translateService: TranslateService,
+              private dividendesService: DividendesService,
+              private boursoramaService: BoursoramaService) {
   }
 
   afficherPortefeuille(portefeuilleAvecCours: PortefeuilleAvecCours, dialogCoursTickerComponent?: DialogCotationsValeurComponent) {
@@ -53,8 +58,10 @@ export class DialogCotationsValeursPortefeuilleComponent {
         next:
           cotationsTickersBoursorama => {
             let i = 0;
+            const dividendesByTicker = this.dividendesService.chargerMapByTicker();
             this.cotationsTickersDecores = cotationsTickersBoursorama.map(cotationsTickerBoursorama =>
-              new CotationsValeurBoursoramaDecore(this.translateService, i++, cotationsTickerBoursorama)
+              new CotationsValeurBoursoramaDecore(this.translateService, i++, cotationsTickerBoursorama,
+                dividendesByTicker ? dividendesByTicker.get(cotationsTickerBoursorama.valeur.ticker) || [] : undefined)
             );
             this.loading = false;
           },

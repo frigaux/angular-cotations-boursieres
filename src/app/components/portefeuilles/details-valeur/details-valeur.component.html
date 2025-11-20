@@ -11,7 +11,7 @@
             marche: `ENUMERATIONS.MARCHE.${coursPortefeuille.marche}` | translate
           }
         }}
-        <app-alertes [alertes]="alertes"></app-alertes>
+        <app-colonne-alertes [alertes]="alertes"></app-colonne-alertes>
       </h2>
       <span class="lien-bandeau" (click)="abcBourse()"
             title="{{ 'COMPOSANTS.PORTEFEUILLES.DETAILS_VALEUR.ABCBOURSE' | translate}}">A</span>

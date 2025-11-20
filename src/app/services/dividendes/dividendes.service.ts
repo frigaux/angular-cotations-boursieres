@@ -3,6 +3,7 @@ import {Observable, Subscriber} from 'rxjs';
 import {DTODividendes} from './dto-dividendes.class';
 import {TranslateService} from '@ngx-translate/core';
 import {TypeDividende} from './type-dividende.enum';
+import {DTODividende} from './dto-dividende.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -76,6 +77,28 @@ export class DividendesService {
       return undefined;
     } else {
       return this.translateService.instant(this.cleMessageErreur!);
+    }
+  }
+
+  chargerParTicker(ticker: string): Array<DTODividende> | undefined {
+    return this.charger()?.dividendes
+      .filter(dividende => dividende.ticker === ticker);
+  }
+
+  chargerMapByTicker(): Map<string, Array<DTODividende>> | undefined {
+    const dividendes = this.charger()?.dividendes;
+    if (dividendes) {
+      const resultat = new Map<string, Array<DTODividende>>();
+      this.charger()?.dividendes.map(dividende => {
+        if (!resultat.has(dividende.ticker)) {
+          resultat.set(dividende.ticker, [dividende]);
+        } else {
+          resultat.get(dividende.ticker)!.push(dividende);
+        }
+      });
+      return resultat;
+    } else {
+      return undefined;
     }
   }
 }

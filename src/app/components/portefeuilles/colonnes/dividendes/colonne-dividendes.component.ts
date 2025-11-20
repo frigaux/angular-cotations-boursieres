@@ -4,15 +4,15 @@ import {CurrencyPipe, DatePipe} from '@angular/common';
 import {DividendeDecore} from './dividende-decore.class';
 
 @Component({
-  selector: 'app-dividendes',
+  selector: 'app-colonne-dividendes',
   imports: [
     CurrencyPipe,
     DatePipe
   ],
-  templateUrl: './dividendes.component.html',
-  styleUrl: './dividendes.component.sass'
+  templateUrl: './colonne-dividendes.component.html',
+  styleUrl: './colonne-dividendes.component.sass'
 })
-export class DividendesComponent {
+export class ColonneDividendesComponent {
   // input/output
   inputDividendes: InputSignal<Array<DTODividende> | undefined> = input([],
     {transform: o => this.intercepteurDividendes(o), alias: 'dividendes'});

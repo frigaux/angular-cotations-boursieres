@@ -30,6 +30,7 @@ import {
   FieldsetPrevisionsComponent
 } from '../../portefeuilles/popover-actions-valeur/dialog-cotations-valeur/fieldset-previsions/fieldset-previsions.component';
 import {DTOInformation} from '../../../services/boursorama/dto-information.interface';
+import {DividendesService} from '../../../services/dividendes/dividendes.service';
 
 @Component({
   selector: 'app-informations-ticker',
@@ -70,7 +71,8 @@ export class InformationsValeurComponent {
 
   constructor(private translateService: TranslateService,
               private abcBourseService: AbcBourseService,
-              private boursoramaService: BoursoramaService) {
+              private boursoramaService: BoursoramaService,
+              private dividendesService: DividendesService) {
   }
 
   private intercepteurCours(cours: Cours | undefined) {
@@ -89,7 +91,8 @@ export class InformationsValeurComponent {
         },
         next: ([dtoAbcBourse, dtoBoursorama]) => {
           this.dtoAbcBourse = dtoAbcBourse;
-          this.dtoBoursoramaDecore = new CotationsValeurBoursoramaDecore(this.translateService, 0, dtoBoursorama);
+          const dividendes = this.dividendesService.chargerParTicker(cours.ticker);
+          this.dtoBoursoramaDecore = new CotationsValeurBoursoramaDecore(this.translateService, 0, dtoBoursorama, dividendes);
           this.loading = false;
         }
       });

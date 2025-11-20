@@ -26,6 +26,7 @@
       <ng-template #header>
         <tr>
           <th>{{ 'COMPOSANTS.PORTEFEUILLES.ACTIONS_VALEUR.DIALOG_COTATIONS_VALEURS_PORTEFEUILLE.VALEUR' | translate }}</th>
+          <th>{{ 'COMPOSANTS.PORTEFEUILLES.ACTIONS_VALEUR.DIALOG_COTATIONS_VALEURS_PORTEFEUILLE.DIVIDENDES' | translate }}</th>
           <th>{{ 'COMPOSANTS.PORTEFEUILLES.ACTIONS_VALEUR.DIALOG_COTATIONS_VALEURS_PORTEFEUILLE.COURS' | translate }}</th>
           <th>{{ 'COMPOSANTS.PORTEFEUILLES.ACTIONS_VALEUR.DIALOG_COTATIONS_VALEURS_PORTEFEUILLE.JAUGE_PLUS_HAUT_BAS' | translate }}</th>
           <th>{{ 'COMPOSANTS.PORTEFEUILLES.ACTIONS_VALEUR.DIALOG_COTATIONS_VALEURS_PORTEFEUILLE.ORDRES' | translate }}</th>
@@ -40,6 +41,9 @@
                   [class]="VueUtil.iconeVariation(cotationsTickerDecore.variationOuverture)"
                   title="{{ 'COMPOSANTS.PORTEFEUILLES.ACTIONS_VALEUR.DIALOG_COTATIONS_VALEURS_PORTEFEUILLE.ACTIONS' | translate }}"></span>
             {{ cotationsTickerDecore.dto.valeur.libelle }}
+          </td>
+          <td>
+            <app-colonne-dividendes [dividendes]="cotationsTickerDecore.dividendes"></app-colonne-dividendes>
           </td>
           <td>{{ cotationsTickerDecore.dto.cotations.cours | currency:'€' }}</td>
           <td>

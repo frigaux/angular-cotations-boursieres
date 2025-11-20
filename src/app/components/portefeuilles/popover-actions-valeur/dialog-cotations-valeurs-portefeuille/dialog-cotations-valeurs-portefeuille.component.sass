@@ -11,22 +11,22 @@ p-table
   .pi-arrow-circle-down
     color: var(--p-red-600)
 
-  th:nth-child(1), th:nth-child(3), th:nth-child(4)
+  th:nth-child(1), th:nth-child(2)
     text-align: left
 
-  th:nth-child(3), th:nth-child(4)
+  th:nth-child(4), th:nth-child(5)
     text-align: center
 
-  th:nth-child(2), th:nth-child(n+5)
+  th:nth-child(3), th:nth-child(6), th:nth-child(7)
     text-align: right
 
   th:nth-child(1)
     min-width: 12rem
 
-  th:nth-child(2)
+  th:nth-child(3)
     width: 6rem
 
-  th:nth-child(3)
+  th:nth-child(4)
     width: 12rem
 
   td
@@ -38,17 +38,16 @@ p-table
     &.negative
       color: var(--p-red-600)
 
-  td:nth-child(1), td:nth-child(3), td:nth-child(4)
+  td:nth-child(1), td:nth-child(2), td:nth-child(4), td:nth-child(5)
     text-align: left
 
-  td:nth-child(2), td:nth-child(n+5)
+  td:nth-child(3), td:nth-child(6), td:nth-child(7)
     text-align: right
-
 
 
 // orientation verticale
 @media screen and (orientation: portrait)
   tr
-    th:nth-child(3), th:nth-child(5), th:nth-child(6), td:nth-child(3), td:nth-child(5), td:nth-child(6)
+    th:nth-child(2), th:nth-child(4), th:nth-child(n+6), td:nth-child(2), td:nth-child(4), td:nth-child(n+6)
       display: none
       width: 0

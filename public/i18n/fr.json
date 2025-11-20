@@ -360,6 +360,7 @@
           "VENTES": "Ventes",
           "VAR_OUVERTURE": "Var/Ouverture",
           "VAR_CLOTURE_VEILLE": "Var/Clôture veille",
+          "DIVIDENDES": "Dividendes",
           "ACTIONS": "Actions sur la valeur",
           "ACTIONS_VALEUR": {
             "ABCBOURSE": "Cotations ABCBourse",

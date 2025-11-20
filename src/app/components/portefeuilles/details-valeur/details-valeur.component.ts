@@ -3,7 +3,7 @@ import {CoursPortefeuille} from '../cours-portefeuille.class';
 import {Panel} from 'primeng/panel';
 import {ChartsComponent} from '../../cours/charts/charts.component';
 import {Cours} from '../../cours/cours.class';
-import {AlertesComponent} from '../colonnes/alertes/alertes.component';
+import {ColonneAlertesComponent} from '../colonnes/alertes/colonne-alertes.component';
 import {AlerteAvecSonEvaluation} from '../alerte-avec-son-evaluation.class';
 import {TranslatePipe} from '@ngx-translate/core';
 import {InformationsValeurComponent} from '../../cours/informations-valeur/informations-valeur.component';
@@ -14,7 +14,7 @@ import {NgClass} from '@angular/common';
   imports: [
     Panel,
     ChartsComponent,
-    AlertesComponent,
+    ColonneAlertesComponent,
     TranslatePipe,
     InformationsValeurComponent,
     NgClass

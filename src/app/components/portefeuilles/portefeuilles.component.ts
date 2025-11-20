@@ -9,7 +9,7 @@ import {PortefeuilleAvecCours} from './portefeuille-avec-cours.class';
 import {CoursPortefeuille} from './cours-portefeuille.class';
 import {TranslatePipe} from '@ngx-translate/core';
 import {DetailsValeurComponent} from './details-valeur/details-valeur.component';
-import {AlertesComponent} from './colonnes/alertes/alertes.component';
+import {ColonneAlertesComponent} from './colonnes/alertes/colonne-alertes.component';
 import {Skeleton} from 'primeng/skeleton';
 import {LoaderComponent} from '../loader/loader.component';
 import {DTOCoursAvecListeAllege} from '../../services/cours/dto-cours-avec-liste-allege.interface';
@@ -24,7 +24,7 @@ import {VueUtil} from '../commun/vue-util.class';
 import {
   DialogEvaluationActualitesComponent
 } from '../cours/dialog-evaluation-actualites/dialog-evaluation-actualites.component';
-import {DividendesComponent} from './colonnes/dividendes/dividendes.component';
+import {ColonneDividendesComponent} from './colonnes/dividendes/colonne-dividendes.component';
 import {
   SauvegardeRestaurationComponent
 } from '../parametrage/sauvegarde-restauration/sauvegarde-restauration.component';
@@ -38,7 +38,7 @@ import {Tab, TabList, TabPanel, TabPanels, Tabs} from 'primeng/tabs';
     TranslatePipe,
     DatePipe,
     DetailsValeurComponent,
-    AlertesComponent,
+    ColonneAlertesComponent,
     NgClass,
     Skeleton,
     LoaderComponent,
@@ -49,7 +49,7 @@ import {Tab, TabList, TabPanel, TabPanels, Tabs} from 'primeng/tabs';
     DecimalPipe,
     DialogActualitesComponent,
     DialogEvaluationActualitesComponent,
-    DividendesComponent,
+    ColonneDividendesComponent,
     SauvegardeRestaurationComponent,
     Tabs,
     TabList,

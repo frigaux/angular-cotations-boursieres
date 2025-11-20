@@ -93,7 +93,7 @@
                             {{ cours[colonneDecoree.id] | number }}
                           }
                           @case (TypesColonnesPortefeuille.ALERTES) {
-                            <app-alertes [alertes]="cours[colonneDecoree.id]"></app-alertes>
+                            <app-colonne-alertes [alertes]="cours[colonneDecoree.id]"></app-colonne-alertes>
                           }
                           @case (TypesColonnesPortefeuille.VARIATION_ACHATS) {
                             {{ cours[colonneDecoree.id] | percent:'1.2-2' }}
@@ -108,7 +108,7 @@
                             {{ cours[colonneDecoree.id] | percent:'1.2-2' }}
                           }
                           @case (TypesColonnesPortefeuille.DIVIDENDES) {
-                            <app-dividendes [dividendes]="cours[colonneDecoree.id]"></app-dividendes>
+                            <app-colonne-dividendes [dividendes]="cours[colonneDecoree.id]"></app-colonne-dividendes>
                           }
                           @default {
                             {{ cours[colonneDecoree.id] }}

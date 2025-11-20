@@ -2,13 +2,13 @@ import {Component, input, InputSignal} from '@angular/core';
 import {AlerteAvecSonEvaluation} from '../../alerte-avec-son-evaluation.class';
 
 @Component({
-  selector: 'app-alertes',
+  selector: 'app-colonne-alertes',
   imports: [
   ],
-  templateUrl: './alertes.component.html',
-  styleUrl: './alertes.component.sass'
+  templateUrl: './colonne-alertes.component.html',
+  styleUrl: './colonne-alertes.component.sass'
 })
-export class AlertesComponent {
+export class ColonneAlertesComponent {
   // input/output
   inputAlertes: InputSignal<AlerteAvecSonEvaluation[] | undefined> = input([],
     {transform: o => this.intercepteurAlertes(o), alias: 'alertes'});

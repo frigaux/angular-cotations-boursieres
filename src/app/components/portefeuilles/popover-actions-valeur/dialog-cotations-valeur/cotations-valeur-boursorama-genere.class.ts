@@ -2,6 +2,7 @@ import {
   DTOInformationsTickerBoursorama
 } from '../../../../services/boursorama/dto-informations-ticker-boursorama.interface';
 import {TranslateService} from '@ngx-translate/core';
+import {DTODividende} from '../../../../services/dividendes/dto-dividende.interface';
 
 export class CotationsValeurBoursoramaDecore {
   id: number;
@@ -9,18 +10,22 @@ export class CotationsValeurBoursoramaDecore {
   pourcentageCours: number;
   variationOuverture: number;
   variationClotureVeille: number;
+  dividendes?: Array<DTODividende>;
   ordresDataDoughnut?: any;
   ordresDataBarChart?: any;
   ordresOptionsBarChart: any;
   coursDataChartLine: any;
   coursOptionsChartLine: any; // https://www.chartjs.org/
 
-  constructor(private translateService: TranslateService, id: number, dto: DTOInformationsTickerBoursorama) {
+  constructor(private translateService: TranslateService,
+              id: number, dto: DTOInformationsTickerBoursorama,
+              dividendes: Array<DTODividende> | undefined) {
     this.id = id;
     this.dto = dto;
     this.pourcentageCours = Math.round(100 * (dto.cotations.cours - dto.cotations.plusBas) / (dto.cotations.plusHaut - dto.cotations.plusBas));
     this.variationOuverture = (dto.cotations.cours / dto.cotations.ouverture) - 1;
     this.variationClotureVeille = (dto.cotations.cours / dto.cotations.clotureVeille) - 1;
+    this.dividendes = dividendes;
     this.ordresDataDoughnut = this.construireOrdresDoughnut(dto);
     this.ordresDataBarChart = this.construireOrdresBarChart(dto);
     this.ordresOptionsBarChart = this.construireOptionsBarChart();

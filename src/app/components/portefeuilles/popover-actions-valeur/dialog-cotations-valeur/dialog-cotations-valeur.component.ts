@@ -16,6 +16,7 @@ import {FieldsetCotationsComponent} from './fieldset-cotations/fieldset-cotation
 import {FieldsetActualitesComponent} from './fieldset-actualites/fieldset-actualites.component';
 import {FieldsetAnalysesComponent} from './fieldset-analyses/fieldset-analyses.component';
 import {FieldsetPrevisionsComponent} from './fieldset-previsions/fieldset-previsions.component';
+import {DividendesService} from '../../../../services/dividendes/dividendes.service';
 
 @Component({
   selector: 'app-dialog-cotations-valeur',
@@ -47,6 +48,7 @@ export class DialogCotationsValeurComponent {
   protected readonly VueUtil = VueUtil;
 
   constructor(private translateService: TranslateService,
+              private dividendesService: DividendesService,
               private boursoramaService: BoursoramaService) {
   }
 
@@ -68,7 +70,8 @@ export class DialogCotationsValeurComponent {
       this.boursoramaService.chargerInformationsTicker(this.valeur).subscribe({
           next:
             cotationsTickerBoursorama => {
-              this.cotationsTickerDecore = new CotationsValeurBoursoramaDecore(this.translateService, 0, cotationsTickerBoursorama);
+              const dividendes = this.dividendesService.chargerParTicker(this.valeur!.ticker);
+              this.cotationsTickerDecore = new CotationsValeurBoursoramaDecore(this.translateService, 0, cotationsTickerBoursorama, dividendes);
               this.loading = false;
             },
           error:
