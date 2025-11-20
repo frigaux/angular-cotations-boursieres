@@ -15,7 +15,6 @@ import {PickList} from 'primeng/picklist';
 import {NavigationBar} from '@squareetlabs/capacitor-navigation-bar';
 
 // TODO : revoir AchatsValeursComponent : ajouter les dividendes, ajuster les tableaux, ...
-// TODO : DialogSelecteurValeursComponent : style des sourceHeader et targetHeader
 // TODO : service ABCBourse de récupération des informations pour un ticker : récupérer la pré-ouverture ?
 // TODO : capacitor android : proxy obligatoire pour requêter les autres domaines ? problème CORS ou pas ?
 // TODO : coverage

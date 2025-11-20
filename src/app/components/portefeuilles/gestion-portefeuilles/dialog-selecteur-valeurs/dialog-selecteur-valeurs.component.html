@@ -10,10 +10,18 @@
                   [showSourceControls]="false" [showTargetControls]="false"
                   [dragdrop]="true" [responsive]="true"
                   filterBy="libelle"
-                  sourceHeader="{{ 'COMPOSANTS.PORTEFEUILLES.GESTION_PORTEFEUILLES.SELECTEUR_VALEURS.SOURCE' | translate }}"
-                  targetHeader="{{ 'COMPOSANTS.PORTEFEUILLES.GESTION_PORTEFEUILLES.SELECTEUR_VALEURS.TARGET' | translate }}"
                   sourceFilterPlaceholder="{{ 'COMPOSANTS.PORTEFEUILLES.GESTION_PORTEFEUILLES.SELECTEUR_VALEURS.RECHERCHE' | translate }}"
                   targetFilterPlaceholder="{{ 'COMPOSANTS.PORTEFEUILLES.GESTION_PORTEFEUILLES.SELECTEUR_VALEURS.RECHERCHE' | translate }}">
+        <ng-template pTemplate="sourceHeader">
+          <div class="header">
+            {{ 'COMPOSANTS.PORTEFEUILLES.GESTION_PORTEFEUILLES.SELECTEUR_VALEURS.SOURCE' | translate }}
+          </div>
+        </ng-template>
+        <ng-template pTemplate="targetHeader">
+          <div class="header">
+            {{ 'COMPOSANTS.PORTEFEUILLES.GESTION_PORTEFEUILLES.SELECTEUR_VALEURS.TARGET' | translate }}
+          </div>
+        </ng-template>
         <ng-template let-valeur #item>
           {{ valeur.libelle }}
         </ng-template>

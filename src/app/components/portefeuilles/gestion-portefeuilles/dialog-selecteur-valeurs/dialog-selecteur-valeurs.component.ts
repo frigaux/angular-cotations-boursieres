@@ -7,6 +7,7 @@ import {DTOPortefeuille} from '../../../../services/portefeuilles/dto-portefeuil
 import {Dialog} from 'primeng/dialog';
 import {Button} from 'primeng/button';
 import {LoaderComponent} from '../../../loader/loader.component';
+import {PrimeTemplate} from 'primeng/api';
 
 @Component({
   selector: 'app-dialog-selecteur-valeurs',
@@ -15,7 +16,8 @@ import {LoaderComponent} from '../../../loader/loader.component';
     TranslatePipe,
     Dialog,
     Button,
-    LoaderComponent
+    LoaderComponent,
+    PrimeTemplate
   ],
   templateUrl: './dialog-selecteur-valeurs.component.html',
   styleUrl: './dialog-selecteur-valeurs.component.sass'
