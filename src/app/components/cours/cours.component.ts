@@ -4,7 +4,7 @@ import {TranslatePipe, TranslateService} from '@ngx-translate/core';
 import {ValeursService} from '../../services/valeurs/valeurs.service';
 import {CoursService} from '../../services/cours/cours.service';
 import {DTOValeur} from '../../services/valeurs/dto-valeur.interface';
-import {CoursMarche} from './cours-marche.class';
+import {MarcheDecore} from './marche-decore.class';
 import {Marches} from '../../services/valeurs/marches.enum';
 import {DTOListeCours} from '../../services/cours/dto-liste-cours.interface';
 import {Cours} from './cours.class';
@@ -57,20 +57,20 @@ export class CoursComponent implements OnInit {
 
   // données pour la vue
   date?: string;
-  marches?: CoursMarche[];
-  idxMarcheCourant: number = -1;
+  marches?: MarcheDecore[];
+  idxMarcheCourant: number = NaN;
   protected readonly VueUtil = VueUtil;
-  protected readonly valeurByTicker: Map<string, DTOValeur> = new Map<string, DTOValeur>();
+  protected valeurByTicker?: Map<string, DTOValeur>;
 
   // cours pour lequel afficher les moyennes mobiles
   coursSelectionne?: { cours: Cours, premier: boolean, dernier: boolean };
 
   // private
   private translateService = inject(TranslateService);
-  private liste?: DTOListeCours;
+  private listeCours?: DTOListeCours;
   private filtreActif?: FiltreDecore;
   private portefeuilles: boolean;
-  private marcheSelectionne?: CoursMarche;
+  private marcheSelectionne?: MarcheDecore;
 
   constructor(private valeursService: ValeursService,
               private coursService: CoursService,
@@ -79,35 +79,40 @@ export class CoursComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.chargerValeurs();
+  }
+
+  private chargerValeurs() {
     this.valeursService.chargerValeurs().subscribe(valeurs => {
-      this.chargerCours(valeurs);
+      this.valeurByTicker = new Map<string, DTOValeur>();
+      for (const valeur of valeurs) {
+        this.valeurByTicker.set(valeur.ticker, valeur);
+      }
+      this.chargerCours();
     });
   }
 
-  chargerCours(valeurs: DTOValeur[]): void {
-    for (const valeur of valeurs) {
-      this.valeurByTicker.set(valeur.ticker, valeur);
-    }
-
+  chargerCours(): void {
     this.coursService.chargerCours().subscribe(liste => {
-      this.liste = liste;
-      this.decorerCours();
+      this.listeCours = liste;
+      this.construireVue();
+      this.idxMarcheCourant = !this.idxMarcheCourant && this.marches!.length > 0 ? 0 : NaN;
       this.loading = false;
     })
   }
 
-  private decorerCours() {
+  private construireVue() {
     this.marches = [];
     this.coursSelectionne = undefined;
 
-    if (this.liste && this.valeurByTicker) {
-      this.date = this.liste.date;
+    if (this.listeCours && this.valeurByTicker) {
+      this.date = this.listeCours.date;
       const coursByMarche = new Map<Marches, Cours[]>();
 
-      this.liste.cours
+      this.listeCours.cours
         .map(dto => {
           const valeur = this.valeurByTicker!.get(dto.ticker);
-          return Cours.fromDTOCours(this.liste!.date, valeur!.libelle, dto)
+          return Cours.fromDTOCours(this.listeCours!.date, valeur!.libelle, dto)
         })
         .filter(c => {
           if (!this.filtreActif) {
@@ -128,12 +133,13 @@ export class CoursComponent implements OnInit {
         });
 
       coursByMarche.forEach((cours, marche) => {
-        this.marches!.push(new CoursMarche(marche, this.translateService, cours));
+        this.marches!.push(new MarcheDecore(marche, this.translateService, cours));
       });
+      this.marches!.sort((m1, m2) => m1.libelle.localeCompare(m2.libelle));
     }
   }
 
-  onClickCours(event: MouseEvent, marche: CoursMarche, cours: Cours) {
+  onClickCours(event: MouseEvent, marche: MarcheDecore, cours: Cours) {
     if (event.target instanceof Element && event.target.tagName === 'SPAN' && this.portefeuilles) {
       this.afficherAjoutAuPortefeuille(event, cours);
     } else {
@@ -141,7 +147,7 @@ export class CoursComponent implements OnInit {
     }
   }
 
-  private basculerAffichageCours(marche: CoursMarche, cours: Cours) {
+  private basculerAffichageCours(marche: MarcheDecore, cours: Cours) {
     if (this.coursSelectionne === undefined || this.coursSelectionne.cours.ticker !== cours.ticker) {
       this.marcheSelectionne = marche;
       const idxCours = this.marcheSelectionne.cours.indexOf(cours);
@@ -166,7 +172,7 @@ export class CoursComponent implements OnInit {
 
   // on procède à un tri "manuel" des données affichées dans le p-table
   // en tri automatique les données ne sont pas mises à jour par p-table :/
-  trierColonne(event: SortEvent, marche: CoursMarche) {
+  trierColonne(event: SortEvent, marche: MarcheDecore) {
     marche.cours.sort((c1, c2) => {
       switch (event.field) {
         case 'libelle' :
@@ -211,9 +217,7 @@ export class CoursComponent implements OnInit {
 
   appliquerFiltre(filtreDecore: FiltreDecore | undefined) {
     this.filtreActif = filtreDecore;
-    this.decorerCours();
-    if (this.marches!.length > 0) {
-      this.idxMarcheCourant = 0;
-    }
+    this.construireVue();
+    this.idxMarcheCourant = this.marches!.length > 0 ? 0 : NaN;
   }
 }

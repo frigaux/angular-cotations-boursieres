@@ -4,7 +4,7 @@
 
 <div class="conteneur" [ngClass]="{'avec-details': valeurSelectionnee !== undefined}">
   @if (!loading && marches) {
-    <p-tabs>
+    <p-tabs [(value)]="idxMarcheCourant">
       <p-tablist>
         @for (marche of marches; track marche.libelle; let i = $index) {
           <p-tab [value]="i">

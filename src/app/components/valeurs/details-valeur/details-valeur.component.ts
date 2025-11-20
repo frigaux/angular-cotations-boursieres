@@ -2,7 +2,7 @@ import {Component, input, InputSignal, output} from '@angular/core';
 import {TranslateService} from '@ngx-translate/core';
 import {CoursService} from '../../../services/cours/cours.service';
 import {DatePipe} from '@angular/common';
-import {Valeur} from '../valeur.class';
+import {ValeurDecore} from '../valeur-decore.class';
 import {EncartsValeurComponent} from './encarts-valeur/encarts-valeur.component';
 import {Cours} from '../../cours/cours.class';
 import {ChartsComponent} from '../../cours/charts/charts.component';
@@ -23,11 +23,11 @@ import {Panel} from 'primeng/panel';
 })
 export class DetailsValeurComponent {
   // input/output
-  inputValeur: InputSignal<Valeur | undefined> = input(undefined,
+  inputValeur: InputSignal<ValeurDecore | undefined> = input(undefined,
     {transform: o => this.intercepteurValeur(o), alias: 'valeur'});
   ferme = output<void>();
 
-  valeur: Valeur | undefined;
+  valeur: ValeurDecore | undefined;
 
   // chargement des cours
   loading: boolean = true;
@@ -38,7 +38,7 @@ export class DetailsValeurComponent {
   constructor(private translateService: TranslateService, private coursService: CoursService) {
   }
 
-  private intercepteurValeur(valeur: Valeur | undefined) {
+  private intercepteurValeur(valeur: ValeurDecore | undefined) {
     this.valeur = valeur;
     this.initChart();
     return valeur;

@@ -30,11 +30,11 @@ export class DialogEvaluationActualitesComponent {
   private dialogChargerLienComponent = viewChild(DialogChargerLienComponent);
 
   // input/output
-  inputValeurs: InputSignal<Map<string, DTOValeur>> = input(new Map<string, DTOValeur>(),
+  inputValeurs: InputSignal<Map<string, DTOValeur> | undefined> = input(new Map<string, DTOValeur>(),
     {transform: o => this.intercepteurValeurs(o), alias: 'valeurs'});
 
   // private
-  private valeurByTicker: Map<string, DTOValeur> = new Map<string, DTOValeur>();
+  private valeurByTicker?: Map<string, DTOValeur>;
 
   // données pour la vue
   visible: boolean = false;
@@ -46,23 +46,25 @@ export class DialogEvaluationActualitesComponent {
   constructor(private zoneBourseService: ZoneBourseService) {
   }
 
-  private intercepteurValeurs(valeurByTicker: Map<string, DTOValeur>) {
+  private intercepteurValeurs(valeurByTicker: Map<string, DTOValeur> | undefined) {
     this.valeurByTicker = valeurByTicker;
     return valeurByTicker;
   }
 
   protected reinitialiserVue() {
-    this.loading = true;
-    this.heure = new Date();
-    this.zoneBourseService.chargerActualites(2, this.valeurByTicker)
-      .subscribe({
-        next: actualites => {
-          this.actualites = actualites;
-          this.loading = false;
-        },
-        error:
-          httpErrorResponse => this.loading = false
-      });
+    if (this.valeurByTicker) {
+      this.loading = true;
+      this.heure = new Date();
+      this.zoneBourseService.chargerActualites(2, this.valeurByTicker)
+        .subscribe({
+          next: actualites => {
+            this.actualites = actualites;
+            this.loading = false;
+          },
+          error:
+            httpErrorResponse => this.loading = false
+        });
+    }
   }
 
   protected afficherActions(event: MouseEvent, actualite: DTOActualitesZoneBourse) {

@@ -1,6 +1,6 @@
 import {DTOValeur} from '../../services/valeurs/dto-valeur.interface';
 
-export class Valeur {
+export class ValeurDecore {
   ticker: string;
   marche: string;
   libelle: string;

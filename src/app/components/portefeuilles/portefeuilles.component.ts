@@ -82,7 +82,7 @@ export class PortefeuillesComponent implements OnInit {
 
   // privé
   private listeCours?: DTOCoursAvecListeAllege[];
-  protected readonly valeurByTicker = new Map<string, DTOValeur>();
+  protected valeurByTicker?: Map<string, DTOValeur>;
 
   constructor(private portefeuillesService: PortefeuillesService,
               private valeursService: ValeursService,
@@ -105,7 +105,8 @@ export class PortefeuillesComponent implements OnInit {
 
   ngOnInit(): void {
     this.valeursService.chargerValeurs().subscribe(valeurs => {
-      valeurs.forEach(valeur => this.valeurByTicker.set(valeur.ticker, valeur));
+      this.valeurByTicker = new Map<string, DTOValeur>();
+      valeurs.forEach(valeur => this.valeurByTicker!.set(valeur.ticker, valeur));
       this.determinerIdxPortefeuilleCourant();
       this.chargerPortefeuilleCourant();
     });
@@ -176,7 +177,7 @@ export class PortefeuillesComponent implements OnInit {
 
       const portefeuilleAvecCours: PortefeuilleAvecCours = this.portefeuillesAvecCours[this.idxPortefeuilleCourant];
       portefeuilleAvecCours.cours = this.listeCours.map(dto => {
-        return new CoursPortefeuille(this.valeurByTicker.get(dto.ticker)!, dto,
+        return new CoursPortefeuille(this.valeurByTicker!.get(dto.ticker)!, dto,
           portefeuilleAvecCours.alertes, this.colonnesDecorees!);
       });
     }

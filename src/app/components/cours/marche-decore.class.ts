@@ -2,7 +2,7 @@ import {TranslateService} from '@ngx-translate/core';
 import {Marches} from '../../services/valeurs/marches.enum';
 import {Cours} from './cours.class';
 
-export class CoursMarche {
+export class MarcheDecore {
   libelle!: string;
   cours!: Cours[];
 

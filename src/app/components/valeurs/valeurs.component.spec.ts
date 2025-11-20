@@ -7,7 +7,7 @@ import {TranslateModule} from '@ngx-translate/core';
 import {CoursService} from '../../services/cours/cours.service';
 import {provideAnimations} from '@angular/platform-browser/animations';
 import {VALEURS} from '../../services/jdd/jdd-valeurs.dataset';
-import {Valeur} from './valeur.class';
+import {ValeurDecore} from './valeur-decore.class';
 
 describe('ValeursComponent', () => {
   let component: ValeursComponent;
@@ -37,14 +37,8 @@ describe('ValeursComponent', () => {
     expect(component).toBeDefined();
   });
 
-  // it('should have <p-tabs>', () => {
-  //   const element: HTMLElement = fixture.nativeElement;
-  //   const el = element.querySelector('p-tabs');
-  //   expect(el).toBeTruthy();
-  // });
-
   describe('Given #chargerValeurs renvoie des valeurs', () => {
-    const valeur: Valeur = new Valeur(VALEURS[0], '');
+    const valeur: ValeurDecore = new ValeurDecore(VALEURS[0], '');
 
     beforeEach(() => {
       mockValeursService.chargerValeurs.and.returnValue(of(VALEURS));
