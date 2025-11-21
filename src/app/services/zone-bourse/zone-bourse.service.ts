@@ -15,37 +15,45 @@ export class ZoneBourseService {
     .set('User-Agent', 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36');
 
   private static readonly SCORE: Array<{ positif: string, negatif: string }> = [
+    {positif: 'accroit', negatif: 'plonge'},
+    {positif: 'achat', negatif: 'vente'},
+    {positif: 'allege', negatif: 'pese'},
+    {positif: 'conforte', negatif: 'divise'},
+    {positif: 'croissant', negatif: 'decroissant'},
+    {positif: 'encourageant', negatif: 'decevant'},
+    {positif: 'essor', negatif: 'chute'},
+    {positif: 'exceptionnel', negatif: 'catastrophique'},
+    {positif: 'favorable', negatif: 'defavorable'},
+    {positif: 'euphorie', negatif: 'inquietude'},
+    {positif: 'gain', negatif: 'perte'},
+    {positif: 'hausse', negatif: 'baisse'},
     {positif: 'optimiste', negatif: 'pessimiste'},
-    {positif: 'optimisme', negatif: 'pessimisme'},
+    {positif: 'performance', negatif: 'repli'},
     {positif: 'positif', negatif: 'negatif'},
     {positif: 'positive', negatif: 'negative'},
-    {positif: 'hausse', negatif: 'baisse'},
-    {positif: 'rehausse', negatif: 'rabaisse'},
-    {positif: 'essor', negatif: 'chute'},
-    {positif: 'reprise', negatif: 'rechute'},
-    {positif: 'favorable', negatif: 'defavorable'},
-    {positif: 'gain', negatif: 'perte'},
-    {positif: 'soutenu', negatif: 'ralenti'},
-    {positif: 'renforce', negatif: 'degrade'},
-    {positif: 'allege', negatif: 'pese'},
-    {positif: 'encourageant', negatif: 'decevant'},
-    {positif: 'performance', negatif: 'repli'},
-    {positif: 'accroit', negatif: 'plonge'},
-    {positif: 'conforte', negatif: 'divise'},
-    {positif: 'repond', negatif: 'decoit'},
     {positif: 'progres', negatif: 'recul'},
-    {positif: 'stabilite', negatif: 'volatilite'},
-    {positif: 'remarquable', negatif: 'mediocre'},
-    {positif: 'exceptionnel', negatif: 'catastrophique'},
-    {positif: 'croissant', negatif: 'decroissant'},
-    {positif: 'croissante', negatif: 'decroissante'},
-    {positif: 'solide', negatif: 'fragile'},
     {positif: 'progresse', negatif: 'devisse'},
-    {positif: 'progresse', negatif: 'decevant'},
-    {positif: 'achat', negatif: 'vente'}
+    {positif: 'rapide', negatif: 'lent'},
+    {positif: 'accelere', negatif: 'ralentit'},
+    {positif: 'rehausse', negatif: 'rabaisse'},
+    {positif: 'remarquable', negatif: 'mediocre'},
+    {positif: 'renforce', negatif: 'degrade'},
+    {positif: 'repond', negatif: 'decoit'},
+    {positif: 'reprise', negatif: 'rechute'},
+    {positif: 'solide', negatif: 'fragile'},
+    {positif: 'soutenu', negatif: 'ralenti'},
+    {positif: 'stabilite', negatif: 'volatilite'}
   ];
 
+  private static SCORE_REGEXP: Array<{ positif: RegExp, negatif: RegExp }>;
+
   constructor(private http: HttpClient) {
+    ZoneBourseService.SCORE_REGEXP = ZoneBourseService.SCORE.map(mots => {
+      return {
+        positif: new RegExp(` ${mots.positif}[es]? `, 'gm'),
+        negatif: new RegExp(` ${mots.negatif}[es]? `, 'gm'),
+      };
+    });
   }
 
   public chargerActualites(nombrePages: number, valeurByTicker: Map<string, DTOValeur>): Observable<Array<DTOActualitesZoneBourse>> {
@@ -102,18 +110,18 @@ export class ZoneBourseService {
 
   private calculerScore(titre: string): number {
     let score = 0;
-    const sansAccent = titre.normalize('NFD')
+    const titreSansAccent = titre.normalize('NFD')
       .replace(/[\u0300-\u036f]/g, '');
-    const nettoye = sansAccent
+    const titreNettoye = titreSansAccent
       .replace(/[^\w]/g, ' ')
       .trim()
       .toLowerCase();
-    const normalise = ` ${nettoye} `;
-    ZoneBourseService.SCORE.forEach(mots => {
-      if (nettoye.indexOf(` ${mots.negatif} `) !== -1) {
+    const titreNormalise = ` ${titreNettoye} `;
+    ZoneBourseService.SCORE_REGEXP.forEach(scoreRegexp => {
+      if (scoreRegexp.negatif.test(titreNormalise)) {
         score--;
       }
-      if (nettoye.indexOf(` ${mots.positif} `) !== -1) {
+      if (scoreRegexp.positif.test(titreNormalise)) {
         score++;
       }
     });
