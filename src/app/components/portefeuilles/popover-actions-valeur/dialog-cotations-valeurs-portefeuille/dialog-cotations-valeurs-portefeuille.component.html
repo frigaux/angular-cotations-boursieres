@@ -45,7 +45,7 @@
           <td>
             <app-colonne-dividendes [dividendes]="cotationsTickerDecore.dividendes"></app-colonne-dividendes>
           </td>
-          <td>{{ cotationsTickerDecore.dto.cotations.cours | currency:'€' }}</td>
+          <td>{{ cotationsTickerDecore.dto.cotations.cours | currency:'EUR':'symbol' }}</td>
           <td>
             <app-jauge
               [cleMinimum]="'COMPOSANTS.PORTEFEUILLES.ACTIONS_VALEUR.DIALOG_COTATIONS_VALEURS_PORTEFEUILLE.PLUS_BAS'"

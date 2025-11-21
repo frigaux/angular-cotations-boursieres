@@ -14,7 +14,7 @@
       <ng-template #body let-dividende>
         <tr>
           <td>{{ dividende.annee }}</td>
-          <td style="text-align: right">{{ dividende.montant | currency:'€' }}</td>
+          <td style="text-align: right">{{ dividende.montant | currency:'EUR':'symbol' }}</td>
         </tr>
       </ng-template>
     </p-table>

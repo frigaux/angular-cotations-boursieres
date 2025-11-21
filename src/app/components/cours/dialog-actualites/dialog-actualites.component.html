@@ -26,7 +26,7 @@
         @for (transaction of acquisitions; track transaction.id) {
           <li>
             <label [innerHTML]="transaction.valeur"></label>
-            <span>{{ transaction.montant | currency:'€' }}</span>
+            <span>{{ transaction.montant | currency:'EUR':'symbol' }}</span>
           </li>
         }
       </ul>
@@ -37,7 +37,7 @@
         @for (cession of cessions; track cession.id) {
           <li>
             <label [innerHTML]="cession.valeur"></label>
-            <span>{{ cession.montant | currency:'€' }}</span>
+            <span>{{ cession.montant | currency:'EUR':'symbol' }}</span>
           </li>
         }
       </ul>
@@ -127,11 +127,11 @@
               <td [innerHTML]="transaction.operation"
                   [ngClass]="{'negative': transaction.operation === 'Cession', 'positive': transaction.operation === 'Acquisition' || transaction.operation === 'Souscription' }"></td>
               <td [innerHTML]="transaction.instrument"></td>
-              <td style="text-align: right">{{ transaction.montant | currency:'€' }}</td>
+              <td style="text-align: right">{{ transaction.montant | currency:'EUR':'symbol' }}</td>
               <td [innerHTML]="transaction.auteur"></td>
               <td>{{ transaction.dateOperation | date: 'dd/MM/yyyy' }}</td>
               <td style="text-align: right">{{ transaction.quantite | number }}</td>
-              <td style="text-align: right">{{ transaction.prix | currency:'€' }}</td>
+              <td style="text-align: right">{{ transaction.prix | currency:'EUR':'symbol' }}</td>
             </tr>
           </ng-template>
         </p-table>

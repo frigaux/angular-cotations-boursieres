@@ -29,8 +29,8 @@
         @for (achatDecore of achatsValeurDecores.achatsDecores; track achatDecore.id) {
           <tr>
             <td>{{ achatsValeurDecores.valeur.libelle }}</td>
-            <td>{{ achatDecore.achat.prix  | currency:'€' }}</td>
-            <td>{{ achatDecore.cours | currency:'€' }}</td>
+            <td>{{ achatDecore.achat.prix  | currency:'EUR':'symbol' }}</td>
+            <td>{{ achatDecore.cours | currency:'EUR':'symbol' }}</td>
             <td [class]="evolutionVariation(achatDecore.variationAchat)">
               {{ achatDecore.variationAchat | percent:'1.2-2' }}
             </td>

@@ -75,15 +75,15 @@
                   <td [class]="VueUtil.evolutionVariation(cours.var1)">
                     {{ cours.var1 | percent:'1.2-2' }}
                   </td>
-                  <td>{{ cours.cloture | currency:'€' }}</td>
+                  <td>{{ cours.cloture | currency:'EUR':'symbol' }}</td>
                   <td [class]="evolutionCours(cours.cloture, cours.moyennesMobiles[4])">
-                    {{ cours.moyennesMobiles[4] | currency:'€' }}
+                    {{ cours.moyennesMobiles[4] | currency:'EUR':'symbol' }}
                   </td>
                   <td [class]="evolutionCours(cours.cloture, cours.moyennesMobiles[19])">
-                    {{ cours.moyennesMobiles[19] | currency:'€' }}
+                    {{ cours.moyennesMobiles[19] | currency:'EUR':'symbol' }}
                   </td>
                   <td [class]="evolutionCours(cours.cloture, cours.moyennesMobiles[49])">
-                    {{ cours.moyennesMobiles[49] | currency:'€' }}
+                    {{ cours.moyennesMobiles[49] | currency:'EUR':'symbol' }}
                   </td>
                 </tr>
               </ng-template>

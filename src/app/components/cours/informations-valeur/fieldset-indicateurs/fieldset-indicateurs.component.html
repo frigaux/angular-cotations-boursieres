@@ -20,7 +20,7 @@
           <ng-template #body let-ratio>
             <tr>
               <td>{{ ratio.annee }}</td>
-              <td style="text-align: right">{{ ratio.bnpa | currency:'€' }}</td>
+              <td style="text-align: right">{{ ratio.bnpa | currency:'EUR':'symbol' }}</td>
               <td style="text-align: right">{{ ratio.per | number }}</td>
             </tr>
           </ng-template>
@@ -30,7 +30,7 @@
         <div class="bloc">
           <div>
             <label>{{ 'COMPOSANTS.COURS.INFORMATIONS_VALEUR.RATIOS.COURS' | translate }}</label>
-            <span>{{ dtoAbcBourse.cotations?.cours | currency:'€' }}</span>
+            <span>{{ dtoAbcBourse.cotations?.cours | currency:'EUR':'symbol' }}</span>
           </div>
           <div>
             <label>{{ 'COMPOSANTS.COURS.INFORMATIONS_VALEUR.RATIOS.VOLATILITE' | translate }}</label>
@@ -69,7 +69,7 @@
           <div>
             <label>{{ 'COMPOSANTS.COURS.INFORMATIONS_VALEUR.RATIOS.DERNIER_DIVIDENDE' | translate }}</label>
             <span>
-              {{ dtoBoursorama.cotations.dernierDividende | currency:'€' }}
+              {{ dtoBoursorama.cotations.dernierDividende | currency:'EUR':'symbol' }}
               {{ dtoBoursorama.cotations.dateDernierDividende | date: 'dd/MM/yyyy' }}
             </span>
           </div>

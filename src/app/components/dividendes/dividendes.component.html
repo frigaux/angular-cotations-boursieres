@@ -46,7 +46,7 @@
         <td>{{ dividendeDecore.dividende.ticker }}</td>
         <td>{{ dividendeDecore.valeur?.libelle }}</td>
         <td>{{ dividendeDecore.dividende.type }}</td>
-        <td>{{ dividendeDecore.dividende.montant | currency:'€' }}</td>
+        <td>{{ dividendeDecore.dividende.montant | currency:'EUR':'symbol' }}</td>
         <td>{{ dividendeDecore.dividende.pourcentageRendement | percent:'1.2-2' }}</td>
       </tr>
     </ng-template>

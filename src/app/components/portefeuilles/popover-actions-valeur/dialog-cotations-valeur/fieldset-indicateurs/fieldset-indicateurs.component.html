@@ -16,11 +16,11 @@
       </div>
       <div>
         <label>{{ 'COMPOSANTS.PORTEFEUILLES.ACTIONS_VALEUR.DIALOG_COTATIONS_VALEUR.INDICATEURS.LIMITE_BAISSE' | translate }}</label>
-        <span>{{ dto.cotations.limiteBaisse | currency:'€' }}</span>
+        <span>{{ dto.cotations.limiteBaisse | currency:'EUR':'symbol' }}</span>
       </div>
       <div>
         <label>{{ 'COMPOSANTS.PORTEFEUILLES.ACTIONS_VALEUR.DIALOG_COTATIONS_VALEUR.INDICATEURS.LIMITE_HAUSSE' | translate }}</label>
-        <span>{{ dto.cotations.limiteHausse | currency:'€' }}</span>
+        <span>{{ dto.cotations.limiteHausse | currency:'EUR':'symbol' }}</span>
       </div>
       <div>
         <label>{{ 'COMPOSANTS.PORTEFEUILLES.ACTIONS_VALEUR.DIALOG_COTATIONS_VALEUR.INDICATEURS.RENDEMENT_ESTIME' | translate }}</label>
@@ -32,7 +32,7 @@
       </div>
       <div>
         <label>{{ 'COMPOSANTS.PORTEFEUILLES.ACTIONS_VALEUR.DIALOG_COTATIONS_VALEUR.INDICATEURS.DERNIER_DIVIDENDE' | translate }}</label>
-        <span>{{ dto.cotations.dernierDividende | currency:'€' }}</span>
+        <span>{{ dto.cotations.dernierDividende | currency:'EUR':'symbol' }}</span>
       </div>
       <div>
         <label>{{ 'COMPOSANTS.PORTEFEUILLES.ACTIONS_VALEUR.DIALOG_COTATIONS_VALEUR.INDICATEURS.DATE_DERNIER_DIVIDENDE' | translate }}</label>
@@ -65,7 +65,7 @@
         </div>
         <div>
           <label>{{ 'COMPOSANTS.PORTEFEUILLES.ACTIONS_VALEUR.DIALOG_COTATIONS_VALEUR.INDICATEURS.OBJECTIF_3MOIS' | translate }}</label>
-          <span>{{ dto.consensus.objectif3mois | currency:'€' }}</span>
+          <span>{{ dto.consensus.objectif3mois | currency:'EUR':'symbol' }}</span>
         </div>
         <div>
           <label>{{ 'COMPOSANTS.PORTEFEUILLES.ACTIONS_VALEUR.DIALOG_COTATIONS_VALEUR.INDICATEURS.POTENTIEL_3MOIS' | translate }}</label>

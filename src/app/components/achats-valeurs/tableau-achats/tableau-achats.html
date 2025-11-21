@@ -27,14 +27,14 @@
             </td>
             <td>{{ achatsValeurDecores.valeur.libelle }}</td>
             <td>{{ achatDecore.achat.date | date: 'dd/MM/yyyy' }}</td>
-            <td>{{ achatDecore.achat.prix  | currency:'€' }}</td>
+            <td>{{ achatDecore.achat.prix  | currency:'EUR':'symbol' }}</td>
             <td>{{ achatDecore.achat.quantite  | number }}</td>
-            <td>{{ (achatDecore.achat.prix * achatDecore.achat.quantite)  | currency:'€' }}</td>
-            <td [class]="evolutionVariation(achatDecore.variationAchat)">{{ achatDecore.cours | currency:'€' }}</td>
+            <td>{{ (achatDecore.achat.prix * achatDecore.achat.quantite)  | currency:'EUR':'symbol' }}</td>
+            <td [class]="evolutionVariation(achatDecore.variationAchat)">{{ achatDecore.cours | currency:'EUR':'symbol' }}</td>
             <td [class]="evolutionVariation(achatDecore.variationAchat)">
               {{ achatDecore.variationAchat | percent:'1.2-2' }}
             </td>
-            <td [class]="evolutionVariation(achatDecore.variationAchat)">{{ (achatDecore.cours! * achatDecore.achat.quantite)  | currency:'€' }}</td>
+            <td [class]="evolutionVariation(achatDecore.variationAchat)">{{ (achatDecore.cours! * achatDecore.achat.quantite)  | currency:'EUR':'symbol' }}</td>
           </tr>
         }
       }
@@ -45,10 +45,10 @@
           <td></td>
           <td></td>
           <td>{{ totalQuantite  | number }}</td>
-          <td>{{ totauxAchats  | currency:'€' }}</td>
+          <td>{{ totauxAchats  | currency:'EUR':'symbol' }}</td>
           <td></td>
           <td></td>
-          <td>{{ totauxClotures  | currency:'€' }}</td>
+          <td>{{ totauxClotures  | currency:'EUR':'symbol' }}</td>
         </tr>
       }
     </tbody>

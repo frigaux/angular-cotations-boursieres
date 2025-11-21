@@ -25,9 +25,9 @@
           <ng-template #body let-prevision>
             <tr>
               <td>{{ prevision.annee }}</td>
-              <td style="text-align: right">{{ prevision.dividende  | currency:'€' }}</td>
+              <td style="text-align: right">{{ prevision.dividende  | currency:'EUR':'symbol' }}</td>
               <td style="text-align: right">{{ prevision.pourcentageRendement | percent:'1.2-2' }}</td>
-              <td style="text-align: right">{{ prevision.benefice  | currency:'€' }}</td>
+              <td style="text-align: right">{{ prevision.benefice  | currency:'EUR':'symbol' }}</td>
               <td style="text-align: right">{{ prevision.per | number }}</td>
             </tr>
           </ng-template>

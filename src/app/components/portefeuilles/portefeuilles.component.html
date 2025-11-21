@@ -78,16 +78,16 @@
                             {{ `ENUMERATIONS.MARCHE.${cours[colonneDecoree.id]}` | translate }}
                           }
                           @case (TypesColonnesPortefeuille.OUVERTURE) {
-                            {{ cours[colonneDecoree.id] | currency:'€' }}
+                            {{ cours[colonneDecoree.id] | currency:'EUR':'symbol' }}
                           }
                           @case (TypesColonnesPortefeuille.PLUS_HAUT) {
-                            {{ cours[colonneDecoree.id] | currency:'€' }}
+                            {{ cours[colonneDecoree.id] | currency:'EUR':'symbol' }}
                           }
                           @case (TypesColonnesPortefeuille.PLUS_BAS) {
-                            {{ cours[colonneDecoree.id] | currency:'€' }}
+                            {{ cours[colonneDecoree.id] | currency:'EUR':'symbol' }}
                           }
                           @case (TypesColonnesPortefeuille.CLOTURE) {
-                            {{ cours[colonneDecoree.id] | currency:'€' }}
+                            {{ cours[colonneDecoree.id] | currency:'EUR':'symbol' }}
                           }
                           @case (TypesColonnesPortefeuille.VOLUME) {
                             {{ cours[colonneDecoree.id] | number }}
@@ -99,10 +99,10 @@
                             {{ cours[colonneDecoree.id] | percent:'1.2-2' }}
                           }
                           @case (TypesColonnesPortefeuille.COURS) {
-                            {{ cours[colonneDecoree.id] | currency:'€' }}
+                            {{ cours[colonneDecoree.id] | currency:'EUR':'symbol' }}
                           }
                           @case (TypesColonnesPortefeuille.MOYENNE_MOBILE) {
-                            {{ cours[colonneDecoree.id] | currency:'€' }}
+                            {{ cours[colonneDecoree.id] | currency:'EUR':'symbol' }}
                           }
                           @case (TypesColonnesPortefeuille.VARIATION) {
                             {{ cours[colonneDecoree.id] | percent:'1.2-2' }}

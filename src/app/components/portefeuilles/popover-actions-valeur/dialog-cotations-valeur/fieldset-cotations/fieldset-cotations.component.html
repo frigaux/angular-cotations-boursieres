@@ -4,7 +4,7 @@
     <div class="cotations">
       <div>
         <label>{{ 'COMPOSANTS.PORTEFEUILLES.ACTIONS_VALEUR.DIALOG_COTATIONS_VALEUR.COTATIONS.COURS' | translate }}</label>
-        <span>{{ cotationsTickerDecore.dto.cotations.cours | currency:'€' }}</span>
+        <span>{{ cotationsTickerDecore.dto.cotations.cours | currency:'EUR':'symbol' }}</span>
       </div>
       <app-jauge
         [cleMinimum]="'COMPOSANTS.PORTEFEUILLES.ACTIONS_VALEUR.DIALOG_COTATIONS_VALEUR.COTATIONS.PLUS_BAS'"
