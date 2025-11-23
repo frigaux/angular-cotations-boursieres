@@ -10,6 +10,9 @@ import {DialogueService} from '../../services/dialogue/dialogue.service';
 import {CoursService} from '../../services/cours/cours.service';
 import {COURS_BNP, COURS_GLE, LISTE_COURS_AVEC_LISTE_ALLEGEE} from '../../services/jdd/jdd-cours.dataset';
 import {BoursoramaService} from '../../services/boursorama/boursorama.service';
+import {
+  DialogCoursAchatsNonRevendusComponent
+} from './dialog-cours-achats-non-revendus/dialog-cours-achats-non-revendus.component';
 
 describe('AchatsValeursComponent', () => {
   let dialogueService: DialogueService;
@@ -18,7 +21,7 @@ describe('AchatsValeursComponent', () => {
 
   const cloneACHATS: Function = () => JSON.parse(JSON.stringify(ACHATS));
 
-  const mockValeursService = jasmine.createSpyObj('ValeursService', ['onImportAchats', 'chargerValeurs', 'chargerAchats', 'enregistrerAchatsTicker']);
+  const mockValeursService = jasmine.createSpyObj('ValeursService', ['onUpdateAchats', 'onImportAchats', 'chargerValeurs', 'chargerAchats', 'enregistrerAchatsTicker', 'chargerAchatsTicker']);
   const mockCoursService = jasmine.createSpyObj('CoursService', ['chargerCoursTickersWithLimit']);
   const mockBoursoramaService = jasmine.createSpyObj('BoursoramaService', ['chargerCoursTickers']);
 
@@ -47,9 +50,13 @@ describe('AchatsValeursComponent', () => {
   });
 
   describe('Given #chargerValeurs renvoie des valeurs', () => {
+    let nbAchats: number = ACHATS
+      .reduce((accumulator, ticker) => accumulator + ticker.achats.length, 0);
+
     beforeEach(() => {
       mockValeursService.chargerValeurs.and.returnValue(of(VALEURS));
       mockValeursService.chargerAchats.and.returnValue(cloneACHATS());
+      mockValeursService.chargerAchatsTicker.and.returnValue(cloneACHATS()[1].achats);
       mockCoursService.chargerCoursTickersWithLimit.and.returnValue(of(LISTE_COURS_AVEC_LISTE_ALLEGEE));
       mockBoursoramaService.chargerCoursTickers.and.returnValue(of([COURS_GLE, COURS_BNP]));
     });
@@ -59,7 +66,7 @@ describe('AchatsValeursComponent', () => {
 
       expect(component).toBeDefined();
       expect(component.loading).toBeFalse();
-      expect(component.achatsNonRevendus).toHaveSize(ACHATS.length);
+      expect(component.achatsNonRevendus).toHaveSize(nbAchats);
       expect(component.achatsNonRevendus![0].valeur).toEqual(VALEURS[1]);
       expect(component.achatsNonRevendus![1].valeur).toEqual(VALEURS[0]);
     });
@@ -70,35 +77,32 @@ describe('AchatsValeursComponent', () => {
 
       spyOn(dialogueService, 'confirmationSuppression').and.callThrough();
       const achatsNonRevendus = component.achatsNonRevendus;
-      const achatsTicker = achatsNonRevendus![0];
+      const achat = achatsNonRevendus![0];
       component.suppressionAchat({
         event: new MouseEvent('click'),
-        achatsValeurDecores: achatsTicker,
-        achatDecore: achatsTicker.achatsDecores[0]
+        achatValeurDecore: achat
       });
       expect(dialogueService.confirmationSuppression).toHaveBeenCalled();
       const onSuppression: Function = (dialogueService.confirmationSuppression as jasmine.Spy).calls.mostRecent().args[3];
       onSuppression();
-      expect(achatsNonRevendus![0].achatsTicker.achats).toHaveSize(0);
+      expect(mockValeursService.enregistrerAchatsTicker).toHaveBeenCalledWith(achat.valeur.ticker, []);
     });
 
-    it('when #ngOnInit et #recupererCoursValeursNonRevendues then les cours sont bien récupérés', () => {
+    it('when #ngOnInit et #recupererCours then les cours sont bien récupérés', () => {
       fixture.detectChanges(); // appelle le ngOnInit
 
-      component.recupererCoursValeursNonRevendues();
-      const coursNonRevendus = component.coursNonRevendus;
-      expect(coursNonRevendus).toBeDefined();
-      expect(coursNonRevendus).toHaveSize(2);
-      if (coursNonRevendus) {
-        for (const achats of coursNonRevendus) {
-          for (const achat of achats.achatsDecores) {
-            expect(achat.cours).toBeDefined()
-            expect(achat.variationAchat).toBeDefined()
-            expect(achat.variationBas).toBeDefined()
-            expect(achat.variationHaut).toBeDefined()
-          }
+      component.recupererCours();
+      expect(component.dialogCoursAchatsNonRevendusComponent()).toBeDefined();
+      const dialog: DialogCoursAchatsNonRevendusComponent = component.dialogCoursAchatsNonRevendusComponent()!;
+      expect(dialog.coursNonRevendus).toBeDefined();
+      expect(dialog.coursNonRevendus).toHaveSize(nbAchats);
+      if (dialog.coursNonRevendus)
+        for (const achat of dialog.coursNonRevendus) {
+          expect(achat.achatDecore.cours).toBeDefined()
+          expect(achat.achatDecore.variationAchat).toBeDefined()
+          expect(achat.achatDecore.variationBas).toBeDefined()
+          expect(achat.achatDecore.variationHaut).toBeDefined()
         }
-      }
     });
   });
 });

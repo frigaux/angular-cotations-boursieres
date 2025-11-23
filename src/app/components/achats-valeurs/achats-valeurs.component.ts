@@ -27,7 +27,7 @@ import {
   styleUrls: ['./achats-valeurs.component.sass', '../commun/titre.sass']
 })
 export class AchatsValeursComponent implements OnInit {
-  private dialogCoursAchatsNonRevendusComponent = viewChild(DialogCoursAchatsNonRevendusComponent);
+  public dialogCoursAchatsNonRevendusComponent = viewChild(DialogCoursAchatsNonRevendusComponent);
 
   // données pour la vue
   loading: boolean = true; // chargement des valeurs
@@ -106,7 +106,7 @@ export class AchatsValeursComponent implements OnInit {
     this.valeursService.enregistrerAchatsTicker(ticker, achatsTicker);
   }
 
-  protected recupererCours() {
+  recupererCours() {
     this.dialogCoursAchatsNonRevendusComponent()?.afficherCours(this.achatsNonRevendus!);
   }
 }

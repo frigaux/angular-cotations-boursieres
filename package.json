@@ -10,7 +10,8 @@
     "test": "ng test",
     "coverage": "ng test --no-watch --code-coverage",
     "continuous-integration": "ng test --no-watch --no-progress --browsers=ChromeHeadless",
-    "lint": "ng lint"
+    "lint": "ng lint",
+    "test-include": "npx ng test --include"
   },
   "private": true,
   "dependencies": {

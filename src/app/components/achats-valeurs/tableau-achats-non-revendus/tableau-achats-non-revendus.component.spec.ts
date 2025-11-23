@@ -2,8 +2,9 @@ import {ComponentFixture, TestBed} from '@angular/core/testing';
 
 import {TableauAchatsNonRevendusComponent} from './tableau-achats-non-revendus.component';
 import {CoursService} from '../../../services/cours/cours.service';
+import {TranslateModule} from '@ngx-translate/core';
 
-describe('TableauAchats', () => {
+describe('TableauAchatsNonRevendusComponent', () => {
   let component: TableauAchatsNonRevendusComponent;
   let fixture: ComponentFixture<TableauAchatsNonRevendusComponent>;
 
@@ -11,7 +12,10 @@ describe('TableauAchats', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [TableauAchatsNonRevendusComponent],
+      imports: [
+        TableauAchatsNonRevendusComponent,
+        TranslateModule.forRoot({})
+      ],
       providers: [
         {provide: CoursService, useValue: mockCoursService}
       ]
