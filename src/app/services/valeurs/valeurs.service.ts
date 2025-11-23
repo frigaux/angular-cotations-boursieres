@@ -55,6 +55,12 @@ export class ValeursService {
     return achatsByTicker;
   }
 
+  public chargerAchatsTicker(ticker: string): Array<DTOAchat> {
+    const achatsTicker: DTOAchatsTicker | undefined = this.chargerAchats()
+      .find(achats => achats.ticker === ticker);
+    return achatsTicker?.achats || [];
+  }
+
   public enregistrerAchats(achatsTickers: Array<DTOAchatsTicker>): string | undefined {
     if (this.validerAchats(achatsTickers)) {
       achatsTickers = this.filtrerTickerSansAchat(achatsTickers);
@@ -64,6 +70,25 @@ export class ValeursService {
     } else {
       return this.translateService.instant(this.cleMessageErreur!);
     }
+  }
+
+  public enregistrerAchatsTicker(ticker: string, achats: Array<DTOAchat>): string | undefined {
+    const achatsTickers = this.chargerAchats();
+    const achatsTicker: DTOAchatsTicker | undefined = achatsTickers
+      .find(achats => achats.ticker === ticker);
+    if (achatsTicker) {
+      achatsTicker.achats = achats;
+    } else {
+      achatsTickers.push({
+        ticker: ticker,
+        achats: achats
+      })
+    }
+    return this.enregistrerAchats(achatsTickers);
+  }
+
+  public onUpdateAchats(handler: ((value: Array<DTOAchatsTicker>) => void)): void {
+    ValeursService.OBSERVABLE_UPDATE_ACHATS.subscribe(handler);
   }
 
   public importAchats(json: string): string | undefined {
@@ -84,42 +109,6 @@ export class ValeursService {
 
   public onImportAchats(handler: ((value: Array<DTOAchatsTicker>) => void)): void {
     ValeursService.OBSERVABLE_IMPORT_ACHATS.subscribe(handler);
-  }
-
-  public chargerAchatsTicker(ticker: string): Array<DTOAchat> {
-    const json = window.localStorage.getItem(ValeursService.ACHATS);
-    if (json) {
-      try {
-        const achatsTicker: any = JSON.parse(json);
-        if (this.validerAchats(achatsTicker)) {
-          const achatsTicker: DTOAchatsTicker | undefined = this.chargerAchats()
-            .find(achats => achats.ticker === ticker);
-          return achatsTicker?.achats || [];
-        }
-      } catch (e) {
-        console.error(e);
-      }
-    }
-    return [];
-  }
-
-  public enregistrerAchatsTicker(ticker: string, achats: Array<DTOAchat>): string | undefined {
-    const achatsTickers = this.chargerAchats();
-    const achatsTicker: DTOAchatsTicker | undefined = achatsTickers
-      .find(achats => achats.ticker === ticker);
-    if (achatsTicker) {
-      achatsTicker.achats = achats;
-    } else {
-      achatsTickers.push({
-        ticker: ticker,
-        achats: achats
-      })
-    }
-    return this.enregistrerAchats(achatsTickers);
-  }
-
-  public onUpdateAchats(handler: ((value: Array<DTOAchatsTicker>) => void)): void {
-    ValeursService.OBSERVABLE_UPDATE_ACHATS.subscribe(handler);
   }
 
   private validerAchats(achatsTickers: Array<DTOAchatsTicker>): boolean {

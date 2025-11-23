@@ -239,25 +239,30 @@
       "CONFIRMATION_SUPPRESSION": "Confirmez-vous la suppression de l'achat ?",
       "NON_REVENDUES": "Non revendues",
       "REVENDUES": "Revendues",
-      "COURS_ACHATS": "Cours des valeurs non revendues",
-      "VALEUR": "Valeur",
-      "PRIX_ACHAT": "Prix achat",
-      "COURS": "Cours",
-      "VARIATION_ACHAT": "Var/Ac",
-      "VARIATION_HAUT": "Var/Haut",
-      "VARIATION_BAS": "Var/Bas",
-      "TABLEAU": {
-        "TOTAUX": "Totaux",
+      "DIALOG_COURS": {
+        "COURS_ACHATS": "Cours des valeurs non revendues",
+        "RAFRAICHIR": "Rafraîchir",
+        "FERMER": "Fermer",
+        "VALEUR": "Valeur",
+        "DIVIDENDES": "Dividendes",
+        "PRIX_ACHAT": "Prix achat",
+        "COURS": "Cours",
+        "VARIATION_ACHAT": "Var/Ac",
+        "VARIATION_HAUT": "Var/Haut",
+        "VARIATION_BAS": "Var/Bas"
+      },
+      "TABLEAU_NON_REVENDUS": {
+        "SUPPRESSION": "Suppression de l'achat",
         "VALEUR": "Valeur",
         "DATE": "Date",
         "PRIX": "Prix",
+        "DIVIDENDES": "Dividendes",
         "QUANTITE": "Quantité",
         "TOTAL": "Total",
         "CLOTURE": "Clôture",
         "VARIATION_ACHAT": "Var/Ac",
         "TOTAL_CLOTURE": "Total",
-        "SUPPRESSION": "Suppression de l'achat",
-        "REVENTE": "Revente"
+        "TOTAUX": "Totaux"
       },
       "IMPORT_EXPORT": {
         "IMPORT_EXPORT": "Import/export des achats",

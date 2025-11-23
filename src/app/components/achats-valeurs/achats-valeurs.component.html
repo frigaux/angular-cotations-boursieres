@@ -1,55 +1,26 @@
+<app-dialog-cours-achats-non-revendus></app-dialog-cours-achats-non-revendus>
+
 <div class="titre">
   <h2>{{ 'COMPOSANTS.ACHATS_VALEURS.ACHATS_VALEURS' | translate }}</h2>
   <app-dialog-import-export></app-dialog-import-export>
   @if (achatsNonRevendus && achatsNonRevendus.length > 0) {
-    <span class="pi pi-cloud-download" (click)="recupererCoursValeursNonRevendues()"
+    <span class="pi pi-cloud-download" (click)="recupererCours()"
           title="{{ 'COMPOSANTS.ACHATS_VALEURS.RECUPERER_COURS' | translate }}"></span>
   }
 </div>
 
 <app-loader [affiche]="loading" [configuration]="[
-  {marginLeft: '0', marginTop: '1rem', height: '20vh', width: '50%'}
+  {marginLeft: '0', marginTop: '1rem', height: '20vh', width: '100%'}
 ]"></app-loader>
 
-@if (coursNonRevendus) {
-  <h3>{{ 'COMPOSANTS.ACHATS_VALEURS.COURS_ACHATS' | translate }}</h3>
-  <table>
-    <thead>
-    <tr>
-      <th>{{ 'COMPOSANTS.ACHATS_VALEURS.VALEUR' | translate }}</th>
-      <th>{{ 'COMPOSANTS.ACHATS_VALEURS.PRIX_ACHAT' | translate }}</th>
-      <th>{{ 'COMPOSANTS.ACHATS_VALEURS.COURS' | translate }}</th>
-      <th>{{ 'COMPOSANTS.ACHATS_VALEURS.VARIATION_ACHAT' | translate }}</th>
-      <th>{{ 'COMPOSANTS.ACHATS_VALEURS.VARIATION_HAUT' | translate }}</th>
-      <th>{{ 'COMPOSANTS.ACHATS_VALEURS.VARIATION_BAS' | translate }}</th>
-    </tr>
-    </thead>
-    <tbody>
-      @for (achatsValeurDecores of coursNonRevendus; track achatsValeurDecores.id) {
-        @for (achatDecore of achatsValeurDecores.achatsDecores; track achatDecore.id) {
-          <tr>
-            <td>{{ achatsValeurDecores.valeur.libelle }}</td>
-            <td>{{ achatDecore.achat.prix  | currency:'EUR':'symbol' }}</td>
-            <td>{{ achatDecore.cours | currency:'EUR':'symbol' }}</td>
-            <td [class]="evolutionVariation(achatDecore.variationAchat)">
-              {{ achatDecore.variationAchat | percent:'1.2-2' }}
-            </td>
-            <td>{{ achatDecore.variationHaut | percent:'1.2-2' }}</td>
-            <td>{{ achatDecore.variationBas | percent:'1.2-2' }}</td>
-          </tr>
-        }
-      }
-    </tbody>
-  </table>
-}
 
 @if (achatsNonRevendus) {
   <h3>{{ 'COMPOSANTS.ACHATS_VALEURS.NON_REVENDUES' | translate }}</h3>
   @if (achatsNonRevendus.length === 0) {
     <div>-</div>
   } @else {
-    <app-tableau-achats [achats]="achatsNonRevendus" (suppression)="suppressionAchat($event)"
-                        (revente)="revendreAchat($event)"></app-tableau-achats>
+    <app-tableau-achats-non-revendus [achats]="achatsNonRevendus"
+                                     (suppression)="suppressionAchat($event)"></app-tableau-achats-non-revendus>
   }
 }
 
@@ -58,6 +29,6 @@
   @if (achatsRevendus.length === 0) {
     <div>-</div>
   } @else {
-    <app-tableau-achats [achats]="achatsRevendus" (suppression)="suppressionAchat($event)"></app-tableau-achats>
+    <!--    <app-tableau-achats-non-revendus [achats]="achatsRevendus" (suppression)="suppressionAchat($event)"></app-tableau-achats-non-revendus>-->
   }
 }

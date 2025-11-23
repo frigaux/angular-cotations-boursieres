@@ -1,0 +1,46 @@
+tr
+  th:nth-child(1)
+    width: 6rem
+
+  th:nth-child(-n+4)
+    text-align: left
+
+  th:nth-child(n+5)
+    text-align: right
+
+  th:nth-child(n+8)
+    background-color: var(--p-yellow-200)
+
+  td:nth-child(-n+4)
+    text-align: left
+
+  td:nth-child(n+5)
+    text-align: right
+
+  td:nth-child(n+8)
+    background-color: var(--p-yellow-100)
+
+  td
+    &.positive
+      color: var(--p-green-600)
+
+    &.negative
+      color: var(--p-red-600)
+
+    span.pi-trash
+      color: var(--p-red-800)
+      cursor: pointer
+
+tr.totaux
+  font-weight: bold
+
+  td
+    background-color: var(--p-gray-300)
+
+
+// orientation verticale
+@media screen and (orientation: portrait)
+  tr
+    th:nth-child(n+3):nth-child(-n+8), td:nth-child(n+3):nth-child(-n+8)
+      display: none
+      width: 0

@@ -1,0 +1,62 @@
+<app-loader [affiche]="loading" [configuration]="[
+  {marginLeft: '0', marginTop: '1rem', height: '20vh', width: '100%'}
+]"></app-loader>
+
+@if (!loading && achatValeurDecores) {
+  <p-table [value]="achatValeurDecores">
+    <ng-template #header>
+      <tr>
+        <th></th>
+        <th>{{ 'COMPOSANTS.ACHATS_VALEURS.TABLEAU_NON_REVENDUS.VALEUR' | translate }}</th>
+        <th>{{ 'COMPOSANTS.ACHATS_VALEURS.TABLEAU_NON_REVENDUS.DATE' | translate }}</th>
+        <th>{{ 'COMPOSANTS.ACHATS_VALEURS.TABLEAU_NON_REVENDUS.DIVIDENDES' | translate }}</th>
+        <th>{{ 'COMPOSANTS.ACHATS_VALEURS.TABLEAU_NON_REVENDUS.PRIX' | translate }}</th>
+        <th>{{ 'COMPOSANTS.ACHATS_VALEURS.TABLEAU_NON_REVENDUS.QUANTITE' | translate }}</th>
+        <th>{{ 'COMPOSANTS.ACHATS_VALEURS.TABLEAU_NON_REVENDUS.TOTAL' | translate }}</th>
+        <th>{{ 'COMPOSANTS.ACHATS_VALEURS.TABLEAU_NON_REVENDUS.CLOTURE' | translate }}</th>
+        <th>{{ 'COMPOSANTS.ACHATS_VALEURS.TABLEAU_NON_REVENDUS.VARIATION_ACHAT' | translate }}</th>
+        <th>{{ 'COMPOSANTS.ACHATS_VALEURS.TABLEAU_NON_REVENDUS.TOTAL_CLOTURE' | translate }}</th>
+      </tr>
+    </ng-template>
+    <ng-template #body let-achatValeurDecore>
+      <tr>
+        <td>
+              <span class="pi pi-trash"
+                    title="{{ 'COMPOSANTS.ACHATS_VALEURS.TABLEAU_NON_REVENDUS.SUPPRESSION' | translate }}"
+                    (click)="suppressionAchat($event, achatValeurDecore)"></span>
+        </td>
+        <td>{{ achatValeurDecore.valeur.libelle }}</td>
+        <td>{{ achatValeurDecore.achatDecore.achat.date | date: 'dd/MM/yyyy' }}</td>
+        <td>
+          <app-colonne-dividendes [dividendes]="achatValeurDecore.dividendes"></app-colonne-dividendes>
+        </td>
+        <td>{{ achatValeurDecore.achatDecore.achat.prix  | currency:'EUR':'symbol' }}</td>
+        <td>{{ achatValeurDecore.achatDecore.achat.quantite  | number }}</td>
+        <td>{{ (achatValeurDecore.achatDecore.achat.prix * achatValeurDecore.achatDecore.achat.quantite)  | currency:'EUR':'symbol' }}</td>
+        <td
+          [class]="evolutionVariation(achatValeurDecore.achatDecore.variationAchat)">{{ achatValeurDecore.achatDecore.cours | currency:'EUR':'symbol' }}
+        </td>
+        <td [class]="evolutionVariation(achatValeurDecore.achatDecore.variationAchat)">
+          {{ achatValeurDecore.achatDecore.variationAchat | percent:'1.2-2' }}
+        </td>
+        <td
+          [class]="evolutionVariation(achatValeurDecore.achatDecore.variationAchat)">{{ (achatValeurDecore.achatDecore.cours! * achatValeurDecore.achatDecore.achat.quantite)  | currency:'EUR':'symbol' }}
+        </td>
+      </tr>
+    </ng-template>
+    <ng-template #footer>
+      <tr class="totaux">
+        <td>{{ 'COMPOSANTS.ACHATS_VALEURS.TABLEAU_NON_REVENDUS.TOTAUX' | translate }}</td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td>{{ totalQuantite  | number }}</td>
+        <td>{{ totauxAchats  | currency:'EUR':'symbol' }}</td>
+        <td></td>
+        <td></td>
+        <td>{{ totauxClotures  | currency:'EUR':'symbol' }}</td>
+      </tr>
+    </ng-template>
+  </p-table>
+}
