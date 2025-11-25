@@ -86,7 +86,7 @@ export class CoursPortefeuille {
 
   calculerVariationAchats(valeursService: ValeursService) {
     const achats: Array<DTOAchat> | undefined = valeursService.chargerAchatsTicker(this.ticker)
-      .filter(achat => !achat.revendu);
+      .filter(achat => achat.dateRevente === undefined);
     if (!achats || achats.length === 0) {
       return undefined;
     }

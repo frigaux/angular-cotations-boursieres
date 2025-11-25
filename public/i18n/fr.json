@@ -44,9 +44,11 @@
         "AJOUTER_ACHAT": "Ajouter un achat",
         "ENREGISTREMENT_REUSSI": "Enregistrement réussi",
         "DATE": "Date",
-        "QUANTITE": "Quantite",
         "PRIX": "Prix",
+        "QUANTITE": "Quantite",
         "REVENDU": "Revendu",
+        "DATE_REVENTE": "Date revente",
+        "PRIX_REVENTE": "Prix revente",
         "CONFIRMATION_SUPPRESSION": "Confirmez-vous la suppression de l'achat ?"
       },
       "DETAILS_VALEUR": {
@@ -77,9 +79,6 @@
         "ABCBOURSE": "Cotations ABCBourse",
         "BOURSORAMA": "Cotations Boursorama",
         "AJOUTER_AU_PORTEFEUILLE": "Ajouter la valeur au portefeuille"
-      },
-      "CHART_COURS": {
-        "CLOTURE": "Cours à la clôture"
       },
       "CHART_MOYENNES_MOBILES": {
         "NB_JOURS_CALCUL": "Nombre de jours de cotations utilisés pour le calcul de la moyenne mobile"
@@ -237,8 +236,8 @@
       "ACHATS_VALEURS": "Liste des achats de valeurs",
       "RECUPERER_COURS": "Récupérer les cours pour les valeurs non revendues sur Boursorama",
       "CONFIRMATION_SUPPRESSION": "Confirmez-vous la suppression de l'achat ?",
-      "NON_REVENDUES": "Non revendues",
-      "REVENDUES": "Revendues",
+      "NON_REVENDUS": "Non revendus",
+      "REVENDUS": "Revendus",
       "DIALOG_COURS": {
         "COURS_ACHATS": "Cours des valeurs non revendues",
         "RAFRAICHIR": "Rafraîchir",
@@ -254,15 +253,27 @@
       "TABLEAU_NON_REVENDUS": {
         "SUPPRESSION": "Suppression de l'achat",
         "VALEUR": "Valeur",
-        "DATE": "Date",
-        "PRIX": "Prix",
+        "DATE_ACHAT": "Date/Achat",
         "DIVIDENDES": "Dividendes",
-        "QUANTITE": "Quantité",
-        "TOTAL": "Total",
+        "PRIX_ACHAT": "Prix achat",
+        "QUANTITE_ACHAT": "Quantité",
+        "TOTAL_ACHAT": "Total achat",
         "CLOTURE": "Clôture",
-        "VARIATION_ACHAT": "Var/Ac",
-        "TOTAL_CLOTURE": "Total",
+        "VARIATION_ACHAT": "Var/Achat",
+        "TOTAL_CLOTURE": "Total clôture",
         "TOTAUX": "Totaux"
+      },
+      "TABLEAU_REVENDUS": {
+        "SUPPRESSION": "Suppression de l'achat",
+        "VALEUR": "Valeur",
+        "DATE_ACHAT": "Date/Achat",
+        "DIVIDENDES": "Dividendes",
+        "PRIX_ACHAT": "Prix achat",
+        "QUANTITE_ACHAT": "Quantité",
+        "TOTAL_ACHAT": "Total achat",
+        "PRIX_VENTE": "Prix vente",
+        "VARIATION_ACHAT": "Var/Achat",
+        "TOTAL_VENTE": "Total vente"
       },
       "IMPORT_EXPORT": {
         "IMPORT_EXPORT": "Import/export des achats",
@@ -540,7 +551,8 @@
             "DATE_REQUIS": "Attribut date manquant",
             "QUANTITE_REQUISE": "Attribut quantite manquant",
             "PRIX_REQUIS": "Attribut prix manquant",
-            "REVENDU_REQUIS": "Attribut revendu manquant"
+            "DATE_REVENTE_REQUISE": "Attribut date de revente manquant",
+            "INCOHERENCE_REVENTE": "La date de la revente et le prix de revente sont indissociables"
           }
         }
       }

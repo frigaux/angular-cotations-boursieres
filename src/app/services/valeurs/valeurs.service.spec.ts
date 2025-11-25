@@ -81,8 +81,6 @@ describe('ValeursService', () => {
       .toBe('SERVICES.VALEURS.ERREURS.ACHATS.ACHAT.QUANTITE_REQUISE');
     expect(valeursService.importAchats('[{"ticker": "GLE", "achats":[{"date": "2025-07-24T16:33:33.048Z", "quantite": 10}]}]'))
       .toBe('SERVICES.VALEURS.ERREURS.ACHATS.ACHAT.PRIX_REQUIS');
-    expect(valeursService.importAchats('[{"ticker": "GLE", "achats":[{"date": "2025-07-24T16:33:33.048Z", "quantite": 10, "prix": 1.2}]}]'))
-      .toBe('SERVICES.VALEURS.ERREURS.ACHATS.ACHAT.REVENDU_REQUIS');
     expect(valeursService.importAchats('[{"ticker": "GLE", "achats":[{"quantite": 10, "prix": 1.2, "revendu": false}]}]'))
       .toBe('SERVICES.VALEURS.ERREURS.ACHATS.ACHAT.DATE_REQUIS');
   });

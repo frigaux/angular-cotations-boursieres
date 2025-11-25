@@ -14,9 +14,13 @@ import {PrimeNG} from 'primeng/config';
 import {PickList} from 'primeng/picklist';
 import {NavigationBar} from '@squareetlabs/capacitor-navigation-bar';
 
+// TODO : BUG : portefeuille achat : pas de maj si valeur revendu et plus dans le portefeuille
 // TODO : revoir AchatsValeursComponent
 //   ajouter prix et date revente dans DTOAchat, patch temporaire pour reprise
-//   revue du composant des reventes, ...
+//   remettre possibilité de revendre
+//   revue du composant des revendus, ...
+//   tri sur les tableaux revendus, non revendus
+//   ligne total sur les revendus
 // TODO : service ABCBourse de récupération des informations pour un ticker : récupérer la pré-ouverture ?
 // TODO : capacitor android : proxy obligatoire pour requêter les autres domaines ? problème CORS ou pas ?
 // TODO : coverage

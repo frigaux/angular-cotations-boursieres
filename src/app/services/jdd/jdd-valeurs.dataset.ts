@@ -29,14 +29,12 @@ export const ACHATS: Array<DTOAchatsTicker> = [
         {
           "date": "2025-05-09",
           "quantite": 10,
-          "prix": 46.23,
-          "revendu": false
+          "prix": 46.23
         },
         {
           "date": "2025-05-08",
           "quantite": 20,
-          "prix": 45.7,
-          "revendu": false
+          "prix": 45.7
         }
       ]
   },
@@ -47,8 +45,7 @@ export const ACHATS: Array<DTOAchatsTicker> = [
         {
           "date": "2025-05-09",
           "quantite": 10,
-          "prix": 70.87,
-          "revendu": false
+          "prix": 70.87
         }
       ]
   }];

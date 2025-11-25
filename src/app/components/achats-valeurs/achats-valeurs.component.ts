@@ -13,6 +13,7 @@ import {AchatValeurDecore} from './tableau-achats-non-revendus/achat-valeur-deco
 import {
   DialogCoursAchatsNonRevendusComponent
 } from './dialog-cours-achats-non-revendus/dialog-cours-achats-non-revendus.component';
+import {TableauAchatsRevendusComponent} from './tableau-achats-revendus/tableau-achats-revendus.component';
 
 @Component({
   selector: 'app-achats-valeurs',
@@ -21,7 +22,8 @@ import {
     LoaderComponent,
     DialogImportExportComponent,
     TableauAchatsNonRevendusComponent,
-    DialogCoursAchatsNonRevendusComponent
+    DialogCoursAchatsNonRevendusComponent,
+    TableauAchatsRevendusComponent
   ],
   templateUrl: './achats-valeurs.component.html',
   styleUrls: ['./achats-valeurs.component.sass', '../commun/titre.sass']
@@ -64,7 +66,11 @@ export class AchatsValeursComponent implements OnInit {
   private filtrerAchats(revendus: boolean): Array<DTOAchatsTicker> {
     return this.achatsTickers!
       .map(achatsTicker => {
-          return {ticker: achatsTicker.ticker, achats: achatsTicker.achats.filter(a => a.revendu === revendus)};
+          return {
+            ticker: achatsTicker.ticker,
+            achats: achatsTicker.achats
+              .filter(a => (revendus && a.dateRevente) || (!revendus && a.dateRevente === undefined))
+          };
         }
       )
       .filter(achatsTicker => achatsTicker.achats.length > 0);
@@ -77,7 +83,7 @@ export class AchatsValeursComponent implements OnInit {
       const valeur: DTOValeur = this.valeurByTicker!.get(achatsTicker.ticker)!;
       achatsTicker.achats
         .sort((a1, a2) => new Date(a1.date).getTime() - new Date(a2.date).getTime())
-        .map(achat => new AchatDecore(i++, new Date(achat.date), achat))
+        .map(achat => new AchatDecore(i++, achat))
         .forEach(achatDecore => {
           resultat.push(new AchatValeurDecore(valeur, achatDecore));
         });

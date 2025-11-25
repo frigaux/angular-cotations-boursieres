@@ -164,7 +164,7 @@ export class PortefeuillesComponent implements OnInit {
 
   private tickersNonRevendus() {
     return this.valeursService.chargerAchats()
-      .filter(achats => achats.achats.find(achat => !achat.revendu) !== undefined)
+      .filter(achats => achats.achats.find(achat => achat.dateRevente === undefined) !== undefined)
       .map(achats => achats.ticker);
   }
 

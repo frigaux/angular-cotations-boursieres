@@ -14,21 +14,14 @@
 ]"></app-loader>
 
 
-@if (achatsNonRevendus) {
-  <h3>{{ 'COMPOSANTS.ACHATS_VALEURS.NON_REVENDUES' | translate }}</h3>
-  @if (achatsNonRevendus.length === 0) {
-    <div>-</div>
-  } @else {
-    <app-tableau-achats-non-revendus [achats]="achatsNonRevendus"
-                                     (suppression)="suppressionAchat($event)"></app-tableau-achats-non-revendus>
-  }
+@if (achatsNonRevendus && achatsNonRevendus.length > 0) {
+  <h3>{{ 'COMPOSANTS.ACHATS_VALEURS.NON_REVENDUS' | translate }}</h3>
+  <app-tableau-achats-non-revendus [achats]="achatsNonRevendus"
+                                   (suppression)="suppressionAchat($event)"></app-tableau-achats-non-revendus>
 }
 
-@if (achatsRevendus) {
-  <h3>{{ 'COMPOSANTS.ACHATS_VALEURS.REVENDUES' | translate }}</h3>
-  @if (achatsRevendus.length === 0) {
-    <div>-</div>
-  } @else {
-    <!--    <app-tableau-achats-non-revendus [achats]="achatsRevendus" (suppression)="suppressionAchat($event)"></app-tableau-achats-non-revendus>-->
-  }
+@if (achatsRevendus && achatsRevendus.length > 0) {
+  <h3>{{ 'COMPOSANTS.ACHATS_VALEURS.REVENDUS' | translate }}</h3>
+  <app-tableau-achats-revendus [achats]="achatsRevendus"
+                               (suppression)="suppressionAchat($event)"></app-tableau-achats-revendus>
 }

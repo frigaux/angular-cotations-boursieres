@@ -13,38 +13,62 @@
     </div>
   }
   @if (achatsDecores.length > 0) {
-    <div class="liste">
-      <div class="entetes">
-        <span></span>
-        <span>{{ 'COMPOSANTS.VALEURS.ACHATS_VALEUR.DATE' | translate }}</span>
-        <span>{{ 'COMPOSANTS.VALEURS.ACHATS_VALEUR.PRIX' | translate }}</span>
-        <span>{{ 'COMPOSANTS.VALEURS.ACHATS_VALEUR.QUANTITE' | translate }}</span>
-        <span>{{ 'COMPOSANTS.VALEURS.ACHATS_VALEUR.REVENDU' | translate }}</span>
-      </div>
-      @for (achatDecore of achatsDecores; track achatDecore.id) {
-        <div class="element">
-          <span class="pi pi-trash" (click)="suppressionAchat($event, achatDecore.achat)"></span>
-          <span>
-            <p-datepicker [(ngModel)]="achatDecore.date" dateFormat="dd/mm/yy"
-                          size="small" showIcon iconDisplay="input"
-                          [inputStyle]="{'width': '8rem'}"
-                          readonlyInput="true"
-                          (onSelect)="onSelectDate(achatDecore)"
-                          [autofocus]="false"/>
-          </span>
-          <span>
-            <input pInputText [(ngModel)]="achatDecore.achat.prix" autocomplete="off" required type="number"
-                   pSize="small" (change)="onChange(achatDecore)"/>
-        </span>
-          <span>
-            <input pInputText [(ngModel)]="achatDecore.achat.quantite" autocomplete="off" required type="number"
-                   pSize="small" (change)="onChange(achatDecore)"/>
-        </span>
-          <span>
-            <p-toggleswitch [(ngModel)]="achatDecore.achat.revendu" (change)="onChange(achatDecore)"/>
-        </span>
-        </div>
-      }
-    </div>
+    <table>
+      <thead>
+      <th></th>
+      <th>{{ 'COMPOSANTS.VALEURS.ACHATS_VALEUR.DATE' | translate }}</th>
+      <th>{{ 'COMPOSANTS.VALEURS.ACHATS_VALEUR.PRIX' | translate }}</th>
+      <th>{{ 'COMPOSANTS.VALEURS.ACHATS_VALEUR.QUANTITE' | translate }}</th>
+      <th>{{ 'COMPOSANTS.VALEURS.ACHATS_VALEUR.REVENDU' | translate }}</th>
+      <th>{{ 'COMPOSANTS.VALEURS.ACHATS_VALEUR.DATE_REVENTE' | translate }}</th>
+      <th>{{ 'COMPOSANTS.VALEURS.ACHATS_VALEUR.PRIX_REVENTE' | translate }}</th>
+      </thead>
+      <tbody>
+        @for (achatDecore of achatsDecores; track achatDecore.id) {
+          <tr>
+            <td class="pi pi-trash" (click)="suppressionAchat($event, achatDecore.achat)"></td>
+            <td>
+              <p-datepicker [(ngModel)]="achatDecore.form.date" dateFormat="dd/mm/yy"
+                            size="small" showIcon iconDisplay="input"
+                            [inputStyle]="{'width': '8rem'}"
+                            readonlyInput="true"
+                            (onSelect)="onSelectDate(achatDecore)"
+                            [autofocus]="false"/>
+            </td>
+            <td>
+              <input pInputText [(ngModel)]="achatDecore.achat.prix" autocomplete="off" required type="number"
+                     pSize="small" (change)="onChange(achatDecore)"/>
+            </td>
+            <td>
+              <input pInputText [(ngModel)]="achatDecore.achat.quantite" autocomplete="off" required type="number"
+                     pSize="small" (change)="onChange(achatDecore)"/>
+            </td>
+            <td>
+              <p-toggleswitch [(ngModel)]="achatDecore.form.revendu" (change)="onChangeRevendu(achatDecore)"/>
+            </td>
+            <td>
+              @if (achatDecore.form.revendu) {
+                <p-datepicker [(ngModel)]="achatDecore.form.dateRevente" dateFormat="dd/mm/yy"
+                              size="small" showIcon iconDisplay="input" required
+                              [inputStyle]="{'width': '8rem'}"
+                              readonlyInput="true"
+                              (onSelect)="onSelectDateRevente(achatDecore)"
+                              [autofocus]="false"/>
+              } @else {
+                -
+              }
+            </td>
+            <td>
+              @if (achatDecore.form.revendu) {
+                <input pInputText [(ngModel)]="achatDecore.achat.prixRevente" autocomplete="off" required type="number"
+                       pSize="small" (change)="onChange(achatDecore)"/>
+              } @else {
+                -
+              }
+            </td>
+          </tr>
+        }
+      </tbody>
+    </table>
   }
 }

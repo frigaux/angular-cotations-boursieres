@@ -1,0 +1,44 @@
+@if (achatValeurDecores) {
+  <p-table [value]="achatValeurDecores">
+    <ng-template #header>
+      <tr>
+        <th></th>
+        <th>{{ 'COMPOSANTS.ACHATS_VALEURS.TABLEAU_REVENDUS.VALEUR' | translate }}</th>
+        <th>{{ 'COMPOSANTS.ACHATS_VALEURS.TABLEAU_REVENDUS.DATE_ACHAT' | translate }}</th>
+        <th>{{ 'COMPOSANTS.ACHATS_VALEURS.TABLEAU_REVENDUS.DIVIDENDES' | translate }}</th>
+        <th>{{ 'COMPOSANTS.ACHATS_VALEURS.TABLEAU_REVENDUS.PRIX_ACHAT' | translate }}</th>
+        <th>{{ 'COMPOSANTS.ACHATS_VALEURS.TABLEAU_REVENDUS.QUANTITE_ACHAT' | translate }}</th>
+        <th>{{ 'COMPOSANTS.ACHATS_VALEURS.TABLEAU_REVENDUS.TOTAL_ACHAT' | translate }}</th>
+        <th>{{ 'COMPOSANTS.ACHATS_VALEURS.TABLEAU_REVENDUS.PRIX_VENTE' | translate }}</th>
+        <th>{{ 'COMPOSANTS.ACHATS_VALEURS.TABLEAU_REVENDUS.VARIATION_ACHAT' | translate }}</th>
+        <th>{{ 'COMPOSANTS.ACHATS_VALEURS.TABLEAU_REVENDUS.TOTAL_VENTE' | translate }}</th>
+      </tr>
+    </ng-template>
+    <ng-template #body let-achatValeurDecore>
+      <tr>
+        <td>
+              <span class="pi pi-trash"
+                    title="{{ 'COMPOSANTS.ACHATS_VALEURS.TABLEAU_REVENDUS.SUPPRESSION' | translate }}"
+                    (click)="suppressionAchat($event, achatValeurDecore)"></span>
+        </td>
+        <td>{{ achatValeurDecore.valeur.libelle }}</td>
+        <td>{{ achatValeurDecore.achatDecore.achat.date | date: 'dd/MM/yyyy' }}</td>
+        <td>
+          <app-colonne-dividendes [dividendes]="achatValeurDecore.dividendes"></app-colonne-dividendes>
+        </td>
+        <td>{{ achatValeurDecore.achatDecore.achat.prix  | currency:'EUR':'symbol' }}</td>
+        <td>{{ achatValeurDecore.achatDecore.achat.quantite  | number }}</td>
+        <td>{{ (achatValeurDecore.achatDecore.achat.prix * achatValeurDecore.achatDecore.achat.quantite)  | currency:'EUR':'symbol' }}</td>
+        <td
+          [class]="evolutionVariation(achatValeurDecore.achatDecore.variationAchat)">{{ achatValeurDecore.achatDecore.achat.prixRevente | currency:'EUR':'symbol' }}
+        </td>
+        <td [class]="evolutionVariation(achatValeurDecore.achatDecore.variationAchat)">
+          {{ achatValeurDecore.achatDecore.variationAchat | percent:'1.2-2' }}
+        </td>
+        <td
+          [class]="evolutionVariation(achatValeurDecore.achatDecore.variationAchat)">{{ (achatValeurDecore.achatDecore.achat.prixRevente! * achatValeurDecore.achatDecore.achat.quantite)  | currency:'EUR':'symbol' }}
+        </td>
+      </tr>
+    </ng-template>
+  </p-table>
+}

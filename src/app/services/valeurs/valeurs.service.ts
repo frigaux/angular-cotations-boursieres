@@ -36,9 +36,9 @@ export class ValeursService {
     const json = window.localStorage.getItem(ValeursService.ACHATS);
     if (json) {
       try {
-        const achatsTickers: any = JSON.parse(json);
-        if (this.validerAchats(achatsTickers)) {
-          return achatsTickers;
+        const achatsTickers: Array<DTOAchatsTicker> = JSON.parse(json);
+        if (this.validerAchatsTickers(achatsTickers)) {
+          return this.patchTemporaire(achatsTickers);
         }
       } catch (e) {
         console.error(e);
@@ -62,7 +62,7 @@ export class ValeursService {
   }
 
   public enregistrerAchats(achatsTickers: Array<DTOAchatsTicker>): string | undefined {
-    if (this.validerAchats(achatsTickers)) {
+    if (this.validerAchatsTickers(achatsTickers)) {
       achatsTickers = this.filtrerTickerSansAchat(achatsTickers);
       window.localStorage.setItem(ValeursService.ACHATS, JSON.stringify(achatsTickers));
       ValeursService.OBSERVERS_UPDATE_ACHATS.forEach(observer => observer.next(achatsTickers));
@@ -73,18 +73,22 @@ export class ValeursService {
   }
 
   public enregistrerAchatsTicker(ticker: string, achats: Array<DTOAchat>): string | undefined {
-    const achatsTickers = this.chargerAchats();
-    const achatsTicker: DTOAchatsTicker | undefined = achatsTickers
-      .find(achats => achats.ticker === ticker);
-    if (achatsTicker) {
-      achatsTicker.achats = achats;
+    if (this.validerAchats(achats)) {
+      const achatsTickers = this.chargerAchats();
+      const achatsTicker: DTOAchatsTicker | undefined = achatsTickers
+        .find(achats => achats.ticker === ticker);
+      if (achatsTicker) {
+        achatsTicker.achats = achats;
+      } else {
+        achatsTickers.push({
+          ticker: ticker,
+          achats: achats
+        })
+      }
+      return this.enregistrerAchats(achatsTickers);
     } else {
-      achatsTickers.push({
-        ticker: ticker,
-        achats: achats
-      })
+      return this.translateService.instant(this.cleMessageErreur!);
     }
-    return this.enregistrerAchats(achatsTickers);
   }
 
   public onUpdateAchats(handler: ((value: Array<DTOAchatsTicker>) => void)): void {
@@ -94,7 +98,7 @@ export class ValeursService {
   public importAchats(json: string): string | undefined {
     try {
       let achatsTickers: any = JSON.parse(json);
-      if (this.validerAchats(achatsTickers)) {
+      if (this.validerAchatsTickers(achatsTickers)) {
         achatsTickers = this.filtrerTickerSansAchat(achatsTickers);
         window.localStorage.setItem(ValeursService.ACHATS, JSON.stringify(achatsTickers));
         ValeursService.OBSERVERS_IMPORT_ACHATS.forEach(observer => observer.next(achatsTickers));
@@ -111,7 +115,7 @@ export class ValeursService {
     ValeursService.OBSERVABLE_IMPORT_ACHATS.subscribe(handler);
   }
 
-  private validerAchats(achatsTickers: Array<DTOAchatsTicker>): boolean {
+  private validerAchatsTickers(achatsTickers: Array<DTOAchatsTicker>): boolean {
     this.cleMessageErreur = undefined;
     for (const achatsTicker of achatsTickers) {
       if (typeof achatsTicker.ticker !== 'string') {
@@ -122,23 +126,35 @@ export class ValeursService {
         this.cleMessageErreur = 'SERVICES.VALEURS.ERREURS.ACHATS.ACHATS_REQUIS';
         return false;
       }
-      for (const achat of achatsTicker.achats) {
-        if (isNaN(Date.parse(achat.date))) {
-          this.cleMessageErreur = 'SERVICES.VALEURS.ERREURS.ACHATS.ACHAT.DATE_REQUIS';
-          return false;
-        }
-        if (typeof achat.quantite !== 'number') {
-          this.cleMessageErreur = 'SERVICES.VALEURS.ERREURS.ACHATS.ACHAT.QUANTITE_REQUISE';
-          return false;
-        }
-        if (typeof achat.prix !== 'number') {
-          this.cleMessageErreur = 'SERVICES.VALEURS.ERREURS.ACHATS.ACHAT.PRIX_REQUIS';
-          return false;
-        }
-        if (typeof achat.revendu !== 'boolean') {
-          this.cleMessageErreur = 'SERVICES.VALEURS.ERREURS.ACHATS.ACHAT.REVENDU_REQUIS';
-          return false;
-        }
+      if (!this.validerAchats(achatsTicker.achats)) {
+        return false;
+      }
+    }
+    return true;
+  }
+
+  private validerAchats(achats: Array<DTOAchat>): boolean {
+    for (const achat of achats) {
+      if (isNaN(Date.parse(achat.date))) {
+        this.cleMessageErreur = 'SERVICES.VALEURS.ERREURS.ACHATS.ACHAT.DATE_REQUIS';
+        return false;
+      }
+      if (typeof achat.quantite !== 'number') {
+        this.cleMessageErreur = 'SERVICES.VALEURS.ERREURS.ACHATS.ACHAT.QUANTITE_REQUISE';
+        return false;
+      }
+      if (typeof achat.prix !== 'number') {
+        this.cleMessageErreur = 'SERVICES.VALEURS.ERREURS.ACHATS.ACHAT.PRIX_REQUIS';
+        return false;
+      }
+      if (achat.dateRevente !== undefined && isNaN(Date.parse(achat.dateRevente))) {
+        this.cleMessageErreur = 'SERVICES.VALEURS.ERREURS.ACHATS.ACHAT.DATE_REVENTE_REQUISE';
+        return false;
+      }
+      if ((achat.dateRevente === undefined && typeof achat.prixRevente === 'number')
+        || (achat.dateRevente !== undefined && typeof achat.prixRevente !== 'number')) {
+        this.cleMessageErreur = 'SERVICES.VALEURS.ERREURS.ACHATS.ACHAT.INCOHERENCE_REVENTE';
+        return false;
       }
     }
     return true;
@@ -146,5 +162,31 @@ export class ValeursService {
 
   private filtrerTickerSansAchat(achatsTickers: Array<DTOAchatsTicker>): Array<DTOAchatsTicker> {
     return achatsTickers.filter(achatsTicker => achatsTicker.achats.length !== 0);
+  }
+
+  // TODO : patchTemporaire
+  private patchTemporaire(achatsTickers: Array<DTOAchatsTicker>) {
+    achatsTickers.forEach(achatsTicker => {
+      const achats: Array<DTOAchat> = [];
+      achatsTicker.achats.forEach(achat => {
+        if (achat.dateRevente) {
+          achats.push({
+            date: achat.date,
+            quantite: achat.quantite,
+            prix: achat.prix,
+            dateRevente: achat.dateRevente,
+            prixRevente: achat.prixRevente
+          });
+        } else {
+          achats.push({
+            date: achat.date,
+            quantite: achat.quantite,
+            prix: achat.prix
+          });
+        }
+      });
+      achatsTicker.achats = achats;
+    });
+    return achatsTickers;
   }
 }

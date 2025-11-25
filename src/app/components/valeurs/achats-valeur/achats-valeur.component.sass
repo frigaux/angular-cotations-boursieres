@@ -28,40 +28,15 @@ div.erreur
   & > span:not(.pi)
     margin-left: 0.5rem
 
-div.liste
-  margin-top: 0.5rem
+table
+  th, td
+    padding: 0.25rem
+    text-align: center
 
-  div.entetes
-    span
-      display: inline-block
-      text-align: center
-
-    span:nth-child(1)
-      width: 2rem
-
-    span:nth-child(2)
-      width: 9rem
-
-    span:nth-child(3)
-      width: 6rem
-
-    span:nth-child(4)
-      width: 6rem
-
-    span:nth-child(5)
-      width: 5rem
-
-  div.element
-    display: flex
-    flex-direction: row
-    align-items: center
-
-    .pi-trash
+  td
+    &.pi-trash
       color: var(--p-red-800)
       cursor: pointer
 
-    span
-      margin: 0.25rem 0.5rem 0 0.5rem
-
-      input
-        width: 5rem
+    input
+      width: 5rem
