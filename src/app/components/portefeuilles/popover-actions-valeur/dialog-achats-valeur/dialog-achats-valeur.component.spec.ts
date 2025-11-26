@@ -1,22 +1,22 @@
 import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import {PanneauAchatsValeurComponent} from './panneau-achats-valeur.component';
+import {DialogAchatsValeurComponent} from './dialog-achats-valeur.component';
 import {TranslateModule} from '@ngx-translate/core';
 
-describe('PanneauAchatsValeurComponent', () => {
-  let component: PanneauAchatsValeurComponent;
-  let fixture: ComponentFixture<PanneauAchatsValeurComponent>;
+describe('DialogAchatsValeurComponent', () => {
+  let component: DialogAchatsValeurComponent;
+  let fixture: ComponentFixture<DialogAchatsValeurComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [
-        PanneauAchatsValeurComponent,
+        DialogAchatsValeurComponent,
         TranslateModule.forRoot({})
       ]
     })
       .compileComponents();
 
-    fixture = TestBed.createComponent(PanneauAchatsValeurComponent);
+    fixture = TestBed.createComponent(DialogAchatsValeurComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

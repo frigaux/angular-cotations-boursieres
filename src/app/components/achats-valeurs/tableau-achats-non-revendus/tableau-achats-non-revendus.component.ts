@@ -1,4 +1,4 @@
-import {Component, input, InputSignal, output} from '@angular/core';
+import {Component, input, InputSignal, output, viewChild} from '@angular/core';
 import {CurrencyPipe, DatePipe, DecimalPipe, PercentPipe} from "@angular/common";
 import {TranslatePipe} from "@ngx-translate/core";
 import {CoursService} from '../../../services/cours/cours.service';
@@ -7,6 +7,9 @@ import {AchatValeurDecore} from './achat-valeur-decore.class';
 import {ColonneDividendesComponent} from '../../portefeuilles/colonnes/dividendes/colonne-dividendes.component';
 import {DividendesService} from '../../../services/dividendes/dividendes.service';
 import {LoaderComponent} from '../../loader/loader.component';
+import {
+  DialogAchatsValeurComponent
+} from '../../portefeuilles/popover-actions-valeur/dialog-achats-valeur/dialog-achats-valeur.component';
 
 @Component({
   selector: 'app-tableau-achats-non-revendus',
@@ -18,12 +21,15 @@ import {LoaderComponent} from '../../loader/loader.component';
     PercentPipe,
     TableModule,
     ColonneDividendesComponent,
-    LoaderComponent
+    LoaderComponent,
+    DialogAchatsValeurComponent
   ],
   templateUrl: './tableau-achats-non-revendus.component.html',
   styleUrl: './tableau-achats-non-revendus.component.sass'
 })
 export class TableauAchatsNonRevendusComponent {
+  private dialogAchatsValeurComponent = viewChild(DialogAchatsValeurComponent);
+
   // chargement des cours
   loading: boolean = true;
 
@@ -96,5 +102,13 @@ export class TableauAchatsNonRevendusComponent {
       return '';
     }
     return variation >= 0 ? 'positive' : 'negative';
+  }
+
+  protected achats(event: PointerEvent, achatValeurDecore: AchatValeurDecore) {
+    this.dialogAchatsValeurComponent()?.afficherAchats({
+      ticker: achatValeurDecore.valeur.ticker,
+      libelle: achatValeurDecore.valeur.libelle,
+      prixParDefaut: achatValeurDecore.achatDecore.cours || 0
+    });
   }
 }

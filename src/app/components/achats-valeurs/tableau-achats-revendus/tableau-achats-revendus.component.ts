@@ -59,8 +59,10 @@ export class TableauAchatsRevendusComponent {
         const achat = achatValeurDecore.achatDecore.achat;
         this.totalQuantite += achat.quantite;
         this.totauxAchats += achat.prix * achat.quantite;
-        if (achat.dateRevente) {
-          this.totauxVentes += achat.prixRevente! * achat.quantite;
+        if (achat.dateRevente && achat.prixRevente) {
+          this.totauxVentes += achat.prixRevente * achat.quantite;
+        } else {
+          console.error('Achat revendu sans date de revente ou prix de revente : ', achat);
         }
       });
       this.variationAchats = (this.totauxVentes / this.totauxAchats) - 1;

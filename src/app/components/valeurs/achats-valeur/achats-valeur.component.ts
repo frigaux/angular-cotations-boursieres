@@ -25,9 +25,9 @@ import {ToggleSwitch} from 'primeng/toggleswitch';
 })
 export class AchatsValeurComponent implements OnInit {
   // input/output
-  inputValeur: InputSignal<{ ticker: string, cloture: number } | undefined> = input(undefined,
+  inputValeur: InputSignal<{ ticker: string, prixParDefaut: number } | undefined> = input(undefined,
     {transform: o => this.intercepteurTicker(o), alias: 'valeur'});
-  valeur?: { ticker: string, cloture: number };
+  valeur?: { ticker: string, prixParDefaut: number };
 
   private achats: Array<DTOAchat> = [];
 
@@ -47,9 +47,9 @@ export class AchatsValeurComponent implements OnInit {
     this.valeursService.onImportAchats(achatsTickers => this.construireVue());
   }
 
-  private intercepteurTicker(valeur: { ticker: string, cloture: number } | undefined): {
+  private intercepteurTicker(valeur: { ticker: string, prixParDefaut: number } | undefined): {
     ticker: string,
-    cloture: number
+    prixParDefaut: number
   } | undefined {
     this.valeur = valeur;
     this.construireVue();
@@ -70,7 +70,7 @@ export class AchatsValeurComponent implements OnInit {
       this.achats.push({
         date: this.datepipe.transform(new Date(), 'yyyy-MM-dd')!,
         quantite: 1,
-        prix: this.valeur.cloture
+        prix: this.valeur.prixParDefaut
       });
       this.decorerAchats();
       this.enregistrerAchats();

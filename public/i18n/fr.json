@@ -252,6 +252,7 @@
       },
       "TABLEAU_NON_REVENDUS": {
         "SUPPRESSION": "Suppression de l'achat",
+        "ACHATS_VALEUR": "Gestion des achats de la valeur \"{{valeur}}\"",
         "VALEUR": "Valeur",
         "DATE_ACHAT": "Date/Achat",
         "DIVIDENDES": "Dividendes",

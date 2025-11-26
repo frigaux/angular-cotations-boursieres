@@ -7,7 +7,7 @@ import {ConfirmationService} from 'primeng/api';
 import {DialogueService} from '../../../services/dialogue/dialogue.service';
 import {Select} from 'primeng/select';
 import {FormsModule} from '@angular/forms';
-import {PanneauAchatsValeurComponent} from './panneau-achats-valeur/panneau-achats-valeur.component';
+import {DialogAchatsValeurComponent} from './dialog-achats-valeur/dialog-achats-valeur.component';
 import {DialogCotationsValeurComponent} from './dialog-cotations-valeur/dialog-cotations-valeur.component';
 import {CoursPortefeuille} from '../cours-portefeuille.class';
 import {PortefeuilleAvecCours} from '../portefeuille-avec-cours.class';
@@ -22,7 +22,7 @@ import {
     TranslatePipe,
     Select,
     FormsModule,
-    PanneauAchatsValeurComponent,
+    DialogAchatsValeurComponent,
     DialogCotationsValeurComponent,
     DialogCotationsValeursPortefeuilleComponent
   ],
@@ -31,7 +31,7 @@ import {
 })
 export class PopoverActionsValeurComponent {
   private popover = viewChild(Popover);
-  private panneauAchatsValeurComponent = viewChild(PanneauAchatsValeurComponent);
+  private dialogAchatsValeurComponent = viewChild(DialogAchatsValeurComponent);
   private dialogCoursTickerComponent = viewChild(DialogCotationsValeurComponent);
   private dialogCotationsTickersPortefeuilleComponent = viewChild(DialogCotationsValeursPortefeuilleComponent);
 
@@ -95,7 +95,11 @@ export class PopoverActionsValeurComponent {
 
   achats() {
     if (this.cours) {
-      this.panneauAchatsValeurComponent()?.afficherCours(this.cours);
+      this.dialogAchatsValeurComponent()?.afficherAchats({
+        ticker: this.cours.ticker,
+        libelle: this.cours.libelle,
+        prixParDefaut: this.cours.cloture,
+      });
     }
     this.popover()?.hide();
   }

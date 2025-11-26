@@ -1,0 +1,7 @@
+<p-dialog [modal]="true" [(visible)]="visible"
+          [header]="'COMPOSANTS.PORTEFEUILLES.ACTIONS_VALEUR.ACHATS_VALEUR' | translate : {'nom': valeur?.libelle}">
+  @if (valeur) {
+    <app-achats-valeur [valeur]="{ticker: valeur.ticker, prixParDefaut: valeur.prixParDefaut}"></app-achats-valeur>
+    <div class="espace-datepicker"></div>
+  }
+</p-dialog>

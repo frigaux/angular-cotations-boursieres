@@ -1,3 +1,5 @@
+<app-dialog-achats-valeur></app-dialog-achats-valeur>
+
 <app-loader [affiche]="loading" [configuration]="[
   {marginLeft: '0', marginTop: '1rem', height: '20vh', width: '100%'}
 ]"></app-loader>
@@ -30,9 +32,12 @@
     <ng-template #body let-achatValeurDecore>
       <tr>
         <td>
-              <span class="pi pi-trash"
-                    title="{{ 'COMPOSANTS.ACHATS_VALEURS.TABLEAU_NON_REVENDUS.SUPPRESSION' | translate }}"
-                    (click)="suppressionAchat($event, achatValeurDecore)"></span>
+          <span class="pi pi-trash"
+                title="{{ 'COMPOSANTS.ACHATS_VALEURS.TABLEAU_NON_REVENDUS.SUPPRESSION' | translate }}"
+                (click)="suppressionAchat($event, achatValeurDecore)"></span>
+          <span class="pi pi-shopping-bag"
+                title="{{ 'COMPOSANTS.ACHATS_VALEURS.TABLEAU_NON_REVENDUS.ACHATS_VALEUR' | translate: { valeur: achatValeurDecore.valeur.libelle } }}"
+                (click)="achats($event, achatValeurDecore)"></span>
         </td>
         <td>{{ achatValeurDecore.valeur.libelle }}</td>
         <td>{{ achatValeurDecore.achatDecore.achat.date | date: 'dd/MM/yyyy' }}</td>
