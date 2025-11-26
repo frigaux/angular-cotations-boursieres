@@ -7,14 +7,23 @@
     <ng-template #header>
       <tr>
         <th></th>
-        <th>{{ 'COMPOSANTS.ACHATS_VALEURS.TABLEAU_NON_REVENDUS.VALEUR' | translate }}</th>
-        <th>{{ 'COMPOSANTS.ACHATS_VALEURS.TABLEAU_NON_REVENDUS.DATE_ACHAT' | translate }}</th>
+        <th pSortableColumn="valeur.libelle">
+          {{ 'COMPOSANTS.ACHATS_VALEURS.TABLEAU_NON_REVENDUS.VALEUR' | translate }}
+          <p-sortIcon field="valeur.libelle"/>
+        </th>
+        <th pSortableColumn="achatDecore.achat.date">
+          {{ 'COMPOSANTS.ACHATS_VALEURS.TABLEAU_NON_REVENDUS.DATE_ACHAT' | translate }}
+          <p-sortIcon field="achatDecore.achat.date"/>
+        </th>
         <th>{{ 'COMPOSANTS.ACHATS_VALEURS.TABLEAU_NON_REVENDUS.DIVIDENDES' | translate }}</th>
         <th>{{ 'COMPOSANTS.ACHATS_VALEURS.TABLEAU_NON_REVENDUS.PRIX_ACHAT' | translate }}</th>
         <th>{{ 'COMPOSANTS.ACHATS_VALEURS.TABLEAU_NON_REVENDUS.QUANTITE_ACHAT' | translate }}</th>
         <th>{{ 'COMPOSANTS.ACHATS_VALEURS.TABLEAU_NON_REVENDUS.TOTAL_ACHAT' | translate }}</th>
         <th>{{ 'COMPOSANTS.ACHATS_VALEURS.TABLEAU_NON_REVENDUS.CLOTURE' | translate }}</th>
-        <th>{{ 'COMPOSANTS.ACHATS_VALEURS.TABLEAU_NON_REVENDUS.VARIATION_ACHAT' | translate }}</th>
+        <th pSortableColumn="achatDecore.variationAchat">
+          {{ 'COMPOSANTS.ACHATS_VALEURS.TABLEAU_NON_REVENDUS.VARIATION_ACHAT' | translate }}
+          <p-sortIcon field="achatDecore.variationAchat"/>
+        </th>
         <th>{{ 'COMPOSANTS.ACHATS_VALEURS.TABLEAU_NON_REVENDUS.TOTAL_CLOTURE' | translate }}</th>
       </tr>
     </ng-template>
@@ -33,14 +42,14 @@
         <td>{{ achatValeurDecore.achatDecore.achat.prix  | currency:'EUR':'symbol' }}</td>
         <td>{{ achatValeurDecore.achatDecore.achat.quantite  | number }}</td>
         <td>{{ (achatValeurDecore.achatDecore.achat.prix * achatValeurDecore.achatDecore.achat.quantite)  | currency:'EUR':'symbol' }}</td>
-        <td
-          [class]="evolutionVariation(achatValeurDecore.achatDecore.variationAchat)">{{ achatValeurDecore.achatDecore.cours | currency:'EUR':'symbol' }}
+        <td [class]="evolutionVariation(achatValeurDecore.achatDecore.variationAchat)">
+          {{ achatValeurDecore.achatDecore.cours | currency:'EUR':'symbol' }}
         </td>
         <td [class]="evolutionVariation(achatValeurDecore.achatDecore.variationAchat)">
           {{ achatValeurDecore.achatDecore.variationAchat | percent:'1.2-2' }}
         </td>
-        <td
-          [class]="evolutionVariation(achatValeurDecore.achatDecore.variationAchat)">{{ (achatValeurDecore.achatDecore.cours! * achatValeurDecore.achatDecore.achat.quantite)  | currency:'EUR':'symbol' }}
+        <td [class]="evolutionVariation(achatValeurDecore.achatDecore.variationAchat)">
+          {{ (achatValeurDecore.achatDecore.cours! * achatValeurDecore.achatDecore.achat.quantite)  | currency:'EUR':'symbol' }}
         </td>
       </tr>
     </ng-template>
@@ -54,8 +63,12 @@
         <td>{{ totalQuantite  | number }}</td>
         <td>{{ totauxAchats  | currency:'EUR':'symbol' }}</td>
         <td></td>
-        <td></td>
-        <td>{{ totauxClotures  | currency:'EUR':'symbol' }}</td>
+        <td [class]="evolutionVariation(variationAchats)">
+          {{ variationAchats | percent:'1.2-2' }}
+        </td>
+        <td [class]="evolutionVariation(variationAchats)">
+          {{ totauxClotures  | currency:'EUR':'symbol' }}
+        </td>
       </tr>
     </ng-template>
   </p-table>

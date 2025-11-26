@@ -36,6 +36,7 @@ export class TableauAchatsNonRevendusComponent {
   achatValeurDecores?: Array<AchatValeurDecore>;
   totalQuantite: number = 0;
   totauxAchats: number = 0;
+  variationAchats: number = 0;
   totauxClotures: number = 0;
 
 
@@ -76,6 +77,7 @@ export class TableauAchatsNonRevendusComponent {
               this.totauxClotures += cours.cloture * achatValeurDecore.achatDecore.achat.quantite;
             });
           });
+          this.variationAchats = (this.totauxClotures / this.totauxAchats) - 1;
           const dividendesByTicker = this.dividendesService.chargerMapByTicker();
           this.achatValeurDecores!.forEach(achatValeurDecore => {
             achatValeurDecore.dividendes = dividendesByTicker?.get(achatValeurDecore.valeur.ticker) || [];

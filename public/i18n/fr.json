@@ -273,7 +273,8 @@
         "TOTAL_ACHAT": "Total achat",
         "PRIX_VENTE": "Prix vente",
         "VARIATION_ACHAT": "Var/Achat",
-        "TOTAL_VENTE": "Total vente"
+        "TOTAL_VENTE": "Total vente",
+        "TOTAUX": "Totaux"
       },
       "IMPORT_EXPORT": {
         "IMPORT_EXPORT": "Import/export des achats",

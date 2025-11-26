@@ -28,6 +28,10 @@ export class TableauAchatsRevendusComponent {
 
   // données pour la vue
   achatValeurDecores?: Array<AchatValeurDecore>;
+  totalQuantite: number = 0;
+  totauxAchats: number = 0;
+  variationAchats: number = 0;
+  totauxVentes: number = 0;
 
   constructor(private dividendesService: DividendesService) {
   }
@@ -41,7 +45,26 @@ export class TableauAchatsRevendusComponent {
       });
     }
     this.achatValeurDecores = listeAchats;
+    this.calculerTotaux(listeAchats);
     return listeAchats;
+  }
+
+  private calculerTotaux(listeAchats: Array<AchatValeurDecore> | undefined) {
+    this.totalQuantite = 0;
+    this.totauxAchats = 0;
+    this.variationAchats = 0;
+    this.totauxVentes = 0;
+    if (listeAchats) {
+      this.achatValeurDecores!.forEach(achatValeurDecore => {
+        const achat = achatValeurDecore.achatDecore.achat;
+        this.totalQuantite += achat.quantite;
+        this.totauxAchats += achat.prix * achat.quantite;
+        if (achat.dateRevente) {
+          this.totauxVentes += achat.prixRevente! * achat.quantite;
+        }
+      });
+      this.variationAchats = (this.totauxVentes / this.totauxAchats) - 1;
+    }
   }
 
   suppressionAchat(event: PointerEvent, achatValeurDecore: AchatValeurDecore) {
