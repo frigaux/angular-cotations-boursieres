@@ -26,8 +26,8 @@ import {HttpErrorResponse} from '@angular/common/http';
 })
 export class SauvegardeRestaurationComponent implements OnInit {
   // input/output
-  inputPetit: InputSignal<boolean | undefined> = input(undefined,
-    {transform: o => this.intercepteurPetit(o), alias: 'petit'});
+  inputReduit: InputSignal<boolean | undefined> = input(undefined,
+    {transform: o => this.intercepteurReduit(o), alias: 'reduit'});
 
   // données pour la vue
   afficherFormulaireUrlSauvegardeRestauration: boolean = false;
@@ -36,14 +36,14 @@ export class SauvegardeRestaurationComponent implements OnInit {
   httpErrorResponse?: HttpErrorResponse;
   dialogSauvegardeVisible: boolean = false;
   dialogRestaurationVisible: boolean = false;
-  petit?: boolean;
+  reduit?: boolean;
 
   constructor(private translateService: TranslateService,
               private parametrageService: ParametrageService) {
   }
 
   ngOnInit(): void {
-    if (this.parametrageService.chargerUrlSauvegardeRestauration() == undefined) {
+    if (this.parametrageService.chargerUrlSauvegardeRestauration() === undefined) {
       this.afficherFormulaireUrlSauvegardeRestauration = true;
     }
   }
@@ -82,8 +82,8 @@ export class SauvegardeRestaurationComponent implements OnInit {
     });
   }
 
-  private intercepteurPetit(petit: boolean | undefined) {
-    this.petit = petit;
+  private intercepteurReduit(petit: boolean | undefined) {
+    this.reduit = petit;
     return petit;
   }
 }

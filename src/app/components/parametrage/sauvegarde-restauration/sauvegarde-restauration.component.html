@@ -1,4 +1,4 @@
-<app-formulaire-url-sauvegarde-restauration [visible]="afficherFormulaireUrlSauvegardeRestauration"
+<app-formulaire-url-sauvegarde-restauration [visible]="!reduit && afficherFormulaireUrlSauvegardeRestauration"
                                             (modifie)="afficherFormulaireUrlSauvegardeRestauration=false"
                                             (abandon)="afficherFormulaireUrlSauvegardeRestauration=false"></app-formulaire-url-sauvegarde-restauration>
 
@@ -12,9 +12,7 @@
       ]"></app-loader>
 
 @if (!afficherFormulaireUrlSauvegardeRestauration && !loading) {
-  @if (petit) {
-    <span class="pi pi-pencil" (click)="afficherFormulaireUrlSauvegardeRestauration=true"
-          title="{{ 'COMPOSANTS.PARAMETRAGE.SAUVEGARDE_RESTAURATION.EDITER_URL' | translate }}"></span>
+  @if (reduit) {
     <span class="pi pi-cloud-upload" (click)="dialogSauvegardeVisible = true"
           title="{{ 'COMPOSANTS.PARAMETRAGE.SAUVEGARDE_RESTAURATION.SAUVEGARDE' | translate }}"></span>
     <span class="pi pi-cloud-download" (click)="dialogRestaurationVisible = true"

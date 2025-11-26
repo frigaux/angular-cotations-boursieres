@@ -1,4 +1,4 @@
-<ul class="dividendes">
+<ul class="dividendes" [ngClass]="{'reduit': reduit}">
   @for (dividendeDecore of dividendesDecores; track dividendeDecore.id) {
     <li>
       <span class="date">{{ dividendeDecore.dividende.date  | date: 'dd/MM/yyyy' }}</span>

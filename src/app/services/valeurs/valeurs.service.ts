@@ -38,7 +38,7 @@ export class ValeursService {
       try {
         const achatsTickers: Array<DTOAchatsTicker> = JSON.parse(json);
         if (this.validerAchatsTickers(achatsTickers)) {
-          return this.patchTemporaire(achatsTickers);
+          return achatsTickers;
         }
       } catch (e) {
         console.error(e);
@@ -162,31 +162,5 @@ export class ValeursService {
 
   private filtrerTickerSansAchat(achatsTickers: Array<DTOAchatsTicker>): Array<DTOAchatsTicker> {
     return achatsTickers.filter(achatsTicker => achatsTicker.achats.length !== 0);
-  }
-
-  // TODO : patchTemporaire
-  private patchTemporaire(achatsTickers: Array<DTOAchatsTicker>) {
-    achatsTickers.forEach(achatsTicker => {
-      const achats: Array<DTOAchat> = [];
-      achatsTicker.achats.forEach(achat => {
-        if (achat.dateRevente) {
-          achats.push({
-            date: achat.date,
-            quantite: achat.quantite,
-            prix: achat.prix,
-            dateRevente: achat.dateRevente,
-            prixRevente: achat.prixRevente
-          });
-        } else {
-          achats.push({
-            date: achat.date,
-            quantite: achat.quantite,
-            prix: achat.prix
-          });
-        }
-      });
-      achatsTicker.achats = achats;
-    });
-    return achatsTickers;
   }
 }

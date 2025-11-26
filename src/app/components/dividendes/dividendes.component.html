@@ -1,6 +1,6 @@
 <div class="titre">
   <h2>{{ 'COMPOSANTS.DIVIDENDES.DIVIDENDES' | translate }}</h2>
-  <span class="pi pi-cloud-download" (click)="recupererDividendesABCBourse()"
+  <span class="pi pi-download" (click)="recupererDividendesABCBourse()"
         title="{{ 'COMPOSANTS.DIVIDENDES.RECUPERER_DIVIDENDES_ABCBOURSE' | translate }}"></span>
   @if (dateRecuperation) {
     <span>{{ 'COMPOSANTS.DIVIDENDES.DATE_DERNIERE_RECUPERATION' | translate : {date: dateRecuperation | date: 'dd/MM/yyyy'} }}</span>

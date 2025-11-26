@@ -25,7 +25,7 @@ describe('PortefeuillesComponent', () => {
   const clonePORTEFEUILLE: Function = () => JSON.parse(JSON.stringify(PORTEFEUILLE));
 
   const mockPortefeuillesService = jasmine.createSpyObj('PortefeuillesService', ['charger', 'onUpdate', 'indexPortefeuilleParDefaut']);
-  const mockValeursService = jasmine.createSpyObj('ValeursService', ['chargerValeurs', 'chargerAchatsByTicker', 'chargerAchatsTicker', 'onImportAchats', 'onUpdateAchats', 'chargerAchats']);
+  const mockValeursService = jasmine.createSpyObj('ValeursService', ['chargerValeurs', 'chargerAchatsByTicker', 'chargerAchatsTicker', 'onUpdateAchats', 'chargerAchats']);
   const mockCoursService = jasmine.createSpyObj('CoursService', ['chargerCoursTickersWithLimit']);
   const mockAbcBourseService = jasmine.createSpyObj('AbcBourseService', ['chargerActualites']);
   const mockBoursoramaService = jasmine.createSpyObj('BoursoramaService', ['chargerCoursTicker']);

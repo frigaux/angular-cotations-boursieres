@@ -114,8 +114,8 @@ export class AchatsValeurComponent implements OnInit {
   protected onChangeRevendu(achatDecore: AchatDecore) {
     if (!achatDecore.form.revendu) {
       achatDecore.form.dateRevente = undefined;
-      achatDecore.achat.dateRevente = undefined;
-      achatDecore.achat.prixRevente = undefined;
+      delete achatDecore.achat['dateRevente'];
+      delete achatDecore.achat['prixRevente'];
       this.enregistrerAchats();
     }
   }

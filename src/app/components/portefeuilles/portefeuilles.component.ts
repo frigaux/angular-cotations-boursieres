@@ -90,9 +90,9 @@ export class PortefeuillesComponent implements OnInit {
               private tableauxService: TableauxService,
               private dividendesService: DividendesService,
               private breakpointObserver: BreakpointObserver) {
+    // restauration des paramètres ou modification des valeurs d'un portefeuille ou des achats de valeur
     portefeuillesService.onUpdate(portefeuilles => this.chargerPortefeuilleCourant());
-    valeursService.onImportAchats(achatsTickers => this.definirCoursPortefeuilleCourant());
-    valeursService.onUpdateAchats(achatsTickers => this.definirCoursPortefeuilleCourant());
+    valeursService.onUpdateAchats(achatsTickers => this.chargerPortefeuilleCourant());
     tableauxService.onUpdate(tableaux => this.definirCoursPortefeuilleCourant());
     dividendesService.onUpdate(dividendes => this.definirCoursPortefeuilleCourant());
 
