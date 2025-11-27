@@ -8,8 +8,8 @@ import {TableModule} from 'primeng/table';
 import {DatePipe} from '@angular/common';
 import {PopoverActionsValeurComponent} from '../popover-actions-valeur/popover-actions-valeur.component';
 import {DTOValeur} from '../../../services/valeurs/dto-valeur.interface';
-import {VueUtil} from '../../../services/commun/vue-util.class';
 import {DialogChargerLienComponent} from '../../commun/dialog-charger-lien/dialog-charger-lien.component';
+import {IconeVariation} from '../../../directives/icone-variation';
 
 @Component({
   selector: 'app-dialog-evaluation-actualites',
@@ -20,7 +20,8 @@ import {DialogChargerLienComponent} from '../../commun/dialog-charger-lien/dialo
     TableModule,
     DatePipe,
     PopoverActionsValeurComponent,
-    DialogChargerLienComponent
+    DialogChargerLienComponent,
+    IconeVariation
   ],
   templateUrl: './dialog-evaluation-actualites.component.html',
   styleUrls: ['./dialog-evaluation-actualites.component.sass', '../../commun/barre-superieure.sass']
@@ -41,7 +42,6 @@ export class DialogEvaluationActualitesComponent {
   loading: boolean = false;
   heure?: Date;
   actualites?: Array<DTOActualitesZoneBourse>;
-  protected readonly VueUtil = VueUtil;
 
   constructor(private zoneBourseService: ZoneBourseService) {
   }

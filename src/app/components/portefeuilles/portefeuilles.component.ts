@@ -20,7 +20,6 @@ import {TypesColonnesPortefeuille} from '../../services/tableaux/types-colonnes-
 import {ColonneDecoree} from './colonne-decoree.class';
 import {BreakpointObserver} from '@angular/cdk/layout';
 import {DialogActualitesComponent} from '../cours/dialog-actualites/dialog-actualites.component';
-import {VueUtil} from '../../services/commun/vue-util.class';
 import {
   DialogEvaluationActualitesComponent
 } from '../cours/dialog-evaluation-actualites/dialog-evaluation-actualites.component';
@@ -30,6 +29,7 @@ import {
 } from '../parametrage/sauvegarde-restauration/sauvegarde-restauration.component';
 import {DividendesService} from '../../services/dividendes/dividendes.service';
 import {Tab, TabList, TabPanel, TabPanels, Tabs} from 'primeng/tabs';
+import {IconeVariation} from '../../directives/icone-variation';
 
 @Component({
   selector: 'app-portefeuilles',
@@ -55,7 +55,8 @@ import {Tab, TabList, TabPanel, TabPanels, Tabs} from 'primeng/tabs';
     TabList,
     Tab,
     TabPanels,
-    TabPanel
+    TabPanel,
+    IconeVariation
   ],
   templateUrl: './portefeuilles.component.html',
   styleUrls: ['./tabs-panel.sass', './portefeuilles.component.sass', '../commun/titre.sass']
@@ -75,7 +76,6 @@ export class PortefeuillesComponent implements OnInit {
   protected date?: string;
   portefeuillesAvecCours: Array<PortefeuilleAvecCours> = [];
   idxPortefeuilleCourant: number = -1;
-  protected readonly VueUtil = VueUtil;
 
   // cours pour lequel afficher les courbes
   coursSelectionne: CoursPortefeuille | undefined = undefined;

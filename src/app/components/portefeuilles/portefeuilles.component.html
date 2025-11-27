@@ -67,7 +67,7 @@
                         [class]="evolutionColonne(colonneDecoree, cours)">
                         @if (colonneDecoree.id === 0) {
                           <span class="pi"
-                                [class]="VueUtil.iconeVariation(cours.var1)"
+                                [appIconeVariation]="cours.var1"
                                 title="{{ 'COMPOSANTS.PORTEFEUILLES.ACTIONS' | translate }}"></span>
                         }
                         @switch (colonneDecoree.colonne.type) {
@@ -108,7 +108,8 @@
                             {{ cours[colonneDecoree.id] | percent:'1.2-2' }}
                           }
                           @case (TypesColonnesPortefeuille.DIVIDENDES) {
-                            <app-colonne-dividendes [reduit]="true" [dividendes]="cours[colonneDecoree.id]"></app-colonne-dividendes>
+                            <app-colonne-dividendes [reduit]="true"
+                                                    [dividendes]="cours[colonneDecoree.id]"></app-colonne-dividendes>
                           }
                           @default {
                             {{ cours[colonneDecoree.id] }}

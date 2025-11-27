@@ -38,7 +38,7 @@
         <tr (click)="onClickCours($event, cotationsTickerDecore)">
           <td>
             <span class="pi"
-                  [class]="VueUtil.iconeVariation(cotationsTickerDecore.variationOuverture)"
+                  [appIconeVariation]="cotationsTickerDecore.variationOuverture"
                   title="{{ 'COMPOSANTS.PORTEFEUILLES.ACTIONS_VALEUR.DIALOG_COTATIONS_VALEURS_PORTEFEUILLE.ACTIONS' | translate }}"></span>
             {{ cotationsTickerDecore.dto.valeur.libelle }}
           </td>

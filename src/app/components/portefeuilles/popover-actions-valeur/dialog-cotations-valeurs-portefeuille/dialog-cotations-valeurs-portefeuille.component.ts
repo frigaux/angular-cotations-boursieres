@@ -10,11 +10,11 @@ import {CurrencyPipe, PercentPipe} from '@angular/common';
 import {UIChart} from 'primeng/chart';
 import {TableModule} from 'primeng/table';
 import {DialogCotationsValeurComponent} from '../dialog-cotations-valeur/dialog-cotations-valeur.component';
-import {VueUtil} from '../../../../services/commun/vue-util.class';
 import {PopoverActionsValeurComponent} from './popover-actions-valeur/popover-actions-valeur.component';
 import {ColonneDividendesComponent} from '../../colonnes/dividendes/colonne-dividendes.component';
 import {DividendesService} from '../../../../services/dividendes/dividendes.service';
 import {ClassVariation} from '../../../../directives/class-variation';
+import {IconeVariation} from '../../../../directives/icone-variation';
 
 @Component({
   selector: 'app-dialog-cotations-valeurs-portefeuille',
@@ -29,7 +29,8 @@ import {ClassVariation} from '../../../../directives/class-variation';
     TableModule,
     PopoverActionsValeurComponent,
     ColonneDividendesComponent,
-    ClassVariation
+    ClassVariation,
+    IconeVariation
   ],
   templateUrl: './dialog-cotations-valeurs-portefeuille.component.html',
   styleUrls: ['./dialog-cotations-valeurs-portefeuille.component.sass', '../../../commun/barre-superieure.sass']
@@ -44,7 +45,6 @@ export class DialogCotationsValeursPortefeuilleComponent {
   loading: boolean = false;
   portefeuilleAvecCours?: PortefeuilleAvecCours;
   cotationsTickersDecores?: Array<CotationsValeurBoursoramaDecore>;
-  protected readonly VueUtil = VueUtil;
 
   constructor(private translateService: TranslateService,
               private dividendesService: DividendesService,

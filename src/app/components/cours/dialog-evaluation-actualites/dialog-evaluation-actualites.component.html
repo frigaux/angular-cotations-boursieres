@@ -36,7 +36,7 @@
           <td>
             <div>
               <span class="pi"
-                    [class]="VueUtil.iconeVariation(actualite.score)"
+                    [appIconeVariation]="actualite.score"
                     title="{{ 'COMPOSANTS.COURS.EVALUATION_ACTUALITES.ACTIONS' | translate }}"
                     (click)="afficherActions($event, actualite)"></span>
               <span>{{ actualite.score }}</span>
