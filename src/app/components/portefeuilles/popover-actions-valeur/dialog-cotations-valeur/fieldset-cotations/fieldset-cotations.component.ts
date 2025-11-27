@@ -3,7 +3,7 @@ import {CurrencyPipe, PercentPipe} from '@angular/common';
 import {Fieldset} from 'primeng/fieldset';
 import {JaugeComponent} from '../../../../commun/jauge/jauge.component';
 import {TranslatePipe} from '@ngx-translate/core';
-import {VueUtil} from '../../../../commun/vue-util.class';
+import {VueUtil} from '../../../../../services/commun/vue-util.class';
 import {CotationsValeurBoursoramaDecore} from '../cotations-valeur-boursorama-genere.class';
 
 @Component({

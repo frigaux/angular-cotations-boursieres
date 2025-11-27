@@ -8,7 +8,7 @@ import {TableModule} from 'primeng/table';
 import {DatePipe} from '@angular/common';
 import {PopoverActionsValeurComponent} from '../popover-actions-valeur/popover-actions-valeur.component';
 import {DTOValeur} from '../../../services/valeurs/dto-valeur.interface';
-import {VueUtil} from '../../commun/vue-util.class';
+import {VueUtil} from '../../../services/commun/vue-util.class';
 import {DialogChargerLienComponent} from '../../commun/dialog-charger-lien/dialog-charger-lien.component';
 
 @Component({

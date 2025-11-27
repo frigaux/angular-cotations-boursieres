@@ -18,7 +18,7 @@ import {FiltreDecore} from './selecteur-filtre/filtre-decore.class';
 import {DialogImportExportComponent} from './dialog-editeur-filtres/import-export/dialog-import-export.component';
 import {PortefeuillesService} from '../../services/portefeuilles/portefeuilles.service';
 import {DialogActualitesComponent} from './dialog-actualites/dialog-actualites.component';
-import {VueUtil} from '../commun/vue-util.class';
+import {VueUtil} from '../../services/commun/vue-util.class';
 import {
   DialogEvaluationActualitesComponent
 } from './dialog-evaluation-actualites/dialog-evaluation-actualites.component';

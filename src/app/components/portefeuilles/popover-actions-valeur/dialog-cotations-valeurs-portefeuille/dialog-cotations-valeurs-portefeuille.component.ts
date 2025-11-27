@@ -10,7 +10,7 @@ import {CurrencyPipe, PercentPipe} from '@angular/common';
 import {UIChart} from 'primeng/chart';
 import {TableModule} from 'primeng/table';
 import {DialogCotationsValeurComponent} from '../dialog-cotations-valeur/dialog-cotations-valeur.component';
-import {VueUtil} from '../../../commun/vue-util.class';
+import {VueUtil} from '../../../../services/commun/vue-util.class';
 import {PopoverActionsValeurComponent} from './popover-actions-valeur/popover-actions-valeur.component';
 import {ColonneDividendesComponent} from '../../colonnes/dividendes/colonne-dividendes.component';
 import {DividendesService} from '../../../../services/dividendes/dividendes.service';

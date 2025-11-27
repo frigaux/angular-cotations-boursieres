@@ -20,7 +20,7 @@ import {TypesColonnesPortefeuille} from '../../services/tableaux/types-colonnes-
 import {ColonneDecoree} from './colonne-decoree.class';
 import {BreakpointObserver} from '@angular/cdk/layout';
 import {DialogActualitesComponent} from '../cours/dialog-actualites/dialog-actualites.component';
-import {VueUtil} from '../commun/vue-util.class';
+import {VueUtil} from '../../services/commun/vue-util.class';
 import {
   DialogEvaluationActualitesComponent
 } from '../cours/dialog-evaluation-actualites/dialog-evaluation-actualites.component';

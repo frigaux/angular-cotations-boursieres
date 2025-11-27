@@ -7,7 +7,7 @@ import {BoursoramaService} from '../../../../services/boursorama/boursorama.serv
 import {UIChart} from 'primeng/chart';
 import {Fieldset} from 'primeng/fieldset';
 import {CotationsValeurBoursoramaDecore} from './cotations-valeur-boursorama-genere.class';
-import {VueUtil} from '../../../commun/vue-util.class';
+import {VueUtil} from '../../../../services/commun/vue-util.class';
 import {DialogChargerLienComponent} from '../../../commun/dialog-charger-lien/dialog-charger-lien.component';
 import {DTOInformation} from '../../../../services/boursorama/dto-information.interface';
 import {DTOValeur} from '../../../../services/boursorama/dto-valeur.interface';
