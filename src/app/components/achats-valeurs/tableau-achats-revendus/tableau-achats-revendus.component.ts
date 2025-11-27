@@ -5,6 +5,7 @@ import {ColonneDividendesComponent} from '../../portefeuilles/colonnes/dividende
 import {CurrencyPipe, DatePipe, DecimalPipe, PercentPipe} from '@angular/common';
 import {TableModule} from 'primeng/table';
 import {TranslatePipe} from '@ngx-translate/core';
+import {ClassVariation} from '../../../directives/class-variation';
 
 @Component({
   selector: 'app-tableau-achats-revendus',
@@ -15,7 +16,8 @@ import {TranslatePipe} from '@ngx-translate/core';
     DecimalPipe,
     PercentPipe,
     TableModule,
-    TranslatePipe
+    TranslatePipe,
+    ClassVariation
   ],
   templateUrl: './tableau-achats-revendus.component.html',
   styleUrls: ['./tableau-achats-revendus.component.sass', '../tableau-achats-non-revendus/tableau-achats-non-revendus.component.sass']
@@ -71,12 +73,5 @@ export class TableauAchatsRevendusComponent {
 
   suppressionAchat(event: PointerEvent, achatValeurDecore: AchatValeurDecore) {
     this.suppression.emit({event, achatValeurDecore});
-  }
-
-  evolutionVariation(variation?: number): string {
-    if (variation === undefined) {
-      return '';
-    }
-    return variation >= 0 ? 'positive' : 'negative';
   }
 }

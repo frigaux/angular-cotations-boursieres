@@ -10,6 +10,7 @@ import {LoaderComponent} from '../../loader/loader.component';
 import {
   DialogAchatsValeurComponent
 } from '../../portefeuilles/popover-actions-valeur/dialog-achats-valeur/dialog-achats-valeur.component';
+import {ClassVariation} from '../../../directives/class-variation';
 
 @Component({
   selector: 'app-tableau-achats-non-revendus',
@@ -22,7 +23,8 @@ import {
     TableModule,
     ColonneDividendesComponent,
     LoaderComponent,
-    DialogAchatsValeurComponent
+    DialogAchatsValeurComponent,
+    ClassVariation
   ],
   templateUrl: './tableau-achats-non-revendus.component.html',
   styleUrl: './tableau-achats-non-revendus.component.sass'
@@ -95,13 +97,6 @@ export class TableauAchatsNonRevendusComponent {
 
   suppressionAchat(event: PointerEvent, achatValeurDecore: AchatValeurDecore) {
     this.suppression.emit({event, achatValeurDecore});
-  }
-
-  evolutionVariation(variation?: number): string {
-    if (variation === undefined) {
-      return '';
-    }
-    return variation >= 0 ? 'positive' : 'negative';
   }
 
   protected achats(event: PointerEvent, achatValeurDecore: AchatValeurDecore) {

@@ -14,6 +14,7 @@ import {VueUtil} from '../../../../services/commun/vue-util.class';
 import {PopoverActionsValeurComponent} from './popover-actions-valeur/popover-actions-valeur.component';
 import {ColonneDividendesComponent} from '../../colonnes/dividendes/colonne-dividendes.component';
 import {DividendesService} from '../../../../services/dividendes/dividendes.service';
+import {ClassVariation} from '../../../../directives/class-variation';
 
 @Component({
   selector: 'app-dialog-cotations-valeurs-portefeuille',
@@ -27,7 +28,8 @@ import {DividendesService} from '../../../../services/dividendes/dividendes.serv
     CurrencyPipe,
     TableModule,
     PopoverActionsValeurComponent,
-    ColonneDividendesComponent
+    ColonneDividendesComponent,
+    ClassVariation
   ],
   templateUrl: './dialog-cotations-valeurs-portefeuille.component.html',
   styleUrls: ['./dialog-cotations-valeurs-portefeuille.component.sass', '../../../commun/barre-superieure.sass']

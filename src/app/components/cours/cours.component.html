@@ -72,7 +72,7 @@
                           title="{{ 'COMPOSANTS.COURS.ACTIONS' | translate }}"></span>
                     {{ cours.libelle }}
                   </td>
-                  <td [class]="VueUtil.evolutionVariation(cours.var1)">
+                  <td [appClassVariation]="cours.var1">
                     {{ cours.var1 | percent:'1.2-2' }}
                   </td>
                   <td>{{ cours.cloture | currency:'EUR':'symbol' }}</td>

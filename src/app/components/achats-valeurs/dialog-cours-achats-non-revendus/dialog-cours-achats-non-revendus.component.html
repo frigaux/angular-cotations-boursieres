@@ -34,7 +34,7 @@
           </td>
           <td>{{ achatValeurDecore.achatDecore.achat.prix  | currency:'EUR':'symbol' }}</td>
           <td>{{ achatValeurDecore.achatDecore.cours | currency:'EUR':'symbol' }}</td>
-          <td [class]="evolutionVariation(achatValeurDecore.achatDecore.variationAchat)">
+          <td [appClassVariation]="achatValeurDecore.achatDecore.variationAchat">
             {{ achatValeurDecore.achatDecore.variationAchat | percent:'1.2-2' }}
           </td>
           <td>{{ achatValeurDecore.achatDecore.variationHaut | percent:'1.2-2' }}</td>

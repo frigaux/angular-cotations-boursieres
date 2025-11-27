@@ -8,9 +8,5 @@ export class VueUtil {
       return 'pi-arrow-circle-down';
     }
   }
-
-  static evolutionVariation(variation: number): string {
-    return variation >= 0 ? 'positive' : 'negative';
-  }
 }
 

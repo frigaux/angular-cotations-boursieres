@@ -18,11 +18,11 @@ import {FiltreDecore} from './selecteur-filtre/filtre-decore.class';
 import {DialogImportExportComponent} from './dialog-editeur-filtres/import-export/dialog-import-export.component';
 import {PortefeuillesService} from '../../services/portefeuilles/portefeuilles.service';
 import {DialogActualitesComponent} from './dialog-actualites/dialog-actualites.component';
-import {VueUtil} from '../../services/commun/vue-util.class';
 import {
   DialogEvaluationActualitesComponent
 } from './dialog-evaluation-actualites/dialog-evaluation-actualites.component';
 import {Tab, TabList, TabPanel, TabPanels, Tabs} from 'primeng/tabs';
+import {ClassVariation} from '../../directives/class-variation';
 
 @Component({
   selector: 'app-cours',
@@ -44,7 +44,8 @@ import {Tab, TabList, TabPanel, TabPanels, Tabs} from 'primeng/tabs';
     TabList,
     TabPanel,
     TabPanels,
-    Tabs
+    Tabs,
+    ClassVariation
   ],
   templateUrl: './cours.component.html',
   styleUrls: ['../portefeuilles/tabs-panel.sass', './cours.component.sass', '../commun/titre.sass']
@@ -59,7 +60,6 @@ export class CoursComponent implements OnInit {
   date?: string;
   marches?: MarcheDecore[];
   idxMarcheCourant: number = NaN;
-  protected readonly VueUtil = VueUtil;
   protected valeurByTicker?: Map<string, DTOValeur>;
 
   // cours pour lequel afficher les moyennes mobiles

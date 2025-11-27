@@ -8,6 +8,7 @@ import {TableModule} from 'primeng/table';
 import {CurrencyPipe, PercentPipe} from '@angular/common';
 import {ColonneDividendesComponent} from '../../portefeuilles/colonnes/dividendes/colonne-dividendes.component';
 import {Dialog} from 'primeng/dialog';
+import {ClassVariation} from '../../../directives/class-variation';
 
 @Component({
   selector: 'app-dialog-cours-achats-non-revendus',
@@ -18,7 +19,8 @@ import {Dialog} from 'primeng/dialog';
     CurrencyPipe,
     PercentPipe,
     ColonneDividendesComponent,
-    Dialog
+    Dialog,
+    ClassVariation
   ],
   templateUrl: './dialog-cours-achats-non-revendus.component.html',
   styleUrls: ['./dialog-cours-achats-non-revendus.component.sass', '../../commun/barre-superieure.sass']
@@ -60,13 +62,6 @@ export class DialogCoursAchatsNonRevendusComponent {
           this.loading = false;
         });
     }
-  }
-
-  protected evolutionVariation(variation?: number): string {
-    if (variation === undefined) {
-      return '';
-    }
-    return variation >= 0 ? 'positive' : 'negative';
   }
 
   protected fermer() {

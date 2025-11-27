@@ -12,13 +12,15 @@
         [pourcentage]="cotationsTickerDecore.pourcentageCours"></app-jauge>
       <div>
         <label>{{ 'COMPOSANTS.PORTEFEUILLES.ACTIONS_VALEUR.DIALOG_COTATIONS_VALEUR.COTATIONS.VAR_OUVERTURE' | translate }}</label>
-        <span
-          [class]="VueUtil.evolutionVariation(cotationsTickerDecore.variationOuverture)">{{ cotationsTickerDecore.variationOuverture  | percent:'1.2-2' }}</span>
+        <span [appClassVariation]="cotationsTickerDecore.variationOuverture">
+          {{ cotationsTickerDecore.variationOuverture  | percent:'1.2-2' }}
+        </span>
       </div>
       <div>
         <label>{{ 'COMPOSANTS.PORTEFEUILLES.ACTIONS_VALEUR.DIALOG_COTATIONS_VALEUR.COTATIONS.VAR_CLOTURE_VEILLE' | translate }}</label>
-        <span
-          [class]="VueUtil.evolutionVariation(cotationsTickerDecore.variationClotureVeille)">{{ cotationsTickerDecore.variationClotureVeille  | percent:'1.2-2' }}</span>
+        <span [appClassVariation]="cotationsTickerDecore.variationClotureVeille">
+          {{ cotationsTickerDecore.variationClotureVeille  | percent:'1.2-2' }}
+        </span>
       </div>
     </div>
   </p-fieldset>

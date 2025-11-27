@@ -38,14 +38,14 @@
         <td>{{ achatValeurDecore.achatDecore.achat.prix  | currency:'EUR':'symbol' }}</td>
         <td>{{ achatValeurDecore.achatDecore.achat.quantite  | number }}</td>
         <td>{{ (achatValeurDecore.achatDecore.achat.prix * achatValeurDecore.achatDecore.achat.quantite)  | currency:'EUR':'symbol' }}</td>
-        <td
-          [class]="evolutionVariation(achatValeurDecore.achatDecore.variationAchat)">{{ achatValeurDecore.achatDecore.achat.prixRevente | currency:'EUR':'symbol' }}
+        <td [appClassVariation]="achatValeurDecore.achatDecore.variationAchat">
+          {{ achatValeurDecore.achatDecore.achat.prixRevente | currency:'EUR':'symbol' }}
         </td>
-        <td [class]="evolutionVariation(achatValeurDecore.achatDecore.variationAchat)">
+        <td [appClassVariation]="achatValeurDecore.achatDecore.variationAchat">
           {{ achatValeurDecore.achatDecore.variationAchat | percent:'1.2-2' }}
         </td>
-        <td
-          [class]="evolutionVariation(achatValeurDecore.achatDecore.variationAchat)">{{ (achatValeurDecore.achatDecore.achat.prixRevente! * achatValeurDecore.achatDecore.achat.quantite)  | currency:'EUR':'symbol' }}
+        <td [appClassVariation]="achatValeurDecore.achatDecore.variationAchat">
+          {{ (achatValeurDecore.achatDecore.achat.prixRevente! * achatValeurDecore.achatDecore.achat.quantite)  | currency:'EUR':'symbol' }}
         </td>
       </tr>
     </ng-template>
@@ -59,10 +59,10 @@
         <td>{{ totalQuantite  | number }}</td>
         <td>{{ totauxAchats  | currency:'EUR':'symbol' }}</td>
         <td></td>
-        <td [class]="evolutionVariation(variationAchats)">
+        <td [appClassVariation]="variationAchats">
           {{ variationAchats | percent:'1.2-2' }}
         </td>
-        <td [class]="evolutionVariation(variationAchats)">
+        <td [appClassVariation]="variationAchats">
           {{ totauxVentes  | currency:'EUR':'symbol' }}
         </td>
       </tr>

@@ -56,10 +56,10 @@
             <p-chart type="bar" [data]="cotationsTickerDecore.ordresDataBarChart"
                      [options]="cotationsTickerDecore.ordresOptionsBarChart" height="4rem" width="12rem"/>
           </td>
-          <td [class]="VueUtil.evolutionVariation(cotationsTickerDecore.variationOuverture)">
+          <td [appClassVariation]="cotationsTickerDecore.variationOuverture">
             {{ cotationsTickerDecore.variationOuverture  | percent:'1.2-2' }}
           </td>
-          <td [class]="VueUtil.evolutionVariation(cotationsTickerDecore.variationClotureVeille)">
+          <td [appClassVariation]="cotationsTickerDecore.variationClotureVeille">
             {{ cotationsTickerDecore.variationClotureVeille  | percent:'1.2-2' }}
           </td>
         </tr>
