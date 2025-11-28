@@ -1,0 +1,12 @@
+<h1>{{ 'COMPOSANTS.PARAMETRAGE.MODELE_APPRENTISSAGE_AUTOMATIQUE.MODELE_TENSORFLOW' | translate }}</h1>
+<div>
+  <p-button
+    label="{{ 'COMPOSANTS.PARAMETRAGE.MODELE_APPRENTISSAGE_AUTOMATIQUE.ENTRAINER_MODELE' | translate }}"
+    (onClick)="entrainerModele()"/>
+  @if (model) {
+    <p-button
+      label="{{ 'COMPOSANTS.PARAMETRAGE.MODELE_APPRENTISSAGE_AUTOMATIQUE.PREDIRE_AVEC_LE_MODELE' | translate }}"
+      (onClick)="predireAvecLeModele()"/>
+    <span>{{ prediction }}</span>
+  }
+</div>

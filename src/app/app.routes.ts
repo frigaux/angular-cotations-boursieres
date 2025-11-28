@@ -15,6 +15,9 @@ import {
   SauvegardeRestaurationComponent
 } from './components/parametrage/sauvegarde-restauration/sauvegarde-restauration.component';
 import {DividendesComponent} from './components/dividendes/dividendes.component';
+import {
+  ModeleApprentissageAutomatiqueComponent
+} from './components/parametrage/modele-apprentissage-automatique/modele-apprentissage-automatique.component';
 
 export const routes: Routes = [
   {
@@ -63,6 +66,11 @@ export const routes: Routes = [
   {
     path: 'sauvegarde-restauration',
     component: SauvegardeRestaurationComponent,
+    canActivate: [authentificationGuard]
+  },
+  {
+    path: 'modele-apprentissage-automatique',
+    component: ModeleApprentissageAutomatiqueComponent,
     canActivate: [authentificationGuard]
   },
   {path: '**', redirectTo: '/authentification'}

@@ -9,7 +9,8 @@
     "PORTEFEUILLES": "Portefeuilles",
     "GESTION_PORTEFEUILLES": "Gestion des portefeuilles",
     "GESTION_TABLEAUX": "Gestion des tableaux",
-    "SAUVEGARDE_RESTAURATION": "Sauvegarde / restauration"
+    "SAUVEGARDE_RESTAURATION": "Sauvegarde / restauration",
+    "MODELE_APPRENTISSAGE_AUTOMATIQUE": "Modèle d'apprentissage automatique"
   },
   "COMPOSANTS": {
     "COMMUN": {
@@ -29,11 +30,12 @@
       "ACHATS_VALEURS": "Achats",
       "DIVIDENDES": "Dividendes",
       "PORTEFEUILLES": "Portefeuilles",
-      "PARAMETRAGE": "Paramétrage",
-      "/PARAMETRAGE": {
+      "SOUS_MENU_PARAMETRAGE": "Paramétrage",
+      "PARAMETRAGE": {
         "GESTION_PORTEFEUILLES": "Gestion des portefeuilles",
         "GESTION_TABLEAUX": "Gestion des tableaux",
-        "SAUVEGARDE_RESTAURATION": "Sauvegarde / restauration"
+        "SAUVEGARDE_RESTAURATION": "Sauvegarde / restauration",
+        "MODELE_APPRENTISSAGE_AUTOMATIQUE": "Modèle d'apprentissage automatique"
       }
     },
     "VALEURS": {
@@ -507,6 +509,11 @@
           "RESTAURER": "Restaurer"
         },
         "RESTAURATION_REUSSIE": "Restauration réussie !"
+      },
+      "MODELE_APPRENTISSAGE_AUTOMATIQUE": {
+        "MODELE_TENSORFLOW": "Modele TensorFlow",
+        "ENTRAINER_MODELE": "Entraîner le modèle",
+        "PREDIRE_AVEC_LE_MODELE": "Prédire avec le modèle"
       }
     }
   },

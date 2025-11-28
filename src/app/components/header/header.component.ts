@@ -52,23 +52,28 @@ export class HeaderComponent {
       });
     }
     this.items.push({
-      label: translateService.instant('COMPOSANTS.HEADER.PARAMETRAGE'),
+      label: translateService.instant('COMPOSANTS.HEADER.SOUS_MENU_PARAMETRAGE'),
       icon: 'pi pi-cog',
       items: [
         {
-          label: translateService.instant('COMPOSANTS.HEADER./PARAMETRAGE.GESTION_PORTEFEUILLES'),
+          label: translateService.instant('COMPOSANTS.HEADER.PARAMETRAGE.GESTION_PORTEFEUILLES'),
           routerLink: 'gestion-portefeuilles',
           icon: 'pi pi-wrench'
         },
         {
-          label: translateService.instant('COMPOSANTS.HEADER./PARAMETRAGE.GESTION_TABLEAUX'),
+          label: translateService.instant('COMPOSANTS.HEADER.PARAMETRAGE.GESTION_TABLEAUX'),
           routerLink: 'gestion-tableaux',
           icon: 'pi pi-wrench'
         },
         {
-          label: translateService.instant('COMPOSANTS.HEADER./PARAMETRAGE.SAUVEGARDE_RESTAURATION'),
+          label: translateService.instant('COMPOSANTS.HEADER.PARAMETRAGE.SAUVEGARDE_RESTAURATION'),
           routerLink: 'sauvegarde-restauration',
           icon: 'pi pi-sync'
+        },
+        {
+          label: translateService.instant('COMPOSANTS.HEADER.PARAMETRAGE.MODELE_APPRENTISSAGE_AUTOMATIQUE'),
+          routerLink: 'modele-apprentissage-automatique',
+          icon: 'pi pi-wrench'
         }
       ]
     });
