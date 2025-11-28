@@ -7,7 +7,9 @@ import {Button} from 'primeng/button';
 import {FloatLabel} from 'primeng/floatlabel';
 import {InputText} from 'primeng/inputtext';
 import {FormArray, FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms';
-import {DialogEditeurConditionAlerteComponent} from './editeur-condition-alerte/dialog-editeur-condition-alerte.component';
+import {
+  DialogEditeurConditionAlerteComponent
+} from './editeur-condition-alerte/dialog-editeur-condition-alerte.component';
 import {DialogueService} from '../../../../services/dialogue/dialogue.service';
 import {ConfirmationService} from 'primeng/api';
 import {PortefeuillesService} from '../../../../services/portefeuilles/portefeuilles.service';
@@ -57,7 +59,7 @@ export class DialogEditeurAlertesComponent {
   private intercepteurPortefeuille(portefeuille: DTOPortefeuille | undefined) {
     this.portefeuilleEnModification = portefeuille;
     if (this.portefeuilleEnModification) {
-      this.titre = this.translateService.instant('COMPOSANTS.PORTEFEUILLES.GESTION_PORTEFEUILLES.EDITEUR_ALERTES.MODIFICATION_PORTEFEUILLE', {'nom': this.portefeuilleEnModification.nom});
+      this.titre = this.translateService.instant('COMPOSANTS.PARAMETRAGE.GESTION_PORTEFEUILLES.EDITEUR_ALERTES.MODIFICATION_PORTEFEUILLE', {'nom': this.portefeuilleEnModification.nom});
       this.alertes = JSON.parse(JSON.stringify(this.portefeuilleEnModification.alertes));
       this.noms.clear();
       this.alertes.forEach(alerte => this.noms.push(this.formBuilder.control(alerte.nom, [Validators.required])));
@@ -83,7 +85,7 @@ export class DialogEditeurAlertesComponent {
     this.dialogueService.confirmationSuppression(
       this.confirmationService,
       event,
-      this.translateService.instant('COMPOSANTS.PORTEFEUILLES.GESTION_PORTEFEUILLES.EDITEUR_ALERTES.CONFIRMATION_SUPPRESSION', {'nom': this.noms.at(idx).value}),
+      this.translateService.instant('COMPOSANTS.PARAMETRAGE.GESTION_PORTEFEUILLES.EDITEUR_ALERTES.CONFIRMATION_SUPPRESSION', {'nom': this.noms.at(idx).value}),
       () => {
         this.supprimerAlerte(idx);
       }

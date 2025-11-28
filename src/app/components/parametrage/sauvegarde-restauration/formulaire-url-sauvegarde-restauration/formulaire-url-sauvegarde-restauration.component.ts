@@ -18,7 +18,7 @@ import {ParametrageService} from '../../../../services/parametrage/parametrage.s
     InputText
   ],
   templateUrl: './formulaire-url-sauvegarde-restauration.component.html',
-  styleUrls: ['./formulaire-url-sauvegarde-restauration.component.sass', '../../../portefeuilles/gestion-portefeuilles/dialog-formulaire-modification/dialog-formulaire-modification.component.sass']
+  styleUrls: ['./formulaire-url-sauvegarde-restauration.component.sass', '../../gestion-portefeuilles/dialog-formulaire-modification/dialog-formulaire-modification.component.sass']
 })
 export class FormulaireUrlSauvegardeRestaurationComponent implements OnInit {
   // injections

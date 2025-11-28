@@ -15,7 +15,9 @@ import {InputText} from 'primeng/inputtext';
 import {TranslatePipe, TranslateService} from '@ngx-translate/core';
 import {ConfirmationService} from 'primeng/api';
 import {DialogueService} from '../../../services/dialogue/dialogue.service';
-import {DialogEditeurConditionFiltreComponent} from './editeur-condition-filtre/dialog-editeur-condition-filtre.component';
+import {
+  DialogEditeurConditionFiltreComponent
+} from './editeur-condition-filtre/dialog-editeur-condition-filtre.component';
 import {DTOFiltre} from '../../../services/cours/dto-filtre.interface';
 import {CoursService} from '../../../services/cours/cours.service';
 
@@ -32,7 +34,7 @@ import {CoursService} from '../../../services/cours/cours.service';
     DialogEditeurConditionFiltreComponent
   ],
   templateUrl: './dialog-editeur-filtres.component.html',
-  styleUrls: ['../../portefeuilles/gestion-portefeuilles/dialog-editeur-alertes/dialog-editeur-alertes.component.sass', './dialog-editeur-filtres.component.sass']
+  styleUrls: ['../../parametrage/gestion-portefeuilles/dialog-editeur-alertes/dialog-editeur-alertes.component.sass', './dialog-editeur-filtres.component.sass']
 })
 export class DialogEditeurFiltresComponent {
   private formBuilder = inject(FormBuilder);

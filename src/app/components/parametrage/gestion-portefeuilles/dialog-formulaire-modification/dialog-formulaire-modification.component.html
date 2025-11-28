@@ -1,6 +1,6 @@
 @if (portefeuilleEnModification !== undefined) {
   <p-dialog
-    [header]="'COMPOSANTS.PORTEFEUILLES.GESTION_PORTEFEUILLES.FORMULAIRE_MODIFICATION.MODIFICATION_NOM' | translate : {'nom': portefeuilleEnModification.nom}"
+    [header]="'COMPOSANTS.PARAMETRAGE.GESTION_PORTEFEUILLES.FORMULAIRE_MODIFICATION.MODIFICATION_NOM' | translate : {'nom': portefeuilleEnModification.nom}"
     [modal]="true" [visible]="true" [closable]="false">
     <form [formGroup]="formulaire"
           (ngSubmit)="modifierNomPortefeuille()">
@@ -8,7 +8,7 @@
         <p-floatlabel>
           <input pInputText [pAutoFocus]="true" id="nom" formControlName="nom" autocomplete="off"/>
           <label for="nom">
-            {{ 'COMPOSANTS.PORTEFEUILLES.GESTION_PORTEFEUILLES.FORMULAIRE_MODIFICATION.NOM' | translate }}
+            {{ 'COMPOSANTS.PARAMETRAGE.GESTION_PORTEFEUILLES.FORMULAIRE_MODIFICATION.NOM' | translate }}
           </label>
         </p-floatlabel>
       </div>
@@ -19,7 +19,7 @@
       </div>
       <div>
         <p-button
-          label="{{ 'COMPOSANTS.PORTEFEUILLES.GESTION_PORTEFEUILLES.FORMULAIRE_MODIFICATION.RENOMMER' | translate }}"
+          label="{{ 'COMPOSANTS.PARAMETRAGE.GESTION_PORTEFEUILLES.FORMULAIRE_MODIFICATION.RENOMMER' | translate }}"
           type="submit" severity="danger"/>
       </div>
     </form>

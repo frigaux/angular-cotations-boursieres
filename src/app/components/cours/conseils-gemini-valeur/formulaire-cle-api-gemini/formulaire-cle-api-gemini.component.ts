@@ -18,7 +18,7 @@ import {InputText} from 'primeng/inputtext';
     InputText
   ],
   templateUrl: './formulaire-cle-api-gemini.component.html',
-  styleUrls: ['./formulaire-cle-api-gemini.component.sass', '../../../portefeuilles/gestion-portefeuilles/dialog-formulaire-modification/dialog-formulaire-modification.component.sass']
+  styleUrls: ['./formulaire-cle-api-gemini.component.sass', '../../../parametrage/gestion-portefeuilles/dialog-formulaire-modification/dialog-formulaire-modification.component.sass']
 })
 export class FormulaireCleApiGeminiComponent implements OnInit {
   // injections

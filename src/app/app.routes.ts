@@ -8,7 +8,7 @@ import {ErreurTechniqueComponent} from './components/erreur-technique/erreur-tec
 import {CoursComponent} from './components/cours/cours.component';
 import {
   GestionPortefeuillesComponent
-} from './components/portefeuilles/gestion-portefeuilles/gestion-portefeuilles.component';
+} from './components/parametrage/gestion-portefeuilles/gestion-portefeuilles.component';
 import {GestionTableauxComponent} from './components/gestion-tableaux/gestion-tableaux.component';
 import {AchatsValeursComponent} from './components/achats-valeurs/achats-valeurs.component';
 import {

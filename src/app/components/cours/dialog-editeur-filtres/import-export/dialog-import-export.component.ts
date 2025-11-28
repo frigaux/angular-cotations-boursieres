@@ -21,7 +21,7 @@ import {CoursService} from '../../../../services/cours/cours.service';
     NgClass
   ],
   templateUrl: './dialog-import-export.component.html',
-  styleUrls: ['../../../portefeuilles/gestion-portefeuilles/dialog-import-export/dialog-import-export.component.sass', './dialog-import-export.component.sass']
+  styleUrls: ['../../../parametrage/gestion-portefeuilles/dialog-import-export/dialog-import-export.component.sass', './dialog-import-export.component.sass']
 })
 export class DialogImportExportComponent {
   visible: boolean = false;

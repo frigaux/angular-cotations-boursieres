@@ -45,7 +45,7 @@ export class DialogSelecteurValeursComponent {
   private intercepteurPortefeuille(portefeuille: DTOPortefeuille | undefined) {
     this.portefeuilleEnModification = portefeuille;
     if (this.portefeuilleEnModification) {
-      this.titre = this.translateService.instant('COMPOSANTS.PORTEFEUILLES.GESTION_PORTEFEUILLES.SELECTEUR_VALEURS.MODIFICATION_PORTEFEUILLE', {'nom': this.portefeuilleEnModification.nom});
+      this.titre = this.translateService.instant('COMPOSANTS.PARAMETRAGE.GESTION_PORTEFEUILLES.SELECTEUR_VALEURS.MODIFICATION_PORTEFEUILLE', {'nom': this.portefeuilleEnModification.nom});
       this.initPicklist(this.portefeuilleEnModification);
     }
     return portefeuille;

@@ -53,7 +53,7 @@ export class DialogEditeurConditionAlerteComponent {
   intercepteurAlerte(alerte: DTOAlerte | undefined) {
     this.alerteEnModification = alerte;
     if (this.alerteEnModification) {
-      this.titre = this.translateService.instant('COMPOSANTS.PORTEFEUILLES.GESTION_PORTEFEUILLES.EDITEUR_ALERTES.EDITEUR_CONDITION_ALERTE.MODIFICATION_CONDITION', {'nom': this.alerteEnModification.nom});
+      this.titre = this.translateService.instant('COMPOSANTS.PARAMETRAGE.GESTION_PORTEFEUILLES.EDITEUR_ALERTES.EDITEUR_CONDITION_ALERTE.MODIFICATION_CONDITION', {'nom': this.alerteEnModification.nom});
       this.formulaire.get('condition')?.setValue(this.alerteEnModification.condition);
     }
     return alerte;

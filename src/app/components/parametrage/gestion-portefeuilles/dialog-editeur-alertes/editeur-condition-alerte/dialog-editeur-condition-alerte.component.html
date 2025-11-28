@@ -1,0 +1,54 @@
+<p-dialog [header]="titre" [modal]="true" [visible]="alerteEnModification !== undefined" [closable]="false">
+  <div class="documentation">
+    <span class="pi pi-question-circle"></span>
+    <p-card
+      [header]="'COMPOSANTS.PARAMETRAGE.GESTION_PORTEFEUILLES.EDITEUR_ALERTES.EDITEUR_CONDITION_ALERTE.DOCUMENTATION' | translate">
+      <P>
+        {{ 'COMPOSANTS.PARAMETRAGE.GESTION_PORTEFEUILLES.EDITEUR_ALERTES.EDITEUR_CONDITION_ALERTE.DOCUMENTATION_OPERATEURS' | translate }} :
+      </P>
+      <UL>
+        <LI>{{ 'COMPOSANTS.PARAMETRAGE.GESTION_PORTEFEUILLES.EDITEUR_ALERTES.EDITEUR_CONDITION_ALERTE.DOCUMENTATION_OPERATEURS_COMPARAISON' | translate }},</LI>
+        <LI>{{ 'COMPOSANTS.PARAMETRAGE.GESTION_PORTEFEUILLES.EDITEUR_ALERTES.EDITEUR_CONDITION_ALERTE.DOCUMENTATION_OPERATEURS_ARITHMETIQUES' | translate }},</LI>
+        <LI>{{ 'COMPOSANTS.PARAMETRAGE.GESTION_PORTEFEUILLES.EDITEUR_ALERTES.EDITEUR_CONDITION_ALERTE.DOCUMENTATION_OPERATEURS_LOGIQUES' | translate }},</LI>
+        <LI>{{ 'COMPOSANTS.PARAMETRAGE.GESTION_PORTEFEUILLES.EDITEUR_ALERTES.EDITEUR_CONDITION_ALERTE.DOCUMENTATION_OPERATEURS_GROUPEMENT' | translate }}.</LI>
+      </UL>
+      <P>
+        {{ 'COMPOSANTS.PARAMETRAGE.GESTION_PORTEFEUILLES.EDITEUR_ALERTES.EDITEUR_CONDITION_ALERTE.DOCUMENTATION_OPERANDES' | translate }} :
+      </P>
+      <UL>
+        <LI>{{ 'COMPOSANTS.PARAMETRAGE.GESTION_PORTEFEUILLES.EDITEUR_ALERTES.EDITEUR_CONDITION_ALERTE.DOCUMENTATION_OPERANDES_COURS' | translate }},</LI>
+        <LI>{{ 'COMPOSANTS.PARAMETRAGE.GESTION_PORTEFEUILLES.EDITEUR_ALERTES.EDITEUR_CONDITION_ALERTE.DOCUMENTATION_OPERANDES_MM' | translate }},</LI>
+        <LI>{{ 'COMPOSANTS.PARAMETRAGE.GESTION_PORTEFEUILLES.EDITEUR_ALERTES.EDITEUR_CONDITION_ALERTE.DOCUMENTATION_OPERANDES_STATISTIQUES_COURS' | translate }},</LI>
+        <LI>{{ 'COMPOSANTS.PARAMETRAGE.GESTION_PORTEFEUILLES.EDITEUR_ALERTES.EDITEUR_CONDITION_ALERTE.DOCUMENTATION_OPERANDES_VAGUES_COURS' | translate }}.</LI>
+      </UL>
+      <P>
+        {{ 'COMPOSANTS.PARAMETRAGE.GESTION_PORTEFEUILLES.EDITEUR_ALERTES.EDITEUR_CONDITION_ALERTE.DOCUMENTATION_EXEMPLE' | translate }}
+      </P>
+    </p-card>
+  </div>
+  @if (erreur !== undefined) {
+    <div class="erreur">
+      <span class="pi pi-exclamation-circle"></span>
+      <span>{{ erreur }}</span>
+    </div>
+  }
+  @if (alerteEnModification !== undefined) {
+    <form [formGroup]="formulaire"
+          (ngSubmit)="modifierConditionAlerte()">
+      <p-floatlabel>
+        <input pInputText [pAutoFocus]="true" id="condition" formControlName="condition" autocomplete="off" size="60"/>
+        <label for="condition">
+          {{ 'COMPOSANTS.PARAMETRAGE.GESTION_PORTEFEUILLES.EDITEUR_ALERTES.EDITEUR_CONDITION_ALERTE.CONDITION' | translate }}
+        </label>
+      </p-floatlabel>
+      <div class="boutons">
+        <p-button
+          label="{{ 'COMPOSANTS.COMMUN.ANNULER' | translate }}"
+          (onClick)="this.abandon.emit()" type="reset" severity="warn"/>
+        <p-button
+          label="{{ 'COMPOSANTS.PARAMETRAGE.GESTION_PORTEFEUILLES.EDITEUR_ALERTES.EDITEUR_CONDITION_ALERTE.MODIFIER' | translate }}"
+          type="submit" severity="danger"/>
+      </div>
+    </form>
+  }
+</p-dialog>

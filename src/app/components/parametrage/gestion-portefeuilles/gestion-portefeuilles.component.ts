@@ -104,7 +104,7 @@ export class GestionPortefeuillesComponent implements OnInit {
     this.dialogueService.confirmationSuppression(
       this.confirmationService,
       event,
-      this.translateService.instant('COMPOSANTS.PORTEFEUILLES.GESTION_PORTEFEUILLES.CONFIRMATION_SUPPRESSION', {'nom': this.portefeuilles[idx].nom}),
+      this.translateService.instant('COMPOSANTS.PARAMETRAGE.GESTION_PORTEFEUILLES.CONFIRMATION_SUPPRESSION', {'nom': this.portefeuilles[idx].nom}),
       () => {
         this.supprimerPortefeuille(idx);
       }

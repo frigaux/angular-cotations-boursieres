@@ -1,7 +1,7 @@
 <span class="pi pi-sync" (click)="visible = true"
-      title="{{ 'COMPOSANTS.PORTEFEUILLES.GESTION_PORTEFEUILLES.IMPORT_EXPORT.IMPORT_EXPORT' | translate }}"></span>
+      title="{{ 'COMPOSANTS.PARAMETRAGE.GESTION_PORTEFEUILLES.IMPORT_EXPORT.IMPORT_EXPORT' | translate }}"></span>
 
-<p-dialog [header]="'COMPOSANTS.PORTEFEUILLES.GESTION_PORTEFEUILLES.IMPORT_EXPORT.IMPORT_EXPORT' | translate"
+<p-dialog [header]="'COMPOSANTS.PARAMETRAGE.GESTION_PORTEFEUILLES.IMPORT_EXPORT.IMPORT_EXPORT' | translate"
           [modal]="true" (onShow)="reinitialiserVue()" [(visible)]="visible">
 
   <div class="conteneur">
@@ -10,12 +10,12 @@
                 pTextarea [(ngModel)]="configurationPortefeuilles"
                 [ngClass]="{'error': erreur !== undefined}"></textarea>
       <label for="json">
-        {{ 'COMPOSANTS.PORTEFEUILLES.GESTION_PORTEFEUILLES.IMPORT_EXPORT.CONFIGURATION' | translate }}
+        {{ 'COMPOSANTS.PARAMETRAGE.GESTION_PORTEFEUILLES.IMPORT_EXPORT.CONFIGURATION' | translate }}
       </label>
     </p-floatlabel>
 
     <div class="exemple" (click)="exemple()">
-      {{ 'COMPOSANTS.PORTEFEUILLES.GESTION_PORTEFEUILLES.IMPORT_EXPORT.EXEMPLE' | translate }}
+      {{ 'COMPOSANTS.PARAMETRAGE.GESTION_PORTEFEUILLES.IMPORT_EXPORT.EXEMPLE' | translate }}
     </div>
 
     @if (erreur !== undefined) {
@@ -27,11 +27,11 @@
 
     <div class="boutons">
       <p-button type="button" (click)="exporter()" severity="warn"
-                label="{{ 'COMPOSANTS.PORTEFEUILLES.GESTION_PORTEFEUILLES.IMPORT_EXPORT.EXPORTER' | translate }}"/>
+                label="{{ 'COMPOSANTS.PARAMETRAGE.GESTION_PORTEFEUILLES.IMPORT_EXPORT.EXPORTER' | translate }}"/>
       <p-button type="button" (click)="importer()" severity="danger"
-                label="{{ 'COMPOSANTS.PORTEFEUILLES.GESTION_PORTEFEUILLES.IMPORT_EXPORT.IMPORTER' | translate }}"/>
+                label="{{ 'COMPOSANTS.PARAMETRAGE.GESTION_PORTEFEUILLES.IMPORT_EXPORT.IMPORTER' | translate }}"/>
       <p-button type="button" (click)="toutSupprimer()" severity="danger"
-                label="{{ 'COMPOSANTS.PORTEFEUILLES.GESTION_PORTEFEUILLES.IMPORT_EXPORT.TOUT_SUPPRIMER' | translate }}"/>
+                label="{{ 'COMPOSANTS.PARAMETRAGE.GESTION_PORTEFEUILLES.IMPORT_EXPORT.TOUT_SUPPRIMER' | translate }}"/>
     </div>
   </div>
 </p-dialog>
