@@ -3,7 +3,7 @@ import {ComponentFixture, fakeAsync, TestBed} from '@angular/core/testing';
 import {DialogImportExportComponent} from './dialog-import-export.component';
 import {TranslateModule} from '@ngx-translate/core';
 import {CurrencyPipe, DatePipe, DecimalPipe, PercentPipe} from '@angular/common';
-import {TABLEAUX} from '../../../services/jdd/jdd-tableaux.dataset';
+import {TABLEAUX} from '../../../../services/jdd/jdd-tableaux.dataset';
 import {provideHttpClient} from '@angular/common/http';
 import {provideHttpClientTesting} from '@angular/common/http/testing';
 

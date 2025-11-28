@@ -1,6 +1,6 @@
 import {PasDeNomEnDoubleValidatorDirective} from './pas-de-nom-en-double-validator.directive';
 import {TestBed} from '@angular/core/testing';
-import {TABLEAUX} from '../../../../services/jdd/jdd-tableaux.dataset';
+import {TABLEAUX} from '../../../../../services/jdd/jdd-tableaux.dataset';
 import {FormControl} from '@angular/forms';
 import {input} from '@angular/core';
 import {ValidatorInput} from './validator-input.interface';

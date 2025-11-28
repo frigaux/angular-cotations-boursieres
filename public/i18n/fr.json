@@ -390,30 +390,6 @@
         }
       }
     },
-    "GESTION_TABLEAUX": {
-      "TABLEAUX": "Configuration des colonnes des tableaux",
-      "ENREGISTRER": "Enregistrer les tableaux",
-      "ENREGISTREMENT_REUSSI": "Enregistrement réussi",
-      "PAYSAGE_PORTEFEUILLE": "Orientation paysage du portefeuille",
-      "PORTRAIT_PORTEFEUILLE": "Orientation portrait du portefeuille",
-      "TABLEAU": {
-        "AJOUTER_COLONNE": "Ajouter une colonne",
-        "NOM_COLONNE": "Nom",
-        "TYPE_COLONNE": "Type",
-        "PARAMETRE_COLONNE": "Jour",
-        "TRI_COLONNE": "Tri",
-        "LARGEUR_COLONNE": "Largeur"
-      },
-      "IMPORT_EXPORT": {
-        "IMPORT_EXPORT": "Import/export de la configuration des colonnes des tableaux",
-        "CONFIGURATION": "Configuration au format JSON",
-        "EXPORTER": "Exporter",
-        "IMPORTER": "Importer",
-        "EXEMPLE_DESKTOP": "Exemple desktop",
-        "EXEMPLE_MOBILE": "Exemple mobile",
-        "EXEMPLE_TABLETTE": "Exemple tablette"
-      }
-    },
     "PARAMETRAGE": {
       "GESTION_PORTEFEUILLES": {
         "CREER": "Créer un portefeuille",
@@ -480,6 +456,30 @@
           "RECHERCHE": "Recherche par libellé",
           "SOURCE": "Valeurs disponibles",
           "TARGET": "Valeurs du portefeuille"
+        }
+      },
+      "GESTION_TABLEAUX": {
+        "TABLEAUX": "Configuration des colonnes des tableaux",
+        "ENREGISTRER": "Enregistrer les tableaux",
+        "ENREGISTREMENT_REUSSI": "Enregistrement réussi",
+        "PAYSAGE_PORTEFEUILLE": "Orientation paysage du portefeuille",
+        "PORTRAIT_PORTEFEUILLE": "Orientation portrait du portefeuille",
+        "TABLEAU": {
+          "AJOUTER_COLONNE": "Ajouter une colonne",
+          "NOM_COLONNE": "Nom",
+          "TYPE_COLONNE": "Type",
+          "PARAMETRE_COLONNE": "Jour",
+          "TRI_COLONNE": "Tri",
+          "LARGEUR_COLONNE": "Largeur"
+        },
+        "IMPORT_EXPORT": {
+          "IMPORT_EXPORT": "Import/export de la configuration des colonnes des tableaux",
+          "CONFIGURATION": "Configuration au format JSON",
+          "EXPORTER": "Exporter",
+          "IMPORTER": "Importer",
+          "EXEMPLE_DESKTOP": "Exemple desktop",
+          "EXEMPLE_MOBILE": "Exemple mobile",
+          "EXEMPLE_TABLETTE": "Exemple tablette"
         }
       },
       "SAUVEGARDE_RESTAURATION": {

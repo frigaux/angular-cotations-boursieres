@@ -1,0 +1,40 @@
+<span class="pi pi-sync" (click)="visible = true"
+      title="{{ 'COMPOSANTS.PARAMETRAGE.GESTION_TABLEAUX.IMPORT_EXPORT.IMPORT_EXPORT' | translate }}"></span>
+
+<p-dialog [header]="'COMPOSANTS.PARAMETRAGE.GESTION_TABLEAUX.IMPORT_EXPORT.IMPORT_EXPORT' | translate"
+          [modal]="true" (onShow)="reinitialiserVue()" [(visible)]="visible">
+
+  <div class="conteneur">
+    <p-floatlabel>
+      <textarea id="json" rows="15" cols="80"
+                pTextarea [(ngModel)]="configurationTableaux"
+                [ngClass]="{'error': erreur !== undefined}"></textarea>
+      <label for="json">
+        {{ 'COMPOSANTS.PARAMETRAGE.GESTION_TABLEAUX.IMPORT_EXPORT.CONFIGURATION' | translate }}
+      </label>
+    </p-floatlabel>
+
+    <div class="exemples">
+      <span
+        (click)="exemple('DESKTOP')">{{ 'COMPOSANTS.PARAMETRAGE.GESTION_TABLEAUX.IMPORT_EXPORT.EXEMPLE_DESKTOP' | translate }}</span>
+      <span
+        (click)="exemple('TABLETTE')">{{ 'COMPOSANTS.PARAMETRAGE.GESTION_TABLEAUX.IMPORT_EXPORT.EXEMPLE_TABLETTE' | translate }}</span>
+      <span
+        (click)="exemple('MOBILE')">{{ 'COMPOSANTS.PARAMETRAGE.GESTION_TABLEAUX.IMPORT_EXPORT.EXEMPLE_MOBILE' | translate }}</span>
+    </div>
+
+    @if (erreur !== undefined) {
+      <div class="erreur">
+        <span class="pi pi-exclamation-circle"></span>
+        <span>{{ erreur }}</span>
+      </div>
+    }
+
+    <div class="boutons">
+      <p-button type="button" (click)="exporter()" severity="warn"
+                label="{{ 'COMPOSANTS.PARAMETRAGE.GESTION_TABLEAUX.IMPORT_EXPORT.EXPORTER' | translate }}"/>
+      <p-button type="button" (click)="importer()" severity="danger"
+                label="{{ 'COMPOSANTS.PARAMETRAGE.GESTION_TABLEAUX.IMPORT_EXPORT.IMPORTER' | translate }}"/>
+    </div>
+  </div>
+</p-dialog>

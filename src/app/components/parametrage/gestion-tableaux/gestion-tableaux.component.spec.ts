@@ -3,8 +3,8 @@ import {ComponentFixture, TestBed} from '@angular/core/testing';
 import {GestionTableauxComponent} from './gestion-tableaux.component';
 import {TranslateModule} from '@ngx-translate/core';
 import {CurrencyPipe, DatePipe, DecimalPipe, PercentPipe} from '@angular/common';
-import {TABLEAUX} from '../../services/jdd/jdd-tableaux.dataset';
-import {TableauxService} from '../../services/tableaux/tableaux.service';
+import {TABLEAUX} from '../../../services/jdd/jdd-tableaux.dataset';
+import {TableauxService} from '../../../services/tableaux/tableaux.service';
 
 describe('GestionTableauxComponent', () => {
   let component: GestionTableauxComponent;

@@ -1,7 +1,7 @@
 <div class="boutons">
   <div (click)="ajouterColonne()">
     <span class="pi pi-plus-circle"></span>
-    <span>{{ 'COMPOSANTS.GESTION_TABLEAUX.TABLEAU.AJOUTER_COLONNE' | translate }}</span>
+    <span>{{ 'COMPOSANTS.PARAMETRAGE.GESTION_TABLEAUX.TABLEAU.AJOUTER_COLONNE' | translate }}</span>
   </div>
 </div>
 <div cdkDropList class="liste" (cdkDropListDropped)="dropColonne($event)">
@@ -12,7 +12,7 @@
           <p-floatlabel>
             <input pInputText [(ngModel)]="deco.colonne.nom" autocomplete="off" required
                    [appPasDeNomEnDoublon]="{colonnes, colonne: deco.colonne}"/>
-            <label>{{ 'COMPOSANTS.GESTION_TABLEAUX.TABLEAU.NOM_COLONNE' | translate }}</label>
+            <label>{{ 'COMPOSANTS.PARAMETRAGE.GESTION_TABLEAUX.TABLEAU.NOM_COLONNE' | translate }}</label>
           </p-floatlabel>
         </span>
       <span>
@@ -20,7 +20,7 @@
               <p-select [(ngModel)]="deco.colonne.type" [options]="deco.typesDisponibles"
                         (onChange)="onChangeTypecolonne(deco.colonne)"
                         optionLabel="libelle" optionValue="type" required/>
-              <label>{{ 'COMPOSANTS.GESTION_TABLEAUX.TABLEAU.TYPE_COLONNE' | translate }}</label>
+              <label>{{ 'COMPOSANTS.PARAMETRAGE.GESTION_TABLEAUX.TABLEAU.TYPE_COLONNE' | translate }}</label>
           </p-floatlabel>
         </span>
       <span>
@@ -28,21 +28,21 @@
             <p-floatlabel>
               <input pInputText [(ngModel)]="deco.colonne.parametre" autocomplete="off" required appEntierPositif
                      type="number"/>
-              <label>{{ 'COMPOSANTS.GESTION_TABLEAUX.TABLEAU.PARAMETRE_COLONNE' | translate }}</label>
+              <label>{{ 'COMPOSANTS.PARAMETRAGE.GESTION_TABLEAUX.TABLEAU.PARAMETRE_COLONNE' | translate }}</label>
             </p-floatlabel>
           }
         </span>
       <span>
           <p-floatlabel>
             <p-toggleswitch [(ngModel)]="deco.colonne.tri"/>
-            <label>{{ 'COMPOSANTS.GESTION_TABLEAUX.TABLEAU.TRI_COLONNE' | translate }}</label>
+            <label>{{ 'COMPOSANTS.PARAMETRAGE.GESTION_TABLEAUX.TABLEAU.TRI_COLONNE' | translate }}</label>
           </p-floatlabel>
         </span>
       <span>
           <p-floatlabel>
             <input pInputText [(ngModel)]="deco.colonne.largeur" autocomplete="off" required appEntierPositif
                    type="number"/>
-            <label>{{ 'COMPOSANTS.GESTION_TABLEAUX.TABLEAU.LARGEUR_COLONNE' | translate }}</label>
+            <label>{{ 'COMPOSANTS.PARAMETRAGE.GESTION_TABLEAUX.TABLEAU.LARGEUR_COLONNE' | translate }}</label>
           </p-floatlabel>
         </span>
     </div>

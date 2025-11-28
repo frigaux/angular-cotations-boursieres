@@ -5,7 +5,7 @@ import {NgClass} from "@angular/common";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {Textarea} from "primeng/textarea";
 import {TranslatePipe} from "@ngx-translate/core";
-import {TableauxService} from '../../../services/tableaux/tableaux.service';
+import {TableauxService} from '../../../../services/tableaux/tableaux.service';
 import {FloatLabel} from 'primeng/floatlabel';
 
 @Component({
@@ -21,7 +21,7 @@ import {FloatLabel} from 'primeng/floatlabel';
     FloatLabel
   ],
   templateUrl: './dialog-import-export.component.html',
-  styleUrls: ['../../parametrage/gestion-portefeuilles/dialog-import-export/dialog-import-export.component.sass', './dialog-import-export.component.sass']
+  styleUrls: ['../../gestion-portefeuilles/dialog-import-export/dialog-import-export.component.sass', './dialog-import-export.component.sass']
 })
 export class DialogImportExportComponent {
   visible: boolean = false;

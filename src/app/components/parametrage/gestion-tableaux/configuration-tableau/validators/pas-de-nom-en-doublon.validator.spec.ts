@@ -1,6 +1,6 @@
 import {FormControl} from '@angular/forms';
 import {pasDeNomEnDoublonValidator} from './pas-de-nom-en-doublon.validator';
-import {TABLEAUX} from '../../../../services/jdd/jdd-tableaux.dataset';
+import {TABLEAUX} from '../../../../../services/jdd/jdd-tableaux.dataset';
 
 describe('pasDeNomEnDoublonValidator', () => {
   let validator: Function;
