@@ -1,6 +1,7 @@
 import {ComponentFixture, TestBed} from '@angular/core/testing';
 
 import {ModeleApprentissageAutomatiqueComponent} from './modele-apprentissage-automatique.component';
+import {TranslateModule} from '@ngx-translate/core';
 
 describe('ModeleApprentissageAutomatiqueComponent', () => {
   let component: ModeleApprentissageAutomatiqueComponent;
@@ -8,9 +9,12 @@ describe('ModeleApprentissageAutomatiqueComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [ModeleApprentissageAutomatiqueComponent]
+      imports: [
+        ModeleApprentissageAutomatiqueComponent,
+        TranslateModule.forRoot({})
+      ]
     })
-    .compileComponents();
+      .compileComponents();
 
     fixture = TestBed.createComponent(ModeleApprentissageAutomatiqueComponent);
     component = fixture.componentInstance;

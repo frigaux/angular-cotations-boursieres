@@ -174,7 +174,7 @@
         }
       },
       "INFORMATIONS_VALEUR": {
-        "COURS": "Cours",
+        "COURS_1J": "Cours 1J",
         "ORDRES": "Ordres",
         "VARIATIONS": {
           "VARIATIONS_COURS": "Variations du cours",

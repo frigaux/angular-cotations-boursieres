@@ -3,12 +3,14 @@ import * as tf from '@tensorflow/tfjs';
 import {TranslatePipe} from '@ngx-translate/core';
 import {Button} from 'primeng/button';
 import {LayersModel} from '@tensorflow/tfjs-layers/dist/engine/training';
+import {JsonPipe} from '@angular/common';
 
 @Component({
   selector: 'app-modele-apprentissage-automatique',
   imports: [
     TranslatePipe,
-    Button
+    Button,
+    JsonPipe
   ],
   templateUrl: './modele-apprentissage-automatique.component.html',
   styleUrl: './modele-apprentissage-automatique.component.sass',
@@ -18,27 +20,34 @@ export class ModeleApprentissageAutomatiqueComponent {
   protected prediction?: any;
 
   protected entrainerModele() {
-    // Define a model for linear regression.
+    tf.setBackend('webgl').then(success => {
+      console.log(`Backend ${tf.getBackend()} : ${success}`);
+      if (success) {
+        this._entrainerModele();
+      }
+    });
+  }
+
+  private _entrainerModele() {
+    const xs = tf.tensor2d([-1, 0, 1, 2, 3, 4], [6, 1]);
+    const ys = tf.tensor2d([-3, -1, 1, 3, 5, 7], [6, 1]);
+
+    // tf.enableDebugMode();
+    // console.log('model', model.summary());
+    // console.log(xs.arraySync(), xs.dataSync());
+
     const model = tf.sequential();
     model.add(tf.layers.dense({units: 1, inputShape: [1]}));
 
-    // Prepare the model for training: Specify the loss and the optimizer.
     model.compile({loss: 'meanSquaredError', optimizer: 'sgd'});
 
-    // Generate some synthetic data for training.
-    const xs = tf.tensor2d([1, 2, 3, 4], [4, 1]);
-    const ys = tf.tensor2d([1, 3, 5, 7], [4, 1]);
-
-    console.log(xs, ys);
-
-    // Train the model using the data.
-    model.fit(xs, ys).then(() => {
+    model.fit(xs, ys, {epochs: 500}).then(() => {
       this.model = model;
     });
   }
 
   protected predireAvecLeModele() {
-    // Use the model to do inference on a data point the model hasn't seen before:
-    this.prediction = this.model!.predict(tf.tensor2d([5], [1, 1]));
+    const prediction: any = this.model!.predict(tf.tensor2d([20], [1, 1]));
+    prediction.array().then((array: any) => this.prediction = array);
   }
 }

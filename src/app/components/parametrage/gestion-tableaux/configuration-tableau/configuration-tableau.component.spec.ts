@@ -4,7 +4,7 @@ import {ConfigurationTableauComponent} from './configuration-tableau.component';
 import {TranslateModule} from '@ngx-translate/core';
 import {CurrencyPipe, DatePipe, DecimalPipe, PercentPipe} from '@angular/common';
 import {TABLEAUX} from '../../../../services/jdd/jdd-tableaux.dataset';
-import {TypesColonnes} from '../../../../services/tableaux/types-colonnes.enum.ts.ts';
+import {TypesColonnes} from '../../../../services/tableaux/types-colonnes.enum.ts';
 import {DTOColonne} from '../../../../services/tableaux/dto-colonne-portefeuille.interface';
 import {TypesColonnesPortefeuille} from '../../../../services/tableaux/types-colonnes-portefeuille.enum';
 import {TypesColonnesCours} from '../../../../services/tableaux/types-colonnes-cours.enum';
