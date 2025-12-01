@@ -1,22 +1,22 @@
 import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import {TableauAchatsRevendusComponent} from './tableau-achats-revendus.component';
+import {TableauVentesComponent} from './tableau-ventes.component';
 import {TranslateModule} from '@ngx-translate/core';
 
-describe('TableauAchatsRevendusComponent', () => {
-  let component: TableauAchatsRevendusComponent;
-  let fixture: ComponentFixture<TableauAchatsRevendusComponent>;
+describe('TableauVentesComponent', () => {
+  let component: TableauVentesComponent;
+  let fixture: ComponentFixture<TableauVentesComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [
-        TableauAchatsRevendusComponent,
+        TableauVentesComponent,
         TranslateModule.forRoot({})
       ]
     })
       .compileComponents();
 
-    fixture = TestBed.createComponent(TableauAchatsRevendusComponent);
+    fixture = TestBed.createComponent(TableauVentesComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

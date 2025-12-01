@@ -126,12 +126,12 @@ export class ChartsComponent {
         {
           label: this.translateService.instant('COMPOSANTS.COURS.CHARTS.COURS'),
           data: dataCours,
-          tension: 0.4
+          tension: 0.4 // Bezier curve tension of the line. Set to 0 to draw straightlines. This option is ignored if monotone cubic interpolation is used.
         },
         {
           label: this.translateService.instant('COMPOSANTS.COURS.CHARTS.MOYENNES_MOBILES') + labels[labels.length - 1],
           data: dataMM,
-          tension: 0.4
+          tension: 0.4 // Bezier curve tension of the line. Set to 0 to draw straightlines. This option is ignored if monotone cubic interpolation is used.
         }
       ]
     };

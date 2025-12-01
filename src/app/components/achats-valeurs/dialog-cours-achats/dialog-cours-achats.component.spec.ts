@@ -1,19 +1,19 @@
 import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import {DialogCoursAchatsNonRevendusComponent} from './dialog-cours-achats-non-revendus.component';
+import {DialogCoursAchatsComponent} from './dialog-cours-achats.component';
 import {TranslateModule} from '@ngx-translate/core';
 import {BoursoramaService} from '../../../services/boursorama/boursorama.service';
 
-describe('DialogCoursAchatsNonRevendusComponent', () => {
-  let component: DialogCoursAchatsNonRevendusComponent;
-  let fixture: ComponentFixture<DialogCoursAchatsNonRevendusComponent>;
+describe('DialogCoursAchatsComponent', () => {
+  let component: DialogCoursAchatsComponent;
+  let fixture: ComponentFixture<DialogCoursAchatsComponent>;
 
   const mockBoursoramaService = jasmine.createSpyObj('BoursoramaService', ['chargerCoursTickers']);
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [
-        DialogCoursAchatsNonRevendusComponent,
+        DialogCoursAchatsComponent,
         TranslateModule.forRoot({})
       ],
       providers: [
@@ -22,7 +22,7 @@ describe('DialogCoursAchatsNonRevendusComponent', () => {
     })
       .compileComponents();
 
-    fixture = TestBed.createComponent(DialogCoursAchatsNonRevendusComponent);
+    fixture = TestBed.createComponent(DialogCoursAchatsComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

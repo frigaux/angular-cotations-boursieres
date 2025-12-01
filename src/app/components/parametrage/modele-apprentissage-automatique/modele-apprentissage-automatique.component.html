@@ -1,5 +1,5 @@
 <h1>{{ 'COMPOSANTS.PARAMETRAGE.MODELE_APPRENTISSAGE_AUTOMATIQUE.MODELE_TENSORFLOW' | translate }}</h1>
-<div>
+<div class="ligne">
   <p-button
     label="{{ 'COMPOSANTS.PARAMETRAGE.MODELE_APPRENTISSAGE_AUTOMATIQUE.ENTRAINER_MODELE' | translate }}"
     (onClick)="entrainerModele()"/>
@@ -7,6 +7,15 @@
     <p-button
       label="{{ 'COMPOSANTS.PARAMETRAGE.MODELE_APPRENTISSAGE_AUTOMATIQUE.PREDIRE_AVEC_LE_MODELE' | translate }}"
       (onClick)="predireAvecLeModele()"/>
-    <span>{{ prediction | json }}</span>
+  } @else {
+    <app-barre-progression [pourcentage]="progressionEntrainement" largeur="20rem"></app-barre-progression>
+  }
+  @if (prediction) {
+    <span class="prediction">{{ prediction | json }}</span>
+  }
+</div>
+<div class="courbes">
+  @if(dataLineChart) {
+    <p-chart type="line" [data]="dataLineChart" [options]="dataLineOptions"/>
   }
 </div>

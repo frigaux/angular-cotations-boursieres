@@ -14,6 +14,9 @@ import {PrimeNG} from 'primeng/config';
 import {PickList} from 'primeng/picklist';
 import {NavigationBar} from '@squareetlabs/capacitor-navigation-bar';
 
+// TODO : modéliser un ordre d'achat/vente avec seuil ?
+//    https://particuliers.sg.fr/nos-conseils/epargner/bien-comprendre-les-ordres-de-bourse
+//    AchatsValeursComponent : ajouter les ordres d'achats et de ventes
 // TODO : service ABCBourse de récupération des informations pour un ticker : récupérer la pré-ouverture ?
 // TODO : capacitor android : proxy obligatoire pour requêter les autres domaines ? problème CORS ou pas ?
 // TODO : coverage

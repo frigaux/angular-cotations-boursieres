@@ -1,0 +1,7 @@
+<div class="barre_progression" [ngStyle]="{'width': largeur}">
+  <div [ngStyle]="{'width': `${pourcentage}%`}">
+    @if (pourcentage) {
+      <span>{{ `${pourcentage}%` }}</span>
+    }
+  </div>
+</div>

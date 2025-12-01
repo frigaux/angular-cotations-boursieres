@@ -13,7 +13,7 @@ import {
 import {ClassVariation} from '../../../directives/class-variation';
 
 @Component({
-  selector: 'app-tableau-achats-non-revendus',
+  selector: 'app-tableau-achats',
   imports: [
     CurrencyPipe,
     DatePipe,
@@ -26,10 +26,10 @@ import {ClassVariation} from '../../../directives/class-variation';
     DialogAchatsValeurComponent,
     ClassVariation
   ],
-  templateUrl: './tableau-achats-non-revendus.component.html',
-  styleUrl: './tableau-achats-non-revendus.component.sass'
+  templateUrl: './tableau-achats.component.html',
+  styleUrl: './tableau-achats.component.sass'
 })
-export class TableauAchatsNonRevendusComponent {
+export class TableauAchatsComponent {
   private dialogAchatsValeurComponent = viewChild(DialogAchatsValeurComponent);
 
   // chargement des cours

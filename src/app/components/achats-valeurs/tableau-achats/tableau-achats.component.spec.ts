@@ -1,19 +1,19 @@
 import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import {TableauAchatsNonRevendusComponent} from './tableau-achats-non-revendus.component';
+import {TableauAchatsComponent} from './tableau-achats.component';
 import {CoursService} from '../../../services/cours/cours.service';
 import {TranslateModule} from '@ngx-translate/core';
 
-describe('TableauAchatsNonRevendusComponent', () => {
-  let component: TableauAchatsNonRevendusComponent;
-  let fixture: ComponentFixture<TableauAchatsNonRevendusComponent>;
+describe('TableauAchatsComponent', () => {
+  let component: TableauAchatsComponent;
+  let fixture: ComponentFixture<TableauAchatsComponent>;
 
   const mockCoursService = jasmine.createSpyObj('CoursService', ['chargerCoursTickersWithLimit']);
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [
-        TableauAchatsNonRevendusComponent,
+        TableauAchatsComponent,
         TranslateModule.forRoot({})
       ],
       providers: [
@@ -22,7 +22,7 @@ describe('TableauAchatsNonRevendusComponent', () => {
     })
       .compileComponents();
 
-    fixture = TestBed.createComponent(TableauAchatsNonRevendusComponent);
+    fixture = TestBed.createComponent(TableauAchatsComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

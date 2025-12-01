@@ -1,5 +1,5 @@
 import {Component, input, InputSignal, output} from '@angular/core';
-import {AchatValeurDecore} from '../tableau-achats-non-revendus/achat-valeur-decore.class';
+import {AchatValeurDecore} from '../tableau-achats/achat-valeur-decore.class';
 import {DividendesService} from '../../../services/dividendes/dividendes.service';
 import {ColonneDividendesComponent} from '../../portefeuilles/colonnes/dividendes/colonne-dividendes.component';
 import {CurrencyPipe, DatePipe, DecimalPipe, PercentPipe} from '@angular/common';
@@ -8,7 +8,7 @@ import {TranslatePipe} from '@ngx-translate/core';
 import {ClassVariation} from '../../../directives/class-variation';
 
 @Component({
-  selector: 'app-tableau-achats-revendus',
+  selector: 'app-tableau-ventes',
   imports: [
     ColonneDividendesComponent,
     CurrencyPipe,
@@ -19,10 +19,10 @@ import {ClassVariation} from '../../../directives/class-variation';
     TranslatePipe,
     ClassVariation
   ],
-  templateUrl: './tableau-achats-revendus.component.html',
-  styleUrls: ['./tableau-achats-revendus.component.sass', '../tableau-achats-non-revendus/tableau-achats-non-revendus.component.sass']
+  templateUrl: './tableau-ventes.component.html',
+  styleUrls: ['./tableau-ventes.component.sass', '../tableau-achats/tableau-achats.component.sass']
 })
-export class TableauAchatsRevendusComponent {
+export class TableauVentesComponent {
   // input/output
   inputAchats: InputSignal<Array<AchatValeurDecore> | undefined> = input(undefined,
     {transform: o => this.intercepteurAchats(o), alias: 'achats'});

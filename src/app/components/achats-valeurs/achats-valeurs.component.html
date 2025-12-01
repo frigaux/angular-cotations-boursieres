@@ -1,4 +1,4 @@
-<app-dialog-cours-achats-non-revendus></app-dialog-cours-achats-non-revendus>
+<app-dialog-cours-achats></app-dialog-cours-achats>
 
 <div class="titre">
   <h2>{{ 'COMPOSANTS.ACHATS_VALEURS.ACHATS_VALEURS' | translate }}</h2>
@@ -15,13 +15,13 @@
 
 
 @if (achatsNonRevendus && achatsNonRevendus.length > 0) {
-  <h3>{{ 'COMPOSANTS.ACHATS_VALEURS.NON_REVENDUS' | translate }}</h3>
-  <app-tableau-achats-non-revendus [achats]="achatsNonRevendus"
-                                   (suppression)="suppressionAchat($event)"></app-tableau-achats-non-revendus>
+  <h3>{{ 'COMPOSANTS.ACHATS_VALEURS.TABLEAU_ACHATS' | translate }}</h3>
+  <app-tableau-achats [achats]="achatsNonRevendus"
+                                   (suppression)="suppressionAchat($event)"></app-tableau-achats>
 }
 
 @if (achatsRevendus && achatsRevendus.length > 0) {
-  <h3>{{ 'COMPOSANTS.ACHATS_VALEURS.REVENDUS' | translate }}</h3>
-  <app-tableau-achats-revendus [achats]="achatsRevendus"
-                               (suppression)="suppressionAchat($event)"></app-tableau-achats-revendus>
+  <h3>{{ 'COMPOSANTS.ACHATS_VALEURS.TABLEAU_VENTES' | translate }}</h3>
+  <app-tableau-ventes [achats]="achatsRevendus"
+                               (suppression)="suppressionAchat($event)"></app-tableau-ventes>
 }

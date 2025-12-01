@@ -8,12 +8,10 @@ import {LoaderComponent} from '../loader/loader.component';
 import {DialogImportExportComponent} from './dialog-import-export/dialog-import-export.component';
 import {ConfirmationService} from 'primeng/api';
 import {DialogueService} from '../../services/dialogue/dialogue.service';
-import {TableauAchatsNonRevendusComponent} from './tableau-achats-non-revendus/tableau-achats-non-revendus.component';
-import {AchatValeurDecore} from './tableau-achats-non-revendus/achat-valeur-decore.class';
-import {
-  DialogCoursAchatsNonRevendusComponent
-} from './dialog-cours-achats-non-revendus/dialog-cours-achats-non-revendus.component';
-import {TableauAchatsRevendusComponent} from './tableau-achats-revendus/tableau-achats-revendus.component';
+import {TableauAchatsComponent} from './tableau-achats/tableau-achats.component';
+import {AchatValeurDecore} from './tableau-achats/achat-valeur-decore.class';
+import {DialogCoursAchatsComponent} from './dialog-cours-achats/dialog-cours-achats.component';
+import {TableauVentesComponent} from './tableau-ventes/tableau-ventes.component';
 
 @Component({
   selector: 'app-achats-valeurs',
@@ -21,15 +19,15 @@ import {TableauAchatsRevendusComponent} from './tableau-achats-revendus/tableau-
     TranslatePipe,
     LoaderComponent,
     DialogImportExportComponent,
-    TableauAchatsNonRevendusComponent,
-    DialogCoursAchatsNonRevendusComponent,
-    TableauAchatsRevendusComponent
+    TableauAchatsComponent,
+    DialogCoursAchatsComponent,
+    TableauVentesComponent
   ],
   templateUrl: './achats-valeurs.component.html',
   styleUrls: ['./achats-valeurs.component.sass', '../commun/titre.sass']
 })
 export class AchatsValeursComponent implements OnInit {
-  public dialogCoursAchatsNonRevendusComponent = viewChild(DialogCoursAchatsNonRevendusComponent);
+  public dialogCoursAchatsNonRevendusComponent = viewChild(DialogCoursAchatsComponent);
 
   // données pour la vue
   loading: boolean = true; // chargement des valeurs
@@ -69,7 +67,7 @@ export class AchatsValeursComponent implements OnInit {
           return {
             ticker: achatsTicker.ticker,
             achats: achatsTicker.achats
-              .filter(a => (revendus && a.dateRevente) || (!revendus && a.dateRevente === undefined))
+              .filter(a => (revendus && a.dateRevente) || (!revendus && a.date && a.dateRevente === undefined))
           };
         }
       )

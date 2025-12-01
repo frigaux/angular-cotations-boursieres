@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {AchatValeurDecore} from '../tableau-achats-non-revendus/achat-valeur-decore.class';
+import {AchatValeurDecore} from '../tableau-achats/achat-valeur-decore.class';
 import {DividendesService} from '../../../services/dividendes/dividendes.service';
 import {BoursoramaService} from '../../../services/boursorama/boursorama.service';
 import {TranslatePipe} from '@ngx-translate/core';
@@ -11,7 +11,7 @@ import {Dialog} from 'primeng/dialog';
 import {ClassVariation} from '../../../directives/class-variation';
 
 @Component({
-  selector: 'app-dialog-cours-achats-non-revendus',
+  selector: 'app-dialog-cours-achats',
   imports: [
     TranslatePipe,
     LoaderComponent,
@@ -22,10 +22,10 @@ import {ClassVariation} from '../../../directives/class-variation';
     Dialog,
     ClassVariation
   ],
-  templateUrl: './dialog-cours-achats-non-revendus.component.html',
-  styleUrls: ['./dialog-cours-achats-non-revendus.component.sass', '../../commun/barre-superieure.sass']
+  templateUrl: './dialog-cours-achats.component.html',
+  styleUrls: ['./dialog-cours-achats.component.sass', '../../commun/barre-superieure.sass']
 })
-export class DialogCoursAchatsNonRevendusComponent {
+export class DialogCoursAchatsComponent {
   // données pour la vue
   visible: boolean = false;
   loading: boolean = true; // chargement des cours depuis Boursorama

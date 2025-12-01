@@ -10,9 +10,7 @@ import {DialogueService} from '../../services/dialogue/dialogue.service';
 import {CoursService} from '../../services/cours/cours.service';
 import {COURS_BNP, COURS_GLE, LISTE_COURS_AVEC_LISTE_ALLEGEE} from '../../services/jdd/jdd-cours.dataset';
 import {BoursoramaService} from '../../services/boursorama/boursorama.service';
-import {
-  DialogCoursAchatsNonRevendusComponent
-} from './dialog-cours-achats-non-revendus/dialog-cours-achats-non-revendus.component';
+import {DialogCoursAchatsComponent} from './dialog-cours-achats/dialog-cours-achats.component';
 
 describe('AchatsValeursComponent', () => {
   let dialogueService: DialogueService;
@@ -93,7 +91,7 @@ describe('AchatsValeursComponent', () => {
 
       component.recupererCours();
       expect(component.dialogCoursAchatsNonRevendusComponent()).toBeDefined();
-      const dialog: DialogCoursAchatsNonRevendusComponent = component.dialogCoursAchatsNonRevendusComponent()!;
+      const dialog: DialogCoursAchatsComponent = component.dialogCoursAchatsNonRevendusComponent()!;
       expect(dialog.coursNonRevendus).toBeDefined();
       expect(dialog.coursNonRevendus).toHaveSize(nbAchats);
       if (dialog.coursNonRevendus)

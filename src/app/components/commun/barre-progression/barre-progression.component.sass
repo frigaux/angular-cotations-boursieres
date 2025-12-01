@@ -1,0 +1,17 @@
+div.barre_progression
+  height: 1.25rem
+  border: 1px solid black
+  border-radius: 0.5rem
+  background-color: white
+
+  & > div
+    height: 100%
+    width: 0
+    border-radius: 0.5rem
+    background-color: var(--p-blue-700)
+    transition-property: width
+    transition-duration: 0.1s
+
+    & > span
+      color: white
+      padding-left: 1rem

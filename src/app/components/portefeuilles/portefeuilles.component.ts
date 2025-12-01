@@ -113,7 +113,7 @@ export class PortefeuillesComponent implements OnInit {
   }
 
   private determinerIdxPortefeuilleCourant() {
-    if (this.tickersNonRevendus().length > 0) {
+    if (this.tickersEnPortefeuilleAchats().length > 0) {
       this.idxPortefeuilleCourant = this.portefeuillesService.charger()
         .filter(portefeuille => portefeuille.tickers.length > 0)
         .length;
@@ -149,7 +149,7 @@ export class PortefeuillesComponent implements OnInit {
   private chargerPortefeuilles() {
     const portefeuilles = this.portefeuillesService.charger();
     // ajout éventuel du portefeuille des achats
-    const tickersNonRevendus = this.tickersNonRevendus();
+    const tickersNonRevendus = this.tickersEnPortefeuilleAchats();
     if (tickersNonRevendus.length > 0) {
       portefeuilles.push({
         nom: PortefeuillesService.PORTEFEUILLE_ACHATS,
@@ -162,9 +162,9 @@ export class PortefeuillesComponent implements OnInit {
       .map(portefeuille => new PortefeuilleAvecCours(portefeuille));
   }
 
-  private tickersNonRevendus() {
+  private tickersEnPortefeuilleAchats() {
     return this.valeursService.chargerAchats()
-      .filter(achats => achats.achats.find(achat => achat.dateRevente === undefined) !== undefined)
+      .filter(achats => achats.achats.find(achat => achat.date && achat.dateRevente === undefined) !== undefined)
       .map(achats => achats.ticker);
   }
 

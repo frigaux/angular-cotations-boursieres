@@ -1,43 +1,34 @@
-<app-dialog-achats-valeur></app-dialog-achats-valeur>
-
-<app-loader [affiche]="loading" [configuration]="[
-  {marginLeft: '0', marginTop: '1rem', height: '20vh', width: '100%'}
-]"></app-loader>
-
-@if (!loading && achatValeurDecores) {
+@if (achatValeurDecores) {
   <p-table [value]="achatValeurDecores">
     <ng-template #header>
       <tr>
         <th></th>
         <th pSortableColumn="valeur.libelle">
-          {{ 'COMPOSANTS.ACHATS_VALEURS.TABLEAU_NON_REVENDUS.VALEUR' | translate }}
+          {{ 'COMPOSANTS.ACHATS_VALEURS.VENTES.VALEUR' | translate }}
           <p-sortIcon field="valeur.libelle"/>
         </th>
         <th pSortableColumn="achatDecore.achat.date">
-          {{ 'COMPOSANTS.ACHATS_VALEURS.TABLEAU_NON_REVENDUS.DATE_ACHAT' | translate }}
+          {{ 'COMPOSANTS.ACHATS_VALEURS.VENTES.DATE_ACHAT' | translate }}
           <p-sortIcon field="achatDecore.achat.date"/>
         </th>
-        <th>{{ 'COMPOSANTS.ACHATS_VALEURS.TABLEAU_NON_REVENDUS.DIVIDENDES' | translate }}</th>
-        <th>{{ 'COMPOSANTS.ACHATS_VALEURS.TABLEAU_NON_REVENDUS.PRIX_ACHAT' | translate }}</th>
-        <th>{{ 'COMPOSANTS.ACHATS_VALEURS.TABLEAU_NON_REVENDUS.QUANTITE_ACHAT' | translate }}</th>
-        <th>{{ 'COMPOSANTS.ACHATS_VALEURS.TABLEAU_NON_REVENDUS.TOTAL_ACHAT' | translate }}</th>
-        <th>{{ 'COMPOSANTS.ACHATS_VALEURS.TABLEAU_NON_REVENDUS.CLOTURE' | translate }}</th>
+        <th>{{ 'COMPOSANTS.ACHATS_VALEURS.VENTES.DIVIDENDES' | translate }}</th>
+        <th>{{ 'COMPOSANTS.ACHATS_VALEURS.VENTES.PRIX_ACHAT' | translate }}</th>
+        <th>{{ 'COMPOSANTS.ACHATS_VALEURS.VENTES.QUANTITE_ACHAT' | translate }}</th>
+        <th>{{ 'COMPOSANTS.ACHATS_VALEURS.VENTES.TOTAL_ACHAT' | translate }}</th>
+        <th>{{ 'COMPOSANTS.ACHATS_VALEURS.VENTES.PRIX_VENTE' | translate }}</th>
         <th pSortableColumn="achatDecore.variationAchat">
-          {{ 'COMPOSANTS.ACHATS_VALEURS.TABLEAU_NON_REVENDUS.VARIATION_ACHAT' | translate }}
+          {{ 'COMPOSANTS.ACHATS_VALEURS.VENTES.VARIATION_ACHAT' | translate }}
           <p-sortIcon field="achatDecore.variationAchat"/>
         </th>
-        <th>{{ 'COMPOSANTS.ACHATS_VALEURS.TABLEAU_NON_REVENDUS.TOTAL_CLOTURE' | translate }}</th>
+        <th>{{ 'COMPOSANTS.ACHATS_VALEURS.VENTES.TOTAL_VENTE' | translate }}</th>
       </tr>
     </ng-template>
     <ng-template #body let-achatValeurDecore>
       <tr>
         <td>
-          <span class="pi pi-trash"
-                title="{{ 'COMPOSANTS.ACHATS_VALEURS.TABLEAU_NON_REVENDUS.SUPPRESSION' | translate }}"
-                (click)="suppressionAchat($event, achatValeurDecore)"></span>
-          <span class="pi pi-shopping-bag"
-                title="{{ 'COMPOSANTS.ACHATS_VALEURS.TABLEAU_NON_REVENDUS.ACHATS_VALEUR' | translate: { valeur: achatValeurDecore.valeur.libelle } }}"
-                (click)="achats($event, achatValeurDecore)"></span>
+              <span class="pi pi-trash"
+                    title="{{ 'COMPOSANTS.ACHATS_VALEURS.VENTES.SUPPRESSION' | translate }}"
+                    (click)="suppressionAchat($event, achatValeurDecore)"></span>
         </td>
         <td>{{ achatValeurDecore.valeur.libelle }}</td>
         <td>{{ achatValeurDecore.achatDecore.achat.date | date: 'dd/MM/yyyy' }}</td>
@@ -48,19 +39,19 @@
         <td>{{ achatValeurDecore.achatDecore.achat.quantite  | number }}</td>
         <td>{{ (achatValeurDecore.achatDecore.achat.prix * achatValeurDecore.achatDecore.achat.quantite)  | currency:'EUR':'symbol' }}</td>
         <td [appClassVariation]="achatValeurDecore.achatDecore.variationAchat">
-          {{ achatValeurDecore.achatDecore.cours | currency:'EUR':'symbol' }}
+          {{ achatValeurDecore.achatDecore.achat.prixRevente | currency:'EUR':'symbol' }}
         </td>
         <td [appClassVariation]="achatValeurDecore.achatDecore.variationAchat">
           {{ achatValeurDecore.achatDecore.variationAchat | percent:'1.2-2' }}
         </td>
         <td [appClassVariation]="achatValeurDecore.achatDecore.variationAchat">
-          {{ (achatValeurDecore.achatDecore.cours! * achatValeurDecore.achatDecore.achat.quantite)  | currency:'EUR':'symbol' }}
+          {{ (achatValeurDecore.achatDecore.achat.prixRevente! * achatValeurDecore.achatDecore.achat.quantite)  | currency:'EUR':'symbol' }}
         </td>
       </tr>
     </ng-template>
     <ng-template #footer>
       <tr class="totaux">
-        <td>{{ 'COMPOSANTS.ACHATS_VALEURS.TABLEAU_NON_REVENDUS.TOTAUX' | translate }}</td>
+        <td>{{ 'COMPOSANTS.ACHATS_VALEURS.VENTES.TOTAUX' | translate }}</td>
         <td></td>
         <td></td>
         <td></td>
@@ -72,7 +63,7 @@
           {{ variationAchats | percent:'1.2-2' }}
         </td>
         <td [appClassVariation]="variationAchats">
-          {{ totauxClotures  | currency:'EUR':'symbol' }}
+          {{ totauxVentes  | currency:'EUR':'symbol' }}
         </td>
       </tr>
     </ng-template>
