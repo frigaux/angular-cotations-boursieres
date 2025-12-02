@@ -16,6 +16,7 @@ import {NavigationBar} from '@squareetlabs/capacitor-navigation-bar';
 
 // TODO : modéliser un ordre d'achat/vente avec seuil ?
 //    https://particuliers.sg.fr/nos-conseils/epargner/bien-comprendre-les-ordres-de-bourse
+//    DTOAchat : revoir l'utilisation de ce DTO et des méthodes is* dans ValeursService
 //    AchatsValeursComponent : ajouter les ordres d'achats et de ventes
 // TODO : service ABCBourse de récupération des informations pour un ticker : récupérer la pré-ouverture ?
 // TODO : capacitor android : proxy obligatoire pour requêter les autres domaines ? problème CORS ou pas ?

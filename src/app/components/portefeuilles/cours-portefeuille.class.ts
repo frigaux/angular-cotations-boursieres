@@ -8,6 +8,7 @@ import {DTOAchat} from '../../services/valeurs/dto-achat.interface';
 import {ColonneDecoree} from './colonne-decoree.class';
 import {DividendesService} from '../../services/dividendes/dividendes.service';
 import {AlertesDecorees} from './alertes-decorees.interface';
+import {EtapeValeurUtil} from '../valeurs/achats-valeur/etape-valeur-util.class';
 
 export class CoursPortefeuille {
   date: string; // ISO 8601 : yyyy-MM-dd
@@ -86,7 +87,7 @@ export class CoursPortefeuille {
 
   calculerVariationAchats(valeursService: ValeursService) {
     const achats: Array<DTOAchat> | undefined = valeursService.chargerAchatsTicker(this.ticker)
-      .filter(achat => achat.date && achat.dateRevente === undefined);
+      .filter(achat => EtapeValeurUtil.isAchat(achat));
     if (!achats || achats.length === 0) {
       return undefined;
     }

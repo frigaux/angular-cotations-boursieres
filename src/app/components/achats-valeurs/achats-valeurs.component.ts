@@ -12,6 +12,10 @@ import {TableauAchatsComponent} from './tableau-achats/tableau-achats.component'
 import {AchatValeurDecore} from './tableau-achats/achat-valeur-decore.class';
 import {DialogCoursAchatsComponent} from './dialog-cours-achats/dialog-cours-achats.component';
 import {TableauVentesComponent} from './tableau-ventes/tableau-ventes.component';
+import {TableauOrdresAchatsComponent} from './tableau-ordres-achats/tableau-ordres-achats.component';
+import {EtapeValeur} from '../valeurs/achats-valeur/etape-valeur.enum';
+import {EtapeValeurUtil} from '../valeurs/achats-valeur/etape-valeur-util.class';
+import {TableauOrdresVentesComponent} from './tableau-ordres-ventes/tableau-ordres-ventes.component';
 
 @Component({
   selector: 'app-achats-valeurs',
@@ -21,7 +25,9 @@ import {TableauVentesComponent} from './tableau-ventes/tableau-ventes.component'
     DialogImportExportComponent,
     TableauAchatsComponent,
     DialogCoursAchatsComponent,
-    TableauVentesComponent
+    TableauVentesComponent,
+    TableauOrdresAchatsComponent,
+    TableauOrdresVentesComponent
   ],
   templateUrl: './achats-valeurs.component.html',
   styleUrls: ['./achats-valeurs.component.sass', '../commun/titre.sass']
@@ -31,8 +37,10 @@ export class AchatsValeursComponent implements OnInit {
 
   // données pour la vue
   loading: boolean = true; // chargement des valeurs
-  achatsNonRevendus?: Array<AchatValeurDecore>;
-  achatsRevendus?: Array<AchatValeurDecore>;
+  ordresAchats?: Array<AchatValeurDecore>;
+  achats?: Array<AchatValeurDecore>;
+  ordresVentes?: Array<AchatValeurDecore>;
+  ventes?: Array<AchatValeurDecore>;
 
   // private
   private valeurByTicker?: Map<string, DTOValeur>;
@@ -57,17 +65,30 @@ export class AchatsValeursComponent implements OnInit {
 
   private construireVue() {
     this.achatsTickers = this.valeursService.chargerAchats();
-    this.achatsNonRevendus = this.decorerAchats(this.filtrerAchats(false));
-    this.achatsRevendus = this.decorerAchats(this.filtrerAchats(true));
+    this.ordresAchats = this.decorerAchats(this.filtrerAchats(EtapeValeur.ORDRE_ACHAT));
+    this.achats = this.decorerAchats(this.filtrerAchats(EtapeValeur.ACHAT));
+    this.ordresVentes = this.decorerAchats(this.filtrerAchats(EtapeValeur.ORDRE_VENTE));
+    this.ventes = this.decorerAchats(this.filtrerAchats(EtapeValeur.VENTE));
   }
 
-  private filtrerAchats(revendus: boolean): Array<DTOAchatsTicker> {
+  private filtrerAchats(etape: EtapeValeur): Array<DTOAchatsTicker> {
     return this.achatsTickers!
       .map(achatsTicker => {
           return {
             ticker: achatsTicker.ticker,
             achats: achatsTicker.achats
-              .filter(a => (revendus && a.dateRevente) || (!revendus && a.date && a.dateRevente === undefined))
+              .filter(achat => {
+                switch (etape) {
+                  case EtapeValeur.ORDRE_ACHAT:
+                    return EtapeValeurUtil.isOrdreAchat(achat);
+                  case EtapeValeur.ACHAT:
+                    return EtapeValeurUtil.isAchat(achat);
+                  case EtapeValeur.ORDRE_VENTE:
+                    return EtapeValeurUtil.isOrdreVente(achat);
+                  case EtapeValeur.VENTE:
+                    return EtapeValeurUtil.isVente(achat);
+                }
+              })
           };
         }
       )
@@ -80,7 +101,11 @@ export class AchatsValeursComponent implements OnInit {
     achats.forEach(achatsTicker => {
       const valeur: DTOValeur = this.valeurByTicker!.get(achatsTicker.ticker)!;
       achatsTicker.achats
-        .sort((a1, a2) => new Date(a1.date).getTime() - new Date(a2.date).getTime())
+        .sort((a1, a2) => {
+          const d1 = a1.date ? new Date(a1.date) : new Date();
+          const d2 = a2.date ? new Date(a2.date) : new Date();
+          return d1.getTime() - d2.getTime();
+        })
         .map(achat => new AchatDecore(i++, achat))
         .forEach(achatDecore => {
           resultat.push(new AchatValeurDecore(valeur, achatDecore));
@@ -111,6 +136,6 @@ export class AchatsValeursComponent implements OnInit {
   }
 
   recupererCours() {
-    this.dialogCoursAchatsNonRevendusComponent()?.afficherCours(this.achatsNonRevendus!);
+    this.dialogCoursAchatsNonRevendusComponent()?.afficherCours(this.achats!);
   }
 }

@@ -16,9 +16,9 @@
         <th>{{ 'COMPOSANTS.ACHATS_VALEURS.VENTES.QUANTITE_ACHAT' | translate }}</th>
         <th>{{ 'COMPOSANTS.ACHATS_VALEURS.VENTES.TOTAL_ACHAT' | translate }}</th>
         <th>{{ 'COMPOSANTS.ACHATS_VALEURS.VENTES.PRIX_VENTE' | translate }}</th>
-        <th pSortableColumn="achatDecore.variationAchat">
+        <th pSortableColumn="achatDecore.variation">
           {{ 'COMPOSANTS.ACHATS_VALEURS.VENTES.VARIATION_ACHAT' | translate }}
-          <p-sortIcon field="achatDecore.variationAchat"/>
+          <p-sortIcon field="achatDecore.variation"/>
         </th>
         <th>{{ 'COMPOSANTS.ACHATS_VALEURS.VENTES.TOTAL_VENTE' | translate }}</th>
       </tr>
@@ -38,13 +38,13 @@
         <td>{{ achatValeurDecore.achatDecore.achat.prix  | currency:'EUR':'symbol' }}</td>
         <td>{{ achatValeurDecore.achatDecore.achat.quantite  | number }}</td>
         <td>{{ (achatValeurDecore.achatDecore.achat.prix * achatValeurDecore.achatDecore.achat.quantite)  | currency:'EUR':'symbol' }}</td>
-        <td [appClassVariation]="achatValeurDecore.achatDecore.variationAchat">
+        <td [appClassVariation]="achatValeurDecore.achatDecore.variation">
           {{ achatValeurDecore.achatDecore.achat.prixRevente | currency:'EUR':'symbol' }}
         </td>
-        <td [appClassVariation]="achatValeurDecore.achatDecore.variationAchat">
-          {{ achatValeurDecore.achatDecore.variationAchat | percent:'1.2-2' }}
+        <td [appClassVariation]="achatValeurDecore.achatDecore.variation">
+          {{ achatValeurDecore.achatDecore.variation | percent:'1.2-2' }}
         </td>
-        <td [appClassVariation]="achatValeurDecore.achatDecore.variationAchat">
+        <td [appClassVariation]="achatValeurDecore.achatDecore.variation">
           {{ (achatValeurDecore.achatDecore.achat.prixRevente! * achatValeurDecore.achatDecore.achat.quantite)  | currency:'EUR':'symbol' }}
         </td>
       </tr>
@@ -59,10 +59,10 @@
         <td>{{ totalQuantite  | number }}</td>
         <td>{{ totauxAchats  | currency:'EUR':'symbol' }}</td>
         <td></td>
-        <td [appClassVariation]="variationAchats">
-          {{ variationAchats | percent:'1.2-2' }}
+        <td [appClassVariation]="variationVentes">
+          {{ variationVentes | percent:'1.2-2' }}
         </td>
-        <td [appClassVariation]="variationAchats">
+        <td [appClassVariation]="variationVentes">
           {{ totauxVentes  | currency:'EUR':'symbol' }}
         </td>
       </tr>

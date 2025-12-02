@@ -30,6 +30,7 @@ import {
 import {DividendesService} from '../../services/dividendes/dividendes.service';
 import {Tab, TabList, TabPanel, TabPanels, Tabs} from 'primeng/tabs';
 import {IconeVariation} from '../../directives/icone-variation';
+import {EtapeValeurUtil} from '../valeurs/achats-valeur/etape-valeur-util.class';
 
 @Component({
   selector: 'app-portefeuilles',
@@ -164,7 +165,7 @@ export class PortefeuillesComponent implements OnInit {
 
   private tickersEnPortefeuilleAchats() {
     return this.valeursService.chargerAchats()
-      .filter(achats => achats.achats.find(achat => achat.date && achat.dateRevente === undefined) !== undefined)
+      .filter(achats => achats.achats.find(achat => EtapeValeurUtil.isAchat(achat)) !== undefined)
       .map(achats => achats.ticker);
   }
 

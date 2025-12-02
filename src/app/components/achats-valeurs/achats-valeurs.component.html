@@ -3,7 +3,7 @@
 <div class="titre">
   <h2>{{ 'COMPOSANTS.ACHATS_VALEURS.ACHATS_VALEURS' | translate }}</h2>
   <app-dialog-import-export></app-dialog-import-export>
-  @if (achatsNonRevendus && achatsNonRevendus.length > 0) {
+  @if (achats && achats.length > 0) {
     <span class="pi pi-download" (click)="recupererCours()"
           title="{{ 'COMPOSANTS.ACHATS_VALEURS.RECUPERER_COURS' | translate }}"></span>
   }
@@ -14,14 +14,26 @@
 ]"></app-loader>
 
 
-@if (achatsNonRevendus && achatsNonRevendus.length > 0) {
+@if (ordresAchats && ordresAchats.length > 0) {
+  <h3>{{ 'COMPOSANTS.ACHATS_VALEURS.TABLEAU_ORDRES_ACHATS' | translate }}</h3>
+  <app-tableau-ordres-achats [ordresAchats]="ordresAchats"
+                      (suppression)="suppressionAchat($event)"></app-tableau-ordres-achats>
+}
+
+@if (achats && achats.length > 0) {
   <h3>{{ 'COMPOSANTS.ACHATS_VALEURS.TABLEAU_ACHATS' | translate }}</h3>
-  <app-tableau-achats [achats]="achatsNonRevendus"
+  <app-tableau-achats [achats]="achats"
                                    (suppression)="suppressionAchat($event)"></app-tableau-achats>
 }
 
-@if (achatsRevendus && achatsRevendus.length > 0) {
+@if (ordresVentes && ordresVentes.length > 0) {
+  <h3>{{ 'COMPOSANTS.ACHATS_VALEURS.TABLEAU_ORDRES_VENTES' | translate }}</h3>
+  <app-tableau-ordres-ventes [ordresVentes]="ordresVentes"
+                      (suppression)="suppressionAchat($event)"></app-tableau-ordres-ventes>
+}
+
+@if (ventes && ventes.length > 0) {
   <h3>{{ 'COMPOSANTS.ACHATS_VALEURS.TABLEAU_VENTES' | translate }}</h3>
-  <app-tableau-ventes [achats]="achatsRevendus"
+  <app-tableau-ventes [ventes]="ventes"
                                (suppression)="suppressionAchat($event)"></app-tableau-ventes>
 }

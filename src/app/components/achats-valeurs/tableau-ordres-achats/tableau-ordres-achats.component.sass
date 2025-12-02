@@ -1,0 +1,47 @@
+tr
+  th:nth-child(1)
+    width: 7rem
+
+  th:nth-child(-n+3)
+    text-align: left
+
+  th:nth-child(n+4)
+    text-align: right
+
+  td:nth-child(-n+3)
+    text-align: left
+
+  td:nth-child(n+4)
+    text-align: right
+
+  td:nth-child(n+7)
+    background-color: var(--p-yellow-100)
+
+  td
+    &.positive
+      color: var(--p-green-600)
+
+    &.negative
+      color: var(--p-red-600)
+
+    span.pi-trash
+      color: var(--p-red-800)
+      cursor: pointer
+
+    span.pi-shopping-bag
+      cursor: pointer
+      margin-left: 1rem
+
+tr.totaux
+  font-weight: bold
+
+  td
+    background-color: var(--p-gray-300)
+
+
+// orientation verticale
+@media screen and (orientation: portrait)
+  tr
+    th:nth-child(n+3):nth-child(-n+7), td:nth-child(n+3):nth-child(-n+7)
+      display: none
+      width: 0

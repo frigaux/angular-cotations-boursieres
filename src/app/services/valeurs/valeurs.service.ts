@@ -135,10 +135,6 @@ export class ValeursService {
 
   private validerAchats(achats: Array<DTOAchat>): boolean {
     for (const achat of achats) {
-      if (isNaN(Date.parse(achat.date))) {
-        this.cleMessageErreur = 'SERVICES.VALEURS.ERREURS.ACHATS.ACHAT.DATE_REQUIS';
-        return false;
-      }
       if (typeof achat.quantite !== 'number') {
         this.cleMessageErreur = 'SERVICES.VALEURS.ERREURS.ACHATS.ACHAT.QUANTITE_REQUISE';
         return false;
@@ -147,13 +143,16 @@ export class ValeursService {
         this.cleMessageErreur = 'SERVICES.VALEURS.ERREURS.ACHATS.ACHAT.PRIX_REQUIS';
         return false;
       }
-      if (achat.dateRevente !== undefined && isNaN(Date.parse(achat.dateRevente))) {
-        this.cleMessageErreur = 'SERVICES.VALEURS.ERREURS.ACHATS.ACHAT.DATE_REVENTE_REQUISE';
+      if (achat.date !== undefined && isNaN(Date.parse(achat.date))) {
+        this.cleMessageErreur = 'SERVICES.VALEURS.ERREURS.ACHATS.ACHAT.DATE_REQUIS';
         return false;
       }
-      if ((achat.dateRevente === undefined && typeof achat.prixRevente === 'number')
-        || (achat.dateRevente !== undefined && typeof achat.prixRevente !== 'number')) {
-        this.cleMessageErreur = 'SERVICES.VALEURS.ERREURS.ACHATS.ACHAT.INCOHERENCE_REVENTE';
+      if (achat.prixRevente !== undefined && typeof achat.prixRevente !== 'number') {
+        this.cleMessageErreur = 'SERVICES.VALEURS.ERREURS.ACHATS.ACHAT.PRIX_REVENTE_REQUIS';
+        return false;
+      }
+      if (achat.dateRevente !== undefined && isNaN(Date.parse(achat.dateRevente))) {
+        this.cleMessageErreur = 'SERVICES.VALEURS.ERREURS.ACHATS.ACHAT.DATE_REVENTE_REQUISE';
         return false;
       }
     }

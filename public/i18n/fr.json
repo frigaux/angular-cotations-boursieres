@@ -43,14 +43,15 @@
       "MARCHE": "Marché",
       "TICKER": "Ticker",
       "ACHATS_VALEUR": {
-        "AJOUTER_ACHAT": "Ajouter un achat",
+        "AJOUTER_ORDRE_ACHAT": "Ajouter un ordre d'achat",
         "ENREGISTREMENT_REUSSI": "Enregistrement réussi",
-        "DATE": "Date",
+        "ETAPE": "Etape",
         "PRIX": "Prix",
-        "QUANTITE": "Quantite",
+        "QUANTITE": "Quantité",
+        "DATE_ACHAT": "Date d'achat",
         "REVENDU": "Revendu",
-        "DATE_REVENTE": "Date revente",
         "PRIX_REVENTE": "Prix revente",
+        "DATE_REVENTE": "Date revente",
         "CONFIRMATION_SUPPRESSION": "Confirmez-vous la suppression de l'achat ?"
       },
       "DETAILS_VALEUR": {
@@ -238,7 +239,9 @@
       "ACHATS_VALEURS": "Ordres d'achats, achats, ordres de ventes et ventes de valeurs",
       "RECUPERER_COURS": "Récupérer les cours des achats sur Boursorama",
       "CONFIRMATION_SUPPRESSION": "Confirmez-vous la suppression de l'achat ?",
+      "TABLEAU_ORDRES_ACHATS": "Ordres d'achats",
       "TABLEAU_ACHATS": "Achats",
+      "TABLEAU_ORDRES_VENTES": "Ordres de ventes",
       "TABLEAU_VENTES": "Ventes",
       "DIALOG_COURS": {
         "COURS_ACHATS": "Cours des achats",
@@ -252,6 +255,19 @@
         "VARIATION_HAUT": "Var/Haut",
         "VARIATION_BAS": "Var/Bas"
       },
+      "ORDRES_ACHATS": {
+        "SUPPRESSION": "Suppression de l'achat",
+        "ACHATS_VALEUR": "Gestion des achats de la valeur \"{{valeur}}\"",
+        "VALEUR": "Valeur",
+        "DIVIDENDES": "Dividendes",
+        "PRIX_ACHAT": "Prix ordre achat",
+        "QUANTITE_ACHAT": "Quantité",
+        "TOTAL_ACHAT": "Total ordre achat",
+        "CLOTURE": "Clôture",
+        "VARIATION_ORDRE": "Var ordre/clôture",
+        "TOTAL_CLOTURE": "Total clôture",
+        "TOTAUX": "Totaux"
+      },
       "ACHATS": {
         "SUPPRESSION": "Suppression de l'achat",
         "ACHATS_VALEUR": "Gestion des achats de la valeur \"{{valeur}}\"",
@@ -263,6 +279,20 @@
         "TOTAL_ACHAT": "Total achat",
         "CLOTURE": "Clôture",
         "VARIATION_ACHAT": "Var/Achat",
+        "TOTAL_CLOTURE": "Total clôture",
+        "TOTAUX": "Totaux"
+      },
+      "ORDRES_VENTES": {
+        "SUPPRESSION": "Suppression de l'achat",
+        "ACHATS_VALEUR": "Gestion des achats de la valeur \"{{valeur}}\"",
+        "VALEUR": "Valeur",
+        "DATE_ACHAT": "Date/Achat",
+        "DIVIDENDES": "Dividendes",
+        "PRIX_REVENTE": "Prix revente",
+        "QUANTITE_REVENTE": "Quantité",
+        "TOTAL_REVENTE": "Total revente",
+        "CLOTURE": "Clôture",
+        "VARIATION_REVENTE": "Var/Revente",
         "TOTAL_CLOTURE": "Total clôture",
         "TOTAUX": "Totaux"
       },
@@ -558,6 +588,12 @@
       "3": "conserver",
       "4": "alléger",
       "5": "vendre"
+    },
+    "ETAPE_VALEUR": {
+      "ORDRE_ACHAT": "OA",
+      "ACHAT": "A",
+      "ORDRE_VENTE": "OV",
+      "VENTE": "V"
     }
   },
   "SERVICES": {
@@ -570,8 +606,8 @@
             "DATE_REQUIS": "Attribut date manquant",
             "QUANTITE_REQUISE": "Attribut quantite manquant",
             "PRIX_REQUIS": "Attribut prix manquant",
-            "DATE_REVENTE_REQUISE": "Attribut date de revente manquant",
-            "INCOHERENCE_REVENTE": "La date de la revente et le prix de revente sont indissociables"
+            "PRIX_REVENTE_REQUIS": "Attribut prix de revente manquant",
+            "DATE_REVENTE_REQUISE": "Attribut date de revente manquant"
           }
         }
       }

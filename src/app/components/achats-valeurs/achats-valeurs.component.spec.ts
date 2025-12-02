@@ -64,9 +64,9 @@ describe('AchatsValeursComponent', () => {
 
       expect(component).toBeDefined();
       expect(component.loading).toBeFalse();
-      expect(component.achatsNonRevendus).toHaveSize(nbAchats);
-      expect(component.achatsNonRevendus![0].valeur).toEqual(VALEURS[1]);
-      expect(component.achatsNonRevendus![1].valeur).toEqual(VALEURS[0]);
+      expect(component.achats).toHaveSize(nbAchats);
+      expect(component.achats![0].valeur).toEqual(VALEURS[1]);
+      expect(component.achats![1].valeur).toEqual(VALEURS[0]);
     });
 
 
@@ -74,7 +74,7 @@ describe('AchatsValeursComponent', () => {
       fixture.detectChanges(); // appelle le ngOnInit
 
       spyOn(dialogueService, 'confirmationSuppression').and.callThrough();
-      const achatsNonRevendus = component.achatsNonRevendus;
+      const achatsNonRevendus = component.achats;
       const achat = achatsNonRevendus![0];
       component.suppressionAchat({
         event: new MouseEvent('click'),
@@ -97,7 +97,7 @@ describe('AchatsValeursComponent', () => {
       if (dialog.coursNonRevendus)
         for (const achat of dialog.coursNonRevendus) {
           expect(achat.achatDecore.cours).toBeDefined()
-          expect(achat.achatDecore.variationAchat).toBeDefined()
+          expect(achat.achatDecore.variation).toBeDefined()
           expect(achat.achatDecore.variationBas).toBeDefined()
           expect(achat.achatDecore.variationHaut).toBeDefined()
         }

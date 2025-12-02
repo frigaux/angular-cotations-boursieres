@@ -2,7 +2,7 @@
   <div class="actions">
     <div (click)="ajouterAchat()">
       <span class="pi pi-plus-circle"></span>
-      <span>{{ 'COMPOSANTS.VALEURS.ACHATS_VALEUR.AJOUTER_ACHAT' | translate }}</span>
+      <span>{{ 'COMPOSANTS.VALEURS.ACHATS_VALEUR.AJOUTER_ORDRE_ACHAT' | translate }}</span>
     </div>
     <span class="message">{{ succes }}</span>
   </div>
@@ -16,24 +16,21 @@
     <table>
       <thead>
       <th></th>
-      <th>{{ 'COMPOSANTS.VALEURS.ACHATS_VALEUR.DATE' | translate }}</th>
+      <th>{{ 'COMPOSANTS.VALEURS.ACHATS_VALEUR.ETAPE' | translate }}</th>
       <th>{{ 'COMPOSANTS.VALEURS.ACHATS_VALEUR.PRIX' | translate }}</th>
       <th>{{ 'COMPOSANTS.VALEURS.ACHATS_VALEUR.QUANTITE' | translate }}</th>
-      <th>{{ 'COMPOSANTS.VALEURS.ACHATS_VALEUR.REVENDU' | translate }}</th>
-      <th>{{ 'COMPOSANTS.VALEURS.ACHATS_VALEUR.DATE_REVENTE' | translate }}</th>
+      <th>{{ 'COMPOSANTS.VALEURS.ACHATS_VALEUR.DATE_ACHAT' | translate }}</th>
       <th>{{ 'COMPOSANTS.VALEURS.ACHATS_VALEUR.PRIX_REVENTE' | translate }}</th>
+      <th>{{ 'COMPOSANTS.VALEURS.ACHATS_VALEUR.DATE_REVENTE' | translate }}</th>
       </thead>
       <tbody>
         @for (achatDecore of achatsDecores; track achatDecore.id) {
           <tr>
             <td class="pi pi-trash" (click)="suppressionAchat($event, achatDecore.achat)"></td>
             <td>
-              <p-datepicker [(ngModel)]="achatDecore.form.date" dateFormat="dd/mm/yy"
-                            size="small" showIcon iconDisplay="input"
-                            [inputStyle]="{'width': '8rem'}"
-                            readonlyInput="true"
-                            (onSelect)="onSelectDate(achatDecore)"
-                            [autofocus]="false"/>
+              <p-select [options]="etapesValeur" [(ngModel)]="achatDecore.form.etape"
+                        optionValue="etape" optionLabel="libelle" size="small"
+                        (onChange)="onChangeEtape(achatDecore)"/>
             </td>
             <td>
               <input pInputText [(ngModel)]="achatDecore.achat.prix" autocomplete="off" required type="number"
@@ -44,24 +41,33 @@
                      pSize="small" (change)="onChange(achatDecore)"/>
             </td>
             <td>
-              <p-toggleswitch [(ngModel)]="achatDecore.form.revendu" (change)="onChangeRevendu(achatDecore)"/>
-            </td>
-            <td>
-              @if (achatDecore.form.revendu) {
-                <p-datepicker [(ngModel)]="achatDecore.form.dateRevente" dateFormat="dd/mm/yy"
-                              size="small" showIcon iconDisplay="input" required
+              @if (achatDecore.form.etape > 0) {
+                <p-datepicker [(ngModel)]="achatDecore.form.date" dateFormat="dd/mm/yy"
+                              size="small" showIcon iconDisplay="input"
                               [inputStyle]="{'width': '8rem'}"
                               readonlyInput="true"
-                              (onSelect)="onSelectDateRevente(achatDecore)"
+                              (onSelect)="onSelectDate(achatDecore)"
                               [autofocus]="false"/>
               } @else {
                 -
               }
             </td>
             <td>
-              @if (achatDecore.form.revendu) {
+              @if (achatDecore.form.etape > 1) {
                 <input pInputText [(ngModel)]="achatDecore.achat.prixRevente" autocomplete="off" required type="number"
                        pSize="small" (change)="onChange(achatDecore)"/>
+              } @else {
+                -
+              }
+            </td>
+            <td>
+              @if (achatDecore.form.etape > 2) {
+                <p-datepicker [(ngModel)]="achatDecore.form.dateRevente" dateFormat="dd/mm/yy"
+                              size="small" showIcon iconDisplay="input" required
+                              [inputStyle]="{'width': '8rem'}"
+                              readonlyInput="true"
+                              (onSelect)="onSelectDateRevente(achatDecore)"
+                              [autofocus]="false"/>
               } @else {
                 -
               }

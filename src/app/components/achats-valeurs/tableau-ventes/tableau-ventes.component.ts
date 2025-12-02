@@ -24,37 +24,37 @@ import {ClassVariation} from '../../../directives/class-variation';
 })
 export class TableauVentesComponent {
   // input/output
-  inputAchats: InputSignal<Array<AchatValeurDecore> | undefined> = input(undefined,
-    {transform: o => this.intercepteurAchats(o), alias: 'achats'});
+  inputVentes: InputSignal<Array<AchatValeurDecore> | undefined> = input(undefined,
+    {transform: o => this.intercepteurVentes(o), alias: 'ventes'});
   suppression = output<{ event: MouseEvent, achatValeurDecore: AchatValeurDecore }>();
 
   // données pour la vue
   achatValeurDecores?: Array<AchatValeurDecore>;
   totalQuantite: number = 0;
   totauxAchats: number = 0;
-  variationAchats: number = 0;
+  variationVentes: number = 0;
   totauxVentes: number = 0;
 
   constructor(private dividendesService: DividendesService) {
   }
 
-  private intercepteurAchats(listeAchats: Array<AchatValeurDecore> | undefined) {
-    if (listeAchats) {
+  private intercepteurVentes(ventes: Array<AchatValeurDecore> | undefined) {
+    if (ventes) {
       const dividendesByTicker = this.dividendesService.chargerMapByTicker();
-      listeAchats!.forEach(achatValeurDecore => {
-        achatValeurDecore.achatDecore.variationAchat = (achatValeurDecore.achatDecore.achat.prixRevente! / achatValeurDecore.achatDecore.achat.prix) - 1;
+      ventes!.forEach(achatValeurDecore => {
+        achatValeurDecore.achatDecore.variation = (achatValeurDecore.achatDecore.achat.prixRevente! / achatValeurDecore.achatDecore.achat.prix) - 1;
         achatValeurDecore.dividendes = dividendesByTicker?.get(achatValeurDecore.valeur.ticker) || [];
       });
     }
-    this.achatValeurDecores = listeAchats;
-    this.calculerTotaux(listeAchats);
-    return listeAchats;
+    this.achatValeurDecores = ventes;
+    this.calculerTotaux(ventes);
+    return ventes;
   }
 
   private calculerTotaux(listeAchats: Array<AchatValeurDecore> | undefined) {
     this.totalQuantite = 0;
     this.totauxAchats = 0;
-    this.variationAchats = 0;
+    this.variationVentes = 0;
     this.totauxVentes = 0;
     if (listeAchats) {
       this.achatValeurDecores!.forEach(achatValeurDecore => {
@@ -67,7 +67,7 @@ export class TableauVentesComponent {
           console.error('Achat revendu sans date de revente ou prix de revente : ', achat);
         }
       });
-      this.variationAchats = (this.totauxVentes / this.totauxAchats) - 1;
+      this.variationVentes = (this.totauxVentes / this.totauxAchats) - 1;
     }
   }
 

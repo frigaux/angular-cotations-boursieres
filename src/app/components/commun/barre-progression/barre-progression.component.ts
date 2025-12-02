@@ -19,13 +19,13 @@ export class BarreProgressionComponent {
   protected pourcentage: number = 0;
   protected largeur: string = '0';
 
-  private intercepteurPourcentage(pourcentage: number | undefined) {
-    this.pourcentage = pourcentage || 0;
-    return pourcentage;
-  }
-
   private intercepteurLargeur(largeur: string | undefined) {
     this.largeur = largeur || '0';
     return largeur;
+  }
+
+  private intercepteurPourcentage(pourcentage: number | undefined) {
+    this.pourcentage = pourcentage || 0;
+    return pourcentage;
   }
 }

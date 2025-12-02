@@ -1,50 +1,49 @@
 import {Component, input, InputSignal, output, viewChild} from '@angular/core';
-import {CurrencyPipe, DatePipe, DecimalPipe, PercentPipe} from "@angular/common";
-import {TranslatePipe} from "@ngx-translate/core";
-import {CoursService} from '../../../services/cours/cours.service';
-import {TableModule} from 'primeng/table';
-import {AchatValeurDecore} from './achat-valeur-decore.class';
 import {ColonneDividendesComponent} from '../../portefeuilles/colonnes/dividendes/colonne-dividendes.component';
-import {DividendesService} from '../../../services/dividendes/dividendes.service';
-import {LoaderComponent} from '../../loader/loader.component';
+import {CurrencyPipe, DecimalPipe, PercentPipe} from '@angular/common';
 import {
   DialogAchatsValeurComponent
 } from '../../portefeuilles/popover-actions-valeur/dialog-achats-valeur/dialog-achats-valeur.component';
+import {LoaderComponent} from '../../loader/loader.component';
+import {TableModule} from 'primeng/table';
+import {TranslatePipe} from '@ngx-translate/core';
 import {ClassVariation} from '../../../directives/class-variation';
+import {AchatValeurDecore} from '../tableau-achats/achat-valeur-decore.class';
+import {CoursService} from '../../../services/cours/cours.service';
+import {DividendesService} from '../../../services/dividendes/dividendes.service';
 
 @Component({
-  selector: 'app-tableau-achats',
+  selector: 'app-tableau-ordres-achats',
   imports: [
+    ColonneDividendesComponent,
     CurrencyPipe,
-    DatePipe,
     DecimalPipe,
-    TranslatePipe,
+    DialogAchatsValeurComponent,
+    LoaderComponent,
     PercentPipe,
     TableModule,
-    ColonneDividendesComponent,
-    LoaderComponent,
-    DialogAchatsValeurComponent,
+    TranslatePipe,
     ClassVariation
   ],
-  templateUrl: './tableau-achats.component.html',
-  styleUrl: './tableau-achats.component.sass'
+  templateUrl: './tableau-ordres-achats.component.html',
+  styleUrl: './tableau-ordres-achats.component.sass',
 })
-export class TableauAchatsComponent {
+export class TableauOrdresAchatsComponent {
   private dialogAchatsValeurComponent = viewChild(DialogAchatsValeurComponent);
 
   // chargement des cours
   loading: boolean = true;
 
   // input/output
-  inputAchats: InputSignal<Array<AchatValeurDecore> | undefined> = input(undefined,
-    {transform: o => this.intercepteurAchats(o), alias: 'achats'});
+  inputOrdresAchats: InputSignal<Array<AchatValeurDecore> | undefined> = input(undefined,
+    {transform: o => this.intercepteurOrdresAchats(o), alias: 'ordresAchats'});
   suppression = output<{ event: MouseEvent, achatValeurDecore: AchatValeurDecore }>();
 
   // données pour la vue
   achatValeurDecores?: Array<AchatValeurDecore>;
   totalQuantite: number = 0;
-  totauxAchats: number = 0;
-  variationClotures: number = 0;
+  totauxOrdresAchats: number = 0;
+  variationOrdres: number = 0;
   totauxClotures: number = 0;
 
 
@@ -52,23 +51,23 @@ export class TableauAchatsComponent {
               private dividendesService: DividendesService) {
   }
 
-  private intercepteurAchats(achats: Array<AchatValeurDecore> | undefined) {
-    this.achatValeurDecores = achats;
-    if (achats) {
+  private intercepteurOrdresAchats(ordresAchats: Array<AchatValeurDecore> | undefined) {
+    this.achatValeurDecores = ordresAchats;
+    if (ordresAchats) {
       this.loading = true;
       this.calculerTotaux();
       this.recupererCours();
     }
-    return achats;
+    return ordresAchats;
   }
 
   private calculerTotaux() {
     this.totalQuantite = 0;
-    this.totauxAchats = 0;
+    this.totauxOrdresAchats = 0;
     this.achatValeurDecores!.forEach(achatValeurDecore => {
       const achat = achatValeurDecore.achatDecore.achat;
       this.totalQuantite += achat.quantite;
-      this.totauxAchats += achat.prix * achat.quantite;
+      this.totauxOrdresAchats += achat.prix * achat.quantite;
     });
   }
 
@@ -81,11 +80,11 @@ export class TableauAchatsComponent {
             const achats: Array<AchatValeurDecore> = this.achatValeurDecores!.filter(achat => achat.valeur.ticker === cours.ticker);
             achats.forEach(achatValeurDecore => {
               achatValeurDecore.achatDecore.cours = cours.cloture;
-              achatValeurDecore.achatDecore.variation = (cours.cloture / achatValeurDecore.achatDecore.achat.prix) - 1;
+              achatValeurDecore.achatDecore.variation = (achatValeurDecore.achatDecore.achat.prix / cours.cloture) - 1;
               this.totauxClotures += cours.cloture * achatValeurDecore.achatDecore.achat.quantite;
             });
           });
-          this.variationClotures = (this.totauxClotures / this.totauxAchats) - 1;
+          this.variationOrdres = (this.totauxOrdresAchats / this.totauxClotures) - 1;
           const dividendesByTicker = this.dividendesService.chargerMapByTicker();
           this.achatValeurDecores!.forEach(achatValeurDecore => {
             achatValeurDecore.dividendes = dividendesByTicker?.get(achatValeurDecore.valeur.ticker) || [];

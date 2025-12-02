@@ -9,7 +9,8 @@ import {DatePicker} from 'primeng/datepicker';
 import {DatePipe} from '@angular/common';
 import {ConfirmationService} from 'primeng/api';
 import {DialogueService} from '../../../services/dialogue/dialogue.service';
-import {ToggleSwitch} from 'primeng/toggleswitch';
+import {EtapeValeur} from './etape-valeur.enum';
+import {Select} from 'primeng/select';
 
 @Component({
   selector: 'app-achats-valeur',
@@ -18,7 +19,7 @@ import {ToggleSwitch} from 'primeng/toggleswitch';
     FormsModule,
     InputText,
     DatePicker,
-    ToggleSwitch
+    Select
   ],
   templateUrl: './achats-valeur.component.html',
   styleUrl: './achats-valeur.component.sass'
@@ -35,6 +36,9 @@ export class AchatsValeurComponent implements OnInit {
   achatsDecores: AchatDecore[] = [];
   erreur?: string;
   succes?: string;
+  etapesValeur?: Array<{ libelle: string, etape: EtapeValeur }>;
+  protected readonly EtapeValeur = EtapeValeur;
+
 
   constructor(private translateService: TranslateService,
               private valeursService: ValeursService,
@@ -44,6 +48,12 @@ export class AchatsValeurComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.etapesValeur = [
+      {libelle: this.translateService.instant('ENUMERATIONS.ETAPE_VALEUR.ORDRE_ACHAT'), etape: EtapeValeur.ORDRE_ACHAT},
+      {libelle: this.translateService.instant('ENUMERATIONS.ETAPE_VALEUR.ACHAT'), etape: EtapeValeur.ACHAT},
+      {libelle: this.translateService.instant('ENUMERATIONS.ETAPE_VALEUR.ORDRE_VENTE'), etape: EtapeValeur.ORDRE_VENTE},
+      {libelle: this.translateService.instant('ENUMERATIONS.ETAPE_VALEUR.VENTE'), etape: EtapeValeur.VENTE},
+    ];
     this.valeursService.onImportAchats(achatsTickers => this.construireVue());
   }
 
@@ -68,7 +78,6 @@ export class AchatsValeurComponent implements OnInit {
   ajouterAchat() {
     if (this.valeur) {
       this.achats.push({
-        date: this.datepipe.transform(new Date(), 'yyyy-MM-dd')!,
         quantite: 1,
         prix: this.valeur.prixParDefaut
       });
@@ -111,19 +120,29 @@ export class AchatsValeurComponent implements OnInit {
     this.enregistrerAchats();
   }
 
-  protected onChangeRevendu(achatDecore: AchatDecore) {
-    if (!achatDecore.form.revendu) {
+  protected onChangeEtape(achatDecore: AchatDecore) {
+    if (achatDecore.form.etape < 3) {
       achatDecore.form.dateRevente = undefined;
       delete achatDecore.achat['dateRevente'];
-      delete achatDecore.achat['prixRevente'];
-      this.enregistrerAchats();
     }
+    if (achatDecore.form.etape < 2) {
+      delete achatDecore.achat['prixRevente'];
+    }
+    if (achatDecore.form.etape < 1) {
+      achatDecore.form.date = undefined;
+      delete achatDecore.achat['date'];
+    }
+    this.enregistrerAchats();
   }
 
   private decorerAchats() {
     let i = 0;
     this.achatsDecores = this.achats
-      .sort((a1, a2) => new Date(a1.date).getTime() - new Date(a2.date).getTime())
+      .sort((a1, a2) => {
+        const d1 = a1.date ? new Date(a1.date) : new Date();
+        const d2 = a2.date ? new Date(a2.date) : new Date();
+        return d1.getTime() - d2.getTime();
+      })
       .map(achat => new AchatDecore(i++, achat));
   }
 
