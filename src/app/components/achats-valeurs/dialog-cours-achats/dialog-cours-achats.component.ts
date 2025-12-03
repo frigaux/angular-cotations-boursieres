@@ -9,6 +9,8 @@ import {CurrencyPipe, PercentPipe} from '@angular/common';
 import {ColonneDividendesComponent} from '../../portefeuilles/colonnes/dividendes/colonne-dividendes.component';
 import {Dialog} from 'primeng/dialog';
 import {ClassVariation} from '../../../directives/class-variation';
+import {DTOCours} from '../../../services/cours/dto-cours.interface';
+import {DTODividende} from '../../../services/dividendes/dto-dividende.interface';
 
 @Component({
   selector: 'app-dialog-cours-achats',
@@ -29,39 +31,58 @@ export class DialogCoursAchatsComponent {
   // données pour la vue
   visible: boolean = false;
   loading: boolean = true; // chargement des cours depuis Boursorama
-  coursNonRevendus?: Array<AchatValeurDecore>;
-
-  // private
-  listeAchatsNonRevendus?: Array<AchatValeurDecore>;
+  ordresAchats?: Array<AchatValeurDecore>;
+  achats?: Array<AchatValeurDecore>;
+  ordresVentes?: Array<AchatValeurDecore>;
 
   constructor(private dividendesService: DividendesService,
               private boursoramaService: BoursoramaService) {
   }
 
-  afficherCours(listeAchatsNonRevendus: Array<AchatValeurDecore>) {
-    this.listeAchatsNonRevendus = listeAchatsNonRevendus;
-    this.visible = true;
-    if (listeAchatsNonRevendus.length > 0) {
+  afficherCours(ordresAchats: Array<AchatValeurDecore>,
+                achats: Array<AchatValeurDecore>,
+                ordresVentes: Array<AchatValeurDecore>) {
+    this.ordresAchats = ordresAchats;
+    this.achats = achats;
+    this.ordresVentes = ordresVentes;
+
+    const tickers: Set<string> = this.tickersDistinct();
+    if (tickers.size > 0) {
+      this.visible = true;
       this.loading = true;
-      const tickers = Array.from(new Set(listeAchatsNonRevendus.map(achat => achat.valeur.ticker)));
-      this.coursNonRevendus = JSON.parse(JSON.stringify(listeAchatsNonRevendus));
-      this.boursoramaService.chargerCoursTickers(tickers)
+      this.boursoramaService.chargerCoursTickers(Array.from(tickers))
         .subscribe(listeCours => {
-          this.coursNonRevendus!.forEach(achatValeurDecore => {
-            const cours = listeCours.find(c => c.ticker === achatValeurDecore.valeur.ticker);
-            const achatDecore = achatValeurDecore.achatDecore;
-            achatDecore.cours = cours ? cours.cloture : undefined;
-            achatDecore.variation = cours ? (cours.cloture / achatDecore.achat.prix) - 1 : undefined;
-            achatDecore.variationBas = cours ? (cours.cloture / cours.plusBas) - 1 : undefined;
-            achatDecore.variationHaut = cours ? (cours.cloture / cours.plusHaut) - 1 : undefined;
-          });
           const dividendesByTicker = this.dividendesService.chargerMapByTicker();
-          this.coursNonRevendus!.forEach(achatValeurDecore => {
-            achatValeurDecore.dividendes = dividendesByTicker?.get(achatValeurDecore.valeur.ticker) || [];
-          });
+          this.completerAchats(ordresAchats, listeCours, dividendesByTicker);
+          this.completerAchats(achats, listeCours, dividendesByTicker);
+          this.completerAchats(ordresVentes, listeCours, dividendesByTicker);
           this.loading = false;
         });
     }
+  }
+
+  private tickersDistinct(): Set<string> {
+    const resultat = new Set<string>();
+    if (this.ordresAchats && this.achats && this.ordresVentes) {
+      this.ordresAchats.forEach(achat => resultat.add(achat.valeur.ticker));
+      this.achats.forEach(achat => resultat.add(achat.valeur.ticker));
+      this.ordresVentes.forEach(achat => resultat.add(achat.valeur.ticker));
+    }
+    return resultat;
+  }
+
+  private completerAchats(achats: Array<AchatValeurDecore>,
+                          listeCours: Array<DTOCours>,
+                          dividendesByTicker: Map<string, Array<DTODividende>> | undefined) {
+    achats.forEach(achatValeurDecore => {
+      const cours = listeCours.find(c => c.ticker === achatValeurDecore.valeur.ticker);
+      const achatDecore = achatValeurDecore.achatDecore;
+      achatDecore.cours = cours ? cours.cloture : undefined;
+      achatDecore.variation = cours ? (cours.cloture / achatDecore.achat.prix) - 1 : undefined;
+      achatDecore.variationBas = cours ? (cours.cloture / cours.plusBas) - 1 : undefined;
+      achatDecore.variationHaut = cours ? (cours.cloture / cours.plusHaut) - 1 : undefined;
+      achatValeurDecore.dividendes = dividendesByTicker?.get(achatValeurDecore.valeur.ticker) || [];
+    });
   }
 
   protected fermer() {
@@ -69,8 +90,8 @@ export class DialogCoursAchatsComponent {
   }
 
   protected rafraichir() {
-    if (this.listeAchatsNonRevendus) {
-      this.afficherCours(this.listeAchatsNonRevendus);
+    if (this.ordresAchats && this.achats && this.ordresVentes) {
+      this.afficherCours(this.ordresAchats, this.achats, this.ordresVentes);
     }
   }
 }

@@ -13,8 +13,8 @@
       {marginLeft: '0', marginTop: '1rem', height: '20vh', width: '100%'}
   ]"></app-loader>
 
-  @if (!loading && coursNonRevendus) {
-    <p-table [value]="coursNonRevendus">
+  @if (!loading && achats) {
+    <p-table [value]="achats">
       <ng-template #header>
         <tr>
           <th>{{ 'COMPOSANTS.ACHATS_VALEURS.DIALOG_COURS.VALEUR' | translate }}</th>

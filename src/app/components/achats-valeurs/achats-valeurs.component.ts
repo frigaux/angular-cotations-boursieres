@@ -136,6 +136,9 @@ export class AchatsValeursComponent implements OnInit {
   }
 
   recupererCours() {
-    this.dialogCoursAchatsNonRevendusComponent()?.afficherCours(this.achats!);
+    this.dialogCoursAchatsNonRevendusComponent()?.afficherCours(
+      JSON.parse(JSON.stringify(this.ordresAchats!)),
+      JSON.parse(JSON.stringify(this.achats!)),
+      JSON.parse(JSON.stringify(this.ordresVentes!)));
   }
 }

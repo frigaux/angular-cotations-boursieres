@@ -237,14 +237,14 @@
     },
     "ACHATS_VALEURS": {
       "ACHATS_VALEURS": "Ordres d'achats, achats, ordres de ventes et ventes de valeurs",
-      "RECUPERER_COURS": "Récupérer les cours des achats sur Boursorama",
+      "RECUPERER_COURS": "Récupérer les cours sur Boursorama",
       "CONFIRMATION_SUPPRESSION": "Confirmez-vous la suppression de l'achat ?",
       "TABLEAU_ORDRES_ACHATS": "Ordres d'achats",
       "TABLEAU_ACHATS": "Achats",
       "TABLEAU_ORDRES_VENTES": "Ordres de ventes",
       "TABLEAU_VENTES": "Ventes",
       "DIALOG_COURS": {
-        "COURS_ACHATS": "Cours des achats",
+        "COURS_ACHATS": "Cours depuis Boursorama",
         "RAFRAICHIR": "Rafraîchir",
         "FERMER": "Fermer",
         "VALEUR": "Valeur",
