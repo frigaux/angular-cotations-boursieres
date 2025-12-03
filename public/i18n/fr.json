@@ -247,13 +247,17 @@
         "COURS_ACHATS": "Cours depuis Boursorama",
         "RAFRAICHIR": "Rafraîchir",
         "FERMER": "Fermer",
-        "VALEUR": "Valeur",
-        "DIVIDENDES": "Dividendes",
-        "PRIX_ACHAT": "Prix achat",
-        "COURS": "Cours",
-        "VARIATION_ACHAT": "Var/Ac",
-        "VARIATION_HAUT": "Var/Haut",
-        "VARIATION_BAS": "Var/Bas"
+        "TABLEAU_ACHATS": {
+          "VALEUR": "Valeur",
+          "DIVIDENDES": "Dividendes",
+          "PRIX_ORDRE_ACHAT": "Prix ordre achat",
+          "PRIX_ACHAT": "Prix achat",
+          "PRIX_REVENTE": "Prix revente",
+          "COURS": "Cours",
+          "VARIATION_ORDRE": "Var Ordre/Clôture",
+          "VARIATION_ACHAT": "Var/Ac",
+          "VARIATION_REVENTE": "Var/Revente"
+        }
       },
       "ORDRES_ACHATS": {
         "SUPPRESSION": "Suppression de l'achat",
@@ -264,7 +268,7 @@
         "QUANTITE_ACHAT": "Quantité",
         "TOTAL_ACHAT": "Total ordre achat",
         "CLOTURE": "Clôture",
-        "VARIATION_ORDRE": "Var ordre/clôture",
+        "VARIATION_ORDRE": "Var Ordre/Clôture",
         "TOTAL_CLOTURE": "Total clôture",
         "TOTAUX": "Totaux"
       },

@@ -6,7 +6,7 @@ import {PortefeuilleAvecCours} from '../../portefeuille-avec-cours.class';
 import {Dialog} from 'primeng/dialog';
 import {LoaderComponent} from '../../../loader/loader.component';
 import {JaugeComponent} from '../../../commun/jauge/jauge.component';
-import {CurrencyPipe, PercentPipe} from '@angular/common';
+import {PercentPipe} from '@angular/common';
 import {UIChart} from 'primeng/chart';
 import {TableModule} from 'primeng/table';
 import {DialogCotationsValeurComponent} from '../dialog-cotations-valeur/dialog-cotations-valeur.component';
@@ -25,7 +25,6 @@ import {IconeVariation} from '../../../../directives/icone-variation';
     JaugeComponent,
     PercentPipe,
     UIChart,
-    CurrencyPipe,
     TableModule,
     PopoverActionsValeurComponent,
     ColonneDividendesComponent,

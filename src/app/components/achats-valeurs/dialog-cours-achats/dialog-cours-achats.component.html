@@ -13,34 +13,18 @@
       {marginLeft: '0', marginTop: '1rem', height: '20vh', width: '100%'}
   ]"></app-loader>
 
-  @if (!loading && achats) {
-    <p-table [value]="achats">
-      <ng-template #header>
-        <tr>
-          <th>{{ 'COMPOSANTS.ACHATS_VALEURS.DIALOG_COURS.VALEUR' | translate }}</th>
-          <th>{{ 'COMPOSANTS.ACHATS_VALEURS.DIALOG_COURS.DIVIDENDES' | translate }}</th>
-          <th>{{ 'COMPOSANTS.ACHATS_VALEURS.DIALOG_COURS.PRIX_ACHAT' | translate }}</th>
-          <th>{{ 'COMPOSANTS.ACHATS_VALEURS.DIALOG_COURS.COURS' | translate }}</th>
-          <th>{{ 'COMPOSANTS.ACHATS_VALEURS.DIALOG_COURS.VARIATION_ACHAT' | translate }}</th>
-          <th>{{ 'COMPOSANTS.ACHATS_VALEURS.DIALOG_COURS.VARIATION_HAUT' | translate }}</th>
-          <th>{{ 'COMPOSANTS.ACHATS_VALEURS.DIALOG_COURS.VARIATION_BAS' | translate }}</th>
-        </tr>
-      </ng-template>
-      <ng-template #body let-achatValeurDecore>
-        <tr>
-          <td>{{ achatValeurDecore.valeur.libelle }}</td>
-          <td>
-            <app-colonne-dividendes [dividendes]="achatValeurDecore.dividendes"></app-colonne-dividendes>
-          </td>
-          <td>{{ achatValeurDecore.achatDecore.achat.prix  | currency:'EUR':'symbol' }}</td>
-          <td>{{ achatValeurDecore.achatDecore.cours | currency:'EUR':'symbol' }}</td>
-          <td [appClassVariation]="achatValeurDecore.achatDecore.variation">
-            {{ achatValeurDecore.achatDecore.variation | percent:'1.2-2' }}
-          </td>
-          <td>{{ achatValeurDecore.achatDecore.variationHaut | percent:'1.2-2' }}</td>
-          <td>{{ achatValeurDecore.achatDecore.variationBas | percent:'1.2-2' }}</td>
-        </tr>
-      </ng-template>
-    </p-table>
+  @if (!loading) {
+    @if (ordresAchats && ordresAchats.length > 0) {
+      <h3>{{ 'COMPOSANTS.ACHATS_VALEURS.TABLEAU_ORDRES_ACHATS' | translate }}</h3>
+      <app-tableau-achats [achats]="{achats: ordresAchats, etape: EtapeValeur.ORDRE_ACHAT}"></app-tableau-achats>
+    }
+    @if (achats && achats.length > 0) {
+      <h3>{{ 'COMPOSANTS.ACHATS_VALEURS.TABLEAU_ACHATS' | translate }}</h3>
+      <app-tableau-achats [achats]="{achats, etape: EtapeValeur.ACHAT}"></app-tableau-achats>
+    }
+    @if (ordresVentes && ordresVentes.length > 0) {
+      <h3>{{ 'COMPOSANTS.ACHATS_VALEURS.TABLEAU_ORDRES_VENTES' | translate }}</h3>
+      <app-tableau-achats [achats]="{achats: ordresVentes, etape: EtapeValeur.ORDRE_VENTE}"></app-tableau-achats>
+    }
   }
 </p-dialog>

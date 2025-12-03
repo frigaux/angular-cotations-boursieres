@@ -13,27 +13,28 @@
   {marginLeft: '0', marginTop: '1rem', height: '20vh', width: '100%'}
 ]"></app-loader>
 
+@if (!loading) {
+  @if (ordresAchats && ordresAchats.length > 0) {
+    <h3>{{ 'COMPOSANTS.ACHATS_VALEURS.TABLEAU_ORDRES_ACHATS' | translate }}</h3>
+    <app-tableau-ordres-achats [ordresAchats]="ordresAchats"
+                               (suppression)="suppressionAchat($event)"></app-tableau-ordres-achats>
+  }
 
-@if (ordresAchats && ordresAchats.length > 0) {
-  <h3>{{ 'COMPOSANTS.ACHATS_VALEURS.TABLEAU_ORDRES_ACHATS' | translate }}</h3>
-  <app-tableau-ordres-achats [ordresAchats]="ordresAchats"
-                      (suppression)="suppressionAchat($event)"></app-tableau-ordres-achats>
-}
+  @if (achats && achats.length > 0) {
+    <h3>{{ 'COMPOSANTS.ACHATS_VALEURS.TABLEAU_ACHATS' | translate }}</h3>
+    <app-tableau-achats [achats]="achats"
+                        (suppression)="suppressionAchat($event)"></app-tableau-achats>
+  }
 
-@if (achats && achats.length > 0) {
-  <h3>{{ 'COMPOSANTS.ACHATS_VALEURS.TABLEAU_ACHATS' | translate }}</h3>
-  <app-tableau-achats [achats]="achats"
-                                   (suppression)="suppressionAchat($event)"></app-tableau-achats>
-}
+  @if (ordresVentes && ordresVentes.length > 0) {
+    <h3>{{ 'COMPOSANTS.ACHATS_VALEURS.TABLEAU_ORDRES_VENTES' | translate }}</h3>
+    <app-tableau-ordres-ventes [ordresVentes]="ordresVentes"
+                               (suppression)="suppressionAchat($event)"></app-tableau-ordres-ventes>
+  }
 
-@if (ordresVentes && ordresVentes.length > 0) {
-  <h3>{{ 'COMPOSANTS.ACHATS_VALEURS.TABLEAU_ORDRES_VENTES' | translate }}</h3>
-  <app-tableau-ordres-ventes [ordresVentes]="ordresVentes"
-                      (suppression)="suppressionAchat($event)"></app-tableau-ordres-ventes>
-}
-
-@if (ventes && ventes.length > 0) {
-  <h3>{{ 'COMPOSANTS.ACHATS_VALEURS.TABLEAU_VENTES' | translate }}</h3>
-  <app-tableau-ventes [ventes]="ventes"
-                               (suppression)="suppressionAchat($event)"></app-tableau-ventes>
+  @if (ventes && ventes.length > 0) {
+    <h3>{{ 'COMPOSANTS.ACHATS_VALEURS.TABLEAU_VENTES' | translate }}</h3>
+    <app-tableau-ventes [ventes]="ventes"
+                        (suppression)="suppressionAchat($event)"></app-tableau-ventes>
+  }
 }

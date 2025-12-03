@@ -5,12 +5,11 @@ import {BoursoramaService} from '../../../services/boursorama/boursorama.service
 import {TranslatePipe} from '@ngx-translate/core';
 import {LoaderComponent} from '../../loader/loader.component';
 import {TableModule} from 'primeng/table';
-import {CurrencyPipe, PercentPipe} from '@angular/common';
-import {ColonneDividendesComponent} from '../../portefeuilles/colonnes/dividendes/colonne-dividendes.component';
 import {Dialog} from 'primeng/dialog';
-import {ClassVariation} from '../../../directives/class-variation';
 import {DTOCours} from '../../../services/cours/dto-cours.interface';
 import {DTODividende} from '../../../services/dividendes/dto-dividende.interface';
+import {TableauAchatsComponent} from './tableau-achats/tableau-achats.component';
+import {EtapeValeur} from '../../valeurs/achats-valeur/etape-valeur.enum';
 
 @Component({
   selector: 'app-dialog-cours-achats',
@@ -18,11 +17,8 @@ import {DTODividende} from '../../../services/dividendes/dto-dividende.interface
     TranslatePipe,
     LoaderComponent,
     TableModule,
-    CurrencyPipe,
-    PercentPipe,
-    ColonneDividendesComponent,
     Dialog,
-    ClassVariation
+    TableauAchatsComponent
   ],
   templateUrl: './dialog-cours-achats.component.html',
   styleUrls: ['./dialog-cours-achats.component.sass', '../../commun/barre-superieure.sass']
@@ -34,6 +30,8 @@ export class DialogCoursAchatsComponent {
   ordresAchats?: Array<AchatValeurDecore>;
   achats?: Array<AchatValeurDecore>;
   ordresVentes?: Array<AchatValeurDecore>;
+  protected readonly EtapeValeur = EtapeValeur;
+
 
   constructor(private dividendesService: DividendesService,
               private boursoramaService: BoursoramaService) {
@@ -78,9 +76,7 @@ export class DialogCoursAchatsComponent {
       const cours = listeCours.find(c => c.ticker === achatValeurDecore.valeur.ticker);
       const achatDecore = achatValeurDecore.achatDecore;
       achatDecore.cours = cours ? cours.cloture : undefined;
-      achatDecore.variation = cours ? (cours.cloture / achatDecore.achat.prix) - 1 : undefined;
-      achatDecore.variationBas = cours ? (cours.cloture / cours.plusBas) - 1 : undefined;
-      achatDecore.variationHaut = cours ? (cours.cloture / cours.plusHaut) - 1 : undefined;
+      achatDecore.dto = cours;
       achatValeurDecore.dividendes = dividendesByTicker?.get(achatValeurDecore.valeur.ticker) || [];
     });
   }

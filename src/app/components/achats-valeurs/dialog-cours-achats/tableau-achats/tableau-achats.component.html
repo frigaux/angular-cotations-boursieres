@@ -1,0 +1,63 @@
+@if (achats) {
+  <p-table [value]="achats">
+    <ng-template #header>
+      <tr>
+        <th>{{ 'COMPOSANTS.ACHATS_VALEURS.DIALOG_COURS.TABLEAU_ACHATS.VALEUR' | translate }}</th>
+        <th>{{ 'COMPOSANTS.ACHATS_VALEURS.DIALOG_COURS.TABLEAU_ACHATS.DIVIDENDES' | translate }}</th>
+        <th>
+          @switch(etape) {
+            @case(EtapeValeur.ORDRE_ACHAT) {
+              {{ 'COMPOSANTS.ACHATS_VALEURS.DIALOG_COURS.TABLEAU_ACHATS.PRIX_ORDRE_ACHAT' | translate }}
+            }
+            @case(EtapeValeur.ACHAT) {
+              {{ 'COMPOSANTS.ACHATS_VALEURS.DIALOG_COURS.TABLEAU_ACHATS.PRIX_ACHAT' | translate }}
+            }
+            @case(EtapeValeur.ORDRE_VENTE) {
+              {{ 'COMPOSANTS.ACHATS_VALEURS.DIALOG_COURS.TABLEAU_ACHATS.PRIX_REVENTE' | translate }}
+            }
+          }
+        </th>
+        <th>{{ 'COMPOSANTS.ACHATS_VALEURS.DIALOG_COURS.TABLEAU_ACHATS.COURS' | translate }}</th>
+        <th>
+          @switch(etape) {
+            @case(EtapeValeur.ORDRE_ACHAT) {
+              {{ 'COMPOSANTS.ACHATS_VALEURS.DIALOG_COURS.TABLEAU_ACHATS.VARIATION_ORDRE' | translate }}
+            }
+            @case(EtapeValeur.ACHAT) {
+              {{ 'COMPOSANTS.ACHATS_VALEURS.DIALOG_COURS.TABLEAU_ACHATS.VARIATION_ACHAT' | translate }}
+            }
+            @case(EtapeValeur.ORDRE_VENTE) {
+              {{ 'COMPOSANTS.ACHATS_VALEURS.DIALOG_COURS.TABLEAU_ACHATS.VARIATION_REVENTE' | translate }}
+            }
+          }
+        </th>
+      </tr>
+    </ng-template>
+    <ng-template #body let-achatValeurDecore>
+      <tr>
+        <td>{{ achatValeurDecore.valeur.libelle }}</td>
+        <td>
+          <app-colonne-dividendes [dividendes]="achatValeurDecore.dividendes"></app-colonne-dividendes>
+        </td>
+        <td>
+          @if (etape == EtapeValeur.ORDRE_VENTE) {
+            {{ achatValeurDecore.achatDecore.achat.prixRevente  | currency:'EUR':'symbol' }}
+          } @else {
+            {{ achatValeurDecore.achatDecore.achat.prix  | currency:'EUR':'symbol' }}
+          }
+        </td>
+        <td>
+          <app-jauge
+            [donnees]="{
+                cours: achatValeurDecore.achatDecore.cours,
+                plusBas: achatValeurDecore.achatDecore.dto.plusBas,
+                plusHaut: achatValeurDecore.achatDecore.dto.plusHaut
+              }"></app-jauge>
+        </td>
+        <td [appClassVariation]="achatValeurDecore.achatDecore.variation">
+          {{ achatValeurDecore.achatDecore.variation | percent:'1.2-2' }}
+        </td>
+      </tr>
+    </ng-template>
+  </p-table>
+}
