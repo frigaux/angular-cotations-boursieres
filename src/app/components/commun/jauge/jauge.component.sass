@@ -11,10 +11,12 @@
     text-align: right
 
 .jauge
-  height: 1rem
+  position: relative
+  height: 1.25rem
   border: 1px solid black
 
-  .pourcentage
+  .remplissage
+    position: absolute
     height: 100%
 
     &.rouge
@@ -22,3 +24,9 @@
 
     &.vert
       background-color: var(--p-green-700)
+
+  .valeur
+    position: absolute
+    color: black
+    text-align: center
+    width: 100%

@@ -1,13 +1,14 @@
 <div>
   <div class="libelles">
-    <span>{{ cleMinimum | translate }}</span>
-    <span>{{ cleMaximum | translate }}</span>
+    <span>{{ plusBas  | currency:'EUR':'symbol' }}</span>
+    <span>{{ plusHaut  | currency:'EUR':'symbol' }}</span>
   </div>
   <div class="jauge">
     @if (pourcentage) {
-      <div class="pourcentage"
+      <div class="remplissage"
            [ngClass]="{'rouge': pourcentage < 50, 'vert': pourcentage >= 50}"
            [style]="{ width: `${pourcentage}%` }"></div>
     }
+    <div class="valeur">{{ cours | currency:'EUR':'symbol' }}</div>
   </div>
 </div>

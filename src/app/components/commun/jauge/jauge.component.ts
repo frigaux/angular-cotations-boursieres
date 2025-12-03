@@ -1,42 +1,37 @@
 import {Component, input, InputSignal} from '@angular/core';
-import {TranslatePipe} from '@ngx-translate/core';
-import {NgClass} from '@angular/common';
+import {CurrencyPipe, NgClass} from '@angular/common';
 
 @Component({
   selector: 'app-jauge',
   imports: [
-    TranslatePipe,
-    NgClass
+    NgClass,
+    CurrencyPipe
   ],
   templateUrl: './jauge.component.html',
   styleUrl: './jauge.component.sass'
 })
 export class JaugeComponent {
   // input/output
-  inputCleMinimum: InputSignal<string | undefined> = input(undefined,
-    {transform: o => this.intercepteurCleMinimum(o), alias: 'cleMinimum'});
-  inputCleMaximum: InputSignal<string | undefined> = input(undefined,
-    {transform: o => this.intercepteurCleMaximum(o), alias: 'cleMaximum'});
-  inputPourcentage: InputSignal<number | undefined> = input(undefined,
-    {transform: o => this.intercepteurPourcentage(o), alias: 'pourcentage'});
+  inputDonnees: InputSignal<{ cours: number, plusBas: number, plusHaut: number } | undefined> = input(undefined,
+    {transform: o => this.intercepteurDonnees(o), alias: 'donnees'});
 
   // données pour la vue
-  cleMinimum?: string;
-  cleMaximum?: string;
+  cours?: number;
+  plusBas?: number;
+  plusHaut?: number;
   pourcentage?: number;
 
-  private intercepteurCleMinimum(cleMinimum: string | undefined) {
-    this.cleMinimum = cleMinimum;
-    return cleMinimum;
-  }
-
-  private intercepteurCleMaximum(cleMaximum: string | undefined) {
-    this.cleMaximum = cleMaximum;
-    return cleMaximum;
-  }
-
-  private intercepteurPourcentage(pourcentage: number | undefined) {
-    this.pourcentage = pourcentage;
-    return pourcentage;
+  private intercepteurDonnees(donnees: { cours: number; plusBas: number; plusHaut: number } | undefined) {
+    this.cours = undefined
+    this.plusBas = undefined
+    this.plusHaut = undefined
+    this.pourcentage = undefined
+    if (donnees) {
+      this.cours = donnees.cours;
+      this.plusBas = donnees.plusBas;
+      this.plusHaut = donnees.plusHaut;
+      this.pourcentage = Math.round(100 * (this.cours - this.plusBas) / (this.plusHaut - this.plusBas));
+    }
+    return donnees;
   }
 }

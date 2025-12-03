@@ -7,7 +7,6 @@ import {DTODividende} from '../../../../services/dividendes/dto-dividende.interf
 export class CotationsValeurBoursoramaDecore {
   id: number;
   dto: DTOInformationsTickerBoursorama;
-  pourcentageCours: number;
   variationOuverture: number;
   variationClotureVeille: number;
   dividendes?: Array<DTODividende>;
@@ -22,7 +21,6 @@ export class CotationsValeurBoursoramaDecore {
               dividendes: Array<DTODividende> | undefined) {
     this.id = id;
     this.dto = dto;
-    this.pourcentageCours = Math.round(100 * (dto.cotations.cours - dto.cotations.plusBas) / (dto.cotations.plusHaut - dto.cotations.plusBas));
     this.variationOuverture = (dto.cotations.cours / dto.cotations.ouverture) - 1;
     this.variationClotureVeille = (dto.cotations.cours / dto.cotations.clotureVeille) - 1;
     this.dividendes = dividendes;

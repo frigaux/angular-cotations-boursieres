@@ -92,10 +92,10 @@ describe('AchatsValeursComponent', () => {
       component.recupererCours();
       expect(component.dialogCoursAchatsNonRevendusComponent()).toBeDefined();
       const dialog: DialogCoursAchatsComponent = component.dialogCoursAchatsNonRevendusComponent()!;
-      expect(dialog.coursNonRevendus).toBeDefined();
-      expect(dialog.coursNonRevendus).toHaveSize(nbAchats);
-      if (dialog.coursNonRevendus)
-        for (const achat of dialog.coursNonRevendus) {
+      expect(dialog.achats).toBeDefined();
+      expect(dialog.achats).toHaveSize(nbAchats);
+      if (dialog.achats)
+        for (const achat of dialog.achats) {
           expect(achat.achatDecore.cours).toBeDefined()
           expect(achat.achatDecore.variation).toBeDefined()
           expect(achat.achatDecore.variationBas).toBeDefined()

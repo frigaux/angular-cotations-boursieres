@@ -2,14 +2,12 @@
   <p-fieldset
     legend="{{ 'COMPOSANTS.PORTEFEUILLES.ACTIONS_VALEUR.DIALOG_COTATIONS_VALEUR.COTATIONS.COTATIONS' | translate }}">
     <div class="cotations">
-      <div>
-        <label>{{ 'COMPOSANTS.PORTEFEUILLES.ACTIONS_VALEUR.DIALOG_COTATIONS_VALEUR.COTATIONS.COURS' | translate }}</label>
-        <span>{{ cotationsTickerDecore.dto.cotations.cours | currency:'EUR':'symbol' }}</span>
-      </div>
       <app-jauge
-        [cleMinimum]="'COMPOSANTS.PORTEFEUILLES.ACTIONS_VALEUR.DIALOG_COTATIONS_VALEUR.COTATIONS.PLUS_BAS'"
-        [cleMaximum]="'COMPOSANTS.PORTEFEUILLES.ACTIONS_VALEUR.DIALOG_COTATIONS_VALEUR.COTATIONS.PLUS_HAUT'"
-        [pourcentage]="cotationsTickerDecore.pourcentageCours"></app-jauge>
+        [donnees]="{
+          cours: cotationsTickerDecore.dto.cotations.cours,
+          plusBas: cotationsTickerDecore.dto.cotations.plusBas,
+          plusHaut: cotationsTickerDecore.dto.cotations.plusHaut
+        }"></app-jauge>
       <div>
         <label>{{ 'COMPOSANTS.PORTEFEUILLES.ACTIONS_VALEUR.DIALOG_COTATIONS_VALEUR.COTATIONS.VAR_OUVERTURE' | translate }}</label>
         <span [appClassVariation]="cotationsTickerDecore.variationOuverture">

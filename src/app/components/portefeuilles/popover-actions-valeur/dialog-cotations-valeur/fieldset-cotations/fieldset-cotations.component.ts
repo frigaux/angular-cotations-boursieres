@@ -1,5 +1,5 @@
 import {Component, input, InputSignal} from '@angular/core';
-import {CurrencyPipe, PercentPipe} from '@angular/common';
+import {PercentPipe} from '@angular/common';
 import {Fieldset} from 'primeng/fieldset';
 import {JaugeComponent} from '../../../../commun/jauge/jauge.component';
 import {TranslatePipe} from '@ngx-translate/core';
@@ -9,7 +9,6 @@ import {ClassVariation} from '../../../../../directives/class-variation';
 @Component({
   selector: 'app-fieldset-cotations',
   imports: [
-    CurrencyPipe,
     Fieldset,
     JaugeComponent,
     PercentPipe,

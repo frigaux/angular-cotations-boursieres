@@ -356,9 +356,6 @@
           "VENTES": "Ventes ({{quantite}})",
           "COTATIONS": {
             "COTATIONS": "Cotations",
-            "COURS": "Cours",
-            "PLUS_BAS": "Plus bas",
-            "PLUS_HAUT": "Plus haut",
             "VAR_OUVERTURE": "Var/Ouverture",
             "VAR_CLOTURE_VEILLE": "Var/Clôture veille"
           },
@@ -402,9 +399,6 @@
           "FERMER": "Fermer",
           "VALEUR": "Valeur",
           "COURS": "Cours",
-          "JAUGE_PLUS_HAUT_BAS": "Jauge",
-          "PLUS_BAS": "Plus bas",
-          "PLUS_HAUT": "Plus haut",
           "ORDRES": "Ordres",
           "ACHATS": "Achats",
           "VENTES": "Ventes",

@@ -28,7 +28,6 @@
           <th>{{ 'COMPOSANTS.PORTEFEUILLES.ACTIONS_VALEUR.DIALOG_COTATIONS_VALEURS_PORTEFEUILLE.VALEUR' | translate }}</th>
           <th>{{ 'COMPOSANTS.PORTEFEUILLES.ACTIONS_VALEUR.DIALOG_COTATIONS_VALEURS_PORTEFEUILLE.DIVIDENDES' | translate }}</th>
           <th>{{ 'COMPOSANTS.PORTEFEUILLES.ACTIONS_VALEUR.DIALOG_COTATIONS_VALEURS_PORTEFEUILLE.COURS' | translate }}</th>
-          <th>{{ 'COMPOSANTS.PORTEFEUILLES.ACTIONS_VALEUR.DIALOG_COTATIONS_VALEURS_PORTEFEUILLE.JAUGE_PLUS_HAUT_BAS' | translate }}</th>
           <th>{{ 'COMPOSANTS.PORTEFEUILLES.ACTIONS_VALEUR.DIALOG_COTATIONS_VALEURS_PORTEFEUILLE.ORDRES' | translate }}</th>
           <th>{{ 'COMPOSANTS.PORTEFEUILLES.ACTIONS_VALEUR.DIALOG_COTATIONS_VALEURS_PORTEFEUILLE.VAR_OUVERTURE' | translate }}</th>
           <th>{{ 'COMPOSANTS.PORTEFEUILLES.ACTIONS_VALEUR.DIALOG_COTATIONS_VALEURS_PORTEFEUILLE.VAR_CLOTURE_VEILLE' | translate }}</th>
@@ -45,12 +44,13 @@
           <td>
             <app-colonne-dividendes [dividendes]="cotationsTickerDecore.dividendes"></app-colonne-dividendes>
           </td>
-          <td>{{ cotationsTickerDecore.dto.cotations.cours | currency:'EUR':'symbol' }}</td>
           <td>
             <app-jauge
-              [cleMinimum]="'COMPOSANTS.PORTEFEUILLES.ACTIONS_VALEUR.DIALOG_COTATIONS_VALEURS_PORTEFEUILLE.PLUS_BAS'"
-              [cleMaximum]="'COMPOSANTS.PORTEFEUILLES.ACTIONS_VALEUR.DIALOG_COTATIONS_VALEURS_PORTEFEUILLE.PLUS_HAUT'"
-              [pourcentage]="cotationsTickerDecore.pourcentageCours"></app-jauge>
+              [donnees]="{
+                cours: cotationsTickerDecore.dto.cotations.cours,
+                plusBas: cotationsTickerDecore.dto.cotations.plusBas,
+                plusHaut: cotationsTickerDecore.dto.cotations.plusHaut
+              }"></app-jauge>
           </td>
           <td>
             <p-chart type="bar" [data]="cotationsTickerDecore.ordresDataBarChart"
