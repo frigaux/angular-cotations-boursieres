@@ -44,17 +44,17 @@ Ajouter la ligne suivante dans les scripts du fichier package.json :
 npm run coverage
 ```
 
-### Paramètres d'environnement
+### Paramètres d'environnement dev/prod
 ```
 ng generate environments
 ```
 
-### Guard
+### Protection des routes avec un Guard pour la vérification du JWT
 ```
 ng generate guard authentification
 ```
 
-## Décodage d'un JWT
+## Ajout pour le décodage du JWT
 ```
 npm install --save jwt-decode
 ```
@@ -115,6 +115,13 @@ https://aistudio.google.com/apikey
 npm install @google/genai
 ```
 
+## Ajout de TensorFlow
+https://www.tensorflow.org/?hl=fr
+```
+npm install @tensorflow/tfjs
+npm imstall buffer
+```
+
 ## Scripts dans package.json
 ```
     "ng": "ng",
@@ -125,5 +132,6 @@ npm install @google/genai
     "test": "ng test",
     "coverage": "ng test --no-watch --code-coverage",
     "continuous-integration": "ng test --no-watch --no-progress --browsers=ChromeHeadless",
-    "lint": "ng lint"
+    "lint": "ng lint",
+    "test-include": "npx ng test --include"
 ```

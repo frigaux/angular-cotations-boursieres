@@ -44,7 +44,6 @@ export class AchatsValeursComponent implements OnInit {
 
   // private
   private valeurByTicker?: Map<string, DTOValeur>;
-  private achatsTickers?: Array<DTOAchatsTicker>;
 
   constructor(private translateService: TranslateService,
               private valeursService: ValeursService,
@@ -64,35 +63,11 @@ export class AchatsValeursComponent implements OnInit {
   }
 
   private construireVue() {
-    this.achatsTickers = this.valeursService.chargerAchats();
-    this.ordresAchats = this.decorerAchats(this.filtrerAchats(EtapeValeur.ORDRE_ACHAT));
-    this.achats = this.decorerAchats(this.filtrerAchats(EtapeValeur.ACHAT));
-    this.ordresVentes = this.decorerAchats(this.filtrerAchats(EtapeValeur.ORDRE_VENTE));
-    this.ventes = this.decorerAchats(this.filtrerAchats(EtapeValeur.VENTE));
-  }
-
-  private filtrerAchats(etape: EtapeValeur): Array<DTOAchatsTicker> {
-    return this.achatsTickers!
-      .map(achatsTicker => {
-          return {
-            ticker: achatsTicker.ticker,
-            achats: achatsTicker.achats
-              .filter(achat => {
-                switch (etape) {
-                  case EtapeValeur.ORDRE_ACHAT:
-                    return EtapeValeurUtil.isOrdreAchat(achat);
-                  case EtapeValeur.ACHAT:
-                    return EtapeValeurUtil.isAchat(achat);
-                  case EtapeValeur.ORDRE_VENTE:
-                    return EtapeValeurUtil.isOrdreVente(achat);
-                  case EtapeValeur.VENTE:
-                    return EtapeValeurUtil.isVente(achat);
-                }
-              })
-          };
-        }
-      )
-      .filter(achatsTicker => achatsTicker.achats.length > 0);
+    const achats = this.valeursService.chargerAchats();
+    this.ordresAchats = this.decorerAchats(EtapeValeurUtil.filtrerParEtape(achats, EtapeValeur.ORDRE_ACHAT));
+    this.achats = this.decorerAchats(EtapeValeurUtil.filtrerParEtape(achats, EtapeValeur.ACHAT));
+    this.ordresVentes = this.decorerAchats(EtapeValeurUtil.filtrerParEtape(achats, EtapeValeur.ORDRE_VENTE));
+    this.ventes = this.decorerAchats(EtapeValeurUtil.filtrerParEtape(achats, EtapeValeur.VENTE));
   }
 
   private decorerAchats(achats: Array<DTOAchatsTicker>): Array<AchatValeurDecore> {

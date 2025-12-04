@@ -21,13 +21,13 @@
         <span class="pi pi-external-link"></span>
         <span>{{ 'COMPOSANTS.PORTEFEUILLES.ACTIONS_VALEUR.BOURSORAMA' | translate }}</span>
       </div>
-      @if (!portefeuilleAchats && portefeuilleAffiche && portefeuilleAffiche.tickers.length > 1) {
+      @if (!portefeuilleAjoute && portefeuilleAffiche && portefeuilleAffiche.tickers.length > 1) {
         <div class="libelle" (click)="suppressionDuPortefeuille($event)">
           <span class="pi pi-minus-circle"></span>
           <span>{{ 'COMPOSANTS.PORTEFEUILLES.ACTIONS_VALEUR.SUPPRIMER_DU_PORTEFEUILLE' | translate }}</span>
         </div>
       }
-      @if (!portefeuilleAchats && nomsPortefeuillesDisponibles && nomsPortefeuillesDisponibles.length > 0) {
+      @if (!portefeuilleAjoute && nomsPortefeuillesDisponibles && nomsPortefeuillesDisponibles.length > 0) {
         <div>
           <div class="libelle" (click)="ajouterAuPortefeuille()">
             <span class="pi pi-plus-circle"></span>

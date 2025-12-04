@@ -8,7 +8,6 @@ import {TranslateService} from '@ngx-translate/core';
 })
 export class PortefeuillesService {
   private static readonly PORTEFEUILLES: string = 'portefeuilles';
-  public static readonly PORTEFEUILLE_ACHATS: string = 'Achats';
   private static readonly OBSERVERS_IMPORT: Array<Subscriber<Array<DTOPortefeuille>>> = [];
   private static readonly OBSERVERS_UPDATE: Array<Subscriber<Array<DTOPortefeuille>>> = [];
   private static readonly OBSERVABLE_IMPORT: Observable<Array<DTOPortefeuille>> = new Observable(observer => {
@@ -17,6 +16,10 @@ export class PortefeuillesService {
   private static readonly OBSERVABLE_UPDATE: Observable<Array<DTOPortefeuille>> = new Observable(observer => {
     PortefeuillesService.OBSERVERS_UPDATE.push(observer);
   });
+
+  public static readonly PORTEFEUILLE_ORDRES_ACHATS: string = 'OA';
+  public static readonly PORTEFEUILLE_ACHATS: string = 'A';
+  public static readonly PORTEFEUILLE_ORDRES_VENTES: string = 'OV';
 
   private cleMessageErreur: string | undefined;
 

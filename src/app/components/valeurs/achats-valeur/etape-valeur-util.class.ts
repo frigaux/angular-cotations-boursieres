@@ -1,5 +1,6 @@
 import {DTOAchat} from '../../../services/valeurs/dto-achat.interface';
 import {EtapeValeur} from './etape-valeur.enum';
+import {DTOAchatsTicker} from '../../../services/valeurs/dto-achats-ticker.interface';
 
 export class EtapeValeurUtil {
   static isOrdreAchat(achat: DTOAchat): boolean {
@@ -35,5 +36,29 @@ export class EtapeValeurUtil {
       }
     }
     return EtapeValeur.ORDRE_ACHAT;
+  }
+
+  static filtrerParEtape(achats: Array<DTOAchatsTicker>, etape: EtapeValeur): Array<DTOAchatsTicker> {
+    return achats
+      .map(achatsTicker => {
+          return {
+            ticker: achatsTicker.ticker,
+            achats: achatsTicker.achats
+              .filter(achat => {
+                switch (etape) {
+                  case EtapeValeur.ORDRE_ACHAT:
+                    return EtapeValeurUtil.isOrdreAchat(achat);
+                  case EtapeValeur.ACHAT:
+                    return EtapeValeurUtil.isAchat(achat);
+                  case EtapeValeur.ORDRE_VENTE:
+                    return EtapeValeurUtil.isOrdreVente(achat);
+                  case EtapeValeur.VENTE:
+                    return EtapeValeurUtil.isVente(achat);
+                }
+              })
+          };
+        }
+      )
+      .filter(achatsTicker => achatsTicker.achats.length > 0);
   }
 }

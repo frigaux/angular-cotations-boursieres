@@ -5,6 +5,9 @@ import {DatePipe, PercentPipe} from '@angular/common';
 import {UIChart} from 'primeng/chart';
 import {RadioButton} from 'primeng/radiobutton';
 import {FormsModule} from '@angular/forms';
+import {ValeursService} from '../../../services/valeurs/valeurs.service';
+import {EtapeValeurUtil} from '../../valeurs/achats-valeur/etape-valeur-util.class';
+import {DTOAchat} from '../../../services/valeurs/dto-achat.interface';
 
 @Component({
   selector: 'app-charts',
@@ -32,7 +35,10 @@ export class ChartsComponent {
   periodes: number[] = [];
   periodeSelectionnee: number = 50;
 
-  constructor(private translateService: TranslateService, private datepipe: DatePipe, private percentPipe: PercentPipe) {
+  constructor(private translateService: TranslateService,
+              private valeursService: ValeursService,
+              private datepipe: DatePipe,
+              private percentPipe: PercentPipe) {
   }
 
   private intercepteurCours(cours: Cours | undefined) {
@@ -60,7 +66,6 @@ export class ChartsComponent {
   }
 
   displayChart() {
-    // const listeCours: DTOCoursTickerAllege[] | undefined = this.coursLight();
     if (this.cours && this.cours.coursAlleges.length <= this.cours.moyennesMobiles.length) {
       const labels: string[] = [];
       const dataCours: number[] = [];
@@ -84,6 +89,8 @@ export class ChartsComponent {
     const numberFormat = new Intl.NumberFormat('fr-FR', {style: 'currency', currency: 'EUR'});
     const formatCurrency: Function = (value: number) => numberFormat.format(value);
     const cloture: number = this.cours!.cloture;
+    const titleCours = this.translateService.instant('COMPOSANTS.COURS.CHARTS.TITLE_COURS');
+    const titleMM = this.translateService.instant('COMPOSANTS.COURS.CHARTS.TITLE_MM');
     return {
       scales: {
         x: {
@@ -105,13 +112,19 @@ export class ChartsComponent {
             title: function (context: any) {
               const dot = context[0];
               if (dot.datasetIndex === 0) {
-                return dot.label;
+                return `${titleCours} ${dot.label}`;
+              } else if (dot.datasetIndex === 1) {
+                return `${titleMM}${dot.dataset.data.length - dot.dataIndex}`;
               } else {
-                return `MM${dot.dataset.data.length - dot.dataIndex}`;
+                return dot.dataset.label;
               }
             },
             label: function (context: any) {
-              return `${formatCurrency(context.parsed.y)} (${formatPercent((cloture / context.raw) - 1)})`;
+              if (context.datasetIndex < 2) {
+                return `${formatCurrency(context.parsed.y)} (${formatPercent(1 - (cloture / context.raw))})`;
+              } else {
+                return `${formatCurrency(context.parsed.y)}`;
+              }
             }
           }
         }
@@ -120,7 +133,7 @@ export class ChartsComponent {
   }
 
   private wrapData(labels: string[], dataCours: number[], dataMM: number[]) {
-    return {
+    const resultat = {
       labels,
       datasets: [
         {
@@ -135,5 +148,32 @@ export class ChartsComponent {
         }
       ]
     };
+    if (this.cours) {
+      const listeAchats = this.valeursService.chargerAchatsTicker(this.cours.ticker);
+      const ordresChats = listeAchats.filter(achat => EtapeValeurUtil.isOrdreAchat(achat));
+      this.ajouterDataset(ordresChats, dataCours, resultat.datasets, a => a.prix, 'ORDRES_ACHATS');
+      const achats = listeAchats.filter(achat => EtapeValeurUtil.isAchat(achat));
+      this.ajouterDataset(achats, dataCours, resultat.datasets, a => a.prix, 'ACHATS');
+      const ordresVentes = listeAchats.filter(achat => EtapeValeurUtil.isOrdreVente(achat));
+      this.ajouterDataset(ordresVentes, dataCours, resultat.datasets, a => a.prixRevente!, 'ORDRES_VENTES');
+    }
+    return resultat;
+  }
+
+  private ajouterDataset(achats: DTOAchat[], dataCours: number[], datasets: Array<any>,
+                         val: (a: DTOAchat) => number, key: string) {
+    if (achats.length > 0) {
+      const valeur = achats
+          .reduce((accumulator, achat) => accumulator + val(achat), 0)
+        / achats.length;
+      const data = Array.from({length: dataCours.length}, (v, k) => valeur);
+      datasets.push(
+        {
+          label: this.translateService.instant(`COMPOSANTS.COURS.CHARTS.${key}`),
+          data,
+          tension: 0.4 // Bezier curve tension of the line. Set to 0 to draw straightlines. This option is ignored if monotone cubic interpolation is used.
+        }
+      );
+    }
   }
 }

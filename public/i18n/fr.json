@@ -89,7 +89,12 @@
       "CHARTS": {
         "JOURS": "Nombre de jours affichés",
         "COURS": "Cours à la clôture",
-        "MOYENNES_MOBILES": "Moyennes mobiles au "
+        "MOYENNES_MOBILES": "Moyennes mobiles au ",
+        "ORDRES_ACHATS": "Ordres d'achats",
+        "ACHATS": "Achats",
+        "ORDRES_VENTES": "Ordres de ventes",
+        "TITLE_COURS": "Cours",
+        "TITLE_MM": "MM"
       },
       "DETAILS_VALEUR": {
         "COURBE_MM": "Courbe des moyennes mobiles : {{valeur}} ({{ticker}})",

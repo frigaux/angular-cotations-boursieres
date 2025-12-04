@@ -44,8 +44,9 @@ export class PopoverActionsValeurComponent {
   nomsPortefeuillesDisponibles?: Array<string>;
   nomsPortefeuilleSelectionne?: string;
 
-  // le portefeuille achats n'existe pas et certaines actions ne sont donc pas disponibles
-  portefeuilleAchats?: boolean;
+  // est ce un portefeuille ajouté à la liste des portefeuilles issus du paramétrage ?
+  // les portefeuilles correspondant aux différentes étapes d'achat d'une valeur
+  portefeuilleAjoute?: boolean;
 
   constructor(private translateService: TranslateService,
               private portefeuillesService: PortefeuillesService,
@@ -63,7 +64,11 @@ export class PopoverActionsValeurComponent {
     if (!this.nomsPortefeuilleSelectionne && this.nomsPortefeuillesDisponibles.length > 0) {
       this.nomsPortefeuilleSelectionne = this.nomsPortefeuillesDisponibles[0];
     }
-    this.portefeuilleAchats = this.portefeuilleAffiche.nom === PortefeuillesService.PORTEFEUILLE_ACHATS;
+    this.portefeuilleAjoute = [
+      PortefeuillesService.PORTEFEUILLE_ORDRES_ACHATS,
+      PortefeuillesService.PORTEFEUILLE_ACHATS,
+      PortefeuillesService.PORTEFEUILLE_ORDRES_VENTES]
+      .includes(this.portefeuilleAffiche.nom);
     this.popover()?.toggle(event);
   }
 

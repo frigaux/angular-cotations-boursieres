@@ -31,6 +31,9 @@ import {DividendesService} from '../../services/dividendes/dividendes.service';
 import {Tab, TabList, TabPanel, TabPanels, Tabs} from 'primeng/tabs';
 import {IconeVariation} from '../../directives/icone-variation';
 import {EtapeValeurUtil} from '../valeurs/achats-valeur/etape-valeur-util.class';
+import {EtapeValeur} from '../valeurs/achats-valeur/etape-valeur.enum';
+import {DTOAchatsTicker} from '../../services/valeurs/dto-achats-ticker.interface';
+import {DTOPortefeuille} from '../../services/portefeuilles/dto-portefeuille.interface';
 
 @Component({
   selector: 'app-portefeuilles',
@@ -114,13 +117,7 @@ export class PortefeuillesComponent implements OnInit {
   }
 
   private determinerIdxPortefeuilleCourant() {
-    if (this.tickersEnPortefeuilleAchats().length > 0) {
-      this.idxPortefeuilleCourant = this.portefeuillesService.charger()
-        .filter(portefeuille => portefeuille.tickers.length > 0)
-        .length;
-    } else {
-      this.idxPortefeuilleCourant = this.indexPortefeuilleCourant();
-    }
+    this.idxPortefeuilleCourant = this.indexPortefeuilleCourant();
   }
 
   private indexPortefeuilleCourant(): number {
@@ -149,24 +146,10 @@ export class PortefeuillesComponent implements OnInit {
 
   private chargerPortefeuilles() {
     const portefeuilles = this.portefeuillesService.charger();
-    // ajout éventuel du portefeuille des achats
-    const tickersNonRevendus = this.tickersEnPortefeuilleAchats();
-    if (tickersNonRevendus.length > 0) {
-      portefeuilles.push({
-        nom: PortefeuillesService.PORTEFEUILLE_ACHATS,
-        parDefaut: false,
-        tickers: tickersNonRevendus,
-        alertes: PortefeuillesService.CONFIGURATION_INITIALE[0].alertes,
-      });
-    }
-    return portefeuilles.filter(portefeuille => portefeuille.tickers.length > 0)
+    this.ajouterPortefeuillesEtapes(portefeuilles);
+    return portefeuilles
+      .filter(portefeuille => portefeuille.tickers.length > 0)
       .map(portefeuille => new PortefeuilleAvecCours(portefeuille));
-  }
-
-  private tickersEnPortefeuilleAchats() {
-    return this.valeursService.chargerAchats()
-      .filter(achats => achats.achats.find(achat => EtapeValeurUtil.isAchat(achat)) !== undefined)
-      .map(achats => achats.ticker);
   }
 
   private definirCoursPortefeuilleCourant(): void {
@@ -223,6 +206,26 @@ export class PortefeuillesComponent implements OnInit {
       this.afficherActions(event, cours, portefeuilleAvecCours);
     } else {
       this._basculerAffichageCours(cours);
+    }
+  }
+
+  private ajouterPortefeuillesEtapes(portefeuilles: Array<DTOPortefeuille>) {
+    const achats = this.valeursService.chargerAchats();
+    this.ajouterPortefeuille(portefeuilles, achats, EtapeValeur.ORDRE_ACHAT, PortefeuillesService.PORTEFEUILLE_ORDRES_ACHATS);
+    this.ajouterPortefeuille(portefeuilles, achats, EtapeValeur.ACHAT, PortefeuillesService.PORTEFEUILLE_ACHATS);
+    this.ajouterPortefeuille(portefeuilles, achats, EtapeValeur.ORDRE_VENTE, PortefeuillesService.PORTEFEUILLE_ORDRES_VENTES);
+  }
+
+  private ajouterPortefeuille(portefeuilles: Array<DTOPortefeuille>, achats: Array<DTOAchatsTicker>, etape: EtapeValeur, nom: string) {
+    const tickers = EtapeValeurUtil.filtrerParEtape(achats, etape)
+      .map(achatsTicker => achatsTicker.ticker);
+    if (tickers.length > 0) {
+      portefeuilles.push({
+        nom,
+        parDefaut: false,
+        tickers: tickers,
+        alertes: PortefeuillesService.CONFIGURATION_INITIALE[0].alertes,
+      });
     }
   }
 }
