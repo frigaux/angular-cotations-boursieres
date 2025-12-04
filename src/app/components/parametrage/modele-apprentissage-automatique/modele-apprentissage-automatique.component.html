@@ -1,5 +1,7 @@
 <h1>{{ 'COMPOSANTS.PARAMETRAGE.MODELE_APPRENTISSAGE_AUTOMATIQUE.MODELE_TENSORFLOW' | translate }}</h1>
 <div class="ligne">
+  <label>{{ 'COMPOSANTS.PARAMETRAGE.MODELE_APPRENTISSAGE_AUTOMATIQUE.NOMBRE_TENSEURS' | translate }}</label>
+  <span>{{nombreTenseurs}}</span>
   <p-select [options]="backends" [(ngModel)]="backend" size="small"
             (onChange)="changeBackend()"
             placeholder="{{ 'COMPOSANTS.PARAMETRAGE.MODELE_APPRENTISSAGE_AUTOMATIQUE.BACKEND' | translate }}"></p-select>

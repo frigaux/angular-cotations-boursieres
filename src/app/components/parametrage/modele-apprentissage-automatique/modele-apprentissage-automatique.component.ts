@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import * as tf from '@tensorflow/tfjs';
-import {Logs} from '@tensorflow/tfjs';
+import {Logs, SymbolicTensor} from '@tensorflow/tfjs';
 import {TranslatePipe, TranslateService} from '@ngx-translate/core';
 import {Button} from 'primeng/button';
 import {LayersModel} from '@tensorflow/tfjs-layers/dist/engine/training';
@@ -28,14 +28,18 @@ import {InputText} from 'primeng/inputtext';
 })
 export class ModeleApprentissageAutomatiqueComponent implements OnInit {
   // données pour la vue
+  protected nombreTenseurs?: number;
   // liste déroulantes
   protected backends: Array<string> = ['cpu', 'webgl']; // 'tensorflow' (requires tfjs-node), 'wasm' (requires tfjs-backend-wasm).
   protected backend: string = this.backends[0];
   protected backendChangeAvecSucces?: boolean;
-  protected epochsOptions: Array<number> = [50, 100, 250, 500];
-  protected epochs: number = this.epochsOptions[0];
 
+  protected epochs: number = 250;
+
+  //
   protected progressionEntrainement: number = 0;
+
+  //
   protected model?: LayersModel;
   protected prediction?: any;
 
@@ -52,6 +56,7 @@ export class ModeleApprentissageAutomatiqueComponent implements OnInit {
 
   ngOnInit(): void {
     this.changeBackend();
+    window.setInterval(() => this.nombreTenseurs = tf.memory().numTensors, 2000);
   }
 
   protected changeBackend() {
@@ -70,22 +75,32 @@ export class ModeleApprentissageAutomatiqueComponent implements OnInit {
     this.model = undefined;
     this.tableauLogs = [];
 
-    const xs = tf.tensor2d([-1, 0, 1, 2, 3, 4], [6, 1]);
-    const ys = tf.tensor2d([-3, -1, 1, 3, 5, 7], [6, 1]);
+    const xs = tf.tensor([-1, 0, 1, 2, 3, 4], [6, 1], 'int32');
+    const ys = tf.tensor([-3, -1, 1, 3, 5, 7], [6, 1], 'int32');
+
+    // Modèle séquentiel : y = 2x - 1
+    // const model = tf.sequential();
+    // model.add(tf.layers.dense({inputShape: [1], units: 1}));
+
+    // Modèle fonctionnel : y = 2x - 1
+    const input: SymbolicTensor = tf.input({shape: [1]});
+    const dense: SymbolicTensor = tf.layers.dense({units: 1}).apply(input) as SymbolicTensor;
+    const model = tf.model({inputs: input, outputs: dense});
 
     // tf.enableDebugMode();
     // console.log('model', model.summary());
     // console.log(xs.arraySync(), xs.dataSync());
 
-    const model = tf.sequential();
-    model.add(tf.layers.dense({units: 1, inputShape: [1]}));
-
-    model.compile({optimizer: 'sgd', loss: 'meanSquaredError', metrics: ['accuracy']});
+    model.compile({
+      optimizer: 'sgd', // sgd ou adam
+      loss: 'meanSquaredError',
+      metrics: ['accuracy']
+    });
 
     model.fit(xs, ys, {
       epochs: this.epochs,
-      batchSize: 300,
-      validationSplit: 0.2,
+      // batchSize: 300,
+      // validationSplit: 0.2,
       callbacks: {
         onEpochEnd: (epoch, logs) => {
           if (logs) {
@@ -98,14 +113,18 @@ export class ModeleApprentissageAutomatiqueComponent implements OnInit {
         }
       }
     }).then(() => {
+      xs.dispose();
+      ys.dispose();
       this.model = model;
       this.dataLineChart = this.wrapDataLineChart();
     });
   }
 
   protected predireAvecLeModele() {
-    const prediction: any = this.model!.predict(tf.tensor2d([5], [1, 1]));
-    prediction.array().then((array: any) => this.prediction = array);
+    tf.tidy(() => {
+      const prediction: any = this.model!.predict(tf.tensor([5], [1, 1], 'int32'));
+      prediction.array().then((array: any) => this.prediction = array);
+    });
   }
 
   private wrapDataLineOptions() {

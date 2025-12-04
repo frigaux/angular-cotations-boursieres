@@ -547,6 +547,7 @@
         "MODELE_TENSORFLOW": "Modele TensorFlow",
         "ENTRAINER_MODELE": "Entraîner le modèle",
         "PREDIRE_AVEC_LE_MODELE": "Prédire avec le modèle",
+        "NOMBRE_TENSEURS": "Tenseurs",
         "EPOCH": "Epoch",
         "LOGS": "Logs",
         "PREDICTION": "Prédiction",
