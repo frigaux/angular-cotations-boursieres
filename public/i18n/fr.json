@@ -550,6 +550,8 @@
         "EPOCH": "Epoch",
         "LOGS": "Logs",
         "PREDICTION": "Prédiction",
+        "BACKEND": "Backend",
+        "EPOCHS": "Epochs",
         "LINE_CHART": {
           "EPOCH": "Epoch",
           "LOSS": "loss",

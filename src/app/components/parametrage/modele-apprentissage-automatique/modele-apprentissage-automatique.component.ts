@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import * as tf from '@tensorflow/tfjs';
 import {Logs} from '@tensorflow/tfjs';
 import {TranslatePipe, TranslateService} from '@ngx-translate/core';
@@ -7,6 +7,9 @@ import {LayersModel} from '@tensorflow/tfjs-layers/dist/engine/training';
 import {BarreProgressionComponent} from '../../commun/barre-progression/barre-progression.component';
 import {JsonPipe} from '@angular/common';
 import {UIChart} from 'primeng/chart';
+import {Select} from 'primeng/select';
+import {FormsModule} from '@angular/forms';
+import {InputText} from 'primeng/inputtext';
 
 @Component({
   selector: 'app-modele-apprentissage-automatique',
@@ -15,15 +18,23 @@ import {UIChart} from 'primeng/chart';
     Button,
     BarreProgressionComponent,
     JsonPipe,
-    UIChart
+    UIChart,
+    Select,
+    FormsModule,
+    InputText
   ],
   templateUrl: './modele-apprentissage-automatique.component.html',
   styleUrl: './modele-apprentissage-automatique.component.sass',
 })
-export class ModeleApprentissageAutomatiqueComponent {
-  private static readonly EPOCHS: number = 500;
-
+export class ModeleApprentissageAutomatiqueComponent implements OnInit {
   // données pour la vue
+  // liste déroulantes
+  protected backends: Array<string> = ['cpu', 'webgl']; // 'tensorflow' (requires tfjs-node), 'wasm' (requires tfjs-backend-wasm).
+  protected backend: string = this.backends[0];
+  protected backendChangeAvecSucces?: boolean;
+  protected epochsOptions: Array<number> = [50, 100, 250, 500];
+  protected epochs: number = this.epochsOptions[0];
+
   protected progressionEntrainement: number = 0;
   protected model?: LayersModel;
   protected prediction?: any;
@@ -39,13 +50,19 @@ export class ModeleApprentissageAutomatiqueComponent {
     this.dataLineOptions = this.wrapDataLineOptions();
   }
 
-  protected entrainerModele() {
-    tf.setBackend('webgl').then(success => {
-      console.log(`Backend ${tf.getBackend()} : ${success}`);
-      if (success) {
-        this._entrainerModele();
-      }
+  ngOnInit(): void {
+    this.changeBackend();
+  }
+
+  protected changeBackend() {
+    this.backendChangeAvecSucces = false;
+    tf.setBackend(this.backend).then(success => {
+      this.backendChangeAvecSucces = true;
     });
+  }
+
+  protected entrainerModele() {
+    this._entrainerModele();
   }
 
   private _entrainerModele() {
@@ -66,7 +83,7 @@ export class ModeleApprentissageAutomatiqueComponent {
     model.compile({optimizer: 'sgd', loss: 'meanSquaredError', metrics: ['accuracy']});
 
     model.fit(xs, ys, {
-      epochs: ModeleApprentissageAutomatiqueComponent.EPOCHS,
+      epochs: this.epochs,
       batchSize: 300,
       validationSplit: 0.2,
       callbacks: {
@@ -74,7 +91,7 @@ export class ModeleApprentissageAutomatiqueComponent {
           if (logs) {
             this.tableauLogs.push(logs);
           }
-          const pourcentage = Math.round(100 * epoch / ModeleApprentissageAutomatiqueComponent.EPOCHS);
+          const pourcentage = Math.round(100 * epoch / this.epochs);
           if (!this.progressionEntrainement || pourcentage > this.progressionEntrainement) {
             this.progressionEntrainement = pourcentage;
           }
