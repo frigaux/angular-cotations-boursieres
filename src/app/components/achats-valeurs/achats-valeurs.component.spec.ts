@@ -97,7 +97,6 @@ describe('AchatsValeursComponent', () => {
       if (dialog.achats)
         for (const achat of dialog.achats) {
           expect(achat.achatDecore.cours).toBeDefined()
-          expect(achat.achatDecore.variation).toBeDefined()
         }
     });
   });

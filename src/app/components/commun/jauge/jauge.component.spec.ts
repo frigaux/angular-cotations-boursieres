@@ -28,18 +28,19 @@ describe('JaugeComponent', () => {
   });
 
   it('should display translated min and max labels', () => {
-    fixture.componentRef.setInput('cleMinimum' , 'minKey');
-    fixture.componentRef.setInput('cleMaximum' , 'maxKey');
+    const donnees = {cours: 3, plusBas: 2, plusHaut: 5};
+    fixture.componentRef.setInput('donnees' , donnees);
     fixture.detectChanges();
 
     const labels = fixture.debugElement.queryAll(By.css('.libelles span'));
     expect(labels.length).toBe(2);
-    expect(labels[0].nativeElement.textContent.trim()).toBe('minKey');
-    expect(labels[1].nativeElement.textContent.trim()).toBe('maxKey');
+    expect(labels[0].nativeElement.textContent.trim()).toContain(donnees.plusBas);
+    expect(labels[1].nativeElement.textContent.trim()).toContain(donnees.plusHaut);
   });
 
   it('should render percentage bar with correct width and red class when < 50%', () => {
-    fixture.componentRef.setInput('pourcentage', 25);
+    const donnees = {cours: 5, plusBas: 4, plusHaut: 8};
+    fixture.componentRef.setInput('donnees' , donnees);
     fixture.detectChanges();
 
     const barDe = fixture.debugElement.query(By.css('.pourcentage'));
@@ -51,25 +52,27 @@ describe('JaugeComponent', () => {
   });
 
   it('should render percentage bar with green class when >= 50%', () => {
-    fixture.componentRef.setInput('pourcentage' , 80);
+    const donnees = {cours: 7, plusBas: 4, plusHaut: 8};
+    fixture.componentRef.setInput('donnees' , donnees);
     fixture.detectChanges();
 
     const barDe = fixture.debugElement.query(By.css('.pourcentage'));
     expect(barDe).toBeTruthy();
     const barEl: HTMLElement = barDe.nativeElement;
-    expect(barEl.style.width).toBe('80%');
+    expect(barEl.style.width).toBe('75%');
     expect(barEl.classList.contains('vert')).toBeTrue();
     expect(barEl.classList.contains('rouge')).toBeFalse();
   });
 
   it('should not render the percentage bar when pourcentage is 0 or undefined', () => {
     // undefined
-    fixture.componentRef.setInput('pourcentage', undefined);
+    fixture.componentRef.setInput('donnees' , undefined);
     fixture.detectChanges();
     expect(fixture.debugElement.query(By.css('.pourcentage'))).toBeNull();
 
     // 0 is falsy, should not render due to template @if (pourcentage)
-    fixture.componentRef.setInput('pourcentage', 0);
+    const donnees = {cours: 4, plusBas: 4, plusHaut: 8};
+    fixture.componentRef.setInput('donnees' , donnees);
     fixture.detectChanges();
     expect(fixture.debugElement.query(By.css('.pourcentage'))).toBeNull();
   });
