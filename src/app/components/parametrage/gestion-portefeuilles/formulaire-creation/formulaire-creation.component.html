@@ -1,5 +1,5 @@
 <form [formGroup]="formulaire" (ngSubmit)="creerPortefeuille()">
-  <div class="cocher">
+  <div class="cocher" [ngClass]="{'cache': aucunFormulaireExistant}">
     <p-checkbox formControlName="initialiserAlertes" binary="true" inputId="initialiserAlertes"  />
     <label for="initialiserAlertes">{{ 'COMPOSANTS.PARAMETRAGE.GESTION_PORTEFEUILLES.FORMULAIRE_CREATION.INITIALISER_ALERTES' | translate }}</label>
   </div>

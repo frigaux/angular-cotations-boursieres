@@ -49,18 +49,26 @@
                     {{ 'COMPOSANTS.COURS.VAR1' | translate }}
                     <p-sortIcon field="var1"/>
                   </th>
-                  <th pSortableColumn="cloture">
+                  <th>
                     {{ 'COMPOSANTS.COURS.CLOTURE' | translate }}
-                    <p-sortIcon field="cloture"/>
                   </th>
-                  <th pSortableColumn="plusBas">
+                  <th>
+                    {{ 'COMPOSANTS.COURS.DIVIDENDES' | translate }}
+                  </th>
+                  <th>
                     {{ 'COMPOSANTS.COURS.MM5' | translate }}
                   </th>
-                  <th pSortableColumn="plusHaut">
+                  <th>
                     {{ 'COMPOSANTS.COURS.MM20' | translate }}
                   </th>
-                  <th pSortableColumn="volume">
+                  <th>
                     {{ 'COMPOSANTS.COURS.MM50' | translate }}
+                  </th>
+                  <th>
+                    {{ 'COMPOSANTS.COURS.MM100' | translate }}
+                  </th>
+                  <th>
+                    {{ 'COMPOSANTS.COURS.MM200' | translate }}
                   </th>
                 </tr>
               </ng-template>
@@ -76,6 +84,9 @@
                     {{ cours.var1 | percent:'1.2-2' }}
                   </td>
                   <td>{{ cours.cloture | currency:'EUR':'symbol' }}</td>
+                  <td>
+                    <app-colonne-dividendes [dividendes]="cours.dividendes"></app-colonne-dividendes>
+                  </td>
                   <td [class]="evolutionCours(cours.cloture, cours.moyennesMobiles[4])">
                     {{ cours.moyennesMobiles[4] | currency:'EUR':'symbol' }}
                   </td>
@@ -84,6 +95,12 @@
                   </td>
                   <td [class]="evolutionCours(cours.cloture, cours.moyennesMobiles[49])">
                     {{ cours.moyennesMobiles[49] | currency:'EUR':'symbol' }}
+                  </td>
+                  <td [class]="evolutionCours(cours.cloture, cours.moyennesMobiles[99])">
+                    {{ cours.moyennesMobiles[99] | currency:'EUR':'symbol' }}
+                  </td>
+                  <td [class]="evolutionCours(cours.cloture, cours.moyennesMobiles[199])">
+                    {{ cours.moyennesMobiles[199] | currency:'EUR':'symbol' }}
                   </td>
                 </tr>
               </ng-template>

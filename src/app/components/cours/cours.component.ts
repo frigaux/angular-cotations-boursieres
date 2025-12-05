@@ -23,6 +23,9 @@ import {
 } from './dialog-evaluation-actualites/dialog-evaluation-actualites.component';
 import {Tab, TabList, TabPanel, TabPanels, Tabs} from 'primeng/tabs';
 import {ClassVariation} from '../../directives/class-variation';
+import {ColonneDividendesComponent} from '../portefeuilles/colonnes/dividendes/colonne-dividendes.component';
+import {DividendesService} from '../../services/dividendes/dividendes.service';
+import {DTODividende} from '../../services/dividendes/dto-dividende.interface';
 
 @Component({
   selector: 'app-cours',
@@ -45,7 +48,8 @@ import {ClassVariation} from '../../directives/class-variation';
     TabPanel,
     TabPanels,
     Tabs,
-    ClassVariation
+    ClassVariation,
+    ColonneDividendesComponent
   ],
   templateUrl: './cours.component.html',
   styleUrls: ['../portefeuilles/tabs-panel.sass', './cours.component.sass', '../commun/titre.sass']
@@ -71,14 +75,17 @@ export class CoursComponent implements OnInit {
   private filtreActif?: FiltreDecore;
   private portefeuilles: boolean;
   private marcheSelectionne?: MarcheDecore;
+  private dividendesByTicker?: Map<string, Array<DTODividende>>;
 
   constructor(private valeursService: ValeursService,
               private coursService: CoursService,
-              private portefeuillesService: PortefeuillesService) {
+              private portefeuillesService: PortefeuillesService,
+              private dividendesService: DividendesService) {
     this.portefeuilles = this.portefeuillesService.auMoinsUnPortefeuilleCorrectementConfigure();
   }
 
   ngOnInit(): void {
+    this.dividendesByTicker = this.dividendesService.chargerMapByTicker();
     this.chargerValeurs();
   }
 
@@ -112,7 +119,8 @@ export class CoursComponent implements OnInit {
       this.listeCours.cours
         .map(dto => {
           const valeur = this.valeurByTicker!.get(dto.ticker);
-          return Cours.fromDTOCours(this.listeCours!.date, valeur!.libelle, dto)
+          const dividendes = this.dividendesByTicker?.get(dto.ticker) || [];
+          return Cours.fromDTOCours(this.listeCours!.date, valeur!.libelle, dto, dividendes)
         })
         .filter(c => {
           if (!this.filtreActif) {

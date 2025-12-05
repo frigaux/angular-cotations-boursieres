@@ -1,20 +1,21 @@
 <app-dialog-formulaire-modification [donnees]="{portefeuilles, portefeuilleNomEnModification}"
-                             (abandon)="portefeuilleNomEnModification = undefined"
-                             (modifie)="modifierNomPortefeuille($event)"></app-dialog-formulaire-modification>
+                                    (abandon)="portefeuilleNomEnModification = undefined"
+                                    (modifie)="modifierNomPortefeuille($event)"></app-dialog-formulaire-modification>
 
 <app-dialog-selecteur-valeurs [portefeuille]="portefeuilleValeursEnModification"
-                       (abandon)="portefeuilleValeursEnModification = undefined"
-                       (modifie)="modifierValeursPortefeuille($event)"></app-dialog-selecteur-valeurs>
+                              (abandon)="portefeuilleValeursEnModification = undefined"
+                              (modifie)="modifierValeursPortefeuille($event)"></app-dialog-selecteur-valeurs>
 
 <app-dialog-editeur-alertes [portefeuille]="portefeuilleAlertesEnModification"
-                     (abandon)="portefeuilleAlertesEnModification = undefined"
-                     (modifie)="modifierAlertesPortefeuille($event)"></app-dialog-editeur-alertes>
+                            (abandon)="portefeuilleAlertesEnModification = undefined"
+                            (modifie)="modifierAlertesPortefeuille($event)"></app-dialog-editeur-alertes>
 
-@if (afficherCreation || this.portefeuilles.length === 0) {
+@if (afficherCreation || portefeuilles.length === 0) {
   <p-card>
     <h3>{{ 'COMPOSANTS.PARAMETRAGE.GESTION_PORTEFEUILLES.CREATION' | translate }}</h3>
 
-    <app-formulaire-creation [portefeuilles]="portefeuilles" (cree)="creerPortefeuille($event)"></app-formulaire-creation>
+    <app-formulaire-creation [portefeuilles]="portefeuilles"
+                             (cree)="creerPortefeuille($event)"></app-formulaire-creation>
   </p-card>
 }
 

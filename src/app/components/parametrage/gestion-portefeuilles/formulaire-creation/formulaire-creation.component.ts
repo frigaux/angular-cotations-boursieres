@@ -8,6 +8,7 @@ import {pasDeNomEnDoublonValidator} from '../pas-de-nom-en-doublon.validator';
 import {InputText} from 'primeng/inputtext';
 import {AutoFocus} from 'primeng/autofocus';
 import {Checkbox} from 'primeng/checkbox';
+import {NgClass} from '@angular/common';
 
 @Component({
   selector: 'app-formulaire-creation',
@@ -18,7 +19,8 @@ import {Checkbox} from 'primeng/checkbox';
     TranslatePipe,
     InputText,
     AutoFocus,
-    Checkbox
+    Checkbox,
+    NgClass
   ],
   templateUrl: './formulaire-creation.component.html',
   styleUrl: './formulaire-creation.component.sass'
@@ -38,8 +40,12 @@ export class FormulaireCreationComponent {
     initialiserAlertes: [true, [Validators.required]],
   });
 
+  // données pour la vue
+  aucunFormulaireExistant: boolean = false;
+
   intercepteurPortefeuilles(portefeuilles: DTOPortefeuille[] | undefined) {
     if (portefeuilles) {
+      this.aucunFormulaireExistant = portefeuilles.length === 0;
       this.formulaire.get('nom')?.addValidators(pasDeNomEnDoublonValidator(portefeuilles));
     }
     return portefeuilles;

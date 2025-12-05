@@ -14,49 +14,40 @@ div.conteneur
         text-align: right
 
   &.avec-details
-    p-accordion
-      p-table
-        tr
-          th:nth-child(1)
-            width: 60%
+    p-table
+      tr
+        th:nth-child(1)
+          width: 60%
 
-          th:nth-child(2)
-            width: 40%
+        th:nth-child(2)
+          width: 40%
 
   &:not(.avec-details)
-    p-accordion
-      p-table
-        tr
-          th:nth-child(1)
-            width: 20%
+    p-table
+      tr
+        th:nth-child(1)
+          width: 22%
 
-          th:nth-child(2)
-            width: 16%
+        th:nth-child(2), th:nth-child(3)
+          width: 9%
 
-          th:nth-child(3)
-            width: 16%
+        th:nth-child(4)
+          width: 15%
 
-          th:nth-child(4)
-            width: 16%
-
-          th:nth-child(5)
-            width: 16%
-
-          th:nth-child(6)
-            width: 16%
+        th:nth-child(n+5)
+          width: 9%
 
 
 // orientation verticale
 @media screen and (orientation: portrait)
-  p-accordion
-    p-table
-      tr
-        th:nth-child(1)
-          width: 50%
+  p-table
+    tr
+      th:nth-child(1)
+        width: 50%
 
-        th:nth-child(2), th:nth-child(3)
-          width: 25%
+      th:nth-child(2), th:nth-child(3)
+        width: 25%
 
-        th:nth-child(n+4), td:nth-child(n+4)
-          display: none
-          width: 0
+      th:nth-child(n+4), td:nth-child(n+4)
+        display: none
+        width: 0
