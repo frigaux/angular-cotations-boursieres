@@ -555,14 +555,7 @@
         "LOGS": "Logs",
         "PREDICTION": "Prédiction",
         "BACKEND": "Backend",
-        "EPOCHS": "Epochs",
-        "LINE_CHART": {
-          "EPOCH": "Epoch",
-          "LOSS": "loss",
-          "VAL_LOSS": "val_loss",
-          "ACC": "acc",
-          "VAL_ACC": "val_acc"
-        }
+        "EPOCHS": "Epochs"
       }
     }
   },
@@ -684,6 +677,18 @@
           "MONTANT_REQUIS": "Montant dividende manquant",
           "POURCENTAGE_RENDEMENT_REQUIS": "Pourcentage rendement dividende manquant"
         }
+      }
+    },
+    "ML": {
+      "GRAPHIQUES": {
+        "EPOCH": "Epoch",
+        "LOSS": "loss",
+        "VAL_LOSS": "val_loss",
+        "ACC": "acc",
+        "VAL_ACC": "val_acc",
+        "DONNEES": "Données",
+        "X": "X",
+        "Y": "Y"
       }
     }
   }

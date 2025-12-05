@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import * as tf from '@tensorflow/tfjs';
-import {Logs, SymbolicTensor} from '@tensorflow/tfjs';
-import {TranslatePipe, TranslateService} from '@ngx-translate/core';
+import {Logs} from '@tensorflow/tfjs';
+import {TranslatePipe} from '@ngx-translate/core';
 import {Button} from 'primeng/button';
 import {LayersModel} from '@tensorflow/tfjs-layers/dist/engine/training';
 import {BarreProgressionComponent} from '../../commun/barre-progression/barre-progression.component';
@@ -10,6 +10,10 @@ import {UIChart} from 'primeng/chart';
 import {Select} from 'primeng/select';
 import {FormsModule} from '@angular/forms';
 import {InputText} from 'primeng/inputtext';
+import {ModelesService} from '../../../services/modele-apprentissage-automatique/modeles.service';
+import {DonneesService} from '../../../services/modele-apprentissage-automatique/donnees.service';
+import {Tensor} from '@tensorflow/tfjs-core';
+import {GraphiquesService} from '../../../services/modele-apprentissage-automatique/graphiques.service';
 
 @Component({
   selector: 'app-modele-apprentissage-automatique',
@@ -38,20 +42,20 @@ export class ModeleApprentissageAutomatiqueComponent implements OnInit {
 
   //
   protected progressionEntrainement: number = 0;
-
-  //
-  protected model?: LayersModel;
+  protected modele?: LayersModel;
   protected prediction?: any;
 
   // https://www.chartjs.org/
-  protected dataLineChart?: any;
-  protected dataLineOptions?: any;
+  protected donneesChart?: any;
+  protected donneesChartOptions?: any;
+  protected entrainementChart?: any;
+  protected entrainementChartOptions?: any;
 
-  // private
-  private tableauLogs: Array<Logs> = [];
-
-  constructor(private translateService: TranslateService) {
-    this.dataLineOptions = this.wrapDataLineOptions();
+  constructor(private graphiquesService: GraphiquesService,
+              private modelesService: ModelesService,
+              private donneesService: DonneesService) {
+    this.donneesChartOptions = this.graphiquesService.donneesChartOptions();
+    this.entrainementChartOptions = this.graphiquesService.entrainementChartOptions();
   }
 
   ngOnInit(): void {
@@ -67,44 +71,21 @@ export class ModeleApprentissageAutomatiqueComponent implements OnInit {
   }
 
   protected entrainerModele() {
-    this._entrainerModele();
-  }
+    this.modele = undefined;
+    const modele: LayersModel = this.modelesService.modeleFonctionAffine();
+    const donnees: { x: Tensor, y: Tensor } = this.donneesService.donneesFonctionAffine();
+    this.donneesChart = this.graphiquesService.donneesChart(donnees);
 
-  private _entrainerModele() {
     this.progressionEntrainement = 0;
-    this.model = undefined;
-    this.tableauLogs = [];
-
-    const xs = tf.tensor([-1, 0, 1, 2, 3, 4], [6, 1], 'int32');
-    const ys = tf.tensor([-3, -1, 1, 3, 5, 7], [6, 1], 'int32');
-
-    // Modèle séquentiel : y = 2x - 1
-    // const model = tf.sequential();
-    // model.add(tf.layers.dense({inputShape: [1], units: 1}));
-
-    // Modèle fonctionnel : y = 2x - 1
-    const input: SymbolicTensor = tf.input({shape: [1]});
-    const dense: SymbolicTensor = tf.layers.dense({units: 1}).apply(input) as SymbolicTensor;
-    const model = tf.model({inputs: input, outputs: dense});
-
-    // tf.enableDebugMode();
-    // console.log('model', model.summary());
-    // console.log(xs.arraySync(), xs.dataSync());
-
-    model.compile({
-      optimizer: 'sgd', // sgd ou adam
-      loss: 'meanSquaredError',
-      metrics: ['accuracy']
-    });
-
-    model.fit(xs, ys, {
+    const logs: Array<Logs> = [];
+    modele.fit(donnees.x, donnees.y, {
       epochs: this.epochs,
       // batchSize: 300,
       // validationSplit: 0.2,
       callbacks: {
-        onEpochEnd: (epoch, logs) => {
-          if (logs) {
-            this.tableauLogs.push(logs);
+        onEpochEnd: (epoch, log) => {
+          if (log) {
+            logs.push(log);
           }
           const pourcentage = Math.round(100 * epoch / this.epochs);
           if (!this.progressionEntrainement || pourcentage > this.progressionEntrainement) {
@@ -113,61 +94,17 @@ export class ModeleApprentissageAutomatiqueComponent implements OnInit {
         }
       }
     }).then(() => {
-      xs.dispose();
-      ys.dispose();
-      this.model = model;
-      this.dataLineChart = this.wrapDataLineChart();
+      donnees.x.dispose();
+      donnees.y.dispose();
+      this.entrainementChart = this.graphiquesService.entrainementChart(logs);
+      this.modele = modele;
     });
   }
 
   protected predireAvecLeModele() {
     tf.tidy(() => {
-      const prediction: any = this.model!.predict(tf.tensor([5], [1, 1], 'int32'));
+      const prediction: any = this.modele!.predict(tf.tensor([5], [1, 1], 'int32'));
       prediction.array().then((array: any) => this.prediction = array);
     });
-  }
-
-  private wrapDataLineOptions() {
-    return {
-      scales: {
-        x: {
-          title: {
-            display: true,
-            text: this.translateService.instant('COMPOSANTS.PARAMETRAGE.MODELE_APPRENTISSAGE_AUTOMATIQUE.LINE_CHART.EPOCH')
-          }
-        }
-      }
-    };
-  }
-
-  private wrapDataLineChart() {
-    return {
-      labels: this.tableauLogs.map((value, index) => String(index)),
-      datasets: [
-        {
-          label: this.translateService.instant('COMPOSANTS.PARAMETRAGE.MODELE_APPRENTISSAGE_AUTOMATIQUE.LINE_CHART.LOSS'),
-          data: this.tableauLogs.map(logs => logs['loss'] as number),
-          tension: 0.4 // Bezier curve tension of the line. Set to 0 to draw straightlines. This option is ignored if monotone cubic interpolation is used.
-        },
-        {
-          label: this.translateService.instant('COMPOSANTS.PARAMETRAGE.MODELE_APPRENTISSAGE_AUTOMATIQUE.LINE_CHART.VAL_LOSS'),
-          data: this.tableauLogs.map(logs => logs['val_loss'] as number),
-          tension: 0.4,
-          hidden: true
-        },
-        {
-          label: this.translateService.instant('COMPOSANTS.PARAMETRAGE.MODELE_APPRENTISSAGE_AUTOMATIQUE.LINE_CHART.ACC'),
-          data: this.tableauLogs.map(logs => logs['acc'] as number),
-          tension: 0.4,
-          hidden: true
-        },
-        {
-          label: this.translateService.instant('COMPOSANTS.PARAMETRAGE.MODELE_APPRENTISSAGE_AUTOMATIQUE.LINE_CHART.VAL_ACC'),
-          data: this.tableauLogs.map(logs => logs['val_acc'] as number),
-          tension: 0.4,
-          hidden: true
-        }
-      ]
-    };
   }
 }

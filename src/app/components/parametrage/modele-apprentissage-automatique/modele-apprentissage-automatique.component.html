@@ -11,7 +11,7 @@
     <p-button
       label="{{ 'COMPOSANTS.PARAMETRAGE.MODELE_APPRENTISSAGE_AUTOMATIQUE.ENTRAINER_MODELE' | translate }}"
       (onClick)="entrainerModele()"/>
-    @if (model) {
+    @if (modele) {
       <p-button
         label="{{ 'COMPOSANTS.PARAMETRAGE.MODELE_APPRENTISSAGE_AUTOMATIQUE.PREDIRE_AVEC_LE_MODELE' | translate }}"
         (onClick)="predireAvecLeModele()"/>
@@ -24,7 +24,10 @@
   }
 </div>
 <div class="courbes">
-  @if (dataLineChart) {
-    <p-chart type="line" [data]="dataLineChart" [options]="dataLineOptions"/>
+  @if (donneesChart) {
+    <p-chart type="scatter" [data]="donneesChart" [options]="donneesChartOptions"/>
+  }
+  @if (entrainementChart) {
+    <p-chart type="line" [data]="entrainementChart" [options]="entrainementChartOptions"/>
   }
 </div>
