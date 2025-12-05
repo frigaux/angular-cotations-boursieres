@@ -28,4 +28,23 @@ export class ModelesService {
 
     return model;
   }
+
+  c(): LayersModel {
+    // const model = tf.sequential();
+    // model.add(tf.layers.dense({inputShape: [1], units: 1, useBias: true}));
+    // model.add(tf.layers.dense({units: 1, useBias: true}));
+
+    const input: SymbolicTensor = tf.input({shape: [1]});
+    const dense1: SymbolicTensor = tf.layers.dense({units: 1, useBias: true}).apply(input) as SymbolicTensor;
+    const dense2: SymbolicTensor = tf.layers.dense({units: 1, useBias: true}).apply(dense1) as SymbolicTensor;
+    const model = tf.model({inputs: input, outputs: dense2});
+
+    model.compile({
+      optimizer: tf.train.adam(),
+      loss: tf.losses.meanSquaredError,
+      metrics: ['mse'],
+    });
+
+    return model;
+  }
 }

@@ -24,34 +24,44 @@ export class GraphiquesService {
   }
 
   entrainementChart(logs: Array<Logs>) {
-    return {
+    const resultat = {
       labels: logs.map((value, index) => String(index)),
       datasets: [
         {
           label: this.translateService.instant('SERVICES.ML.GRAPHIQUES.LOSS'),
           data: logs.map(v => v['loss'] as number),
-          tension: 0.4 // Bezier curve tension of the line. Set to 0 to draw straightlines. This option is ignored if monotone cubic interpolation is used.
-        },
-        {
+          tension: 0.4, // Bezier curve tension of the line. Set to 0 to draw straightlines. This option is ignored if monotone cubic interpolation is used.
+          hidden: false
+        }
+      ]
+    };
+    if (logs && logs.length > 0) {
+      if (logs[0].hasOwnProperty('val_loss')) {
+        resultat.datasets.push({
           label: this.translateService.instant('SERVICES.ML.GRAPHIQUES.VAL_LOSS'),
           data: logs.map(v => v['val_loss'] as number),
           tension: 0.4,
           hidden: true
-        },
-        {
+        });
+      }
+      if (logs[0].hasOwnProperty('acc')) {
+        resultat.datasets.push({
           label: this.translateService.instant('SERVICES.ML.GRAPHIQUES.ACC'),
           data: logs.map(v => v['acc'] as number),
           tension: 0.4,
           hidden: true
-        },
-        {
+        });
+      }
+      if (logs[0].hasOwnProperty('val_acc')) {
+        resultat.datasets.push({
           label: this.translateService.instant('SERVICES.ML.GRAPHIQUES.VAL_ACC'),
           data: logs.map(v => v['val_acc'] as number),
           tension: 0.4,
           hidden: true
-        }
-      ]
-    };
+        });
+      }
+    }
+    return resultat;
   }
 
   donneesChartOptions() {

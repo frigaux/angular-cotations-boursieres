@@ -42,6 +42,7 @@ export class ModeleApprentissageAutomatiqueComponent implements OnInit {
 
   //
   protected progressionEntrainement: number = 0;
+  protected donnees?: { x: Tensor; y: Tensor };
   protected modele?: LayersModel;
   protected prediction?: any;
 
@@ -61,6 +62,11 @@ export class ModeleApprentissageAutomatiqueComponent implements OnInit {
   ngOnInit(): void {
     this.changeBackend();
     window.setInterval(() => this.nombreTenseurs = tf.memory().numTensors, 2000);
+    this.donneesService.donneesFonctionAffine()
+      .then(donnees => {
+        this.donnees = donnees;
+        this.donneesChart = this.graphiquesService.donneesChart(donnees);
+      });
   }
 
   protected changeBackend() {
@@ -71,34 +77,34 @@ export class ModeleApprentissageAutomatiqueComponent implements OnInit {
   }
 
   protected entrainerModele() {
-    this.modele = undefined;
-    const modele: LayersModel = this.modelesService.modeleFonctionAffine();
-    const donnees: { x: Tensor, y: Tensor } = this.donneesService.donneesFonctionAffine();
-    this.donneesChart = this.graphiquesService.donneesChart(donnees);
+    if (this.donnees) {
+      this.modele = undefined;
+      const modele: LayersModel = this.modelesService.modeleFonctionAffine();
 
-    this.progressionEntrainement = 0;
-    const logs: Array<Logs> = [];
-    modele.fit(donnees.x, donnees.y, {
-      epochs: this.epochs,
-      // batchSize: 300,
-      // validationSplit: 0.2,
-      callbacks: {
-        onEpochEnd: (epoch, log) => {
-          if (log) {
-            logs.push(log);
-          }
-          const pourcentage = Math.round(100 * epoch / this.epochs);
-          if (!this.progressionEntrainement || pourcentage > this.progressionEntrainement) {
-            this.progressionEntrainement = pourcentage;
+      this.progressionEntrainement = 0;
+      const logs: Array<Logs> = [];
+      modele.fit(this.donnees.x, this.donnees.y, {
+        epochs: this.epochs,
+        // batchSize: 300,
+        // validationSplit: 0.2,
+        callbacks: {
+          onEpochEnd: (epoch, log) => {
+            if (log) {
+              logs.push(log);
+            }
+            const pourcentage = Math.round(100 * epoch / this.epochs);
+            if (!this.progressionEntrainement || pourcentage > this.progressionEntrainement) {
+              this.progressionEntrainement = pourcentage;
+            }
           }
         }
-      }
-    }).then(() => {
-      donnees.x.dispose();
-      donnees.y.dispose();
-      this.entrainementChart = this.graphiquesService.entrainementChart(logs);
-      this.modele = modele;
-    });
+      }).then(() => {
+        // this.donnees.x.dispose();
+        // this.donnees.y.dispose();
+        this.entrainementChart = this.graphiquesService.entrainementChart(logs);
+        this.modele = modele;
+      });
+    }
   }
 
   protected predireAvecLeModele() {
