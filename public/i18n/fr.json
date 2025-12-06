@@ -548,14 +548,12 @@
       },
       "MODELE_APPRENTISSAGE_AUTOMATIQUE": {
         "MODELE_TENSORFLOW": "Modele TensorFlow",
-        "ENTRAINER_MODELE": "Entraîner le modèle",
-        "PREDIRE_AVEC_LE_MODELE": "Prédire avec le modèle",
         "NOMBRE_TENSEURS": "Tenseurs",
-        "EPOCH": "Epoch",
-        "LOGS": "Logs",
-        "PREDICTION": "Prédiction",
         "BACKEND": "Backend",
-        "EPOCHS": "Epochs"
+        "EPOCHS": "Epochs",
+        "ENTRAINER_MODELE": "Entraîner le modèle",
+        "VALEUR": "Valeur",
+        "PREDIRE_AVEC_LE_MODELE": "Prédire avec le modèle"
       }
     }
   },
@@ -687,8 +685,8 @@
         "ACC": "acc",
         "VAL_ACC": "val_acc",
         "DONNEES": "Données",
-        "X": "X",
-        "Y": "Y"
+        "ENTREE": "Entrée",
+        "SORTIE": "Sortie"
       }
     }
   }

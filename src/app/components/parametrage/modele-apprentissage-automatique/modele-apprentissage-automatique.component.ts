@@ -14,6 +14,7 @@ import {ModelesService} from '../../../services/modele-apprentissage-automatique
 import {DonneesService} from '../../../services/modele-apprentissage-automatique/donnees.service';
 import {Tensor} from '@tensorflow/tfjs-core';
 import {GraphiquesService} from '../../../services/modele-apprentissage-automatique/graphiques.service';
+import {FloatLabel} from 'primeng/floatlabel';
 
 @Component({
   selector: 'app-modele-apprentissage-automatique',
@@ -25,7 +26,8 @@ import {GraphiquesService} from '../../../services/modele-apprentissage-automati
     UIChart,
     Select,
     FormsModule,
-    InputText
+    InputText,
+    FloatLabel
   ],
   templateUrl: './modele-apprentissage-automatique.component.html',
   styleUrl: './modele-apprentissage-automatique.component.sass',
@@ -42,8 +44,9 @@ export class ModeleApprentissageAutomatiqueComponent implements OnInit {
 
   //
   protected progressionEntrainement: number = 0;
-  protected donnees?: { x: Tensor; y: Tensor };
+  protected donnees?: { entrees: Tensor; sorties: Tensor };
   protected modele?: LayersModel;
+  protected valeur?: number;
   protected prediction?: any;
 
   // https://www.chartjs.org/
@@ -83,7 +86,7 @@ export class ModeleApprentissageAutomatiqueComponent implements OnInit {
 
       this.progressionEntrainement = 0;
       const logs: Array<Logs> = [];
-      modele.fit(this.donnees.x, this.donnees.y, {
+      modele.fit(this.donnees.entrees, this.donnees.sorties, {
         epochs: this.epochs,
         // batchSize: 300,
         // validationSplit: 0.2,
@@ -108,9 +111,11 @@ export class ModeleApprentissageAutomatiqueComponent implements OnInit {
   }
 
   protected predireAvecLeModele() {
-    tf.tidy(() => {
-      const prediction: any = this.modele!.predict(tf.tensor([5], [1, 1], 'int32'));
-      prediction.array().then((array: any) => this.prediction = array);
-    });
+    if (this.valeur) {
+      tf.tidy(() => {
+        const prediction: any = this.modele!.predict(tf.tensor([this.valeur!], [1, 1], 'int32'));
+        prediction.array().then((array: any) => this.prediction = array);
+      });
+    }
   }
 }

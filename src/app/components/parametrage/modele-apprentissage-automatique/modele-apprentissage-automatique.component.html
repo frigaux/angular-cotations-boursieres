@@ -1,19 +1,27 @@
 <h1>{{ 'COMPOSANTS.PARAMETRAGE.MODELE_APPRENTISSAGE_AUTOMATIQUE.MODELE_TENSORFLOW' | translate }}</h1>
 <div class="ligne">
-  <label>{{ 'COMPOSANTS.PARAMETRAGE.MODELE_APPRENTISSAGE_AUTOMATIQUE.NOMBRE_TENSEURS' | translate }}</label>
+  <label>{{ 'COMPOSANTS.PARAMETRAGE.MODELE_APPRENTISSAGE_AUTOMATIQUE.NOMBRE_TENSEURS' | translate }} :</label>
   <span>{{ nombreTenseurs }}</span>
-  <p-select [options]="backends" [(ngModel)]="backend" size="small"
-            (onChange)="changeBackend()"
-            placeholder="{{ 'COMPOSANTS.PARAMETRAGE.MODELE_APPRENTISSAGE_AUTOMATIQUE.BACKEND' | translate }}"></p-select>
+  <p-floatlabel>
+    <p-select id="backend" [options]="backends" [(ngModel)]="backend" size="small"
+              (onChange)="changeBackend()"></p-select>
+    <label for="backend">{{ 'COMPOSANTS.PARAMETRAGE.MODELE_APPRENTISSAGE_AUTOMATIQUE.BACKEND' | translate }}</label>
+  </p-floatlabel>
   @if (backendChangeAvecSucces) {
-    <input type="text" pInputText [(ngModel)]="epochs" pSize="small" size="5"
-           placeholder="{{ 'COMPOSANTS.PARAMETRAGE.MODELE_APPRENTISSAGE_AUTOMATIQUE.EPOCHS' | translate }}"/>
+    <p-floatlabel>
+      <input id="epochs" type="text" pInputText [(ngModel)]="epochs" pSize="small" size="5"/>
+      <label for="epochs">{{ 'COMPOSANTS.PARAMETRAGE.MODELE_APPRENTISSAGE_AUTOMATIQUE.EPOCHS' | translate }}</label>
+    </p-floatlabel>
     @if (donnees) {
       <p-button
         label="{{ 'COMPOSANTS.PARAMETRAGE.MODELE_APPRENTISSAGE_AUTOMATIQUE.ENTRAINER_MODELE' | translate }}"
         (onClick)="entrainerModele()"/>
     }
     @if (modele) {
+      <p-floatlabel>
+        <input id="valeur" type="text" pInputText [(ngModel)]="valeur" pSize="small" size="5"/>
+        <label for="valeur">{{ 'COMPOSANTS.PARAMETRAGE.MODELE_APPRENTISSAGE_AUTOMATIQUE.VALEUR' | translate }}</label>
+      </p-floatlabel>
       <p-button
         label="{{ 'COMPOSANTS.PARAMETRAGE.MODELE_APPRENTISSAGE_AUTOMATIQUE.PREDIRE_AVEC_LE_MODELE' | translate }}"
         (onClick)="predireAvecLeModele()"/>

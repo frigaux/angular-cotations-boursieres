@@ -41,7 +41,7 @@ export class GraphiquesService {
           label: this.translateService.instant('SERVICES.ML.GRAPHIQUES.VAL_LOSS'),
           data: logs.map(v => v['val_loss'] as number),
           tension: 0.4,
-          hidden: true
+          hidden: false
         });
       }
       if (logs[0].hasOwnProperty('acc')) {
@@ -49,7 +49,7 @@ export class GraphiquesService {
           label: this.translateService.instant('SERVICES.ML.GRAPHIQUES.ACC'),
           data: logs.map(v => v['acc'] as number),
           tension: 0.4,
-          hidden: true
+          hidden: false
         });
       }
       if (logs[0].hasOwnProperty('val_acc')) {
@@ -57,7 +57,7 @@ export class GraphiquesService {
           label: this.translateService.instant('SERVICES.ML.GRAPHIQUES.VAL_ACC'),
           data: logs.map(v => v['val_acc'] as number),
           tension: 0.4,
-          hidden: true
+          hidden: false
         });
       }
     }
@@ -70,13 +70,13 @@ export class GraphiquesService {
         x: {
           title: {
             display: true,
-            text: this.translateService.instant('SERVICES.ML.GRAPHIQUES.X')
+            text: this.translateService.instant('SERVICES.ML.GRAPHIQUES.ENTREE')
           }
         },
         y: {
           title: {
             display: true,
-            text: this.translateService.instant('SERVICES.ML.GRAPHIQUES.Y')
+            text: this.translateService.instant('SERVICES.ML.GRAPHIQUES.SORTIE')
           }
         }
 
@@ -84,9 +84,9 @@ export class GraphiquesService {
     };
   }
 
-  donneesChart(donnees: { x: Tensor; y: Tensor }) {
-    const tx = donnees.x.dataSync();
-    const ty = donnees.y.dataSync();
+  donneesChart(donnees: { entrees: Tensor; sorties: Tensor }) {
+    const tx = donnees.entrees.dataSync();
+    const ty = donnees.sorties.dataSync();
     const data: Array<{ x: number, y: number }> = [];
     tx.forEach((x, i) => data.push({x, y: ty[i]}));
     return {
