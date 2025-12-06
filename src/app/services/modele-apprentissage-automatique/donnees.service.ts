@@ -7,7 +7,6 @@ import * as tf from '@tensorflow/tfjs';
 })
 export class DonneesService {
   donneesFonctionAffine(): Promise<{ entrees: Tensor; sorties: Tensor; }> {
-    // console.log(xs.arraySync(), xs.dataSync());
     return new Promise(resolve => resolve({
       entrees: tf.tensor([-1, 0, 1, 2, 3, 4], [6, 1], 'int32'),
       sorties: tf.tensor([-3, -1, 1, 3, 5, 7], [6, 1], 'int32')

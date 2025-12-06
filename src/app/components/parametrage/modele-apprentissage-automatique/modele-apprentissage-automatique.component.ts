@@ -67,6 +67,7 @@ export class ModeleApprentissageAutomatiqueComponent implements OnInit {
     window.setInterval(() => this.nombreTenseurs = tf.memory().numTensors, 2000);
     this.donneesService.donneesFonctionAffine()
       .then(donnees => {
+        // console.log(this.donnees?.entrees.arraySync(), this.donnees?.entrees.dataSync());
         this.donnees = donnees;
         this.donneesChart = this.graphiquesService.donneesChart(donnees);
       });
@@ -104,6 +105,11 @@ export class ModeleApprentissageAutomatiqueComponent implements OnInit {
       }).then(() => {
         // this.donnees.x.dispose();
         // this.donnees.y.dispose();
+        tf.enableDebugMode();
+        // console.log('modele', modele.summary());
+        // modele.weights.forEach(w => {
+        //   console.log(w);
+        // });
         this.entrainementChart = this.graphiquesService.entrainementChart(logs);
         this.modele = modele;
       });

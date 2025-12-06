@@ -17,9 +17,6 @@ export class ModelesService {
     const dense: SymbolicTensor = tf.layers.dense({units: 1}).apply(input) as SymbolicTensor;
     const model = tf.model({inputs: input, outputs: dense});
 
-    // tf.enableDebugMode();
-    // console.log('model', model.summary());
-
     model.compile({
       optimizer: 'sgd', // sgd ou adam
       loss: 'meanSquaredError',
