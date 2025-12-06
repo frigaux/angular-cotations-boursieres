@@ -105,7 +105,7 @@ export class ModeleApprentissageAutomatiqueComponent implements OnInit {
       }).then(() => {
         // this.donnees.x.dispose();
         // this.donnees.y.dispose();
-        tf.enableDebugMode();
+        // tf.enableDebugMode();
         // console.log('modele', modele.summary());
         // modele.weights.forEach(w => {
         //   console.log(w);

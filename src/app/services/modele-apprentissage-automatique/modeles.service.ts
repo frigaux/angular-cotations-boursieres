@@ -18,15 +18,15 @@ export class ModelesService {
     const model = tf.model({inputs: input, outputs: dense});
 
     model.compile({
-      optimizer: 'sgd', // sgd ou adam
-      loss: 'meanSquaredError',
+      optimizer: tf.train.sgd(0.1),
+      loss: tf.losses.meanSquaredError,
       metrics: ['accuracy']
     });
 
     return model;
   }
 
-  modelePuissanceConso(): LayersModel {
+  modelePuissanceRendement(): LayersModel {
     // const model = tf.sequential();
     // model.add(tf.layers.dense({inputShape: [1], units: 1, useBias: true}));
     // model.add(tf.layers.dense({units: 1, useBias: true}));
