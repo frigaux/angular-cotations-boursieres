@@ -41,7 +41,8 @@ export class ModeleApprentissageAutomatiqueComponent implements OnInit {
   protected backendChangeAvecSucces?: boolean;
 
   protected tauxApprentissage: number = 0.1;
-  protected epochs: number = 250;
+  protected epochs: number = 50;
+  protected tailleLot: number = 32;
 
   //
   protected progressionEntrainement: number = 0;
@@ -90,7 +91,8 @@ export class ModeleApprentissageAutomatiqueComponent implements OnInit {
       const logs: Array<Logs> = [];
       modele.fit(this.donnees.entrees, this.donnees.sorties, {
         epochs: this.epochs,
-        // batchSize: 300,
+        batchSize: this.tailleLot,
+        shuffle: true,
         // validationSplit: 0.2,
         callbacks: {
           onEpochEnd: (epoch, log) => {
