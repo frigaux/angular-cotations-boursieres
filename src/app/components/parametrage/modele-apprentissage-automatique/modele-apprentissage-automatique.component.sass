@@ -5,11 +5,18 @@ div.ligne
   align-items: center
   overflow: visible
 
-  span
+  span.nombre
     margin-left: 0.25rem
 
-  p-floatlabel, p-button, app-barre-progression
+  span.prediction
+    font-weight: bold
+
+  p-floatlabel, p-button, app-barre-progression, span.prediction
     margin-left: 1rem
 
 div.courbes
-  width: 70%
+  display: flex
+  flex-direction: row
+
+  p-chart
+    width: 50%

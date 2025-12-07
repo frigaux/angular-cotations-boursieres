@@ -7,7 +7,7 @@ import {SymbolicTensor} from '@tensorflow/tfjs';
   providedIn: 'root',
 })
 export class ModelesService {
-  modeleFonctionAffine(): LayersModel {
+  modeleFonctionAffine(tauxApprentissage: number): LayersModel {
     // Modèle séquentiel : y = 2x - 1
     // const model = tf.sequential();
     // model.add(tf.layers.dense({inputShape: [1], units: 1}));
@@ -18,7 +18,7 @@ export class ModelesService {
     const model = tf.model({inputs: input, outputs: dense});
 
     model.compile({
-      optimizer: tf.train.sgd(0.1),
+      optimizer: tf.train.sgd(tauxApprentissage),
       loss: tf.losses.meanSquaredError,
       metrics: ['accuracy']
     });
@@ -26,7 +26,7 @@ export class ModelesService {
     return model;
   }
 
-  modelePuissanceRendement(): LayersModel {
+  modelePuissanceRendement(tauxApprentissage: number): LayersModel {
     // const model = tf.sequential();
     // model.add(tf.layers.dense({inputShape: [1], units: 1, useBias: true}));
     // model.add(tf.layers.dense({units: 1, useBias: true}));
@@ -37,7 +37,7 @@ export class ModelesService {
     const model = tf.model({inputs: input, outputs: dense2});
 
     model.compile({
-      optimizer: tf.train.adam(),
+      optimizer: tf.train.adam(tauxApprentissage),
       loss: tf.losses.meanSquaredError,
       metrics: ['mse'],
     });

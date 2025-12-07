@@ -40,6 +40,7 @@ export class ModeleApprentissageAutomatiqueComponent implements OnInit {
   protected backend: string = this.backends[0];
   protected backendChangeAvecSucces?: boolean;
 
+  protected tauxApprentissage: number = 0.1;
   protected epochs: number = 250;
 
   //
@@ -83,7 +84,7 @@ export class ModeleApprentissageAutomatiqueComponent implements OnInit {
   protected entrainerModele() {
     if (this.donnees) {
       this.modele = undefined;
-      const modele: LayersModel = this.modelesService.modeleFonctionAffine();
+      const modele: LayersModel = this.modelesService.modeleFonctionAffine(this.tauxApprentissage);
 
       this.progressionEntrainement = 0;
       const logs: Array<Logs> = [];

@@ -550,6 +550,7 @@
         "MODELE_TENSORFLOW": "Modele TensorFlow",
         "NOMBRE_TENSEURS": "Tenseurs",
         "BACKEND": "Backend",
+        "TAUX_APPRENTISSAGE": "Taux apprentissage",
         "EPOCHS": "Epochs",
         "ENTRAINER_MODELE": "Entraîner le modèle",
         "VALEUR": "Valeur",
