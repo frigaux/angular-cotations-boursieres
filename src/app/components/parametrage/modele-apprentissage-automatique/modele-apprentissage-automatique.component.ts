@@ -12,10 +12,11 @@ import {FormsModule} from '@angular/forms';
 import {InputText} from 'primeng/inputtext';
 import {ModelesService} from '../../../services/modele-apprentissage-automatique/modeles.service';
 import {DonneesService} from '../../../services/modele-apprentissage-automatique/donnees.service';
-import {Tensor} from '@tensorflow/tfjs-core';
 import {GraphiquesService} from '../../../services/modele-apprentissage-automatique/graphiques.service';
 import {FloatLabel} from 'primeng/floatlabel';
+import {Donnees} from '../../../services/modele-apprentissage-automatique/donnees.interface';
 
+// TODO : prediction sur modeleFonctionAffine ? virer input valeur et bouton predire ?
 @Component({
   selector: 'app-modele-apprentissage-automatique',
   imports: [
@@ -35,18 +36,20 @@ import {FloatLabel} from 'primeng/floatlabel';
 export class ModeleApprentissageAutomatiqueComponent implements OnInit {
   // données pour la vue
   protected nombreTenseurs?: number;
+
   // liste déroulantes
   protected backends: Array<string> = ['cpu', 'webgl']; // 'tensorflow' (requires tfjs-node), 'wasm' (requires tfjs-backend-wasm).
   protected backend: string = this.backends[0];
   protected backendChangeAvecSucces?: boolean;
 
+  //
   protected tauxApprentissage: number = 0.1;
   protected epochs: number = 50;
   protected tailleLot: number = 32;
 
   //
   protected progressionEntrainement: number = 0;
-  protected donnees?: { entrees: Tensor; sorties: Tensor };
+  protected donnees?: Donnees;
   protected modele?: LayersModel;
   protected valeur?: number;
   protected prediction?: any;
@@ -56,22 +59,25 @@ export class ModeleApprentissageAutomatiqueComponent implements OnInit {
   protected donneesChartOptions?: any;
   protected entrainementChart?: any;
   protected entrainementChartOptions?: any;
+  protected predictionChart?: any;
+  protected predictionChartOptions?: any;
 
   constructor(private graphiquesService: GraphiquesService,
               private modelesService: ModelesService,
               private donneesService: DonneesService) {
     this.donneesChartOptions = this.graphiquesService.donneesChartOptions();
     this.entrainementChartOptions = this.graphiquesService.entrainementChartOptions();
+    this.predictionChartOptions = this.graphiquesService.donneesChartOptions();
   }
 
   ngOnInit(): void {
     this.changeBackend();
-    window.setInterval(() => this.nombreTenseurs = tf.memory().numTensors, 2000);
-    this.donneesService.donneesFonctionAffine()
+    window.setInterval(() => this.nombreTenseurs = tf.memory().numTensors, 1000);
+    this.donneesService.donneesPuissanceRendement()
       .then(donnees => {
         // console.log(this.donnees?.entrees.arraySync(), this.donnees?.entrees.dataSync());
         this.donnees = donnees;
-        this.donneesChart = this.graphiquesService.donneesChart(donnees);
+        this.donneesChart = this.graphiquesService.donneesChart(donnees, 'DONNEES');
       });
   }
 
@@ -85,11 +91,12 @@ export class ModeleApprentissageAutomatiqueComponent implements OnInit {
   protected entrainerModele() {
     if (this.donnees) {
       this.modele = undefined;
-      const modele: LayersModel = this.modelesService.modeleFonctionAffine(this.tauxApprentissage);
+      const modele: LayersModel = this.modelesService.modelePuissanceRendement(this.tauxApprentissage);
 
+      const donneesNormalisees = this.donneesService.normaliser(this.donnees);
       this.progressionEntrainement = 0;
       const logs: Array<Logs> = [];
-      modele.fit(this.donnees.entrees, this.donnees.sorties, {
+      modele.fit(donneesNormalisees.entrees, donneesNormalisees.sorties, {
         epochs: this.epochs,
         batchSize: this.tailleLot,
         shuffle: true,
@@ -115,6 +122,9 @@ export class ModeleApprentissageAutomatiqueComponent implements OnInit {
         // });
         this.entrainementChart = this.graphiquesService.entrainementChart(logs);
         this.modele = modele;
+        this.predictionChart = this.graphiquesService.donneesChart(
+          this.donneesService.predictionsPuissanceRendement(modele, donneesNormalisees)
+          , 'PREDICTIONS');
       });
     }
   }

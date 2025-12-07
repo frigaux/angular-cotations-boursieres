@@ -688,9 +688,11 @@
         "VAL_LOSS": "val_loss",
         "ACC": "acc",
         "VAL_ACC": "val_acc",
+        "MSE": "mse",
         "DONNEES": "Données",
         "ENTREE": "Entrée",
-        "SORTIE": "Sortie"
+        "SORTIE": "Sortie",
+        "PREDICTIONS": "Prédictions"
       }
     }
   }

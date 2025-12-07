@@ -1,19 +1,21 @@
 import {Injectable} from '@angular/core';
-import {Tensor} from '@tensorflow/tfjs-core';
 import * as tf from '@tensorflow/tfjs';
+import {LayersModel} from '@tensorflow/tfjs-layers/dist/engine/training';
+import {Donnees} from './donnees.interface';
+import {DonneesNormalisees} from './donnees-normalisees.interface';
 
 @Injectable({
   providedIn: 'root',
 })
 export class DonneesService {
-  donneesFonctionAffine(): Promise<{ entrees: Tensor; sorties: Tensor }> {
+  donneesFonctionAffine(): Promise<Donnees> {
     return new Promise(resolve => resolve({
       entrees: tf.tensor([-1, 0, 1, 2, 3, 4], [6, 1], 'int32'),
       sorties: tf.tensor([-3, -1, 1, 3, 5, 7], [6, 1], 'int32')
     }));
   }
 
-  async donneesPuissanceConso(): Promise<{ entrees: Tensor; sorties: Tensor }> {
+  async donneesPuissanceRendement(): Promise<Donnees> {
     const reponse = await fetch('https://storage.googleapis.com/tfjs-tutorials/carsData.json');
     const voitures: Array<any> = await reponse.json();
     const voituresValides = voitures
@@ -29,11 +31,11 @@ export class DonneesService {
     });
   }
 
-  normaliser(donnees: { entrees: Tensor; sorties: Tensor }) {
-    const entreesMax = donnees.entrees.max();
+  normaliser(donnees: Donnees): DonneesNormalisees {
     const entreesMin = donnees.entrees.min();
-    const sortiesMax = donnees.sorties.max();
+    const entreesMax = donnees.entrees.max();
     const sortiesMin = donnees.sorties.min();
+    const sortiesMax = donnees.sorties.max();
 
     const entreesNormalisees = donnees.entrees.sub(entreesMin).div(entreesMax.sub(entreesMin));
     const sortiesNormalisees = donnees.sorties.sub(sortiesMin).div(sortiesMax.sub(sortiesMin));
@@ -41,10 +43,23 @@ export class DonneesService {
       entrees: entreesNormalisees,
       sorties: sortiesNormalisees,
       // Return the min/max bounds so we can use them later.
-      entreesMax,
       entreesMin,
-      sortiesMax,
+      entreesMax,
       sortiesMin,
+      sortiesMax,
     }
+  }
+
+  predictionsPuissanceRendement(modele: LayersModel, donneesNormalisees: DonneesNormalisees) {
+    const xs = tf.linspace(0, 1, 100);
+    const preds: any = modele.predict(xs.reshape([100, 1]));
+    const entrees = xs
+      .mul(donneesNormalisees.entreesMax.sub(donneesNormalisees.entreesMin))
+      .add(donneesNormalisees.entreesMin);
+
+    const sorties = preds
+      .mul(donneesNormalisees.sortiesMax.sub(donneesNormalisees.sortiesMin))
+      .add(donneesNormalisees.sortiesMin);
+    return {entrees, sorties};
   }
 }

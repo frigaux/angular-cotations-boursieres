@@ -9,18 +9,20 @@
   </p-floatlabel>
   @if (backendChangeAvecSucces) {
     <p-floatlabel>
-      <input id="tauxApprentissage" type="text" pInputText [(ngModel)]="tauxApprentissage" pSize="small" size="7"/>
-      <label for="tauxApprentissage">{{ 'COMPOSANTS.PARAMETRAGE.MODELE_APPRENTISSAGE_AUTOMATIQUE.TAUX_APPRENTISSAGE' | translate }}</label>
+      <input id="tauxApprentissage" type="number" pInputText [(ngModel)]="tauxApprentissage" pSize="small"/>
+      <label
+        for="tauxApprentissage">{{ 'COMPOSANTS.PARAMETRAGE.MODELE_APPRENTISSAGE_AUTOMATIQUE.TAUX_APPRENTISSAGE' | translate }}</label>
     </p-floatlabel>
     <p-floatlabel>
-      <input id="epochs" type="text" pInputText [(ngModel)]="epochs" pSize="small" size="5"
-      title="{{ 'COMPOSANTS.PARAMETRAGE.MODELE_APPRENTISSAGE_AUTOMATIQUE.EPOCHS_DESCRIPTION' | translate }}"/>
+      <input id="epochs" type="number" pInputText [(ngModel)]="epochs" pSize="small"
+             title="{{ 'COMPOSANTS.PARAMETRAGE.MODELE_APPRENTISSAGE_AUTOMATIQUE.EPOCHS_DESCRIPTION' | translate }}"/>
       <label for="epochs">{{ 'COMPOSANTS.PARAMETRAGE.MODELE_APPRENTISSAGE_AUTOMATIQUE.EPOCHS' | translate }}</label>
     </p-floatlabel>
     <p-floatlabel>
-      <input id="tailleLot" type="text" pInputText [(ngModel)]="tailleLot" pSize="small" size="5"
-      title="{{ 'COMPOSANTS.PARAMETRAGE.MODELE_APPRENTISSAGE_AUTOMATIQUE.TAILLE_LOT_DESCRIPTION' | translate }}"/>
-      <label for="tailleLot">{{ 'COMPOSANTS.PARAMETRAGE.MODELE_APPRENTISSAGE_AUTOMATIQUE.TAILLE_LOT' | translate }}</label>
+      <input id="tailleLot" type="number" pInputText [(ngModel)]="tailleLot" pSize="small"
+             title="{{ 'COMPOSANTS.PARAMETRAGE.MODELE_APPRENTISSAGE_AUTOMATIQUE.TAILLE_LOT_DESCRIPTION' | translate }}"/>
+      <label
+        for="tailleLot">{{ 'COMPOSANTS.PARAMETRAGE.MODELE_APPRENTISSAGE_AUTOMATIQUE.TAILLE_LOT' | translate }}</label>
     </p-floatlabel>
     @if (donnees) {
       <p-button
@@ -29,7 +31,7 @@
     }
     @if (modele) {
       <p-floatlabel>
-        <input id="valeur" type="text" pInputText [(ngModel)]="valeur" pSize="small" size="5"/>
+        <input id="valeur" type="number" pInputText [(ngModel)]="valeur" pSize="small"/>
         <label for="valeur">{{ 'COMPOSANTS.PARAMETRAGE.MODELE_APPRENTISSAGE_AUTOMATIQUE.VALEUR' | translate }}</label>
       </p-floatlabel>
       <p-button
@@ -49,5 +51,8 @@
   }
   @if (entrainementChart) {
     <p-chart type="line" [data]="entrainementChart" [options]="entrainementChartOptions"/>
+  }
+  @if (predictionChart) {
+    <p-chart type="scatter" [data]="predictionChart" [options]="predictionChartOptions"/>
   }
 </div>
