@@ -33,7 +33,8 @@ export class ModelesService {
 
     const input: SymbolicTensor = tf.input({shape: [1]});
     const dense1: SymbolicTensor = tf.layers.dense({units: 1, useBias: true}).apply(input) as SymbolicTensor;
-    const dense2: SymbolicTensor = tf.layers.dense({units: 1, useBias: true}).apply(dense1) as SymbolicTensor;
+    const hidden: SymbolicTensor = tf.layers.dense({units: 50, activation: 'sigmoid'}).apply(dense1) as SymbolicTensor;
+    const dense2: SymbolicTensor = tf.layers.dense({units: 1, useBias: true}).apply(hidden) as SymbolicTensor;
     const model = tf.model({inputs: input, outputs: dense2});
 
     model.compile({
