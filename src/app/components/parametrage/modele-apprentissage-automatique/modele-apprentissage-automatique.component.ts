@@ -5,7 +5,6 @@ import {TranslatePipe} from '@ngx-translate/core';
 import {Button} from 'primeng/button';
 import {LayersModel} from '@tensorflow/tfjs-layers/dist/engine/training';
 import {BarreProgressionComponent} from '../../commun/barre-progression/barre-progression.component';
-import {JsonPipe} from '@angular/common';
 import {UIChart} from 'primeng/chart';
 import {Select} from 'primeng/select';
 import {FormsModule} from '@angular/forms';
@@ -23,7 +22,6 @@ import {Donnees} from '../../../services/modele-apprentissage-automatique/donnee
     TranslatePipe,
     Button,
     BarreProgressionComponent,
-    JsonPipe,
     UIChart,
     Select,
     FormsModule,
@@ -51,8 +49,6 @@ export class ModeleApprentissageAutomatiqueComponent implements OnInit {
   protected progressionEntrainement: number = 0;
   protected donnees?: Donnees;
   protected modele?: LayersModel;
-  protected valeur?: number;
-  protected prediction?: any;
 
   // https://www.chartjs.org/
   protected donneesChart?: any;
@@ -125,15 +121,6 @@ export class ModeleApprentissageAutomatiqueComponent implements OnInit {
         this.predictionChart = this.graphiquesService.donneesChart(
           this.donneesService.predictionsFonctionAffine(modele, donneesNormalisees)
           , 'PREDICTIONS');
-      });
-    }
-  }
-
-  protected predireAvecLeModele() {
-    if (this.valeur) {
-      tf.tidy(() => {
-        const prediction: any = this.modele!.predict(tf.tensor([this.valeur!], [1, 1], 'int32'));
-        prediction.array().then((array: any) => this.prediction = array);
       });
     }
   }

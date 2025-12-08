@@ -29,20 +29,9 @@
         label="{{ 'COMPOSANTS.PARAMETRAGE.MODELE_APPRENTISSAGE_AUTOMATIQUE.ENTRAINER_MODELE' | translate }}"
         (onClick)="entrainerModele()"/>
     }
-    @if (modele) {
-      <p-floatlabel>
-        <input id="valeur" type="number" pInputText [(ngModel)]="valeur" pSize="small"/>
-        <label for="valeur">{{ 'COMPOSANTS.PARAMETRAGE.MODELE_APPRENTISSAGE_AUTOMATIQUE.VALEUR' | translate }}</label>
-      </p-floatlabel>
-      <p-button
-        label="{{ 'COMPOSANTS.PARAMETRAGE.MODELE_APPRENTISSAGE_AUTOMATIQUE.PREDIRE_AVEC_LE_MODELE' | translate }}"
-        (onClick)="predireAvecLeModele()"/>
-    } @else {
+    @if (!modele) {
       <app-barre-progression [pourcentage]="progressionEntrainement" largeur="20rem"></app-barre-progression>
     }
-  }
-  @if (prediction) {
-    <span class="prediction">{{ prediction | json }}</span>
   }
 </div>
 <div class="courbes">

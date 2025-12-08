@@ -555,9 +555,7 @@
         "ITERATIONS_DESCRIPTION": "Nombre de fois où le modèle va examiner l'intégralité de l'ensemble de données que vous lui fournissez",
         "LOT": "Taille lot",
         "LOT_DESCRIPTION": "Taille des sous-ensembles de données que le modèle verra à chaque itération de l'entraînement. Les tailles de lot courantes sont généralement comprises entre 32 et 512. Il n'existe pas vraiment de taille de lot idéale qui résout tous les problèmes",
-        "ENTRAINER_MODELE": "Entraîner le modèle",
-        "VALEUR": "Valeur",
-        "PREDIRE_AVEC_LE_MODELE": "Prédire avec le modèle"
+        "ENTRAINER_MODELE": "Entraîner le modèle"
       }
     }
   },
