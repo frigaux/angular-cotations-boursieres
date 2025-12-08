@@ -8,11 +8,24 @@ import {DonneesNormalisees} from './donnees-normalisees.interface';
   providedIn: 'root',
 })
 export class DonneesService {
-  donneesFonctionAffine(): Promise<Donnees> {
+  donneesFonctionAffine(): Promise<Donnees> {// y = 2x - 1
     return new Promise(resolve => resolve({
-      entrees: tf.tensor([-1, 0, 1, 2, 3, 4], [6, 1], 'int32'),
-      sorties: tf.tensor([-3, -1, 1, 3, 5, 7], [6, 1], 'int32')
+      entrees: tf.tensor([1, 2, 3, 4, 5, 6, 7], [7, 1], 'int32'),
+      sorties: tf.tensor([1, 3, 5, 7, 9, 11, 13], [7, 1], 'int32')
     }));
+  }
+
+  predictionsFonctionAffine(modele: LayersModel, donneesNormalisees: DonneesNormalisees) {
+    const xs = tf.linspace(0, 10, 100);
+    const preds: any = modele.predict(xs.reshape([100, 1]));
+    const entrees = xs
+      .mul(donneesNormalisees.entreesMax.sub(donneesNormalisees.entreesMin))
+      .add(donneesNormalisees.entreesMin);
+
+    const sorties = preds
+      .mul(donneesNormalisees.sortiesMax.sub(donneesNormalisees.sortiesMin))
+      .add(donneesNormalisees.sortiesMin);
+    return {entrees, sorties};
   }
 
   async donneesPuissanceRendement(): Promise<Donnees> {
@@ -31,25 +44,6 @@ export class DonneesService {
     });
   }
 
-  normaliser(donnees: Donnees): DonneesNormalisees {
-    const entreesMin = donnees.entrees.min();
-    const entreesMax = donnees.entrees.max();
-    const sortiesMin = donnees.sorties.min();
-    const sortiesMax = donnees.sorties.max();
-
-    const entreesNormalisees = donnees.entrees.sub(entreesMin).div(entreesMax.sub(entreesMin));
-    const sortiesNormalisees = donnees.sorties.sub(sortiesMin).div(sortiesMax.sub(sortiesMin));
-    return {
-      entrees: entreesNormalisees,
-      sorties: sortiesNormalisees,
-      // Return the min/max bounds so we can use them later.
-      entreesMin,
-      entreesMax,
-      sortiesMin,
-      sortiesMax,
-    }
-  }
-
   predictionsPuissanceRendement(modele: LayersModel, donneesNormalisees: DonneesNormalisees) {
     const xs = tf.linspace(0, 1, 100);
     const preds: any = modele.predict(xs.reshape([100, 1]));
@@ -61,5 +55,23 @@ export class DonneesService {
       .mul(donneesNormalisees.sortiesMax.sub(donneesNormalisees.sortiesMin))
       .add(donneesNormalisees.sortiesMin);
     return {entrees, sorties};
+  }
+
+  normaliserZeroAUn(donnees: Donnees): DonneesNormalisees {
+    const entreesMin = donnees.entrees.min();
+    const entreesMax = donnees.entrees.max();
+    const sortiesMin = donnees.sorties.min();
+    const sortiesMax = donnees.sorties.max();
+
+    const entreesNormalisees = donnees.entrees.sub(entreesMin).div(entreesMax.sub(entreesMin));
+    const sortiesNormalisees = donnees.sorties.sub(sortiesMin).div(sortiesMax.sub(sortiesMin));
+    return {
+      entrees: entreesNormalisees,
+      sorties: sortiesNormalisees,
+      entreesMin,
+      entreesMax,
+      sortiesMin,
+      sortiesMax,
+    }
   }
 }

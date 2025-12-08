@@ -39,7 +39,7 @@ export class ModelesService {
     model.compile({
       optimizer: tf.train.adam(tauxApprentissage),
       loss: tf.losses.meanSquaredError,
-      metrics: ['mse'],
+      metrics: ['accuracy'],
     });
 
     return model;

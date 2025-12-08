@@ -14,15 +14,15 @@
         for="tauxApprentissage">{{ 'COMPOSANTS.PARAMETRAGE.MODELE_APPRENTISSAGE_AUTOMATIQUE.TAUX_APPRENTISSAGE' | translate }}</label>
     </p-floatlabel>
     <p-floatlabel>
-      <input id="epochs" type="number" pInputText [(ngModel)]="epochs" pSize="small"
-             title="{{ 'COMPOSANTS.PARAMETRAGE.MODELE_APPRENTISSAGE_AUTOMATIQUE.EPOCHS_DESCRIPTION' | translate }}"/>
-      <label for="epochs">{{ 'COMPOSANTS.PARAMETRAGE.MODELE_APPRENTISSAGE_AUTOMATIQUE.EPOCHS' | translate }}</label>
+      <input id="iterations" type="number" pInputText [(ngModel)]="iterations" pSize="small"
+             title="{{ 'COMPOSANTS.PARAMETRAGE.MODELE_APPRENTISSAGE_AUTOMATIQUE.ITERATIONS_DESCRIPTION' | translate }}"/>
+      <label for="iterations">{{ 'COMPOSANTS.PARAMETRAGE.MODELE_APPRENTISSAGE_AUTOMATIQUE.ITERATIONS' | translate }}</label>
     </p-floatlabel>
     <p-floatlabel>
-      <input id="tailleLot" type="number" pInputText [(ngModel)]="tailleLot" pSize="small"
-             title="{{ 'COMPOSANTS.PARAMETRAGE.MODELE_APPRENTISSAGE_AUTOMATIQUE.TAILLE_LOT_DESCRIPTION' | translate }}"/>
+      <input id="lot" type="number" pInputText [(ngModel)]="lot" pSize="small"
+             title="{{ 'COMPOSANTS.PARAMETRAGE.MODELE_APPRENTISSAGE_AUTOMATIQUE.LOT_DESCRIPTION' | translate }}"/>
       <label
-        for="tailleLot">{{ 'COMPOSANTS.PARAMETRAGE.MODELE_APPRENTISSAGE_AUTOMATIQUE.TAILLE_LOT' | translate }}</label>
+        for="lot">{{ 'COMPOSANTS.PARAMETRAGE.MODELE_APPRENTISSAGE_AUTOMATIQUE.LOT' | translate }}</label>
     </p-floatlabel>
     @if (donnees) {
       <p-button

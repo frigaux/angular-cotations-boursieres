@@ -44,8 +44,8 @@ export class ModeleApprentissageAutomatiqueComponent implements OnInit {
 
   //
   protected tauxApprentissage: number = 0.1;
-  protected epochs: number = 50;
-  protected tailleLot: number = 32;
+  protected iterations: number = 50;
+  protected lot: number = 32;
 
   //
   protected progressionEntrainement: number = 0;
@@ -73,7 +73,7 @@ export class ModeleApprentissageAutomatiqueComponent implements OnInit {
   ngOnInit(): void {
     this.changeBackend();
     window.setInterval(() => this.nombreTenseurs = tf.memory().numTensors, 1000);
-    this.donneesService.donneesPuissanceRendement()
+    this.donneesService.donneesFonctionAffine()
       .then(donnees => {
         // console.log(this.donnees?.entrees.arraySync(), this.donnees?.entrees.dataSync());
         this.donnees = donnees;
@@ -91,14 +91,14 @@ export class ModeleApprentissageAutomatiqueComponent implements OnInit {
   protected entrainerModele() {
     if (this.donnees) {
       this.modele = undefined;
-      const modele: LayersModel = this.modelesService.modelePuissanceRendement(this.tauxApprentissage);
+      const modele: LayersModel = this.modelesService.modeleFonctionAffine(this.tauxApprentissage);
 
-      const donneesNormalisees = this.donneesService.normaliser(this.donnees);
+      const donneesNormalisees = this.donneesService.normaliserZeroAUn(this.donnees);
       this.progressionEntrainement = 0;
       const logs: Array<Logs> = [];
       modele.fit(donneesNormalisees.entrees, donneesNormalisees.sorties, {
-        epochs: this.epochs,
-        batchSize: this.tailleLot,
+        epochs: this.iterations,
+        batchSize: this.lot,
         shuffle: true,
         // validationSplit: 0.2,
         callbacks: {
@@ -106,7 +106,7 @@ export class ModeleApprentissageAutomatiqueComponent implements OnInit {
             if (log) {
               logs.push(log);
             }
-            const pourcentage = Math.round(100 * epoch / this.epochs);
+            const pourcentage = Math.round(100 * epoch / this.iterations);
             if (!this.progressionEntrainement || pourcentage > this.progressionEntrainement) {
               this.progressionEntrainement = pourcentage;
             }
@@ -123,7 +123,7 @@ export class ModeleApprentissageAutomatiqueComponent implements OnInit {
         this.entrainementChart = this.graphiquesService.entrainementChart(logs);
         this.modele = modele;
         this.predictionChart = this.graphiquesService.donneesChart(
-          this.donneesService.predictionsPuissanceRendement(modele, donneesNormalisees)
+          this.donneesService.predictionsFonctionAffine(modele, donneesNormalisees)
           , 'PREDICTIONS');
       });
     }
