@@ -8,6 +8,25 @@ import {DonneesNormalisees} from './donnees-normalisees.interface';
   providedIn: 'root',
 })
 export class DonneesService {
+
+  normaliserZeroAUn(donnees: Donnees): DonneesNormalisees {
+    const entreesMin = donnees.entrees.min();
+    const entreesMax = donnees.entrees.max();
+    const sortiesMin = donnees.sorties.min();
+    const sortiesMax = donnees.sorties.max();
+
+    const entreesNormalisees = donnees.entrees.sub(entreesMin).div(entreesMax.sub(entreesMin));
+    const sortiesNormalisees = donnees.sorties.sub(sortiesMin).div(sortiesMax.sub(sortiesMin));
+    return {
+      entrees: entreesNormalisees,
+      sorties: sortiesNormalisees,
+      entreesMin,
+      entreesMax,
+      sortiesMin,
+      sortiesMax,
+    }
+  }
+
   donneesFonctionAffine(): Promise<Donnees> {// y = 2x - 1
     return new Promise(resolve => resolve({
       entrees: tf.tensor([1, 2, 3, 4, 5, 6, 7], [7, 1], 'int32'),
@@ -55,23 +74,5 @@ export class DonneesService {
       .mul(donneesNormalisees.sortiesMax.sub(donneesNormalisees.sortiesMin))
       .add(donneesNormalisees.sortiesMin);
     return {entrees, sorties};
-  }
-
-  normaliserZeroAUn(donnees: Donnees): DonneesNormalisees {
-    const entreesMin = donnees.entrees.min();
-    const entreesMax = donnees.entrees.max();
-    const sortiesMin = donnees.sorties.min();
-    const sortiesMax = donnees.sorties.max();
-
-    const entreesNormalisees = donnees.entrees.sub(entreesMin).div(entreesMax.sub(entreesMin));
-    const sortiesNormalisees = donnees.sorties.sub(sortiesMin).div(sortiesMax.sub(sortiesMin));
-    return {
-      entrees: entreesNormalisees,
-      sorties: sortiesNormalisees,
-      entreesMin,
-      entreesMax,
-      sortiesMin,
-      sortiesMax,
-    }
   }
 }

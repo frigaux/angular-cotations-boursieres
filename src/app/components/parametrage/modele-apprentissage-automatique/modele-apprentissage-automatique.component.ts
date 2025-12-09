@@ -14,6 +14,9 @@ import {DonneesService} from '../../../services/modele-apprentissage-automatique
 import {GraphiquesService} from '../../../services/modele-apprentissage-automatique/graphiques.service';
 import {FloatLabel} from 'primeng/floatlabel';
 import {Donnees} from '../../../services/modele-apprentissage-automatique/donnees.interface';
+import {DonneesNormalisees} from '../../../services/modele-apprentissage-automatique/donnees-normalisees.interface';
+import {CoucheDense} from '../../../services/modele-apprentissage-automatique/couche-dense.interface';
+import {CoucheDenseComponent} from './couche-dense/couche-dense.component';
 
 @Component({
   selector: 'app-modele-apprentissage-automatique',
@@ -25,7 +28,8 @@ import {Donnees} from '../../../services/modele-apprentissage-automatique/donnee
     Select,
     FormsModule,
     InputText,
-    FloatLabel
+    FloatLabel,
+    CoucheDenseComponent
   ],
   templateUrl: './modele-apprentissage-automatique.component.html',
   styleUrl: './modele-apprentissage-automatique.component.sass',
@@ -48,6 +52,7 @@ export class ModeleApprentissageAutomatiqueComponent implements OnInit {
   protected progressionEntrainement: number = 0;
   protected donnees?: Donnees;
   protected modele?: LayersModel;
+  protected couches?: Array<CoucheDense>;
 
   // https://www.chartjs.org/
   protected donneesChart?: any;
@@ -65,7 +70,7 @@ export class ModeleApprentissageAutomatiqueComponent implements OnInit {
   ngOnInit(): void {
     this.changeBackend();
     window.setInterval(() => this.nombreTenseurs = tf.memory().numTensors, 1000);
-    this.donneesService.donneesPuissanceRendement()
+    this.donneesService.donneesFonctionAffine()
       .then(donnees => {
         // console.log(this.donnees?.entrees.arraySync(), this.donnees?.entrees.dataSync());
         this.donnees = donnees;
@@ -83,7 +88,7 @@ export class ModeleApprentissageAutomatiqueComponent implements OnInit {
   protected entrainerModele() {
     if (this.donnees) {
       this.modele = undefined;
-      const modele: LayersModel = this.modelesService.modelePuissanceRendement(this.tauxApprentissage);
+      const modele: LayersModel = this.modelesService.modeleFonctionAffine(this.tauxApprentissage);
 
       const donneesNormalisees = this.donneesService.normaliserZeroAUn(this.donnees);
       this.progressionEntrainement = 0;
@@ -105,21 +110,31 @@ export class ModeleApprentissageAutomatiqueComponent implements OnInit {
           }
         }
       }).then(() => {
-        // this.donnees.x.dispose();
-        // this.donnees.y.dispose();
-        // tf.enableDebugMode();
-        // console.log('modele', modele.summary());
-        // modele.weights.forEach(w => {
-        //   console.log(w);
-        // });
-        this.entrainementChart = this.graphiquesService.entrainementChart(logs);
         this.modele = modele;
-        const datasets = this.graphiquesService.donneesChart(this.donnees!, 'DONNEES');
-        datasets.datasets.push(this.graphiquesService.donneesChart(
-          this.donneesService.predictionsPuissanceRendement(modele, donneesNormalisees)
-          , 'PREDICTIONS').datasets[0]);
-        this.donneesChart = datasets;
+        this.entrainementTermine(donneesNormalisees, logs);
       });
     }
+  }
+
+  private entrainementTermine(donneesNormalisees: DonneesNormalisees, logs: Array<Logs>) {
+    // this.donnees.x.dispose();
+    // this.donnees.y.dispose();
+    // tf.enableDebugMode();
+    // console.log('modele', this.modele!.summary());
+    // this.modele!.weights.forEach(w => {
+    //   console.log(w);
+    // });
+
+    this.couches = this.modelesService.couchesDense(this.modele!);
+
+    // line chart : affichage des metrics d'entrainement
+    this.entrainementChart = this.graphiquesService.entrainementChart(logs);
+
+    // scatter chart : données et prédictions
+    const datasets = this.graphiquesService.donneesChart(this.donnees!, 'DONNEES');
+    datasets.datasets.push(this.graphiquesService.donneesChart(
+      this.donneesService.predictionsFonctionAffine(this.modele!, donneesNormalisees)
+      , 'PREDICTIONS').datasets[0]);
+    this.donneesChart = datasets;
   }
 }

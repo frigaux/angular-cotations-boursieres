@@ -1,0 +1,25 @@
+@if (couche) {
+  <H3>{{ couche.nom }} : {{ couche.fonctionActivation }}</H3>
+  <div class="couche">
+    <table>
+      <tbody>
+        @for (neurone of couche.neurones; track $index) {
+          <tr>
+            @for (poids of neurone.poids; track $index) {
+              <td>{{ poids | number:'1.2-2' }}</td>
+            }
+          </tr>
+        }
+      </tbody>
+    </table>
+    <table>
+      <tbody>
+        @for (neurone of couche.neurones; track $index) {
+          <tr>
+            <td>{{ neurone.biais | number:'1.2-2' }}</td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  </div>
+}

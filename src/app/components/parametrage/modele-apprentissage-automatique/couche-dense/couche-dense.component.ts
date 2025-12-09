@@ -1,0 +1,24 @@
+import {Component, input, InputSignal} from '@angular/core';
+import {CoucheDense} from '../../../../services/modele-apprentissage-automatique/couche-dense.interface';
+import {DecimalPipe} from '@angular/common';
+
+@Component({
+  selector: 'app-couche-dense',
+  imports: [
+    DecimalPipe
+  ],
+  templateUrl: './couche-dense.component.html',
+  styleUrl: './couche-dense.component.sass',
+})
+export class CoucheDenseComponent {
+  inputCouche: InputSignal<CoucheDense | undefined> = input(undefined,
+    {transform: o => this.intercepteurCouche(o), alias: 'couche'});
+
+  // données pour la vue
+  couche?: CoucheDense;
+
+  private intercepteurCouche(couche: CoucheDense | undefined) {
+    this.couche = couche;
+    return couche;
+  }
+}

@@ -42,3 +42,8 @@
     <p-chart type="line" [data]="entrainementChart" [options]="entrainementChartOptions"/>
   }
 </div>
+<div class="couches">
+  @for (couche of couches; track couche.nom) {
+    <app-couche-dense [couche]="couche"></app-couche-dense>
+  }
+</div>
