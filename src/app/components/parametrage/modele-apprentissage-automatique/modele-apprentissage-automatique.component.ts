@@ -18,6 +18,7 @@ import {DonneesNormalisees} from '../../../services/modele-apprentissage-automat
 import {CoucheDense} from '../../../services/modele-apprentissage-automatique/couche-dense.interface';
 import {CoucheDenseComponent} from './couche-dense/couche-dense.component';
 
+// TOOD: fonction d'activation linéaire/sigmoid,relu, couche dense, optimizer, loss
 @Component({
   selector: 'app-modele-apprentissage-automatique',
   imports: [
@@ -122,8 +123,13 @@ export class ModeleApprentissageAutomatiqueComponent implements OnInit {
     // tf.enableDebugMode();
     // console.log('modele', this.modele!.summary());
     // this.modele!.weights.forEach(w => {
-    //   console.log(w);
+    //   console.log(w.name, w.shape);
     // });
+    // this.modele!.layers.forEach(layer => {
+    //   console.log(layer.name, layer.weights);
+    // });
+    // const o: any = tf.layers.activation({activation: 'linear'}).apply(this.donnees!.entrees);
+    // o.print();
 
     this.couches = this.modelesService.couchesDense(this.modele!);
 

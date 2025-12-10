@@ -31,11 +31,12 @@ export class ModelesService {
   }
 
   modeleFonctionAffine(tauxApprentissage: number): LayersModel {
-    // Modèle séquentiel : y = 2x - 1
+    // Modèle séquentiel
     // const model = tf.sequential();
     // model.add(tf.layers.dense({inputShape: [1], units: 1}));
 
-    // Modèle fonctionnel : y = 2x - 1
+    // Modèle fonctionnel : un neurone avec les deux paramètres poids et biais
+    // f(x)=ax+b avec a le poids et b le biais
     const input: SymbolicTensor = tf.input({shape: [1]});
     const dense: SymbolicTensor = tf.layers.dense({units: 1}).apply(input) as SymbolicTensor;
     const model = tf.model({inputs: input, outputs: dense});

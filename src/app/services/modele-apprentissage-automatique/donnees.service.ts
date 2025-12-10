@@ -27,7 +27,10 @@ export class DonneesService {
     }
   }
 
-  donneesFonctionAffine(): Promise<Donnees> {// y = 2x - 1
+  donneesFonctionAffine(): Promise<Donnees> {
+    // données sous la forme de la fonction affine, y = 2x - 1
+    // Après entrainement, on trouve donc un neurone avec les deux paramètres :
+    // poids = 2 et biais = -1 (si on ne normalise pas les entrées/sorties !)
     return new Promise(resolve => resolve({
       entrees: tf.tensor([1, 2, 3, 4, 5, 6, 7], [7, 1], 'int32'),
       sorties: tf.tensor([1, 3, 5, 7, 9, 11, 13], [7, 1], 'int32')
