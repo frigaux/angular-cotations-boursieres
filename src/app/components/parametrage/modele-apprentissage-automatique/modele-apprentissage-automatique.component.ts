@@ -18,7 +18,9 @@ import {DonneesNormalisees} from '../../../services/modele-apprentissage-automat
 import {CoucheDense} from '../../../services/modele-apprentissage-automatique/couche-dense.interface';
 import {CoucheDenseComponent} from './couche-dense/couche-dense.component';
 
-// TOOD: fonction d'activation linéaire/sigmoid,relu, couche dense, optimizer, loss
+// TODO : fonction d'activation (sigmoid,relu)
+// TODO : compilation du modèle : optimizer, loss
+// TODO : metrics : loss, accuracy
 @Component({
   selector: 'app-modele-apprentissage-automatique',
   imports: [
@@ -71,7 +73,7 @@ export class ModeleApprentissageAutomatiqueComponent implements OnInit {
   ngOnInit(): void {
     this.changeBackend();
     window.setInterval(() => this.nombreTenseurs = tf.memory().numTensors, 1000);
-    this.donneesService.donneesFonctionAffine()
+    this.donneesService.donneesPuissanceRendement()
       .then(donnees => {
         // console.log(this.donnees?.entrees.arraySync(), this.donnees?.entrees.dataSync());
         this.donnees = donnees;
@@ -89,7 +91,7 @@ export class ModeleApprentissageAutomatiqueComponent implements OnInit {
   protected entrainerModele() {
     if (this.donnees) {
       this.modele = undefined;
-      const modele: LayersModel = this.modelesService.modeleFonctionAffine(this.tauxApprentissage);
+      const modele: LayersModel = this.modelesService.modelePuissanceRendement(this.tauxApprentissage);
 
       const donneesNormalisees = this.donneesService.normaliserZeroAUn(this.donnees);
       this.progressionEntrainement = 0;
@@ -139,7 +141,7 @@ export class ModeleApprentissageAutomatiqueComponent implements OnInit {
     // scatter chart : données et prédictions
     const datasets = this.graphiquesService.donneesChart(this.donnees!, 'DONNEES');
     datasets.datasets.push(this.graphiquesService.donneesChart(
-      this.donneesService.predictionsFonctionAffine(this.modele!, donneesNormalisees)
+      this.donneesService.predictionsPuissanceRendement(this.modele!, donneesNormalisees)
       , 'PREDICTIONS').datasets[0]);
     this.donneesChart = datasets;
   }

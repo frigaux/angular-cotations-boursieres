@@ -1,7 +1,12 @@
 @if (couche) {
-  <H3>{{ couche.nom }} : {{ couche.fonctionActivation }}</H3>
   <div class="couche">
+    <div>{{ couche.fonctionActivation }} (</div>
     <table>
+      <thead>
+      <th [colSpan]="couche.neurones[0].poids.length">
+        {{ 'COMPOSANTS.PARAMETRAGE.MODELE_APPRENTISSAGE_AUTOMATIQUE.COUCHE_DENSE.POIDS_NEURONES' | translate }}
+      </th>
+      </thead>
       <tbody>
         @for (neurone of couche.neurones; track $index) {
           <tr>
@@ -12,11 +17,37 @@
         }
       </tbody>
     </table>
+    <div>*</div>
     <table>
+      <tbody>
+        @for (v of couche.neurones[0].poids; track $index; let i = $index) {
+          <tr>
+            <td>a<sup>{{ couche.numero - 1 }}</sup><sub>{{ i }}</sub></td>
+          </tr>
+        }
+      </tbody>
+    </table>
+    <div>+</div>
+    <table>
+      <thead>
+      <th>
+        {{ 'COMPOSANTS.PARAMETRAGE.MODELE_APPRENTISSAGE_AUTOMATIQUE.COUCHE_DENSE.BIAIS_NEURONES' | translate }}
+      </th>
+      </thead>
       <tbody>
         @for (neurone of couche.neurones; track $index) {
           <tr>
             <td>{{ neurone.biais | number:'1.2-2' }}</td>
+          </tr>
+        }
+      </tbody>
+    </table>
+    <div>) =</div>
+    <table>
+      <tbody>
+        @for (neurone of couche.neurones; track $index; let i = $index) {
+          <tr>
+            <td>a<sup>{{ couche.numero }}</sup><sub>{{ i }}</sub></td>
           </tr>
         }
       </tbody>

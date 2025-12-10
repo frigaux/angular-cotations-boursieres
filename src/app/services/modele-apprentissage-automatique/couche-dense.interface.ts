@@ -1,7 +1,7 @@
 import {Neurone} from './neurone';
 
 export interface CoucheDense {
-  nom: string;
+  numero: number;
   fonctionActivation: string;
   neurones: Neurone[];
 }

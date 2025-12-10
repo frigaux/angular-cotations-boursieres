@@ -1,11 +1,13 @@
 import {Component, input, InputSignal} from '@angular/core';
 import {CoucheDense} from '../../../../services/modele-apprentissage-automatique/couche-dense.interface';
 import {DecimalPipe} from '@angular/common';
+import {TranslatePipe} from '@ngx-translate/core';
 
 @Component({
   selector: 'app-couche-dense',
   imports: [
-    DecimalPipe
+    DecimalPipe,
+    TranslatePipe
   ],
   templateUrl: './couche-dense.component.html',
   styleUrl: './couche-dense.component.sass',
