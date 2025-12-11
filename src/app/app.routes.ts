@@ -18,6 +18,9 @@ import {DividendesComponent} from './components/dividendes/dividendes.component'
 import {
   RegressionSuperviseeComponent
 } from './components/parametrage/modeles-tensor-flow/regression-supervisee.component';
+import {
+  ClassificationSuperviseeConvolutiveComponent
+} from './components/parametrage/modeles-tensor-flow/classification-supervisee-convolutive.component';
 
 export const routes: Routes = [
   {
@@ -69,8 +72,13 @@ export const routes: Routes = [
     canActivate: [authentificationGuard]
   },
   {
-    path: 'modele-apprentissage-automatique',
+    path: 'regression-supervisee',
     component: RegressionSuperviseeComponent,
+    canActivate: [authentificationGuard]
+  },
+  {
+    path: 'classification-supervisee-convolutive',
+    component: ClassificationSuperviseeConvolutiveComponent,
     canActivate: [authentificationGuard]
   },
   {path: '**', redirectTo: '/authentification'}

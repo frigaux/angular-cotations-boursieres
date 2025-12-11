@@ -71,8 +71,13 @@ export class HeaderComponent {
           icon: 'pi pi-sync'
         },
         {
-          label: translateService.instant('COMPOSANTS.HEADER.PARAMETRAGE.MODELE_APPRENTISSAGE_AUTOMATIQUE'),
-          routerLink: 'modele-apprentissage-automatique',
+          label: translateService.instant('COMPOSANTS.HEADER.PARAMETRAGE.REGRESSION_SUPERVISEE'),
+          routerLink: 'regression-supervisee',
+          icon: 'pi pi-wrench'
+        },
+        {
+          label: translateService.instant('COMPOSANTS.HEADER.PARAMETRAGE.CLASSIFICATION_SUPERVISEE_CONVOLUTIVE'),
+          routerLink: 'classification-supervisee-convolutive',
           icon: 'pi pi-wrench'
         }
       ]

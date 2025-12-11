@@ -10,16 +10,19 @@ import {Select} from 'primeng/select';
 import {FormsModule} from '@angular/forms';
 import {InputText} from 'primeng/inputtext';
 import {ModelesService} from '../../../services/modeles-tensor-flow/regression-supervisee/modeles.service';
-import {DonneesService} from '../../../services/modeles-tensor-flow/donnees.service';
-import {GraphiquesService} from '../../../services/modeles-tensor-flow/graphiques.service';
+import {DonneesService} from '../../../services/modeles-tensor-flow/regression-supervisee/donnees.service';
+import {GraphiquesService} from '../../../services/modeles-tensor-flow/regression-supervisee/graphiques.service';
 import {FloatLabel} from 'primeng/floatlabel';
-import {Donnees} from '../../../services/modeles-tensor-flow/donnees.interface';
-import {DonneesNormalisees} from '../../../services/modeles-tensor-flow/donnees-normalisees.interface';
+import {Donnees} from '../../../services/modeles-tensor-flow/regression-supervisee/donnees.interface';
+import {
+  DonneesNormalisees
+} from '../../../services/modeles-tensor-flow/regression-supervisee/donnees-normalisees.interface';
 import {CoucheDense} from '../../../services/modeles-tensor-flow/couche-dense.interface';
 import {CoucheDenseComponent} from './couches/couche-dense/couche-dense.component';
+import {CouchesService} from '../../../services/modeles-tensor-flow/couches.service';
 
 @Component({
-  selector: 'app-modele-apprentissage-automatique',
+  selector: 'app-regression-supervisee',
   imports: [
     TranslatePipe,
     Button,
@@ -62,7 +65,8 @@ export class RegressionSuperviseeComponent implements OnInit {
 
   constructor(private graphiquesService: GraphiquesService,
               private modelesService: ModelesService,
-              private donneesService: DonneesService) {
+              private donneesService: DonneesService,
+              private couchesService: CouchesService) {
     this.donneesChartOptions = this.graphiquesService.donneesChartOptions();
     this.entrainementChartOptions = this.graphiquesService.entrainementChartOptions();
   }
@@ -119,7 +123,7 @@ export class RegressionSuperviseeComponent implements OnInit {
   private entrainementTermine(donneesNormalisees: DonneesNormalisees, logs: Array<Logs>) {
     this.tracerInformations();
 
-    this.couchesDenses = this.modelesService.couchesDenses(this.modele!);
+    this.couchesDenses = this.couchesService.couchesDenses(this.modele!);
 
     // line chart : affichage des metrics d'entrainement
     this.entrainementChart = this.graphiquesService.entrainementChart(logs);

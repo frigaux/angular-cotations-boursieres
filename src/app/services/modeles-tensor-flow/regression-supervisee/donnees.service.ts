@@ -57,7 +57,7 @@ export class DonneesService {
     return {entrees, sorties};
   }
 
-  async donneesPuissanceRendement(): Promise<Donnees> {
+  async donneesPuissancesRendements(): Promise<Donnees> {
     const reponse = await fetch('https://storage.googleapis.com/tfjs-tutorials/carsData.json');
     const voitures: Array<any> = await reponse.json();
     const voituresValides = voitures

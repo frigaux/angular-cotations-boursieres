@@ -10,7 +10,8 @@
     "GESTION_PORTEFEUILLES": "Gestion des portefeuilles",
     "GESTION_TABLEAUX": "Gestion des tableaux",
     "SAUVEGARDE_RESTAURATION": "Sauvegarde / restauration",
-    "MODELE_APPRENTISSAGE_AUTOMATIQUE": "Modèle d'apprentissage automatique"
+    "REGRESSION_SUPERVISEE": "Régression supervisée",
+    "CLASSIFICATION_SUPERVISEE_CONVOLUTIVE": "Classification supervisée convolutive"
   },
   "COMPOSANTS": {
     "COMMUN": {
@@ -35,7 +36,8 @@
         "GESTION_PORTEFEUILLES": "Gestion des portefeuilles",
         "GESTION_TABLEAUX": "Gestion des tableaux",
         "SAUVEGARDE_RESTAURATION": "Sauvegarde / restauration",
-        "MODELE_APPRENTISSAGE_AUTOMATIQUE": "Modèle d'apprentissage automatique"
+        "REGRESSION_SUPERVISEE": "Régression supervisée",
+        "CLASSIFICATION_SUPERVISEE_CONVOLUTIVE": "Classification supervisée convolutive"
       }
     },
     "VALEURS": {
@@ -546,7 +548,7 @@
         },
         "RESTAURATION_REUSSIE": "Restauration réussie !"
       },
-      "MODELE_APPRENTISSAGE_AUTOMATIQUE": {
+      "REGRESSION_SUPERVISEE": {
         "REGRESSION_SUPERVISEE": "Apprentissage supervisé par régression",
         "NOMBRE_TENSEURS": "Tenseurs",
         "BACKEND": "Backend",
