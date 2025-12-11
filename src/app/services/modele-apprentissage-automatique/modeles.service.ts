@@ -44,7 +44,7 @@ export class ModelesService {
     model.compile({
       optimizer: tf.train.sgd(tauxApprentissage),
       loss: tf.losses.meanSquaredError,
-      metrics: ['accuracy']
+      metrics: [tf.metrics.binaryAccuracy]
     });
 
     return model;
@@ -64,7 +64,7 @@ export class ModelesService {
     model.compile({
       optimizer: tf.train.adam(tauxApprentissage),
       loss: tf.losses.meanSquaredError,
-      metrics: ['accuracy'],
+      metrics: [tf.metrics.binaryAccuracy],
     });
 
     return model;

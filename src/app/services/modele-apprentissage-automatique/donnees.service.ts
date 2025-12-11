@@ -3,6 +3,7 @@ import * as tf from '@tensorflow/tfjs';
 import {LayersModel} from '@tensorflow/tfjs-layers/dist/engine/training';
 import {Donnees} from './donnees.interface';
 import {DonneesNormalisees} from './donnees-normalisees.interface';
+import {Tensor} from '@tensorflow/tfjs-core';
 
 @Injectable({
   providedIn: 'root',
@@ -25,6 +26,12 @@ export class DonneesService {
       sortiesMin,
       sortiesMax,
     }
+  }
+
+  libererTenseursDans(objet: Object) {
+    Object.values(objet)
+      .filter(obj => obj instanceof Tensor)
+      .forEach(tensor => tensor.dispose());
   }
 
   donneesFonctionAffine(): Promise<Donnees> {

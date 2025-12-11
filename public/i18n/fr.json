@@ -685,12 +685,7 @@
     },
     "ML": {
       "GRAPHIQUES": {
-        "EPOCH": "Epoch",
-        "LOSS": "loss",
-        "VAL_LOSS": "val_loss",
-        "ACC": "acc",
-        "VAL_ACC": "val_acc",
-        "MSE": "mse",
+        "ITERATION": "Itération",
         "DONNEES": "Données",
         "ENTREE": "Entrée",
         "SORTIE": "Sortie",

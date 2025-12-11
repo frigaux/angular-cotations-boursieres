@@ -18,9 +18,6 @@ import {DonneesNormalisees} from '../../../services/modele-apprentissage-automat
 import {CoucheDense} from '../../../services/modele-apprentissage-automatique/couche-dense.interface';
 import {CoucheDenseComponent} from './couches/couche-dense/couche-dense.component';
 
-// TODO : fonction d'activation (sigmoid, relu)
-// TODO : compilation du modèle : optimizer, loss
-// TODO : metrics : loss, accuracy
 @Component({
   selector: 'app-modele-apprentissage-automatique',
   imports: [
@@ -73,7 +70,7 @@ export class RegressionSuperviseeComponent implements OnInit {
   ngOnInit(): void {
     this.changeBackend();
     window.setInterval(() => this.nombreTenseurs = tf.memory().numTensors, 1000);
-    this.donneesService.donneesPuissanceRendement()
+    this.donneesService.donneesFonctionAffine()
       .then(donnees => {
         // console.log(this.donnees?.entrees.arraySync(), this.donnees?.entrees.dataSync());
         this.donnees = donnees;
@@ -91,7 +88,7 @@ export class RegressionSuperviseeComponent implements OnInit {
   protected entrainerModele() {
     if (this.donnees) {
       this.modele = undefined;
-      const modele: LayersModel = this.modelesService.modelePuissanceRendement(this.tauxApprentissage);
+      const modele: LayersModel = this.modelesService.modeleFonctionAffine(this.tauxApprentissage);
 
       const donneesNormalisees = this.donneesService.normaliserZeroAUn(this.donnees);
       this.progressionEntrainement = 0;
@@ -120,18 +117,7 @@ export class RegressionSuperviseeComponent implements OnInit {
   }
 
   private entrainementTermine(donneesNormalisees: DonneesNormalisees, logs: Array<Logs>) {
-    // this.donnees.x.dispose();
-    // this.donnees.y.dispose();
-    // tf.enableDebugMode();
-    // console.log('modele', this.modele!.summary());
-    // this.modele!.weights.forEach(w => {
-    //   console.log(w.name, w.shape);
-    // });
-    // this.modele!.layers.forEach(layer => {
-    //   console.log(layer.name, layer.weights);
-    // });
-    // const o: any = tf.layers.activation({activation: 'linear'}).apply(this.donnees!.entrees);
-    // o.print();
+    this.tracerInformations();
 
     this.couchesDenses = this.modelesService.couchesDenses(this.modele!);
 
@@ -140,9 +126,27 @@ export class RegressionSuperviseeComponent implements OnInit {
 
     // scatter chart : données et prédictions
     const datasets = this.graphiquesService.donneesChart(this.donnees!, 'DONNEES');
-    datasets.datasets.push(this.graphiquesService.donneesChart(
-      this.donneesService.predictionsPuissanceRendement(this.modele!, donneesNormalisees)
-      , 'PREDICTIONS').datasets[0]);
+    const predictions = this.donneesService.predictionsFonctionAffine(this.modele!, donneesNormalisees);
+    datasets.datasets.push(this.graphiquesService.donneesChart(predictions, 'PREDICTIONS').datasets[0]);
     this.donneesChart = datasets;
+
+    this.donneesService.libererTenseursDans(predictions);
+    this.donneesService.libererTenseursDans(donneesNormalisees);
+  }
+
+  private tracerInformations() {
+    // tf.enableDebugMode();
+    // console.log('modele', this.modele!.summary());
+    // this.modele!.weights.forEach(w => {
+    //   console.log(w.name, w.shape);
+    // });
+    // this.modele!.layers.forEach(layer => {
+    //   console.log(layer.name, layer.weights);
+    // });
+    // const t1 = tf.tensor([0, 0, 0], [3, 1], 'int32');
+    // const t2 = tf.tensor([0, 1, 2], [3, 1], 'int32');
+    // (tf.layers.activation({activation: 'linear'}).apply(t2) as any).print();
+    // tf.losses.meanSquaredError(t1, t2).print();
+    // tf.metrics.binaryAccuracy(t1, t2).print();
   }
 }

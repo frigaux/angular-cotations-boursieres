@@ -16,7 +16,7 @@ export class GraphiquesService {
         x: {
           title: {
             display: true,
-            text: this.translateService.instant('SERVICES.ML.GRAPHIQUES.EPOCH')
+            text: this.translateService.instant('SERVICES.ML.GRAPHIQUES.ITERATION')
           }
         }
       }
@@ -29,23 +29,20 @@ export class GraphiquesService {
       datasets: []
     };
     if (logs && logs.length > 0) {
-      this.ajouterDataset(resultat.datasets, logs, 'loss', 'LOSS');
-      this.ajouterDataset(resultat.datasets, logs, 'val_loss', 'VAL_LOSS');
-      this.ajouterDataset(resultat.datasets, logs, 'acc', 'ACC');
-      this.ajouterDataset(resultat.datasets, logs, 'val_acc', 'VAL_ACC');
-      this.ajouterDataset(resultat.datasets, logs, 'mse', 'MSE');
+      // les clés de l'objet log correspondent aux paramètres loss et metrics du modèle
+      Object.keys(logs[0]).forEach(cle => {
+        this.ajouterDataset(resultat.datasets, logs, cle);
+      });
     }
     return resultat;
   }
 
-  private ajouterDataset(datasets: any, logs: Array<Logs>, cle: string, cleTraduction: string) {
-    if (logs[0].hasOwnProperty(cle)) {
-      datasets.push({
-        label: this.translateService.instant(`SERVICES.ML.GRAPHIQUES.${cleTraduction}`),
-        data: logs.map(v => v[cle] as number),
-        tension: 0.4 // Bezier curve tension of the line. Set to 0 to draw straightlines. This option is ignored if monotone cubic interpolation is used.
-      });
-    }
+  private ajouterDataset(datasets: Array<any>, logs: Array<Logs>, cle: string) {
+    datasets.push({
+      label: cle,
+      data: logs.map(v => v[cle] as number),
+      tension: 0.4 // Bezier curve tension of the line. Set to 0 to draw straightlines. This option is ignored if monotone cubic interpolation is used.
+    });
   }
 
   donneesChartOptions() {
