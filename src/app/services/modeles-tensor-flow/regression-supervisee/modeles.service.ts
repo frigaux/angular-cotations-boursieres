@@ -2,8 +2,8 @@ import {Injectable} from '@angular/core';
 import {LayersModel} from '@tensorflow/tfjs-layers/dist/engine/training';
 import * as tf from '@tensorflow/tfjs';
 import {SymbolicTensor} from '@tensorflow/tfjs';
-import {CoucheDense} from './couche-dense.interface';
-import {Neurone} from './neurone';
+import {CoucheDense} from '../couche-dense.interface';
+import {Neurone} from '../neurone';
 
 @Injectable({
   providedIn: 'root',

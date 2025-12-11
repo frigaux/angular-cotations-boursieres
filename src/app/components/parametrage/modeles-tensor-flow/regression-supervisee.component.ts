@@ -9,13 +9,13 @@ import {UIChart} from 'primeng/chart';
 import {Select} from 'primeng/select';
 import {FormsModule} from '@angular/forms';
 import {InputText} from 'primeng/inputtext';
-import {ModelesService} from '../../../services/modele-apprentissage-automatique/modeles.service';
-import {DonneesService} from '../../../services/modele-apprentissage-automatique/donnees.service';
-import {GraphiquesService} from '../../../services/modele-apprentissage-automatique/graphiques.service';
+import {ModelesService} from '../../../services/modeles-tensor-flow/regression-supervisee/modeles.service';
+import {DonneesService} from '../../../services/modeles-tensor-flow/donnees.service';
+import {GraphiquesService} from '../../../services/modeles-tensor-flow/graphiques.service';
 import {FloatLabel} from 'primeng/floatlabel';
-import {Donnees} from '../../../services/modele-apprentissage-automatique/donnees.interface';
-import {DonneesNormalisees} from '../../../services/modele-apprentissage-automatique/donnees-normalisees.interface';
-import {CoucheDense} from '../../../services/modele-apprentissage-automatique/couche-dense.interface';
+import {Donnees} from '../../../services/modeles-tensor-flow/donnees.interface';
+import {DonneesNormalisees} from '../../../services/modeles-tensor-flow/donnees-normalisees.interface';
+import {CoucheDense} from '../../../services/modeles-tensor-flow/couche-dense.interface';
 import {CoucheDenseComponent} from './couches/couche-dense/couche-dense.component';
 
 @Component({
