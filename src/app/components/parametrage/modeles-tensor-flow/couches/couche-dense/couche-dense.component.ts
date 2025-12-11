@@ -1,5 +1,5 @@
 import {Component, input, InputSignal} from '@angular/core';
-import {CoucheDense} from '../../../../services/modele-apprentissage-automatique/couche-dense.interface';
+import {CoucheDense} from '../../../../../services/modele-apprentissage-automatique/couche-dense.interface';
 import {DecimalPipe} from '@angular/common';
 import {TranslatePipe} from '@ngx-translate/core';
 

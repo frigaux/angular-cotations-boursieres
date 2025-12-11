@@ -1,4 +1,4 @@
-<h1>{{ 'COMPOSANTS.PARAMETRAGE.MODELE_APPRENTISSAGE_AUTOMATIQUE.MODELE_TENSORFLOW' | translate }}</h1>
+<h1>{{ 'COMPOSANTS.PARAMETRAGE.MODELE_APPRENTISSAGE_AUTOMATIQUE.REGRESSION_SUPERVISEE' | translate }}</h1>
 <div class="ligne">
   <label>{{ 'COMPOSANTS.PARAMETRAGE.MODELE_APPRENTISSAGE_AUTOMATIQUE.NOMBRE_TENSEURS' | translate }} :</label>
   <span class="nombre">{{ nombreTenseurs }}</span>
@@ -43,7 +43,7 @@
   }
 </div>
 <div class="couches">
-  @for (couche of couches; track couche.numero) {
+  @for (couche of couchesDenses; track couche.numero) {
     <app-couche-dense [couche]="couche"></app-couche-dense>
   }
 </div>

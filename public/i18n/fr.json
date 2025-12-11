@@ -547,7 +547,7 @@
         "RESTAURATION_REUSSIE": "Restauration réussie !"
       },
       "MODELE_APPRENTISSAGE_AUTOMATIQUE": {
-        "MODELE_TENSORFLOW": "Modele TensorFlow",
+        "REGRESSION_SUPERVISEE": "Apprentissage supervisé par régression",
         "NOMBRE_TENSEURS": "Tenseurs",
         "BACKEND": "Backend",
         "TAUX_APPRENTISSAGE": "Taux apprentissage",

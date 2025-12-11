@@ -1,22 +1,22 @@
 import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import {ModeleApprentissageAutomatiqueComponent} from './modele-apprentissage-automatique.component';
+import {RegressionSuperviseeComponent} from './regression-supervisee.component';
 import {TranslateModule} from '@ngx-translate/core';
 
-describe('ModeleApprentissageAutomatiqueComponent', () => {
-  let component: ModeleApprentissageAutomatiqueComponent;
-  let fixture: ComponentFixture<ModeleApprentissageAutomatiqueComponent>;
+describe('RegressionSuperviseeComponent', () => {
+  let component: RegressionSuperviseeComponent;
+  let fixture: ComponentFixture<RegressionSuperviseeComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [
-        ModeleApprentissageAutomatiqueComponent,
+        RegressionSuperviseeComponent,
         TranslateModule.forRoot({})
       ]
     })
       .compileComponents();
 
-    fixture = TestBed.createComponent(ModeleApprentissageAutomatiqueComponent);
+    fixture = TestBed.createComponent(RegressionSuperviseeComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

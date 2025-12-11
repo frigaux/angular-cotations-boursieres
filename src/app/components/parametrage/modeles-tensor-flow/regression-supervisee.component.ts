@@ -16,9 +16,9 @@ import {FloatLabel} from 'primeng/floatlabel';
 import {Donnees} from '../../../services/modele-apprentissage-automatique/donnees.interface';
 import {DonneesNormalisees} from '../../../services/modele-apprentissage-automatique/donnees-normalisees.interface';
 import {CoucheDense} from '../../../services/modele-apprentissage-automatique/couche-dense.interface';
-import {CoucheDenseComponent} from './couche-dense/couche-dense.component';
+import {CoucheDenseComponent} from './couches/couche-dense/couche-dense.component';
 
-// TODO : fonction d'activation (sigmoid,relu)
+// TODO : fonction d'activation (sigmoid, relu)
 // TODO : compilation du modèle : optimizer, loss
 // TODO : metrics : loss, accuracy
 @Component({
@@ -34,10 +34,10 @@ import {CoucheDenseComponent} from './couche-dense/couche-dense.component';
     FloatLabel,
     CoucheDenseComponent
   ],
-  templateUrl: './modele-apprentissage-automatique.component.html',
-  styleUrl: './modele-apprentissage-automatique.component.sass',
+  templateUrl: './regression-supervisee.component.html',
+  styleUrl: './regression-supervisee.component.sass',
 })
-export class ModeleApprentissageAutomatiqueComponent implements OnInit {
+export class RegressionSuperviseeComponent implements OnInit {
   // données pour la vue
   protected nombreTenseurs?: number;
 
@@ -55,7 +55,7 @@ export class ModeleApprentissageAutomatiqueComponent implements OnInit {
   protected progressionEntrainement: number = 0;
   protected donnees?: Donnees;
   protected modele?: LayersModel;
-  protected couches?: Array<CoucheDense>;
+  protected couchesDenses?: Array<CoucheDense>;
 
   // https://www.chartjs.org/
   protected donneesChart?: any;
@@ -133,7 +133,7 @@ export class ModeleApprentissageAutomatiqueComponent implements OnInit {
     // const o: any = tf.layers.activation({activation: 'linear'}).apply(this.donnees!.entrees);
     // o.print();
 
-    this.couches = this.modelesService.couchesDense(this.modele!);
+    this.couchesDenses = this.modelesService.couchesDenses(this.modele!);
 
     // line chart : affichage des metrics d'entrainement
     this.entrainementChart = this.graphiquesService.entrainementChart(logs);

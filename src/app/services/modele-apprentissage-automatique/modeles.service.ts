@@ -9,7 +9,7 @@ import {Neurone} from './neurone';
   providedIn: 'root',
 })
 export class ModelesService {
-  couchesDense(modele: LayersModel): Array<CoucheDense> {
+  couchesDenses(modele: LayersModel): Array<CoucheDense> {
     return modele.layers
       .filter((layer: any) => layer.getClassName?.() === 'Dense')
       .map((layer: any) => {

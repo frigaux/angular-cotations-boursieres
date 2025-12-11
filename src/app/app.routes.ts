@@ -16,8 +16,8 @@ import {
 } from './components/parametrage/sauvegarde-restauration/sauvegarde-restauration.component';
 import {DividendesComponent} from './components/dividendes/dividendes.component';
 import {
-  ModeleApprentissageAutomatiqueComponent
-} from './components/parametrage/modele-apprentissage-automatique/modele-apprentissage-automatique.component';
+  RegressionSuperviseeComponent
+} from './components/parametrage/modeles-tensor-flow/regression-supervisee.component';
 
 export const routes: Routes = [
   {
@@ -70,7 +70,7 @@ export const routes: Routes = [
   },
   {
     path: 'modele-apprentissage-automatique',
-    component: ModeleApprentissageAutomatiqueComponent,
+    component: RegressionSuperviseeComponent,
     canActivate: [authentificationGuard]
   },
   {path: '**', redirectTo: '/authentification'}
