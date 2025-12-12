@@ -1,24 +1,26 @@
 import {Injectable} from '@angular/core';
-import {Donnees} from './donnees.class';
+import {IterateurDonnees} from './iterateur-donnees.class';
 
 @Injectable({
   providedIn: 'root',
 })
 export class DonneesService {
-  public static readonly IMAGE_SIZE: number = 784;
-  public static readonly NUM_CLASSES: number = 10;
-  private static readonly NUM_DATASET_ELEMENTS: number = 65000;
+  public static readonly NOMBRE_PIXELS_LARGEUR_HAUTEUR_IMAGE: number = 28;
+  public static readonly CANAL_NOIR_BLANC = 1;
+  public static readonly NOMBRE_PIXELS_IMAGE: number = Math.pow(DonneesService.NOMBRE_PIXELS_LARGEUR_HAUTEUR_IMAGE, 2); // nombre neurones en entrée
+  public static readonly CHIFFRES_DISTINCTS: number = 10; // nombre neurones en sortie
 
-  public static readonly NUM_TRAIN_ELEMENTS: number = 55000;
-  public static readonly NUM_TEST_ELEMENTS: number = DonneesService.NUM_DATASET_ELEMENTS - DonneesService.NUM_TRAIN_ELEMENTS;
+  private static readonly NOMBRES_IMAGES: number = 65000;
+  public static readonly NOMBRE_IMAGES_ENTRAINEMENT: number = 55000;
+  public static readonly NOMBRE_IMAGES_PREDICTIONS: number = DonneesService.NOMBRES_IMAGES - DonneesService.NOMBRE_IMAGES_ENTRAINEMENT;
 
-  private static readonly MNIST_IMAGES_SPRITE_PATH: string =
+  private static readonly URL_MNIST_65000_IMAGES_DE_784PX: string =
     'https://storage.googleapis.com/learnjs-data/model-builder/mnist_images.png';
-  private static readonly MNIST_LABELS_PATH: string =
+  private static readonly URL_MNIST_BOOLEEN_PAR_CHIFFRE_PAR_IMAGE: string =
     'https://storage.googleapis.com/learnjs-data/model-builder/mnist_labels_uint8';
 
 
-  private datasetImages(): Promise<Float32Array> {
+  private images(): Promise<Float32Array> {
     return new Promise(resolve => {
       const img = new Image();
       img.crossOrigin = '';
@@ -27,50 +29,47 @@ export class DonneesService {
         img.height = img.naturalHeight;
 
         const datasetBytesBuffer =
-          new ArrayBuffer(DonneesService.NUM_DATASET_ELEMENTS * DonneesService.IMAGE_SIZE * 4);
+          new ArrayBuffer(DonneesService.NOMBRES_IMAGES * DonneesService.NOMBRE_PIXELS_IMAGE * 4);
 
-        const chunkSize = 5000;
+        const chunkSize = 5000; // découpage pour un canvas de taille raisonnable
         const canvas = document.createElement('canvas');
         canvas.width = img.width;
         canvas.height = chunkSize;
 
         const ctx = canvas.getContext('2d');
-        for (let i = 0; i < DonneesService.NUM_DATASET_ELEMENTS / chunkSize; i++) {
+        for (let i = 0; i < DonneesService.NOMBRES_IMAGES / chunkSize; i++) {
           const datasetBytesView = new Float32Array(
-            datasetBytesBuffer, i * DonneesService.IMAGE_SIZE * chunkSize * 4,
-            DonneesService.IMAGE_SIZE * chunkSize);
-          ctx!.drawImage(
-            img, 0, i * chunkSize, img.width, chunkSize, 0, 0, img.width,
-            chunkSize);
+            datasetBytesBuffer, i * DonneesService.NOMBRE_PIXELS_IMAGE * chunkSize * 4,
+            DonneesService.NOMBRE_PIXELS_IMAGE * chunkSize);
+          ctx!.drawImage(img, 0, i * chunkSize, img.width, chunkSize, 0, 0, img.width, chunkSize);
 
           const imageData = ctx!.getImageData(0, 0, canvas.width, canvas.height);
 
           for (let j = 0; j < imageData.data.length / 4; j++) {
-            // All channels hold an equal value since the image is grayscale, so
-            // just read the red channel.
+            // un seul canal de couleur : noir et blanc
             datasetBytesView[j] = imageData.data[j * 4] / 255;
           }
         }
         resolve(new Float32Array(datasetBytesBuffer));
       };
-      img.src = DonneesService.MNIST_IMAGES_SPRITE_PATH;
+      img.src = DonneesService.URL_MNIST_65000_IMAGES_DE_784PX;
     });
   }
 
-  private datasetLabels(): Promise<Uint8Array> {
+  private chiffres(): Promise<Uint8Array> {
     return new Promise(resolve => {
-      fetch(DonneesService.MNIST_LABELS_PATH)
+      fetch(DonneesService.URL_MNIST_BOOLEEN_PAR_CHIFFRE_PAR_IMAGE)
         .then(reponse => {
           reponse.arrayBuffer().then(buffer => resolve(new Uint8Array(buffer)))
         });
     });
   }
 
-  donneesImagesLibelles(): Promise<Donnees> {
+  donneesImagesChiffres(): Promise<IterateurDonnees> {
     return new Promise(resolve => {
-      Promise.all([this.datasetImages(), this.datasetLabels()])
-        .then(([datasetImages, datasetLabels]) => {
-          resolve(new Donnees(datasetImages, datasetLabels));
+      Promise.all([this.images(), this.chiffres()])
+        .then(([images, chiffres]) => {
+          resolve(new IterateurDonnees(images, chiffres));
         });
     });
   }

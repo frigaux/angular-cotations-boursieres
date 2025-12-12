@@ -1,3 +1,27 @@
+<h1>{{ 'COMPOSANTS.PARAMETRAGE.CLASSIFICATION_SUPERVISEE_CONVOLUTIVE.CLASSIFICATION_SUPERVISEE_CONVOLUTIVE' | translate }}</h1>
+<h2>{{ 'COMPOSANTS.PARAMETRAGE.CLASSIFICATION_SUPERVISEE_CONVOLUTIVE.DONNEES' | translate }}</h2>
+
 <app-loader [affiche]="loading" [configuration]="[
-  {marginLeft: '0', marginTop: '1rem', height: '20vh', width: '100%'}
+  {marginLeft: '0', marginTop: '1rem', height: '10vh', width: '100%'}
 ]"></app-loader>
+
+@if (booleenParChiffreParImage) {
+  <div class="images">
+    @for (scoresChiffresImage of booleenParChiffreParImage; track $index; let i = $index) {
+      <div>
+        <h5>{{ scoresChiffresImage }}</h5>
+        <img id="{{`img_${i}`}}" width="28" height="28"/>
+      </div>
+    }
+  </div>
+}
+@if (iterateurDonnees) {
+  <div class="entrainement">
+    <p-button
+      label="{{ 'COMPOSANTS.PARAMETRAGE.CLASSIFICATION_SUPERVISEE_CONVOLUTIVE.ENTRAINER_MODELE' | translate }}"
+      (onClick)="entrainerModele()"/>
+    @if (!modele) {
+      <app-barre-progression [pourcentage]="progressionEntrainement" largeur="20rem"></app-barre-progression>
+    }
+  </div>
+}

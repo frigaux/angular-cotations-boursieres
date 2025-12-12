@@ -4,13 +4,14 @@ import {LayersModel} from '@tensorflow/tfjs-layers/dist/engine/training';
 import {Donnees} from './donnees.interface';
 import {DonneesNormalisees} from './donnees-normalisees.interface';
 import {Tensor} from '@tensorflow/tfjs-core';
+import {Rank} from '@tensorflow/tfjs-core/dist/types';
 
 @Injectable({
   providedIn: 'root',
 })
 export class DonneesService {
 
-  normaliserZeroAUn(donnees: Donnees): DonneesNormalisees {
+  normaliserZeroAUn(donnees: Donnees<Rank.R2>): DonneesNormalisees {
     const entreesMin = donnees.entrees.min();
     const entreesMax = donnees.entrees.max();
     const sortiesMin = donnees.sorties.min();
@@ -34,7 +35,7 @@ export class DonneesService {
       .forEach(tensor => tensor.dispose());
   }
 
-  donneesFonctionAffine(): Promise<Donnees> {
+  donneesFonctionAffine(): Promise<Donnees<Rank.R2>> {
     // données sous la forme de la fonction affine, y = 2x - 1
     // Après entrainement, on trouve donc un neurone avec les deux paramètres :
     // poids = 2 et biais = -1 (si on ne normalise pas les entrées/sorties !)
@@ -57,7 +58,7 @@ export class DonneesService {
     return {entrees, sorties};
   }
 
-  async donneesPuissancesRendements(): Promise<Donnees> {
+  async donneesPuissancesRendements(): Promise<Donnees<Rank.R2>> {
     const reponse = await fetch('https://storage.googleapis.com/tfjs-tutorials/carsData.json');
     const voitures: Array<any> = await reponse.json();
     const voituresValides = voitures
@@ -73,7 +74,7 @@ export class DonneesService {
     });
   }
 
-  predictionsPuissanceRendement(modele: LayersModel, donneesNormalisees: DonneesNormalisees) {
+  predictionsPuissancesRendements(modele: LayersModel, donneesNormalisees: DonneesNormalisees) {
     const xs = tf.linspace(0, 1, 100);
     const preds: any = modele.predict(xs.reshape([100, 1]));
     const entrees = xs

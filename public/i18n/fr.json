@@ -562,6 +562,11 @@
           "POIDS_NEURONES": "Poids",
           "BIAIS_NEURONES": "Biais"
         }
+      },
+      "CLASSIFICATION_SUPERVISEE_CONVOLUTIVE": {
+        "CLASSIFICATION_SUPERVISEE_CONVOLUTIVE": "Apprentissage supervisé par classification convolutives",
+        "DONNEES": "Données",
+        "ENTRAINER_MODELE": "Entraîner le modèle"
       }
     }
   },

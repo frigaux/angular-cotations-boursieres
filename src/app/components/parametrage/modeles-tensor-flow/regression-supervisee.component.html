@@ -28,9 +28,9 @@
       <p-button
         label="{{ 'COMPOSANTS.PARAMETRAGE.REGRESSION_SUPERVISEE.ENTRAINER_MODELE' | translate }}"
         (onClick)="entrainerModele()"/>
-    }
-    @if (!modele) {
-      <app-barre-progression [pourcentage]="progressionEntrainement" largeur="20rem"></app-barre-progression>
+      @if (!modele) {
+        <app-barre-progression [pourcentage]="progressionEntrainement" largeur="20rem"></app-barre-progression>
+      }
     }
   }
 </div>

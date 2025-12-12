@@ -20,6 +20,7 @@ import {
 import {CoucheDense} from '../../../services/modeles-tensor-flow/couche-dense.interface';
 import {CoucheDenseComponent} from './couches/couche-dense/couche-dense.component';
 import {CouchesService} from '../../../services/modeles-tensor-flow/couches.service';
+import {Rank} from '@tensorflow/tfjs-core/dist/types';
 
 @Component({
   selector: 'app-regression-supervisee',
@@ -52,8 +53,8 @@ export class RegressionSuperviseeComponent implements OnInit {
   protected lot: number = 32;
 
   //
+  protected donnees?: Donnees<Rank.R2>;
   protected progressionEntrainement: number = 0;
-  protected donnees?: Donnees;
   protected modele?: LayersModel;
   protected couchesDenses?: Array<CoucheDense>;
 
@@ -74,7 +75,7 @@ export class RegressionSuperviseeComponent implements OnInit {
   ngOnInit(): void {
     this.changeBackend();
     window.setInterval(() => this.nombreTenseurs = tf.memory().numTensors, 1000);
-    this.donneesService.donneesFonctionAffine()
+    this.donneesService.donneesPuissancesRendements()
       .then(donnees => {
         // console.log(this.donnees?.entrees.arraySync(), this.donnees?.entrees.dataSync());
         this.donnees = donnees;
@@ -92,7 +93,7 @@ export class RegressionSuperviseeComponent implements OnInit {
   protected entrainerModele() {
     if (this.donnees) {
       this.modele = undefined;
-      const modele: LayersModel = this.modelesService.modeleFonctionAffine(this.tauxApprentissage);
+      const modele: LayersModel = this.modelesService.modelePuissancesRendements(this.tauxApprentissage);
 
       const donneesNormalisees = this.donneesService.normaliserZeroAUn(this.donnees);
       this.progressionEntrainement = 0;
@@ -130,7 +131,7 @@ export class RegressionSuperviseeComponent implements OnInit {
 
     // scatter chart : données et prédictions
     const datasets = this.graphiquesService.donneesChart(this.donnees!, 'DONNEES');
-    const predictions = this.donneesService.predictionsFonctionAffine(this.modele!, donneesNormalisees);
+    const predictions = this.donneesService.predictionsPuissancesRendements(this.modele!, donneesNormalisees);
     datasets.datasets.push(this.graphiquesService.donneesChart(predictions, 'PREDICTIONS').datasets[0]);
     this.donneesChart = datasets;
 
