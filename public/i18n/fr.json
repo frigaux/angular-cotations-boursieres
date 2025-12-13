@@ -549,7 +549,7 @@
         "RESTAURATION_REUSSIE": "Restauration réussie !"
       },
       "REGRESSION_SUPERVISEE": {
-        "REGRESSION_SUPERVISEE": "Apprentissage supervisé par régression",
+        "REGRESSION_SUPERVISEE": "Effectuer des prédictions à partir de données 2D (régression supervisée)",
         "NOMBRE_TENSEURS": "Tenseurs",
         "BACKEND": "Backend",
         "TAUX_APPRENTISSAGE": "Taux apprentissage",
@@ -564,8 +564,16 @@
         }
       },
       "CLASSIFICATION_SUPERVISEE_CONVOLUTIVE": {
-        "CLASSIFICATION_SUPERVISEE_CONVOLUTIVE": "Apprentissage supervisé par classification convolutives",
-        "DONNEES": "Données",
+        "CLASSIFICATION_SUPERVISEE_CONVOLUTIVE": "Reconnaître des chiffres manuscrits à l'aide de réseaux de neurones convolutifs (classification supervisée)",
+        "EXEMPLES": "Quelques exemples des données chargées",
+        "NOMBRE_TENSEURS": "Tenseurs",
+        "TAUX_APPRENTISSAGE": "Taux apprentissage",
+        "ITERATIONS": "Itérations",
+        "ITERATIONS_DESCRIPTION": "Nombre de fois où le modèle va examiner l'intégralité de l'ensemble de données que vous lui fournissez",
+        "LOT": "Taille lot",
+        "LOT_DESCRIPTION": "Taille des sous-ensembles de données que le modèle verra à chaque itération de l'entraînement. Les tailles de lot courantes sont généralement comprises entre 32 et 512. Il n'existe pas vraiment de taille de lot idéale qui résout tous les problèmes",
+        "NOMBRE_IMAGES_ENTRAINEMENT": "Img entrainement",
+        "NOMBRE_IMAGES_PREDICTIONS": "Img prédiction",
         "ENTRAINER_MODELE": "Entraîner le modèle"
       }
     }

@@ -49,9 +49,9 @@ export class IterateurDonnees {
         donnees[0].slice(idx * DonneesService.NOMBRE_PIXELS_IMAGE, idx * DonneesService.NOMBRE_PIXELS_IMAGE + DonneesService.NOMBRE_PIXELS_IMAGE);
       lotImages.set(image, i * DonneesService.NOMBRE_PIXELS_IMAGE);
 
-      const label =
+      const booleenChiffres =
         donnees[1].slice(idx * DonneesService.CHIFFRES_DISTINCTS, idx * DonneesService.CHIFFRES_DISTINCTS + DonneesService.CHIFFRES_DISTINCTS);
-      lotBooleenChiffresImages.set(label, i * DonneesService.CHIFFRES_DISTINCTS);
+      lotBooleenChiffresImages.set(booleenChiffres, i * DonneesService.CHIFFRES_DISTINCTS);
     }
 
     const entrees = tf.tensor2d(lotImages, [tailleLot, DonneesService.NOMBRE_PIXELS_IMAGE]);

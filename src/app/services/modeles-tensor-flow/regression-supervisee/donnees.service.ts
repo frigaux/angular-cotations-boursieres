@@ -59,7 +59,7 @@ export class DonneesService {
   }
 
   async donneesPuissancesRendements(): Promise<Donnees<Rank.R2>> {
-    const reponse = await fetch('https://storage.googleapis.com/tfjs-tutorials/carsData.json');
+    const reponse = await fetch('http://fabienrigaux.freeboxos.fr/ml/carsData.json');
     const voitures: Array<any> = await reponse.json();
     const voituresValides = voitures
       .filter(car => (car.Miles_per_Gallon != null && car.Horsepower != null));

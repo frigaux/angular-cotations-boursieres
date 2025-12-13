@@ -39,24 +39,24 @@ import {Rank} from '@tensorflow/tfjs-core/dist/types';
   styleUrl: './regression-supervisee.component.sass',
 })
 export class RegressionSuperviseeComponent implements OnInit {
-  // données pour la vue
+  // nombre de tenseur en mémoire
   protected nombreTenseurs?: number;
 
-  // liste déroulantes
+  // choix backend
   protected backends: Array<string> = ['cpu', 'webgl']; // 'tensorflow' (requires tfjs-node), 'wasm' (requires tfjs-backend-wasm).
   protected backend: string = this.backends[0];
   protected backendChangeAvecSucces?: boolean;
 
-  //
-  protected tauxApprentissage: number = 0.1;
-  protected iterations: number = 50;
-  protected lot: number = 32;
-
-  //
+  // données, modèle, couches
   protected donnees?: Donnees<Rank.R2>;
   protected progressionEntrainement: number = 0;
   protected modele?: LayersModel;
   protected couchesDenses?: Array<CoucheDense>;
+
+  // paramètres apprentissage
+  protected tauxApprentissage: number = 0.1;
+  protected iterations: number = 50;
+  protected lot: number = 32;
 
   // https://www.chartjs.org/
   protected donneesChart?: any;

@@ -6,7 +6,7 @@ import {DonneesService} from './donnees.service';
   providedIn: 'root',
 })
 export class ModelesService {
-  modeleImagesChiffres() {
+  modeleImagesChiffres(tauxApprentissage: number) {
     const model = tf.sequential();
 
     model.add(tf.layers.conv2d({
@@ -41,13 +41,10 @@ export class ModelesService {
       activation: 'softmax'
     }));
 
-    // Choose an optimizer, loss function and accuracy metric,
-    // then compile and return the model
-    const optimizer = tf.train.adam();
     model.compile({
-      optimizer: optimizer,
-      loss: 'categoricalCrossentropy',
-      metrics: ['accuracy'],
+      optimizer: tf.train.adam(tauxApprentissage),
+      loss: tf.losses.softmaxCrossEntropy,
+      metrics: [tf.metrics.binaryAccuracy]
     });
 
     return model;

@@ -17,6 +17,11 @@ import {
 } from '../../../services/modeles-tensor-flow/classification-supervisee-convolutive/modeles.service';
 import {Donnees} from '../../../services/modeles-tensor-flow/regression-supervisee/donnees.interface';
 import {Rank} from '@tensorflow/tfjs-core/dist/types';
+import {FloatLabel} from 'primeng/floatlabel';
+import {InputText} from 'primeng/inputtext';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {UIChart} from 'primeng/chart';
+import {GraphiquesService} from '../../../services/modeles-tensor-flow/regression-supervisee/graphiques.service';
 
 @Component({
   selector: 'app-classification-supervisee-convolutive',
@@ -24,26 +29,51 @@ import {Rank} from '@tensorflow/tfjs-core/dist/types';
     LoaderComponent,
     TranslatePipe,
     BarreProgressionComponent,
-    Button
+    Button,
+    FloatLabel,
+    InputText,
+    ReactiveFormsModule,
+    FormsModule,
+    UIChart
   ],
   templateUrl: './classification-supervisee-convolutive.component.html',
-  styleUrl: './classification-supervisee-convolutive.component.sass',
+  styleUrls: ['./classification-supervisee-convolutive.component.sass', './regression-supervisee.component.sass'],
 })
 export class ClassificationSuperviseeConvolutiveComponent implements OnInit {
   // données pour la vue
   protected loading: boolean = true;
-  protected iterateurDonnees?: IterateurDonnees;
-  protected booleenParChiffreParImage?: number[][];
 
+  // nombre de tenseur en mémoire
+  protected nombreTenseurs?: number;
+
+  // données, modèle, couches
+  protected iterateurDonnees?: IterateurDonnees;
   protected progressionEntrainement: number = 0;
   protected modele?: LayersModel;
 
-  constructor(private donneesService: DonneesService,
-              private modelesService: ModelesService) {
+  // chiffres des images affichées
+  protected booleenParChiffreParImage?: number[][];
 
+  // paramètres apprentissage
+  protected tauxApprentissage: number = 0.01;
+  protected nombreIterations: number = 100;
+  protected tailleLot: number = 32;
+  protected nombreImagesEntrainement: number = 640;
+  protected nombreImagesPredictions: number = 100;
+
+  // https://www.chartjs.org/
+  protected entrainementChart?: any;
+  protected entrainementChartOptions?: any;
+
+
+  constructor(private graphiquesService: GraphiquesService,
+              private donneesService: DonneesService,
+              private modelesService: ModelesService) {
+    this.entrainementChartOptions = this.graphiquesService.entrainementChartOptions();
   }
 
   ngOnInit(): void {
+    window.setInterval(() => this.nombreTenseurs = tf.memory().numTensors, 1000);
     this.donneesService.donneesImagesChiffres()
       .then(iterateurDonnees => {
         this.iterateurDonnees = iterateurDonnees;
@@ -85,49 +115,38 @@ export class ClassificationSuperviseeConvolutiveComponent implements OnInit {
   protected entrainerModele() {
     if (this.iterateurDonnees) {
       this.modele = undefined;
-      const modele: LayersModel = this.modelesService.modeleImagesChiffres();
+      const modele: LayersModel = this.modelesService.modeleImagesChiffres(this.tauxApprentissage);
 
-      const tailleLot = 32;
-      const tailleEntrainement = 640;
-      const taillePrediction = 100;
-      const nombreIterations = 100;
-
-      const [imagesEntrainement, chiffresEntrainement] = this.extracted(tailleEntrainement, () => this.iterateurDonnees!.donneesEntrainementSuivantes(tailleEntrainement));
-      const [imagesPrediction, chiffrePrediction] = this.extracted(taillePrediction, () => this.iterateurDonnees!.donneesPredictionSuivantes(taillePrediction));
+      const [imagesEntrainement, chiffresEntrainement] = this.remodelerTenseurs(this.nombreImagesEntrainement,
+        () => this.iterateurDonnees!.donneesEntrainementSuivantes(this.nombreImagesEntrainement));
+      const [imagesPrediction, chiffrePrediction] = this.remodelerTenseurs(this.nombreImagesPredictions,
+        () => this.iterateurDonnees!.donneesPredictionSuivantes(this.nombreImagesPredictions));
 
       const logsEpoch: Array<Logs> = [];
-      const logsBatch: Array<Logs> = [];
       modele.fit(imagesEntrainement, chiffresEntrainement, {
-        batchSize: tailleLot,
+        epochs: this.nombreIterations,
+        batchSize: this.tailleLot,
         validationData: [imagesPrediction, chiffrePrediction],
-        epochs: nombreIterations,
         shuffle: true,
         callbacks: {
           onEpochEnd: (epoch, log) => {
-            console.log('onEpochEnd', epoch, log);
             if (log) {
               logsEpoch.push(log);
             }
-            const pourcentage = Math.round(100 * epoch / nombreIterations);
+            const pourcentage = Math.round(100 * epoch / this.nombreIterations);
             if (!this.progressionEntrainement || pourcentage > this.progressionEntrainement) {
               this.progressionEntrainement = pourcentage;
-            }
-          },
-          onBatchEnd: (batch, log) => {
-            console.log('onBatchEnd', batch, log);
-            if (log) {
-              logsBatch.push(log);
             }
           }
         }
       }).then(() => {
         this.modele = modele;
-        // this.entrainementTermine(donneesNormalisees, logs);
+        this.entrainementTermine(logsEpoch);
       });
     }
   }
 
-  private extracted(tailleLot: number, donnees: () => Donnees<Rank.R2>): [Tensor2D, Tensor2D] {
+  private remodelerTenseurs(tailleLot: number, donnees: () => Donnees<Rank.R2>): [Tensor2D, Tensor2D] {
     return tf.tidy(() => {
       const d = donnees();
       return [
@@ -137,5 +156,10 @@ export class ClassificationSuperviseeConvolutiveComponent implements OnInit {
         d.sorties
       ];
     });
+  }
+
+  private entrainementTermine(logsEpoch: Array<Logs>) {
+    this.entrainementChart = this.graphiquesService.entrainementChart(logsEpoch);
+    // TODO : prediction et affichage du résultat sous forme matricielle
   }
 }

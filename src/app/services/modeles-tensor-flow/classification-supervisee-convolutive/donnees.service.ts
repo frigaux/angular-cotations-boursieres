@@ -15,9 +15,9 @@ export class DonneesService {
   public static readonly NOMBRE_IMAGES_PREDICTIONS: number = DonneesService.NOMBRES_IMAGES - DonneesService.NOMBRE_IMAGES_ENTRAINEMENT;
 
   private static readonly URL_MNIST_65000_IMAGES_DE_784PX: string =
-    'https://storage.googleapis.com/learnjs-data/model-builder/mnist_images.png';
+    'http://fabienrigaux.freeboxos.fr/ml/mnist_images.png';
   private static readonly URL_MNIST_BOOLEEN_PAR_CHIFFRE_PAR_IMAGE: string =
-    'https://storage.googleapis.com/learnjs-data/model-builder/mnist_labels_uint8';
+    'http://fabienrigaux.freeboxos.fr/ml/mnist_labels_uint8';
 
 
   private images(): Promise<Float32Array> {
