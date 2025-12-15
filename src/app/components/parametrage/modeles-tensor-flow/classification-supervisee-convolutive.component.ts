@@ -22,6 +22,7 @@ import {InputText} from 'primeng/inputtext';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {UIChart} from 'primeng/chart';
 import {GraphiquesService} from '../../../services/modeles-tensor-flow/regression-supervisee/graphiques.service';
+import {NgClass, PercentPipe} from '@angular/common';
 
 @Component({
   selector: 'app-classification-supervisee-convolutive',
@@ -34,10 +35,12 @@ import {GraphiquesService} from '../../../services/modeles-tensor-flow/regressio
     InputText,
     ReactiveFormsModule,
     FormsModule,
-    UIChart
+    UIChart,
+    NgClass,
+    PercentPipe
   ],
   templateUrl: './classification-supervisee-convolutive.component.html',
-  styleUrls: ['./classification-supervisee-convolutive.component.sass', './regression-supervisee.component.sass'],
+  styleUrl: './classification-supervisee-convolutive.component.sass',
 })
 export class ClassificationSuperviseeConvolutiveComponent implements OnInit {
   // données pour la vue
@@ -56,15 +59,22 @@ export class ClassificationSuperviseeConvolutiveComponent implements OnInit {
 
   // paramètres apprentissage
   protected tauxApprentissage: number = 0.01;
-  protected nombreIterations: number = 100;
+  protected nombreIterations: number = 10;
   protected tailleLot: number = 32;
   protected nombreImagesEntrainement: number = 640;
-  protected nombreImagesPredictions: number = 100;
+  protected nombreImagesPredictions: number = 200;
 
   // https://www.chartjs.org/
   protected entrainementChart?: any;
   protected entrainementChartOptions?: any;
 
+  // analyses prédictions
+  private predictionsParChiffre?: Array<Array<number>>;
+  protected predictionsAgregees?: Array<{
+    reussites: number,
+    total: number,
+    predictions: Array<{ chiffrePredit: number, quantite: number }>
+  }>;
 
   constructor(private graphiquesService: GraphiquesService,
               private donneesService: DonneesService,
@@ -112,21 +122,34 @@ export class ClassificationSuperviseeConvolutiveComponent implements OnInit {
     }
   }
 
+  private remodelerTenseurs(tailleLot: number, donnees: () => Donnees<Rank.R2>): [Tensor2D, Tensor2D] {
+    return tf.tidy(() => {
+      const d = donnees();
+      return [
+        d.entrees.reshape([tailleLot, DonneesService.NOMBRE_PIXELS_LARGEUR_HAUTEUR_IMAGE,
+          DonneesService.NOMBRE_PIXELS_LARGEUR_HAUTEUR_IMAGE,
+          DonneesService.CANAL_NOIR_BLANC]),
+        d.sorties
+      ];
+    });
+  }
+
   protected entrainerModele() {
     if (this.iterateurDonnees) {
       this.modele = undefined;
-      const modele: LayersModel = this.modelesService.modeleImagesChiffres(this.tauxApprentissage);
+      this.progressionEntrainement = 0;
+      const modele: LayersModel = this.modelesService.modeleFonctionnelImagesChiffres(this.tauxApprentissage);
 
-      const [imagesEntrainement, chiffresEntrainement] = this.remodelerTenseurs(this.nombreImagesEntrainement,
+      const [imagesEntrainement, chiffresAttendusEntrainement] = this.remodelerTenseurs(this.nombreImagesEntrainement,
         () => this.iterateurDonnees!.donneesEntrainementSuivantes(this.nombreImagesEntrainement));
-      const [imagesPrediction, chiffrePrediction] = this.remodelerTenseurs(this.nombreImagesPredictions,
+      const [imagesValidation, chiffresAttendusValidation] = this.remodelerTenseurs(this.nombreImagesPredictions,
         () => this.iterateurDonnees!.donneesPredictionSuivantes(this.nombreImagesPredictions));
 
       const logsEpoch: Array<Logs> = [];
-      modele.fit(imagesEntrainement, chiffresEntrainement, {
+      modele.fit(imagesEntrainement, chiffresAttendusEntrainement, {
         epochs: this.nombreIterations,
         batchSize: this.tailleLot,
-        validationData: [imagesPrediction, chiffrePrediction],
+        validationData: [imagesValidation, chiffresAttendusValidation],
         shuffle: true,
         callbacks: {
           onEpochEnd: (epoch, log) => {
@@ -141,25 +164,64 @@ export class ClassificationSuperviseeConvolutiveComponent implements OnInit {
         }
       }).then(() => {
         this.modele = modele;
-        this.entrainementTermine(logsEpoch);
+        this.entrainementChart = this.graphiquesService.entrainementChart(logsEpoch);
+        this.predictions();
       });
     }
   }
 
-  private remodelerTenseurs(tailleLot: number, donnees: () => Donnees<Rank.R2>): [Tensor2D, Tensor2D] {
-    return tf.tidy(() => {
-      const d = donnees();
-      return [
-        d.entrees.reshape([tailleLot, DonneesService.NOMBRE_PIXELS_LARGEUR_HAUTEUR_IMAGE,
-          DonneesService.NOMBRE_PIXELS_LARGEUR_HAUTEUR_IMAGE,
-          DonneesService.CANAL_NOIR_BLANC]),
-        d.sorties
-      ];
+  private predictions() {
+    this.tracerInformations();
+    tf.tidy(() => {
+      const [images, chiffresAttendus] = this.remodelerTenseurs(this.nombreImagesPredictions,
+        () => this.iterateurDonnees!.donneesPredictionSuivantes(this.nombreImagesPredictions));
+
+      const predictions: Tensor2D = this.modele!.predict(images) as Tensor2D;
+
+      this.analysesPredictions(chiffresAttendus.argMax(-1).arraySync() as number[],
+        predictions.argMax(-1).arraySync() as number[]);
     });
+    // TODO : dispose ?
+    // images.dispose();
+    // chiffresAttendus.dispose();
+    // predictions.dispose();
   }
 
-  private entrainementTermine(logsEpoch: Array<Logs>) {
-    this.entrainementChart = this.graphiquesService.entrainementChart(logsEpoch);
-    // TODO : prediction et affichage du résultat sous forme matricielle
+  private analysesPredictions(chiffresAttendus: number[], chiffresPredits: number[]) {
+    const predictionsParChiffre: Array<Array<number>> = Array.from({length: DonneesService.CHIFFRES_DISTINCTS},
+      (v, i) => Array.from({length: DonneesService.CHIFFRES_DISTINCTS}, (v, i) => 0));
+    chiffresAttendus.forEach((chiffreAttendu, i) => {
+      predictionsParChiffre[chiffreAttendu][chiffresPredits[i]] = predictionsParChiffre[chiffreAttendu][chiffresPredits[i]] + 1;
+    });
+    this.predictionsParChiffre = predictionsParChiffre;
+
+    const predictionsAgregees: Array<{
+      reussites: number,
+      total: number,
+      predictions: Array<{ chiffrePredit: number, quantite: number }>
+    }> = [];
+    predictionsParChiffre.forEach((chiffresPredits, chiffreAttendu) => {
+      const total = chiffresPredits.reduce((acc, qt) => acc + qt, 0);
+      const reussites = chiffresPredits[chiffreAttendu];
+      const predictions: Array<{ chiffrePredit: number, quantite: number }> = [];
+      chiffresPredits.forEach((quantite, chiffrePredit) => {
+        if (quantite !== 0) {
+          predictions.push({chiffrePredit, quantite})
+        }
+      });
+      predictionsAgregees.push({reussites, total, predictions});
+    });
+    this.predictionsAgregees = predictionsAgregees;
+  }
+
+  private tracerInformations() {
+    // tf.enableDebugMode();
+    this.modele!.summary();
+    this.modele!.weights.forEach(w => {
+      console.log(w.name, w.shape);
+    });
+    // this.modele!.layers.forEach(layer => {
+    //   console.log(layer.name, layer.weights);
+    // });
   }
 }

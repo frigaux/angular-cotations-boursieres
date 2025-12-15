@@ -1,8 +1,69 @@
 div.images
+  display: flex
+  flex-direction: row
+  flex-wrap: wrap
+
   div
     margin: 1rem
     border: 0.1rem solid black
-    display: inline-block
-    text-align: center
+    display: flex
+    flex-direction: column
+    align-items: center
 
+    label, img
+      margin: 0.25rem
 
+div.ligne
+  margin: 2rem 1rem 1rem 1rem
+  display: flex
+  flex-direction: row
+  align-items: center
+  overflow: visible
+
+  span.nombre
+    margin-left: 0.25rem
+
+  p-floatlabel, p-button, app-barre-progression
+    margin-left: 1rem
+
+  input
+    width: 8rem
+
+div.courbes
+  display: flex
+  flex-direction: row
+  margin: 2rem 1rem 1rem 1rem
+
+  p-chart
+    width: 50%
+
+  table
+    width: 50%
+    th:nth-child(1), td:nth-child(1)
+      text-align: center
+
+    th:nth-child(2), td:nth-child(2)
+      text-align: left
+      padding-left: 1rem
+
+    div.barres
+      display: flex
+      flex-direction: row
+      align-items: center
+
+      & > span.total
+        text-align: left
+        width: 4rem
+        margin-right: 1rem
+
+      & > div
+        text-align: center
+        border: 0.1rem solid black
+        min-width: 1rem
+        cursor: context-menu
+
+      & > div.valide
+        background-color: var(--p-green-600)
+
+      & > div:not(.valide)
+        background-color: var(--p-red-600)

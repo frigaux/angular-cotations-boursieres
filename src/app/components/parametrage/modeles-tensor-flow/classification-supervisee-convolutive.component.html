@@ -2,14 +2,14 @@
 <h3>{{ 'COMPOSANTS.PARAMETRAGE.CLASSIFICATION_SUPERVISEE_CONVOLUTIVE.EXEMPLES' | translate }}</h3>
 
 <app-loader [affiche]="loading" [configuration]="[
-  {marginLeft: '0', marginTop: '1rem', height: '10vh', width: '100%'}
+  {marginLeft: '0', marginTop: '1rem', height: '30vh', width: '100%'}
 ]"></app-loader>
 
 @if (!loading && booleenParChiffreParImage) {
   <div class="images">
     @for (scoresChiffresImage of booleenParChiffreParImage; track $index; let i = $index) {
       <div>
-        <h5>{{ scoresChiffresImage }}</h5>
+        <label>{{ scoresChiffresImage }}</label>
         <img id="{{`img_${i}`}}" width="28" height="28"/>
       </div>
     }
@@ -61,6 +61,32 @@
   <div class="courbes">
     @if (entrainementChart) {
       <p-chart type="line" [data]="entrainementChart" [options]="entrainementChartOptions"/>
+    }
+    @if (predictionsAgregees) {
+      <table>
+        <thead>
+        <th>{{ 'COMPOSANTS.PARAMETRAGE.CLASSIFICATION_SUPERVISEE_CONVOLUTIVE.CHIFFRE' | translate }}</th>
+        <th>{{ 'COMPOSANTS.PARAMETRAGE.CLASSIFICATION_SUPERVISEE_CONVOLUTIVE.PREDICTIONS' | translate }}</th>
+        </thead>
+        <tbody>
+          @for (predictions of predictionsAgregees; track $index; let chiffreAttendu = $index) {
+            <tr>
+              <td>{{ chiffreAttendu }}</td>
+              <td>
+                <div class="barres">
+                  <span class="total">{{ (predictions.reussites / predictions.total) | percent:'1.2-2' }}</span>
+                  @for (prediction of predictions.predictions; track $index) {
+                    <div [style]="{ width: `${200 * prediction.quantite / nombreImagesPredictions}rem` }"
+                         [ngClass]="{'valide': chiffreAttendu === prediction.chiffrePredit}"
+                         [title]="prediction.quantite">{{ prediction.chiffrePredit }}
+                    </div>
+                  }
+                </div>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
     }
   </div>
 }

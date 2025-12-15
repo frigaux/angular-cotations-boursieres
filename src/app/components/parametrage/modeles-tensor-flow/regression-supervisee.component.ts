@@ -141,7 +141,7 @@ export class RegressionSuperviseeComponent implements OnInit {
 
   private tracerInformations() {
     // tf.enableDebugMode();
-    // console.log('modele', this.modele!.summary());
+    // this.modele!.summary();
     // this.modele!.weights.forEach(w => {
     //   console.log(w.name, w.shape);
     // });

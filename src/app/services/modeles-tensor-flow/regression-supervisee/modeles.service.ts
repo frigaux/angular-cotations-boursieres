@@ -28,10 +28,12 @@ export class ModelesService {
   }
 
   modelePuissancesRendements(tauxApprentissage: number): LayersModel {
+    // Modèle séquentiel
     // const model = tf.sequential();
     // model.add(tf.layers.dense({inputShape: [1], units: 1, useBias: true}));
     // model.add(tf.layers.dense({units: 1, useBias: true}));
 
+    // Modèle fonctionnel
     const input: SymbolicTensor = tf.input({shape: [1]});
     const dense1: SymbolicTensor = tf.layers.dense({units: 1, useBias: true}).apply(input) as SymbolicTensor;
     const hidden: SymbolicTensor = tf.layers.dense({units: 5, activation: 'sigmoid'}).apply(dense1) as SymbolicTensor;
