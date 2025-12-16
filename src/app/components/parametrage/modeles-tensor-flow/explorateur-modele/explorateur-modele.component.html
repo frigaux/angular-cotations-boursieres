@@ -22,36 +22,7 @@
         <span>{{ modele.metriques }}</span>
       </div>
     </div>
-    <table>
-      <tbody>
-      <tr>
-        <th>
-          <label>{{ 'COMPOSANTS.PARAMETRAGE.ML.MODELE.ENTREES' | translate }}</label>
-          <span>[
-            @for (description of descriptionEntrees; track description.sub; let dernier = $last) {
-              a<sup>{{ description.sup }}</sup><sub>{{ description.sub }}</sub>
-              @if (!dernier) {
-                ,
-              }
-            }
-            ]</span>
-        </th>
-      </tr>
-      <tr>
-        <th>
-          <label>{{ 'COMPOSANTS.PARAMETRAGE.ML.MODELE.SORTIES' | translate }}</label>
-          <span>[
-            @for (description of descriptionSorties; track description.sub; let dernier = $last) {
-              a<sup>{{ description.sup }}</sup><sub>{{ description.sub }}</sub>
-              @if (!dernier) {
-                ,
-              }
-            }
-            ]</span>
-        </th>
-      </tr>
-      </tbody>
-    </table>
+    <app-explorateur-entrees-sorties [modeleEtDonnees]="modeleEtDonnees"></app-explorateur-entrees-sorties>
   </div>
   <div class="couches">
     @for (couche of modele.couches; track couche.numero) {

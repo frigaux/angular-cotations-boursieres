@@ -1,0 +1,58 @@
+<table>
+  <tbody>
+  <tr>
+    <th>
+      <label>{{ 'COMPOSANTS.PARAMETRAGE.ML.MODELE.ENTREES' | translate }}</label>
+      <span>[
+        @for (description of descriptionEntrees; track description.sub; let dernier = $last) {
+          a<sup>{{ description.sup }}</sup><sub>{{ description.sub }}</sub>
+          @if (!dernier) {
+            ,
+          }
+        }
+        ]</span>
+    </th>
+    @for (entree of entrees; track $index; let i = $index) {
+      @if (i < 10) {
+        <td>
+          [
+          @for (valeur of entree; track $index; let dernier = $last) {
+            {{ valeur | number: '1.2-2' }}
+            @if (!dernier) {
+              ,
+            }
+          }
+          ]
+        </td>
+      }
+    }
+  </tr>
+  <tr>
+    <th>
+      <label>{{ 'COMPOSANTS.PARAMETRAGE.ML.MODELE.SORTIES' | translate }}</label>
+      <span>[
+        @for (description of descriptionSorties; track description.sub; let dernier = $last) {
+          a<sup>{{ description.sup }}</sup><sub>{{ description.sub }}</sub>
+          @if (!dernier) {
+            ,
+          }
+        }
+        ]</span>
+    </th>
+    @for (sortie of sorties; track $index; let i = $index) {
+      @if (i < 10) {
+        <td>
+          [
+          @for (valeur of sortie; track $index; let dernier = $last) {
+            {{ valeur | number: '1.2-2' }}
+            @if (!dernier) {
+              ,
+            }
+          }
+          ]
+        </td>
+      }
+    }
+  </tr>
+  </tbody>
+</table>

@@ -12,7 +12,6 @@ export class ModeleService {
   }
 
   modele(modele: LayersModel): Modele {
-    console.log(modele);
     const optimiseur = this.optimiseur(modele);
     const fonctionsPerte = modele.lossFunctions.map(lossFunction => lossFunction.name);
     const metriques = modele.metricsNames;
