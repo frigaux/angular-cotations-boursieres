@@ -1,7 +1,7 @@
 import {Component, input, InputSignal} from '@angular/core';
-import {CoucheDense} from '../../../../../services/modeles-tensor-flow/couche-dense.interface';
 import {DecimalPipe} from '@angular/common';
 import {TranslatePipe} from '@ngx-translate/core';
+import {Couche} from '../../../../../services/modeles-tensor-flow/couche.interface';
 
 @Component({
   selector: 'app-couche-dense',
@@ -13,13 +13,13 @@ import {TranslatePipe} from '@ngx-translate/core';
   styleUrl: './couche-dense.component.sass',
 })
 export class CoucheDenseComponent {
-  inputCouche: InputSignal<CoucheDense | undefined> = input(undefined,
+  inputCouche: InputSignal<Couche | undefined> = input(undefined,
     {transform: o => this.intercepteurCouche(o), alias: 'couche'});
 
   // données pour la vue
-  couche?: CoucheDense;
+  couche?: Couche;
 
-  private intercepteurCouche(couche: CoucheDense | undefined) {
+  private intercepteurCouche(couche: Couche | undefined) {
     this.couche = couche;
     return couche;
   }

@@ -1,0 +1,44 @@
+div.conteneur
+  display: flex
+  flex-direction: row
+  flex-wrap: wrap
+
+  div.parametres
+    margin: 1rem
+    padding: 1rem
+    border: 0.1rem solid black
+    width: fit-content
+
+    & > div:nth-child(n+2)
+      margin-top: 0.5rem
+
+    & > div
+      label
+        display: inline-block
+        width: 10rem
+
+      span
+        text-align: left
+        display: inline-block
+
+    & > div:not(.details)
+      label
+        font-weight: bold
+
+    & > div.details
+      label
+        padding-left: 1rem
+
+  table
+    th
+      width: 10rem
+
+      label
+        display: block
+        font-weight: normal
+
+div.couches
+  margin: 1rem
+
+  & > div
+    margin-top: 1rem

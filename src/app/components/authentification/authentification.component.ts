@@ -3,7 +3,7 @@ import {Component, OnInit} from '@angular/core';
 import {Dialog} from 'primeng/dialog';
 import {ProgressBar} from 'primeng/progressbar';
 import {AuthentificationService} from '../../services/authentification/authentification.service';
-import {StatutAuthentification} from './statuts.enum';
+import {StatutAuthentification} from './statut-authentification.enum';
 import {TranslatePipe} from "@ngx-translate/core";
 import {Router} from '@angular/router';
 import {PortefeuillesService} from '../../services/portefeuilles/portefeuilles.service';

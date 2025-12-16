@@ -1,4 +1,4 @@
-div.images
+div.exemples
   display: flex
   flex-direction: row
   flex-wrap: wrap
@@ -13,7 +13,7 @@ div.images
     label, img
       margin: 0.25rem
 
-div.ligne
+div.formulaire
   margin: 2rem 1rem 1rem 1rem
   display: flex
   flex-direction: row
@@ -29,7 +29,7 @@ div.ligne
   input
     width: 8rem
 
-div.courbes
+div.resultat
   display: flex
   flex-direction: row
   margin: 2rem 1rem 1rem 1rem
@@ -39,6 +39,7 @@ div.courbes
 
   table
     width: 50%
+
     th:nth-child(1), td:nth-child(1)
       text-align: center
 
@@ -51,10 +52,10 @@ div.courbes
       flex-direction: row
       align-items: center
 
-      & > span.total
+      & > span.pourcentage
         text-align: left
-        width: 4rem
-        margin-right: 1rem
+        width: 6rem
+        display: inline-block
 
       & > div
         text-align: center

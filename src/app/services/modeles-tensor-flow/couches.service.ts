@@ -1,13 +1,14 @@
 import {Injectable} from '@angular/core';
 import {LayersModel} from '@tensorflow/tfjs-layers/dist/engine/training';
-import {CoucheDense} from './couche-dense.interface';
-import {Neurone} from './neurone';
+import {Neurone} from './neurone.interface';
+import {Couche} from './couche.interface';
+import {TypeCouche} from './type-couche';
 
 @Injectable({
   providedIn: 'root',
 })
 export class CouchesService {
-  couchesDenses(modele: LayersModel): Array<CoucheDense> {
+  private couchesDenses(modele: LayersModel): Array<Couche> {
     return modele.layers
       .filter((layer: any) => layer.getClassName?.() === 'Dense')
       .map((layer: any) => {
@@ -22,9 +23,14 @@ export class CouchesService {
         });
         return {
           numero: layer.id,
+          type: TypeCouche.DENSE,
           fonctionActivation: layer.activation.getClassName?.(),
           neurones
         };
       });
+  }
+
+  couches(modele: LayersModel): Array<Couche> {
+    return this.couchesDenses(modele);
   }
 }

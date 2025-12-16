@@ -14,13 +14,9 @@ import {DonneesService} from '../../../services/modeles-tensor-flow/regression-s
 import {GraphiquesService} from '../../../services/modeles-tensor-flow/regression-supervisee/graphiques.service';
 import {FloatLabel} from 'primeng/floatlabel';
 import {Donnees} from '../../../services/modeles-tensor-flow/regression-supervisee/donnees.interface';
-import {
-  DonneesNormalisees
-} from '../../../services/modeles-tensor-flow/regression-supervisee/donnees-normalisees.interface';
-import {CoucheDense} from '../../../services/modeles-tensor-flow/couche-dense.interface';
-import {CoucheDenseComponent} from './couches/couche-dense/couche-dense.component';
-import {CouchesService} from '../../../services/modeles-tensor-flow/couches.service';
 import {Rank} from '@tensorflow/tfjs-core/dist/types';
+import {ExplorateurModeleComponent} from './explorateur-modele/explorateur-modele.component';
+import {ModeleEtDonnees} from './explorateur-modele/modele-et-donnees.interface';
 
 @Component({
   selector: 'app-regression-supervisee',
@@ -33,7 +29,7 @@ import {Rank} from '@tensorflow/tfjs-core/dist/types';
     FormsModule,
     InputText,
     FloatLabel,
-    CoucheDenseComponent
+    ExplorateurModeleComponent
   ],
   templateUrl: './regression-supervisee.component.html',
   styleUrl: './regression-supervisee.component.sass',
@@ -50,8 +46,7 @@ export class RegressionSuperviseeComponent implements OnInit {
   // données, modèle, couches
   protected donnees?: Donnees<Rank.R2>;
   protected progressionEntrainement: number = 0;
-  protected modele?: LayersModel;
-  protected couchesDenses?: Array<CoucheDense>;
+  protected modeleEtDonnees?: ModeleEtDonnees;
 
   // paramètres apprentissage
   protected tauxApprentissage: number = 0.1;
@@ -66,8 +61,7 @@ export class RegressionSuperviseeComponent implements OnInit {
 
   constructor(private graphiquesService: GraphiquesService,
               private modelesService: ModelesService,
-              private donneesService: DonneesService,
-              private couchesService: CouchesService) {
+              private donneesService: DonneesService) {
     this.donneesChartOptions = this.graphiquesService.donneesChartOptions();
     this.entrainementChartOptions = this.graphiquesService.entrainementChartOptions();
   }
@@ -92,7 +86,7 @@ export class RegressionSuperviseeComponent implements OnInit {
 
   protected entrainerModele() {
     if (this.donnees) {
-      this.modele = undefined;
+      this.modeleEtDonnees = undefined;
       const modele: LayersModel = this.modelesService.modelePuissancesRendements(this.tauxApprentissage);
 
       const donneesNormalisees = this.donneesService.normaliserZeroAUn(this.donnees);
@@ -115,37 +109,34 @@ export class RegressionSuperviseeComponent implements OnInit {
           }
         }
       }).then(() => {
-        this.modele = modele;
-        this.entrainementTermine(donneesNormalisees, logs);
+        this.modeleEtDonnees = {modele, donneesNormalisees};
+        this.entrainementTermine(logs);
       });
     }
   }
 
-  private entrainementTermine(donneesNormalisees: DonneesNormalisees, logs: Array<Logs>) {
+  private entrainementTermine(logs: Array<Logs>) {
     this.tracerInformations();
-
-    this.couchesDenses = this.couchesService.couchesDenses(this.modele!);
 
     // line chart : affichage des metrics d'entrainement
     this.entrainementChart = this.graphiquesService.entrainementChart(logs);
 
     // scatter chart : données et prédictions
     const datasets = this.graphiquesService.donneesChart(this.donnees!, 'DONNEES');
-    const predictions = this.donneesService.predictionsPuissancesRendements(this.modele!, donneesNormalisees);
+    const predictions = this.donneesService.predictionsPuissancesRendements(this.modeleEtDonnees!);
     datasets.datasets.push(this.graphiquesService.donneesChart(predictions, 'PREDICTIONS').datasets[0]);
     this.donneesChart = datasets;
 
     this.donneesService.libererTenseursDans(predictions);
-    this.donneesService.libererTenseursDans(donneesNormalisees);
   }
 
   private tracerInformations() {
     // tf.enableDebugMode();
-    // this.modele!.summary();
-    // this.modele!.weights.forEach(w => {
+    // this.modeleEtDonnees!.modele!.summary();
+    // this.modeleEtDonnees!.modele!.weights.forEach(w => {
     //   console.log(w.name, w.shape);
     // });
-    // this.modele!.layers.forEach(layer => {
+    // this.modeleEtDonnees!.modele!.layers.forEach(layer => {
     //   console.log(layer.name, layer.weights);
     // });
     // const t1 = tf.tensor([0, 0, 0], [3, 1], 'int32');

@@ -70,9 +70,10 @@ export class ClassificationSuperviseeConvolutiveComponent implements OnInit {
 
   // analyses prédictions
   private predictionsParChiffre?: Array<Array<number>>;
+  private predictionsParChiffreArgMax?: Array<Array<number>>;
   protected predictionsAgregees?: Array<{
-    reussites: number,
-    total: number,
+    pourcentage: number,
+    pourcentageArgMax: number,
     predictions: Array<{ chiffrePredit: number, quantite: number }>
   }>;
 
@@ -178,8 +179,9 @@ export class ClassificationSuperviseeConvolutiveComponent implements OnInit {
 
       const predictions: Tensor2D = this.modele!.predict(images) as Tensor2D;
 
-      this.analysesPredictions(chiffresAttendus.argMax(-1).arraySync() as number[],
-        predictions.argMax(-1).arraySync() as number[]);
+      // this.analysesPredictions(chiffresAttendus.argMax(-1).arraySync() as number[],
+      //   predictions.argMax(-1).arraySync() as number[]);
+      this.analysesPredictions(chiffresAttendus, predictions);
     });
     // TODO : dispose ?
     // images.dispose();
@@ -187,39 +189,80 @@ export class ClassificationSuperviseeConvolutiveComponent implements OnInit {
     // predictions.dispose();
   }
 
-  private analysesPredictions(chiffresAttendus: number[], chiffresPredits: number[]) {
+  // private analysesPredictions(chiffresAttendus: number[], chiffresPredits: number[]) {
+  //   const predictionsParChiffre: Array<Array<number>> = Array.from({length: DonneesService.CHIFFRES_DISTINCTS},
+  //     (v, i) => Array.from({length: DonneesService.CHIFFRES_DISTINCTS}, (v, i) => 0));
+  //   chiffresAttendus.forEach((chiffreAttendu, i) => {
+  //     predictionsParChiffre[chiffreAttendu][chiffresPredits[i]] = predictionsParChiffre[chiffreAttendu][chiffresPredits[i]] + 1;
+  //   });
+  //   this.predictionsParChiffre = predictionsParChiffre;
+  //
+  //   const predictionsAgregees: Array<{
+  //     reussites: number,
+  //     total: number,
+  //     predictions: Array<{ chiffrePredit: number, quantite: number }>
+  //   }> = [];
+  //   predictionsParChiffre.forEach((chiffresPredits, chiffreAttendu) => {
+  //     const total = chiffresPredits.reduce((acc, qt) => acc + qt, 0);
+  //     const reussites = chiffresPredits[chiffreAttendu];
+  //     const predictions: Array<{ chiffrePredit: number, quantite: number }> = [];
+  //     chiffresPredits.forEach((quantite, chiffrePredit) => {
+  //       if (quantite !== 0) {
+  //         predictions.push({chiffrePredit, quantite})
+  //       }
+  //     });
+  //     predictionsAgregees.push({reussites, total, predictions});
+  //   });
+  //   this.predictionsAgregees = predictionsAgregees;
+  // }
+
+  private analysesPredictions(chiffresAttendus: Tensor2D, predictions: Tensor2D) {
+    const chiffresAttendusArgMax: number[] = chiffresAttendus.argMax(-1).arraySync() as number[];
+    const chiffresPreditsArgMax: number[] = predictions.argMax(-1).arraySync() as number[];
+    const chiffresPredits: number[][] = predictions.arraySync();
+
     const predictionsParChiffre: Array<Array<number>> = Array.from({length: DonneesService.CHIFFRES_DISTINCTS},
       (v, i) => Array.from({length: DonneesService.CHIFFRES_DISTINCTS}, (v, i) => 0));
-    chiffresAttendus.forEach((chiffreAttendu, i) => {
-      predictionsParChiffre[chiffreAttendu][chiffresPredits[i]] = predictionsParChiffre[chiffreAttendu][chiffresPredits[i]] + 1;
+    const predictionsParChiffreArgMax: Array<Array<number>> = Array.from({length: DonneesService.CHIFFRES_DISTINCTS},
+      (v, i) => Array.from({length: DonneesService.CHIFFRES_DISTINCTS}, (v, i) => 0));
+    chiffresAttendusArgMax.forEach((chiffreAttendu, i) => {
+      predictionsParChiffreArgMax[chiffreAttendu][chiffresPreditsArgMax[i]] = predictionsParChiffreArgMax[chiffreAttendu][chiffresPreditsArgMax[i]] + 1;
+      chiffresPredits[i].forEach((prediction, chiffrePredit) => {
+        predictionsParChiffre[chiffreAttendu][chiffrePredit] = predictionsParChiffre[chiffreAttendu][chiffrePredit] + prediction;
+      });
     });
     this.predictionsParChiffre = predictionsParChiffre;
+    this.predictionsParChiffreArgMax = predictionsParChiffreArgMax;
 
     const predictionsAgregees: Array<{
-      reussites: number,
-      total: number,
+      pourcentage: number,
+      pourcentageArgMax: number,
       predictions: Array<{ chiffrePredit: number, quantite: number }>
     }> = [];
-    predictionsParChiffre.forEach((chiffresPredits, chiffreAttendu) => {
-      const total = chiffresPredits.reduce((acc, qt) => acc + qt, 0);
-      const reussites = chiffresPredits[chiffreAttendu];
+    predictionsParChiffreArgMax.forEach((chiffresPredits, chiffreAttendu) => {
+      const total = predictionsParChiffre[chiffreAttendu].reduce((acc, qt) => acc + qt, 0);
+      const reussites = predictionsParChiffre[chiffreAttendu][chiffreAttendu];
+      const pourcentage = reussites / total;
+      const totalArgMax = chiffresPredits.reduce((acc, qt) => acc + qt, 0);
+      const reussitesArgMax = chiffresPredits[chiffreAttendu];
+      const pourcentageArgMax = reussitesArgMax / totalArgMax;
       const predictions: Array<{ chiffrePredit: number, quantite: number }> = [];
       chiffresPredits.forEach((quantite, chiffrePredit) => {
         if (quantite !== 0) {
-          predictions.push({chiffrePredit, quantite})
+          predictions.push({chiffrePredit, quantite});
         }
       });
-      predictionsAgregees.push({reussites, total, predictions});
+      predictionsAgregees.push({pourcentage, pourcentageArgMax, predictions});
     });
     this.predictionsAgregees = predictionsAgregees;
   }
 
   private tracerInformations() {
     // tf.enableDebugMode();
-    this.modele!.summary();
-    this.modele!.weights.forEach(w => {
-      console.log(w.name, w.shape);
-    });
+    // this.modele!.summary();
+    // this.modele!.weights.forEach(w => {
+    //   console.log(w.name, w.shape);
+    // });
     // this.modele!.layers.forEach(layer => {
     //   console.log(layer.name, layer.weights);
     // });
