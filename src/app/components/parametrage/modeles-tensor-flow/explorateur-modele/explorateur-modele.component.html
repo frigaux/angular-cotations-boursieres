@@ -1,11 +1,11 @@
-@if (modele) {
+@if (modeleEtDonnees) {
   <div class="conteneur">
     <div class="parametres">
       <div>
         <label>{{ 'COMPOSANTS.PARAMETRAGE.ML.MODELE.OPTIMISEUR' | translate }}</label>
-        <span>{{ modele.optimiseur.nom }}</span>
+        <span>{{ modeleEtDonnees.modele.optimiseur.nom }}</span>
       </div>
-      @for (parametre of modele.optimiseur.parametres; track parametre.nom) {
+      @for (parametre of modeleEtDonnees.modele.optimiseur.parametres; track parametre.nom) {
         <div class="details">
           <label>{{ parametre.nom }}</label>
           <span>{{ parametre.valeur }}</span>
@@ -15,21 +15,24 @@
     <div class="parametres">
       <div>
         <label>{{ 'COMPOSANTS.PARAMETRAGE.ML.MODELE.FONCTIONS_PERTE' | translate }}</label>
-        <span>{{ modele.fonctionsPerte }}</span>
+        <span>{{ modeleEtDonnees.modele.fonctionsPerte }}</span>
       </div>
       <div>
         <label>{{ 'COMPOSANTS.PARAMETRAGE.ML.MODELE.METRIQUES' | translate }}</label>
-        <span>{{ modele.metriques }}</span>
+        <span>{{ modeleEtDonnees.modele.metriques }}</span>
       </div>
     </div>
     <app-explorateur-entrees-sorties [modeleEtDonnees]="modeleEtDonnees"></app-explorateur-entrees-sorties>
   </div>
   <div class="couches">
-    @for (couche of modele.couches; track couche.numero) {
+    @for (couche of modeleEtDonnees.modele.couches; track couche.numero) {
       <div>
         @switch (couche.type) {
           @case (TypeCouche.DENSE) {
             <app-couche-dense [couche]="couche"></app-couche-dense>
+          }
+          @case (TypeCouche.CONV2D) {
+            <app-couche-conv2d [couche]="couche"></app-couche-conv2d>
           }
         }
       </div>

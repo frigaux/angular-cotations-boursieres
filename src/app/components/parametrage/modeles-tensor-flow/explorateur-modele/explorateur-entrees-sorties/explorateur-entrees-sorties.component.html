@@ -1,58 +1,66 @@
-<table>
-  <tbody>
-  <tr>
-    <th>
-      <label>{{ 'COMPOSANTS.PARAMETRAGE.ML.MODELE.ENTREES' | translate }}</label>
-      <span>[
-        @for (description of descriptionEntrees; track description.sub; let dernier = $last) {
-          a<sup>{{ description.sup }}</sup><sub>{{ description.sub }}</sub>
-          @if (!dernier) {
-            ,
-          }
-        }
-        ]</span>
-    </th>
-    @for (entree of entrees; track $index; let i = $index) {
-      @if (i < 10) {
-        <td>
-          [
-          @for (valeur of entree; track $index; let dernier = $last) {
-            {{ valeur | number: '1.2-2' }}
+@if (descriptionEntrees && descriptionSorties && entrees && sorties) {
+  <table>
+    <tbody>
+    <tr>
+      <th>
+        <label>{{ 'COMPOSANTS.PARAMETRAGE.ML.MODELE.ENTREES' | translate }}</label>
+        <span>[
+          @for (description of descriptionEntrees; track description.sub; let dernier = $last) {
+            a<sup>{{ description.sup }}</sup><sub>{{ description.sub }}</sub>
             @if (!dernier) {
               ,
             }
           }
-          ]
-        </td>
-      }
-    }
-  </tr>
-  <tr>
-    <th>
-      <label>{{ 'COMPOSANTS.PARAMETRAGE.ML.MODELE.SORTIES' | translate }}</label>
-      <span>[
-        @for (description of descriptionSorties; track description.sub; let dernier = $last) {
-          a<sup>{{ description.sup }}</sup><sub>{{ description.sub }}</sub>
-          @if (!dernier) {
-            ,
-          }
+          ]</span>
+      </th>
+      @for (entree of entrees; track $index; let i = $index) {
+        @if (i < 8) {
+          <td>
+            [
+            @for (valeur of entree; track $index; let dernier = $last) {
+              {{ valeur | number: '1.0-4' }}
+              @if (!dernier) {
+                ,
+              }
+            }
+            ]
+          </td>
         }
-        ]</span>
-    </th>
-    @for (sortie of sorties; track $index; let i = $index) {
-      @if (i < 10) {
-        <td>
-          [
-          @for (valeur of sortie; track $index; let dernier = $last) {
-            {{ valeur | number: '1.2-2' }}
+        @if (i === 8) {
+          <td>...</td>
+        }
+      }
+    </tr>
+    <tr>
+      <th>
+        <label>{{ 'COMPOSANTS.PARAMETRAGE.ML.MODELE.SORTIES' | translate }}</label>
+        <span>[
+          @for (description of descriptionSorties; track description.sub; let dernier = $last) {
+            a<sup>{{ description.sup }}</sup><sub>{{ description.sub }}</sub>
             @if (!dernier) {
               ,
             }
           }
-          ]
-        </td>
+          ]</span>
+      </th>
+      @for (sortie of sorties; track $index; let i = $index) {
+        @if (i < 8) {
+          <td>
+            [
+            @for (valeur of sortie; track $index; let dernier = $last) {
+              {{ valeur | number: '1.0-4' }}
+              @if (!dernier) {
+                ,
+              }
+            }
+            ]
+          </td>
+        }
+        @if (i === 8) {
+          <td>...</td>
+        }
       }
-    }
-  </tr>
-  </tbody>
-</table>
+    </tr>
+    </tbody>
+  </table>
+}

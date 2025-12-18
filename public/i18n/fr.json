@@ -264,7 +264,7 @@
           "PRIX_ACHAT": "Prix achat",
           "PRIX_REVENTE": "Prix revente",
           "COURS": "Cours",
-          "VARIATION_ORDRE": "Var Ordre/Clôture",
+          "VARIATION_ORDRE": "Var Ordre/Cours",
           "VARIATION_ACHAT": "Var/Ac",
           "VARIATION_REVENTE": "Var/Revente"
         }
@@ -584,6 +584,12 @@
         },
         "COUCHES": {
           "COUCHE_DENSE": {
+            "DESCRIPTION": "Couche dense : {{nbNeurones}} neurones avec {{nbPoids}} poids (activation {{activation}} ; initialisation {{initialisation}})",
+            "POIDS_NEURONES": "Poids",
+            "BIAIS_NEURONES": "Biais"
+          },
+          "COUCHE_CONV2D": {
+            "DESCRIPTION": "Couche de convolution 2D : {{nbNeurones}} neurones avec {{nbPoids}}x{{nbPoids}} poids (activation {{activation}} ; initialisation {{initialisation}})",
             "POIDS_NEURONES": "Poids",
             "BIAIS_NEURONES": "Biais"
           }

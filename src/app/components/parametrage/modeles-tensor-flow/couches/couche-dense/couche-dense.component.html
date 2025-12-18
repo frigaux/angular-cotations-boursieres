@@ -1,56 +1,66 @@
 @if (couche) {
-  <div class="couche">
-    <span>{{ couche.fonctionActivation }} (</span>
-    <table>
-      <thead>
-      <th [colSpan]="couche.neurones[0].poids.length">
-        {{ 'COMPOSANTS.PARAMETRAGE.ML.COUCHES.COUCHE_DENSE.POIDS_NEURONES' | translate }}
-      </th>
-      </thead>
-      <tbody>
-        @for (neurone of couche.neurones; track $index) {
-          <tr>
-            @for (poids of neurone.poids; track $index) {
-              <td>{{ poids | number:'1.2-2' }}</td>
-            }
-          </tr>
-        }
-      </tbody>
-    </table>
-    <span>*</span>
-    <table>
-      <tbody>
-        @for (p of couche.neurones[0].poids; track $index; let i = $index) {
-          <tr>
-            <td>a<sup>{{ couche.numero - 1 }}</sup><sub>{{ i }}</sub></td>
-          </tr>
-        }
-      </tbody>
-    </table>
-    <span>+</span>
-    <table>
-      <thead>
-      <th>
-        {{ 'COMPOSANTS.PARAMETRAGE.ML.COUCHES.COUCHE_DENSE.BIAIS_NEURONES' | translate }}
-      </th>
-      </thead>
-      <tbody>
-        @for (neurone of couche.neurones; track $index) {
-          <tr>
-            <td>{{ neurone.biais | number:'1.2-2' }}</td>
-          </tr>
-        }
-      </tbody>
-    </table>
-    <span>) =</span>
-    <table>
-      <tbody>
-        @for (neurone of couche.neurones; track $index; let i = $index) {
-          <tr>
-            <td>a<sup>{{ couche.numero }}</sup><sub>{{ i }}</sub></td>
-          </tr>
-        }
-      </tbody>
-    </table>
-  </div>
+  <h3>{{
+      'COMPOSANTS.PARAMETRAGE.ML.COUCHES.COUCHE_DENSE.DESCRIPTION' | translate : {
+        nbNeurones: couche.neurones.length,
+        nbPoids: couche.neurones[0].poids!.length,
+        activation: couche.fonctionActivation,
+        initialisation: couche.fonctionInitialisationPoids
+      }
+    }}</h3>
+  @if (couche.neurones.length > 0 && couche.neurones.length < 10 && couche.neurones[0].poids!.length < 10) {
+    <div class="couche">
+      <span>{{ couche.fonctionActivation }} (</span>
+      <table>
+        <thead>
+        <th [colSpan]="couche.neurones[0].poids!.length">
+          {{ 'COMPOSANTS.PARAMETRAGE.ML.COUCHES.COUCHE_DENSE.POIDS_NEURONES' | translate }}
+        </th>
+        </thead>
+        <tbody>
+          @for (neurone of couche.neurones; track $index) {
+            <tr>
+              @for (poids of neurone.poids; track $index) {
+                <td>{{ poids | number:'1.3-3' }}</td>
+              }
+            </tr>
+          }
+        </tbody>
+      </table>
+      <span>*</span>
+      <table>
+        <tbody>
+          @for (p of couche.neurones[0].poids; track $index; let i = $index) {
+            <tr>
+              <td>a<sup>{{ couche.numero - 1 }}</sup><sub>{{ i }}</sub></td>
+            </tr>
+          }
+        </tbody>
+      </table>
+      <span>+</span>
+      <table>
+        <thead>
+        <th>
+          {{ 'COMPOSANTS.PARAMETRAGE.ML.COUCHES.COUCHE_DENSE.BIAIS_NEURONES' | translate }}
+        </th>
+        </thead>
+        <tbody>
+          @for (neurone of couche.neurones; track $index) {
+            <tr>
+              <td>{{ neurone.biais | number:'1.3-3' }}</td>
+            </tr>
+          }
+        </tbody>
+      </table>
+      <span>) =</span>
+      <table>
+        <tbody>
+          @for (neurone of couche.neurones; track $index; let i = $index) {
+            <tr>
+              <td>a<sup>{{ couche.numero }}</sup><sub>{{ i }}</sub></td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  }
 }

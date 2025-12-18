@@ -23,6 +23,9 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {UIChart} from 'primeng/chart';
 import {GraphiquesService} from '../../../services/modeles-tensor-flow/regression-supervisee/graphiques.service';
 import {NgClass, PercentPipe} from '@angular/common';
+import {ExplorateurModeleComponent} from './explorateur-modele/explorateur-modele.component';
+import {ModeleEtDonnees} from './explorateur-modele/modele-et-donnees.interface';
+import {ModeleService} from '../../../services/modeles-tensor-flow/modele.service';
 
 @Component({
   selector: 'app-classification-supervisee-convolutive',
@@ -37,7 +40,8 @@ import {NgClass, PercentPipe} from '@angular/common';
     FormsModule,
     UIChart,
     NgClass,
-    PercentPipe
+    PercentPipe,
+    ExplorateurModeleComponent
   ],
   templateUrl: './classification-supervisee-convolutive.component.html',
   styleUrl: './classification-supervisee-convolutive.component.sass',
@@ -52,7 +56,7 @@ export class ClassificationSuperviseeConvolutiveComponent implements OnInit {
   // données, modèle, couches
   protected iterateurDonnees?: IterateurDonnees;
   protected progressionEntrainement: number = 0;
-  protected modele?: LayersModel;
+  protected modeleEtDonnees?: ModeleEtDonnees;
 
   // chiffres des images affichées
   protected booleenParChiffreParImage?: number[][];
@@ -79,7 +83,8 @@ export class ClassificationSuperviseeConvolutiveComponent implements OnInit {
 
   constructor(private graphiquesService: GraphiquesService,
               private donneesService: DonneesService,
-              private modelesService: ModelesService) {
+              private modelesService: ModelesService,
+              private modeleService: ModeleService) {
     this.entrainementChartOptions = this.graphiquesService.entrainementChartOptions();
   }
 
@@ -137,9 +142,9 @@ export class ClassificationSuperviseeConvolutiveComponent implements OnInit {
 
   protected entrainerModele() {
     if (this.iterateurDonnees) {
-      this.modele = undefined;
+      this.modeleEtDonnees = undefined;
       this.progressionEntrainement = 0;
-      const modele: LayersModel = this.modelesService.modeleFonctionnelImagesChiffres(this.tauxApprentissage);
+      const modeleCouches: LayersModel = this.modelesService.modeleFonctionnelImagesChiffres(this.tauxApprentissage);
 
       const [imagesEntrainement, chiffresAttendusEntrainement] = this.remodelerTenseurs(this.nombreImagesEntrainement,
         () => this.iterateurDonnees!.donneesEntrainementSuivantes(this.nombreImagesEntrainement));
@@ -147,7 +152,7 @@ export class ClassificationSuperviseeConvolutiveComponent implements OnInit {
         () => this.iterateurDonnees!.donneesPredictionSuivantes(this.nombreImagesPredictions));
 
       const logsEpoch: Array<Logs> = [];
-      modele.fit(imagesEntrainement, chiffresAttendusEntrainement, {
+      modeleCouches.fit(imagesEntrainement, chiffresAttendusEntrainement, {
         epochs: this.nombreIterations,
         batchSize: this.tailleLot,
         validationData: [imagesValidation, chiffresAttendusValidation],
@@ -164,7 +169,12 @@ export class ClassificationSuperviseeConvolutiveComponent implements OnInit {
           }
         }
       }).then(() => {
-        this.modele = modele;
+        this.modeleEtDonnees = {
+          modeleCouches,
+          modele: this.modeleService.modele(modeleCouches),
+          entrees: imagesEntrainement,
+          sorties: chiffresAttendusEntrainement
+        };
         this.entrainementChart = this.graphiquesService.entrainementChart(logsEpoch);
         this.predictions();
       });
@@ -177,10 +187,8 @@ export class ClassificationSuperviseeConvolutiveComponent implements OnInit {
       const [images, chiffresAttendus] = this.remodelerTenseurs(this.nombreImagesPredictions,
         () => this.iterateurDonnees!.donneesPredictionSuivantes(this.nombreImagesPredictions));
 
-      const predictions: Tensor2D = this.modele!.predict(images) as Tensor2D;
+      const predictions: Tensor2D = this.modeleEtDonnees!.modeleCouches.predict(images) as Tensor2D;
 
-      // this.analysesPredictions(chiffresAttendus.argMax(-1).arraySync() as number[],
-      //   predictions.argMax(-1).arraySync() as number[]);
       this.analysesPredictions(chiffresAttendus, predictions);
     });
     // TODO : dispose ?
@@ -188,33 +196,6 @@ export class ClassificationSuperviseeConvolutiveComponent implements OnInit {
     // chiffresAttendus.dispose();
     // predictions.dispose();
   }
-
-  // private analysesPredictions(chiffresAttendus: number[], chiffresPredits: number[]) {
-  //   const predictionsParChiffre: Array<Array<number>> = Array.from({length: DonneesService.CHIFFRES_DISTINCTS},
-  //     (v, i) => Array.from({length: DonneesService.CHIFFRES_DISTINCTS}, (v, i) => 0));
-  //   chiffresAttendus.forEach((chiffreAttendu, i) => {
-  //     predictionsParChiffre[chiffreAttendu][chiffresPredits[i]] = predictionsParChiffre[chiffreAttendu][chiffresPredits[i]] + 1;
-  //   });
-  //   this.predictionsParChiffre = predictionsParChiffre;
-  //
-  //   const predictionsAgregees: Array<{
-  //     reussites: number,
-  //     total: number,
-  //     predictions: Array<{ chiffrePredit: number, quantite: number }>
-  //   }> = [];
-  //   predictionsParChiffre.forEach((chiffresPredits, chiffreAttendu) => {
-  //     const total = chiffresPredits.reduce((acc, qt) => acc + qt, 0);
-  //     const reussites = chiffresPredits[chiffreAttendu];
-  //     const predictions: Array<{ chiffrePredit: number, quantite: number }> = [];
-  //     chiffresPredits.forEach((quantite, chiffrePredit) => {
-  //       if (quantite !== 0) {
-  //         predictions.push({chiffrePredit, quantite})
-  //       }
-  //     });
-  //     predictionsAgregees.push({reussites, total, predictions});
-  //   });
-  //   this.predictionsAgregees = predictionsAgregees;
-  // }
 
   private analysesPredictions(chiffresAttendus: Tensor2D, predictions: Tensor2D) {
     const chiffresAttendusArgMax: number[] = chiffresAttendus.argMax(-1).arraySync() as number[];
@@ -259,11 +240,11 @@ export class ClassificationSuperviseeConvolutiveComponent implements OnInit {
 
   private tracerInformations() {
     // tf.enableDebugMode();
-    // this.modele!.summary();
-    // this.modele!.weights.forEach(w => {
+    // this.modeleEtDonnees!.modeleCouches.summary();
+    // this.modeleEtDonnees!.modeleCouches.weights.forEach(w => {
     //   console.log(w.name, w.shape);
     // });
-    // this.modele!.layers.forEach(layer => {
+    // this.modeleEtDonnees!.modeleCouches.layers.forEach(layer => {
     //   console.log(layer.name, layer.weights);
     // });
   }

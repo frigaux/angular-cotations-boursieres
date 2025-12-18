@@ -1,8 +1,8 @@
 import {Component, input, InputSignal} from '@angular/core';
 import {TranslatePipe} from '@ngx-translate/core';
 import {ModeleEtDonnees} from '../modele-et-donnees.interface';
-import {ModeleService} from '../../../../../services/modeles-tensor-flow/modele.service';
 import {DecimalPipe} from '@angular/common';
+import {TypeCouche} from '../../../../../services/modeles-tensor-flow/type-couche';
 
 @Component({
   selector: 'app-explorateur-entrees-sorties',
@@ -22,26 +22,23 @@ export class ExplorateurEntreesSortiesComponent {
   protected descriptionSorties?: { sup: number; sub: number }[];
   protected sorties?: number[][];
 
-  constructor(private modeleService: ModeleService) {
-  }
-
   private intercepteurModele(modeleEtDonnees: ModeleEtDonnees | undefined) {
     if (modeleEtDonnees) {
-      const modele = this.modeleService.modele(modeleEtDonnees.modele);
+      if (modeleEtDonnees.entrees.shape.length === 3 && modeleEtDonnees.modele.couches[0].type === TypeCouche.DENSE) {
+        this.descriptionEntrees = modeleEtDonnees.modele.couches[0].neurones[0].poids!
+          .map((poids, i) => {
+            return {sup: 0, sub: i};
+          });
 
-      this.descriptionEntrees = modele.couches[0].neurones[0].poids
-        .map((poids, i) => {
-          return {sup: 0, sub: i};
-        });
+        const derniereCouche = modeleEtDonnees.modele.couches[modeleEtDonnees.modele.couches.length - 1];
+        this.descriptionSorties = derniereCouche.neurones
+          .map((neurone, i) => {
+            return {sup: derniereCouche.numero, sub: i};
+          });
 
-      const derniereCouche = modele.couches[modele.couches.length - 1];
-      this.descriptionSorties = derniereCouche.neurones
-        .map((neurone, i) => {
-          return {sup: derniereCouche.numero, sub: i};
-        });
-
-      this.entrees = modeleEtDonnees.donneesNormalisees.entrees.arraySync() as number[][];
-      this.sorties = modeleEtDonnees.donneesNormalisees.sorties.arraySync() as number[][];
+        this.entrees = modeleEtDonnees.entrees.arraySync() as number[][];
+        this.sorties = modeleEtDonnees.sorties.arraySync() as number[][];
+      }
     }
     return modeleEtDonnees;
   }

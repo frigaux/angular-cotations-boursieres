@@ -4,6 +4,7 @@ import {Neurone} from './neurone.interface';
 export interface Couche {
   numero: number;
   type: TypeCouche;
-  fonctionActivation: string;
+  fonctionActivation?: string;
+  fonctionInitialisationPoids?: string;
   neurones: Neurone[];
 }

@@ -17,6 +17,10 @@ import {Donnees} from '../../../services/modeles-tensor-flow/regression-supervis
 import {Rank} from '@tensorflow/tfjs-core/dist/types';
 import {ExplorateurModeleComponent} from './explorateur-modele/explorateur-modele.component';
 import {ModeleEtDonnees} from './explorateur-modele/modele-et-donnees.interface';
+import {ModeleService} from '../../../services/modeles-tensor-flow/modele.service';
+import {
+  DonneesNormalisees
+} from '../../../services/modeles-tensor-flow/regression-supervisee/donnees-normalisees.interface';
 
 @Component({
   selector: 'app-regression-supervisee',
@@ -47,12 +51,13 @@ export class RegressionSuperviseeComponent implements OnInit {
   protected donnees?: Donnees<Rank.R2>;
   protected progressionEntrainement: number = 0;
   protected modeleEtDonnees?: ModeleEtDonnees;
+  private donneesNormalisees?: DonneesNormalisees;
 
   // paramètres apprentissage
   protected tauxApprentissage: number = 0.1;
   protected iterations: number = 50;
-  protected lot: number = 32;
 
+  protected lot: number = 32;
   // https://www.chartjs.org/
   protected donneesChart?: any;
   protected donneesChartOptions?: any;
@@ -61,7 +66,8 @@ export class RegressionSuperviseeComponent implements OnInit {
 
   constructor(private graphiquesService: GraphiquesService,
               private modelesService: ModelesService,
-              private donneesService: DonneesService) {
+              private donneesService: DonneesService,
+              private modeleService: ModeleService) {
     this.donneesChartOptions = this.graphiquesService.donneesChartOptions();
     this.entrainementChartOptions = this.graphiquesService.entrainementChartOptions();
   }
@@ -71,7 +77,6 @@ export class RegressionSuperviseeComponent implements OnInit {
     window.setInterval(() => this.nombreTenseurs = tf.memory().numTensors, 1000);
     this.donneesService.donneesPuissancesRendements()
       .then(donnees => {
-        // console.log(this.donnees?.entrees.arraySync(), this.donnees?.entrees.dataSync());
         this.donnees = donnees;
         this.donneesChart = this.graphiquesService.donneesChart(donnees, 'DONNEES');
       });
@@ -87,12 +92,12 @@ export class RegressionSuperviseeComponent implements OnInit {
   protected entrainerModele() {
     if (this.donnees) {
       this.modeleEtDonnees = undefined;
-      const modele: LayersModel = this.modelesService.modelePuissancesRendements(this.tauxApprentissage);
+      const modeleCouches: LayersModel = this.modelesService.modelePuissancesRendements(this.tauxApprentissage);
 
-      const donneesNormalisees = this.donneesService.normaliserZeroAUn(this.donnees);
+      this.donneesNormalisees = this.donneesService.normaliserZeroAUn(this.donnees);
       this.progressionEntrainement = 0;
       const logs: Array<Logs> = [];
-      modele.fit(donneesNormalisees.entrees, donneesNormalisees.sorties, {
+      modeleCouches.fit(this.donneesNormalisees.entrees, this.donneesNormalisees.sorties, {
         epochs: this.iterations,
         batchSize: this.lot,
         shuffle: true,
@@ -109,7 +114,12 @@ export class RegressionSuperviseeComponent implements OnInit {
           }
         }
       }).then(() => {
-        this.modeleEtDonnees = {modele, donneesNormalisees};
+        this.modeleEtDonnees = {
+          modeleCouches,
+          modele: this.modeleService.modele(modeleCouches),
+          entrees: this.donneesNormalisees!.entrees,
+          sorties: this.donneesNormalisees!.sorties
+        };
         this.entrainementTermine(logs);
       });
     }
@@ -123,7 +133,7 @@ export class RegressionSuperviseeComponent implements OnInit {
 
     // scatter chart : données et prédictions
     const datasets = this.graphiquesService.donneesChart(this.donnees!, 'DONNEES');
-    const predictions = this.donneesService.predictionsPuissancesRendements(this.modeleEtDonnees!);
+    const predictions = this.donneesService.predictionsPuissancesRendements(this.modeleEtDonnees!.modeleCouches, this.donneesNormalisees!);
     datasets.datasets.push(this.graphiquesService.donneesChart(predictions, 'PREDICTIONS').datasets[0]);
     this.donneesChart = datasets;
 
@@ -131,12 +141,13 @@ export class RegressionSuperviseeComponent implements OnInit {
   }
 
   private tracerInformations() {
+    // console.log(this.donnees!.entrees.arraySync(), this.modeleEtDonnees!.entrees.dataSync());
     // tf.enableDebugMode();
-    // this.modeleEtDonnees!.modele!.summary();
-    // this.modeleEtDonnees!.modele!.weights.forEach(w => {
+    // this.modeleEtDonnees!.modeleCouches.summary();
+    // this.modeleEtDonnees!.modeleCouches.weights.forEach(w => {
     //   console.log(w.name, w.shape);
     // });
-    // this.modeleEtDonnees!.modele!.layers.forEach(layer => {
+    // this.modeleEtDonnees!.modeleCouches.layers.forEach(layer => {
     //   console.log(layer.name, layer.weights);
     // });
     // const t1 = tf.tensor([0, 0, 0], [3, 1], 'int32');

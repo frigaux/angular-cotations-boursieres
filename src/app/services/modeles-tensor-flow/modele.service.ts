@@ -14,7 +14,8 @@ export class ModeleService {
   modele(modele: LayersModel): Modele {
     const optimiseur = this.optimiseur(modele);
     const fonctionsPerte = modele.lossFunctions.map(lossFunction => lossFunction.name);
-    const metriques = modele.metricsNames;
+    const metriques = modele.metricsNames
+      .filter(metric => metric !== 'loss');
     const couches = this.couchesService.couches(modele);
     return {optimiseur, fonctionsPerte, metriques, couches};
   }

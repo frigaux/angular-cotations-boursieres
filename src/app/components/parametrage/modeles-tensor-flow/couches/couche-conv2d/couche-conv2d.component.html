@@ -1,0 +1,76 @@
+@if (couche) {
+  <h3>{{
+      'COMPOSANTS.PARAMETRAGE.ML.COUCHES.COUCHE_CONV2D.DESCRIPTION' | translate : {
+        nbNeurones: couche.neurones.length,
+        nbPoids: couche.neurones[0].poids2D!.length,
+        activation: couche.fonctionActivation,
+        initialisation: couche.fonctionInitialisationPoids
+      }
+    }}</h3>
+  <div class="couche">
+    <span>{{ couche.fonctionActivation }} (</span>
+    <table>
+      <thead>
+      <th [colSpan]="couche.neurones[0].poids2D!.length">
+        {{ 'COMPOSANTS.PARAMETRAGE.ML.COUCHES.COUCHE_CONV2D.POIDS_NEURONES' | translate }}
+      </th>
+      </thead>
+      <tbody>
+        @for (neurone of couche.neurones; track $index) {
+          <tr>
+            @for (poids1D of neurone.poids2D; track $index) {
+              <td>
+                <ul>
+                  @for (poids of poids1D; track $index) {
+                    <li>{{ poids | number:'1.3-3' }}</li>
+                  }
+                </ul>
+              </td>
+            }
+          </tr>
+        }
+      </tbody>
+    </table>
+    <span>*</span>
+    <table>
+      <tbody>
+        @for (poids1D of couche.neurones[0].poids2D; track $index; let i = $index) {
+          <tr>
+            <td>
+              <ul>
+                @for (p of poids1D; track $index; let j = $index) {
+                  <li>a<sup>{{ couche.numero - 1 }}</sup><sub>{{ `[${i},${j}]` }}</sub></li>
+                }
+              </ul>
+            </td>
+          </tr>
+        }
+      </tbody>
+    </table>
+    <span>+</span>
+    <table>
+      <thead>
+      <th>
+        {{ 'COMPOSANTS.PARAMETRAGE.ML.COUCHES.COUCHE_CONV2D.BIAIS_NEURONES' | translate }}
+      </th>
+      </thead>
+      <tbody>
+        @for (neurone of couche.neurones; track $index) {
+          <tr>
+            <td>{{ neurone.biais | number:'1.3-3' }}</td>
+          </tr>
+        }
+      </tbody>
+    </table>
+    <span>) =</span>
+    <table>
+      <tbody>
+        @for (neurone of couche.neurones; track $index; let i = $index) {
+          <tr>
+            <td>a<sup>{{ couche.numero }}</sup><sub>{{ i }}</sub></td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  </div>
+}

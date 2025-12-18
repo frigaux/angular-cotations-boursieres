@@ -52,7 +52,7 @@
       <p-button
         label="{{ 'COMPOSANTS.PARAMETRAGE.ML.CLASSIFICATION_SUPERVISEE_CONVOLUTIVE.ENTRAINER_MODELE' | translate }}"
         (onClick)="entrainerModele()"/>
-      @if (!modele) {
+      @if (!modeleEtDonnees) {
         <app-barre-progression [pourcentage]="progressionEntrainement" largeur="20rem"></app-barre-progression>
       }
     }
@@ -90,4 +90,6 @@
       </table>
     }
   </div>
+
+  <app-explorateur-modele [modeleEtDonnees]="modeleEtDonnees"></app-explorateur-modele>
 }

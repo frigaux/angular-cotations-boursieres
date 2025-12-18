@@ -5,9 +5,6 @@ import {Donnees} from './donnees.interface';
 import {DonneesNormalisees} from './donnees-normalisees.interface';
 import {Tensor} from '@tensorflow/tfjs-core';
 import {Rank} from '@tensorflow/tfjs-core/dist/types';
-import {
-  ModeleEtDonnees
-} from '../../../components/parametrage/modeles-tensor-flow/explorateur-modele/modele-et-donnees.interface';
 
 @Injectable({
   providedIn: 'root',
@@ -77,16 +74,16 @@ export class DonneesService {
     });
   }
 
-  predictionsPuissancesRendements(modeleEtDonnees: ModeleEtDonnees) {
+  predictionsPuissancesRendements(modele: LayersModel, donneesNormalisees: DonneesNormalisees) {
     const xs = tf.linspace(0, 1, 100);
-    const preds: any = modeleEtDonnees.modele.predict(xs.reshape([100, 1]));
+    const preds: any = modele.predict(xs.reshape([100, 1]));
     const entrees = xs
-      .mul(modeleEtDonnees.donneesNormalisees.entreesMax.sub(modeleEtDonnees.donneesNormalisees.entreesMin))
-      .add(modeleEtDonnees.donneesNormalisees.entreesMin);
+      .mul(donneesNormalisees.entreesMax.sub(donneesNormalisees.entreesMin))
+      .add(donneesNormalisees.entreesMin);
 
     const sorties = preds
-      .mul(modeleEtDonnees.donneesNormalisees.sortiesMax.sub(modeleEtDonnees.donneesNormalisees.sortiesMin))
-      .add(modeleEtDonnees.donneesNormalisees.sortiesMin);
+      .mul(donneesNormalisees.sortiesMax.sub(donneesNormalisees.sortiesMin))
+      .add(donneesNormalisees.sortiesMin);
     return {entrees, sorties};
   }
 }
