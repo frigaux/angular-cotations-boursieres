@@ -6,6 +6,7 @@ import {TypeCouche} from './type-couche.enum';
 import {DTOCoucheDense} from './dto-couche-dense.class';
 import {DTOCoucheConv2d} from './dto-couche-conv2d.class';
 import {DTONeurone2d} from './dto-neurone2d.interface';
+import {DTOCoucheMaxpooling2d} from './dto-couche-pooling2d.class';
 
 @Injectable({
   providedIn: 'root',
@@ -43,17 +44,15 @@ export class CouchesService {
     return new DTOCoucheConv2d(layer.id,
       layer.activation.getClassName?.(),
       layer.kernelInitializer.getClassName?.(),
-      neurones);
+      neurones,
+      layer.strides);
   }
 
-  private couchesMaxPooling2D(layer: any): DTOCouche {
-    return {
-      numero: layer.id,
-      type: TypeCouche.MAXPOOLING2D
-    };
+  private couchesMaxPooling2D(layer: any): DTOCoucheMaxpooling2d {
+    return new DTOCoucheMaxpooling2d(layer.id, layer.poolSize, layer.strides);
   }
 
-  private couchesFlatten(layer: any) {
+  private couchesFlatten(layer: any): DTOCouche {
     return {
       numero: layer.id,
       type: TypeCouche.FLATTEN

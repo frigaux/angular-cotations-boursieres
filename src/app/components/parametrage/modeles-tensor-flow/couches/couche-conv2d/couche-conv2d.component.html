@@ -1,10 +1,11 @@
 @if (couche) {
   <h3>{{
       'COMPOSANTS.PARAMETRAGE.ML.COUCHES.COUCHE_CONV2D.DESCRIPTION' | translate : {
-        nbNeurones: couche.neurones.length,
-        nbPoids: couche.neurones[0].poids!.length,
-        activation: couche.fonctionActivation,
-        initialisation: couche.fonctionInitialisationPoids
+        nbFenetresFiltres: couche.neurones.length,
+        tailleFenetre: couche.neurones[0].poids!.length,
+        pasDeplacementFenetre: couche.pas[0],
+        fonctionActivation: couche.fonctionActivation,
+        fonctionInitialisationPoids: couche.fonctionInitialisationPoids
       }
     }}</h3>
   <div class="couche">

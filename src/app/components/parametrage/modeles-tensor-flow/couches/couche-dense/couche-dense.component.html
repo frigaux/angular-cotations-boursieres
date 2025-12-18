@@ -3,8 +3,8 @@
       'COMPOSANTS.PARAMETRAGE.ML.COUCHES.COUCHE_DENSE.DESCRIPTION' | translate : {
         nbNeurones: couche.neurones.length,
         nbPoids: couche.neurones[0].poids!.length,
-        activation: couche.fonctionActivation,
-        initialisation: couche.fonctionInitialisationPoids
+        fonctionActivation: couche.fonctionActivation,
+        fonctionInitialisationPoids: couche.fonctionInitialisationPoids
       }
     }}</h3>
   @if (couche.neurones.length > 0 && couche.neurones.length < 10 && couche.neurones[0].poids!.length < 10) {

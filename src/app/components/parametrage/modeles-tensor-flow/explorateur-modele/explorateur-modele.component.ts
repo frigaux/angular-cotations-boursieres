@@ -5,6 +5,8 @@ import {TypeCouche} from '../../../../services/modeles-tensor-flow/type-couche.e
 import {ModeleEtDonnees} from './modele-et-donnees.interface';
 import {ExplorateurEntreesSortiesComponent} from './explorateur-entrees-sorties/explorateur-entrees-sorties.component';
 import {CoucheConv2dComponent} from '../couches/couche-conv2d/couche-conv2d.component';
+import {CoucheMaxpooling2dComponent} from '../couches/couche-maxpooling2d/couche-maxpooling2d.component';
+import {CoucheFlatten} from '../couches/couche-flatten/couche-flatten';
 
 @Component({
   selector: 'app-explorateur-modele',
@@ -12,7 +14,9 @@ import {CoucheConv2dComponent} from '../couches/couche-conv2d/couche-conv2d.comp
     CoucheDenseComponent,
     TranslatePipe,
     ExplorateurEntreesSortiesComponent,
-    CoucheConv2dComponent
+    CoucheConv2dComponent,
+    CoucheMaxpooling2dComponent,
+    CoucheFlatten
   ],
   templateUrl: './explorateur-modele.component.html',
   styleUrl: './explorateur-modele.component.sass',

@@ -34,6 +34,12 @@
           @case (TypeCouche.CONV2D) {
             <app-couche-conv2d [couche]="couche"></app-couche-conv2d>
           }
+          @case (TypeCouche.MAXPOOLING2D) {
+            <app-couche-maxpooling2d [couche]="couche"></app-couche-maxpooling2d>
+          }
+          @case (TypeCouche.FLATTEN) {
+            <app-couche-flatten [couche]="couche"></app-couche-flatten>
+          }
         }
       </div>
     }

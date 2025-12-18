@@ -8,8 +8,7 @@ import {DonneesService} from './donnees.service';
 })
 export class ModelesService {
   modeleFonctionnelImagesChiffres(tauxApprentissage: number) {
-    // https://setosa.io/ev/image-kernels/
-    // https://cs231n.github.io/convolutional-networks/
+    // https://datascientest.com/convolutional-neural-network
     const input: SymbolicTensor = tf.input({shape: [
       DonneesService.NOMBRE_PIXELS_LARGEUR_HAUTEUR_IMAGE,
       DonneesService.NOMBRE_PIXELS_LARGEUR_HAUTEUR_IMAGE,

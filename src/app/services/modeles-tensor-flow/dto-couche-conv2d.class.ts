@@ -8,11 +8,13 @@ export class DTOCoucheConv2d implements DTOCouche {
   fonctionActivation: string;
   fonctionInitialisationPoids: string;
   neurones: DTONeurone2d[];
+  pas: number[];
 
-  constructor(numero: number, fonctionActivation: string, fonctionInitialisationPoids: string, neurones: DTONeurone2d[]) {
+  constructor(numero: number, fonctionActivation: string, fonctionInitialisationPoids: string, neurones: DTONeurone2d[], pas: number[]) {
     this.numero = numero;
     this.fonctionActivation = fonctionActivation;
     this.fonctionInitialisationPoids = fonctionInitialisationPoids;
     this.neurones = neurones;
+    this.pas = pas;
   }
 }

@@ -584,14 +584,20 @@
         },
         "COUCHES": {
           "COUCHE_DENSE": {
-            "DESCRIPTION": "Couche dense : {{nbNeurones}} neurones avec {{nbPoids}} poids (activation {{activation}} ; initialisation {{initialisation}})",
+            "DESCRIPTION": "Couche dense : {{nbNeurones}} neurones avec {{nbPoids}} poids (activation {{fonctionActivation}} ; initialisation poids {{fonctionInitialisationPoids}})",
             "POIDS_NEURONES": "Poids",
             "BIAIS_NEURONES": "Biais"
           },
           "COUCHE_CONV2D": {
-            "DESCRIPTION": "Couche de convolution 2D : {{nbNeurones}} neurones avec {{nbPoids}}x{{nbPoids}} poids (activation {{activation}} ; initialisation {{initialisation}})",
+            "DESCRIPTION": "Couche de convolution 2D : {{nbFenetresFiltres}} fenêtres de filtre de taille {{tailleFenetre}}x{{tailleFenetre}} qui se déplacent progressivement de gauche vers la droite de {{pasDeplacementFenetre}} en {{pasDeplacementFenetre}} (activation {{fonctionActivation}} ; initialisation poids {{fonctionInitialisationPoids}})",
             "POIDS_NEURONES": "Poids",
             "BIAIS_NEURONES": "Biais"
+          },
+          "COUCHE_MAXPOOLING2D": {
+            "DESCRIPTION": "Couche échantillonnage des maximums : fenêtre de filtre qui prend le maximum sur une taille de {{tailleFenetre}}x{{tailleFenetre}} et se déplace de {{pasDeplacementFenetre}} en {{pasDeplacementFenetre}}"
+          },
+          "FLATTEN": {
+            "DESCRIPTION": "Couche qui convertit les entrées en tensor1d pour une couche dense"
           }
         }
       }
