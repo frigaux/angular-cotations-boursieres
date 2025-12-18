@@ -1,8 +1,8 @@
 import {Injectable} from '@angular/core';
-import {Modele} from './modele.interface';
+import {DTOModele} from './dto-modele.interface';
 import {LayersModel} from '@tensorflow/tfjs-layers/dist/engine/training';
 import {CouchesService} from './couches.service';
-import {Optimiseur} from './optimiseur';
+import {DTOOptimiseur} from './dto-optimiseur';
 
 @Injectable({
   providedIn: 'root',
@@ -11,7 +11,7 @@ export class ModeleService {
   constructor(private couchesService: CouchesService) {
   }
 
-  modele(modele: LayersModel): Modele {
+  modele(modele: LayersModel): DTOModele {
     const optimiseur = this.optimiseur(modele);
     const fonctionsPerte = modele.lossFunctions.map(lossFunction => lossFunction.name);
     const metriques = modele.metricsNames
@@ -20,7 +20,7 @@ export class ModeleService {
     return {optimiseur, fonctionsPerte, metriques, couches};
   }
 
-  private optimiseur(modele: LayersModel): Optimiseur {
+  private optimiseur(modele: LayersModel): DTOOptimiseur {
     const optimizer: any = modele.optimizer;
     const nom = optimizer.getClassName();
     const parametres: Array<{ nom: string, valeur: number }> = Object.keys(optimizer)

@@ -2,7 +2,7 @@
   <h3>{{
       'COMPOSANTS.PARAMETRAGE.ML.COUCHES.COUCHE_CONV2D.DESCRIPTION' | translate : {
         nbNeurones: couche.neurones.length,
-        nbPoids: couche.neurones[0].poids2D!.length,
+        nbPoids: couche.neurones[0].poids!.length,
         activation: couche.fonctionActivation,
         initialisation: couche.fonctionInitialisationPoids
       }
@@ -11,14 +11,14 @@
     <span>{{ couche.fonctionActivation }} (</span>
     <table>
       <thead>
-      <th [colSpan]="couche.neurones[0].poids2D!.length">
+      <th [colSpan]="couche.neurones[0].poids!.length">
         {{ 'COMPOSANTS.PARAMETRAGE.ML.COUCHES.COUCHE_CONV2D.POIDS_NEURONES' | translate }}
       </th>
       </thead>
       <tbody>
         @for (neurone of couche.neurones; track $index) {
           <tr>
-            @for (poids1D of neurone.poids2D; track $index) {
+            @for (poids1D of neurone.poids; track $index) {
               <td>
                 <ul>
                   @for (poids of poids1D; track $index) {
@@ -34,7 +34,7 @@
     <span>*</span>
     <table>
       <tbody>
-        @for (poids1D of couche.neurones[0].poids2D; track $index; let i = $index) {
+        @for (poids1D of couche.neurones[0].poids; track $index; let i = $index) {
           <tr>
             <td>
               <ul>

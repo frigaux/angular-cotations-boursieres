@@ -1,7 +1,7 @@
 import {Component, input, InputSignal} from '@angular/core';
 import {CoucheDenseComponent} from "../couches/couche-dense/couche-dense.component";
 import {TranslatePipe} from "@ngx-translate/core";
-import {TypeCouche} from '../../../../services/modeles-tensor-flow/type-couche';
+import {TypeCouche} from '../../../../services/modeles-tensor-flow/type-couche.enum';
 import {ModeleEtDonnees} from './modele-et-donnees.interface';
 import {ExplorateurEntreesSortiesComponent} from './explorateur-entrees-sorties/explorateur-entrees-sorties.component';
 import {CoucheConv2dComponent} from '../couches/couche-conv2d/couche-conv2d.component';
