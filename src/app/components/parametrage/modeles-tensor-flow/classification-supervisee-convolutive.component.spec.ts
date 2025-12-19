@@ -1,6 +1,7 @@
 import {ComponentFixture, TestBed} from '@angular/core/testing';
 
 import {ClassificationSuperviseeConvolutiveComponent} from './classification-supervisee-convolutive.component';
+import {TranslateModule} from '@ngx-translate/core';
 
 describe('ClassificationSuperviseeConvolutiveComponent', () => {
   let component: ClassificationSuperviseeConvolutiveComponent;
@@ -8,9 +9,12 @@ describe('ClassificationSuperviseeConvolutiveComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [ClassificationSuperviseeConvolutiveComponent]
+      imports: [
+        ClassificationSuperviseeConvolutiveComponent,
+        TranslateModule.forRoot({})
+      ]
     })
-    .compileComponents();
+      .compileComponents();
 
     fixture = TestBed.createComponent(ClassificationSuperviseeConvolutiveComponent);
     component = fixture.componentInstance;

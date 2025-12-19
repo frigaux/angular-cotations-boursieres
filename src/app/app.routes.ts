@@ -21,6 +21,9 @@ import {
 import {
   ClassificationSuperviseeConvolutiveComponent
 } from './components/parametrage/modeles-tensor-flow/classification-supervisee-convolutive.component';
+import {
+  GenerateurDonneesEntrainementModeleComponent
+} from './components/parametrage/modeles-tensor-flow/generateur-donnees-entrainement-modele/generateur-donnees-entrainement-modele.component';
 
 export const routes: Routes = [
   {
@@ -79,6 +82,11 @@ export const routes: Routes = [
   {
     path: 'classification-supervisee-convolutive',
     component: ClassificationSuperviseeConvolutiveComponent,
+    canActivate: [authentificationGuard]
+  },
+  {
+    path: 'generateur-donnees-entrainement-modele',
+    component: GenerateurDonneesEntrainementModeleComponent,
     canActivate: [authentificationGuard]
   },
   {path: '**', redirectTo: '/authentification'}

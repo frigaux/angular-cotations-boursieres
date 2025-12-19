@@ -79,6 +79,11 @@ export class HeaderComponent {
           label: translateService.instant('COMPOSANTS.HEADER.PARAMETRAGE.CLASSIFICATION_SUPERVISEE_CONVOLUTIVE'),
           routerLink: 'classification-supervisee-convolutive',
           icon: 'pi pi-wrench'
+        },
+        {
+          label: translateService.instant('COMPOSANTS.HEADER.PARAMETRAGE.GENERATEUR_DONNEES_ENTRAINEMENT_MODELE'),
+          routerLink: 'generateur-donnees-entrainement-modele',
+          icon: 'pi pi-wrench'
         }
       ]
     });

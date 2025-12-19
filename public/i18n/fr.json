@@ -11,7 +11,8 @@
     "GESTION_TABLEAUX": "Gestion des tableaux",
     "SAUVEGARDE_RESTAURATION": "Sauvegarde / restauration",
     "REGRESSION_SUPERVISEE": "Régression supervisée",
-    "CLASSIFICATION_SUPERVISEE_CONVOLUTIVE": "Classification supervisée convolutive"
+    "CLASSIFICATION_SUPERVISEE_CONVOLUTIVE": "Classification supervisée convolutive",
+    "GENERATEUR_DONNEES_ENTRAINEMENT_MODELE": "Générateur de données d'entrainement pour du ML"
   },
   "COMPOSANTS": {
     "COMMUN": {
@@ -37,7 +38,8 @@
         "GESTION_TABLEAUX": "Gestion des tableaux",
         "SAUVEGARDE_RESTAURATION": "Sauvegarde / restauration",
         "REGRESSION_SUPERVISEE": "Régression supervisée",
-        "CLASSIFICATION_SUPERVISEE_CONVOLUTIVE": "Classification supervisée convolutive"
+        "CLASSIFICATION_SUPERVISEE_CONVOLUTIVE": "Classification supervisée convolutive",
+        "GENERATEUR_DONNEES_ENTRAINEMENT_MODELE": "Générateur de données d'entrainement pour du ML"
       }
     },
     "VALEURS": {
