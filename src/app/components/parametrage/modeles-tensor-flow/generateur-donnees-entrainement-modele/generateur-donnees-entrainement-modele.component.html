@@ -1,0 +1,46 @@
+<h1>{{ 'COMPOSANTS.PARAMETRAGE.ML.GENERATEUR_DONNEES_ENTRAINEMENT.DONNEES_COURS_VAGUES' | translate }} </h1>
+
+<app-loader [affiche]="loading" [configuration]="[
+  {marginLeft: '0', marginTop: '1rem', height: 'calc(100vh - 15em)', width: '100%'}
+]"></app-loader>
+
+@if (!loading && coursDecores) {
+  <div class="conteneur">
+    <div class="liste-valeurs">
+      <label for="valeurs">{{
+          'COMPOSANTS.PARAMETRAGE.ML.GENERATEUR_DONNEES_ENTRAINEMENT.VALEURS_MARCHE' | translate: {
+            libelleMarche: `ENUMERATIONS.MARCHE.${marche}` | translate
+          }
+        }} </label>
+      <p-listbox id="valeurs"
+                 [options]="coursDecores"
+                 [(ngModel)]="coursDecoreSelectionne"
+                 optionLabel="valeur.libelle"
+                 [filter]="true"
+                 [listStyle]="{'max-height': 'calc(100vh - 25rem)'}"
+                 (onChange)="rafraichirVue()">
+      </p-listbox>
+      <p-button
+        [icon]="'pi pi-download'"
+        label="{{ 'COMPOSANTS.PARAMETRAGE.ML.GENERATEUR_DONNEES_ENTRAINEMENT.EXPORTER_DONNEES' | translate }}"
+        (onClick)="exporterDonnees()"/>
+    </div>
+
+    <div class="valeur">
+      @if (coursDecoreSelectionne) {
+        <h2>{{ coursDecoreSelectionne.valeur.libelle }} ({{ coursDecoreSelectionne.valeur.ticker }})</h2>
+        <div class="vagues">
+          <label for="nbVagues">
+            {{ 'COMPOSANTS.PARAMETRAGE.ML.GENERATEUR_DONNEES_ENTRAINEMENT.NOMBRE_VAGUES' | translate }} :
+          </label>
+          <p-inputNumber id="nbVagues" [(ngModel)]="coursDecoreSelectionne.nbVagues" [min]="0" required></p-inputNumber>
+        </div>
+        <div class="cours">
+          @if (data) {
+            <p-chart type="line" [data]="data" [options]="options"/>
+          }
+        </div>
+      }
+    </div>
+  </div>
+}

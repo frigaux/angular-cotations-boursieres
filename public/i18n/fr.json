@@ -601,6 +601,13 @@
           "FLATTEN": {
             "DESCRIPTION": "Couche qui convertit les entrées en tensor1d pour une couche dense"
           }
+        },
+        "GENERATEUR_DONNEES_ENTRAINEMENT": {
+          "DONNEES_COURS_VAGUES": "Générateur de données d'entrainement : cours -> nombre vagues",
+          "VALEURS_MARCHE": "Valeurs du marché {{libelleMarche}}",
+          "EXPORTER_DONNEES": "Exporter les données",
+          "NOMBRE_VAGUES": "Nombre de vagues",
+          "COURS": "Cours"
         }
       }
     }
