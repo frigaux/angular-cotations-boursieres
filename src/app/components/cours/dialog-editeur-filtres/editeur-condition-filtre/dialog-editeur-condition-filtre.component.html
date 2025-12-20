@@ -42,10 +42,10 @@
       <div class="boutons">
         <p-button
           label="{{ 'COMPOSANTS.COMMUN.ANNULER' | translate }}"
-          (onClick)="this.abandon.emit()" type="reset" severity="warn"/>
+          (onClick)="abandon.emit()" type="reset" severity="warn" [icon]="'pi pi-times'"/>
         <p-button
           label="{{ 'COMPOSANTS.COURS.EDITEUR_FILTRES.EDITEUR_CONDITION_FILTRE.MODIFIER' | translate }}"
-          type="submit" severity="danger"/>
+          type="submit" severity="danger" [icon]="'pi pi-check'"/>
       </div>
     </form>
   }

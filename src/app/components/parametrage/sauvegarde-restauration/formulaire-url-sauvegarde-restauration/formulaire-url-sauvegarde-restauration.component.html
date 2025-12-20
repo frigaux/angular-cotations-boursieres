@@ -14,13 +14,13 @@
       <div>
         <p-button
           label="{{ 'COMPOSANTS.COMMUN.ABANDONNER' | translate }}"
-          (onClick)="abandonnerModification()" severity="warn"/>
+          (onClick)="abandonnerModification()" severity="warn" [icon]="'pi pi-times'"/>
       </div>
     }
     <div>
       <p-button
         label="{{ 'COMPOSANTS.COMMUN.ENREGISTRER' | translate }}"
-        type="submit" severity="danger"/>
+        type="submit" severity="danger" [icon]="'pi pi-check'"/>
     </div>
   </form>
 }

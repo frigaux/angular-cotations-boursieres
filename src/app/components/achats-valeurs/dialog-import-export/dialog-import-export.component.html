@@ -22,9 +22,9 @@
     }
 
     <div class="boutons">
-      <p-button type="button" (click)="exporter()" severity="warn"
+      <p-button type="button" (click)="exporter()" severity="warn" [icon]="'pi pi-download'"
                 label="{{ 'COMPOSANTS.ACHATS_VALEURS.IMPORT_EXPORT.EXPORTER' | translate }}"/>
-      <p-button type="button" (click)="importer()" severity="danger"
+      <p-button type="button" (click)="importer()" severity="danger" [icon]="'pi pi-upload'"
                 label="{{ 'COMPOSANTS.ACHATS_VALEURS.IMPORT_EXPORT.IMPORTER' | translate }}"/>
     </div>
   </div>

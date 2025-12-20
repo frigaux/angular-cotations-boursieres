@@ -51,7 +51,7 @@
     @if (iterateurDonnees) {
       <p-button
         label="{{ 'COMPOSANTS.PARAMETRAGE.ML.CLASSIFICATION_SUPERVISEE_CONVOLUTIVE.ENTRAINER_MODELE' | translate }}"
-        (onClick)="entrainerModele()"/>
+        (onClick)="entrainerModele()" [icon]="'pi pi-microchip-ai'"/>
       @if (!modeleEtDonnees) {
         <app-barre-progression [pourcentage]="progressionEntrainement" largeur="20rem"></app-barre-progression>
       }

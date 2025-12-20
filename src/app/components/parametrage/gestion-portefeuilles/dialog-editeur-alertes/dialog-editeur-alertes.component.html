@@ -43,10 +43,10 @@
     <div class="boutons">
       <p-button
         label="{{ 'COMPOSANTS.COMMUN.ABANDONNER_MODIFICATIONS' | translate }}"
-        (onClick)="this.abandon.emit()" type="reset" severity="warn"/>
+        (onClick)="this.abandon.emit()" type="reset" severity="warn" [icon]="'pi pi-times'"/>
       <p-button
         label="{{ 'COMPOSANTS.COMMUN.ENREGISTRER_MODIFICATIONS' | translate }}"
-        type="button" severity="danger" (click)="modifierAlertesPortefeuille()"/>
+        type="button" severity="danger" (click)="modifierAlertesPortefeuille()" [icon]="'pi pi-check'"/>
     </div>
   }
 </p-dialog>

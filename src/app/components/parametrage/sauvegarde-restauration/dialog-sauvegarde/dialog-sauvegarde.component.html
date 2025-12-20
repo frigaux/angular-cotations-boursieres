@@ -14,10 +14,10 @@
     <div class="boutons">
       <p-button
         label="{{ 'COMPOSANTS.COMMUN.ANNULER' | translate }}"
-        (onClick)="visible.set(false)" type="reset" severity="warn"/>
+        (onClick)="visible.set(false)" type="reset" severity="warn" [icon]="'pi pi-times'"/>
       <p-button
         label="{{ 'COMPOSANTS.PARAMETRAGE.SAUVEGARDE_RESTAURATION.DIALOG_SAUVEGARDE.SAUVEGARDER' | translate }}"
-        (onClick)="sauvegarder()" type="button" severity="danger"/>
+        (onClick)="sauvegarder()" type="button" severity="danger" [icon]="'pi pi-check'"/>
     </div>
   </div>
 </p-dialog>

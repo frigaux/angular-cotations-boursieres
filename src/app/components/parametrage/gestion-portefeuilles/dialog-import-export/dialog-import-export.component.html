@@ -26,11 +26,11 @@
     }
 
     <div class="boutons">
-      <p-button type="button" (click)="exporter()" severity="warn"
+      <p-button type="button" (click)="exporter()" severity="warn" [icon]="'pi pi-download'"
                 label="{{ 'COMPOSANTS.PARAMETRAGE.GESTION_PORTEFEUILLES.IMPORT_EXPORT.EXPORTER' | translate }}"/>
-      <p-button type="button" (click)="importer()" severity="danger"
+      <p-button type="button" (click)="importer()" severity="danger" [icon]="'pi pi-upload'"
                 label="{{ 'COMPOSANTS.PARAMETRAGE.GESTION_PORTEFEUILLES.IMPORT_EXPORT.IMPORTER' | translate }}"/>
-      <p-button type="button" (click)="toutSupprimer()" severity="danger"
+      <p-button type="button" (click)="toutSupprimer()" severity="danger" [icon]="'pi pi-trash'"
                 label="{{ 'COMPOSANTS.PARAMETRAGE.GESTION_PORTEFEUILLES.IMPORT_EXPORT.TOUT_SUPPRIMER' | translate }}"/>
     </div>
   </div>
