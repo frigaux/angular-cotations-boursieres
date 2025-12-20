@@ -15,10 +15,12 @@
       <p-listbox id="valeurs"
                  [options]="coursDecores"
                  [(ngModel)]="coursDecoreSelectionne"
-                 optionLabel="valeur.libelle"
                  [filter]="true"
                  [listStyle]="{'max-height': 'calc(100vh - 25rem)'}"
                  (onChange)="rafraichirVue()">
+        <ng-template #item let-cours>
+            <div [ngClass]="{'complete': cours.nbVagues !== undefined}">{{ cours.valeur.libelle }}</div>
+        </ng-template>
       </p-listbox>
       <p-button
         [icon]="'pi pi-download'"
@@ -28,12 +30,14 @@
 
     <div class="valeur">
       @if (coursDecoreSelectionne) {
-        <h2>{{ coursDecoreSelectionne.valeur.libelle }} ({{ coursDecoreSelectionne.valeur.ticker }})</h2>
         <div class="vagues">
-          <label for="nbVagues">
-            {{ 'COMPOSANTS.PARAMETRAGE.ML.GENERATEUR_DONNEES_ENTRAINEMENT.NOMBRE_VAGUES' | translate }} :
-          </label>
-          <p-inputNumber id="nbVagues" [(ngModel)]="coursDecoreSelectionne.nbVagues" [min]="0" required></p-inputNumber>
+          <h3> {{ coursDecoreSelectionne.valeur.libelle }} ({{ coursDecoreSelectionne.valeur.ticker }}) </h3>
+          <p-floatlabel>
+            <p-inputNumber id="nbVagues" [(ngModel)]="coursDecoreSelectionne.nbVagues" [min]="0"
+                           required></p-inputNumber>
+            <label
+              for="nbVagues">{{ 'COMPOSANTS.PARAMETRAGE.ML.GENERATEUR_DONNEES_ENTRAINEMENT.NOMBRE_VAGUES' | translate }}</label>
+          </p-floatlabel>
         </div>
         <div class="cours">
           @if (data) {

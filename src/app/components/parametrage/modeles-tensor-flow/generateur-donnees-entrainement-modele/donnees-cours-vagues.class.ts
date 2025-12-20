@@ -1,7 +1,7 @@
 import {DTOValeur} from '../../../../services/valeurs/dto-valeur.interface';
 import {DTOCoursTickerAllege} from '../../../../services/cours/dto-cours-ticker-allege.interface';
 
-export class CoursDecore {
+export class DonneesCoursVagues {
   valeur: DTOValeur;
   cours: DTOCoursTickerAllege[];
   nbVagues?: number;

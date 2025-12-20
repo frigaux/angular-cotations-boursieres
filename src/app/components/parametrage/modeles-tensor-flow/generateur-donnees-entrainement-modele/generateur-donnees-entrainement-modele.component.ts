@@ -9,9 +9,10 @@ import {TranslatePipe, TranslateService} from '@ngx-translate/core';
 import {InputNumberModule} from 'primeng/inputnumber';
 import {Button} from 'primeng/button';
 import {LoaderComponent} from '../../../loader/loader.component';
-import {CoursDecore} from './cours-decore.class';
+import {DonneesCoursVagues} from './donnees-cours-vagues.class';
 import {UIChart} from 'primeng/chart';
-import {DatePipe} from '@angular/common';
+import {DatePipe, NgClass} from '@angular/common';
+import {FloatLabel} from 'primeng/floatlabel';
 
 @Component({
   selector: 'app-generateur-donnees-entrainement-modele',
@@ -22,7 +23,9 @@ import {DatePipe} from '@angular/common';
     InputNumberModule,
     LoaderComponent,
     Button,
-    UIChart
+    UIChart,
+    FloatLabel,
+    NgClass
   ],
   templateUrl: './generateur-donnees-entrainement-modele.component.html',
   styleUrl: './generateur-donnees-entrainement-modele.component.sass',
@@ -31,8 +34,8 @@ export class GenerateurDonneesEntrainementModeleComponent implements OnInit {
   // données pour la vue
   protected loading: boolean = true;
   protected readonly marche: Marches = Marches.EURO_LIST_A;
-  protected coursDecores?: Array<CoursDecore>;
-  protected coursDecoreSelectionne?: CoursDecore;
+  protected coursDecores?: Array<DonneesCoursVagues>;
+  protected coursDecoreSelectionne?: DonneesCoursVagues;
 
   // données pour la vue
   // https://www.chartjs.org/
@@ -64,7 +67,7 @@ export class GenerateurDonneesEntrainementModeleComponent implements OnInit {
       this.coursService.chargerCoursTickersWithLimit(tickers, 300)
         .subscribe(liste => {
           this.coursDecores = liste
-            .map(dto => new CoursDecore(valeurByTicker.get(dto.ticker)!, dto.cours))
+            .map(dto => new DonneesCoursVagues(valeurByTicker.get(dto.ticker)!, dto.cours))
             .sort((c1, c2) => c1.valeur.libelle.localeCompare(c2.valeur.libelle));
           this.loading = false;
         });
