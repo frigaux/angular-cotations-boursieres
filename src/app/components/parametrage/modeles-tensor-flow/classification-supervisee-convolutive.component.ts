@@ -18,7 +18,7 @@ import {
 import {Donnees} from '../../../services/modeles-tensor-flow/regression-supervisee/donnees.interface';
 import {Rank} from '@tensorflow/tfjs-core/dist/types';
 import {FloatLabel} from 'primeng/floatlabel';
-import {InputText} from 'primeng/inputtext';
+import {InputNumber} from 'primeng/inputnumber';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {UIChart} from 'primeng/chart';
 import {GraphiquesService} from '../../../services/modeles-tensor-flow/regression-supervisee/graphiques.service';
@@ -35,7 +35,7 @@ import {ModeleService} from '../../../services/modeles-tensor-flow/modele.servic
     BarreProgressionComponent,
     Button,
     FloatLabel,
-    InputText,
+    InputNumber,
     ReactiveFormsModule,
     FormsModule,
     UIChart,

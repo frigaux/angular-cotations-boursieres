@@ -21,30 +21,30 @@
     <label>{{ 'COMPOSANTS.PARAMETRAGE.ML.CLASSIFICATION_SUPERVISEE_CONVOLUTIVE.NOMBRE_TENSEURS' | translate }} :</label>
     <span class="nombre">{{ nombreTenseurs }}</span>
     <p-floatlabel>
-      <input id="tauxApprentissage" type="number" pInputText [(ngModel)]="tauxApprentissage" pSize="small"/>
+      <p-inputNumber id="tauxApprentissage" [(ngModel)]="tauxApprentissage" size="small" [inputSize]="7"/>
       <label
         for="tauxApprentissage">{{ 'COMPOSANTS.PARAMETRAGE.ML.CLASSIFICATION_SUPERVISEE_CONVOLUTIVE.TAUX_APPRENTISSAGE' | translate }}</label>
     </p-floatlabel>
     <p-floatlabel>
-      <input id="iterations" type="number" pInputText [(ngModel)]="nombreIterations" pSize="small"
+      <p-inputNumber id="iterations" [(ngModel)]="nombreIterations" size="small" [inputSize]="6"
              title="{{ 'COMPOSANTS.PARAMETRAGE.ML.CLASSIFICATION_SUPERVISEE_CONVOLUTIVE.ITERATIONS_DESCRIPTION' | translate }}"/>
       <label
         for="iterations">{{ 'COMPOSANTS.PARAMETRAGE.ML.CLASSIFICATION_SUPERVISEE_CONVOLUTIVE.ITERATIONS' | translate }}</label>
     </p-floatlabel>
     <p-floatlabel>
-      <input id="lot" type="number" pInputText [(ngModel)]="tailleLot" pSize="small"
+      <p-inputNumber id="lot" [(ngModel)]="tailleLot" size="small" [inputSize]="6"
              title="{{ 'COMPOSANTS.PARAMETRAGE.ML.CLASSIFICATION_SUPERVISEE_CONVOLUTIVE.LOT_DESCRIPTION' | translate }}"/>
       <label
         for="lot">{{ 'COMPOSANTS.PARAMETRAGE.ML.CLASSIFICATION_SUPERVISEE_CONVOLUTIVE.LOT' | translate }}</label>
     </p-floatlabel>
     <p-floatlabel>
-      <input id="nombreImagesEntrainement" type="number" pInputText [(ngModel)]="nombreImagesEntrainement"
-             pSize="small"/>
+      <p-inputNumber id="nombreImagesEntrainement" [(ngModel)]="nombreImagesEntrainement"
+             size="small" [inputSize]="6"/>
       <label
         for="nombreImagesEntrainement">{{ 'COMPOSANTS.PARAMETRAGE.ML.CLASSIFICATION_SUPERVISEE_CONVOLUTIVE.NOMBRE_IMAGES_ENTRAINEMENT' | translate }}</label>
     </p-floatlabel>
     <p-floatlabel>
-      <input id="nombreImagesPredictions" type="number" pInputText [(ngModel)]="nombreImagesPredictions" pSize="small"/>
+      <p-inputNumber id="nombreImagesPredictions" [(ngModel)]="nombreImagesPredictions" size="small" [inputSize]="6"/>
       <label
         for="nombreImagesPredictions">{{ 'COMPOSANTS.PARAMETRAGE.ML.CLASSIFICATION_SUPERVISEE_CONVOLUTIVE.NOMBRE_IMAGES_PREDICTIONS' | translate }}</label>
     </p-floatlabel>

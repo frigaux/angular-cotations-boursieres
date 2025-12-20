@@ -33,12 +33,12 @@
                         (onChange)="onChangeEtape(achatDecore)"/>
             </td>
             <td>
-              <input pInputText [(ngModel)]="achatDecore.achat.prix" autocomplete="off" required type="number"
-                     pSize="small" (change)="onChange(achatDecore)"/>
+              <p-inputNumber [(ngModel)]="achatDecore.achat.prix" required
+                             size="small" [inputSize]="4" (onBlur)="onChange(achatDecore)"/>
             </td>
             <td>
-              <input pInputText [(ngModel)]="achatDecore.achat.quantite" autocomplete="off" required type="number"
-                     pSize="small" (change)="onChange(achatDecore)"/>
+              <p-inputNumber [(ngModel)]="achatDecore.achat.quantite" required
+                             size="small" [inputSize]="4" (onBlur)="onChange(achatDecore)"/>
             </td>
             <td>
               @if (achatDecore.form.etape > 0) {
@@ -54,8 +54,8 @@
             </td>
             <td>
               @if (achatDecore.form.etape > 1) {
-                <input pInputText [(ngModel)]="achatDecore.achat.prixRevente" autocomplete="off" required type="number"
-                       pSize="small" (change)="onChange(achatDecore)"/>
+                <p-inputNumber [(ngModel)]="achatDecore.achat.prixRevente" required
+                               size="small" [inputSize]="4" (onBlur)="onChange(achatDecore)"/>
               } @else {
                 -
               }

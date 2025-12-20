@@ -4,7 +4,7 @@ import {DTOAchat} from '../../../services/valeurs/dto-achat.interface';
 import {TranslatePipe, TranslateService} from '@ngx-translate/core';
 import {FormsModule} from '@angular/forms';
 import {AchatDecore} from './achat-decore.class';
-import {InputText} from 'primeng/inputtext';
+import {InputNumber} from 'primeng/inputnumber';
 import {DatePicker} from 'primeng/datepicker';
 import {DatePipe} from '@angular/common';
 import {ConfirmationService} from 'primeng/api';
@@ -17,7 +17,7 @@ import {Select} from 'primeng/select';
   imports: [
     TranslatePipe,
     FormsModule,
-    InputText,
+    InputNumber,
     DatePicker,
     Select
   ],

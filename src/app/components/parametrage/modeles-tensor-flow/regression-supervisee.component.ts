@@ -8,7 +8,7 @@ import {BarreProgressionComponent} from '../../commun/barre-progression/barre-pr
 import {UIChart} from 'primeng/chart';
 import {Select} from 'primeng/select';
 import {FormsModule} from '@angular/forms';
-import {InputText} from 'primeng/inputtext';
+import {InputNumber} from 'primeng/inputnumber';
 import {ModelesService} from '../../../services/modeles-tensor-flow/regression-supervisee/modeles.service';
 import {DonneesService} from '../../../services/modeles-tensor-flow/regression-supervisee/donnees.service';
 import {GraphiquesService} from '../../../services/modeles-tensor-flow/regression-supervisee/graphiques.service';
@@ -31,7 +31,7 @@ import {
     UIChart,
     Select,
     FormsModule,
-    InputText,
+    InputNumber,
     FloatLabel,
     ExplorateurModeleComponent
   ],
