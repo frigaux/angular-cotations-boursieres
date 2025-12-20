@@ -94,8 +94,7 @@ export class GenerateurDonneesEntrainementModeleComponent implements OnInit {
 
   exporterDonnees(): void {
     if (this.coursDecores) {
-      const json = this.coursDecores
-        .filter(coursDecore => coursDecore.nbVagues);
+      const json = this.coursDecores;
       if (json.length > 0) {
         const data = JSON.stringify(json, null, 2);
         const blob = new Blob([data], {type: 'application/json'});
@@ -106,6 +105,21 @@ export class GenerateurDonneesEntrainementModeleComponent implements OnInit {
         a.click();
         window.URL.revokeObjectURL(url);
       }
+    }
+  }
+
+  importerDonnees(event: any): void {
+    const file = event.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = (e: any) => {
+        try {
+          this.coursDecores = JSON.parse(e.target.result);
+        } catch (error) {
+          console.error('Erreur lors de l\'importation du fichier JSON', error);
+        }
+      };
+      reader.readAsText(file);
     }
   }
 }

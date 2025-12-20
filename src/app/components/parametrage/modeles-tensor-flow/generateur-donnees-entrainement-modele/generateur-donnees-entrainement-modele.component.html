@@ -22,10 +22,17 @@
             <div [ngClass]="{'complete': cours.nbVagues !== undefined}">{{ cours.valeur.libelle }}</div>
         </ng-template>
       </p-listbox>
-      <p-button
-        [icon]="'pi pi-download'"
-        label="{{ 'COMPOSANTS.PARAMETRAGE.ML.GENERATEUR_DONNEES_ENTRAINEMENT.EXPORTER_DONNEES' | translate }}"
-        (onClick)="exporterDonnees()"/>
+      <div class="actions">
+        <p-button
+          [icon]="'pi pi-download'"
+          label="{{ 'COMPOSANTS.PARAMETRAGE.ML.GENERATEUR_DONNEES_ENTRAINEMENT.EXPORTER_DONNEES' | translate }}"
+          (onClick)="exporterDonnees()"/>
+        <p-button
+          [icon]="'pi pi-upload'"
+          label="{{ 'COMPOSANTS.PARAMETRAGE.ML.GENERATEUR_DONNEES_ENTRAINEMENT.IMPORTER_DONNEES' | translate }}"
+          (onClick)="fileInput.click()"/>
+        <input #fileInput type="file" (change)="importerDonnees($event)" style="display:none" accept=".json">
+      </div>
     </div>
 
     <div class="valeur">
