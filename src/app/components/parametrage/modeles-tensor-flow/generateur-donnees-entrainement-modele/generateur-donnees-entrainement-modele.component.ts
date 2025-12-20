@@ -67,7 +67,7 @@ export class GenerateurDonneesEntrainementModeleComponent implements OnInit {
       this.coursService.chargerCoursTickersWithLimit(tickers, 300)
         .subscribe(liste => {
           this.coursDecores = liste
-            .map(dto => new DonneesCoursVagues(valeurByTicker.get(dto.ticker)!, dto.cours))
+            .map(dto => new DonneesCoursVagues(valeurByTicker.get(dto.ticker)!, dto.cours.reverse()))
             .sort((c1, c2) => c1.valeur.libelle.localeCompare(c2.valeur.libelle));
           this.loading = false;
         });
