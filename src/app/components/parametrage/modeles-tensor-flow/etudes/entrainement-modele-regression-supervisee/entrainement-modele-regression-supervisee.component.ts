@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {DonneesService} from '../../../../../services/modeles-tensor-flow/etudes/regression-supervisee/donnees.service';
 
 @Component({
@@ -7,12 +7,18 @@ import {DonneesService} from '../../../../../services/modeles-tensor-flow/etudes
   templateUrl: './entrainement-modele-regression-supervisee.component.html',
   styleUrl: './entrainement-modele-regression-supervisee.component.sass',
 })
-export class EntrainementModeleRegressionSuperviseeComponent {
-  constructor(private donneesService: DonneesService) {}
+export class EntrainementModeleRegressionSuperviseeComponent implements OnInit {
+  constructor(private donneesService: DonneesService) {
+  }
 
   ngOnInit(): void {
     this.donneesService.donneesCoursVagues()
-      .then(iterateurDonnees => {
+      .then(pontDonnees => {
+        console.log(
+          pontDonnees.donneesNormaliseesEntrainement().entrees.arraySync(),
+          pontDonnees.donneesNormaliseesEntrainement().sorties.arraySync(),
+          pontDonnees.entreesNormaliseesPredictions().arraySync(),
+          pontDonnees.sortiesPredictions().arraySync());
       });
   }
 }
