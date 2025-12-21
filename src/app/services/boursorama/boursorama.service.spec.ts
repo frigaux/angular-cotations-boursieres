@@ -5,7 +5,6 @@ import {HttpInterceptorFn, provideHttpClient, withInterceptors} from '@angular/c
 import {firstValueFrom} from 'rxjs';
 import {VALEUR, VALEURS} from '../jdd/jdd-valeurs.dataset';
 import {DTOCours} from '../cours/dto-cours.interface';
-import {COURS_PORTEFEUILLE} from '../jdd/jdd-cours.dataset';
 import {DTOInformationsTickerBoursorama} from './dto-informations-ticker-boursorama.interface';
 import {TranslateModule} from '@ngx-translate/core';
 

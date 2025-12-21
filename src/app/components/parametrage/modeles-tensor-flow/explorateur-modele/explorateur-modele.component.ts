@@ -1,12 +1,12 @@
 import {Component, input, InputSignal} from '@angular/core';
-import {CoucheDenseComponent} from "../couches/couche-dense/couche-dense.component";
+import {CoucheDenseComponent} from "./couches/couche-dense/couche-dense.component";
 import {TranslatePipe} from "@ngx-translate/core";
-import {TypeCouche} from '../../../../services/modeles-tensor-flow/type-couche.enum';
+import {TypeCouche} from '../../../../services/modeles-tensor-flow/couches/type-couche.enum';
 import {ModeleEtDonnees} from './modele-et-donnees.interface';
 import {ExplorateurEntreesSortiesComponent} from './explorateur-entrees-sorties/explorateur-entrees-sorties.component';
-import {CoucheConv2dComponent} from '../couches/couche-conv2d/couche-conv2d.component';
-import {CoucheMaxpooling2dComponent} from '../couches/couche-maxpooling2d/couche-maxpooling2d.component';
-import {CoucheFlatten} from '../couches/couche-flatten/couche-flatten';
+import {CoucheConv2dComponent} from './couches/couche-conv2d/couche-conv2d.component';
+import {CoucheMaxpooling2dComponent} from './couches/couche-maxpooling2d/couche-maxpooling2d.component';
+import {CoucheFlatten} from './couches/couche-flatten/couche-flatten';
 
 @Component({
   selector: 'app-explorateur-modele',

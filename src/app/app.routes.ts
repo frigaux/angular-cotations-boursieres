@@ -17,13 +17,16 @@ import {
 import {DividendesComponent} from './components/dividendes/dividendes.component';
 import {
   RegressionSuperviseeComponent
-} from './components/parametrage/modeles-tensor-flow/regression-supervisee.component';
+} from './components/parametrage/modeles-tensor-flow/regression-supervisee/regression-supervisee.component';
 import {
   ClassificationSuperviseeConvolutiveComponent
-} from './components/parametrage/modeles-tensor-flow/classification-supervisee-convolutive.component';
+} from './components/parametrage/modeles-tensor-flow/classification-supervisee-convolutive/classification-supervisee-convolutive.component';
 import {
   GenerateurDonneesEntrainementModeleComponent
 } from './components/parametrage/modeles-tensor-flow/generateur-donnees-entrainement-modele/generateur-donnees-entrainement-modele.component';
+import {
+  EntrainementModeleRegressionSuperviseeComponent
+} from './components/parametrage/modeles-tensor-flow/entrainement-modele-regression-supervisee/entrainement-modele-regression-supervisee.component';
 
 export const routes: Routes = [
   {
@@ -87,6 +90,11 @@ export const routes: Routes = [
   {
     path: 'generateur-donnees-entrainement-modele',
     component: GenerateurDonneesEntrainementModeleComponent,
+    canActivate: [authentificationGuard]
+  },
+  {
+    path: 'entrainement-modele-regression-supervisee',
+    component: EntrainementModeleRegressionSuperviseeComponent,
     canActivate: [authentificationGuard]
   },
   {path: '**', redirectTo: '/authentification'}

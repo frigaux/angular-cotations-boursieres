@@ -73,17 +73,22 @@ export class HeaderComponent {
         {
           label: translateService.instant('COMPOSANTS.HEADER.PARAMETRAGE.REGRESSION_SUPERVISEE'),
           routerLink: 'regression-supervisee',
-          icon: 'pi pi-wrench'
+          icon: 'pi pi-microchip-ai'
         },
         {
           label: translateService.instant('COMPOSANTS.HEADER.PARAMETRAGE.CLASSIFICATION_SUPERVISEE_CONVOLUTIVE'),
           routerLink: 'classification-supervisee-convolutive',
-          icon: 'pi pi-wrench'
+          icon: 'pi pi-microchip-ai'
         },
         {
           label: translateService.instant('COMPOSANTS.HEADER.PARAMETRAGE.GENERATEUR_DONNEES_ENTRAINEMENT_MODELE'),
           routerLink: 'generateur-donnees-entrainement-modele',
-          icon: 'pi pi-wrench'
+          icon: 'pi pi-microchip-ai'
+        },
+        {
+          label: translateService.instant('COMPOSANTS.HEADER.PARAMETRAGE.ENTRAINEMENT_MODELE_REGRESSION_SUPERVISEE'),
+          routerLink: 'entrainement-modele-regression-supervisee',
+          icon: 'pi pi-microchip-ai'
         }
       ]
     });

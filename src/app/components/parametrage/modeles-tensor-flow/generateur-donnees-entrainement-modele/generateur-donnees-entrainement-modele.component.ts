@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, viewChild} from '@angular/core';
 import {ValeursService} from '../../../../services/valeurs/valeurs.service';
 import {CoursService} from '../../../../services/cours/cours.service';
 import {DTOValeur} from '../../../../services/valeurs/dto-valeur.interface';
@@ -6,7 +6,7 @@ import {Marches} from '../../../../services/valeurs/marches.enum';
 import {ListboxModule} from 'primeng/listbox';
 import {FormsModule} from '@angular/forms';
 import {TranslatePipe, TranslateService} from '@ngx-translate/core';
-import {InputNumberModule} from 'primeng/inputnumber';
+import {InputNumber, InputNumberModule} from 'primeng/inputnumber';
 import {Button} from 'primeng/button';
 import {LoaderComponent} from '../../../loader/loader.component';
 import {DonneesCoursVagues} from './donnees-cours-vagues.class';
@@ -31,6 +31,8 @@ import {FloatLabel} from 'primeng/floatlabel';
   styleUrl: './generateur-donnees-entrainement-modele.component.sass',
 })
 export class GenerateurDonneesEntrainementModeleComponent implements OnInit {
+  public inputNumber = viewChild(InputNumber);
+
   // données pour la vue
   protected loading: boolean = true;
   protected readonly marche: Marches = Marches.EURO_LIST_A;
@@ -90,6 +92,10 @@ export class GenerateurDonneesEntrainementModeleComponent implements OnInit {
         }
       ]
     };
+
+    setTimeout(() => {
+      this.inputNumber()?.input.nativeElement.focus();
+    }, 0);
   }
 
   exporterDonnees(): void {

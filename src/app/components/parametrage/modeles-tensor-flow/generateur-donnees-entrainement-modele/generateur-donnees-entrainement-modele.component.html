@@ -19,7 +19,7 @@
                  [listStyle]="{'max-height': 'calc(100vh - 25rem)'}"
                  (onChange)="rafraichirVue()">
         <ng-template #item let-cours>
-            <div [ngClass]="{'complete': cours.nbVagues !== undefined}">{{ cours.valeur.libelle }}</div>
+            <div [ngClass]="{'complete': cours.nbVagues !== undefined && cours.nbVagues !== null}">{{ cours.valeur.libelle }}</div>
         </ng-template>
       </p-listbox>
       <div class="actions">

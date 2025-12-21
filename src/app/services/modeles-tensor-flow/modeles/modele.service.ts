@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {DTOModele} from './dto-modele.interface';
 import {LayersModel} from '@tensorflow/tfjs-layers/dist/engine/training';
-import {CouchesService} from './couches.service';
+import {CouchesService} from '../couches/couches.service';
 import {DTOOptimiseur} from './dto-optimiseur';
 
 @Injectable({
