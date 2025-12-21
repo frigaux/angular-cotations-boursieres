@@ -1,5 +1,5 @@
-import {DTOValeur} from '../../../../services/valeurs/dto-valeur.interface';
-import {DTOCoursTickerAllege} from '../../../../services/cours/dto-cours-ticker-allege.interface';
+import {DTOValeur} from '../../../valeurs/dto-valeur.interface';
+import {DTOCoursTickerAllege} from '../../../cours/dto-cours-ticker-allege.interface';
 
 export class DonneesCoursVagues {
   valeur: DTOValeur;

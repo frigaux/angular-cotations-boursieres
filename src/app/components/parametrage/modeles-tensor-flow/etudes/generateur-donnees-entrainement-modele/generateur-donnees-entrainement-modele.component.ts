@@ -1,15 +1,17 @@
 import {Component, OnInit, viewChild} from '@angular/core';
-import {ValeursService} from '../../../../services/valeurs/valeurs.service';
-import {CoursService} from '../../../../services/cours/cours.service';
-import {DTOValeur} from '../../../../services/valeurs/dto-valeur.interface';
-import {Marches} from '../../../../services/valeurs/marches.enum';
+import {ValeursService} from '../../../../../services/valeurs/valeurs.service';
+import {CoursService} from '../../../../../services/cours/cours.service';
+import {DTOValeur} from '../../../../../services/valeurs/dto-valeur.interface';
+import {Marches} from '../../../../../services/valeurs/marches.enum';
 import {ListboxModule} from 'primeng/listbox';
 import {FormsModule} from '@angular/forms';
 import {TranslatePipe, TranslateService} from '@ngx-translate/core';
 import {InputNumber, InputNumberModule} from 'primeng/inputnumber';
 import {Button} from 'primeng/button';
-import {LoaderComponent} from '../../../loader/loader.component';
-import {DonneesCoursVagues} from './donnees-cours-vagues.class';
+import {LoaderComponent} from '../../../../loader/loader.component';
+import {
+  DonneesCoursVagues
+} from '../../../../../services/modeles-tensor-flow/etudes/regression-supervisee/donnees-cours-vagues.class';
 import {UIChart} from 'primeng/chart';
 import {DatePipe, NgClass} from '@angular/common';
 import {FloatLabel} from 'primeng/floatlabel';
@@ -68,9 +70,10 @@ export class GenerateurDonneesEntrainementModeleComponent implements OnInit {
         .map(valeur => valeur.ticker);
       this.coursService.chargerCoursTickersWithLimit(tickers, 300)
         .subscribe(liste => {
-          this.coursDecores = liste
+          const donnees = liste
             .map(dto => new DonneesCoursVagues(valeurByTicker.get(dto.ticker)!, dto.cours.reverse()))
             .sort((c1, c2) => c1.valeur.libelle.localeCompare(c2.valeur.libelle));
+          this.coursDecores = this.filtrerDonneesCoursVagues(donnees);
           this.loading = false;
         });
     });
@@ -100,7 +103,7 @@ export class GenerateurDonneesEntrainementModeleComponent implements OnInit {
 
   exporterDonnees(): void {
     if (this.coursDecores) {
-      const json = this.coursDecores;
+      const json = this.filtrerDonneesCoursVagues(this.coursDecores);
       if (json.length > 0) {
         const data = JSON.stringify(json, null, 2);
         const blob = new Blob([data], {type: 'application/json'});
@@ -120,12 +123,17 @@ export class GenerateurDonneesEntrainementModeleComponent implements OnInit {
       const reader = new FileReader();
       reader.onload = (e: any) => {
         try {
-          this.coursDecores = JSON.parse(e.target.result);
+          this.coursDecores = this.filtrerDonneesCoursVagues(JSON.parse(e.target.result) as Array<DonneesCoursVagues>);
         } catch (error) {
           console.error('Erreur lors de l\'importation du fichier JSON', error);
         }
       };
       reader.readAsText(file);
     }
+  }
+
+  private filtrerDonneesCoursVagues(donnees: Array<DonneesCoursVagues>) {
+    const maximum = Math.max(...donnees.map(cours => cours.cours.length));
+    return donnees.filter(cours => cours.cours.length === maximum);
   }
 }

@@ -17,16 +17,16 @@ import {
 import {DividendesComponent} from './components/dividendes/dividendes.component';
 import {
   RegressionSuperviseeComponent
-} from './components/parametrage/modeles-tensor-flow/regression-supervisee/regression-supervisee.component';
+} from './components/parametrage/modeles-tensor-flow/tutoriels/regression-supervisee/regression-supervisee.component';
 import {
   ClassificationSuperviseeConvolutiveComponent
-} from './components/parametrage/modeles-tensor-flow/classification-supervisee-convolutive/classification-supervisee-convolutive.component';
+} from './components/parametrage/modeles-tensor-flow/tutoriels/classification-supervisee-convolutive/classification-supervisee-convolutive.component';
 import {
   GenerateurDonneesEntrainementModeleComponent
-} from './components/parametrage/modeles-tensor-flow/generateur-donnees-entrainement-modele/generateur-donnees-entrainement-modele.component';
+} from './components/parametrage/modeles-tensor-flow/etudes/generateur-donnees-entrainement-modele/generateur-donnees-entrainement-modele.component';
 import {
   EntrainementModeleRegressionSuperviseeComponent
-} from './components/parametrage/modeles-tensor-flow/entrainement-modele-regression-supervisee/entrainement-modele-regression-supervisee.component';
+} from './components/parametrage/modeles-tensor-flow/etudes/entrainement-modele-regression-supervisee/entrainement-modele-regression-supervisee.component';
 
 export const routes: Routes = [
   {

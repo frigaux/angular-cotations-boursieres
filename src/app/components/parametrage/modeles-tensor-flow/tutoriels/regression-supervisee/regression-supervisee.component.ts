@@ -4,23 +4,27 @@ import {Logs} from '@tensorflow/tfjs';
 import {TranslatePipe} from '@ngx-translate/core';
 import {Button} from 'primeng/button';
 import {LayersModel} from '@tensorflow/tfjs-layers/dist/engine/training';
-import {BarreProgressionComponent} from '../../../commun/barre-progression/barre-progression.component';
+import {BarreProgressionComponent} from '../../../../commun/barre-progression/barre-progression.component';
 import {UIChart} from 'primeng/chart';
 import {Select} from 'primeng/select';
 import {FormsModule} from '@angular/forms';
 import {InputNumber} from 'primeng/inputnumber';
-import {ModelesService} from '../../../../services/modeles-tensor-flow/regression-supervisee/modeles.service';
-import {DonneesService} from '../../../../services/modeles-tensor-flow/regression-supervisee/donnees.service';
-import {GraphiquesService} from '../../../../services/modeles-tensor-flow/regression-supervisee/graphiques.service';
+import {
+  ModelesService
+} from '../../../../../services/modeles-tensor-flow/tutoriels/regression-supervisee/modeles.service';
+import {
+  DonneesService
+} from '../../../../../services/modeles-tensor-flow/tutoriels/regression-supervisee/donnees.service';
+import {GraphiquesService} from '../../../../../services/modeles-tensor-flow/graphiques/graphiques.service';
 import {FloatLabel} from 'primeng/floatlabel';
-import {Donnees} from '../../../../services/modeles-tensor-flow/regression-supervisee/donnees.interface';
+import {Donnees} from '../../../../../services/modeles-tensor-flow/tutoriels/regression-supervisee/donnees.interface';
 import {Rank} from '@tensorflow/tfjs-core/dist/types';
-import {ExplorateurModeleComponent} from '../explorateur-modele/explorateur-modele.component';
-import {ModeleEtDonnees} from '../explorateur-modele/modele-et-donnees.interface';
-import {ModeleService} from '../../../../services/modeles-tensor-flow/modeles/modele.service';
+import {ExplorateurModeleComponent} from '../../explorateur-modele/explorateur-modele.component';
+import {ModeleEtDonnees} from '../../explorateur-modele/modele-et-donnees.interface';
+import {ModeleService} from '../../../../../services/modeles-tensor-flow/modeles/modele.service';
 import {
   DonneesNormalisees
-} from '../../../../services/modeles-tensor-flow/regression-supervisee/donnees-normalisees.interface';
+} from '../../../../../services/modeles-tensor-flow/tutoriels/regression-supervisee/donnees-normalisees.interface';
 
 @Component({
   selector: 'app-regression-supervisee',

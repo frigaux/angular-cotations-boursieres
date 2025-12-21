@@ -3,11 +3,11 @@ import {ComponentFixture, TestBed} from '@angular/core/testing';
 import {GenerateurDonneesEntrainementModeleComponent} from './generateur-donnees-entrainement-modele.component';
 import {TranslateModule} from '@ngx-translate/core';
 import {DatePipe} from '@angular/common';
-import {CoursService} from '../../../../services/cours/cours.service';
-import {ValeursService} from '../../../../services/valeurs/valeurs.service';
+import {CoursService} from '../../../../../services/cours/cours.service';
+import {ValeursService} from '../../../../../services/valeurs/valeurs.service';
 import {of} from 'rxjs';
-import {VALEURS} from '../../../../services/jdd/jdd-valeurs.dataset';
-import {LISTE_COURS_AVEC_LISTE_ALLEGEE} from '../../../../services/jdd/jdd-cours.dataset';
+import {VALEURS} from '../../../../../services/jdd/jdd-valeurs.dataset';
+import {LISTE_COURS_AVEC_LISTE_ALLEGEE} from '../../../../../services/jdd/jdd-cours.dataset';
 
 describe('GenerateurDonneesEntrainementModeleComponent', () => {
   let component: GenerateurDonneesEntrainementModeleComponent;

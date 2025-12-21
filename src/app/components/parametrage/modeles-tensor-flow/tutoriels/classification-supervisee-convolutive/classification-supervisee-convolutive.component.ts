@@ -1,31 +1,31 @@
 import {Component, OnInit} from '@angular/core';
 import {
   DonneesService
-} from '../../../../services/modeles-tensor-flow/classification-supervisee-convolutive/donnees.service';
+} from '../../../../../services/modeles-tensor-flow/tutoriels/classification-supervisee-convolutive/donnees.service';
 import {
   IterateurDonnees
-} from '../../../../services/modeles-tensor-flow/classification-supervisee-convolutive/iterateur-donnees.class';
-import {LoaderComponent} from '../../../loader/loader.component';
+} from '../../../../../services/modeles-tensor-flow/tutoriels/classification-supervisee-convolutive/iterateur-donnees.class';
+import {LoaderComponent} from '../../../../loader/loader.component';
 import * as tf from '@tensorflow/tfjs';
 import {Logs, Tensor2D} from '@tensorflow/tfjs';
 import {TranslatePipe} from '@ngx-translate/core';
-import {BarreProgressionComponent} from '../../../commun/barre-progression/barre-progression.component';
+import {BarreProgressionComponent} from '../../../../commun/barre-progression/barre-progression.component';
 import {Button} from 'primeng/button';
 import {LayersModel} from '@tensorflow/tfjs-layers/dist/engine/training';
 import {
   ModelesService
-} from '../../../../services/modeles-tensor-flow/classification-supervisee-convolutive/modeles.service';
-import {Donnees} from '../../../../services/modeles-tensor-flow/regression-supervisee/donnees.interface';
+} from '../../../../../services/modeles-tensor-flow/tutoriels/classification-supervisee-convolutive/modeles.service';
+import {Donnees} from '../../../../../services/modeles-tensor-flow/tutoriels/regression-supervisee/donnees.interface';
 import {Rank} from '@tensorflow/tfjs-core/dist/types';
 import {FloatLabel} from 'primeng/floatlabel';
 import {InputNumber} from 'primeng/inputnumber';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {UIChart} from 'primeng/chart';
-import {GraphiquesService} from '../../../../services/modeles-tensor-flow/regression-supervisee/graphiques.service';
+import {GraphiquesService} from '../../../../../services/modeles-tensor-flow/graphiques/graphiques.service';
 import {NgClass, PercentPipe} from '@angular/common';
-import {ExplorateurModeleComponent} from '../explorateur-modele/explorateur-modele.component';
-import {ModeleEtDonnees} from '../explorateur-modele/modele-et-donnees.interface';
-import {ModeleService} from '../../../../services/modeles-tensor-flow/modeles/modele.service';
+import {ExplorateurModeleComponent} from '../../explorateur-modele/explorateur-modele.component';
+import {ModeleEtDonnees} from '../../explorateur-modele/modele-et-donnees.interface';
+import {ModeleService} from '../../../../../services/modeles-tensor-flow/modeles/modele.service';
 
 @Component({
   selector: 'app-classification-supervisee-convolutive',
