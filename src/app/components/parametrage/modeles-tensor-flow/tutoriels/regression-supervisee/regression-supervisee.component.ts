@@ -1,14 +1,11 @@
 import {Component, OnInit} from '@angular/core';
-import * as tf from '@tensorflow/tfjs';
 import {Logs} from '@tensorflow/tfjs';
 import {TranslatePipe} from '@ngx-translate/core';
 import {Button} from 'primeng/button';
 import {LayersModel} from '@tensorflow/tfjs-layers/dist/engine/training';
 import {BarreProgressionComponent} from '../../../../commun/barre-progression/barre-progression.component';
 import {UIChart} from 'primeng/chart';
-import {Select} from 'primeng/select';
 import {FormsModule} from '@angular/forms';
-import {InputNumber} from 'primeng/inputnumber';
 import {
   ModelesService
 } from '../../../../../services/modeles-tensor-flow/tutoriels/regression-supervisee/modeles.service';
@@ -16,15 +13,16 @@ import {
   DonneesService
 } from '../../../../../services/modeles-tensor-flow/tutoriels/regression-supervisee/donnees.service';
 import {GraphiquesService} from '../../../../../services/modeles-tensor-flow/graphiques/graphiques.service';
-import {FloatLabel} from 'primeng/floatlabel';
 import {Donnees} from '../../../../../services/modeles-tensor-flow/tutoriels/regression-supervisee/donnees.interface';
 import {Rank} from '@tensorflow/tfjs-core/dist/types';
-import {ExplorateurModeleComponent} from '../../explorateur-modele/explorateur-modele.component';
-import {ModeleEtDonnees} from '../../explorateur-modele/modele-et-donnees.interface';
+import {ExplorateurModeleComponent} from '../../commun/explorateur-modele/explorateur-modele.component';
+import {ModeleEtDonnees} from '../../commun/explorateur-modele/modele-et-donnees.interface';
 import {ModeleService} from '../../../../../services/modeles-tensor-flow/modeles/modele.service';
 import {
   DonneesNormalisees
 } from '../../../../../services/modeles-tensor-flow/tutoriels/regression-supervisee/donnees-normalisees.interface';
+import {FormulaireModeleComponent} from '../../commun/formulaire-modele/formulaire-modele.component';
+import {ParametresModele} from '../../commun/formulaire-modele/parametres-modele.interface';
 
 @Component({
   selector: 'app-regression-supervisee',
@@ -33,23 +31,19 @@ import {
     Button,
     BarreProgressionComponent,
     UIChart,
-    Select,
     FormsModule,
-    InputNumber,
-    FloatLabel,
-    ExplorateurModeleComponent
+    ExplorateurModeleComponent,
+    FormulaireModeleComponent
   ],
   templateUrl: './regression-supervisee.component.html',
   styleUrl: './regression-supervisee.component.sass',
 })
 export class RegressionSuperviseeComponent implements OnInit {
-  // nombre de tenseur en mémoire
-  protected nombreTenseurs?: number;
-
-  // choix backend
-  protected backends: Array<string> = ['cpu', 'webgl']; // 'tensorflow' (requires tfjs-node), 'wasm' (requires tfjs-backend-wasm).
-  protected backend: string = this.backends[0];
-  protected backendChangeAvecSucces?: boolean;
+  protected parametresModele: ParametresModele = {
+    tauxApprentissage: 0.1,
+    iterations: 50,
+    lot: 32
+  };
 
   // données, modèle, couches
   protected donnees?: Donnees<Rank.R2>;
@@ -57,11 +51,6 @@ export class RegressionSuperviseeComponent implements OnInit {
   protected modeleEtDonnees?: ModeleEtDonnees;
   private donneesNormalisees?: DonneesNormalisees;
 
-  // paramètres apprentissage
-  protected tauxApprentissage: number = 0.1;
-  protected iterations: number = 50;
-
-  protected lot: number = 32;
   // https://www.chartjs.org/
   protected donneesChart?: any;
   protected donneesChartOptions?: any;
@@ -77,8 +66,6 @@ export class RegressionSuperviseeComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.changeBackend();
-    window.setInterval(() => this.nombreTenseurs = tf.memory().numTensors, 1000);
     this.donneesService.donneesPuissancesRendements()
       .then(donnees => {
         this.donnees = donnees;
@@ -86,24 +73,17 @@ export class RegressionSuperviseeComponent implements OnInit {
       });
   }
 
-  protected changeBackend() {
-    this.backendChangeAvecSucces = false;
-    tf.setBackend(this.backend).then(success => {
-      this.backendChangeAvecSucces = true;
-    });
-  }
-
   protected entrainerModele() {
     if (this.donnees) {
       this.modeleEtDonnees = undefined;
-      const modeleCouches: LayersModel = this.modelesService.modelePuissancesRendements(this.tauxApprentissage);
+      const modeleCouches: LayersModel = this.modelesService.modelePuissancesRendements(this.parametresModele.tauxApprentissage);
 
       this.donneesNormalisees = this.donneesService.normaliserZeroAUn(this.donnees);
       this.progressionEntrainement = 0;
       const logs: Array<Logs> = [];
       modeleCouches.fit(this.donneesNormalisees.entrees, this.donneesNormalisees.sorties, {
-        epochs: this.iterations,
-        batchSize: this.lot,
+        epochs: this.parametresModele.iterations,
+        batchSize: this.parametresModele.lot,
         shuffle: true,
         // validationSplit: 0.2,
         callbacks: {
@@ -111,7 +91,7 @@ export class RegressionSuperviseeComponent implements OnInit {
             if (log) {
               logs.push(log);
             }
-            const pourcentage = Math.round(100 * epoch / this.iterations);
+            const pourcentage = Math.round(100 * epoch / this.parametresModele.iterations);
             if (!this.progressionEntrainement || pourcentage > this.progressionEntrainement) {
               this.progressionEntrainement = pourcentage;
             }

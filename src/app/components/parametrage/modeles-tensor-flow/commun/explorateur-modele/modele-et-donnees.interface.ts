@@ -1,5 +1,5 @@
 import {LayersModel} from '@tensorflow/tfjs-layers/dist/engine/training';
-import {DTOModele} from '../../../../services/modeles-tensor-flow/modeles/dto-modele.interface';
+import {DTOModele} from '../../../../../services/modeles-tensor-flow/modeles/dto-modele.interface';
 import {Tensor} from '@tensorflow/tfjs-core';
 
 export interface ModeleEtDonnees {

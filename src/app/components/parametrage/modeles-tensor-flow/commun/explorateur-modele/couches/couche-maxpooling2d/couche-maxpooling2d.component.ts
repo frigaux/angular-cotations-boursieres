@@ -1,7 +1,9 @@
 import {Component, input, InputSignal} from '@angular/core';
-import {DTOCouche} from '../../../../../../services/modeles-tensor-flow/couches/dto-couche.interface';
-import {TypeCouche} from '../../../../../../services/modeles-tensor-flow/couches/type-couche.enum';
-import {DTOCoucheMaxpooling2d} from '../../../../../../services/modeles-tensor-flow/couches/dto-couche-pooling2d.class';
+import {DTOCouche} from '../../../../../../../services/modeles-tensor-flow/couches/dto-couche.interface';
+import {TypeCouche} from '../../../../../../../services/modeles-tensor-flow/couches/type-couche.enum';
+import {
+  DTOCoucheMaxpooling2d
+} from '../../../../../../../services/modeles-tensor-flow/couches/dto-couche-pooling2d.class';
 import {TranslatePipe} from '@ngx-translate/core';
 
 @Component({

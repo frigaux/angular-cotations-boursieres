@@ -1,9 +1,9 @@
 import {Component, input, InputSignal} from '@angular/core';
 import {DecimalPipe} from '@angular/common';
 import {TranslatePipe} from '@ngx-translate/core';
-import {DTOCouche} from '../../../../../../services/modeles-tensor-flow/couches/dto-couche.interface';
-import {TypeCouche} from '../../../../../../services/modeles-tensor-flow/couches/type-couche.enum';
-import {DTOCoucheDense} from '../../../../../../services/modeles-tensor-flow/couches/dto-couche-dense.class';
+import {DTOCouche} from '../../../../../../../services/modeles-tensor-flow/couches/dto-couche.interface';
+import {TypeCouche} from '../../../../../../../services/modeles-tensor-flow/couches/type-couche.enum';
+import {DTOCoucheDense} from '../../../../../../../services/modeles-tensor-flow/couches/dto-couche-dense.class';
 
 @Component({
   selector: 'app-couche-dense',

@@ -2,8 +2,8 @@ import {Component, input, InputSignal} from '@angular/core';
 import {TranslatePipe} from '@ngx-translate/core';
 import {ModeleEtDonnees} from '../modele-et-donnees.interface';
 import {DecimalPipe} from '@angular/common';
-import {TypeCouche} from '../../../../../services/modeles-tensor-flow/couches/type-couche.enum';
-import {DTOCoucheDense} from '../../../../../services/modeles-tensor-flow/couches/dto-couche-dense.class';
+import {TypeCouche} from '../../../../../../services/modeles-tensor-flow/couches/type-couche.enum';
+import {DTOCoucheDense} from '../../../../../../services/modeles-tensor-flow/couches/dto-couche-dense.class';
 
 @Component({
   selector: 'app-explorateur-entrees-sorties',

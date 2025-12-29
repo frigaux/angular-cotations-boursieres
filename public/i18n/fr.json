@@ -553,15 +553,17 @@
         "RESTAURATION_REUSSIE": "Restauration réussie !"
       },
       "ML": {
-        "REGRESSION_SUPERVISEE": {
-          "REGRESSION_SUPERVISEE": "Effectuer des prédictions à partir de données 2D (régression supervisée)",
+        "FORMULAIRE": {
           "NOMBRE_TENSEURS": "Tenseurs",
           "BACKEND": "Backend",
           "TAUX_APPRENTISSAGE": "Taux apprentissage",
-          "ITERATIONS": "Itérations",
           "ITERATIONS_DESCRIPTION": "Nombre de fois où le modèle va examiner l'intégralité de l'ensemble de données que vous lui fournissez",
-          "LOT": "Taille lot",
+          "ITERATIONS": "Itérations",
           "LOT_DESCRIPTION": "Taille des sous-ensembles de données que le modèle verra à chaque itération de l'entraînement. Les tailles de lot courantes sont généralement comprises entre 32 et 512. Il n'existe pas vraiment de taille de lot idéale qui résout tous les problèmes",
+          "LOT": "Taille lot"
+        },
+        "REGRESSION_SUPERVISEE": {
+          "REGRESSION_SUPERVISEE": "Effectuer des prédictions à partir de données 2D (régression supervisée)",
           "ENTRAINER_MODELE": "Entraîner le modèle"
         },
         "CLASSIFICATION_SUPERVISEE_CONVOLUTIVE": {

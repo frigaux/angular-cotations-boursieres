@@ -1,36 +1,12 @@
 <h1>{{ 'COMPOSANTS.PARAMETRAGE.ML.REGRESSION_SUPERVISEE.REGRESSION_SUPERVISEE' | translate }}</h1>
 <div class="formulaire">
-  <label>{{ 'COMPOSANTS.PARAMETRAGE.ML.REGRESSION_SUPERVISEE.NOMBRE_TENSEURS' | translate }} :</label>
-  <span class="nombre">{{ nombreTenseurs }}</span>
-  <p-floatlabel>
-    <p-select id="backend" [options]="backends" [(ngModel)]="backend" size="small"
-              (onChange)="changeBackend()"></p-select>
-    <label for="backend">{{ 'COMPOSANTS.PARAMETRAGE.ML.REGRESSION_SUPERVISEE.BACKEND' | translate }}</label>
-  </p-floatlabel>
-  @if (backendChangeAvecSucces) {
-    <p-floatlabel>
-      <p-inputNumber id="tauxApprentissage" [(ngModel)]="tauxApprentissage" size="small" [inputSize]="7"/>
-      <label
-        for="tauxApprentissage">{{ 'COMPOSANTS.PARAMETRAGE.ML.REGRESSION_SUPERVISEE.TAUX_APPRENTISSAGE' | translate }}</label>
-    </p-floatlabel>
-    <p-floatlabel>
-      <p-inputNumber id="iterations" [(ngModel)]="iterations" size="small" [inputSize]="7"
-             title="{{ 'COMPOSANTS.PARAMETRAGE.ML.REGRESSION_SUPERVISEE.ITERATIONS_DESCRIPTION' | translate }}"/>
-      <label for="iterations">{{ 'COMPOSANTS.PARAMETRAGE.ML.REGRESSION_SUPERVISEE.ITERATIONS' | translate }}</label>
-    </p-floatlabel>
-    <p-floatlabel>
-      <p-inputNumber id="lot" [(ngModel)]="lot" size="small" [inputSize]="7"
-             title="{{ 'COMPOSANTS.PARAMETRAGE.ML.REGRESSION_SUPERVISEE.LOT_DESCRIPTION' | translate }}"/>
-      <label
-        for="lot">{{ 'COMPOSANTS.PARAMETRAGE.ML.REGRESSION_SUPERVISEE.LOT' | translate }}</label>
-    </p-floatlabel>
-    @if (donnees) {
-      <p-button
-        label="{{ 'COMPOSANTS.PARAMETRAGE.ML.REGRESSION_SUPERVISEE.ENTRAINER_MODELE' | translate }}"
-        (onClick)="entrainerModele()" [icon]="'pi pi-microchip-ai'"/>
-      @if (!modeleEtDonnees) {
-        <app-barre-progression [pourcentage]="progressionEntrainement" largeur="20rem"></app-barre-progression>
-      }
+  <app-formulaire-modele [(parametres)]="parametresModele"></app-formulaire-modele>
+  @if (donnees) {
+    <p-button
+      label="{{ 'COMPOSANTS.PARAMETRAGE.ML.REGRESSION_SUPERVISEE.ENTRAINER_MODELE' | translate }}"
+      (onClick)="entrainerModele()" [icon]="'pi pi-microchip-ai'"/>
+    @if (!modeleEtDonnees) {
+      <app-barre-progression [pourcentage]="progressionEntrainement" largeur="20rem"></app-barre-progression>
     }
   }
 </div>

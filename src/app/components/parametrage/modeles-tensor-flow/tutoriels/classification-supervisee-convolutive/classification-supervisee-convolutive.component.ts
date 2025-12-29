@@ -23,8 +23,8 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {UIChart} from 'primeng/chart';
 import {GraphiquesService} from '../../../../../services/modeles-tensor-flow/graphiques/graphiques.service';
 import {NgClass, PercentPipe} from '@angular/common';
-import {ExplorateurModeleComponent} from '../../explorateur-modele/explorateur-modele.component';
-import {ModeleEtDonnees} from '../../explorateur-modele/modele-et-donnees.interface';
+import {ExplorateurModeleComponent} from '../../commun/explorateur-modele/explorateur-modele.component';
+import {ModeleEtDonnees} from '../../commun/explorateur-modele/modele-et-donnees.interface';
 import {ModeleService} from '../../../../../services/modeles-tensor-flow/modeles/modele.service';
 
 @Component({

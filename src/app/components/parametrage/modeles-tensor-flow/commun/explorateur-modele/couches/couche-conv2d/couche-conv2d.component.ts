@@ -1,9 +1,9 @@
 import {Component, input, InputSignal} from '@angular/core';
-import {DTOCouche} from '../../../../../../services/modeles-tensor-flow/couches/dto-couche.interface';
-import {TypeCouche} from '../../../../../../services/modeles-tensor-flow/couches/type-couche.enum';
+import {DTOCouche} from '../../../../../../../services/modeles-tensor-flow/couches/dto-couche.interface';
+import {TypeCouche} from '../../../../../../../services/modeles-tensor-flow/couches/type-couche.enum';
 import {DecimalPipe} from '@angular/common';
 import {TranslatePipe} from '@ngx-translate/core';
-import {DTOCoucheConv2d} from '../../../../../../services/modeles-tensor-flow/couches/dto-couche-conv2d.class';
+import {DTOCoucheConv2d} from '../../../../../../../services/modeles-tensor-flow/couches/dto-couche-conv2d.class';
 
 @Component({
   selector: 'app-couche-conv2d',

@@ -6,10 +6,6 @@ import {Donnees} from '../../tutoriels/regression-supervisee/donnees.interface';
 import {Tensor} from '@tensorflow/tfjs-core';
 
 export class PontDonnees {
-  // private indexEntrainementMelange: number = 0;
-  // private indexPredictionMelange: number = 0;
-  // private indexEntrainements: Uint32Array;
-  // private indexPredictions: Uint32Array;
   private entrees: Array<Array<number>>;
   private sorties: Array<Array<number>>;
   private entreesNormalisees: { min: number; max: number; donneesNormalisees: number[][] };
@@ -18,9 +14,6 @@ export class PontDonnees {
   constructor(donnees: Array<DonneesCoursVagues>) {
     donnees = this.filtrerDonnees(donnees);
     if (donnees.length > DonneesService.DONNEES_ENTRAINEMENT) {
-      // this.indexEntrainements = tf.util.createShuffledIndices(DonneesService.DONNEES_ENTRAINEMENT);
-      // this.indexPredictions = tf.util.createShuffledIndices(donnees.length - DonneesService.DONNEES_ENTRAINEMENT);
-
       this.entrees = donnees.map(d =>
         d.cours.map(value => value.cloture)
       );
