@@ -1,1 +1,15 @@
-<p>entrainement-modele works!</p>
+<h1>{{ 'COMPOSANTS.PARAMETRAGE.ML.ETUDES.REGRESSION_SUPERVISEE.REGRESSION_SUPERVISEE' | translate }}</h1>
+<div class="formulaire">
+  <app-formulaire-modele [(parametres)]="parametresModele"></app-formulaire-modele>
+  @if (pontDonnees) {
+    <p-button
+      label="{{ 'COMPOSANTS.PARAMETRAGE.ML.ETUDES.REGRESSION_SUPERVISEE.ENTRAINER_MODELE' | translate }}"
+      (onClick)="entrainerModele()" [icon]="'pi pi-microchip-ai'"/>
+    @if (!modeleEtDonnees) {
+      <app-barre-progression [pourcentage]="progressionEntrainement" largeur="20rem"></app-barre-progression>
+    }
+  }
+</div>
+<div class="resultat">
+</div>
+<app-explorateur-modele [modeleEtDonnees]="modeleEtDonnees"></app-explorateur-modele>

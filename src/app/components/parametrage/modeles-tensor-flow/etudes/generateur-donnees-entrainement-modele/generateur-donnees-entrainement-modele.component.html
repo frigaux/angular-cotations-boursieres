@@ -1,4 +1,4 @@
-<h1>{{ 'COMPOSANTS.PARAMETRAGE.ML.GENERATEUR_DONNEES_ENTRAINEMENT.DONNEES_COURS_VAGUES' | translate }} </h1>
+<h1>{{ 'COMPOSANTS.PARAMETRAGE.ML.ETUDES.GENERATEUR_DONNEES_ENTRAINEMENT.DONNEES_COURS_VAGUES' | translate }} </h1>
 
 <app-loader [affiche]="loading" [configuration]="[
   {marginLeft: '0', marginTop: '1rem', height: 'calc(100vh - 15em)', width: '100%'}
@@ -8,7 +8,7 @@
   <div class="conteneur">
     <div class="liste-valeurs">
       <label for="valeurs">{{
-          'COMPOSANTS.PARAMETRAGE.ML.GENERATEUR_DONNEES_ENTRAINEMENT.VALEURS_MARCHE' | translate: {
+          'COMPOSANTS.PARAMETRAGE.ML.ETUDES.GENERATEUR_DONNEES_ENTRAINEMENT.VALEURS_MARCHE' | translate: {
             libelleMarche: `ENUMERATIONS.MARCHE.${marche}` | translate
           }
         }} </label>
@@ -25,11 +25,11 @@
       <div class="actions">
         <p-button
           [icon]="'pi pi-download'"
-          label="{{ 'COMPOSANTS.PARAMETRAGE.ML.GENERATEUR_DONNEES_ENTRAINEMENT.EXPORTER_DONNEES' | translate }}"
+          label="{{ 'COMPOSANTS.PARAMETRAGE.ML.ETUDES.GENERATEUR_DONNEES_ENTRAINEMENT.EXPORTER_DONNEES' | translate }}"
           (onClick)="exporterDonnees()"/>
         <p-button
           [icon]="'pi pi-upload'"
-          label="{{ 'COMPOSANTS.PARAMETRAGE.ML.GENERATEUR_DONNEES_ENTRAINEMENT.IMPORTER_DONNEES' | translate }}"
+          label="{{ 'COMPOSANTS.PARAMETRAGE.ML.ETUDES.GENERATEUR_DONNEES_ENTRAINEMENT.IMPORTER_DONNEES' | translate }}"
           (onClick)="fileInput.click()"/>
         <input #fileInput type="file" (change)="importerDonnees($event)" style="display:none" accept=".json">
       </div>
@@ -43,7 +43,7 @@
             <p-inputNumber id="nbVagues" [(ngModel)]="coursDecoreSelectionne.nbVagues" [min]="0"
                            required></p-inputNumber>
             <label
-              for="nbVagues">{{ 'COMPOSANTS.PARAMETRAGE.ML.GENERATEUR_DONNEES_ENTRAINEMENT.NOMBRE_VAGUES' | translate }}</label>
+              for="nbVagues">{{ 'COMPOSANTS.PARAMETRAGE.ML.ETUDES.GENERATEUR_DONNEES_ENTRAINEMENT.NOMBRE_VAGUES' | translate }}</label>
           </p-floatlabel>
         </div>
         <div class="cours">

@@ -10,7 +10,7 @@ import {
   providedIn: 'root',
 })
 export class ModelesService {
-  modeleFonctionAffine(tauxApprentissage: number): LayersModel {
+  modeleFonctionAffine(parametresModele: ParametresModele): LayersModel {
     // Modèle séquentiel
     // const model = tf.sequential();
     // model.add(tf.layers.dense({inputShape: [1], units: 1}));
@@ -21,10 +21,12 @@ export class ModelesService {
     const dense: SymbolicTensor = tf.layers.dense({units: 1}).apply(input) as SymbolicTensor;
     const model = tf.model({inputs: input, outputs: dense});
 
+    const loss = parametresModele.fonctionsPertes.map(fonction => (tf.losses as any)[fonction]);
+    const metrics = parametresModele.metriques.map(metrique => (tf.metrics as any)[metrique]);
     model.compile({
-      optimizer: tf.train.sgd(tauxApprentissage),
-      loss: tf.losses.meanSquaredError,
-      metrics: [tf.metrics.binaryAccuracy]
+      optimizer: (tf.train as any)[parametresModele.optimiseur](parametresModele.tauxApprentissage),
+      loss,
+      metrics
     });
 
     return model;

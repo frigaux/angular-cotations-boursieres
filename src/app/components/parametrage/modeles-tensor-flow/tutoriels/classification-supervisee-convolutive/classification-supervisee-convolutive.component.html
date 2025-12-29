@@ -1,5 +1,5 @@
-<h1>{{ 'COMPOSANTS.PARAMETRAGE.ML.CLASSIFICATION_SUPERVISEE_CONVOLUTIVE.CLASSIFICATION_SUPERVISEE_CONVOLUTIVE' | translate }}</h1>
-<h3>{{ 'COMPOSANTS.PARAMETRAGE.ML.CLASSIFICATION_SUPERVISEE_CONVOLUTIVE.EXEMPLES' | translate }}</h3>
+<h1>{{ 'COMPOSANTS.PARAMETRAGE.ML.TUTORIELS.CLASSIFICATION_SUPERVISEE_CONVOLUTIVE.CLASSIFICATION_SUPERVISEE_CONVOLUTIVE' | translate }}</h1>
+<h3>{{ 'COMPOSANTS.PARAMETRAGE.ML.TUTORIELS.CLASSIFICATION_SUPERVISEE_CONVOLUTIVE.EXEMPLES' | translate }}</h3>
 
 <app-loader [affiche]="loading" [configuration]="[
   {marginLeft: '0', marginTop: '1rem', height: '30vh', width: '100%'}
@@ -18,39 +18,39 @@
 
 @if (!loading) {
   <div class="formulaire">
-    <label>{{ 'COMPOSANTS.PARAMETRAGE.ML.CLASSIFICATION_SUPERVISEE_CONVOLUTIVE.NOMBRE_TENSEURS' | translate }} :</label>
+    <label>{{ 'COMPOSANTS.PARAMETRAGE.ML.TUTORIELS.CLASSIFICATION_SUPERVISEE_CONVOLUTIVE.NOMBRE_TENSEURS' | translate }} :</label>
     <span class="nombre">{{ nombreTenseurs }}</span>
     <p-floatlabel>
       <p-inputNumber id="tauxApprentissage" [(ngModel)]="tauxApprentissage" size="small" [inputSize]="7"/>
       <label
-        for="tauxApprentissage">{{ 'COMPOSANTS.PARAMETRAGE.ML.CLASSIFICATION_SUPERVISEE_CONVOLUTIVE.TAUX_APPRENTISSAGE' | translate }}</label>
+        for="tauxApprentissage">{{ 'COMPOSANTS.PARAMETRAGE.ML.TUTORIELS.CLASSIFICATION_SUPERVISEE_CONVOLUTIVE.TAUX_APPRENTISSAGE' | translate }}</label>
     </p-floatlabel>
     <p-floatlabel>
       <p-inputNumber id="iterations" [(ngModel)]="nombreIterations" size="small" [inputSize]="6"
-             title="{{ 'COMPOSANTS.PARAMETRAGE.ML.CLASSIFICATION_SUPERVISEE_CONVOLUTIVE.ITERATIONS_DESCRIPTION' | translate }}"/>
+             title="{{ 'COMPOSANTS.PARAMETRAGE.ML.TUTORIELS.CLASSIFICATION_SUPERVISEE_CONVOLUTIVE.ITERATIONS_DESCRIPTION' | translate }}"/>
       <label
-        for="iterations">{{ 'COMPOSANTS.PARAMETRAGE.ML.CLASSIFICATION_SUPERVISEE_CONVOLUTIVE.ITERATIONS' | translate }}</label>
+        for="iterations">{{ 'COMPOSANTS.PARAMETRAGE.ML.TUTORIELS.CLASSIFICATION_SUPERVISEE_CONVOLUTIVE.ITERATIONS' | translate }}</label>
     </p-floatlabel>
     <p-floatlabel>
       <p-inputNumber id="lot" [(ngModel)]="tailleLot" size="small" [inputSize]="6"
-             title="{{ 'COMPOSANTS.PARAMETRAGE.ML.CLASSIFICATION_SUPERVISEE_CONVOLUTIVE.LOT_DESCRIPTION' | translate }}"/>
+             title="{{ 'COMPOSANTS.PARAMETRAGE.ML.TUTORIELS.CLASSIFICATION_SUPERVISEE_CONVOLUTIVE.LOT_DESCRIPTION' | translate }}"/>
       <label
-        for="lot">{{ 'COMPOSANTS.PARAMETRAGE.ML.CLASSIFICATION_SUPERVISEE_CONVOLUTIVE.LOT' | translate }}</label>
+        for="lot">{{ 'COMPOSANTS.PARAMETRAGE.ML.TUTORIELS.CLASSIFICATION_SUPERVISEE_CONVOLUTIVE.LOT' | translate }}</label>
     </p-floatlabel>
     <p-floatlabel>
       <p-inputNumber id="nombreImagesEntrainement" [(ngModel)]="nombreImagesEntrainement"
              size="small" [inputSize]="6"/>
       <label
-        for="nombreImagesEntrainement">{{ 'COMPOSANTS.PARAMETRAGE.ML.CLASSIFICATION_SUPERVISEE_CONVOLUTIVE.NOMBRE_IMAGES_ENTRAINEMENT' | translate }}</label>
+        for="nombreImagesEntrainement">{{ 'COMPOSANTS.PARAMETRAGE.ML.TUTORIELS.CLASSIFICATION_SUPERVISEE_CONVOLUTIVE.NOMBRE_IMAGES_ENTRAINEMENT' | translate }}</label>
     </p-floatlabel>
     <p-floatlabel>
       <p-inputNumber id="nombreImagesPredictions" [(ngModel)]="nombreImagesPredictions" size="small" [inputSize]="6"/>
       <label
-        for="nombreImagesPredictions">{{ 'COMPOSANTS.PARAMETRAGE.ML.CLASSIFICATION_SUPERVISEE_CONVOLUTIVE.NOMBRE_IMAGES_PREDICTIONS' | translate }}</label>
+        for="nombreImagesPredictions">{{ 'COMPOSANTS.PARAMETRAGE.ML.TUTORIELS.CLASSIFICATION_SUPERVISEE_CONVOLUTIVE.NOMBRE_IMAGES_PREDICTIONS' | translate }}</label>
     </p-floatlabel>
     @if (iterateurDonnees) {
       <p-button
-        label="{{ 'COMPOSANTS.PARAMETRAGE.ML.CLASSIFICATION_SUPERVISEE_CONVOLUTIVE.ENTRAINER_MODELE' | translate }}"
+        label="{{ 'COMPOSANTS.PARAMETRAGE.ML.TUTORIELS.CLASSIFICATION_SUPERVISEE_CONVOLUTIVE.ENTRAINER_MODELE' | translate }}"
         (onClick)="entrainerModele()" [icon]="'pi pi-microchip-ai'"/>
       @if (!modeleEtDonnees) {
         <app-barre-progression [pourcentage]="progressionEntrainement" largeur="20rem"></app-barre-progression>
@@ -65,8 +65,8 @@
     @if (predictionsAgregees) {
       <table>
         <thead>
-        <th>{{ 'COMPOSANTS.PARAMETRAGE.ML.CLASSIFICATION_SUPERVISEE_CONVOLUTIVE.CHIFFRE' | translate }}</th>
-        <th>{{ 'COMPOSANTS.PARAMETRAGE.ML.CLASSIFICATION_SUPERVISEE_CONVOLUTIVE.PREDICTIONS' | translate }}</th>
+        <th>{{ 'COMPOSANTS.PARAMETRAGE.ML.TUTORIELS.CLASSIFICATION_SUPERVISEE_CONVOLUTIVE.CHIFFRE' | translate }}</th>
+        <th>{{ 'COMPOSANTS.PARAMETRAGE.ML.TUTORIELS.CLASSIFICATION_SUPERVISEE_CONVOLUTIVE.PREDICTIONS' | translate }}</th>
         </thead>
         <tbody>
           @for (predictions of predictionsAgregees; track $index; let chiffreAttendu = $index) {
