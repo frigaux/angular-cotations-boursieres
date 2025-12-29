@@ -53,7 +53,7 @@ export class AppComponent {
   private configurationTraduction() {
     this.translateService.setTranslation('fr', translationsFR);
     this.translateService.addLangs(['fr']);
-    this.translateService.setDefaultLang('fr');
+    this.translateService.setFallbackLang('fr');
     this.translateService.use('fr');
     this.primeng.setTranslation({
       dayNames: ['Dimanche', 'Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi'],

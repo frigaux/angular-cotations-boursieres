@@ -42,7 +42,10 @@ export class RegressionSuperviseeComponent implements OnInit {
   protected parametresModele: ParametresModele = {
     tauxApprentissage: 0.1,
     iterations: 50,
-    lot: 32
+    lot: 32,
+    optimiseur: 'adam',
+    fonctionsPertes: ['meanSquaredError'],
+    metriques: ['binaryAccuracy']
   };
 
   // données, modèle, couches
@@ -76,7 +79,7 @@ export class RegressionSuperviseeComponent implements OnInit {
   protected entrainerModele() {
     if (this.donnees) {
       this.modeleEtDonnees = undefined;
-      const modeleCouches: LayersModel = this.modelesService.modelePuissancesRendements(this.parametresModele.tauxApprentissage);
+      const modeleCouches: LayersModel = this.modelesService.modelePuissancesRendements(this.parametresModele);
 
       this.donneesNormalisees = this.donneesService.normaliserZeroAUn(this.donnees);
       this.progressionEntrainement = 0;

@@ -6,6 +6,7 @@ import {TranslatePipe} from "@ngx-translate/core";
 import * as tf from '@tensorflow/tfjs';
 import {FormsModule} from '@angular/forms';
 import {ParametresModele} from './parametres-modele.interface';
+import {MultiSelect} from 'primeng/multiselect';
 
 @Component({
   selector: 'app-formulaire-modele',
@@ -14,7 +15,8 @@ import {ParametresModele} from './parametres-modele.interface';
     InputNumber,
     Select,
     TranslatePipe,
-    FormsModule
+    FormsModule,
+    MultiSelect
   ],
   templateUrl: './formulaire-modele.component.html',
   styleUrl: './formulaire-modele.component.sass',
@@ -29,6 +31,14 @@ export class FormulaireModeleComponent implements OnInit {
   protected backends: Array<string> = ['cpu', 'webgl']; // 'tensorflow' (requires tfjs-node), 'wasm' (requires tfjs-backend-wasm).
   protected backend: string = this.backends[0];
   protected backendChangeAvecSucces?: boolean;
+
+  // modèle
+  protected optimiseurs: Array<string> = ['adam', 'sgd'];
+  protected pertes: Array<string> = ['absoluteDifference', 'computeWeightedLoss', 'cosineDistance',
+    'hingeLoss', 'huberLoss', 'logLoss', 'meanSquaredError', 'sigmoidCrossEntropy', 'softmaxCrossEntropy'];
+  protected metriques: Array<string> = ['binaryAccuracy', 'binaryCrossentropy', 'categoricalAccuracy',
+    'categoricalCrossentropy', 'cosineProximity', 'meanAbsoluteError', 'meanAbsolutePercentageError',
+    'meanSquaredError', 'precision', 'r2Score', 'recall', 'sparseCategoricalAccuracy'];
 
   ngOnInit(): void {
     this.changeBackend();
