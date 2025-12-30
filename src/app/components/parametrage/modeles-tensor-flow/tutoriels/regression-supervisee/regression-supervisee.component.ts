@@ -23,6 +23,7 @@ import {
 } from '../../../../../services/modeles-tensor-flow/tutoriels/regression-supervisee/donnees-normalisees.interface';
 import {FormulaireModeleComponent} from '../../commun/formulaire-modele/formulaire-modele.component';
 import {ParametresModele} from '../../commun/formulaire-modele/parametres-modele.interface';
+import {OutilsService} from '../../../../../services/modeles-tensor-flow/commun/outils.service';
 
 @Component({
   selector: 'app-regression-supervisee',
@@ -63,7 +64,8 @@ export class RegressionSuperviseeComponent implements OnInit {
   constructor(private graphiquesService: GraphiquesService,
               private modelesService: ModelesService,
               private donneesService: DonneesService,
-              private modeleService: ModeleService) {
+              private modeleService: ModeleService,
+              private outilsService: OutilsService) {
     this.donneesChartOptions = this.graphiquesService.donneesChartOptions();
     this.entrainementChartOptions = this.graphiquesService.entrainementChartOptions();
   }
@@ -81,7 +83,7 @@ export class RegressionSuperviseeComponent implements OnInit {
       this.modeleEtDonnees = undefined;
       const modeleCouches: LayersModel = this.modelesService.modelePuissancesRendements(this.parametresModele);
 
-      this.donneesNormalisees = this.donneesService.normaliserZeroAUn(this.donnees);
+      this.donneesNormalisees = this.outilsService.normaliserZeroAUn(this.donnees);
       this.progressionEntrainement = 0;
       const logs: Array<Logs> = [];
       modeleCouches.fit(this.donneesNormalisees.entrees, this.donneesNormalisees.sorties, {
@@ -124,7 +126,7 @@ export class RegressionSuperviseeComponent implements OnInit {
     datasets.datasets.push(this.graphiquesService.donneesChart(predictions, 'PREDICTIONS').datasets[0]);
     this.donneesChart = datasets;
 
-    this.donneesService.libererTenseursDans(predictions);
+    this.outilsService.libererTenseursDans(predictions);
   }
 
   private tracerInformations() {

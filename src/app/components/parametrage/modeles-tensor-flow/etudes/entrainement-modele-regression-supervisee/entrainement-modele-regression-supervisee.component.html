@@ -11,5 +11,28 @@
   }
 </div>
 <div class="resultat">
+  @if (entrainementChart) {
+    <p-chart type="line" [data]="entrainementChart" [options]="entrainementChartOptions"/>
+  }
+  @if (predictionsParAttendu) {
+    <table>
+      <thead>
+      <th>{{ 'COMPOSANTS.PARAMETRAGE.ML.ETUDES.REGRESSION_SUPERVISEE.NOMBRE_VAGUES_ATTENDUES' | translate }}</th>
+      <th>{{ 'COMPOSANTS.PARAMETRAGE.ML.ETUDES.REGRESSION_SUPERVISEE.PREDICTIONS' | translate }}</th>
+      </thead>
+      <tbody>
+        @for (attendu of predictionsParAttendu.keys(); track $index) {
+          <tr>
+            <td>{{ attendu }}</td>
+            <td>
+              @for (prediction of predictionsParAttendu.get(attendu); track $index) {
+                <span>{{ prediction | number :'1.2-2' }}</span>
+              }
+            </td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  }
 </div>
 <app-explorateur-modele [modeleEtDonnees]="modeleEtDonnees"></app-explorateur-modele>

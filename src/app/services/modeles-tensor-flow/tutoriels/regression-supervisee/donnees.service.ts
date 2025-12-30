@@ -3,37 +3,12 @@ import * as tf from '@tensorflow/tfjs';
 import {LayersModel} from '@tensorflow/tfjs-layers/dist/engine/training';
 import {Donnees} from './donnees.interface';
 import {DonneesNormalisees} from './donnees-normalisees.interface';
-import {Tensor} from '@tensorflow/tfjs-core';
 import {Rank} from '@tensorflow/tfjs-core/dist/types';
 
 @Injectable({
   providedIn: 'root',
 })
 export class DonneesService {
-
-  normaliserZeroAUn(donnees: Donnees<Rank.R2>): DonneesNormalisees {
-    const entreesMin = donnees.entrees.min();
-    const entreesMax = donnees.entrees.max();
-    const sortiesMin = donnees.sorties.min();
-    const sortiesMax = donnees.sorties.max();
-
-    const entreesNormalisees = donnees.entrees.sub(entreesMin).div(entreesMax.sub(entreesMin));
-    const sortiesNormalisees = donnees.sorties.sub(sortiesMin).div(sortiesMax.sub(sortiesMin));
-    return {
-      entrees: entreesNormalisees,
-      sorties: sortiesNormalisees,
-      entreesMin,
-      entreesMax,
-      sortiesMin,
-      sortiesMax,
-    }
-  }
-
-  libererTenseursDans(objet: Object) {
-    Object.values(objet)
-      .filter(obj => obj instanceof Tensor)
-      .forEach(tensor => tensor.dispose());
-  }
 
   donneesFonctionAffine(): Promise<Donnees<Rank.R2>> {
     // données sous la forme de la fonction affine, y = 2x - 1

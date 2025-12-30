@@ -5,7 +5,7 @@ import {DonneesService} from './donnees.service';
 import {Donnees} from '../../tutoriels/regression-supervisee/donnees.interface';
 import {Tensor} from '@tensorflow/tfjs-core';
 
-export class PontDonnees {
+export class PontDonneesCoursVagues {
   private entrees: Array<Array<number>>;
   private sorties: Array<Array<number>>;
   private entreesNormalisees: { min: number; max: number; donneesNormalisees: number[][] };
@@ -27,8 +27,8 @@ export class PontDonnees {
     }
   }
 
-  private filtrerDonnees(donnees: Array<DonneesCoursVagues>) {
-    return donnees.filter(d => d.nbVagues !== undefined && d.nbVagues !== null);
+  public tailleEntree(): number {
+    return this.entrees[0].length;
   }
 
   public donneesNormaliseesEntrainement(): Donnees<Rank.R2> {
@@ -45,9 +45,21 @@ export class PontDonnees {
     return tf.tensor2d(donnees, [donnees.length, donnees[0].length]);
   }
 
-  public sortiesPredictions(): Tensor<Rank.R2> {
+  public sortiesAttenduesPredictions(): Tensor<Rank.R2> {
     const sorties = this.sorties.slice(DonneesService.DONNEES_ENTRAINEMENT);
     return tf.tensor2d(sorties, [sorties.length, sorties[0].length]);
+  }
+
+  public denormaliserSorties(sorties: Tensor<Rank.R2>): Tensor<Rank.R2> {
+    const min = this.sortiesNormalisees.min;
+    const max = this.sortiesNormalisees.max;
+    return sorties
+      .mul(max - min)
+      .add(min);
+  }
+
+  private filtrerDonnees(donnees: Array<DonneesCoursVagues>) {
+    return donnees.filter(d => d.nbVagues !== undefined && d.nbVagues !== null);
   }
 
   private normaliser(donnees: Array<Array<number>>) {

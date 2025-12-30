@@ -7,3 +7,22 @@ div.formulaire
   p-button, app-barre-progression
     margin-left: 1rem
 
+div.resultat
+  display: flex
+  flex-direction: row
+  margin: 2rem 1rem 1rem 1rem
+
+  p-chart, table
+    width: calc(50vw - 2rem)
+
+  table
+    th:nth-child(1), td:nth-child(1)
+      text-align: right
+
+    th:nth-child(2), td:nth-child(2)
+      text-align: left
+      padding-left: 1rem
+
+    td:nth-child(2)
+      span:not(:first-child)
+        margin-left: 1rem

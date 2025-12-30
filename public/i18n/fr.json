@@ -601,7 +601,9 @@
           },
           "REGRESSION_SUPERVISEE": {
             "REGRESSION_SUPERVISEE": "Effectuer des prédictions du nombre de vagues sur une courbe (régression supervisée)",
-            "ENTRAINER_MODELE": "Entraîner le modèle"
+            "ENTRAINER_MODELE": "Entraîner le modèle",
+            "NOMBRE_VAGUES_ATTENDUES": "Attendu",
+            "PREDICTIONS": "Prédictions"
           }
         },
         "TUTORIELS": {
