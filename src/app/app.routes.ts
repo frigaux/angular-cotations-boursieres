@@ -27,6 +27,9 @@ import {
 import {
   EntrainementModeleRegressionSuperviseeComponent
 } from './components/parametrage/modeles-tensor-flow/etudes/entrainement-modele-regression-supervisee/entrainement-modele-regression-supervisee.component';
+import {
+  EntrainementModeleClassificationSuperviseeComponent
+} from './components/parametrage/modeles-tensor-flow/etudes/entrainement-modele-classification-supervisee/entrainement-modele-classification-supervisee.component';
 
 export const routes: Routes = [
   {
@@ -95,6 +98,11 @@ export const routes: Routes = [
   {
     path: 'entrainement-modele-regression-supervisee',
     component: EntrainementModeleRegressionSuperviseeComponent,
+    canActivate: [authentificationGuard]
+  },
+  {
+    path: 'entrainement-modele-classification-supervisee',
+    component: EntrainementModeleClassificationSuperviseeComponent,
     canActivate: [authentificationGuard]
   },
   {path: '**', redirectTo: '/authentification'}

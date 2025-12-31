@@ -13,7 +13,8 @@
     "REGRESSION_SUPERVISEE": "Régression supervisée",
     "CLASSIFICATION_SUPERVISEE_CONVOLUTIVE": "Classification supervisée convolutive",
     "GENERATEUR_DONNEES_ENTRAINEMENT_MODELE": "Générateur de données d'entrainement pour du ML",
-    "ENTRAINEMENT_MODELE_REGRESSION_SUPERVISEE": "Entrainement du modèle par régression supervisée"
+    "ENTRAINEMENT_MODELE_REGRESSION_SUPERVISEE": "Entrainement du modèle par régression supervisée",
+    "ENTRAINEMENT_MODELE_CLASSIFICATION_SUPERVISEE": "Entrainement du modèle par classification supervisée"
   },
   "COMPOSANTS": {
     "COMMUN": {
@@ -41,7 +42,8 @@
         "REGRESSION_SUPERVISEE": "Régression supervisée",
         "CLASSIFICATION_SUPERVISEE_CONVOLUTIVE": "Classification supervisée convolutive",
         "GENERATEUR_DONNEES_ENTRAINEMENT_MODELE": "Générateur de données d'entrainement pour du ML",
-        "ENTRAINEMENT_MODELE_REGRESSION_SUPERVISEE": "Entrainement du modèle par régression supervisée"
+        "ENTRAINEMENT_MODELE_REGRESSION_SUPERVISEE": "Entrainement du modèle par régression supervisée",
+        "ENTRAINEMENT_MODELE_CLASSIFICATION_SUPERVISEE": "Entrainement du modèle par classification supervisée"
       }
     },
     "VALEURS": {
@@ -601,6 +603,12 @@
           },
           "REGRESSION_SUPERVISEE": {
             "REGRESSION_SUPERVISEE": "Effectuer des prédictions du nombre de vagues sur une courbe (régression supervisée)",
+            "ENTRAINER_MODELE": "Entraîner le modèle",
+            "NOMBRE_VAGUES_ATTENDUES": "Attendu",
+            "PREDICTIONS": "Prédictions"
+          },
+          "CLASSIFICATION_SUPERVISEE": {
+            "CLASSIFICATION_SUPERVISEE": "Effectuer des prédictions du nombre de vagues sur une courbe (classification supervisée)",
             "ENTRAINER_MODELE": "Entraîner le modèle",
             "NOMBRE_VAGUES_ATTENDUES": "Attendu",
             "PREDICTIONS": "Prédictions"

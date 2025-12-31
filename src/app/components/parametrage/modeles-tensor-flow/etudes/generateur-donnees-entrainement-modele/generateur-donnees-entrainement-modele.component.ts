@@ -9,9 +9,7 @@ import {TranslatePipe, TranslateService} from '@ngx-translate/core';
 import {InputNumber, InputNumberModule} from 'primeng/inputnumber';
 import {Button} from 'primeng/button';
 import {LoaderComponent} from '../../../../loader/loader.component';
-import {
-  DonneesCoursVagues
-} from '../../../../../services/modeles-tensor-flow/etudes/regression-supervisee/donnees-cours-vagues.class';
+import {DonneesCoursVagues} from '../../../../../services/modeles-tensor-flow/etudes/donnees-cours-vagues.class';
 import {UIChart} from 'primeng/chart';
 import {DatePipe, NgClass} from '@angular/common';
 import {FloatLabel} from 'primeng/floatlabel';

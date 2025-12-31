@@ -1,39 +1,39 @@
 import {Component, OnInit} from '@angular/core';
-import {DonneesService} from '../../../../../services/modeles-tensor-flow/etudes/donnees.service';
 import {ParametresModele} from '../../commun/formulaire-modele/parametres-modele.interface';
-import {ModeleEtDonnees} from '../../commun/explorateur-modele/modele-et-donnees.interface';
 import {
   PontDonneesCoursVagues
 } from '../../../../../services/modeles-tensor-flow/etudes/regression-supervisee/pont-donnees-cours-vagues.class';
+import {ModeleEtDonnees} from '../../commun/explorateur-modele/modele-et-donnees.interface';
+import {GraphiquesService} from '../../../../../services/modeles-tensor-flow/graphiques/graphiques.service';
+import {DonneesService} from '../../../../../services/modeles-tensor-flow/etudes/donnees.service';
+import {ModelesService} from '../../../../../services/modeles-tensor-flow/etudes/regression-supervisee/modeles.service';
+import {ModeleService} from '../../../../../services/modeles-tensor-flow/modeles/modele.service';
+import {LayersModel} from '@tensorflow/tfjs-layers/dist/engine/training';
+import {Logs, Rank} from '@tensorflow/tfjs';
+import {Tensor} from '@tensorflow/tfjs-core';
 import {TranslatePipe} from '@ngx-translate/core';
 import {FormulaireModeleComponent} from '../../commun/formulaire-modele/formulaire-modele.component';
 import {Button} from 'primeng/button';
 import {BarreProgressionComponent} from '../../../../commun/barre-progression/barre-progression.component';
-import {ExplorateurModeleComponent} from '../../commun/explorateur-modele/explorateur-modele.component';
-import {ModelesService} from '../../../../../services/modeles-tensor-flow/etudes/regression-supervisee/modeles.service';
-import {LayersModel} from '@tensorflow/tfjs-layers/dist/engine/training';
-import {Logs, Rank} from '@tensorflow/tfjs';
-import {ModeleService} from '../../../../../services/modeles-tensor-flow/modeles/modele.service';
-import {GraphiquesService} from '../../../../../services/modeles-tensor-flow/graphiques/graphiques.service';
 import {UIChart} from 'primeng/chart';
-import {Tensor} from '@tensorflow/tfjs-core';
 import {DecimalPipe} from '@angular/common';
+import {ExplorateurModeleComponent} from '../../commun/explorateur-modele/explorateur-modele.component';
 
 @Component({
-  selector: 'app-entrainement-modele-regression-supervisee',
+  selector: 'app-entrainement-modele-classification-supervisee',
   imports: [
     TranslatePipe,
     FormulaireModeleComponent,
     Button,
     BarreProgressionComponent,
-    ExplorateurModeleComponent,
     UIChart,
-    DecimalPipe
+    DecimalPipe,
+    ExplorateurModeleComponent
   ],
-  templateUrl: './entrainement-modele-regression-supervisee.component.html',
-  styleUrl: './entrainement-modele-regression-supervisee.component.sass',
+  templateUrl: './entrainement-modele-classification-supervisee.component.html',
+  styleUrls: ['./entrainement-modele-classification-supervisee.component.sass', '../entrainement-modele-regression-supervisee/entrainement-modele-regression-supervisee.component.sass'],
 })
-export class EntrainementModeleRegressionSuperviseeComponent implements OnInit {
+export class EntrainementModeleClassificationSuperviseeComponent implements OnInit {
   protected parametresModele: ParametresModele = {
     tauxApprentissage: 0.1,
     iterations: 50,

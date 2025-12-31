@@ -1,0 +1,38 @@
+<h1>{{ 'COMPOSANTS.PARAMETRAGE.ML.ETUDES.CLASSIFICATION_SUPERVISEE.CLASSIFICATION_SUPERVISEE' | translate }}</h1>
+<div class="formulaire">
+  <app-formulaire-modele [(parametres)]="parametresModele"></app-formulaire-modele>
+  @if (pontDonnees) {
+    <p-button
+      label="{{ 'COMPOSANTS.PARAMETRAGE.ML.ETUDES.CLASSIFICATION_SUPERVISEE.ENTRAINER_MODELE' | translate }}"
+      (onClick)="entrainerModele()" [icon]="'pi pi-microchip-ai'"/>
+    @if (!modeleEtDonnees) {
+      <app-barre-progression [pourcentage]="progressionEntrainement" largeur="20rem"></app-barre-progression>
+    }
+  }
+</div>
+<div class="resultat">
+  @if (entrainementChart) {
+    <p-chart type="line" [data]="entrainementChart" [options]="entrainementChartOptions"/>
+  }
+  @if (predictionsParAttendu) {
+    <table>
+      <thead>
+      <th>{{ 'COMPOSANTS.PARAMETRAGE.ML.ETUDES.CLASSIFICATION_SUPERVISEE.NOMBRE_VAGUES_ATTENDUES' | translate }}</th>
+      <th>{{ 'COMPOSANTS.PARAMETRAGE.ML.ETUDES.CLASSIFICATION_SUPERVISEE.PREDICTIONS' | translate }}</th>
+      </thead>
+      <tbody>
+        @for (attendu of predictionsParAttendu.keys(); track $index) {
+          <tr>
+            <td>{{ attendu }}</td>
+            <td>
+              @for (prediction of predictionsParAttendu.get(attendu); track $index) {
+                <span>{{ prediction | number :'1.2-2' }}</span>
+              }
+            </td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  }
+</div>
+<app-explorateur-modele [modeleEtDonnees]="modeleEtDonnees"></app-explorateur-modele>

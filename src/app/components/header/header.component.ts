@@ -89,6 +89,11 @@ export class HeaderComponent {
           label: translateService.instant('COMPOSANTS.HEADER.PARAMETRAGE.ENTRAINEMENT_MODELE_REGRESSION_SUPERVISEE'),
           routerLink: 'entrainement-modele-regression-supervisee',
           icon: 'pi pi-microchip-ai'
+        },
+        {
+          label: translateService.instant('COMPOSANTS.HEADER.PARAMETRAGE.ENTRAINEMENT_MODELE_CLASSIFICATION_SUPERVISEE'),
+          routerLink: 'entrainement-modele-classification-supervisee',
+          icon: 'pi pi-microchip-ai'
         }
       ]
     });
