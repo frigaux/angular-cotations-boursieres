@@ -13,8 +13,8 @@ import {ExplorateurModeleComponent} from '../../commun/explorateur-modele/explor
 import {ModelesService} from '../../../../../services/modeles-tensor-flow/etudes/regression-supervisee/modeles.service';
 import {LayersModel} from '@tensorflow/tfjs-layers/dist/engine/training';
 import {Logs, Rank} from '@tensorflow/tfjs';
-import {ModeleService} from '../../../../../services/modeles-tensor-flow/modeles/modele.service';
-import {GraphiquesService} from '../../../../../services/modeles-tensor-flow/graphiques/graphiques.service';
+import {ModeleService} from '../../../../../services/modeles-tensor-flow/commun/modeles/modele.service';
+import {GraphiquesService} from '../../../../../services/modeles-tensor-flow/commun/graphiques/graphiques.service';
 import {UIChart} from 'primeng/chart';
 import {Tensor} from '@tensorflow/tfjs-core';
 import {DecimalPipe} from '@angular/common';
@@ -76,6 +76,7 @@ export class EntrainementModeleRegressionSuperviseeComponent implements OnInit {
       this.progressionEntrainement = 0;
       const logs: Array<Logs> = [];
       const donneesNormalisees = this.pontDonnees.donneesNormaliseesEntrainement();
+
       modeleCouches.fit(donneesNormalisees.entrees, donneesNormalisees.sorties, {
         epochs: this.parametresModele.iterations,
         batchSize: this.parametresModele.lot,

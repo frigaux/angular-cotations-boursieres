@@ -8,7 +8,7 @@ import {Tensor} from '@tensorflow/tfjs-core';
 export class PontDonneesCoursVagues {
   private entrees: Array<Array<number>>;
   private sorties: Array<number>;
-  private entreesNormalisees: { min: number; max: number; donneesNormalisees: number[][] };
+  private entreesNormalisees: number[][];
   private sortiesClassifiees: Array<Array<number>>;
 
   constructor(donnees: Array<DonneesCoursVagues>) {
@@ -36,7 +36,7 @@ export class PontDonneesCoursVagues {
   }
 
   public donneesEntrainement(): Donnees<Rank.R2> {
-    const donnees = this.entreesNormalisees.donneesNormalisees.slice(0, DonneesService.DONNEES_ENTRAINEMENT);
+    const donnees = this.entreesNormalisees.slice(0, DonneesService.DONNEES_ENTRAINEMENT);
     const sorties = this.sortiesClassifiees.slice(0, DonneesService.DONNEES_ENTRAINEMENT);
     return {
       entrees: tf.tensor2d(donnees, [DonneesService.DONNEES_ENTRAINEMENT, donnees[0].length]),
@@ -45,7 +45,7 @@ export class PontDonneesCoursVagues {
   }
 
   public entreesNormaliseesPredictions(): Tensor<Rank.R2> {
-    const donnees = this.entreesNormalisees.donneesNormalisees.slice(DonneesService.DONNEES_ENTRAINEMENT);
+    const donnees = this.entreesNormalisees.slice(DonneesService.DONNEES_ENTRAINEMENT);
     return tf.tensor2d(donnees, [donnees.length, donnees[0].length]);
   }
 
@@ -61,16 +61,18 @@ export class PontDonneesCoursVagues {
     return donnees.filter(d => d.nbVagues !== undefined && d.nbVagues !== null);
   }
 
-  private normaliser(donnees: Array<Array<number>>) {
-    const min = Math.min(...donnees.map(liste => Math.min(...liste)));
-    const max = Math.max(...donnees.map(liste => Math.max(...liste)));
-    return {min, max, donneesNormalisees: donnees.map(liste => liste.map(valeur => (valeur - min) / (max - min)))};
+  private normaliser(entrees: Array<Array<number>>) {
+    return entrees.map(entree => {
+      const min = Math.min(...entree);
+      const max = Math.max(...entree);
+      return entree.map(valeur => (valeur - min) / (max - min));
+    });
   }
 
   private classifier(sorties: Array<number>): Array<Array<number>> {
     const max = Math.max(...sorties);
     return sorties.map(sortie => {
-      const resultat = new Array(max + 1);
+      const resultat = Array.from({length: max + 1}, (v, i) => 0);
       resultat[sortie] = 1;
       return resultat;
     });

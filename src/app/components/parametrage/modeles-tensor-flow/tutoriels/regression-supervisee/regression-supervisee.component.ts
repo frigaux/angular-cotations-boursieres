@@ -12,12 +12,12 @@ import {
 import {
   DonneesService
 } from '../../../../../services/modeles-tensor-flow/tutoriels/regression-supervisee/donnees.service';
-import {GraphiquesService} from '../../../../../services/modeles-tensor-flow/graphiques/graphiques.service';
+import {GraphiquesService} from '../../../../../services/modeles-tensor-flow/commun/graphiques/graphiques.service';
 import {Donnees} from '../../../../../services/modeles-tensor-flow/tutoriels/regression-supervisee/donnees.interface';
 import {Rank} from '@tensorflow/tfjs-core/dist/types';
 import {ExplorateurModeleComponent} from '../../commun/explorateur-modele/explorateur-modele.component';
 import {ModeleEtDonnees} from '../../commun/explorateur-modele/modele-et-donnees.interface';
-import {ModeleService} from '../../../../../services/modeles-tensor-flow/modeles/modele.service';
+import {ModeleService} from '../../../../../services/modeles-tensor-flow/commun/modeles/modele.service';
 import {
   DonneesNormalisees
 } from '../../../../../services/modeles-tensor-flow/tutoriels/regression-supervisee/donnees-normalisees.interface';

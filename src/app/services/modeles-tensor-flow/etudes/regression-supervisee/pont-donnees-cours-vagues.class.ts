@@ -8,7 +8,7 @@ import {Tensor} from '@tensorflow/tfjs-core';
 export class PontDonneesCoursVagues {
   private entrees: Array<Array<number>>;
   private sorties: Array<Array<number>>;
-  private entreesNormalisees: { min: number; max: number; donneesNormalisees: number[][] };
+  private entreesNormalisees: number[][];
   private sortiesNormalisees: { min: number; max: number; donneesNormalisees: number[][] };
 
   constructor(donnees: Array<DonneesCoursVagues>) {
@@ -20,8 +20,8 @@ export class PontDonneesCoursVagues {
 
       this.sorties = donnees.map(d => [d.nbVagues!]);
 
-      this.entreesNormalisees = this.normaliser(this.entrees);
-      this.sortiesNormalisees = this.normaliser(this.sorties);
+      this.entreesNormalisees = this.normaliserEntrees(this.entrees);
+      this.sortiesNormalisees = this.normaliserSorties(this.sorties);
     } else {
       throw new Error(`Pas assez de données : ${donnees.length} <= ${DonneesService.DONNEES_ENTRAINEMENT}`);
     }
@@ -32,7 +32,7 @@ export class PontDonneesCoursVagues {
   }
 
   public donneesNormaliseesEntrainement(): Donnees<Rank.R2> {
-    const donnees = this.entreesNormalisees.donneesNormalisees.slice(0, DonneesService.DONNEES_ENTRAINEMENT);
+    const donnees = this.entreesNormalisees.slice(0, DonneesService.DONNEES_ENTRAINEMENT);
     const sorties = this.sortiesNormalisees.donneesNormalisees.slice(0, DonneesService.DONNEES_ENTRAINEMENT);
     return {
       entrees: tf.tensor2d(donnees, [DonneesService.DONNEES_ENTRAINEMENT, donnees[0].length]),
@@ -41,7 +41,7 @@ export class PontDonneesCoursVagues {
   }
 
   public entreesNormaliseesPredictions(): Tensor<Rank.R2> {
-    const donnees = this.entreesNormalisees.donneesNormalisees.slice(DonneesService.DONNEES_ENTRAINEMENT);
+    const donnees = this.entreesNormalisees.slice(DonneesService.DONNEES_ENTRAINEMENT);
     return tf.tensor2d(donnees, [donnees.length, donnees[0].length]);
   }
 
@@ -62,9 +62,17 @@ export class PontDonneesCoursVagues {
     return donnees.filter(d => d.nbVagues !== undefined && d.nbVagues !== null);
   }
 
-  private normaliser(donnees: Array<Array<number>>) {
-    const min = Math.min(...donnees.map(liste => Math.min(...liste)));
-    const max = Math.max(...donnees.map(liste => Math.max(...liste)));
-    return {min, max, donneesNormalisees: donnees.map(liste => liste.map(valeur => (valeur - min) / (max - min)))};
+  private normaliserSorties(sorties: Array<Array<number>>) {
+    const min = Math.min(...sorties.map(liste => Math.min(...liste)));
+    const max = Math.max(...sorties.map(liste => Math.max(...liste)));
+    return {min, max, donneesNormalisees: sorties.map(liste => liste.map(valeur => (valeur - min) / (max - min)))};
+  }
+
+  private normaliserEntrees(entrees: Array<Array<number>>) {
+    return entrees.map(entree => {
+      const min = Math.min(...entree);
+      const max = Math.max(...entree);
+      return entree.map(valeur => (valeur - min) / (max - min));
+    });
   }
 }

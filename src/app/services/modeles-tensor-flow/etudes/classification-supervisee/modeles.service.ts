@@ -10,11 +10,11 @@ import {
   providedIn: 'root',
 })
 export class ModelesService {
-  modeleCoursVagues(parametresModele: ParametresModele, inputShape: number): LayersModel {
+  modeleCoursVagues(parametresModele: ParametresModele, inputShape: number, outputShape: number): LayersModel {
     const input: SymbolicTensor = tf.input({shape: [inputShape]});
     const dense1: SymbolicTensor = tf.layers.dense({units: inputShape, useBias: true}).apply(input) as SymbolicTensor;
-    const hidden: SymbolicTensor = tf.layers.dense({units: 10}).apply(dense1) as SymbolicTensor;
-    const dense2: SymbolicTensor = tf.layers.dense({units: 1, useBias: true}).apply(hidden) as SymbolicTensor;
+    const hidden: SymbolicTensor = tf.layers.dense({units: 16}).apply(dense1) as SymbolicTensor;
+    const dense2: SymbolicTensor = tf.layers.dense({units: outputShape, useBias: true}).apply(hidden) as SymbolicTensor;
     const model = tf.model({inputs: input, outputs: dense2});
 
     const loss = parametresModele.fonctionsPertes.map(fonction => (tf.losses as any)[fonction]);

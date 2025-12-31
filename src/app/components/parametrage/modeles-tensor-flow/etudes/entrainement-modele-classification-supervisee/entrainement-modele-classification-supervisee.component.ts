@@ -2,12 +2,14 @@ import {Component, OnInit} from '@angular/core';
 import {ParametresModele} from '../../commun/formulaire-modele/parametres-modele.interface';
 import {
   PontDonneesCoursVagues
-} from '../../../../../services/modeles-tensor-flow/etudes/regression-supervisee/pont-donnees-cours-vagues.class';
+} from '../../../../../services/modeles-tensor-flow/etudes/classification-supervisee/pont-donnees-cours-vagues.class';
 import {ModeleEtDonnees} from '../../commun/explorateur-modele/modele-et-donnees.interface';
-import {GraphiquesService} from '../../../../../services/modeles-tensor-flow/graphiques/graphiques.service';
+import {GraphiquesService} from '../../../../../services/modeles-tensor-flow/commun/graphiques/graphiques.service';
 import {DonneesService} from '../../../../../services/modeles-tensor-flow/etudes/donnees.service';
-import {ModelesService} from '../../../../../services/modeles-tensor-flow/etudes/regression-supervisee/modeles.service';
-import {ModeleService} from '../../../../../services/modeles-tensor-flow/modeles/modele.service';
+import {
+  ModelesService
+} from '../../../../../services/modeles-tensor-flow/etudes/classification-supervisee/modeles.service';
+import {ModeleService} from '../../../../../services/modeles-tensor-flow/commun/modeles/modele.service';
 import {LayersModel} from '@tensorflow/tfjs-layers/dist/engine/training';
 import {Logs, Rank} from '@tensorflow/tfjs';
 import {Tensor} from '@tensorflow/tfjs-core';
@@ -63,7 +65,7 @@ export class EntrainementModeleClassificationSuperviseeComponent implements OnIn
   }
 
   ngOnInit(): void {
-    this.donneesService.donneesCoursVaguesRegression()
+    this.donneesService.donneesCoursVaguesClassification()
       .then(pontDonnees => {
         this.pontDonnees = pontDonnees;
       });
@@ -72,10 +74,11 @@ export class EntrainementModeleClassificationSuperviseeComponent implements OnIn
   protected entrainerModele() {
     if (this.pontDonnees) {
       this.modeleEtDonnees = undefined;
-      const modeleCouches: LayersModel = this.modelesService.modeleCoursVagues(this.parametresModele, this.pontDonnees.tailleEntree());
+      const modeleCouches: LayersModel = this.modelesService.modeleCoursVagues(this.parametresModele,
+        this.pontDonnees.tailleEntree(), this.pontDonnees.tailleSortie());
       this.progressionEntrainement = 0;
       const logs: Array<Logs> = [];
-      const donneesNormalisees = this.pontDonnees.donneesNormaliseesEntrainement();
+      const donneesNormalisees = this.pontDonnees.donneesEntrainement();
       modeleCouches.fit(donneesNormalisees.entrees, donneesNormalisees.sorties, {
         epochs: this.parametresModele.iterations,
         batchSize: this.parametresModele.lot,
@@ -108,20 +111,15 @@ export class EntrainementModeleClassificationSuperviseeComponent implements OnIn
     if (this.modeleEtDonnees && this.pontDonnees) {
       // line chart : affichage des metrics d'entrainement
       this.entrainementChart = this.graphiquesService.entrainementChart(logs);
-      const sortiesPredictions: Tensor<Rank.R2> = this.pontDonnees.denormaliserSorties(
-        this.modeleEtDonnees.modeleCouches.predict(this.pontDonnees.entreesNormaliseesPredictions()) as Tensor<Rank.R2>
-      );
-      const sortiesAttendues = this.pontDonnees.sortiesAttenduesPredictions();
+      const predictions = this.modeleEtDonnees.modeleCouches.predict(this.pontDonnees.entreesNormaliseesPredictions()) as Tensor<Rank.R2>;
+      const sortiesPredictions: number[] = this.pontDonnees.denormaliserSorties(predictions);
+      const sortiesAttendues: number[] = this.pontDonnees.sortiesAttenduesPredictions();
 
-      const predictions = sortiesPredictions.dataSync();
       const predictionsParAttendu = new Map<number, Array<number>>();
-      sortiesAttendues.dataSync().forEach((attendu, i) => {
-        predictionsParAttendu.set(attendu, (predictionsParAttendu.get(attendu) || []).concat([predictions[i]]));
+      sortiesAttendues.forEach((attendu, i) => {
+        predictionsParAttendu.set(attendu, (predictionsParAttendu.get(attendu) || []).concat([sortiesPredictions[i]]));
       });
       this.predictionsParAttendu = predictionsParAttendu;
-
-      sortiesPredictions.dispose();
-      sortiesAttendues.dispose();
     }
   }
 }

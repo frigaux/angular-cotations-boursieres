@@ -21,11 +21,11 @@ import {FloatLabel} from 'primeng/floatlabel';
 import {InputNumber} from 'primeng/inputnumber';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {UIChart} from 'primeng/chart';
-import {GraphiquesService} from '../../../../../services/modeles-tensor-flow/graphiques/graphiques.service';
+import {GraphiquesService} from '../../../../../services/modeles-tensor-flow/commun/graphiques/graphiques.service';
 import {NgClass, PercentPipe} from '@angular/common';
 import {ExplorateurModeleComponent} from '../../commun/explorateur-modele/explorateur-modele.component';
 import {ModeleEtDonnees} from '../../commun/explorateur-modele/modele-et-donnees.interface';
-import {ModeleService} from '../../../../../services/modeles-tensor-flow/modeles/modele.service';
+import {ModeleService} from '../../../../../services/modeles-tensor-flow/commun/modeles/modele.service';
 
 @Component({
   selector: 'app-classification-supervisee-convolutive',
@@ -191,7 +191,6 @@ export class ClassificationSuperviseeConvolutiveComponent implements OnInit {
 
       this.analysesPredictions(chiffresAttendus, predictions);
     });
-    // TODO : dispose ?
     // images.dispose();
     // chiffresAttendus.dispose();
     // predictions.dispose();
