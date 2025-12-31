@@ -120,7 +120,7 @@ export class BoursoramaService {
       .parseFromString(html, 'text/html');
 
     const elDIVCours = document.querySelector('div.c-faceplate__price');
-    const elLIsCotations = document.querySelectorAll('li.c-list-info__item');
+    const elLIsCotations = document.querySelectorAll('div.c-faceplate__data li.c-list-info__item');
     const elULsNouvelles = document.querySelectorAll('ul.c-list-news');
     const elTableByLabel = this.queryTables(document);
     const elTableFiveDaysHistory = elTableByLabel.get('five-days-history');
@@ -128,7 +128,7 @@ export class BoursoramaService {
     const elTableHistoricalData = elTableByLabel.get('historical-data');
     const elDIVsGauges = document.querySelectorAll('div.c-median-gauge');
 
-    if (elDIVCours && elLIsCotations.length === 18 && elULsNouvelles.length === 3
+    if (elDIVCours && elLIsCotations.length === 16 && elULsNouvelles.length === 3
       && elTableFiveDaysHistory && elTableHistoricalData
       && elDIVsGauges.length >= 1) {
       const cotations = this.parseAndMapCotations(elDIVCours, elLIsCotations, elTableHistoricalData);
@@ -179,23 +179,23 @@ export class BoursoramaService {
   private parseAndMapCotations(elDIVCours: Element, elLIsCotations: NodeListOf<Element>, elTable: Element): DTOCotations {
     const cours = ParseUtil.queryAndParseNumber(elDIVCours, 'span.c-instrument');
 
-    const ouverture = ParseUtil.queryAndParseNumber(elLIsCotations[2], 'span.c-instrument');
-    const cloture = ParseUtil.queryAndParseNumber(elLIsCotations[3], 'span.c-instrument');
-    const plusHaut = ParseUtil.queryAndParseNumber(elLIsCotations[4], 'span.c-instrument');
-    const plusBas = ParseUtil.queryAndParseNumber(elLIsCotations[5], 'span.c-instrument');
-    const volume = ParseUtil.queryAndParseNumber(elLIsCotations[6], 'span.c-instrument');
+    const ouverture = ParseUtil.queryAndParseNumber(elLIsCotations[0], 'span.c-instrument');
+    const cloture = ParseUtil.queryAndParseNumber(elLIsCotations[1], 'span.c-instrument');
+    const plusHaut = ParseUtil.queryAndParseNumber(elLIsCotations[2], 'span.c-instrument');
+    const plusBas = ParseUtil.queryAndParseNumber(elLIsCotations[3], 'span.c-instrument');
+    const volume = ParseUtil.queryAndParseNumber(elLIsCotations[4], 'span.c-instrument');
 
-    const pourcentageCapitalEchange = ParseUtil.queryAndParseNumber(elLIsCotations[7], 'p.c-list-info__value') / 100;
-    const valorisation = ParseUtil.queryAndParseString(elLIsCotations[8], 'p.c-list-info__value');
+    const pourcentageCapitalEchange = ParseUtil.queryAndParseNumber(elLIsCotations[5], 'p.c-list-info__value') / 100;
+    const valorisation = ParseUtil.queryAndParseString(elLIsCotations[6], 'p.c-list-info__value');
 
-    const limiteBaisse = ParseUtil.queryAndParseNumber(elLIsCotations[10], 'p.c-list-info__value');
-    const limiteHausse = ParseUtil.queryAndParseNumber(elLIsCotations[11], 'p.c-list-info__value');
-    const pourcentageRendementEstime = ParseUtil.queryAndParseNumber(elLIsCotations[12], 'p.c-list-info__value') / 100;
-    const perEstime = ParseUtil.queryAndParseNumber(elLIsCotations[13], 'p.c-list-info__value');
-    const dernierDividende = ParseUtil.queryAndParseNumber(elLIsCotations[14], 'p.c-list-info__value');
-    const dateDernierDividende = ParseUtil.queryAndParseDate(elLIsCotations[15], 'p.c-list-info__value');
+    const limiteBaisse = ParseUtil.queryAndParseNumber(elLIsCotations[8], 'p.c-list-info__value');
+    const limiteHausse = ParseUtil.queryAndParseNumber(elLIsCotations[9], 'p.c-list-info__value');
+    const pourcentageRendementEstime = ParseUtil.queryAndParseNumber(elLIsCotations[10], 'p.c-list-info__value') / 100;
+    const perEstime = ParseUtil.queryAndParseNumber(elLIsCotations[11], 'p.c-list-info__value');
+    const dernierDividende = ParseUtil.queryAndParseNumber(elLIsCotations[12], 'p.c-list-info__value');
+    const dateDernierDividende = ParseUtil.queryAndParseDate(elLIsCotations[13], 'p.c-list-info__value');
 
-    const risqueESG = ParseUtil.queryAndParseString(elLIsCotations[17], 'p.c-list-info__value');
+    const risqueESG = ParseUtil.queryAndParseString(elLIsCotations[15], 'p.c-list-info__value');
 
     const valeurs: Array<number> = [];
     elTable.querySelectorAll('tbody > tr.c-table__row')

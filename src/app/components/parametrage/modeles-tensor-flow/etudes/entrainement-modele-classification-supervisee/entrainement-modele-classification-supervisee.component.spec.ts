@@ -3,6 +3,7 @@ import {ComponentFixture, TestBed} from '@angular/core/testing';
 import {
   EntrainementModeleClassificationSuperviseeComponent
 } from './entrainement-modele-classification-supervisee.component';
+import {TranslateModule} from '@ngx-translate/core';
 
 describe('EntrainementModeleClassificationSupervisee', () => {
   let component: EntrainementModeleClassificationSuperviseeComponent;
@@ -10,7 +11,10 @@ describe('EntrainementModeleClassificationSupervisee', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [EntrainementModeleClassificationSuperviseeComponent]
+      imports: [
+        EntrainementModeleClassificationSuperviseeComponent,
+        TranslateModule.forRoot({})
+      ]
     })
       .compileComponents();
 
