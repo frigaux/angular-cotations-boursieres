@@ -599,6 +599,7 @@
             "EXPORTER_DONNEES": "Exporter les données",
             "IMPORTER_DONNEES": "Importer les données",
             "NOMBRE_VAGUES": "Nombre de vagues",
+            "NB_JOURS_MOYENNE_MOBILE_GLISSANTE": "Nb jours MMG",
             "COURS": "Cours"
           },
           "REGRESSION_SUPERVISEE": {

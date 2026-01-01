@@ -36,6 +36,7 @@ export class GenerateurDonneesEntrainementModeleComponent implements OnInit {
   // données pour la vue
   protected loading: boolean = true;
   protected readonly marche: Marches = Marches.EURO_LIST_A;
+  protected nbJoursMMG: number = 1;
   protected coursDecores?: Array<DonneesCoursVagues>;
   protected coursDecoreSelectionne?: DonneesCoursVagues;
 
@@ -78,17 +79,19 @@ export class GenerateurDonneesEntrainementModeleComponent implements OnInit {
   }
 
   rafraichirVue(): void {
-    const labels = this.coursDecoreSelectionne!.cours
-      .map(cours => this.datepipe.transform(cours.date, 'dd/MM/yyyy'));
-    const data = this.coursDecoreSelectionne!.cours
+
+    // const labels = this.coursDecoreSelectionne!.cours
+    //   .map(cours => this.datepipe.transform(cours.date, 'dd/MM/yyyy'));
+    const cours = this.coursDecoreSelectionne!.cours
       .map(cours => cours.cloture);
+    const moyennesMobilesGlissantes = this.calculerMMG(cours, this.nbJoursMMG);
 
     this.data = {
-      labels,
+      labels: Array.from(Array(moyennesMobilesGlissantes.length).keys()),
       datasets: [
         {
           label: this.translateService.instant('COMPOSANTS.PARAMETRAGE.ML.GENERATEUR_DONNEES_ENTRAINEMENT.COURS'),
-          data,
+          data: moyennesMobilesGlissantes,
           tension: 0.4 // Bezier curve tension of the line. Set to 0 to draw straightlines. This option is ignored if monotone cubic interpolation is used.
         }
       ]
@@ -133,5 +136,17 @@ export class GenerateurDonneesEntrainementModeleComponent implements OnInit {
   private filtrerDonneesCoursVagues(donnees: Array<DonneesCoursVagues>) {
     const maximum = Math.max(...donnees.map(cours => cours.cours.length));
     return donnees.filter(cours => cours.cours.length === maximum);
+  }
+
+  private calculerMMG(data: number[], nbJours: number): number[] {
+    const mmg = [];
+    for (let i = 0; i < data.length - nbJours + 1; i++) {
+      let somme = 0;
+      for (let j = 0; j < nbJours; j++) {
+        somme += data[i + j];
+      }
+      mmg.push(Math.round(100 * somme / nbJours) / 100);
+    }
+    return mmg;
   }
 }

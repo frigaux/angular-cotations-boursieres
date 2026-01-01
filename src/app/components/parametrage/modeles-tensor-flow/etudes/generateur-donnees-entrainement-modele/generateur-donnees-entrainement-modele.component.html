@@ -41,9 +41,15 @@
           <h3> {{ coursDecoreSelectionne.valeur.libelle }} ({{ coursDecoreSelectionne.valeur.ticker }}) </h3>
           <p-floatlabel>
             <p-inputNumber id="nbVagues" [(ngModel)]="coursDecoreSelectionne.nbVagues" [min]="0"
-                           required></p-inputNumber>
+                           required size="small"></p-inputNumber>
             <label
               for="nbVagues">{{ 'COMPOSANTS.PARAMETRAGE.ML.ETUDES.GENERATEUR_DONNEES_ENTRAINEMENT.NOMBRE_VAGUES' | translate }}</label>
+          </p-floatlabel>
+          <p-floatlabel>
+            <p-inputNumber id="nbJours" [(ngModel)]="nbJoursMMG" [min]="1"
+                           required size="small" [inputSize]="5"></p-inputNumber>
+            <label
+              for="nbJours">{{ 'COMPOSANTS.PARAMETRAGE.ML.ETUDES.GENERATEUR_DONNEES_ENTRAINEMENT.NB_JOURS_MOYENNE_MOBILE_GLISSANTE' | translate }}</label>
           </p-floatlabel>
         </div>
         <div class="cours">
