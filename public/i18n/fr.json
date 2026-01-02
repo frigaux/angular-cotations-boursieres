@@ -39,11 +39,20 @@
         "GESTION_PORTEFEUILLES": "Gestion des portefeuilles",
         "GESTION_TABLEAUX": "Gestion des tableaux",
         "SAUVEGARDE_RESTAURATION": "Sauvegarde / restauration",
-        "REGRESSION_SUPERVISEE": "Régression supervisée",
-        "CLASSIFICATION_SUPERVISEE_CONVOLUTIVE": "Classification supervisée convolutive",
-        "GENERATEUR_DONNEES_ENTRAINEMENT_MODELE": "Générateur de données d'entrainement pour du ML",
-        "ENTRAINEMENT_MODELE_REGRESSION_SUPERVISEE": "Entrainement du modèle par régression supervisée",
-        "ENTRAINEMENT_MODELE_CLASSIFICATION_SUPERVISEE": "Entrainement du modèle par classification supervisée"
+        "SOUS_MENU_ML": "Machine learning",
+        "ML": {
+          "SOUS_MENU_TUTORIELS": "Tutoriels",
+          "TUTORIELS": {
+            "REGRESSION_SUPERVISEE": "Régression supervisée",
+            "CLASSIFICATION_SUPERVISEE_CONVOLUTIVE": "Classification supervisée convolutive"
+          },
+          "SOUS_MENU_ETUDES": "Etudes",
+          "ETUDES": {
+            "GENERATEUR_DONNEES_ENTRAINEMENT_MODELE": "Générateur de données d'entrainement pour du ML",
+            "ENTRAINEMENT_MODELE_REGRESSION_SUPERVISEE": "Entrainement du modèle par régression supervisée",
+            "ENTRAINEMENT_MODELE_CLASSIFICATION_SUPERVISEE": "Entrainement du modèle par classification supervisée"
+          }
+        }
       }
     },
     "VALEURS": {

@@ -71,30 +71,48 @@ export class HeaderComponent {
           icon: 'pi pi-sync'
         },
         {
-          label: translateService.instant('COMPOSANTS.HEADER.PARAMETRAGE.REGRESSION_SUPERVISEE'),
-          routerLink: 'regression-supervisee',
-          icon: 'pi pi-microchip-ai'
+          label: translateService.instant('COMPOSANTS.HEADER.PARAMETRAGE.SOUS_MENU_ML'),
+          icon: 'pi pi-microchip-ai',
+          items: [
+            {
+              label: translateService.instant('COMPOSANTS.HEADER.PARAMETRAGE.ML.SOUS_MENU_TUTORIELS'),
+              icon: 'pi pi-microchip-ai',
+              items: [
+                {
+                  label: translateService.instant('COMPOSANTS.HEADER.PARAMETRAGE.ML.TUTORIELS.REGRESSION_SUPERVISEE'),
+                  routerLink: 'regression-supervisee',
+                  icon: 'pi pi-microchip-ai'
+                },
+                {
+                  label: translateService.instant('COMPOSANTS.HEADER.PARAMETRAGE.ML.TUTORIELS.CLASSIFICATION_SUPERVISEE_CONVOLUTIVE'),
+                  routerLink: 'classification-supervisee-convolutive',
+                  icon: 'pi pi-microchip-ai'
+                }
+              ]
+            },
+            {
+              label: translateService.instant('COMPOSANTS.HEADER.PARAMETRAGE.ML.SOUS_MENU_ETUDES'),
+              icon: 'pi pi-microchip-ai',
+              items: [
+                {
+                  label: translateService.instant('COMPOSANTS.HEADER.PARAMETRAGE.ML.ETUDES.GENERATEUR_DONNEES_ENTRAINEMENT_MODELE'),
+                  routerLink: 'generateur-donnees-entrainement-modele',
+                  icon: 'pi pi-microchip-ai'
+                },
+                {
+                  label: translateService.instant('COMPOSANTS.HEADER.PARAMETRAGE.ML.ETUDES.ENTRAINEMENT_MODELE_REGRESSION_SUPERVISEE'),
+                  routerLink: 'entrainement-modele-regression-supervisee',
+                  icon: 'pi pi-microchip-ai'
+                },
+                {
+                  label: translateService.instant('COMPOSANTS.HEADER.PARAMETRAGE.ML.ETUDES.ENTRAINEMENT_MODELE_CLASSIFICATION_SUPERVISEE'),
+                  routerLink: 'entrainement-modele-classification-supervisee',
+                  icon: 'pi pi-microchip-ai'
+                }
+              ]
+            }
+          ]
         },
-        {
-          label: translateService.instant('COMPOSANTS.HEADER.PARAMETRAGE.CLASSIFICATION_SUPERVISEE_CONVOLUTIVE'),
-          routerLink: 'classification-supervisee-convolutive',
-          icon: 'pi pi-microchip-ai'
-        },
-        {
-          label: translateService.instant('COMPOSANTS.HEADER.PARAMETRAGE.GENERATEUR_DONNEES_ENTRAINEMENT_MODELE'),
-          routerLink: 'generateur-donnees-entrainement-modele',
-          icon: 'pi pi-microchip-ai'
-        },
-        {
-          label: translateService.instant('COMPOSANTS.HEADER.PARAMETRAGE.ENTRAINEMENT_MODELE_REGRESSION_SUPERVISEE'),
-          routerLink: 'entrainement-modele-regression-supervisee',
-          icon: 'pi pi-microchip-ai'
-        },
-        {
-          label: translateService.instant('COMPOSANTS.HEADER.PARAMETRAGE.ENTRAINEMENT_MODELE_CLASSIFICATION_SUPERVISEE'),
-          routerLink: 'entrainement-modele-classification-supervisee',
-          icon: 'pi pi-microchip-ai'
-        }
       ]
     });
   }
