@@ -13,6 +13,7 @@ import {DonneesCoursVagues} from '../../../../../services/modeles-tensor-flow/et
 import {UIChart} from 'primeng/chart';
 import {DatePipe, NgClass} from '@angular/common';
 import {FloatLabel} from 'primeng/floatlabel';
+import {MachineLearningUtil} from '../../../../../services/modeles-tensor-flow/commun/machine-learning-util.class';
 
 @Component({
   selector: 'app-generateur-donnees-entrainement-modele',
@@ -83,7 +84,7 @@ export class GenerateurDonneesEntrainementModeleComponent implements OnInit {
     //   .map(cours => this.datepipe.transform(cours.date, 'dd/MM/yyyy'));
     const cours = this.coursDecoreSelectionne!.cours
       .map(cours => cours.cloture);
-    const moyennesMobilesGlissantes = this.calculerMMG(cours, this.nbJoursMMG);
+    const moyennesMobilesGlissantes = MachineLearningUtil.calculerMMG(cours, this.nbJoursMMG);
 
     this.data = {
       labels: Array.from(Array(moyennesMobilesGlissantes.length).keys()),
@@ -135,17 +136,5 @@ export class GenerateurDonneesEntrainementModeleComponent implements OnInit {
   private filtrerDonneesCoursVagues(donnees: Array<DonneesCoursVagues>) {
     const maximum = Math.max(...donnees.map(cours => cours.cours.length));
     return donnees.filter(cours => cours.cours.length === maximum);
-  }
-
-  private calculerMMG(data: number[], nbJours: number): number[] {
-    const mmg = [];
-    for (let i = 0; i < data.length - nbJours + 1; i++) {
-      let somme = 0;
-      for (let j = 0; j < nbJours; j++) {
-        somme += data[i + j];
-      }
-      mmg.push(Math.round(100 * somme / nbJours) / 100);
-    }
-    return mmg;
   }
 }

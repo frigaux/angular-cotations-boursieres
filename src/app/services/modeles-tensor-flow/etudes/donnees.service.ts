@@ -14,7 +14,7 @@ export class DonneesService {
   public static readonly DONNEES_ENTRAINEMENT: number = 100;
 
   private static readonly URL_DONNEES_COURS_VAGUES: string =
-    'http://fabienrigaux.freeboxos.fr/ml/cours_vagues_21_12_2025.json';
+    'http://fabienrigaux.freeboxos.fr/ml/cours_vagues_02_01_2026.json';
 
   async donneesCoursVaguesRegression(): Promise<PontDonneesCoursVaguesRegression> {
     const reponse = await fetch(DonneesService.URL_DONNEES_COURS_VAGUES);

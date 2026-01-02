@@ -23,7 +23,7 @@ import {
 } from '../../../../../services/modeles-tensor-flow/tutoriels/regression-supervisee/donnees-normalisees.interface';
 import {FormulaireModeleComponent} from '../../commun/formulaire-modele/formulaire-modele.component';
 import {ParametresModele} from '../../commun/formulaire-modele/parametres-modele.interface';
-import {OutilsService} from '../../../../../services/modeles-tensor-flow/commun/outils.service';
+import {MachineLearningUtil} from '../../../../../services/modeles-tensor-flow/commun/machine-learning-util.class';
 import {NombreTenseurs} from '../../commun/nombre-tenseurs/nombre-tenseurs';
 
 @Component({
@@ -66,8 +66,7 @@ export class RegressionSuperviseeComponent implements OnInit {
   constructor(private graphiquesService: GraphiquesService,
               private modelesService: ModelesService,
               private donneesService: DonneesService,
-              private modeleService: ModeleService,
-              private outilsService: OutilsService) {
+              private modeleService: ModeleService) {
     this.donneesChartOptions = this.graphiquesService.donneesChartOptions();
     this.entrainementChartOptions = this.graphiquesService.entrainementChartOptions();
   }
@@ -85,7 +84,7 @@ export class RegressionSuperviseeComponent implements OnInit {
       this.modeleEtDonnees = undefined;
       const modeleCouches: LayersModel = this.modelesService.modelePuissancesRendements(this.parametresModele);
 
-      this.donneesNormalisees = this.outilsService.normaliserZeroAUn(this.donnees);
+      this.donneesNormalisees = MachineLearningUtil.normaliserZeroAUn(this.donnees);
       this.progressionEntrainement = 0;
       const logs: Array<Logs> = [];
       modeleCouches.fit(this.donneesNormalisees.entrees, this.donneesNormalisees.sorties, {
@@ -128,7 +127,7 @@ export class RegressionSuperviseeComponent implements OnInit {
     datasets.datasets.push(this.graphiquesService.donneesChart(predictions, 'PREDICTIONS').datasets[0]);
     this.donneesChart = datasets;
 
-    this.outilsService.libererTenseursDans(predictions);
+    MachineLearningUtil.libererTenseursDans(predictions);
   }
 
   private tracerInformations() {

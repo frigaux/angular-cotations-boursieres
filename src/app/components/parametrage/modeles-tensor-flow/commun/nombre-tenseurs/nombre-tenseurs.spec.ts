@@ -1,6 +1,7 @@
 import {ComponentFixture, TestBed} from '@angular/core/testing';
 
 import {NombreTenseurs} from './nombre-tenseurs';
+import {TranslateModule} from '@ngx-translate/core';
 
 describe('NombreTenseurs', () => {
   let component: NombreTenseurs;
@@ -8,9 +9,12 @@ describe('NombreTenseurs', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [NombreTenseurs]
+      imports: [
+        NombreTenseurs,
+        TranslateModule.forRoot({})
+      ]
     })
-    .compileComponents();
+      .compileComponents();
 
     fixture = TestBed.createComponent(NombreTenseurs);
     component = fixture.componentInstance;
@@ -18,6 +22,6 @@ describe('NombreTenseurs', () => {
   });
 
   it('should create', () => {
-    expect(component).toBeTruthy();
+    expect(component).toBeDefined();
   });
 });

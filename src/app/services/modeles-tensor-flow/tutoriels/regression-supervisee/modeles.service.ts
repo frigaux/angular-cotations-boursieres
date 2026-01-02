@@ -17,9 +17,9 @@ export class ModelesService {
 
     // Modèle fonctionnel : un neurone avec les deux paramètres poids et biais
     // f(x)=ax+b avec a le poids et b le biais
-    const input: SymbolicTensor = tf.input({shape: [1]});
-    const dense: SymbolicTensor = tf.layers.dense({units: 1}).apply(input) as SymbolicTensor;
-    const model = tf.model({inputs: input, outputs: dense});
+    const entree: SymbolicTensor = tf.input({shape: [1]});
+    const dense: SymbolicTensor = tf.layers.dense({units: 1, useBias: true}).apply(entree) as SymbolicTensor;
+    const model = tf.model({inputs: entree, outputs: dense});
 
     const loss = parametresModele.fonctionsPertes.map(fonction => (tf.losses as any)[fonction]);
     const metrics = parametresModele.metriques.map(metrique => (tf.metrics as any)[metrique]);
@@ -39,11 +39,11 @@ export class ModelesService {
     // model.add(tf.layers.dense({units: 1, useBias: true}));
 
     // Modèle fonctionnel
-    const input: SymbolicTensor = tf.input({shape: [1]});
-    const dense1: SymbolicTensor = tf.layers.dense({units: 1, useBias: true}).apply(input) as SymbolicTensor;
-    const hidden: SymbolicTensor = tf.layers.dense({units: 5, activation: 'sigmoid'}).apply(dense1) as SymbolicTensor;
-    const dense2: SymbolicTensor = tf.layers.dense({units: 1, useBias: true}).apply(hidden) as SymbolicTensor;
-    const model = tf.model({inputs: input, outputs: dense2});
+    const entree: SymbolicTensor = tf.input({shape: [1]});
+    const dense1: SymbolicTensor = tf.layers.dense({units: 1, activation: 'sigmoid', useBias: true}).apply(entree) as SymbolicTensor;
+    const dense2: SymbolicTensor = tf.layers.dense({units: 5, activation: 'sigmoid', useBias: true}).apply(dense1) as SymbolicTensor;
+    const dense3: SymbolicTensor = tf.layers.dense({units: 1, useBias: true}).apply(dense2) as SymbolicTensor;
+    const model = tf.model({inputs: entree, outputs: dense3});
 
     const loss = parametresModele.fonctionsPertes.map(fonction => (tf.losses as any)[fonction]);
     const metrics = parametresModele.metriques.map(metrique => (tf.metrics as any)[metrique]);

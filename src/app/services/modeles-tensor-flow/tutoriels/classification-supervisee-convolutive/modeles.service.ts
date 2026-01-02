@@ -9,7 +9,7 @@ import {DonneesService} from './donnees.service';
 export class ModelesService {
   modeleFonctionnelImagesChiffres(tauxApprentissage: number) {
     // https://datascientest.com/convolutional-neural-network
-    const input: SymbolicTensor = tf.input({shape: [
+    const entree: SymbolicTensor = tf.input({shape: [
       DonneesService.NOMBRE_PIXELS_LARGEUR_HAUTEUR_IMAGE,
       DonneesService.NOMBRE_PIXELS_LARGEUR_HAUTEUR_IMAGE,
       DonneesService.CANAL_NOIR_BLANC
@@ -20,7 +20,7 @@ export class ModelesService {
       strides: 1,
       activation: 'relu',
       kernelInitializer: 'varianceScaling'
-    }).apply(input) as SymbolicTensor;
+    }).apply(entree) as SymbolicTensor;
 
     const maxPooling2d_1: SymbolicTensor = tf.layers.maxPooling2d({poolSize: [2, 2], strides: [2, 2]}).apply(conv2d_1) as SymbolicTensor;
 
@@ -42,7 +42,7 @@ export class ModelesService {
       activation: 'softmax'}
     ).apply(flatten) as SymbolicTensor;
 
-    const modele = tf.model({inputs: input, outputs: dense});
+    const modele = tf.model({inputs: entree, outputs: dense});
 
     modele.compile({
       optimizer: tf.train.adam(tauxApprentissage),
