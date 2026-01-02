@@ -43,7 +43,6 @@ export class MachineLearningUtil {
   }
 
   static calculerVariations(donnees: number[]): number[] {
-    console.log(donnees);
     const variations: number[] = [];
     for (let i = 1; i < donnees.length; i++) {
       // variations.push(Math.round(100 * donnees[i] / donnees[i - 1]) / 100);

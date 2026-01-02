@@ -3,6 +3,7 @@ import {DTOModele} from './dto-modele.interface';
 import {LayersModel} from '@tensorflow/tfjs-layers/dist/engine/training';
 import {CouchesService} from '../couches/couches.service';
 import {DTOOptimiseur} from './dto-optimiseur';
+import {LossOrMetricFn} from '@tensorflow/tfjs-layers/dist/types';
 
 @Injectable({
   providedIn: 'root',
@@ -13,7 +14,8 @@ export class ModeleService {
 
   modele(modele: LayersModel): DTOModele {
     const optimiseur = this.optimiseur(modele);
-    const fonctionsPerte = modele.lossFunctions.map(lossFunction => lossFunction.name);
+    const fonctionsPerte = (modele.lossFunctions || modele.loss as LossOrMetricFn[])
+      .map(lossFunction => lossFunction.name);
     const metriques = modele.metricsNames
       .filter(metric => metric !== 'loss');
     const couches = this.couchesService.couches(modele);

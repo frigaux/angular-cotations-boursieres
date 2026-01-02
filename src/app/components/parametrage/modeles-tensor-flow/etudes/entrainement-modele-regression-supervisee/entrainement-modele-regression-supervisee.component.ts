@@ -38,7 +38,7 @@ import {NombreTenseurs} from '../../commun/nombre-tenseurs/nombre-tenseurs';
 export class EntrainementModeleRegressionSuperviseeComponent implements OnInit {
   protected parametresModele: ParametresModele = {
     tauxApprentissage: 0.1,
-    iterations: 50,
+    iterations: 1,
     lot: 50,
     optimiseur: 'adam',
     fonctionsPertes: ['meanSquaredError'],
