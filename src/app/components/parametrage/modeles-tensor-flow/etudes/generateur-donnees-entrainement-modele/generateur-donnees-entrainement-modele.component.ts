@@ -79,7 +79,6 @@ export class GenerateurDonneesEntrainementModeleComponent implements OnInit {
   }
 
   rafraichirVue(): void {
-
     // const labels = this.coursDecoreSelectionne!.cours
     //   .map(cours => this.datepipe.transform(cours.date, 'dd/MM/yyyy'));
     const cours = this.coursDecoreSelectionne!.cours

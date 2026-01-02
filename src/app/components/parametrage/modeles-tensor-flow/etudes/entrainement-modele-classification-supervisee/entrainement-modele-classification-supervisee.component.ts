@@ -20,6 +20,7 @@ import {BarreProgressionComponent} from '../../../../commun/barre-progression/ba
 import {UIChart} from 'primeng/chart';
 import {DecimalPipe} from '@angular/common';
 import {ExplorateurModeleComponent} from '../../commun/explorateur-modele/explorateur-modele.component';
+import {NombreTenseurs} from '../../commun/nombre-tenseurs/nombre-tenseurs';
 
 @Component({
   selector: 'app-entrainement-modele-classification-supervisee',
@@ -30,7 +31,8 @@ import {ExplorateurModeleComponent} from '../../commun/explorateur-modele/explor
     BarreProgressionComponent,
     UIChart,
     DecimalPipe,
-    ExplorateurModeleComponent
+    ExplorateurModeleComponent,
+    NombreTenseurs
   ],
   templateUrl: './entrainement-modele-classification-supervisee.component.html',
   styleUrls: ['./entrainement-modele-classification-supervisee.component.sass', '../entrainement-modele-regression-supervisee/entrainement-modele-regression-supervisee.component.sass'],

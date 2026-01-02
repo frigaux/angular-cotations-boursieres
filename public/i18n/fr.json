@@ -564,8 +564,8 @@
         "RESTAURATION_REUSSIE": "Restauration réussie !"
       },
       "ML": {
+        "NOMBRE_TENSEURS": "Tenseurs",
         "FORMULAIRE": {
-          "NOMBRE_TENSEURS": "Tenseurs",
           "BACKEND": "Backend",
           "TAUX_APPRENTISSAGE": "Taux apprentissage",
           "OPTIMISEUR": "Optimiseur",

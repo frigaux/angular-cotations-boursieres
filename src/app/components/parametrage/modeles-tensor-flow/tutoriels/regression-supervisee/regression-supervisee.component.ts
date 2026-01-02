@@ -24,6 +24,7 @@ import {
 import {FormulaireModeleComponent} from '../../commun/formulaire-modele/formulaire-modele.component';
 import {ParametresModele} from '../../commun/formulaire-modele/parametres-modele.interface';
 import {OutilsService} from '../../../../../services/modeles-tensor-flow/commun/outils.service';
+import {NombreTenseurs} from '../../commun/nombre-tenseurs/nombre-tenseurs';
 
 @Component({
   selector: 'app-regression-supervisee',
@@ -34,7 +35,8 @@ import {OutilsService} from '../../../../../services/modeles-tensor-flow/commun/
     UIChart,
     FormsModule,
     ExplorateurModeleComponent,
-    FormulaireModeleComponent
+    FormulaireModeleComponent,
+    NombreTenseurs
   ],
   templateUrl: './regression-supervisee.component.html',
   styleUrl: './regression-supervisee.component.sass',

@@ -47,7 +47,7 @@
           </p-floatlabel>
           <p-floatlabel>
             <p-inputNumber id="nbJours" [(ngModel)]="nbJoursMMG" [min]="1"
-                           required size="small" [inputSize]="5"></p-inputNumber>
+                           required size="small" [inputSize]="5" (onInput)="rafraichirVue()"></p-inputNumber>
             <label
               for="nbJours">{{ 'COMPOSANTS.PARAMETRAGE.ML.ETUDES.GENERATEUR_DONNEES_ENTRAINEMENT.NB_JOURS_MOYENNE_MOBILE_GLISSANTE' | translate }}</label>
           </p-floatlabel>

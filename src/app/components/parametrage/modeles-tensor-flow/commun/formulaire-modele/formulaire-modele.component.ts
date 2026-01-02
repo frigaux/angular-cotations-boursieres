@@ -24,9 +24,6 @@ import {MultiSelect} from 'primeng/multiselect';
 export class FormulaireModeleComponent implements OnInit {
   parametres = model<ParametresModele>();
 
-  // nombre de tenseur en mémoire
-  protected nombreTenseurs?: number;
-
   // choix backend
   protected backends: Array<string> = ['cpu', 'webgl']; // 'tensorflow' (requires tfjs-node), 'wasm' (requires tfjs-backend-wasm).
   protected backend: string = this.backends[0];
@@ -42,7 +39,6 @@ export class FormulaireModeleComponent implements OnInit {
 
   ngOnInit(): void {
     this.changeBackend();
-    window.setInterval(() => this.nombreTenseurs = tf.memory().numTensors, 1000);
   }
 
   protected changeBackend() {

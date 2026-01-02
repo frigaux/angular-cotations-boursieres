@@ -18,6 +18,7 @@ import {GraphiquesService} from '../../../../../services/modeles-tensor-flow/com
 import {UIChart} from 'primeng/chart';
 import {Tensor} from '@tensorflow/tfjs-core';
 import {DecimalPipe} from '@angular/common';
+import {NombreTenseurs} from '../../commun/nombre-tenseurs/nombre-tenseurs';
 
 @Component({
   selector: 'app-entrainement-modele-regression-supervisee',
@@ -28,7 +29,8 @@ import {DecimalPipe} from '@angular/common';
     BarreProgressionComponent,
     ExplorateurModeleComponent,
     UIChart,
-    DecimalPipe
+    DecimalPipe,
+    NombreTenseurs
   ],
   templateUrl: './entrainement-modele-regression-supervisee.component.html',
   styleUrl: './entrainement-modele-regression-supervisee.component.sass',

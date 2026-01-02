@@ -1,6 +1,4 @@
 <div class="formulaire">
-  <label>{{ 'COMPOSANTS.PARAMETRAGE.ML.FORMULAIRE.NOMBRE_TENSEURS' | translate }} :</label>
-  <span class="nombre">{{ nombreTenseurs }}</span>
   <p-floatlabel>
     <p-select id="backend" [options]="backends" [(ngModel)]="backend" size="small"
               (onChange)="changeBackend()" [invalid]="!backendChangeAvecSucces"></p-select>
