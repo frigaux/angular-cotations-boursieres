@@ -40,6 +40,15 @@
           @case (TypeCouche.FLATTEN) {
             <app-couche-flatten [couche]="couche"></app-couche-flatten>
           }
+          @case (TypeCouche.RESHAPE) {
+            <app-couche-reshape [couche]="couche"></app-couche-reshape>
+          }
+          @case (TypeCouche.CONV1D) {
+            <app-couche-conv1d [couche]="couche"></app-couche-conv1d>
+          }
+          @case (TypeCouche.MAXPOOLING1D) {
+            <app-couche-maxpooling1d [couche]="couche"></app-couche-maxpooling1d>
+          }
         }
       </div>
     }

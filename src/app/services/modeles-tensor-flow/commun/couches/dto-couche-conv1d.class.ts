@@ -1,16 +1,16 @@
 import {DTOCouche} from './dto-couche.interface';
 import {TypeCouche} from './type-couche.enum';
-import {DTONeurone2d} from './dto-neurone2d.interface';
+import {DTONeurone} from './dto-neurone.interface';
 
-export class DTOCoucheConv2D implements DTOCouche {
-  readonly type: TypeCouche = TypeCouche.CONV2D;
+export class DTOCoucheConv1D implements DTOCouche {
+  readonly type: TypeCouche = TypeCouche.CONV1D;
   numero: number;
   fonctionActivation: string;
   fonctionInitialisationPoids: string;
-  neurones: DTONeurone2d[];
+  neurones: DTONeurone[];
   pas: number[];
 
-  constructor(numero: number, fonctionActivation: string, fonctionInitialisationPoids: string, neurones: DTONeurone2d[], pas: number[]) {
+  constructor(numero: number, fonctionActivation: string, fonctionInitialisationPoids: string, neurones: DTONeurone[], pas: number[]) {
     this.numero = numero;
     this.fonctionActivation = fonctionActivation;
     this.fonctionInitialisationPoids = fonctionInitialisationPoids;

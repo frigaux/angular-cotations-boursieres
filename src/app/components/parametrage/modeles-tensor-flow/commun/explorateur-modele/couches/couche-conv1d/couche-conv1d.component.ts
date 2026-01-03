@@ -1,32 +1,32 @@
 import {Component, input, InputSignal} from '@angular/core';
+import {TranslatePipe} from '@ngx-translate/core';
+import {DecimalPipe} from '@angular/common';
 import {DTOCouche} from '../../../../../../../services/modeles-tensor-flow/commun/couches/dto-couche.interface';
 import {TypeCouche} from '../../../../../../../services/modeles-tensor-flow/commun/couches/type-couche.enum';
-import {DecimalPipe} from '@angular/common';
-import {TranslatePipe} from '@ngx-translate/core';
 import {
-  DTOCoucheConv2D
-} from '../../../../../../../services/modeles-tensor-flow/commun/couches/dto-couche-conv2d.class';
+  DTOCoucheConv1D
+} from '../../../../../../../services/modeles-tensor-flow/commun/couches/dto-couche-conv1d.class';
 
 @Component({
-  selector: 'app-couche-conv2d',
+  selector: 'app-couche-conv1d',
   imports: [
-    DecimalPipe,
-    TranslatePipe
+    TranslatePipe,
+    DecimalPipe
   ],
-  templateUrl: './couche-conv2d.component.html',
-  styleUrls: ['./couche-conv2d.component.sass', '../couche-dense/couche-dense.component.sass'],
+  templateUrl: './couche-conv1d.component.html',
+  styleUrls: ['./couche-conv1d.component.sass', '../couche-dense/couche-dense.component.sass'],
 })
-export class CoucheConv2dComponent {
+export class CoucheConv1dComponent {
   inputCouche: InputSignal<DTOCouche | undefined> = input(undefined,
     {transform: o => this.intercepteurCouche(o), alias: 'couche'});
 
   // données pour la vue
-  couche?: DTOCoucheConv2D;
+  couche?: DTOCoucheConv1D;
 
   private intercepteurCouche(couche: DTOCouche | undefined) {
     this.couche = undefined;
-    if (couche && couche.type === TypeCouche.CONV2D) {
-      this.couche = couche as DTOCoucheConv2D;
+    if (couche && couche.type === TypeCouche.CONV1D) {
+      this.couche = couche as DTOCoucheConv1D;
     }
     return couche;
   }

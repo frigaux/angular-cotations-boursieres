@@ -1,7 +1,7 @@
 import {DTOCouche} from './dto-couche.interface';
 import {TypeCouche} from './type-couche.enum';
 
-export class DTOCoucheMaxpooling2d implements DTOCouche {
+export class DTOCoucheMaxPooling2D implements DTOCouche {
   readonly type: TypeCouche = TypeCouche.MAXPOOLING2D;
   numero: number;
   taille: [number, number];

@@ -599,6 +599,17 @@
           },
           "FLATTEN": {
             "DESCRIPTION": "Couche qui convertit les entrées en tensor1d pour une couche dense"
+          },
+          "COUCHE_RESHAPE": {
+            "DESCRIPTION": "Couche de transformation des entrées vers la forme [{{formeDestination}}]"
+          },
+          "COUCHE_CONV1D": {
+            "DESCRIPTION": "Couche de convolution 1D : {{nbFenetresFiltres}} fenêtres de filtre de taille {{tailleFenetre}} qui se déplacent progressivement de gauche vers la droite de {{pasDeplacementFenetre}} en {{pasDeplacementFenetre}} (activation {{fonctionActivation}} ; initialisation poids {{fonctionInitialisationPoids}})",
+            "POIDS_NEURONES": "Poids",
+            "BIAIS_NEURONES": "Biais"
+          },
+          "COUCHE_MAXPOOLING1D": {
+            "DESCRIPTION": "Couche échantillonnage des maximums : fenêtre de filtre qui prend le maximum sur une taille de {{tailleFenetre}} et se déplace de {{pasDeplacementFenetre}} en {{pasDeplacementFenetre}}"
           }
         },
         "ETUDES": {

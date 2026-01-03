@@ -2,8 +2,8 @@ import {Component, input, InputSignal} from '@angular/core';
 import {DTOCouche} from '../../../../../../../services/modeles-tensor-flow/commun/couches/dto-couche.interface';
 import {TypeCouche} from '../../../../../../../services/modeles-tensor-flow/commun/couches/type-couche.enum';
 import {
-  DTOCoucheMaxpooling2d
-} from '../../../../../../../services/modeles-tensor-flow/commun/couches/dto-couche-pooling2d.class';
+  DTOCoucheMaxPooling2D
+} from '../../../../../../../services/modeles-tensor-flow/commun/couches/dto-couche-max-pooling2d.class';
 import {TranslatePipe} from '@ngx-translate/core';
 
 @Component({
@@ -19,12 +19,12 @@ export class CoucheMaxpooling2dComponent {
     {transform: o => this.intercepteurCouche(o), alias: 'couche'});
 
   // données pour la vue
-  couche?: DTOCoucheMaxpooling2d;
+  couche?: DTOCoucheMaxPooling2D;
 
   private intercepteurCouche(couche: DTOCouche | undefined) {
     this.couche = undefined;
     if (couche && couche.type === TypeCouche.MAXPOOLING2D) {
-      this.couche = couche as DTOCoucheMaxpooling2d;
+      this.couche = couche as DTOCoucheMaxPooling2D;
     }
     return couche;
   }

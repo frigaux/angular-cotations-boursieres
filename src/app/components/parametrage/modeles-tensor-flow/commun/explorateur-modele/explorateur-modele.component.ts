@@ -7,6 +7,9 @@ import {ExplorateurEntreesSortiesComponent} from './explorateur-entrees-sorties/
 import {CoucheConv2dComponent} from './couches/couche-conv2d/couche-conv2d.component';
 import {CoucheMaxpooling2dComponent} from './couches/couche-maxpooling2d/couche-maxpooling2d.component';
 import {CoucheFlatten} from './couches/couche-flatten/couche-flatten';
+import {CoucheReshape} from './couches/couche-reshape/couche-reshape';
+import {CoucheConv1dComponent} from './couches/couche-conv1d/couche-conv1d.component';
+import {CoucheMaxpooling1dComponent} from './couches/couche-maxpooling1d/couche-maxpooling1d.component';
 
 @Component({
   selector: 'app-explorateur-modele',
@@ -16,7 +19,10 @@ import {CoucheFlatten} from './couches/couche-flatten/couche-flatten';
     ExplorateurEntreesSortiesComponent,
     CoucheConv2dComponent,
     CoucheMaxpooling2dComponent,
-    CoucheFlatten
+    CoucheFlatten,
+    CoucheReshape,
+    CoucheConv1dComponent,
+    CoucheMaxpooling1dComponent
   ],
   templateUrl: './explorateur-modele.component.html',
   styleUrl: './explorateur-modele.component.sass',

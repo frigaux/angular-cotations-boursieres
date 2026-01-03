@@ -1,5 +1,6 @@
 import {Injectable} from '@angular/core';
 import * as tf from '@tensorflow/tfjs';
+import {Tensor1D} from '@tensorflow/tfjs';
 import {LayersModel} from '@tensorflow/tfjs-layers/dist/engine/training';
 import {Donnees} from './donnees.interface';
 import {DonneesNormalisees} from './donnees-normalisees.interface';
@@ -21,7 +22,7 @@ export class DonneesService {
   }
 
   predictionsFonctionAffine(modele: LayersModel, donneesNormalisees: DonneesNormalisees) {
-    const xs = tf.linspace(0, 10, 100);
+    const xs: Tensor1D = tf.linspace(0, 10, 100);
     const preds: any = modele.predict(xs.reshape([100, 1]));
     const entrees = xs
       .mul(donneesNormalisees.entreesMax.sub(donneesNormalisees.entreesMin))
@@ -50,7 +51,7 @@ export class DonneesService {
   }
 
   predictionsPuissancesRendements(modele: LayersModel, donneesNormalisees: DonneesNormalisees) {
-    const xs = tf.linspace(0, 1, 100);
+    const xs: Tensor1D = tf.linspace(0, 1, 100);
     const preds: any = modele.predict(xs.reshape([100, 1]));
     const entrees = xs
       .mul(donneesNormalisees.entreesMax.sub(donneesNormalisees.entreesMin))

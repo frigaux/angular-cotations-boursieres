@@ -1,32 +1,30 @@
 import {Component, input, InputSignal} from '@angular/core';
+import {TranslatePipe} from "@ngx-translate/core";
 import {DTOCouche} from '../../../../../../../services/modeles-tensor-flow/commun/couches/dto-couche.interface';
 import {TypeCouche} from '../../../../../../../services/modeles-tensor-flow/commun/couches/type-couche.enum';
-import {DecimalPipe} from '@angular/common';
-import {TranslatePipe} from '@ngx-translate/core';
 import {
-  DTOCoucheConv2D
-} from '../../../../../../../services/modeles-tensor-flow/commun/couches/dto-couche-conv2d.class';
+  DTOCoucheMaxPooling1D
+} from '../../../../../../../services/modeles-tensor-flow/commun/couches/dto-couche-max-pooling1d.class';
 
 @Component({
-  selector: 'app-couche-conv2d',
+  selector: 'app-couche-maxpooling1d',
   imports: [
-    DecimalPipe,
     TranslatePipe
   ],
-  templateUrl: './couche-conv2d.component.html',
-  styleUrls: ['./couche-conv2d.component.sass', '../couche-dense/couche-dense.component.sass'],
+  templateUrl: './couche-maxpooling1d.component.html',
+  styleUrl: './couche-maxpooling1d.component.sass',
 })
-export class CoucheConv2dComponent {
+export class CoucheMaxpooling1dComponent {
   inputCouche: InputSignal<DTOCouche | undefined> = input(undefined,
     {transform: o => this.intercepteurCouche(o), alias: 'couche'});
 
   // données pour la vue
-  couche?: DTOCoucheConv2D;
+  couche?: DTOCoucheMaxPooling1D;
 
   private intercepteurCouche(couche: DTOCouche | undefined) {
     this.couche = undefined;
-    if (couche && couche.type === TypeCouche.CONV2D) {
-      this.couche = couche as DTOCoucheConv2D;
+    if (couche && couche.type === TypeCouche.MAXPOOLING1D) {
+      this.couche = couche as DTOCoucheMaxPooling1D;
     }
     return couche;
   }

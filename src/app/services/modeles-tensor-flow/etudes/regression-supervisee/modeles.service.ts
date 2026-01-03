@@ -27,7 +27,7 @@ export class ModelesService {
       kernelSize: 5,
       filters: 32,
       strides: 1,
-      activation: 'relu',
+      activation: 'linear',
       kernelInitializer: 'varianceScaling'
     }));
 
@@ -39,7 +39,7 @@ export class ModelesService {
       kernelSize: 5,
       filters: 64,
       strides: 1,
-      activation: 'relu',
+      activation: 'linear',
       kernelInitializer: 'varianceScaling'
     }));
 
@@ -50,7 +50,7 @@ export class ModelesService {
     model.add(tf.layers.flatten());
 
     // Couche dense pour l'interprétation des caractéristiques extraites
-    model.add(tf.layers.dense({units: 64, activation: 'relu'}));
+    model.add(tf.layers.dense({units: 64, activation: 'linear'}));
 
     // Couche de sortie pour la régression (1 neurone, activation linéaire pour prédire le nombre)
     model.add(tf.layers.dense({units: 1, activation: 'linear'}));
