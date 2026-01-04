@@ -34,7 +34,7 @@ import {EntrainementModeleComponent} from '../../commun/entrainement-modele/entr
 export class EntrainementModeleRegressionSuperviseeComponent implements OnInit {
   protected parametresModele: ParametresModele = {
     tauxApprentissage: 0.1,
-    iterations: 1,
+    iterations: 50,
     lot: 50,
     optimiseur: 'adam',
     fonctionsPertes: ['meanSquaredError'],

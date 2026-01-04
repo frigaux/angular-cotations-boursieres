@@ -66,17 +66,17 @@ export class PontDonneesCoursVagues {
     return donnees.filter(d => d.nbVagues !== undefined && d.nbVagues !== null);
   }
 
-  private normaliserSorties(sorties: Array<Array<number>>) {
-    const min = Math.min(...sorties.map(liste => Math.min(...liste)));
-    const max = Math.max(...sorties.map(liste => Math.max(...liste)));
-    return {min, max, donneesNormalisees: sorties.map(liste => liste.map(valeur => (valeur - min) / (max - min)))};
-  }
-
   private normaliserEntrees(entrees: Array<Array<number>>) {
     return entrees.map(entree => {
       const min = Math.min(...entree);
       const max = Math.max(...entree);
       return entree.map(valeur => (valeur - min) / (max - min));
     });
+  }
+
+  private normaliserSorties(sorties: Array<Array<number>>) {
+    const min = Math.min(...sorties.map(liste => Math.min(...liste)));
+    const max = Math.max(...sorties.map(liste => Math.max(...liste)));
+    return {min, max, donneesNormalisees: sorties.map(liste => liste.map(valeur => (valeur - min) / (max - min)))};
   }
 }

@@ -4,6 +4,7 @@ import {DonneesCoursVagues} from '../donnees-cours-vagues.class';
 import {DonneesService} from '../donnees.service';
 import {Donnees} from '../../tutoriels/regression-supervisee/donnees.interface';
 import {Tensor} from '@tensorflow/tfjs-core';
+import {DonneesBuilder} from '../../commun/donnees-builder.class';
 
 export class PontDonneesCoursVagues {
   private entrees: Array<Array<number>>;
@@ -14,14 +15,17 @@ export class PontDonneesCoursVagues {
   constructor(donnees: Array<DonneesCoursVagues>) {
     donnees = this.filtrerDonnees(donnees);
     if (donnees.length > DonneesService.DONNEES_ENTRAINEMENT) {
-      this.entrees = donnees.map(d =>
-        d.cours.map(value => value.cloture)
+      this.entrees = donnees.map(data =>
+        new DonneesBuilder(data.cours.map(value => value.cloture))
+          .calculerMMG(10)
+          // .calculerVariation()
+          .build()
       );
 
       this.sorties = donnees.map(d => d.nbVagues!);
 
-      this.entreesNormalisees = this.normaliser(this.entrees);
-      this.sortiesClassifiees = this.classifier(this.sorties);
+      this.entreesNormalisees = this.normaliserEntrees(this.entrees);
+      this.sortiesClassifiees = this.classifierSorties(this.sorties);
     } else {
       throw new Error(`Pas assez de données : ${donnees.length} <= ${DonneesService.DONNEES_ENTRAINEMENT}`);
     }
@@ -61,7 +65,7 @@ export class PontDonneesCoursVagues {
     return donnees.filter(d => d.nbVagues !== undefined && d.nbVagues !== null);
   }
 
-  private normaliser(entrees: Array<Array<number>>) {
+  private normaliserEntrees(entrees: Array<Array<number>>) {
     return entrees.map(entree => {
       const min = Math.min(...entree);
       const max = Math.max(...entree);
@@ -69,7 +73,7 @@ export class PontDonneesCoursVagues {
     });
   }
 
-  private classifier(sorties: Array<number>): Array<Array<number>> {
+  private classifierSorties(sorties: Array<number>): Array<Array<number>> {
     const max = Math.max(...sorties);
     return sorties.map(sortie => {
       const resultat = Array.from({length: max + 1}, (v, i) => 0);

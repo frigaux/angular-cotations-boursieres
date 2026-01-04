@@ -111,6 +111,7 @@ export class EntrainementModeleClassificationSuperviseeComponent implements OnIn
       // line chart : affichage des metrics d'entrainement
       this.entrainementChart = this.graphiquesService.entrainementChart(logs);
       const predictions = this.modeleEtDonnees.modeleCouches.predict(this.pontDonnees.entreesNormaliseesPredictions()) as Tensor<Rank.R2>;
+console.log(predictions.arraySync());
       const sortiesPredictions: number[] = this.pontDonnees.denormaliserSorties(predictions);
       const sortiesAttendues: number[] = this.pontDonnees.sortiesAttenduesPredictions();
 

@@ -18,7 +18,8 @@ export class ModelesService {
       filters: 32,
       strides: 1,
       activation: 'linear',
-      kernelInitializer: 'varianceScaling'
+      kernelInitializer: 'varianceScaling',
+      useBias: true
     }).apply(reshape) as SymbolicTensor;
     const maxPooling1d_1: SymbolicTensor = tf.layers.maxPooling1d({poolSize: 2, strides: 2}).apply(conv1d_1) as SymbolicTensor;
     const conv1d_2: SymbolicTensor = tf.layers.conv1d({
@@ -26,12 +27,13 @@ export class ModelesService {
       filters: 64,
       strides: 1,
       activation: 'linear',
-      kernelInitializer: 'varianceScaling'
+      kernelInitializer: 'varianceScaling',
+      useBias: true
     }).apply(maxPooling1d_1) as SymbolicTensor;
     const maxPooling1d_2: SymbolicTensor = tf.layers.maxPooling1d({poolSize: 2, strides: 2}).apply(conv1d_2) as SymbolicTensor;
     const flatten: SymbolicTensor = tf.layers.flatten().apply(maxPooling1d_2) as SymbolicTensor;
-    const dense1: SymbolicTensor = tf.layers.dense({units: 64, activation: 'linear'}).apply(flatten) as SymbolicTensor;
-    const dense2: SymbolicTensor = tf.layers.dense({units: 1, activation: 'linear'}).apply(dense1) as SymbolicTensor;
+    const dense1: SymbolicTensor = tf.layers.dense({units: 64, activation: 'relu', useBias: true}).apply(flatten) as SymbolicTensor;
+    const dense2: SymbolicTensor = tf.layers.dense({units: 1, activation: 'linear', useBias: true}).apply(dense1) as SymbolicTensor;
     const model = tf.model({inputs: entree, outputs: dense2});
 
     // // Pour une approche convolutionnelle 1D, nous devons transformer l'entrée plate [inputShape] en [inputShape, 1]
