@@ -15,24 +15,20 @@ import {Logs, Rank} from '@tensorflow/tfjs';
 import {Tensor} from '@tensorflow/tfjs-core';
 import {TranslatePipe} from '@ngx-translate/core';
 import {FormulaireModeleComponent} from '../../commun/formulaire-modele/formulaire-modele.component';
-import {Button} from 'primeng/button';
-import {BarreProgressionComponent} from '../../../../commun/barre-progression/barre-progression.component';
 import {UIChart} from 'primeng/chart';
 import {DecimalPipe} from '@angular/common';
 import {ExplorateurModeleComponent} from '../../commun/explorateur-modele/explorateur-modele.component';
-import {NombreTenseurs} from '../../commun/nombre-tenseurs/nombre-tenseurs';
+import {EntrainementModeleComponent} from '../../commun/entrainement-modele/entrainement-modele.component';
 
 @Component({
   selector: 'app-entrainement-modele-classification-supervisee',
   imports: [
     TranslatePipe,
     FormulaireModeleComponent,
-    Button,
-    BarreProgressionComponent,
     UIChart,
     DecimalPipe,
     ExplorateurModeleComponent,
-    NombreTenseurs
+    EntrainementModeleComponent
   ],
   templateUrl: './entrainement-modele-classification-supervisee.component.html',
   styleUrls: ['./entrainement-modele-classification-supervisee.component.sass', '../entrainement-modele-regression-supervisee/entrainement-modele-regression-supervisee.component.sass'],
@@ -98,6 +94,7 @@ export class EntrainementModeleClassificationSuperviseeComponent implements OnIn
           }
         }
       }).then(() => {
+        this.progressionEntrainement = 100;
         this.modeleEtDonnees = {
           modeleCouches,
           modele: this.modeleService.modele(modeleCouches),

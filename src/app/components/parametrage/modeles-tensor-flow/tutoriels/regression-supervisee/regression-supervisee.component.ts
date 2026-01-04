@@ -1,9 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {Logs} from '@tensorflow/tfjs';
 import {TranslatePipe} from '@ngx-translate/core';
-import {Button} from 'primeng/button';
 import {LayersModel} from '@tensorflow/tfjs-layers/dist/engine/training';
-import {BarreProgressionComponent} from '../../../../commun/barre-progression/barre-progression.component';
 import {UIChart} from 'primeng/chart';
 import {FormsModule} from '@angular/forms';
 import {
@@ -24,19 +22,17 @@ import {
 import {FormulaireModeleComponent} from '../../commun/formulaire-modele/formulaire-modele.component';
 import {ParametresModele} from '../../commun/formulaire-modele/parametres-modele.interface';
 import {MachineLearningUtil} from '../../../../../services/modeles-tensor-flow/commun/machine-learning-util.class';
-import {NombreTenseurs} from '../../commun/nombre-tenseurs/nombre-tenseurs';
+import {EntrainementModeleComponent} from '../../commun/entrainement-modele/entrainement-modele.component';
 
 @Component({
   selector: 'app-regression-supervisee',
   imports: [
     TranslatePipe,
-    Button,
-    BarreProgressionComponent,
     UIChart,
     FormsModule,
     ExplorateurModeleComponent,
     FormulaireModeleComponent,
-    NombreTenseurs
+    EntrainementModeleComponent
   ],
   templateUrl: './regression-supervisee.component.html',
   styleUrl: './regression-supervisee.component.sass',
@@ -104,6 +100,7 @@ export class RegressionSuperviseeComponent implements OnInit {
           }
         }
       }).then(() => {
+        this.progressionEntrainement = 100;
         this.modeleEtDonnees = {
           modeleCouches,
           modele: this.modeleService.modele(modeleCouches),

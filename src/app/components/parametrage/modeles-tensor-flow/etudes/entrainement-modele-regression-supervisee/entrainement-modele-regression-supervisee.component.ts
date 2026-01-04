@@ -7,8 +7,6 @@ import {
 } from '../../../../../services/modeles-tensor-flow/etudes/regression-supervisee/pont-donnees-cours-vagues.class';
 import {TranslatePipe} from '@ngx-translate/core';
 import {FormulaireModeleComponent} from '../../commun/formulaire-modele/formulaire-modele.component';
-import {Button} from 'primeng/button';
-import {BarreProgressionComponent} from '../../../../commun/barre-progression/barre-progression.component';
 import {ExplorateurModeleComponent} from '../../commun/explorateur-modele/explorateur-modele.component';
 import {ModelesService} from '../../../../../services/modeles-tensor-flow/etudes/regression-supervisee/modeles.service';
 import {LayersModel} from '@tensorflow/tfjs-layers/dist/engine/training';
@@ -18,19 +16,17 @@ import {GraphiquesService} from '../../../../../services/modeles-tensor-flow/com
 import {UIChart} from 'primeng/chart';
 import {Tensor} from '@tensorflow/tfjs-core';
 import {DecimalPipe} from '@angular/common';
-import {NombreTenseurs} from '../../commun/nombre-tenseurs/nombre-tenseurs';
+import {EntrainementModeleComponent} from '../../commun/entrainement-modele/entrainement-modele.component';
 
 @Component({
   selector: 'app-entrainement-modele-regression-supervisee',
   imports: [
     TranslatePipe,
     FormulaireModeleComponent,
-    Button,
-    BarreProgressionComponent,
     ExplorateurModeleComponent,
     UIChart,
     DecimalPipe,
-    NombreTenseurs
+    EntrainementModeleComponent
   ],
   templateUrl: './entrainement-modele-regression-supervisee.component.html',
   styleUrl: './entrainement-modele-regression-supervisee.component.sass',
@@ -96,6 +92,7 @@ export class EntrainementModeleRegressionSuperviseeComponent implements OnInit {
           }
         }
       }).then(() => {
+        this.progressionEntrainement = 100;
         this.modeleEtDonnees = {
           modeleCouches,
           modele: this.modeleService.modele(modeleCouches),

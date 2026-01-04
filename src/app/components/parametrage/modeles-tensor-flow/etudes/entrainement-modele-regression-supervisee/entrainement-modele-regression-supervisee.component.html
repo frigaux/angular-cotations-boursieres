@@ -2,17 +2,12 @@
 <div class="formulaire">
   <app-formulaire-modele [(parametres)]="parametresModele"></app-formulaire-modele>
 </div>
-<div class="commandes">
-  @if (pontDonnees) {
-    <p-button
-      label="{{ 'COMPOSANTS.PARAMETRAGE.ML.ETUDES.REGRESSION_SUPERVISEE.ENTRAINER_MODELE' | translate }}"
-      (onClick)="entrainerModele()" [icon]="'pi pi-microchip-ai'"/>
-    <app-nombre-tenseurs></app-nombre-tenseurs>
-    @if (!modeleEtDonnees) {
-      <app-barre-progression [pourcentage]="progressionEntrainement" largeur="20rem"></app-barre-progression>
-    }
-  }
-</div>
+@if (pontDonnees) {
+  <div class="commandes">
+    <app-entrainement-modele [progressionEntrainement]="progressionEntrainement"
+                             (entrainer)="entrainerModele()"></app-entrainement-modele>
+  </div>
+}
 <div class="resultat">
   @if (entrainementChart) {
     <p-chart type="line" [data]="entrainementChart" [options]="entrainementChartOptions"/>

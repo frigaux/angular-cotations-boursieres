@@ -68,6 +68,8 @@ export class ClassificationSuperviseeConvolutiveComponent implements OnInit {
   protected nombreImagesEntrainement: number = 640;
   protected nombreImagesPredictions: number = 200;
 
+  private training: boolean = false;
+
   // https://www.chartjs.org/
   protected entrainementChart?: any;
   protected entrainementChartOptions?: any;
@@ -141,7 +143,8 @@ export class ClassificationSuperviseeConvolutiveComponent implements OnInit {
   }
 
   protected entrainerModele() {
-    if (this.iterateurDonnees) {
+    if (!this.training && this.iterateurDonnees) {
+      this.training = true;
       this.modeleEtDonnees = undefined;
       this.progressionEntrainement = 0;
       const modeleCouches: LayersModel = this.modelesService.modeleFonctionnelImagesChiffres(this.tauxApprentissage);
@@ -169,6 +172,7 @@ export class ClassificationSuperviseeConvolutiveComponent implements OnInit {
           }
         }
       }).then(() => {
+        this.training = false;
         this.modeleEtDonnees = {
           modeleCouches,
           modele: this.modeleService.modele(modeleCouches),

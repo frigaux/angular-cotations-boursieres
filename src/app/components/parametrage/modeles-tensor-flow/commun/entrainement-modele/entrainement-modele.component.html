@@ -1,0 +1,8 @@
+<div class="commandes">
+  <p-button
+    label="{{ 'COMPOSANTS.PARAMETRAGE.ML.ENTRAINEMENT.ENTRAINER_MODELE' | translate }}"
+    (onClick)="entrainerModele()" [icon]="'pi pi-microchip-ai'"
+    [disabled]="training"/>
+  <app-nombre-tenseurs></app-nombre-tenseurs>
+  <app-barre-progression [pourcentage]="progressionEntrainement" largeur="20rem"></app-barre-progression>
+</div>
