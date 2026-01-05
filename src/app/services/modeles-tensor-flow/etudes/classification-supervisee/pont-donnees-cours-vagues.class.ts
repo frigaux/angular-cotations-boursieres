@@ -17,7 +17,7 @@ export class PontDonneesCoursVagues {
     if (donnees.length > DonneesService.DONNEES_ENTRAINEMENT) {
       this.entrees = donnees.map(data =>
         new DonneesBuilder(data.cours.map(value => value.cloture))
-          .calculerMMG(10)
+          .calculerMMG(15)
           // .calculerVariation()
           .build()
       );

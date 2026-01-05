@@ -2,11 +2,10 @@ import {Component, OnInit, viewChild} from '@angular/core';
 import {ValeursService} from '../../../../../services/valeurs/valeurs.service';
 import {CoursService} from '../../../../../services/cours/cours.service';
 import {DTOValeur} from '../../../../../services/valeurs/dto-valeur.interface';
-import {Marches} from '../../../../../services/valeurs/marches.enum';
 import {ListboxModule} from 'primeng/listbox';
 import {FormsModule} from '@angular/forms';
 import {TranslatePipe, TranslateService} from '@ngx-translate/core';
-import {InputNumber, InputNumberModule} from 'primeng/inputnumber';
+import {InputNumber, InputNumberInputEvent, InputNumberModule} from 'primeng/inputnumber';
 import {Button} from 'primeng/button';
 import {LoaderComponent} from '../../../../loader/loader.component';
 import {DonneesCoursVagues} from '../../../../../services/modeles-tensor-flow/etudes/donnees-cours-vagues.class';
@@ -36,9 +35,10 @@ export class GenerateurDonneesEntrainementModeleComponent implements OnInit {
 
   // données pour la vue
   protected loading: boolean = true;
-  protected readonly marche: Marches = Marches.EURO_LIST_A;
-  protected nbJoursMMG: number = 1;
-  protected coursDecores?: Array<DonneesCoursVagues>;
+  protected filtreNbVagues?: number;
+  protected nbJoursMMG: number = 15;
+  private coursDecores?: Array<DonneesCoursVagues>;
+  protected coursDecoresAffiches?: Array<DonneesCoursVagues>;
   protected coursDecoreSelectionne?: DonneesCoursVagues;
 
   // données pour la vue
@@ -66,7 +66,6 @@ export class GenerateurDonneesEntrainementModeleComponent implements OnInit {
       const valeurByTicker = new Map<string, DTOValeur>();
       valeurs.forEach(valeur => valeurByTicker.set(valeur.ticker, valeur));
       const tickers = valeurs
-        .filter(valeur => valeur.marche === this.marche)
         .map(valeur => valeur.ticker);
       this.coursService.chargerCoursTickersWithLimit(tickers, 300)
         .subscribe(liste => {
@@ -74,9 +73,16 @@ export class GenerateurDonneesEntrainementModeleComponent implements OnInit {
             .map(dto => new DonneesCoursVagues(valeurByTicker.get(dto.ticker)!, dto.cours.reverse()))
             .sort((c1, c2) => c1.valeur.libelle.localeCompare(c2.valeur.libelle));
           this.coursDecores = this.filtrerDonneesCoursVagues(donnees);
+          this.coursDecoresAffiches = this.coursDecores;
           this.loading = false;
         });
     });
+  }
+
+  protected filtrerNbVagues(event: InputNumberInputEvent) {
+    this.coursDecoresAffiches = this.coursDecores?.filter(
+      cours => !event.value || (cours.nbVagues && cours.nbVagues === event.value)
+    );
   }
 
   rafraichirVue(): void {
@@ -125,6 +131,7 @@ export class GenerateurDonneesEntrainementModeleComponent implements OnInit {
       reader.onload = (e: any) => {
         try {
           this.coursDecores = this.filtrerDonneesCoursVagues(JSON.parse(e.target.result) as Array<DonneesCoursVagues>);
+          this.coursDecoresAffiches = this.coursDecores;
         } catch (error) {
           console.error('Erreur lors de l\'importation du fichier JSON', error);
         }

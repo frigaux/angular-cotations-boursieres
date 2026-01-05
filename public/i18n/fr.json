@@ -617,8 +617,8 @@
         },
         "ETUDES": {
           "GENERATEUR_DONNEES_ENTRAINEMENT": {
+            "FILTRE_NOMBRE_VAGUES_MINIMUM": "Filtre nb vagues",
             "DONNEES_COURS_VAGUES": "Générateur de données d'entrainement : cours -> nombre vagues",
-            "VALEURS_MARCHE": "Valeurs du marché {{libelleMarche}}",
             "EXPORTER_DONNEES": "Exporter les données",
             "IMPORTER_DONNEES": "Importer les données",
             "NOMBRE_VAGUES": "Nombre de vagues",
