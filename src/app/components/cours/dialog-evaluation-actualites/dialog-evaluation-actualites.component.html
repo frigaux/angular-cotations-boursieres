@@ -5,15 +5,17 @@
 
 <app-popover-actions-valeur></app-popover-actions-valeur>
 
-<p-dialog [showHeader]="false" [modal]="true" [(visible)]="visible"
+<p-dialog [showHeader]="true" [closable]="false" [modal]="true" [(visible)]="visible"
           (onShow)="reinitialiserVue()" [style]="{ width: '90vw' }">
-  <div class="barre-superieure-sticky">
-    <h2>{{ 'COMPOSANTS.COURS.EVALUATION_ACTUALITES.EVALUATION_DATE' | translate: {heure: heure | date : 'HH:mm'} }} </h2>
-    <span class="pi pi-refresh" (click)="reinitialiserVue()"
-          title="{{ 'COMPOSANTS.COURS.EVALUATION_ACTUALITES.RAFRAICHIR' | translate }}"></span>
-    <span class="pi pi-times-circle" (click)="visible = false"
-          title="{{ 'COMPOSANTS.COURS.EVALUATION_ACTUALITES.FERMER' | translate }}"></span>
-  </div>
+  <ng-template #header>
+    <div class="header-dialog">
+      <h2>{{ 'COMPOSANTS.COURS.EVALUATION_ACTUALITES.EVALUATION_DATE' | translate: {heure: heure | date : 'HH:mm'} }} </h2>
+      <span class="pi pi-refresh" (click)="reinitialiserVue()"
+            title="{{ 'COMPOSANTS.COURS.EVALUATION_ACTUALITES.RAFRAICHIR' | translate }}"></span>
+      <span class="pi pi-times-circle" (click)="visible = false"
+            title="{{ 'COMPOSANTS.COURS.EVALUATION_ACTUALITES.FERMER' | translate }}"></span>
+    </div>
+  </ng-template>
 
   <app-loader [affiche]="loading" [configuration]="[
         {marginLeft: '0', marginTop: '0', height: '70vh', width: '100%'}

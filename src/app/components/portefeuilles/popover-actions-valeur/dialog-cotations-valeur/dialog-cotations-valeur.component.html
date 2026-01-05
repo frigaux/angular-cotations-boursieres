@@ -1,20 +1,22 @@
 <app-dialog-charger-lien></app-dialog-charger-lien>
 
-<p-dialog [showHeader]="false" [modal]="true" [(visible)]="visible">
-  <div class="barre-superieure-sticky">
-    <h2>
-      {{
-        'COMPOSANTS.PORTEFEUILLES.ACTIONS_VALEUR.DIALOG_COTATIONS_VALEUR.COTATIONS_VALEUR' | translate : {
-          valeur: valeur?.libelle,
-          ticker: valeur?.ticker
-        }
-      }}
-    </h2>
-    <span class="pi pi-refresh" (click)="rafraichir()"
-          title="{{ 'COMPOSANTS.PORTEFEUILLES.ACTIONS_VALEUR.DIALOG_COTATIONS_VALEUR.RAFRAICHIR' | translate }}"></span>
-    <span class="pi pi-times-circle" (click)="fermer()"
-          title="{{ 'COMPOSANTS.PORTEFEUILLES.ACTIONS_VALEUR.DIALOG_COTATIONS_VALEUR.FERMER' | translate }}"></span>
-  </div>
+<p-dialog [showHeader]="true" [closable]="false" [modal]="true" [(visible)]="visible">
+  <ng-template #header>
+    <div class="header-dialog">
+      <h2>
+        {{
+          'COMPOSANTS.PORTEFEUILLES.ACTIONS_VALEUR.DIALOG_COTATIONS_VALEUR.COTATIONS_VALEUR' | translate : {
+            valeur: valeur?.libelle,
+            ticker: valeur?.ticker
+          }
+        }}
+      </h2>
+      <span class="pi pi-refresh" (click)="rafraichir()"
+            title="{{ 'COMPOSANTS.PORTEFEUILLES.ACTIONS_VALEUR.DIALOG_COTATIONS_VALEUR.RAFRAICHIR' | translate }}"></span>
+      <span class="pi pi-times-circle" (click)="fermer()"
+            title="{{ 'COMPOSANTS.PORTEFEUILLES.ACTIONS_VALEUR.DIALOG_COTATIONS_VALEUR.FERMER' | translate }}"></span>
+    </div>
+  </ng-template>
 
   <app-loader [affiche]="loading" [configuration]="[
         {marginLeft: '0', marginTop: '0', height: '60vh', width: '50rem'}
