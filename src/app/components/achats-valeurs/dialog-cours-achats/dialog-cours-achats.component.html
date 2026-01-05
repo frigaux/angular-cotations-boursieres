@@ -1,13 +1,15 @@
-<p-dialog [showHeader]="false" [modal]="true" [(visible)]="visible">
-  <div class="barre-superieure-sticky">
-    <h2>
-      {{ 'COMPOSANTS.ACHATS_VALEURS.DIALOG_COURS.COURS_ACHATS' | translate }}
-    </h2>
-    <span class="pi pi-refresh" (click)="rafraichir()"
-          title="{{ 'COMPOSANTS.ACHATS_VALEURS.DIALOG_COURS.RAFRAICHIR' | translate }}"></span>
-    <span class="pi pi-times-circle" (click)="fermer()"
-          title="{{ 'COMPOSANTS.ACHATS_VALEURS.DIALOG_COURS.FERMER' | translate }}"></span>
-  </div>
+<p-dialog [showHeader]="true" [closable]="false" [modal]="true" [(visible)]="visible">
+  <ng-template #header>
+    <div class="header-dialog">
+      <h2>
+        {{ 'COMPOSANTS.ACHATS_VALEURS.DIALOG_COURS.COURS_ACHATS' | translate }}
+      </h2>
+      <span class="pi pi-refresh" (click)="rafraichir()"
+            title="{{ 'COMPOSANTS.ACHATS_VALEURS.DIALOG_COURS.RAFRAICHIR' | translate }}"></span>
+      <span class="pi pi-times-circle" (click)="fermer()"
+            title="{{ 'COMPOSANTS.ACHATS_VALEURS.DIALOG_COURS.FERMER' | translate }}"></span>
+    </div>
+  </ng-template>
 
   <app-loader [affiche]="loading" [configuration]="[
       {marginLeft: '0', marginTop: '1rem', height: '20vh', width: '100%'}
