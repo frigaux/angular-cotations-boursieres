@@ -43,13 +43,13 @@
         <td>{{ achatValeurDecore.achatDecore.achat.quantite  | number }}</td>
         <td>{{ (achatValeurDecore.achatDecore.achat.prix * achatValeurDecore.achatDecore.achat.quantite)  | currency:'EUR':'symbol':'1.3-3' }}</td>
         <td [appClassVariation]="achatValeurDecore.achatDecore.variation">
-          {{ achatValeurDecore.achatDecore.cours | currency:'EUR':'symbol':'1.3-3' }}
+          {{ achatValeurDecore.achatDecore.cours | currency:'EUR':'symbol':'1.2-2' }}
         </td>
         <td [appClassVariation]="achatValeurDecore.achatDecore.variation">
           {{ achatValeurDecore.achatDecore.variation | percent:'1.2-2' }}
         </td>
         <td [appClassVariation]="achatValeurDecore.achatDecore.variation">
-          {{ (achatValeurDecore.achatDecore.cours! * achatValeurDecore.achatDecore.achat.quantite)  | currency:'EUR':'symbol':'1.3-3' }}
+          {{ (achatValeurDecore.achatDecore.cours! * achatValeurDecore.achatDecore.achat.quantite)  | currency:'EUR':'symbol':'1.2-2' }}
         </td>
       </tr>
     </ng-template>
@@ -66,7 +66,7 @@
           {{ variationOrdres | percent:'1.2-2' }}
         </td>
         <td [appClassVariation]="variationOrdres">
-          {{ totauxClotures  | currency:'EUR':'symbol':'1.3-3' }}
+          {{ totauxClotures  | currency:'EUR':'symbol':'1.2-2' }}
         </td>
       </tr>
     </ng-template>
