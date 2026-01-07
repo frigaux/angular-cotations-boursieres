@@ -44,17 +44,17 @@
         <td>
           <app-colonne-dividendes [dividendes]="achatValeurDecore.dividendes"></app-colonne-dividendes>
         </td>
-        <td>{{ achatValeurDecore.achatDecore.achat.prixRevente  | currency:'EUR':'symbol' }}</td>
+        <td>{{ achatValeurDecore.achatDecore.achat.prixRevente  | currency:'EUR':'symbol':'1.3-3' }}</td>
         <td>{{ achatValeurDecore.achatDecore.achat.quantite  | number }}</td>
-        <td>{{ (achatValeurDecore.achatDecore.achat.prixRevente * achatValeurDecore.achatDecore.achat.quantite)  | currency:'EUR':'symbol' }}</td>
+        <td>{{ (achatValeurDecore.achatDecore.achat.prixRevente * achatValeurDecore.achatDecore.achat.quantite)  | currency:'EUR':'symbol':'1.3-3' }}</td>
         <td [appClassVariation]="achatValeurDecore.achatDecore.variation">
-          {{ achatValeurDecore.achatDecore.cours | currency:'EUR':'symbol' }}
+          {{ achatValeurDecore.achatDecore.cours | currency:'EUR':'symbol':'1.3-3' }}
         </td>
         <td [appClassVariation]="achatValeurDecore.achatDecore.variation">
           {{ achatValeurDecore.achatDecore.variation | percent:'1.2-2' }}
         </td>
         <td [appClassVariation]="achatValeurDecore.achatDecore.variation">
-          {{ (achatValeurDecore.achatDecore.cours! * achatValeurDecore.achatDecore.achat.quantite)  | currency:'EUR':'symbol' }}
+          {{ (achatValeurDecore.achatDecore.cours! * achatValeurDecore.achatDecore.achat.quantite)  | currency:'EUR':'symbol':'1.3-3' }}
         </td>
       </tr>
     </ng-template>
@@ -66,13 +66,13 @@
         <td></td>
         <td></td>
         <td>{{ totalQuantite  | number }}</td>
-        <td>{{ totauxReventes  | currency:'EUR':'symbol' }}</td>
+        <td>{{ totauxReventes  | currency:'EUR':'symbol':'1.3-3' }}</td>
         <td></td>
         <td [appClassVariation]="variationClotures">
           {{ variationClotures | percent:'1.2-2' }}
         </td>
         <td [appClassVariation]="variationClotures">
-          {{ totauxClotures  | currency:'EUR':'symbol' }}
+          {{ totauxClotures  | currency:'EUR':'symbol':'1.3-3' }}
         </td>
       </tr>
     </ng-template>

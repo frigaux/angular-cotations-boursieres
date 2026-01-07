@@ -35,7 +35,7 @@
             <td>
               <p-inputNumber [(ngModel)]="achatDecore.achat.prix" required
                              size="small" [inputSize]="4" (onBlur)="onChange(achatDecore)"
-                             mode="decimal" [maxFractionDigits]="2"/>
+                             mode="decimal" [maxFractionDigits]="3"/>
             </td>
             <td>
               <p-inputNumber [(ngModel)]="achatDecore.achat.quantite" required
@@ -57,7 +57,7 @@
               @if (achatDecore.form.etape > 1) {
                 <p-inputNumber [(ngModel)]="achatDecore.achat.prixRevente" required
                                size="small" [inputSize]="4" (onBlur)="onChange(achatDecore)"
-                               mode="decimal" [maxFractionDigits]="2"/>
+                               mode="decimal" [maxFractionDigits]="3"/>
               } @else {
                 -
               }
