@@ -39,7 +39,7 @@
                 title="{{ 'COMPOSANTS.ACHATS_VALEURS.ACHATS.ACHATS_VALEUR' | translate: { valeur: achatValeurDecore.valeur.libelle } }}"
                 (click)="achats($event, achatValeurDecore)"></span>
         </td>
-        <td>{{ achatValeurDecore.valeur.libelle }}</td>
+        <td>{{ achatValeurDecore.valeur.libelle }} ({{ achatValeurDecore.valeur.ticker }})</td>
         <td>{{ achatValeurDecore.achatDecore.achat.date | date: 'dd/MM/yyyy' }}</td>
         <td>
           <app-colonne-dividendes [dividendes]="achatValeurDecore.dividendes"></app-colonne-dividendes>

@@ -21,7 +21,8 @@
     <label>{{ 'COMPOSANTS.PARAMETRAGE.ML.TUTORIELS.CLASSIFICATION_SUPERVISEE_CONVOLUTIVE.NOMBRE_TENSEURS' | translate }} :</label>
     <span class="nombre">{{ nombreTenseurs }}</span>
     <p-floatlabel>
-      <p-inputNumber id="tauxApprentissage" [(ngModel)]="tauxApprentissage" size="small" [inputSize]="7"/>
+      <p-inputNumber id="tauxApprentissage" [(ngModel)]="tauxApprentissage" size="small" [inputSize]="7"
+                     mode="decimal" [maxFractionDigits]="5"/>
       <label
         for="tauxApprentissage">{{ 'COMPOSANTS.PARAMETRAGE.ML.TUTORIELS.CLASSIFICATION_SUPERVISEE_CONVOLUTIVE.TAUX_APPRENTISSAGE' | translate }}</label>
     </p-floatlabel>
