@@ -1,18 +1,18 @@
 import {Injectable} from '@angular/core';
 import {forkJoin, Observable} from 'rxjs';
 import {DTOActualitesZoneBourse} from './dto-actualites-zone-bourse.interface';
-import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {HttpClient} from '@angular/common/http';
 import {DTOValeur} from '../valeurs/dto-valeur.interface';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ZoneBourseService {
-  private static readonly HEADERS_HTML = new HttpHeaders()
-    .set('Accept', 'text/html')
-    .set('Accept-Encoding', 'gzip, deflate')
-    .set('Accept-Language', 'fr-FR,fr;q=0.9,en-US;q=0.8,en;q=0.7')
-    .set('User-Agent', 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36');
+  // private static readonly HEADERS_HTML = new HttpHeaders()
+  //   .set('Accept', 'text/html')
+  //   .set('Accept-Encoding', 'gzip, deflate')
+  //   .set('Accept-Language', 'fr-FR,fr;q=0.9,en-US;q=0.8,en;q=0.7')
+  //   .set('User-Agent', 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36');
 
   private static readonly SCORE: Array<{ positif: string, negatif: string }> = [
     {positif: 'accroit', negatif: 'plonge'},
@@ -61,8 +61,8 @@ export class ZoneBourseService {
       forkJoin(
         Array.from({length: nombrePages}, (v, i) => i + 1)
           .map(numeroPage =>
-            this.http.get(`/zonebourse/actualite-bourse/regions/locales/?p=${numeroPage}`, {
-              headers: ZoneBourseService.HEADERS_HTML,
+            this.http.get(`/zonebourse/actualite-bourse/?p=${numeroPage}`, {
+              // headers: ZoneBourseService.HEADERS_HTML,
               responseType: 'text'
             })
           )).subscribe({
@@ -90,14 +90,13 @@ export class ZoneBourseService {
       const elTRs = elTBody.querySelectorAll('tr');
       elTRs.forEach(elTR => {
         const elAs = elTR.querySelectorAll('a');
-        const elSpanTicker = elTR.querySelector('span.txt-s1');
         const elSpanDate = elTR.querySelector('span.js-date-relative');
-        if (elAs.length === 2 && elSpanTicker && elSpanDate) {
+        if (elAs.length >= 1 && elSpanDate) {
           const date = elSpanDate.innerHTML.trim();
           let ticker = undefined;
-          if (valeurByTicker.has(elSpanTicker.innerHTML.trim())) {
-            ticker = elSpanTicker.innerHTML.trim();
-          }
+          // if (valeurByTicker.has(elSpanTicker.innerHTML.trim())) {
+          //   ticker = elSpanTicker.innerHTML.trim();
+          // }
           const titre = elAs[0].innerText.trim();
           const pathname = elAs[0].pathname;
           const score = this.calculerScore(titre);
@@ -134,7 +133,7 @@ export class ZoneBourseService {
         pathname = '/' + pathname;
       }
       this.http.get(`/zonebourse${pathname}`, {
-        headers: ZoneBourseService.HEADERS_HTML,
+        // headers: ZoneBourseService.HEADERS_HTML,
         responseType: 'text'
       }).subscribe({
         error: httpErrorResponse => {
