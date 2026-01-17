@@ -38,7 +38,7 @@ export class ModelesService {
     }).apply(maxPooling1d_1) as SymbolicTensor;
     const maxPooling1d_2: SymbolicTensor = tf.layers.maxPooling1d({poolSize: 2, strides: 2}).apply(conv1d_2) as SymbolicTensor;
     const flatten: SymbolicTensor = tf.layers.flatten().apply(maxPooling1d_2) as SymbolicTensor;
-    const dense1: SymbolicTensor = tf.layers.dense({units: 64, activation: 'relu', useBias: true}).apply(flatten) as SymbolicTensor;
+    const dense1: SymbolicTensor = tf.layers.dense({units: 64, activation: 'relu', useBias: true}).apply(entree) as SymbolicTensor;
     const dense2: SymbolicTensor = tf.layers.dense({units: outputShape, activation: 'softmax', useBias: true}).apply(dense1) as SymbolicTensor;
     const model = tf.model({inputs: entree, outputs: dense2});
 

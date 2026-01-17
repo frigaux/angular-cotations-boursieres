@@ -139,11 +139,13 @@ export class ChartsComponent {
         {
           label: this.translateService.instant('COMPOSANTS.COURS.CHARTS.COURS'),
           data: dataCours,
+          borderColor: '#374151',
           tension: 0.4 // Bezier curve tension of the line. Set to 0 to draw straightlines. This option is ignored if monotone cubic interpolation is used.
         },
         {
           label: this.translateService.instant('COMPOSANTS.COURS.CHARTS.MOYENNES_MOBILES') + labels[labels.length - 1],
           data: dataMM,
+          borderColor: '#1d4ed8',
           tension: 0.4 // Bezier curve tension of the line. Set to 0 to draw straightlines. This option is ignored if monotone cubic interpolation is used.
         }
       ]
@@ -151,17 +153,17 @@ export class ChartsComponent {
     if (this.cours) {
       const listeAchats = this.valeursService.chargerAchatsTicker(this.cours.ticker);
       const ordresChats = listeAchats.filter(achat => EtapeValeurUtil.isOrdreAchat(achat));
-      this.ajouterDataset(ordresChats, dataCours, resultat.datasets, a => a.prix, 'ORDRES_ACHATS');
+      this.ajouterDataset(ordresChats, dataCours, resultat.datasets, a => a.prix, 'ORDRES_ACHATS', '#eab308');
       const achats = listeAchats.filter(achat => EtapeValeurUtil.isAchat(achat));
-      this.ajouterDataset(achats, dataCours, resultat.datasets, a => a.prix, 'ACHATS');
+      this.ajouterDataset(achats, dataCours, resultat.datasets, a => a.prix, 'ACHATS', '#ea580c');
       const ordresVentes = listeAchats.filter(achat => EtapeValeurUtil.isOrdreVente(achat));
-      this.ajouterDataset(ordresVentes, dataCours, resultat.datasets, a => a.prixRevente!, 'ORDRES_VENTES');
+      this.ajouterDataset(ordresVentes, dataCours, resultat.datasets, a => a.prixRevente!, 'ORDRES_VENTES', '#dc2626');
     }
     return resultat;
   }
 
   private ajouterDataset(achats: DTOAchat[], dataCours: number[], datasets: Array<any>,
-                         val: (a: DTOAchat) => number, key: string) {
+                         val: (a: DTOAchat) => number, key: string, borderColor: string) {
     if (achats.length > 0) {
       const valeur = achats
           .reduce((accumulator, achat) => accumulator + val(achat), 0)
@@ -171,6 +173,7 @@ export class ChartsComponent {
         {
           label: this.translateService.instant(`COMPOSANTS.COURS.CHARTS.${key}`),
           data,
+          borderColor,
           tension: 0.4 // Bezier curve tension of the line. Set to 0 to draw straightlines. This option is ignored if monotone cubic interpolation is used.
         }
       );
