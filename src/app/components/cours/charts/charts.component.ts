@@ -1,4 +1,4 @@
-import {Component, input, InputSignal} from '@angular/core';
+import {Component, input, InputSignal, ViewChild} from '@angular/core';
 import {Cours} from '../cours.class';
 import {TranslatePipe, TranslateService} from '@ngx-translate/core';
 import {DatePipe, PercentPipe} from '@angular/common';
@@ -22,6 +22,8 @@ import {DTOAchat} from '../../../services/valeurs/dto-achat.interface';
   styleUrl: './charts.component.sass'
 })
 export class ChartsComponent {
+  @ViewChild('chart') chart?: UIChart;
+
   // input/output
   inputCours: InputSignal<Cours | undefined> = input(undefined,
     {transform: o => this.intercepteurCours(o), alias: 'cours'});
@@ -81,6 +83,9 @@ export class ChartsComponent {
       this.data = this.wrapData(labels, dataCours, dataMM);
 
       this.options = this.wrapOptions();
+
+      // parfois, le canvas dépasse initialement en largeur le parent avec une scrollbar :/
+      setTimeout(() => this.chart?.reinit());
     }
   }
 
