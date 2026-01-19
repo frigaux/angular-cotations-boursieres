@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { FieldsetActualitesComponent } from './fieldset-actualites.component';
+import {FieldsetActualitesComponent} from './fieldset-actualites.component';
 
 describe('FieldsetActualitesComponent', () => {
   let component: FieldsetActualitesComponent;

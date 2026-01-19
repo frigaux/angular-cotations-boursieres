@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { FieldsetPrevisionsComponent } from './fieldset-previsions.component';
+import {FieldsetPrevisionsComponent} from './fieldset-previsions.component';
 
 describe('FieldsetPrevisionsComponent', () => {
   let component: FieldsetPrevisionsComponent;

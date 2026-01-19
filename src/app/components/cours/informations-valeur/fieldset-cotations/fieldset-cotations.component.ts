@@ -1,10 +1,12 @@
 import {Component, input, InputSignal} from '@angular/core';
 import {PercentPipe} from '@angular/common';
 import {Fieldset} from 'primeng/fieldset';
-import {JaugeComponent} from '../../../../commun/jauge/jauge.component';
+import {JaugeComponent} from '../../../commun/jauge/jauge.component';
 import {TranslatePipe} from '@ngx-translate/core';
-import {CotationsValeurBoursoramaDecore} from '../cotations-valeur-boursorama-genere.class';
-import {ClassVariation} from '../../../../../directives/class-variation';
+import {
+  CotationsValeurBoursoramaDecore
+} from '../../../portefeuilles/popover-actions-valeur/dialog-cotations-valeur/cotations-valeur-boursorama-genere.class';
+import {ClassVariation} from '../../../../directives/class-variation';
 
 @Component({
   selector: 'app-fieldset-cotations',

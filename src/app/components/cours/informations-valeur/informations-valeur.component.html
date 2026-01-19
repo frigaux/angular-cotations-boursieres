@@ -24,12 +24,12 @@
         <app-fieldset-cotations [dto]="dtoBoursoramaDecore"></app-fieldset-cotations>
       </div>
       <div class="colonne">
-        <app-fieldset-indicateurs [data]="{dtoAbcBourse, dtoBoursorama: dtoBoursoramaDecore.dto}"></app-fieldset-indicateurs>
-        <app-fieldset-actualites [dto]="dtoBoursoramaDecore.dto"
+        <app-fieldset-indicateurs [data]="{dtoAbcBourse, dtoBoursorama: dtoBoursoramaDecore.dtoBoursorama}"></app-fieldset-indicateurs>
+        <app-fieldset-actualites [actualites]="dtoBoursoramaDecore.dtoBoursorama.actualites"
                                  (afficherInformation)="afficherInformation($event)"></app-fieldset-actualites>
-        <app-fieldset-analyses [dto]="dtoBoursoramaDecore.dto"
+        <app-fieldset-analyses [dto]="dtoBoursoramaDecore.dtoBoursorama"
                                (afficherInformation)="afficherInformation($event)"></app-fieldset-analyses>
-        <app-fieldset-previsions [dto]="dtoBoursoramaDecore.dto"
+        <app-fieldset-previsions [dto]="dtoBoursoramaDecore.dtoBoursorama"
                                  (afficherInformation)="afficherInformation($event)"></app-fieldset-previsions>
         <p-fieldset legend="{{ 'COMPOSANTS.COURS.INFORMATIONS_VALEUR.IA.GEMINI' | translate }}">
           <app-conseils-gemini-valeur [cours]="cours"></app-conseils-gemini-valeur>

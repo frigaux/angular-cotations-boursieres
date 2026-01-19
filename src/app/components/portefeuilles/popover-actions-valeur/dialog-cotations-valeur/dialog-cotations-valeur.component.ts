@@ -11,10 +11,18 @@ import {DialogChargerLienComponent} from '../../../commun/dialog-charger-lien/di
 import {DTOInformation} from '../../../../services/boursorama/dto-information.interface';
 import {DTOValeur} from '../../../../services/boursorama/dto-valeur.interface';
 import {FieldsetIndicateursComponent} from './fieldset-indicateurs/fieldset-indicateurs.component';
-import {FieldsetCotationsComponent} from './fieldset-cotations/fieldset-cotations.component';
-import {FieldsetActualitesComponent} from './fieldset-actualites/fieldset-actualites.component';
-import {FieldsetAnalysesComponent} from './fieldset-analyses/fieldset-analyses.component';
-import {FieldsetPrevisionsComponent} from './fieldset-previsions/fieldset-previsions.component';
+import {
+  FieldsetCotationsComponent
+} from '../../../cours/informations-valeur/fieldset-cotations/fieldset-cotations.component';
+import {
+  FieldsetActualitesComponent
+} from '../../../cours/informations-valeur/fieldset-actualites/fieldset-actualites.component';
+import {
+  FieldsetAnalysesComponent
+} from '../../../cours/informations-valeur/fieldset-analyses/fieldset-analyses.component';
+import {
+  FieldsetPrevisionsComponent
+} from '../../../cours/informations-valeur/fieldset-previsions/fieldset-previsions.component';
 import {DividendesService} from '../../../../services/dividendes/dividendes.service';
 
 @Component({
@@ -52,7 +60,7 @@ export class DialogCotationsValeurComponent {
 
   public afficherCotationsTickerBoursoramaDecore(cotationsTickerDecore: CotationsValeurBoursoramaDecore) {
     this.visible = true;
-    this.valeur = cotationsTickerDecore.dto.valeur;
+    this.valeur = cotationsTickerDecore.dtoBoursorama.valeur;
     this.cotationsTickerDecore = cotationsTickerDecore;
   }
 

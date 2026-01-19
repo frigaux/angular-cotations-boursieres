@@ -1,8 +1,8 @@
-@if (dto) {
+@if (actualites) {
   <p-fieldset
     legend="{{ 'COMPOSANTS.PORTEFEUILLES.ACTIONS_VALEUR.DIALOG_COTATIONS_VALEUR.ACTUALITES' | translate }}">
     <div>
-      @for (actualite of dto.actualites; track actualite.id) {
+      @for (actualite of actualites; track actualite.id) {
         <div>
           <span>{{ actualite.date }}</span>
           <span (click)="afficherInformation.emit(actualite)">{{ actualite.titre }}</span>

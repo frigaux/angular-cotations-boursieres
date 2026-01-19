@@ -41,7 +41,7 @@
             <span class="pi"
                   [appIconeVariation]="cotationsTickerDecore.variationOuverture"
                   title="{{ 'COMPOSANTS.PORTEFEUILLES.ACTIONS_VALEUR.DIALOG_COTATIONS_VALEURS_PORTEFEUILLE.ACTIONS' | translate }}"></span>
-            {{ cotationsTickerDecore.dto.valeur.libelle }}
+            {{ cotationsTickerDecore.dtoBoursorama.valeur.libelle }}
           </td>
           <td>
             <app-colonne-dividendes [dividendes]="cotationsTickerDecore.dividendes"></app-colonne-dividendes>
@@ -49,9 +49,9 @@
           <td>
             <app-jauge
               [donnees]="{
-                cours: cotationsTickerDecore.dto.cotations.cours,
-                plusBas: cotationsTickerDecore.dto.cotations.plusBas,
-                plusHaut: cotationsTickerDecore.dto.cotations.plusHaut
+                cours: cotationsTickerDecore.dtoBoursorama.cotations.cours,
+                plusBas: cotationsTickerDecore.dtoBoursorama.cotations.plusBas,
+                plusHaut: cotationsTickerDecore.dtoBoursorama.cotations.plusHaut
               }"></app-jauge>
           </td>
           <td>

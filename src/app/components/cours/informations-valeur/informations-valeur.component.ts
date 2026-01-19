@@ -17,18 +17,10 @@ import {
   CotationsValeurBoursoramaDecore
 } from '../../portefeuilles/popover-actions-valeur/dialog-cotations-valeur/cotations-valeur-boursorama-genere.class';
 import {UIChart} from 'primeng/chart';
-import {
-  FieldsetCotationsComponent
-} from '../../portefeuilles/popover-actions-valeur/dialog-cotations-valeur/fieldset-cotations/fieldset-cotations.component';
-import {
-  FieldsetActualitesComponent
-} from '../../portefeuilles/popover-actions-valeur/dialog-cotations-valeur/fieldset-actualites/fieldset-actualites.component';
-import {
-  FieldsetAnalysesComponent
-} from '../../portefeuilles/popover-actions-valeur/dialog-cotations-valeur/fieldset-analyses/fieldset-analyses.component';
-import {
-  FieldsetPrevisionsComponent
-} from '../../portefeuilles/popover-actions-valeur/dialog-cotations-valeur/fieldset-previsions/fieldset-previsions.component';
+import {FieldsetCotationsComponent} from './fieldset-cotations/fieldset-cotations.component';
+import {FieldsetActualitesComponent} from './fieldset-actualites/fieldset-actualites.component';
+import {FieldsetAnalysesComponent} from './fieldset-analyses/fieldset-analyses.component';
+import {FieldsetPrevisionsComponent} from './fieldset-previsions/fieldset-previsions.component';
 import {DTOInformation} from '../../../services/boursorama/dto-information.interface';
 import {DividendesService} from '../../../services/dividendes/dividendes.service';
 

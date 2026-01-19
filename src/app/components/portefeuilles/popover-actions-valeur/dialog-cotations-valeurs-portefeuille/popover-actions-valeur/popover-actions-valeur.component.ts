@@ -29,12 +29,12 @@ export class PopoverActionsValeurComponent {
   }
 
   protected boursorama() {
-    window.open(`https://www.boursorama.com/cours/1rP${this.cotationsTickerDecore?.dto.valeur.ticker}/`);
+    window.open(`https://www.boursorama.com/cours/1rP${this.cotationsTickerDecore?.dtoBoursorama.valeur.ticker}/`);
     this.popover()?.hide();
   }
 
   protected abcBourse() {
-    window.open(`https://www.abcbourse.com/cotation/${this.cotationsTickerDecore?.dto.valeur.ticker}p`);
+    window.open(`https://www.abcbourse.com/cotation/${this.cotationsTickerDecore?.dtoBoursorama.valeur.ticker}p`);
     this.popover()?.hide();
   }
 
