@@ -23,6 +23,7 @@ import {FieldsetAnalysesComponent} from './fieldset-analyses/fieldset-analyses.c
 import {FieldsetPrevisionsComponent} from './fieldset-previsions/fieldset-previsions.component';
 import {DTOInformation} from '../../../services/boursorama/dto-information.interface';
 import {DividendesService} from '../../../services/dividendes/dividendes.service';
+import {DTOActualiteTicker} from '../../../services/abc-bourse/dto-actualite-ticker.class';
 
 @Component({
   selector: 'app-informations-ticker',
@@ -60,6 +61,7 @@ export class InformationsValeurComponent {
   // données pour la vue
   dtoAbcBourse?: DTOInformationsTickerABCBourse;
   dtoBoursoramaDecore?: CotationsValeurBoursoramaDecore;
+  actualites?: Array<DTOInformation>;
 
   constructor(private translateService: TranslateService,
               private abcBourseService: AbcBourseService,
@@ -82,7 +84,7 @@ export class InformationsValeurComponent {
           this.loading = false;
         },
         next: ([dtoAbcBourse, dtoBoursorama]) => {
-          console.log(dtoAbcBourse.actualites, dtoBoursorama.actualites);
+          this.actualites = this.agregerActualites(dtoAbcBourse.actualites, dtoBoursorama.actualites);
           this.dtoAbcBourse = dtoAbcBourse;
           const dividendes = this.dividendesService.chargerParTicker(cours.ticker);
           this.dtoBoursoramaDecore = new CotationsValeurBoursoramaDecore(this.translateService, 0, dtoBoursorama, dividendes);
@@ -93,7 +95,28 @@ export class InformationsValeurComponent {
     return cours;
   }
 
-  protected afficherInformation(information: DTOInformation) {
+  protected afficherActualite(information: DTOInformation) {
+    const actualiteABC = this.dtoAbcBourse!.actualites
+      .find(a => a.pathname === information.pathname);
+    if (actualiteABC) {
+      this.dialogChargerLienComponent()?.afficherActualiteABCBourse(actualiteABC);
+    } else {
+      this.dialogChargerLienComponent()?.afficherInformationBoursorama(information);
+    }
+  }
+
+  protected afficherInformationBoursorama(information: DTOInformation) {
     this.dialogChargerLienComponent()?.afficherInformationBoursorama(information);
+  }
+
+  private agregerActualites(actualitesAbc: Array<DTOActualiteTicker>, actualitesBoursorama: Array<DTOInformation>): Array<DTOInformation> {
+    const actualites: Array<DTOInformation> = [];
+    actualites.push(...actualitesBoursorama);
+    actualitesAbc.forEach(actualite => {
+      actualites.push({id: NaN, ...actualite});
+    });
+    actualites.sort((a1, a2) => a2.date.localeCompare(a1.date));
+    actualites.forEach((a, i) => a.id = i);
+    return actualites;
   }
 }
