@@ -251,12 +251,12 @@ export class BoursoramaService {
     let id = 0;
     elULNouvelles.querySelectorAll('li.c-list-news__line')
       .forEach(elLI => {
-        const elSPAN = elLI.querySelector('span.c-list-news__date');
+        const elSpanDate = elLI.querySelector('span.c-list-news__date');
         const elA = elLI.querySelector('a');
-        if (elSPAN && elA) {
+        if (elSpanDate && elA) {
           resultat.push({
             id: id++,
-            date: elSPAN.innerHTML,
+            date: ParseUtil.parseDateBoursoramaAndMapTo8601(elSpanDate.innerHTML),
             titre: elA.innerHTML,
             pathname: elA.pathname
           });
@@ -468,7 +468,7 @@ export class BoursoramaService {
         const elDIVmonth = elA.querySelector('div.c-event-card__month');
         const elDIVtext = elA.querySelector('div.c-event-card__text');
         if (elDIVday && elDIVmonth && elDIVtext) {
-          const date = elDIVday.innerHTML.trim() + ' ' + elDIVmonth.innerHTML.trim();
+          const date = ParseUtil.parseDateAVenirAndMapTo8601(elDIVday.innerHTML, elDIVmonth.innerHTML);
           const titre = elDIVtext.innerHTML.trim();
           resultat.push({id: id++, date, titre, pathname});
         }

@@ -4,7 +4,7 @@
     <div>
       @for (actualite of actualites; track actualite.id) {
         <div>
-          <span>{{ actualite.date }}</span>
+          <span>{{ actualite.date | date: 'dd/MM/yyyy' }}</span>
           <span (click)="afficherInformation.emit(actualite)">{{ actualite.titre }}</span>
         </div>
       }

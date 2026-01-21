@@ -82,6 +82,7 @@ export class InformationsValeurComponent {
           this.loading = false;
         },
         next: ([dtoAbcBourse, dtoBoursorama]) => {
+          console.log(dtoAbcBourse.actualites, dtoBoursorama.actualites);
           this.dtoAbcBourse = dtoAbcBourse;
           const dividendes = this.dividendesService.chargerParTicker(cours.ticker);
           this.dtoBoursoramaDecore = new CotationsValeurBoursoramaDecore(this.translateService, 0, dtoBoursorama, dividendes);

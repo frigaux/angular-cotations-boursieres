@@ -91,11 +91,16 @@ export class ParseUtil {
   }
 
   static parseDateBoursoramaAndMapTo8601(dateBoursorama: string): string {
+    dateBoursorama = dateBoursorama.trim();
     const matchJour = ParseUtil.REGEXP_BOURSORAMA_JOUR.exec(dateBoursorama);
     if (matchJour) {
       const date = new Date();
-      var distance = ParseUtil.mapJourBoursorama(matchJour[1]) - date.getDay();
-      date.setDate(date.getDate() + distance);
+      const dayBoursorama = ParseUtil.mapJourBoursorama(matchJour[1]);
+      let deplacement = dayBoursorama - date.getDay();
+      if (deplacement > 0) {
+        deplacement -= 7;
+      }
+      date.setDate(date.getDate() + deplacement);
       return date.toISOString().slice(0, 10);
     }
     const matchHeure = ParseUtil.REGEXP_BOURSORAMA_HEURE.exec(dateBoursorama);
@@ -167,5 +172,16 @@ export class ParseUtil {
       default:
         throw new Error(`Mois boursorama inconnu : ${mois}`);
     }
+  }
+
+  static parseDateAVenirAndMapTo8601(jourB: string, moisB: string): string {
+    const jour = Number(jourB.trim());
+    const mois = ParseUtil.mapMoisBoursorama(moisB.trim().replace('.', ''));
+    const date = new Date();
+    if (date.getMonth() > mois) {
+      date.setFullYear(date.getFullYear() + 1);
+    }
+    date.setMonth(mois, jour);
+    return date.toISOString().slice(0, 10);
   }
 }

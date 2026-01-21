@@ -4,7 +4,7 @@
     <div>
       @for (analyse of dto.analyses; track analyse.id) {
         <div>
-          <span>{{ analyse.date }}</span>
+          <span>{{ analyse.date | date: 'dd/MM/yyyy' }}</span>
           <span (click)="afficherInformation.emit(analyse)">{{ analyse.titre }}</span>
         </div>
       }

@@ -1,5 +1,5 @@
 import {Component, input, InputSignal, output} from '@angular/core';
-import {CurrencyPipe, DecimalPipe, PercentPipe} from '@angular/common';
+import {CurrencyPipe, DatePipe, DecimalPipe, PercentPipe} from '@angular/common';
 import {Fieldset} from 'primeng/fieldset';
 import {TableModule} from 'primeng/table';
 import {TranslatePipe} from '@ngx-translate/core';
@@ -16,7 +16,8 @@ import {DTOInformation} from '../../../../services/boursorama/dto-information.in
     Fieldset,
     PercentPipe,
     TableModule,
-    TranslatePipe
+    TranslatePipe,
+    DatePipe
   ],
   templateUrl: './fieldset-previsions.component.html',
   styleUrls: ['./fieldset-previsions.component.sass', '../fieldset-actualites/fieldset-actualites.component.sass']

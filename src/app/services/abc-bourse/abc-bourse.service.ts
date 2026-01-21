@@ -55,7 +55,7 @@ export class AbcBourseService {
       result.actualites,
       html,
       new RegExp('<div class="newsln2">\\s*<div>([^>]+)<\\/div>\\s*<div><a href="([^"]+)">([^>]+)<\\/a>', 'gm'),
-      (matches) => new DTOActualiteTicker(ParseUtil.parseAndMapTo8601(matches[1]), matches[3], matches[2])
+      (matches) => new DTOActualiteTicker(ParseUtil.parseDateFrAndMapTo8601(matches[1]), matches[3], matches[2])
     );
 
     const elTables = document.querySelectorAll('table.tableDis');
@@ -284,8 +284,8 @@ export class AbcBourseService {
     let m1, m2;
     let i = 0;
     while ((m1 = r1.exec(html)) && (m2 = r2.exec(html))) {
-      result.push(new DTOTransaction(i++, m1[2], m1[1], ParseUtil.parseAndMapTo8601(m1[3]), m1[4], m1[5], ParseUtil.parseNumber(m1[6]),
-        m2[1], ParseUtil.parseAndMapTo8601(m2[2]), ParseUtil.parseNumber(m2[3]), ParseUtil.parseNumber(m2[4])));
+      result.push(new DTOTransaction(i++, m1[2], m1[1], ParseUtil.parseDateFrAndMapTo8601(m1[3]), m1[4], m1[5], ParseUtil.parseNumber(m1[6]),
+        m2[1], ParseUtil.parseDateFrAndMapTo8601(m2[2]), ParseUtil.parseNumber(m2[3]), ParseUtil.parseNumber(m2[4])));
     }
     return result;
   }
@@ -411,7 +411,7 @@ export class AbcBourseService {
         } else {
           const elA = elTDs[1].querySelector('a');
           if (elA) {
-            const date = ParseUtil.parseAndMapTo8601(elTDs[0].innerText);
+            const date = ParseUtil.parseDateFrAndMapTo8601(elTDs[0].innerText);
             const matchTicker = /\/([A-Z0-9]+)p/.exec(elA.href);
             const type: TypeDividende = elTDs[2].innerText.toLowerCase() as TypeDividende;
             const montant = ParseUtil.parseNumber(elTDs[3].innerText);

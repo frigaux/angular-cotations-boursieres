@@ -2,12 +2,14 @@ import {Component, input, InputSignal, output} from '@angular/core';
 import {Fieldset} from 'primeng/fieldset';
 import {TranslatePipe} from '@ngx-translate/core';
 import {DTOInformation} from '../../../../services/boursorama/dto-information.interface';
+import {DatePipe} from '@angular/common';
 
 @Component({
   selector: 'app-fieldset-actualites',
   imports: [
     Fieldset,
-    TranslatePipe
+    TranslatePipe,
+    DatePipe
   ],
   templateUrl: './fieldset-actualites.component.html',
   styleUrl: './fieldset-actualites.component.sass'

@@ -5,12 +5,14 @@ import {
   DTOInformationsTickerBoursorama
 } from '../../../../services/boursorama/dto-informations-ticker-boursorama.interface';
 import {DTOInformation} from '../../../../services/boursorama/dto-information.interface';
+import {DatePipe} from '@angular/common';
 
 @Component({
   selector: 'app-fieldset-analyses',
   imports: [
     Fieldset,
-    TranslatePipe
+    TranslatePipe,
+    DatePipe
   ],
   templateUrl: './fieldset-analyses.component.html',
   styleUrls: ['./fieldset-analyses.component.sass', '../fieldset-actualites/fieldset-actualites.component.sass']
