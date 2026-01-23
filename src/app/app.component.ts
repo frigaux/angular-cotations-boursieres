@@ -14,7 +14,7 @@ import {PrimeNG} from 'primeng/config';
 import {PickList} from 'primeng/picklist';
 import {NavigationBar} from '@squareetlabs/capacitor-navigation-bar';
 
-// TODO : bug actualité sur Arcelor Mittal, ATOS
+// TODO : alertes portefeuille et filtre cours : MIN(nbJours), MAX(nbJours), MOY(nbJours)
 // TODO : service ABCBourse de récupération des informations pour un ticker : récupérer la pré-ouverture ?
 // TODO : capacitor android : proxy obligatoire pour requêter les autres domaines ? problème CORS ou pas ?
 // TODO : coverage

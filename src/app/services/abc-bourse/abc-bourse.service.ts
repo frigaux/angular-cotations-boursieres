@@ -28,17 +28,36 @@ export class AbcBourseService {
 
   public chargerInformationsTicker(ticker: string): Observable<DTOInformationsTickerABCBourse> {
     return new Observable(observer => {
-      this.http.get(`/abcbourse/cotation/${ticker}p`, {
+      const pathname = `/abcbourse/cotation/${ticker}p`;
+      this.http.get(pathname, {
         headers: AbcBourseService.HEADERS,
-        responseType: 'text'
+        responseType: 'text',
+        observe: 'response'
       }).subscribe({
         error: httpErrorResponse => {
           observer.error(httpErrorResponse);
           observer.complete();
         },
-        next: html => {
-          observer.next(this.parseAndMapInformations(html, ticker));
-          observer.complete();
+        next: response => {
+          const pathnameResponse = new URL(response.url!).pathname;
+          if (pathname !== pathnameResponse) { // 301 : apache a appliqué la RewriteRule vers index.html
+            this.http.get(`/abcbourse${pathnameResponse}`, {
+              headers: AbcBourseService.HEADERS,
+              responseType: 'text'
+            }).subscribe({
+              error: httpErrorResponse => {
+                observer.error(httpErrorResponse);
+                observer.complete();
+              },
+              next: html => {
+                observer.next(this.parseAndMapInformations(html, ticker));
+                observer.complete();
+              }
+            });
+          } else {
+            observer.next(this.parseAndMapInformations(response.body ?? '', ticker));
+            observer.complete();
+          }
         }
       });
     });
@@ -131,22 +150,27 @@ export class AbcBourseService {
 
   private mapIndicateurs(result: DTOInformationsTickerABCBourse, elTable: Element) {
     const elTrs: NodeListOf<HTMLTableCellElement> = elTable.querySelectorAll('tbody > tr');
-
-    const elTdVariation: HTMLTableCellElement | null = elTrs[0].querySelector('td:nth-child(2)');
-    if (elTdVariation) {
-      result.ratios.variationCAC = ParseUtil.parseNumber(elTdVariation.innerText);
-    }
-
-    const elTdCorrelation: HTMLTableCellElement | null = elTrs[1].querySelector('td:nth-child(2)');
-    if (elTdCorrelation) {
-      result.ratios.correlationCAC = ParseUtil.parseNumber(elTdCorrelation.innerText) / 100;
-    }
-
-    // qualité financière facultative
-    const elSpanQualite: HTMLSpanElement | null = elTrs[2]?.querySelector('td:nth-child(2) > span');
-    if (elSpanQualite) {
-      result.ratios.qualiteFinanciere = elSpanQualite.innerText;
-    }
+    elTrs.forEach((elTr, i) => {
+      const indicateur = elTr.querySelector('td.t1 > a')?.innerHTML.trim();
+      if (indicateur?.startsWith('Beta')) {
+        const elTdVariation: HTMLTableCellElement | null = elTr.querySelector('td:nth-child(2)');
+        if (elTdVariation) {
+          result.ratios.variationCAC = ParseUtil.parseNumber(elTdVariation.innerText);
+        }
+      }
+      if (indicateur?.startsWith('Corr')) {
+        const elTdCorrelation: HTMLTableCellElement | null = elTr.querySelector('td:nth-child(2)');
+        if (elTdCorrelation) {
+          result.ratios.correlationCAC = ParseUtil.parseNumber(elTdCorrelation.innerText) / 100;
+        }
+      }
+      if (indicateur?.startsWith('Note')) {
+        const elSpanQualite: HTMLSpanElement | null = elTr.querySelector('td:nth-child(2) > span');
+        if (elSpanQualite) {
+          result.ratios.qualiteFinanciere = elSpanQualite.innerText;
+        }
+      }
+    });
   }
 
   public chargerLien(pathname: string): Observable<string> {

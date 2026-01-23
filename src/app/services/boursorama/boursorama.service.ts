@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {forkJoin, Observable} from 'rxjs';
+import {forkJoin, Observable, Subscriber} from 'rxjs';
 import {DTOCours} from '../cours/dto-cours.interface';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {DTOCoursBoursorama} from './dto-cours-boursorama.interface';
@@ -64,28 +64,51 @@ export class BoursoramaService {
 
   public chargerInformationsTicker(valeur: DTOValeur): Observable<DTOInformationsTickerBoursorama> {
     return new Observable(observer => {
-      this.http.get(`/boursorama/cours/1rP${valeur.ticker}/`, {
+      const pathname = `/boursorama/cours/1rP${valeur.ticker}/`;
+      this.http.get(pathname, {
         headers: BoursoramaService.HEADERS_HTML,
-        responseType: 'text'
+        responseType: 'text',
+        observe: 'response'
       }).subscribe({
         error: httpErrorResponse => {
           observer.error(httpErrorResponse);
           observer.complete();
         },
-        next: html => {
-          const dto = this.parseAndMapInformationsTicker(valeur, html);
-          if (dto) {
-            observer.next(dto);
+        next: response => {
+          const pathnameResponse = new URL(response.url!).pathname;
+          if (pathname !== pathnameResponse) { // 301 : apache a appliqué la RewriteRule vers index.html
+            this.http.get(`/boursorama/cours/1rA${valeur.ticker}/`, {
+              headers: BoursoramaService.HEADERS_HTML,
+              responseType: 'text'
+            }).subscribe({
+              error: httpErrorResponse => {
+                observer.error(httpErrorResponse);
+                observer.complete();
+              },
+              next: html => {
+                this.parseHtml(valeur, html, observer);
+              }
+            });
           } else {
-            observer.error({
-              message: 'Impossible de récupérer les informations dans le html',
-              error: html
-            })
+            const html = response.body ?? '';
+            this.parseHtml(valeur, html, observer);
           }
-          observer.complete();
         }
       });
     });
+  }
+
+  private parseHtml(valeur: DTOValeur, html: string, observer: Subscriber<DTOInformationsTickerBoursorama>) {
+    const dto = this.parseAndMapInformationsTicker(valeur, html);
+    if (dto) {
+      observer.next(dto);
+    } else {
+      observer.error({
+        message: 'Impossible de récupérer les informations dans le html',
+        error: html
+      })
+    }
+    observer.complete();
   }
 
   public chargerInformationsTickers(valeurs: Array<DTOValeur>): Observable<Array<DTOInformationsTickerBoursorama>> {
