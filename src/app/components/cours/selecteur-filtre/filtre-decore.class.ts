@@ -12,9 +12,9 @@ export class FiltreDecore {
     this.id = id;
     this.filtre = filtre;
     this.evaluer = this.genererFonctionFiltre(filtre);
-    this.avecOperandeMIN = filtre.condition.includes('MIN');
-    this.avecOperandeMAX = filtre.condition.includes('MAX');
-    this.avecOperandeMOY = filtre.condition.includes('MOY');
+    this.avecOperandeMIN = filtre.condition.includes('MIN(');
+    this.avecOperandeMAX = filtre.condition.includes('MAX(');
+    this.avecOperandeMOY = filtre.condition.includes('MOY(');
   }
 
   private genererFonctionFiltre(filtre: DTOFiltre): Function {

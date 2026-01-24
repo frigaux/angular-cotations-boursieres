@@ -164,7 +164,7 @@ export class CoursService {
     try {
       const evaluerCondition = new Function(
         'const M = Array.from({ length: 300 }, (v, i) => i);'
-        + 'const MIN = 0; const MAX = 299; const MOY = 149.5;'
+        + 'const MIN = i => i; const MAX = i => i; const MOY = i => i;'
         + 'return ' + conditionAvecSubstitution + ';'
       );
       evaluerCondition();

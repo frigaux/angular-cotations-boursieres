@@ -13,13 +13,13 @@ export class PortefeuilleAvecCours {
     this.portefeuille = portefeuille;
     const alertesDecorees = portefeuille.alertes.map(this.genererFonctionAlerte);
     const avecOperandeMIN = portefeuille.alertes
-      .find(alerte => alerte.condition.includes('MIN')) !== undefined;
+      .find(alerte => alerte.condition.includes('MIN(')) !== undefined;
     const avecOperandeMAX = portefeuille.alertes
-      .find(alerte => alerte.condition.includes('MAX')) !== undefined;
+      .find(alerte => alerte.condition.includes('MAX(')) !== undefined;
     const avecOperandeMOY = portefeuille.alertes
-      .find(alerte => alerte.condition.includes('MOY')) !== undefined;
+      .find(alerte => alerte.condition.includes('MOY(')) !== undefined;
     const avecOperandeNBV = portefeuille.alertes
-      .find(alerte => alerte.condition.includes('NBV')) !== undefined;
+      .find(alerte => alerte.condition.includes('NBV(')) !== undefined;
     this.alertes = {alertesDecorees, avecOperandeMIN, avecOperandeMAX, avecOperandeMOY, avecOperandeNBV};
   }
 

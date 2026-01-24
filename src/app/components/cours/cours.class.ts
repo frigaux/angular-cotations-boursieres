@@ -61,17 +61,26 @@ export class Cours {
     return '';
   }
 
-  public calculerMinimumMM(): number {
-    return Math.min(...this.moyennesMobiles);
+  public calculerMinimumMM() {
+    return (nbJours: number) => {
+      const nb = Math.min(nbJours, this.moyennesMobiles.length);
+      return Math.min(...this.moyennesMobiles.slice(0, nb));
+    };
   }
 
-  public calculerMaximumMM(): number {
-    return Math.max(...this.moyennesMobiles);
+  public calculerMaximumMM() {
+    return (nbJours: number) => {
+      const nb = Math.min(nbJours, this.moyennesMobiles.length);
+      return Math.max(...this.moyennesMobiles.slice(0, nb));
+    };
   }
 
-  public calculerMoyenneMM(): number {
-    return this.moyennesMobiles
-        .reduce((accumulator, mm) => accumulator + mm, 0)
-      / this.moyennesMobiles.length;
+  public calculerMoyenneMM() {
+    return (nbJours: number) => {
+      const nb = Math.min(nbJours, this.moyennesMobiles.length);
+      return this.moyennesMobiles.slice(0, nb)
+          .reduce((accumulator, mm) => accumulator + mm, 0)
+        / nb;
+    };
   }
 }

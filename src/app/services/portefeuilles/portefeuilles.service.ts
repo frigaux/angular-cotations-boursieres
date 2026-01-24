@@ -261,7 +261,7 @@ export class PortefeuillesService {
       const evaluerCondition = new Function(
         'const C = Array.from({ length: 300 }, (v, i) => i);'
         + 'const M = Array.from({ length: 300 }, (v, i) => i);'
-        + 'const MIN = 0; const MAX = 299; const MOY = 149.5; const NBV = 5;'
+        + 'const MIN = i => i; const MAX = i => i; const MOY = i => i; const NBV = i => i;'
         + 'return ' + conditionAvecSubstitution + ';'
       );
       evaluerCondition();

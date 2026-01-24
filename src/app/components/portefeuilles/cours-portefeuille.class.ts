@@ -23,10 +23,10 @@ export class CoursPortefeuille {
   moyennesMobiles: number[];
   coursAlleges: DTOCoursTickerAllege[];
   alertes: AlertesDecorees;
-  coursMinimum?: number;
-  coursMaximum?: number;
-  coursMoyen?: number;
-  coursNbVagues?: number;
+  coursMinimum?: (nbJours: number) => number;
+  coursMaximum?: (nbJours: number) => number;
+  coursMoyen?: (nbJours: number) => number;
+  coursNbVagues?: (nbJours: number) => number;
 
   constructor(valeur: DTOValeur, dto: DTOCoursAvecListeAllege,
               alertes: AlertesDecorees,
@@ -44,18 +44,27 @@ export class CoursPortefeuille {
     this.coursAlleges = dto.cours;
     this.alertes = alertes;
     if (alertes.avecOperandeMIN) {
-      this.coursMinimum = Math.min(...this.coursAlleges.map(cours => cours.cloture));
+      this.coursMinimum = (nbJours: number) => {
+        const nb = Math.min(nbJours, this.coursAlleges.length);
+        return Math.min(...this.coursAlleges.slice(0, nb).map(cours => cours.cloture));
+      };
     }
     if (alertes.avecOperandeMAX) {
-      this.coursMaximum = Math.max(...this.coursAlleges.map(cours => cours.cloture));
+      this.coursMaximum = (nbJours: number) => {
+        const nb = Math.min(nbJours, this.coursAlleges.length);
+        return Math.max(...this.coursAlleges.slice(0, nb).map(cours => cours.cloture));
+      };
     }
     if (alertes.avecOperandeMOY) {
-      this.coursMoyen = this.coursAlleges
-          .reduce((accumulator, cours) => accumulator + cours.cloture, 0)
-        / this.coursAlleges.length;
+      this.coursMoyen = (nbJours: number) => {
+        const nb = Math.min(nbJours, this.coursAlleges.length);
+        return this.coursAlleges.slice(0, nb)
+            .reduce((accumulator, cours) => accumulator + cours.cloture, 0)
+          / nb;
+      };
     }
     if (alertes.avecOperandeNBV) {
-      this.coursNbVagues = this.estimerNbVagues();
+      this.coursNbVagues = (nbJours: number) => this.estimerNbVagues(nbJours);
     }
 
     Object.assign(this, {var1: this.calculerVariation(1)});
@@ -103,7 +112,8 @@ export class CoursPortefeuille {
     return (this.cloture / (totalPrix / totalQuantites)) - 1;
   }
 
-  private estimerNbVagues() {
+  // TODO : prendre en compte nbJours
+  private estimerNbVagues(nbJours: number) {
     if (this.coursAlleges.length > 100) {
       const nbJoursMM = 15;
       const moyennesMobilesGlissantes = this.calculerMoyennesMobilesGlissantes(nbJoursMM);
