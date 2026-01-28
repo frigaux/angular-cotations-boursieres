@@ -9,6 +9,7 @@ import {ColonneDecoree} from './colonne-decoree.class';
 import {DividendesService} from '../../services/dividendes/dividendes.service';
 import {AlertesDecorees} from './alertes-decorees.interface';
 import {EtapeValeurUtil} from '../valeurs/achats-valeur/etape-valeur-util.class';
+import {EtapeValeur} from '../valeurs/achats-valeur/etape-valeur.enum';
 
 export class CoursPortefeuille {
   date: string; // ISO 8601 : yyyy-MM-dd
@@ -94,39 +95,67 @@ export class CoursPortefeuille {
     );
   }
 
-  calculerVariationAchats(valeursService: ValeursService) {
+  /**
+   *
+   * @param valeursService
+   * @param etapeValeur défini si portefeuille ajouté (OA, A, OV)
+   */
+  calculerVariationAchats(valeursService: ValeursService, etapeValeur?: EtapeValeur) {
     const achats: Array<DTOAchat> | undefined = valeursService.chargerAchatsTicker(this.ticker)
-      .filter(achat => EtapeValeurUtil.isAchat(achat));
+      .filter(achat => {
+        if (etapeValeur !== undefined) {
+          if (etapeValeur === EtapeValeur.ORDRE_ACHAT) {
+            return EtapeValeurUtil.isOrdreAchat(achat);
+          } else if (etapeValeur === EtapeValeur.ORDRE_VENTE) {
+            return EtapeValeurUtil.isOrdreVente(achat);
+          }
+        }
+        return EtapeValeurUtil.isAchat(achat);
+      });
+
     if (!achats || achats.length === 0) {
       return undefined;
     }
     if (achats.length === 1) {
+      if (etapeValeur === EtapeValeur.ORDRE_ACHAT) {
+        return (achats[0].prix! / this.cloture) - 1;
+      }
+      if (etapeValeur === EtapeValeur.ORDRE_VENTE) {
+        return (this.cloture / achats[0].prixRevente!) - 1;
+      }
       return (this.cloture / achats[0].prix) - 1;
     }
     let totalQuantites = 0;
     let totalPrix = 0;
     for (const achat of achats) {
       totalQuantites += achat.quantite;
-      totalPrix += achat.prix * achat.quantite;
+      if (etapeValeur === EtapeValeur.ORDRE_VENTE) {
+        totalPrix += achat.prixRevente! * achat.quantite;
+      } else {
+        totalPrix += achat.prix * achat.quantite;
+      }
+    }
+
+    if (etapeValeur === EtapeValeur.ORDRE_ACHAT) {
+      return ((totalPrix / totalQuantites) / this.cloture) - 1;
     }
     return (this.cloture / (totalPrix / totalQuantites)) - 1;
   }
 
-  // TODO : prendre en compte nbJours
   private estimerNbVagues(nbJours: number) {
-    if (this.coursAlleges.length > 100) {
+    if (this.coursAlleges.length > 100 && nbJours <= this.coursAlleges.length) {
       const nbJoursMM = 15;
-      const moyennesMobilesGlissantes = this.calculerMoyennesMobilesGlissantes(nbJoursMM);
+      const moyennesMobilesGlissantes = this.calculerMoyennesMobilesGlissantes(nbJours, nbJoursMM);
       return this.calculerNbVagues(moyennesMobilesGlissantes, nbJoursMM);
     }
     return 0;
   }
 
-  private calculerNbVagues(moyennesMobilesGlissantes: Array<number>, nbJours: number) {
+  private calculerNbVagues(moyennesMobilesGlissantes: Array<number>, nbJoursMM: number) {
     let auDessus: boolean | undefined = undefined;
     let nbVagues = 0;
     moyennesMobilesGlissantes.forEach((moyenneMobileGlissante, i) => {
-      if (moyenneMobileGlissante > this.moyennesMobiles[i + nbJours - 1]) {
+      if (moyenneMobileGlissante > this.moyennesMobiles[i + nbJoursMM - 1]) {
         if (auDessus !== undefined && !auDessus) {
           nbVagues++;
         }
@@ -141,16 +170,16 @@ export class CoursPortefeuille {
     return nbVagues;
   }
 
-  private calculerMoyennesMobilesGlissantes(nbJours: number) {
+  private calculerMoyennesMobilesGlissantes(nbJours: number, nbJoursMM: number) {
     const moyennesMobiles: Array<number> = [];
     let somme = 0;
-    for (let i = 0; i < nbJours; i++) {
+    for (let i = 0; i < nbJoursMM; i++) {
       somme += this.coursAlleges[i].cloture;
     }
-    moyennesMobiles.push(somme / nbJours);
-    for (let j = nbJours; j < this.coursAlleges.length; j++) {
-      somme = somme - this.coursAlleges[j - nbJours].cloture + this.coursAlleges[j].cloture;
-      moyennesMobiles.push(somme / nbJours);
+    moyennesMobiles.push(somme / nbJoursMM);
+    for (let j = nbJoursMM; j < nbJours; j++) {
+      somme = somme - this.coursAlleges[j - nbJoursMM].cloture + this.coursAlleges[j].cloture;
+      moyennesMobiles.push(somme / nbJoursMM);
     }
     return moyennesMobiles;
   }

@@ -14,6 +14,9 @@ import {PrimeNG} from 'primeng/config';
 import {PickList} from 'primeng/picklist';
 import {NavigationBar} from '@squareetlabs/capacitor-navigation-bar';
 
+// TODO : portefeuille : valeur suivante/précédente
+// TODO : portefeuille : après enregistrement d'un achat, les filtres/tris sont perdus avec le rafraichissement du tableau
+// TODO : gestion des portefeuilles : améliorer le radio button pour le portefeuille par défaut
 // TODO : service ABCBourse de récupération des informations pour un ticker : récupérer la pré-ouverture ?
 // TODO : capacitor android : proxy obligatoire pour requêter les autres domaines ? problème CORS ou pas ?
 // TODO : coverage

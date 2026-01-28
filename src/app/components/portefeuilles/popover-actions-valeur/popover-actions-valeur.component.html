@@ -3,7 +3,7 @@
 <app-dialog-cotations-valeurs-portefeuille></app-dialog-cotations-valeurs-portefeuille>
 
 <p-popover>
-  @if (cours) {
+  @if (cours && portefeuilleAvecCoursAffiche && portefeuilleAffiche && nomsPortefeuillesDisponibles) {
     <div class="actions-valeur">
       <div class="libelle" (click)="coursBoursoramaPortefeuille()">
         <span class="pi pi-download"></span>
@@ -21,13 +21,13 @@
         <span class="pi pi-external-link"></span>
         <span>{{ 'COMPOSANTS.PORTEFEUILLES.ACTIONS_VALEUR.BOURSORAMA' | translate }}</span>
       </div>
-      @if (!portefeuilleAjoute && portefeuilleAffiche && portefeuilleAffiche.tickers.length > 1) {
+      @if (portefeuilleAvecCoursAffiche.etapeValeur === undefined && portefeuilleAffiche.tickers.length > 1) {
         <div class="libelle" (click)="suppressionDuPortefeuille($event)">
           <span class="pi pi-minus-circle"></span>
           <span>{{ 'COMPOSANTS.PORTEFEUILLES.ACTIONS_VALEUR.SUPPRIMER_DU_PORTEFEUILLE' | translate }}</span>
         </div>
       }
-      @if (!portefeuilleAjoute && nomsPortefeuillesDisponibles && nomsPortefeuillesDisponibles.length > 0) {
+      @if (portefeuilleAvecCoursAffiche.etapeValeur === undefined && nomsPortefeuillesDisponibles.length > 0) {
         <div>
           <div class="libelle" (click)="ajouterAuPortefeuille()">
             <span class="pi pi-plus-circle"></span>
@@ -36,7 +36,7 @@
           <p-select [options]="nomsPortefeuillesDisponibles" [(ngModel)]="nomsPortefeuilleSelectionne"
                     size="small"></p-select>
         </div>
-        @if (portefeuilleAffiche && portefeuilleAffiche.tickers.length > 1) {
+        @if (portefeuilleAffiche.tickers.length > 1) {
           <div>
             <div class="libelle" (click)="deplacerDansPortefeuille()">
               <span class="pi pi-plus-circle"></span>

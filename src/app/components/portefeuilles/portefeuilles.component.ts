@@ -146,20 +146,24 @@ export class PortefeuillesComponent implements OnInit {
 
   private chargerPortefeuilles() {
     const portefeuilles = this.portefeuillesService.charger();
-    this.ajouterPortefeuillesEtapes(portefeuilles);
+    const portefeuilleParEtapeValeur = this.construirePortefeuilleParEtapeValeur();
     return portefeuilles
       .filter(portefeuille => portefeuille.tickers.length > 0)
-      .map(portefeuille => new PortefeuilleAvecCours(portefeuille));
+      .map(portefeuille => new PortefeuilleAvecCours(portefeuille))
+      .concat(
+        Array.from(portefeuilleParEtapeValeur.keys())
+          .map(etapeValeur => new PortefeuilleAvecCours(portefeuilleParEtapeValeur.get(etapeValeur)!, etapeValeur))
+      );
   }
 
   private definirCoursPortefeuilleCourant(): void {
     if (this.listeCours) {
       this.date = this.listeCours.length > 0 ? this.listeCours[0].date : undefined;
 
-      this.colonnesDecorees = this.decorerColonnes();
-      this.idColonneTriParDefaut = this.colonnesDecorees.find(colonneDecoree => colonneDecoree.colonne.tri)?.id;
-
       const portefeuilleAvecCours: PortefeuilleAvecCours = this.portefeuillesAvecCours[this.idxPortefeuilleCourant];
+
+      this.colonnesDecorees = this.decorerColonnes(portefeuilleAvecCours.etapeValeur);
+      this.idColonneTriParDefaut = this.colonnesDecorees.find(colonneDecoree => colonneDecoree.colonne.tri)?.id;
       portefeuilleAvecCours.cours = this.listeCours.map(dto => {
         return new CoursPortefeuille(this.valeurByTicker!.get(dto.ticker)!, dto,
           portefeuilleAvecCours.alertes, this.colonnesDecorees!);
@@ -167,13 +171,22 @@ export class PortefeuillesComponent implements OnInit {
     }
   }
 
-  private decorerColonnes() {
+  private decorerColonnes(etapeValeur?: EtapeValeur): ColonneDecoree[] {
     const tableau = this.tableauxService.charger().portefeuille;
     const isPaysage = this.breakpointObserver.isMatched('(orientation: landscape)');
     const colonnes: DTOColonne<TypesColonnesPortefeuille>[] = isPaysage ? tableau.colonnesPaysage : tableau.colonnesPortrait;
     let i = 0;
-    return colonnes.map(colonne =>
-      new ColonneDecoree(i++, colonne, this.tableauxService.valeurPourUnCours(colonne))
+    return colonnes.map(colonne => {
+        if (colonne.type === TypesColonnesPortefeuille.VARIATION_ACHATS && etapeValeur !== undefined) {
+          if (etapeValeur === EtapeValeur.ORDRE_ACHAT) {
+            colonne.nom = 'Var O/C';
+          }
+          if (etapeValeur === EtapeValeur.ORDRE_VENTE) {
+            colonne.nom = 'Var/V';
+          }
+        }
+        return new ColonneDecoree(i++, colonne, this.tableauxService.valeurPourUnCours(colonne, etapeValeur));
+      }
     );
   }
 
@@ -209,22 +222,24 @@ export class PortefeuillesComponent implements OnInit {
     }
   }
 
-  private ajouterPortefeuillesEtapes(portefeuilles: Array<DTOPortefeuille>) {
+  private construirePortefeuilleParEtapeValeur(): Map<EtapeValeur, DTOPortefeuille> {
     const achats = this.valeursService.chargerAchats();
-    this.ajouterPortefeuille(portefeuilles, achats, EtapeValeur.ORDRE_ACHAT, PortefeuillesService.PORTEFEUILLE_ORDRES_ACHATS);
-    this.ajouterPortefeuille(portefeuilles, achats, EtapeValeur.ACHAT, PortefeuillesService.PORTEFEUILLE_ACHATS);
-    this.ajouterPortefeuille(portefeuilles, achats, EtapeValeur.ORDRE_VENTE, PortefeuillesService.PORTEFEUILLE_ORDRES_VENTES);
+    const resultat = new Map<EtapeValeur, DTOPortefeuille>();
+    this.ajouterPortefeuille(resultat, achats, EtapeValeur.ORDRE_ACHAT, 'OA');
+    this.ajouterPortefeuille(resultat, achats, EtapeValeur.ACHAT, 'A');
+    this.ajouterPortefeuille(resultat, achats, EtapeValeur.ORDRE_VENTE, 'OV');
+    return resultat;
   }
 
-  private ajouterPortefeuille(portefeuilles: Array<DTOPortefeuille>, achats: Array<DTOAchatsTicker>, etape: EtapeValeur, nom: string) {
-    const tickers = EtapeValeurUtil.filtrerParEtape(achats, etape)
+  private ajouterPortefeuille(liste: Map<EtapeValeur, DTOPortefeuille>, achats: Array<DTOAchatsTicker>, etapeValeur: EtapeValeur, nom: string) {
+    const tickers = EtapeValeurUtil.filtrerParEtape(achats, etapeValeur)
       .map(achatsTicker => achatsTicker.ticker);
     if (tickers.length > 0) {
-      portefeuilles.push({
+      liste.set(etapeValeur, {
         nom,
         parDefaut: false,
         tickers: tickers,
-        alertes: PortefeuillesService.CONFIGURATION_INITIALE[0].alertes,
+        alertes: PortefeuillesService.CONFIGURATION_INITIALE[0].alertes
       });
     }
   }

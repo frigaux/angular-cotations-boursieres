@@ -17,10 +17,6 @@ export class PortefeuillesService {
     PortefeuillesService.OBSERVERS_UPDATE.push(observer);
   });
 
-  public static readonly PORTEFEUILLE_ORDRES_ACHATS: string = 'OA';
-  public static readonly PORTEFEUILLE_ACHATS: string = 'A';
-  public static readonly PORTEFEUILLE_ORDRES_VENTES: string = 'OV';
-
   private cleMessageErreur: string | undefined;
 
   public static readonly CONFIGURATION_INITIALE = [

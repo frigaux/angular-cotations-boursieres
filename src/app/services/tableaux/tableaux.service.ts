@@ -10,6 +10,7 @@ import {TypesColonnesCours} from './types-colonnes-cours.enum';
 import {Observable, Subscriber} from 'rxjs';
 import {ValeursService} from '../valeurs/valeurs.service';
 import {DividendesService} from '../dividendes/dividendes.service';
+import {EtapeValeur} from '../../components/valeurs/achats-valeur/etape-valeur.enum';
 
 @Injectable({
   providedIn: 'root'
@@ -349,7 +350,7 @@ export class TableauxService {
         console.error(e);
       }
     }
-    return TableauxService.CONFIGURATION_INITIALE['DESKTOP'];
+    return JSON.parse(JSON.stringify(TableauxService.CONFIGURATION_INITIALE['DESKTOP']));
   }
 
   public enregistrer(tableaux: DTOTableaux): string | undefined {
@@ -428,7 +429,7 @@ export class TableauxService {
     }
   }
 
-  public valeurPourUnCours<T extends TypesColonnesPortefeuille | TypesColonnesCours>(colonne: DTOColonne<T>): Function {
+  public valeurPourUnCours<T extends TypesColonnesPortefeuille | TypesColonnesCours>(colonne: DTOColonne<T>, etapeValeur?: EtapeValeur): Function {
     switch (colonne.type) {
       case TypesColonnesPortefeuille.DATE:
         return (cours: CoursPortefeuille) => cours.date;
@@ -451,7 +452,7 @@ export class TableauxService {
       case TypesColonnesPortefeuille.ALERTES:
         return (cours: CoursPortefeuille) => cours.evaluerAlertes();
       case TypesColonnesPortefeuille.VARIATION_ACHATS:
-        return (cours: CoursPortefeuille) => cours.calculerVariationAchats(this.valeursService);
+        return (cours: CoursPortefeuille) => cours.calculerVariationAchats(this.valeursService, etapeValeur);
       case TypesColonnesPortefeuille.COURS:
         return (cours: CoursPortefeuille) => cours.coursAlleges[colonne.parametre! - 1].cloture
       case TypesColonnesPortefeuille.MOYENNE_MOBILE:
