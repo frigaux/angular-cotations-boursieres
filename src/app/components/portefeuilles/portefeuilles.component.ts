@@ -73,7 +73,8 @@ export class PortefeuillesComponent implements OnInit {
 
   // les colonnes dynamiques de la table
   protected colonnesDecorees?: ColonneDecoree[];
-  protected idColonneTriParDefaut?: number;
+  protected idColonneTriee?: string;
+  protected ordreColonneTriee: number = 1;
   protected readonly TypesColonnesPortefeuille = TypesColonnesPortefeuille;
 
   // données pour la vue
@@ -163,7 +164,11 @@ export class PortefeuillesComponent implements OnInit {
       const portefeuilleAvecCours: PortefeuilleAvecCours = this.portefeuillesAvecCours[this.idxPortefeuilleCourant];
 
       this.colonnesDecorees = this.decorerColonnes(portefeuilleAvecCours.etapeValeur);
-      this.idColonneTriParDefaut = this.colonnesDecorees.find(colonneDecoree => colonneDecoree.colonne.tri)?.id;
+      if (!this.idColonneTriee) { // colonne triée par défaut
+        this.idColonneTriee = this.colonnesDecorees
+          .find(colonneDecoree => colonneDecoree.colonne.tri)
+          ?.id.toString();
+      }
       portefeuilleAvecCours.cours = this.listeCours.map(dto => {
         return new CoursPortefeuille(this.valeurByTicker!.get(dto.ticker)!, dto,
           portefeuilleAvecCours.alertes, this.colonnesDecorees!);
@@ -242,5 +247,10 @@ export class PortefeuillesComponent implements OnInit {
         alertes: PortefeuillesService.CONFIGURATION_INITIALE[0].alertes
       });
     }
+  }
+
+  protected onSortOptionsChange(event: any) {
+    this.idColonneTriee = event.field;
+    this.ordreColonneTriee = event.order;
   }
 }

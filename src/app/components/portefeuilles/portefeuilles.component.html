@@ -34,7 +34,9 @@
               ]"></app-loader>
             } @else {
               <p-table
-                sortField="{{idColonneTriParDefaut}}"
+                [sortField]="idColonneTriee"
+                [sortOrder]="ordreColonneTriee"
+                (onSort)="onSortOptionsChange($event)"
                 [scrollable]="true" scrollHeight="calc(100vh - 20rem)"
                 [style]="{ margin: '1rem' }"
                 [tableStyle]="{'table-layout': 'fixed'}"
