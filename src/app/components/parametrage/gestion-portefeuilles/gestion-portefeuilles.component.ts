@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {ReactiveFormsModule} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {Card} from 'primeng/card';
 import {TranslatePipe, TranslateService} from '@ngx-translate/core';
 import {DTOPortefeuille} from '../../../services/portefeuilles/dto-portefeuille.interface';
@@ -16,6 +16,7 @@ import {ConfigurationPortefeuilleComponent} from './configuration-portefeuille/c
 import {CdkDrag, CdkDragDrop, CdkDropList, moveItemInArray} from '@angular/cdk/drag-drop';
 import {DialogueService} from '../../../services/dialogue/dialogue.service';
 import {ConfirmationService} from 'primeng/api';
+import {Checkbox} from 'primeng/checkbox';
 
 @Component({
   selector: 'app-gestion-portefeuilles',
@@ -30,7 +31,9 @@ import {ConfirmationService} from 'primeng/api';
     DialogEditeurAlertesComponent,
     ConfigurationPortefeuilleComponent,
     CdkDropList,
-    CdkDrag
+    CdkDrag,
+    Checkbox,
+    FormsModule
   ],
   templateUrl: './gestion-portefeuilles.component.html',
   styleUrls: ['./gestion-portefeuilles.component.sass', '../../commun/titre.sass']

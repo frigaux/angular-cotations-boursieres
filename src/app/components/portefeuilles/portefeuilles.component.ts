@@ -179,7 +179,7 @@ export class PortefeuillesComponent implements OnInit {
     return colonnes.map(colonne => {
         if (colonne.type === TypesColonnesPortefeuille.VARIATION_ACHATS && etapeValeur !== undefined) {
           if (etapeValeur === EtapeValeur.ORDRE_ACHAT) {
-            colonne.nom = 'Var O/C';
+            colonne.nom = 'Var O';
           }
           if (etapeValeur === EtapeValeur.ORDRE_VENTE) {
             colonne.nom = 'Var/V';

@@ -34,9 +34,9 @@
       @for (portefeuille of portefeuilles; track portefeuille.nom; let idx = $index) {
         <div cdkDrag class="ligne">
           <div>
-            <input type="radio" name="idxPortefeuilleParDefaut" [value]="idx" [checked]="portefeuille.parDefaut"
-                   title="{{ 'COMPOSANTS.PARAMETRAGE.GESTION_PORTEFEUILLES.PAR_DEFAUT' | translate }}"
-                   (change)="changerParDefaut(idx)">
+            <p-checkbox [binary]="true"
+                        title="{{ 'COMPOSANTS.PARAMETRAGE.GESTION_PORTEFEUILLES.PAR_DEFAUT' | translate }}"
+                        [(ngModel)]="portefeuille.parDefaut" (change)="changerParDefaut(idx)"></p-checkbox>
           </div>
           <div class="colonne">
             <div><span class="pi pi-link" (click)="associationValeursPortefeuille(idx)"
