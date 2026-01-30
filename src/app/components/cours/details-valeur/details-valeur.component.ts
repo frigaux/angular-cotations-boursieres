@@ -27,20 +27,20 @@ export class DetailsValeurComponent {
   suivant = output<void>();
 
   // données pour la vue
-  cours?: { cours: Cours, premier: boolean, dernier: boolean };
+  dto?: { cours: Cours, premier: boolean, dernier: boolean };
   informationsDetaillees: boolean = false;
 
-  private intercepteurCours(cours?: { cours: Cours, premier: boolean, dernier: boolean }) {
+  private intercepteurCours(dto?: { cours: Cours, premier: boolean, dernier: boolean }) {
     this.informationsDetaillees = false;
-    this.cours = cours;
-    return cours;
+    this.dto = dto;
+    return dto;
   }
 
   boursorama() {
-    window.open(`https://www.boursorama.com/cours/1rP${this.cours?.cours.ticker}/`);
+    window.open(`https://www.boursorama.com/cours/1rP${this.dto?.cours.ticker}/`);
   }
 
   abcBourse() {
-    window.open(`https://www.abcbourse.com/cotation/${this.cours?.cours.ticker}p`);
+    window.open(`https://www.abcbourse.com/cotation/${this.dto?.cours.ticker}p`);
   }
 }

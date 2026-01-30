@@ -34,6 +34,7 @@ import {EtapeValeurUtil} from '../valeurs/achats-valeur/etape-valeur-util.class'
 import {EtapeValeur} from '../valeurs/achats-valeur/etape-valeur.enum';
 import {DTOAchatsTicker} from '../../services/valeurs/dto-achats-ticker.interface';
 import {DTOPortefeuille} from '../../services/portefeuilles/dto-portefeuille.interface';
+import {SortEvent} from 'primeng/api';
 
 @Component({
   selector: 'app-portefeuilles',
@@ -60,7 +61,8 @@ import {DTOPortefeuille} from '../../services/portefeuilles/dto-portefeuille.int
     Tab,
     TabPanels,
     TabPanel,
-    IconeVariation
+    IconeVariation,
+    DetailsValeurComponent
   ],
   templateUrl: './portefeuilles.component.html',
   styleUrls: ['./tabs-panel.sass', './portefeuilles.component.sass', '../commun/titre.sass']
@@ -83,7 +85,11 @@ export class PortefeuillesComponent implements OnInit {
   idxPortefeuilleCourant: number = -1;
 
   // cours pour lequel afficher les courbes
-  coursSelectionne: CoursPortefeuille | undefined = undefined;
+  coursSelectionne: {
+    coursPortefeuille: CoursPortefeuille,
+    premier: boolean,
+    dernier: boolean
+  } | undefined = undefined;
 
   // privé
   private listeCours?: DTOCoursAvecListeAllege[];
@@ -208,8 +214,8 @@ export class PortefeuillesComponent implements OnInit {
   }
 
   _basculerAffichageCours(cours: CoursPortefeuille) {
-    if (this.coursSelectionne === undefined || this.coursSelectionne.ticker !== cours.ticker) {
-      this.coursSelectionne = cours;
+    if (this.coursSelectionne === undefined || this.coursSelectionne.coursPortefeuille.ticker !== cours.ticker) {
+      this.coursSelectionne = {coursPortefeuille: cours, premier: false, dernier: false};
     } else {
       this.coursSelectionne = undefined;
     }
@@ -249,8 +255,57 @@ export class PortefeuillesComponent implements OnInit {
     }
   }
 
-  protected onSortOptionsChange(event: any) {
+  // on procède à un tri "manuel" des données affichées dans le p-table
+  // en tri automatique les données ne sont pas mises à jour par p-table :/
+  trierColonnes(event: SortEvent, portefeuilleAvecCours: PortefeuilleAvecCours) {
     this.idColonneTriee = event.field;
-    this.ordreColonneTriee = event.order;
+    this.ordreColonneTriee = event.order!;
+    if (event.field && event.order && (event.data && event.data.length > 0)) {
+      portefeuilleAvecCours.cours.sort((c1, c2) => {
+        const v1 = Object.values(c1)[Object.keys(c1).findIndex(v => v === event.field!)];
+        const v2 = Object.values(c2)[Object.keys(c2).findIndex(v => v === event.field!)];
+        if (typeof v1 === 'string' && typeof v2 === 'string') {
+          return event.order! * v1.localeCompare(v2);
+        } else if (typeof v1 === 'number' && typeof v2 === 'number') {
+          return event.order! * (v1 - v2);
+        } else if (typeof v1 === 'number') {
+          return event.order!;
+        } else if (typeof v2 === 'number') {
+          return -event.order!;
+        }
+        return 0;
+      });
+    }
+  }
+
+
+  valeurPrecedente() {
+    if (this.coursSelectionne) {
+      const portefeuilleAvecCours: PortefeuilleAvecCours = this.portefeuillesAvecCours[this.idxPortefeuilleCourant];
+      const idxCours = portefeuilleAvecCours.cours.indexOf(this.coursSelectionne.coursPortefeuille);
+      if (idxCours > 0) {
+        const coursPortefeuille = portefeuilleAvecCours.cours[idxCours - 1];
+        this.coursSelectionne = {
+          coursPortefeuille,
+          premier: idxCours - 1 === 0,
+          dernier: false
+        };
+      }
+    }
+  }
+
+  valeurSuivante() {
+    if (this.coursSelectionne) {
+      const portefeuilleAvecCours: PortefeuilleAvecCours = this.portefeuillesAvecCours[this.idxPortefeuilleCourant];
+      const idxCours = portefeuilleAvecCours.cours.indexOf(this.coursSelectionne.coursPortefeuille);
+      if (idxCours !== -1 && idxCours + 1 < portefeuilleAvecCours.cours.length) {
+        const coursPortefeuille = portefeuilleAvecCours.cours[idxCours + 1];
+        this.coursSelectionne = {
+          coursPortefeuille,
+          premier: false,
+          dernier: idxCours + 1 === portefeuilleAvecCours.cours.length - 1
+        };
+      }
+    }
   }
 }

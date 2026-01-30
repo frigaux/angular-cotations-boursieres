@@ -1,4 +1,4 @@
-@if (cours && coursPortefeuille) {
+@if (cours && dto) {
   <p-panel>
     <ng-template #header>
       <h2>
@@ -8,11 +8,17 @@
             | translate: {
             valeur: cours.libelle,
             ticker: cours.ticker,
-            marche: `ENUMERATIONS.MARCHE.${coursPortefeuille.marche}` | translate
+            marche: `ENUMERATIONS.MARCHE.${dto.coursPortefeuille.marche}` | translate
           }
         }}
         <app-colonne-alertes [alertes]="alertes"></app-colonne-alertes>
       </h2>
+      <span class="pi" [ngClass]="{'pi-caret-left': !dto.premier, 'pi-ban': dto.premier}"
+            (click)="this.precedent.emit()"
+            title="{{ 'COMPOSANTS.COURS.DETAILS_VALEUR.VALEUR_PRECEDENTE' | translate}}"></span>
+      <span class="pi" [ngClass]="{'pi-caret-right': !dto.dernier, 'pi-ban': dto.dernier}"
+            (click)="this.suivant.emit()"
+            title="{{ 'COMPOSANTS.COURS.DETAILS_VALEUR.VALEUR_SUIVANTE' | translate}}"></span>
       <span class="lien-bandeau" (click)="abcBourse()"
             title="{{ 'COMPOSANTS.PORTEFEUILLES.DETAILS_VALEUR.ABCBOURSE' | translate}}">A</span>
       <span class="lien-bandeau" (click)="boursorama()"
@@ -24,7 +30,7 @@
             | translate : {
             valeur: cours.libelle,
             ticker: cours.ticker,
-            marche: `ENUMERATIONS.MARCHE.${coursPortefeuille.marche}` | translate
+            marche: `ENUMERATIONS.MARCHE.${dto.coursPortefeuille.marche}` | translate
           }
         }}"></span>
       <span class="pi pi-times-circle" (click)="this.ferme.emit()"></span>

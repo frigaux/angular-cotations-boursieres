@@ -36,7 +36,8 @@
               <p-table
                 [sortField]="idColonneTriee"
                 [sortOrder]="ordreColonneTriee"
-                (onSort)="onSortOptionsChange($event)"
+                (sortFunction)="trierColonnes($event, portefeuilleAvecCours)"
+                [customSort]="true"
                 [scrollable]="true" scrollHeight="calc(100vh - 20rem)"
                 [style]="{ margin: '1rem' }"
                 [tableStyle]="{'table-layout': 'fixed'}"
@@ -128,6 +129,7 @@
       </p-tabpanels>
     </p-tabs>
 
-    <app-details-valeur [cours]="coursSelectionne" (ferme)="coursSelectionne = undefined"></app-details-valeur>
+    <app-details-valeur [cours]="coursSelectionne" (ferme)="coursSelectionne = undefined"
+                        (precedent)="valeurPrecedente()" (suivant)="valeurSuivante()"></app-details-valeur>
   </div>
 }

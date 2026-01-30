@@ -30,7 +30,7 @@
           <p-tabpanel [value]="i">
             <p-table
               sortField="libelle"
-              (sortFunction)="trierColonne($event, marche)"
+              (sortFunction)="trierColonnes($event, marche)"
               [customSort]="true"
               [scrollable]="true" scrollHeight="calc(100vh - 26rem)"
               [style]="{ margin: '1rem' }"

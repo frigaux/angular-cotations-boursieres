@@ -24,22 +24,32 @@ import {NgClass} from '@angular/common';
 })
 export class DetailsValeurComponent {
   // input/output
-  inputCours: InputSignal<CoursPortefeuille | undefined> = input(undefined,
+  inputCours: InputSignal<{
+    coursPortefeuille: CoursPortefeuille,
+    premier: boolean,
+    dernier: boolean
+  } | undefined> = input(undefined,
     {transform: o => this.intercepteurCoursPortefeuille(o), alias: 'cours'});
   ferme = output<void>();
+  precedent = output<void>();
+  suivant = output<void>();
 
   // données pour la vue
   alertes: AlerteAvecSonEvaluation[] | undefined;
-  coursPortefeuille?: CoursPortefeuille;
+  dto?: { coursPortefeuille: CoursPortefeuille, premier: boolean, dernier: boolean };
   cours: Cours | undefined;
   informationsDetaillees: boolean = false;
 
-  private intercepteurCoursPortefeuille(coursPortefeuille: CoursPortefeuille | undefined) {
+  private intercepteurCoursPortefeuille(dto: {
+    coursPortefeuille: CoursPortefeuille,
+    premier: boolean,
+    dernier: boolean
+  } | undefined) {
     this.informationsDetaillees = false;
-    this.coursPortefeuille = coursPortefeuille;
-    this.alertes = coursPortefeuille?.evaluerAlertes();
-    this.cours = coursPortefeuille ? Cours.fromCoursPortefeuille(coursPortefeuille) : undefined;
-    return coursPortefeuille;
+    this.dto = dto;
+    this.alertes = dto?.coursPortefeuille.evaluerAlertes();
+    this.cours = dto?.coursPortefeuille ? Cours.fromCoursPortefeuille(dto.coursPortefeuille) : undefined;
+    return dto;
   }
 
   boursorama() {

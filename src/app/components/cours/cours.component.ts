@@ -180,19 +180,21 @@ export class CoursComponent implements OnInit {
 
   // on procède à un tri "manuel" des données affichées dans le p-table
   // en tri automatique les données ne sont pas mises à jour par p-table :/
-  trierColonne(event: SortEvent, marche: MarcheDecore) {
-    marche.cours.sort((c1, c2) => {
-      switch (event.field) {
-        case 'libelle' :
-          return event.order! * c1.libelle.localeCompare(c2.libelle);
-        case 'cloture' :
-          return event.order! * (c1.cloture - c2.cloture);
-        case 'var1' :
-          return c1.var1 !== undefined && c2.var1 !== undefined ? event.order! * (c1.var1 - c2.var1) : 0;
-        default:
-          return 0;
-      }
-    });
+  trierColonnes(event: SortEvent, marche: MarcheDecore) {
+    if (event.field && event.order) {
+      marche.cours.sort((c1, c2) => {
+        switch (event.field) {
+          case 'libelle' :
+            return event.order! * c1.libelle.localeCompare(c2.libelle);
+          case 'cloture' :
+            return event.order! * (c1.cloture - c2.cloture);
+          case 'var1' :
+            return c1.var1 !== undefined && c2.var1 !== undefined ? event.order! * (c1.var1 - c2.var1) : 0;
+          default:
+            return 0;
+        }
+      });
+    }
   }
 
   valeurPrecedente() {
