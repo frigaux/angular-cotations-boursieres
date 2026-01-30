@@ -39,7 +39,10 @@ export class AbcBourseService {
           observer.complete();
         },
         next: response => {
-          const pathnameResponse = new URL(response.url!).pathname;
+          let url = response.url!;
+          url = url.replaceAll('%2F', '/').replaceAll('%3A', ':');
+          url = url.slice(url.indexOf('http://'));
+          const pathnameResponse = new URL(url).pathname;
           if (pathname !== pathnameResponse) { // 301 : apache a appliqué la RewriteRule vers index.html
             this.http.get(`/abcbourse${pathnameResponse}`, {
               headers: AbcBourseService.HEADERS,
