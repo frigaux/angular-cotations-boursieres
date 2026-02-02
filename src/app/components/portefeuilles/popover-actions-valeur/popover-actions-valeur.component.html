@@ -1,14 +1,8 @@
 <app-dialog-achats-valeur></app-dialog-achats-valeur>
-<app-dialog-cotations-valeur></app-dialog-cotations-valeur>
-<app-dialog-cotations-valeurs-portefeuille></app-dialog-cotations-valeurs-portefeuille>
 
 <p-popover>
   @if (cours && portefeuilleAvecCoursAffiche && portefeuilleAffiche && nomsPortefeuillesDisponibles) {
     <div class="actions-valeur">
-      <div class="libelle" (click)="coursBoursoramaPortefeuille()">
-        <span class="pi pi-download"></span>
-        <span>{{ 'COMPOSANTS.PORTEFEUILLES.ACTIONS_VALEUR.COURS_BOURSORAMA_PORTEFEUILLE' | translate }}</span>
-      </div>
       <div class="libelle" (click)="achats()">
         <span class="pi pi-shopping-bag"></span>
         <span>{{ 'COMPOSANTS.PORTEFEUILLES.ACTIONS_VALEUR.ACHATS' | translate }}</span>

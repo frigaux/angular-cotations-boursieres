@@ -360,6 +360,7 @@
     },
     "PORTEFEUILLES": {
       "PORTEFEUILLES_DATE": "Portefeuilles à la date du {{jour}}",
+      "COURS_BOURSORAMA_PORTEFEUILLE": "Cours des valeurs du portefeuille depuis Boursorama",
       "ACTIONS": "Actions sur la valeur",
       "DETAILS_VALEUR": {
         "DETAILS_VALEUR": "{{valeur}} ({{ticker}}, {{marche}})",
@@ -370,7 +371,6 @@
       },
       "ACTIONS_VALEUR": {
         "SUPPRIMER_DU_PORTEFEUILLE": "Supprimer la valeur du portefeuille",
-        "COURS_BOURSORAMA_PORTEFEUILLE": "Cours des valeurs du portefeuille depuis Boursorama",
         "ACHATS": "Achats de la valeur",
         "ABCBOURSE": "Cotations ABCBourse",
         "BOURSORAMA": "Cotations Boursorama",

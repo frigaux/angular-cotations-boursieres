@@ -8,12 +8,8 @@ import {DialogueService} from '../../../services/dialogue/dialogue.service';
 import {Select} from 'primeng/select';
 import {FormsModule} from '@angular/forms';
 import {DialogAchatsValeurComponent} from './dialog-achats-valeur/dialog-achats-valeur.component';
-import {DialogCotationsValeurComponent} from './dialog-cotations-valeur/dialog-cotations-valeur.component';
 import {CoursPortefeuille} from '../cours-portefeuille.class';
 import {PortefeuilleAvecCours} from '../portefeuille-avec-cours.class';
-import {
-  DialogCotationsValeursPortefeuilleComponent
-} from './dialog-cotations-valeurs-portefeuille/dialog-cotations-valeurs-portefeuille.component';
 
 @Component({
   selector: 'app-popover-actions-valeur',
@@ -22,9 +18,7 @@ import {
     TranslatePipe,
     Select,
     FormsModule,
-    DialogAchatsValeurComponent,
-    DialogCotationsValeurComponent,
-    DialogCotationsValeursPortefeuilleComponent
+    DialogAchatsValeurComponent
   ],
   templateUrl: './popover-actions-valeur.component.html',
   styleUrl: './popover-actions-valeur.component.sass'
@@ -32,8 +26,6 @@ import {
 export class PopoverActionsValeurComponent {
   private popover = viewChild(Popover);
   private dialogAchatsValeurComponent = viewChild(DialogAchatsValeurComponent);
-  private dialogCoursTickerComponent = viewChild(DialogCotationsValeurComponent);
-  private dialogCotationsTickersPortefeuilleComponent = viewChild(DialogCotationsValeursPortefeuilleComponent);
 
   // paramètres
   cours?: CoursPortefeuille;
@@ -136,11 +128,6 @@ export class PopoverActionsValeurComponent {
 
   protected abcBourse() {
     window.open(`https://www.abcbourse.com/cotation/${this.cours!.ticker}p`);
-    this.popover()?.hide();
-  }
-
-  protected coursBoursoramaPortefeuille() {
-    this.dialogCotationsTickersPortefeuilleComponent()?.afficherPortefeuille(this.portefeuilleAvecCoursAffiche!, this.dialogCoursTickerComponent());
     this.popover()?.hide();
   }
 }

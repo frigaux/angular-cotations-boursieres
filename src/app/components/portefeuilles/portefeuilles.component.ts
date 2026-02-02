@@ -35,6 +35,12 @@ import {EtapeValeur} from '../valeurs/achats-valeur/etape-valeur.enum';
 import {DTOAchatsTicker} from '../../services/valeurs/dto-achats-ticker.interface';
 import {DTOPortefeuille} from '../../services/portefeuilles/dto-portefeuille.interface';
 import {SortEvent} from 'primeng/api';
+import {
+  DialogCotationsValeurComponent
+} from './popover-actions-valeur/dialog-cotations-valeur/dialog-cotations-valeur.component';
+import {
+  DialogCotationsValeursPortefeuilleComponent
+} from './popover-actions-valeur/dialog-cotations-valeurs-portefeuille/dialog-cotations-valeurs-portefeuille.component';
 
 @Component({
   selector: 'app-portefeuilles',
@@ -62,13 +68,17 @@ import {SortEvent} from 'primeng/api';
     TabPanels,
     TabPanel,
     IconeVariation,
-    DetailsValeurComponent
+    DetailsValeurComponent,
+    DialogCotationsValeurComponent,
+    DialogCotationsValeursPortefeuilleComponent
   ],
   templateUrl: './portefeuilles.component.html',
   styleUrls: ['./tabs-panel.sass', './portefeuilles.component.sass', '../commun/titre.sass']
 })
 export class PortefeuillesComponent implements OnInit {
   private actionsValeur = viewChild(PopoverActionsValeurComponent);
+  private dialogCoursTickerComponent = viewChild(DialogCotationsValeurComponent);
+  private dialogCotationsTickersPortefeuilleComponent = viewChild(DialogCotationsValeursPortefeuilleComponent);
 
   // chargement des valeurs et cours
   loading: boolean = true;
@@ -307,5 +317,9 @@ export class PortefeuillesComponent implements OnInit {
         };
       }
     }
+  }
+
+  protected coursBoursoramaPortefeuille() {
+    this.dialogCotationsTickersPortefeuilleComponent()?.afficherPortefeuille(this.portefeuillesAvecCours[this.idxPortefeuilleCourant], this.dialogCoursTickerComponent());
   }
 }

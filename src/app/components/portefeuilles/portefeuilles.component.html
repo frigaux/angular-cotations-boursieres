@@ -1,3 +1,6 @@
+<app-dialog-cotations-valeur></app-dialog-cotations-valeur>
+<app-dialog-cotations-valeurs-portefeuille></app-dialog-cotations-valeurs-portefeuille>
+
 @if (date === undefined) {
   <p-skeleton shape="rectangle" borderRadius="0" width="100%" height="2rem"/>
 }
@@ -7,6 +10,8 @@
     <h2>{{ 'COMPOSANTS.PORTEFEUILLES.PORTEFEUILLES_DATE' | translate: {jour: date | date: 'dd/MM/yyyy'} }}</h2>
     <app-dialog-actualites></app-dialog-actualites>
     <app-dialog-evaluation-actualites [valeurs]="valeurByTicker"></app-dialog-evaluation-actualites>
+    <span class="pi pi-download" (click)="coursBoursoramaPortefeuille()"
+          title="{{ 'COMPOSANTS.PORTEFEUILLES.COURS_BOURSORAMA_PORTEFEUILLE' | translate }}"></span>
     <app-sauvegarde-restauration [reduit]="true"></app-sauvegarde-restauration>
   </div>
 }
