@@ -1,4 +1,4 @@
-import {Component, input, InputSignal, output, viewChild} from '@angular/core';
+import {Component, input, InputSignal, viewChild} from '@angular/core';
 import {CurrencyPipe, DatePipe, DecimalPipe, PercentPipe} from "@angular/common";
 import {TranslatePipe} from "@ngx-translate/core";
 import {CoursService} from '../../../services/cours/cours.service';
@@ -38,7 +38,6 @@ export class TableauAchatsComponent {
   // input/output
   inputAchats: InputSignal<Array<AchatValeurDecore> | undefined> = input(undefined,
     {transform: o => this.intercepteurAchats(o), alias: 'achats'});
-  suppression = output<{ event: MouseEvent, achatValeurDecore: AchatValeurDecore }>();
 
   // données pour la vue
   achatValeurDecores?: Array<AchatValeurDecore>;
@@ -93,10 +92,6 @@ export class TableauAchatsComponent {
           this.loading = false;
         }
       );
-  }
-
-  suppressionAchat(event: PointerEvent, achatValeurDecore: AchatValeurDecore) {
-    this.suppression.emit({event, achatValeurDecore});
   }
 
   protected achats(event: PointerEvent, achatValeurDecore: AchatValeurDecore) {

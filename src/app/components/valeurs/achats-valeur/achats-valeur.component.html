@@ -29,7 +29,7 @@
             <td class="pi pi-trash" (click)="suppressionAchat($event, achatDecore.achat)"></td>
             <td>
               <p-select [options]="etapesValeur" [(ngModel)]="achatDecore.form.etape"
-                        optionValue="etape" optionLabel="libelle" size="small"
+                        optionValue="etape" optionLabel="libelle" size="small" style="width: 10rem; text-align: left;"
                         (onChange)="onChangeEtape(achatDecore)"/>
             </td>
             <td>

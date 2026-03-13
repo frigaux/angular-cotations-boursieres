@@ -90,26 +90,6 @@ export class AchatsValeursComponent implements OnInit {
     return resultat;
   }
 
-  suppressionAchat(data: { event: MouseEvent, achatValeurDecore: AchatValeurDecore }) {
-    this.dialogueService.confirmationSuppression(
-      this.confirmationService,
-      data.event,
-      this.translateService.instant('COMPOSANTS.ACHATS_VALEURS.CONFIRMATION_SUPPRESSION'),
-      () => {
-        this.supprimerAchat(data.achatValeurDecore);
-      }
-    );
-  }
-
-  private supprimerAchat(achatValeurDecore: AchatValeurDecore) {
-    const ticker = achatValeurDecore.valeur.ticker;
-    const achatsTicker = this.valeursService.chargerAchatsTicker(ticker);
-    const achatASupprimer = achatValeurDecore.achatDecore.achat;
-    const indexASupprimer = achatsTicker.findIndex(achat => JSON.stringify(achat) === JSON.stringify(achatASupprimer));
-    achatsTicker.splice(indexASupprimer, 1);
-    this.valeursService.enregistrerAchatsTicker(ticker, achatsTicker);
-  }
-
   recupererCours() {
     this.dialogCoursAchatsNonRevendusComponent()?.afficherCours(
       JSON.parse(JSON.stringify(this.ordresAchats!)),

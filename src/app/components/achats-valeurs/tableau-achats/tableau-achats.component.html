@@ -32,9 +32,6 @@
     <ng-template #body let-achatValeurDecore>
       <tr>
         <td>
-          <span class="pi pi-trash"
-                title="{{ 'COMPOSANTS.ACHATS_VALEURS.ACHATS.SUPPRESSION' | translate }}"
-                (click)="suppressionAchat($event, achatValeurDecore)"></span>
           <span class="pi pi-shopping-bag"
                 title="{{ 'COMPOSANTS.ACHATS_VALEURS.ACHATS.ACHATS_VALEUR' | translate: { valeur: achatValeurDecore.valeur.libelle } }}"
                 (click)="achats($event, achatValeurDecore)"></span>

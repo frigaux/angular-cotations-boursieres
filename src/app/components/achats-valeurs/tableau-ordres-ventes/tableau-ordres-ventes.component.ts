@@ -1,4 +1,4 @@
-import {Component, input, InputSignal, output, viewChild} from '@angular/core';
+import {Component, input, InputSignal, viewChild} from '@angular/core';
 import {ColonneDividendesComponent} from "../../portefeuilles/colonnes/dividendes/colonne-dividendes.component";
 import {CurrencyPipe, DatePipe, DecimalPipe, PercentPipe} from "@angular/common";
 import {
@@ -6,11 +6,14 @@ import {
 } from "../../portefeuilles/popover-actions-valeur/dialog-achats-valeur/dialog-achats-valeur.component";
 import {LoaderComponent} from "../../loader/loader.component";
 import {TableModule} from "primeng/table";
-import {TranslatePipe} from "@ngx-translate/core";
+import {TranslatePipe, TranslateService} from "@ngx-translate/core";
 import {AchatValeurDecore} from '../tableau-achats/achat-valeur-decore.class';
 import {CoursService} from '../../../services/cours/cours.service';
 import {DividendesService} from '../../../services/dividendes/dividendes.service';
 import {ClassVariation} from '../../../directives/class-variation';
+import {ValeursService} from '../../../services/valeurs/valeurs.service';
+import {ConfirmationService} from 'primeng/api';
+import {DialogueService} from '../../../services/dialogue/dialogue.service';
 
 @Component({
   selector: 'app-tableau-ordres-ventes',
@@ -38,7 +41,6 @@ export class TableauOrdresVentesComponent {
   // input/output
   inputOrdresVentes: InputSignal<Array<AchatValeurDecore> | undefined> = input(undefined,
     {transform: o => this.intercepteurOrdresVentes(o), alias: 'ordresVentes'});
-  suppression = output<{ event: MouseEvent, achatValeurDecore: AchatValeurDecore }>();
 
   // données pour la vue
   achatValeurDecores?: Array<AchatValeurDecore>;
@@ -48,8 +50,12 @@ export class TableauOrdresVentesComponent {
   totauxClotures: number = 0;
 
 
-  constructor(private coursService: CoursService,
-              private dividendesService: DividendesService) {
+  constructor(private translateService: TranslateService,
+              private coursService: CoursService,
+              private dividendesService: DividendesService,
+              private valeursService: ValeursService,
+              private confirmationService: ConfirmationService,
+              private dialogueService: DialogueService) {
   }
 
   private intercepteurOrdresVentes(ordresVentes: Array<AchatValeurDecore> | undefined) {
@@ -95,8 +101,21 @@ export class TableauOrdresVentesComponent {
       );
   }
 
-  suppressionAchat(event: PointerEvent, achatValeurDecore: AchatValeurDecore) {
-    this.suppression.emit({event, achatValeurDecore});
+  annulerOrdreVente(event: PointerEvent, achatValeurDecore: AchatValeurDecore) {
+    this.dialogueService.confirmationSuppression(
+      this.confirmationService,
+      event,
+      this.translateService.instant('COMPOSANTS.ACHATS_VALEURS.ORDRES_VENTES.CONFIRMATION_ANNULATION_ORDRE_VENTE'),
+      () => {
+        const ticker = achatValeurDecore.valeur.ticker;
+        const achatsTicker = this.valeursService.chargerAchatsTicker(ticker);
+        const achat = achatsTicker.find(achat => JSON.stringify(achat) === JSON.stringify(achatValeurDecore.achatDecore.achat));
+        if (achat) {
+          delete achat['prixRevente'];
+          this.valeursService.enregistrerAchatsTicker(ticker, achatsTicker);
+        }
+      }
+    );
   }
 
   protected achats(event: PointerEvent, achatValeurDecore: AchatValeurDecore) {

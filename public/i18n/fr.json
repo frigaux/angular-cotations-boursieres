@@ -265,7 +265,6 @@
     "ACHATS_VALEURS": {
       "ACHATS_VALEURS": "Ordres d'achats, achats, ordres de ventes et ventes de valeurs",
       "RECUPERER_COURS": "Récupérer les cours sur Boursorama",
-      "CONFIRMATION_SUPPRESSION": "Confirmez-vous la suppression de l'achat ?",
       "TABLEAU_ORDRES_ACHATS": "Ordres d'achats",
       "TABLEAU_ACHATS": "Achats",
       "TABLEAU_ORDRES_VENTES": "Ordres de ventes",
@@ -287,7 +286,8 @@
         }
       },
       "ORDRES_ACHATS": {
-        "SUPPRESSION": "Suppression de l'achat",
+        "ANNULATION": "Annuler l'ordre d'achat",
+        "CONFIRMATION_ANNULATION_ORDRE_ACHAT": "Confirmez-vous l'annulation de l'ordre d'achat ?",
         "ACHATS_VALEUR": "Gestion des achats de la valeur \"{{valeur}}\"",
         "VALEUR": "Valeur",
         "DIVIDENDES": "Dividendes",
@@ -300,7 +300,6 @@
         "TOTAUX": "Totaux"
       },
       "ACHATS": {
-        "SUPPRESSION": "Suppression de l'achat",
         "ACHATS_VALEUR": "Gestion des achats de la valeur \"{{valeur}}\"",
         "VALEUR": "Valeur",
         "DATE_ACHAT": "Date/Achat",
@@ -314,7 +313,8 @@
         "TOTAUX": "Totaux"
       },
       "ORDRES_VENTES": {
-        "SUPPRESSION": "Suppression de l'achat",
+        "ANNULATION": "Annuler l'ordre de vente",
+        "CONFIRMATION_ANNULATION_ORDRE_VENTE": "Confirmez-vous l'annulation de l'ordre de vente ?",
         "ACHATS_VALEUR": "Gestion des achats de la valeur \"{{valeur}}\"",
         "VALEUR": "Valeur",
         "DATE_ACHAT": "Date/Achat",
@@ -328,7 +328,6 @@
         "TOTAUX": "Totaux"
       },
       "VENTES": {
-        "SUPPRESSION": "Suppression de l'achat",
         "VALEUR": "Valeur",
         "DATE_ACHAT": "Date/Achat",
         "DIVIDENDES": "Dividendes",
@@ -696,10 +695,10 @@
       "5": "vendre"
     },
     "ETAPE_VALEUR": {
-      "ORDRE_ACHAT": "OA",
-      "ACHAT": "A",
-      "ORDRE_VENTE": "OV",
-      "VENTE": "V"
+      "ORDRE_ACHAT": "Ordre d'achat",
+      "ACHAT": "Achat",
+      "ORDRE_VENTE": "Ordre de vente",
+      "VENTE": "Vente"
     }
   },
   "SERVICES": {

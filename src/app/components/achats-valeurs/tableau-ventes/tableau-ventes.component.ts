@@ -1,4 +1,4 @@
-import {Component, input, InputSignal, output} from '@angular/core';
+import {Component, input, InputSignal, viewChild} from '@angular/core';
 import {AchatValeurDecore} from '../tableau-achats/achat-valeur-decore.class';
 import {DividendesService} from '../../../services/dividendes/dividendes.service';
 import {ColonneDividendesComponent} from '../../portefeuilles/colonnes/dividendes/colonne-dividendes.component';
@@ -6,6 +6,9 @@ import {CurrencyPipe, DatePipe, DecimalPipe, PercentPipe} from '@angular/common'
 import {TableModule} from 'primeng/table';
 import {TranslatePipe} from '@ngx-translate/core';
 import {ClassVariation} from '../../../directives/class-variation';
+import {
+  DialogAchatsValeurComponent
+} from '../../portefeuilles/popover-actions-valeur/dialog-achats-valeur/dialog-achats-valeur.component';
 
 @Component({
   selector: 'app-tableau-ventes',
@@ -17,16 +20,18 @@ import {ClassVariation} from '../../../directives/class-variation';
     PercentPipe,
     TableModule,
     TranslatePipe,
-    ClassVariation
+    ClassVariation,
+    DialogAchatsValeurComponent
   ],
   templateUrl: './tableau-ventes.component.html',
   styleUrls: ['./tableau-ventes.component.sass', '../tableau-achats/tableau-achats.component.sass']
 })
 export class TableauVentesComponent {
+  private dialogAchatsValeurComponent = viewChild(DialogAchatsValeurComponent);
+
   // input/output
   inputVentes: InputSignal<Array<AchatValeurDecore> | undefined> = input(undefined,
     {transform: o => this.intercepteurVentes(o), alias: 'ventes'});
-  suppression = output<{ event: MouseEvent, achatValeurDecore: AchatValeurDecore }>();
 
   // données pour la vue
   achatValeurDecores?: Array<AchatValeurDecore>;
@@ -71,7 +76,11 @@ export class TableauVentesComponent {
     }
   }
 
-  suppressionAchat(event: PointerEvent, achatValeurDecore: AchatValeurDecore) {
-    this.suppression.emit({event, achatValeurDecore});
+  protected achats(event: PointerEvent, achatValeurDecore: AchatValeurDecore) {
+    this.dialogAchatsValeurComponent()?.afficherAchats({
+      ticker: achatValeurDecore.valeur.ticker,
+      libelle: achatValeurDecore.valeur.libelle,
+      prixParDefaut: achatValeurDecore.achatDecore.cours || 0
+    });
   }
 }
