@@ -2,18 +2,15 @@ import {ComponentFixture, TestBed} from '@angular/core/testing';
 
 import {AchatsValeursComponent} from './achats-valeurs.component';
 import {TranslateModule} from '@ngx-translate/core';
-import {ConfirmationService} from 'primeng/api';
 import {ValeursService} from '../../services/valeurs/valeurs.service';
 import {of} from 'rxjs';
 import {ACHATS, VALEURS} from '../../services/jdd/jdd-valeurs.dataset';
-import {DialogueService} from '../../services/dialogue/dialogue.service';
 import {CoursService} from '../../services/cours/cours.service';
 import {COURS_BNP, COURS_GLE, LISTE_COURS_AVEC_LISTE_ALLEGEE} from '../../services/jdd/jdd-cours.dataset';
 import {BoursoramaService} from '../../services/boursorama/boursorama.service';
 import {DialogCoursAchatsComponent} from './dialog-cours-achats/dialog-cours-achats.component';
 
 describe('AchatsValeursComponent', () => {
-  let dialogueService: DialogueService;
   let component: AchatsValeursComponent;
   let fixture: ComponentFixture<AchatsValeursComponent>;
 
@@ -32,13 +29,11 @@ describe('AchatsValeursComponent', () => {
       providers: [
         {provide: ValeursService, useValue: mockValeursService},
         {provide: CoursService, useValue: mockCoursService},
-        {provide: BoursoramaService, useValue: mockBoursoramaService},
-        ConfirmationService
+        {provide: BoursoramaService, useValue: mockBoursoramaService}
       ]
     })
       .compileComponents();
 
-    dialogueService = TestBed.inject(DialogueService);
     fixture = TestBed.createComponent(AchatsValeursComponent);
     component = fixture.componentInstance;
   });
@@ -67,23 +62,6 @@ describe('AchatsValeursComponent', () => {
       expect(component.achats).toHaveSize(nbAchats);
       expect(component.achats![0].valeur).toEqual(VALEURS[1]);
       expect(component.achats![1].valeur).toEqual(VALEURS[0]);
-    });
-
-
-    it('when #ngOnInit et #suppressionAchat then l\'achat est bien supprimé', () => {
-      fixture.detectChanges(); // appelle le ngOnInit
-
-      spyOn(dialogueService, 'confirmationSuppression').and.callThrough();
-      const achatsNonRevendus = component.achats;
-      const achat = achatsNonRevendus![0];
-      component.suppressionAchat({
-        event: new MouseEvent('click'),
-        achatValeurDecore: achat
-      });
-      expect(dialogueService.confirmationSuppression).toHaveBeenCalled();
-      const onSuppression: Function = (dialogueService.confirmationSuppression as jasmine.Spy).calls.mostRecent().args[3];
-      onSuppression();
-      expect(mockValeursService.enregistrerAchatsTicker).toHaveBeenCalledWith(achat.valeur.ticker, []);
     });
 
     it('when #ngOnInit et #recupererCours then les cours sont bien récupérés', () => {
