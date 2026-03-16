@@ -126,6 +126,11 @@
       },
       "ACTUALITES": {
         "ACTUALITES": "Actualités ABCBourse",
+        "NOUVELLES": {
+          "NOUVELLES": "Dernières nouvelles",
+          "HEURE": "Heure",
+          "TITRE": "Titre"
+        },
         "ANALYSES": {
           "ANALYSES": "Dernières analyses",
           "DATE": "Date",

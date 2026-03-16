@@ -22,7 +22,7 @@ export class BlocLiensComponent {
     liens: Array<DTOLien>,
     keysTranslation: {
       legende: string,
-      moment: string,
+      moment: string | undefined,
       titre: string
     }
   } | undefined> = input(undefined,
@@ -32,7 +32,7 @@ export class BlocLiensComponent {
   liensDecores?: Array<LienDecore>;
   keysTranslation?: {
     legende: string,
-    moment: string,
+    moment: string | undefined,
     titre: string
   };
 
@@ -43,7 +43,7 @@ export class BlocLiensComponent {
     liens: Array<DTOLien>;
     keysTranslation: {
       legende: string,
-      moment: string,
+      moment: string | undefined,
       titre: string
     }
   } | undefined) {

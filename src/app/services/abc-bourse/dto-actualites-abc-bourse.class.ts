@@ -6,12 +6,14 @@ export class DTOActualitesABCBourse {
   marches?: string;
   analyses: Array<DTOLien>;
   chroniques: Array<DTOLien>;
+  nouvelles: Array<DTOLien>;
   ventesADecouvert: Array<DTOVentesADecouvert>;
   transactionsDirigeants: Array<DTOTransaction>;
 
   constructor() {
     this.analyses = [];
     this.chroniques = [];
+    this.nouvelles = [];
     this.ventesADecouvert = [];
     this.transactionsDirigeants = [];
   }

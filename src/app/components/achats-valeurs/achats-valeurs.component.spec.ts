@@ -9,6 +9,7 @@ import {CoursService} from '../../services/cours/cours.service';
 import {COURS_BNP, COURS_GLE, LISTE_COURS_AVEC_LISTE_ALLEGEE} from '../../services/jdd/jdd-cours.dataset';
 import {BoursoramaService} from '../../services/boursorama/boursorama.service';
 import {DialogCoursAchatsComponent} from './dialog-cours-achats/dialog-cours-achats.component';
+import {ConfirmationService} from 'primeng/api';
 
 describe('AchatsValeursComponent', () => {
   let component: AchatsValeursComponent;
@@ -29,7 +30,8 @@ describe('AchatsValeursComponent', () => {
       providers: [
         {provide: ValeursService, useValue: mockValeursService},
         {provide: CoursService, useValue: mockCoursService},
-        {provide: BoursoramaService, useValue: mockBoursoramaService}
+        {provide: BoursoramaService, useValue: mockBoursoramaService},
+        ConfirmationService
       ]
     })
       .compileComponents();

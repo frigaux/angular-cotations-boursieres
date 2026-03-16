@@ -225,11 +225,12 @@ export class AbcBourseService {
       const result = new DTOActualitesABCBourse();
       this.parseAndMapLiens(html, result);
 
-      let pathnameMarches = new RegExp('<span>Marchés<\\/span>\\s*<\\/div>\\s*<div class="hptit">\\s*<a href="([^"]+)"', 'gm');
-      if (ParseUtil.isMobile()) {
-        pathnameMarches = new RegExp('<div class="newshmecont">\\s*<div class="newshme clearfix" onclick="location.href=\'([^\']+)\'', 'gm');
-      }
+      let pathnameMarches = ParseUtil.isMobile()
+        ? new RegExp('<h2 class="nf-title">\\s*<a class="nf-link" href="([^"]+)', 'gm')
+        : new RegExp('<article class="news-feature">\\s*<a class="nf-media" href="([^"]+)"', 'gm');
+
       const match = pathnameMarches.exec(html);
+
       if (match) {
         forkJoin([
           this.http.get(`/abcbourse${match[1]}`, {headers: AbcBourseService.HEADERS, responseType: 'text'}),
@@ -261,46 +262,31 @@ export class AbcBourseService {
   }
 
   private parseAndMapLiens(html: string, result: DTOActualitesABCBourse) {
-    if (ParseUtil.isMobile()) {
-      const elDivs = new DOMParser()
-        .parseFromString(html, 'text/html')
-        .querySelectorAll('div.homat');
+    const divNews = new DOMParser()
+      .parseFromString(html, 'text/html')
+      .querySelectorAll('div.hom_ncont');
 
-      if (elDivs.length === 1) {
-        ParseUtil.execRegexpAndMap(
-          result.analyses,
-          elDivs[0].innerHTML,
-          new RegExp('<a href="([^"]+)"><span>([^<]+)<\\/span> : ([^<]+)', 'gm'),
-          (matches) => new DTOLien(undefined, matches[2], matches[3], matches[1])
-        );
-      }
-
+    if (divNews.length === 1) {
       ParseUtil.execRegexpAndMap(
-        result.chroniques,
-        html,
-        new RegExp('<div class="newsln">\\s*<div>(\\d{2}:\\d{2})<\\/div>\\s*<div><a href="([^"]+)">(<span>([^<]+)<\\/span> : )?([^<]+)<\\/a>', 'gm'),
-        (matches) => new DTOLien(matches[1], matches[4], matches[5], matches[2])
+        result.nouvelles,
+        divNews[0].innerHTML,
+        new RegExp('<span class="news-time">(\\d{2}:\\d{2})<\\/span>\\s*<a href="([^"]+)">([^<]+)', 'gm'),
+        (matches) => new DTOLien(matches[1], undefined, matches[3], matches[2])
       );
-    } else {
-      const elDivs = new DOMParser()
-        .parseFromString(html, 'text/html')
-        .querySelectorAll('div.hom_ncont');
-
-      if (elDivs.length === 2) {
-        ParseUtil.execRegexpAndMap(
-          result.analyses,
-          elDivs[0].innerHTML,
-          new RegExp('(\\d{2}\\/\\d{2})<a href="([^"]+)"><span>([^<]+)<\\/span> : ([^<]+)', 'gm'),
-          (matches) => new DTOLien(matches[1], matches[3], matches[4], matches[2])
-        );
-        ParseUtil.execRegexpAndMap(
-          result.chroniques,
-          elDivs[1].innerHTML,
-          new RegExp('(\\d{2}:\\d{2})<a href="([^"]+)">(<span>([^<]+)<\\/span> : )?([^<]+)', 'gm'),
-          (matches) => new DTOLien(matches[1], matches[4], matches[5], matches[2])
-        );
-      }
     }
+
+    ParseUtil.execRegexpAndMap(
+      result.analyses,
+      html,
+      new RegExp('<article class="lastana-item">\\s*<a class="lastana-link" href="([^"]+)">\\s*<span class="lastana-name">([^<]+)<\\/span>:\\s*<span class="lastana-ttl">([^<]+)<\\/span>\\s*<\\/a>\\s*<div class="lastana-meta">([^<]+)', 'gm'),
+      (matches) => new DTOLien(matches[4], matches[2], matches[3], matches[1])
+    );
+    ParseUtil.execRegexpAndMap(
+      result.chroniques,
+      html,
+      new RegExp('<a class="ch-link" href="([^"]+)">([^<]+)<\\/a>\\s*<\\/h3>\\s*<p class="ch-chapo">\\s*([^<]+)', 'gm'),
+      (matches) => new DTOLien(undefined, matches[2], matches[3], matches[1])
+    );
   }
 
   private parseAndMapTransactions(html: string): Array<DTOTransaction> {

@@ -44,6 +44,16 @@
     </div>
     <div class="bloc">
       <app-bloc-liens [configuration]="{
+        liens: actualites.nouvelles,
+        keysTranslation: {
+          legende: 'COMPOSANTS.COURS.ACTUALITES.NOUVELLES.NOUVELLES',
+          moment: 'COMPOSANTS.COURS.ACTUALITES.NOUVELLES.HEURE',
+          titre: 'COMPOSANTS.COURS.ACTUALITES.NOUVELLES.TITRE'
+        }
+      }"></app-bloc-liens>
+    </div>
+    <div class="bloc">
+      <app-bloc-liens [configuration]="{
         liens: actualites.analyses,
         keysTranslation: {
           legende: 'COMPOSANTS.COURS.ACTUALITES.ANALYSES.ANALYSES',
@@ -57,7 +67,7 @@
         liens: actualites.chroniques,
         keysTranslation: {
           legende: 'COMPOSANTS.COURS.ACTUALITES.CHRONIQUES.CHRONIQUES',
-          moment: 'COMPOSANTS.COURS.ACTUALITES.CHRONIQUES.HEURE',
+          moment: undefined,
           titre: 'COMPOSANTS.COURS.ACTUALITES.CHRONIQUES.TITRE'
         }
       }"></app-bloc-liens>
