@@ -12,9 +12,6 @@ import {DTOLien} from './dto-lien.class';
 import {DTOVentesADecouvert} from './dto-ventes-a-decouvert.class';
 import {DTOTransaction} from './dto-transaction.class';
 import {DTOCotations} from './dto-cotations.interface';
-import {DTODividendes} from '../dividendes/dto-dividendes.class';
-import {DTODividende} from '../dividendes/dto-dividende.interface';
-import {TypeDividende} from '../dividendes/type-dividende.enum';
 
 @Injectable({
   providedIn: 'root'
@@ -26,6 +23,7 @@ export class AbcBourseService {
   constructor(private http: HttpClient) {
   }
 
+  // TODO : HS
   public chargerInformationsTicker(ticker: string): Observable<DTOInformationsTickerABCBourse> {
     return new Observable(observer => {
       const pathname = `/abcbourse/cotation/${ticker}p`;
@@ -301,144 +299,5 @@ export class AbcBourseService {
         m2[1], ParseUtil.parseDateFrAndMapTo8601(m2[2]), ParseUtil.parseNumber(m2[3]), ParseUtil.parseNumber(m2[4])));
     }
     return result;
-  }
-
-  public chargerDividendes(): Observable<DTODividendes> {
-    return new Observable(observer => {
-      this.http.get(`/abcbourse/marches/dividendes`, {
-        headers: AbcBourseService.HEADERS,
-        responseType: 'text',
-        withCredentials: true
-      }).subscribe({
-        error: httpErrorResponse => {
-          observer.error(httpErrorResponse);
-          observer.complete();
-        },
-        next: html => {
-          const listeParametres = this.parseAndMapParametresFormulaire(html);
-          if (listeParametres) {
-            this.chargerDividendesPourParametres(listeParametres).subscribe({
-              error: httpErrorResponse => {
-                observer.error(httpErrorResponse);
-                observer.complete();
-              },
-              next: dividendes => {
-                observer.next(dividendes);
-                observer.complete();
-              }
-            });
-          } else {
-            observer.error({
-              message: 'Impossible de récupérer les paramètres du formulaire dans le html',
-              error: html
-            });
-            observer.complete();
-          }
-        }
-      });
-    });
-  }
-
-  private parseAndMapParametresFormulaire(html: string)
-    : Array<Record<'DlDate' | 'DlZone' | '__RequestVerificationToken', string>> | undefined {
-    const resultat = [];
-    const document = new DOMParser().parseFromString(html, 'text/html');
-    const elFORM = document.querySelector('form');
-    if (elFORM && elFORM.elements.length === 3) {
-      const elements = elFORM.elements;
-      if (elements.item(0)?.tagName === 'SELECT'
-        && elements.item(1)?.tagName === 'SELECT'
-        && elements.item(2)?.tagName === 'INPUT') {
-        const elSELECT = elements.item(1) as HTMLSelectElement;
-        const DlZone = elSELECT.options.item(0)!.value;
-        const elINPUT = elements.item(2) as HTMLInputElement;
-        const __RequestVerificationToken = elINPUT.value;
-        const elSELECT2 = elements.item(0) as HTMLSelectElement;
-        const options = elSELECT2.options;
-        if (options.length > 12) {
-          for (let i = options.length - 12; i < options.length; i++) {
-            const option = options.item(i);
-            resultat.push({
-              DlDate: option!.value, DlZone, __RequestVerificationToken
-            })
-          }
-        }
-      }
-      return resultat;
-    } else {
-      console.error('Impossible de récupérer les paramètres du formulaire dans le html', html);
-      return undefined;
-    }
-  }
-
-  private chargerDividendesPourParametres(listeParametres: Array<Record<'DlDate' | 'DlZone' | '__RequestVerificationToken', string>>): Observable<DTODividendes> {
-    const resultat = new DTODividendes();
-    return new Observable(observer => {
-      const headers = new HttpHeaders()
-        .set('Accept', 'text/html; charset=utf-8')
-        .set('Content-Type', 'application/x-www-form-urlencoded');
-      forkJoin(
-        listeParametres.map(parametres => {
-          // Construire un corps en x-www-form-urlencoded pour éviter la preflight CORS
-          const body = new URLSearchParams(parametres).toString();
-          return this.http.post(`/abcbourse/marches/dividendes`, body, {
-            headers,
-            responseType: 'text',
-            withCredentials: true
-          });
-        })
-      ).subscribe({
-        error: httpErrorResponse => {
-          observer.error(httpErrorResponse);
-          observer.complete();
-        },
-        next: htmls => {
-          const htmlErreur = htmls.find(html => !this.parseAndMapDividendes(html, resultat.dividendes));
-          if (htmlErreur) {
-            observer.error({
-              message: 'Impossible de récupérer les dividendes dans le html',
-              error: htmlErreur
-            });
-          } else {
-            observer.next(resultat);
-          }
-          observer.complete();
-        }
-      });
-    });
-  }
-
-  private parseAndMapDividendes(html: string, dividendes: Array<DTODividende>): boolean {
-    const document = new DOMParser().parseFromString(html, 'text/html');
-    const elTBODY = document.querySelector('table.tablesorter > tbody');
-    if (!elTBODY) {
-      console.error('tbody introuvable');
-      return false;
-    } else {
-      const elTRs = elTBODY.querySelectorAll('tr');
-      for (const elTR of elTRs) {
-        const elTDs = elTR.querySelectorAll('td');
-        if (elTDs.length !== 5) {
-          console.error('le TR n\'a pas 5 TD', elTR, elTDs.length);
-          return false;
-        } else {
-          const elA = elTDs[1].querySelector('a');
-          if (elA) {
-            const date = ParseUtil.parseDateFrAndMapTo8601(elTDs[0].innerText);
-            const matchTicker = /\/([A-Z0-9]+)p/.exec(elA.href);
-            const type: TypeDividende = elTDs[2].innerText.toLowerCase() as TypeDividende;
-            const montant = ParseUtil.parseNumber(elTDs[3].innerText);
-            const pourcentageRendement = ParseUtil.parseNumber(elTDs[4].innerText) / 100;
-            if (!matchTicker) {
-              console.error('ticker introuvable dans : %s', elA.href);
-              return false;
-            } else {
-              dividendes.push({date, ticker: matchTicker[1], type, montant, pourcentageRendement});
-            }
-          }
-        }
-      }
-    }
-    return true;
   }
 }

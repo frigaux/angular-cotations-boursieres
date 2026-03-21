@@ -24,7 +24,8 @@ export class DividendesService {
     const json = window.localStorage.getItem(DividendesService.DIVIDENDES);
     if (json) {
       try {
-        const dividendes: any = JSON.parse(json);
+        const parser = (key: string, val: any) => val === "NaN" ? NaN : val;
+        const dividendes: any = JSON.parse(json, parser);
         if (this.validerDividendes(dividendes)) {
           return dividendes;
         }
@@ -72,7 +73,8 @@ export class DividendesService {
 
   public enregistrer(dividendes: DTODividendes): string | undefined {
     if (this.validerDividendes(dividendes)) {
-      window.localStorage.setItem(DividendesService.DIVIDENDES, JSON.stringify(dividendes));
+      const replacer = (key: string, value: any) => Number.isNaN(value) ? "NaN" : value;
+      window.localStorage.setItem(DividendesService.DIVIDENDES, JSON.stringify(dividendes, replacer));
       DividendesService.OBSERVERS_UPDATE.forEach(observer => observer.next(dividendes));
       return undefined;
     } else {

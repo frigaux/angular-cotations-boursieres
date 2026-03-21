@@ -6,6 +6,7 @@ export class ParseUtil {
   private static readonly REGEXP_BOURSORAMA_HEURE = /^(\d{1,2}):(\d{2})$/;
   private static readonly REGEXP_BOURSORAMA_JOUR_MOIS = /^(\d{1,2}) ([\wéû]+)\.?$/;
   private static readonly REGEXP_BOURSORAMA_JOUR_MOIS_ANNEE = /^(\d{1,2}) ([\wéû]+)\.? (\d{4})$/;
+  private static readonly REGEXP_BOURSORAMA_JOUR_JOUR_MOIS_ANNEE = /^\w+ (\d{1,2}) ([\wéû]+)\.? (\d{4})$/;
 
   static execRegexpAndMap<T>(result: Array<T>, html: string, regexp: RegExp, mapper: (m: Array<string>) => T) {
     let matches;
@@ -119,6 +120,12 @@ export class ParseUtil {
         Number(matchJourMoisAnnee[1]), 23);
       return date.toISOString().slice(0, 10);
     }
+    const matchJourJourMoisAnnee = ParseUtil.REGEXP_BOURSORAMA_JOUR_JOUR_MOIS_ANNEE.exec(dateBoursorama);
+    if (matchJourJourMoisAnnee) {
+      const date = new Date(Number(matchJourJourMoisAnnee[3]), ParseUtil.mapMoisBoursorama(matchJourJourMoisAnnee[2]),
+        Number(matchJourJourMoisAnnee[1]), 23);
+      return date.toISOString().slice(0, 10);
+    }
     throw new Error(`Format de date boursorama inconnu : ${dateBoursorama}`);
   }
 
@@ -146,28 +153,36 @@ export class ParseUtil {
   private static mapMoisBoursorama(mois: string): number {
     switch (mois) {
       case 'janv':
+      case 'janvier':
         return 0;
       case 'févr':
+      case 'février':
         return 1;
       case 'mars':
         return 2;
       case 'avr':
+      case 'avril':
         return 3;
       case 'mai':
         return 4;
       case 'juin':
         return 5;
       case 'juil':
+      case 'juillet':
         return 6;
       case 'août':
         return 7;
       case 'sept':
+      case 'septembre':
         return 8;
       case 'oct':
+      case 'octobre':
         return 9;
       case 'nov':
+      case 'novembre':
         return 10;
       case 'déc':
+      case 'décembre':
         return 11;
       default:
         throw new Error(`Mois boursorama inconnu : ${mois}`);

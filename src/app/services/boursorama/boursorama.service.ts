@@ -18,6 +18,9 @@ import {DTOConsensus} from './dto-consensus.interface';
 import {Conseil} from './conseil.enum';
 import {DTOPrevision} from './dto-prevision.interface';
 import {RisqueESG} from './risque-esg.enum';
+import {DTODividendes} from '../dividendes/dto-dividendes.class';
+import {DTODividende} from '../dividendes/dto-dividende.interface';
+import {TypeDividende} from '../dividendes/type-dividende.enum';
 
 @Injectable({
   providedIn: 'root'
@@ -500,5 +503,130 @@ export class BoursoramaService {
         }
       });
     return resultat;
+  }
+
+  public chargerDividendes(): Observable<DTODividendes> {
+    return new Observable(observer => {
+      this.http.get(`/boursorama/bourse/actualites/calendriers/dividendes`, {
+        headers: BoursoramaService.HEADERS_HTML,
+        responseType: 'text',
+        withCredentials: true
+      }).subscribe({
+        error: httpErrorResponse => {
+          observer.error(httpErrorResponse);
+          observer.complete();
+        },
+        next: html => {
+          const listeParametres = this.parseAndMapParametresFormulaire(html);
+          if (listeParametres) {
+            this.chargerDividendesPourParametres(listeParametres).subscribe({
+              error: httpErrorResponse => {
+                observer.error(httpErrorResponse);
+                observer.complete();
+              },
+              next: dividendes => {
+                observer.next(dividendes);
+                observer.complete();
+              }
+            });
+          } else {
+            observer.error({
+              message: 'Impossible de récupérer les paramètres du formulaire dans le html',
+              error: html
+            });
+            observer.complete();
+          }
+        }
+      });
+    });
+  }
+
+  private parseAndMapParametresFormulaire(html: string)
+    : Array<Record<'FiltersDividendsCalendar[month]' | 'FiltersDividendsCalendar[filter]', string>> | undefined {
+    const resultat = [];
+    const document = new DOMParser().parseFromString(html, 'text/html');
+    const el = document.querySelector('#FiltersDividendsCalendar_month');
+    if (el) {
+      const elSELECT = el as HTMLSelectElement;
+      const options = elSELECT.options;
+      for (let i = 0; i < 12 && i < options.length; i++) {
+        const option = options.item(i);
+        resultat.push({
+          'FiltersDividendsCalendar[month]': option!.value, 'FiltersDividendsCalendar[filter]': ''
+        })
+      }
+      return resultat;
+    } else {
+      console.error('Impossible de récupérer les paramètres du formulaire dans le html', html);
+      return undefined;
+    }
+  }
+
+  private chargerDividendesPourParametres(listeParametres: Array<Record<'FiltersDividendsCalendar[month]' | 'FiltersDividendsCalendar[filter]', string>>): Observable<DTODividendes> {
+    const resultat = new DTODividendes();
+    return new Observable(observer => {
+      forkJoin(
+        listeParametres.map(parametres => {
+          return this.http.get(`/boursorama/bourse/actualites/calendriers/dividendes?${new URLSearchParams(parametres).toString()}`, {
+            headers: BoursoramaService.HEADERS_HTML,
+            responseType: 'text',
+            withCredentials: true
+          });
+        })
+      ).subscribe({
+        error: httpErrorResponse => {
+          observer.error(httpErrorResponse);
+          observer.complete();
+        },
+        next: htmls => {
+          const htmlErreur = htmls.find(html => !this.parseAndMapDividendes(html, resultat.dividendes));
+          if (htmlErreur) {
+            observer.error({
+              message: 'Impossible de récupérer les dividendes dans le html',
+              error: htmlErreur
+            });
+          } else {
+            observer.next(resultat);
+          }
+          observer.complete();
+        }
+      });
+    });
+  }
+
+  private parseAndMapDividendes(html: string, dividendes: Array<DTODividende>): boolean {
+    const document = new DOMParser().parseFromString(html, 'text/html');
+    const elSELECT = document.querySelector('#FiltersDividendsCalendar_month') as HTMLSelectElement;
+    const elTBODYs = document.querySelectorAll('table > tbody');
+    if (!elSELECT || elTBODYs.length === 0) {
+      console.error('select mois ou tbody résultat introuvable');
+      return false;
+    } else {
+      const annee = ParseUtil.parseYear(elSELECT.selectedOptions.item(0)!.value);
+      const elTRs = elTBODYs[0].querySelectorAll('tr');
+      for (const elTR of elTRs) {
+        const elTDs = elTR.querySelectorAll('td');
+        if (elTDs.length !== 5) {
+          console.error('le TR n\'a pas 5 TD', elTR, elTDs.length);
+          return false;
+        } else {
+          const elA = elTDs[1].querySelector('a');
+          if (elA) {
+            const date = ParseUtil.parseDateBoursoramaAndMapTo8601(`${elTDs[0].innerText.trim()} ${annee}`);
+            const matchTicker = /\/1rE?P([A-Z0-9]+)/.exec(elA.href);
+            const type: TypeDividende = elTDs[2].innerText.trim().toLowerCase() as TypeDividende;
+            const montant = ParseUtil.parseNumber(elTDs[3].innerText);
+            const pourcentageRendement = ParseUtil.parseNumber(elTDs[4].innerText) / 100;
+            if (!matchTicker) {
+              console.error('ticker introuvable dans : %s', elA.href);
+              return false;
+            } else {
+              dividendes.push({date, ticker: matchTicker[1], type, montant, pourcentageRendement});
+            }
+          }
+        }
+      }
+    }
+    return true;
   }
 }

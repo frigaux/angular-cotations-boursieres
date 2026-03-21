@@ -33,5 +33,7 @@ describe('ParseUtil', () => {
 
     expect(ParseUtil.parseDateBoursoramaAndMapTo8601('11 déc. 2025')).toBe('2025-12-11');
     expect(ParseUtil.parseDateBoursoramaAndMapTo8601('6 août 2025')).toBe('2025-08-06');
+
+    expect(ParseUtil.parseDateBoursoramaAndMapTo8601('lun 02 juin 2025')).toBe('2025-06-02');
   });
 });

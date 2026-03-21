@@ -7,6 +7,7 @@ import {VALEUR, VALEURS} from '../jdd/jdd-valeurs.dataset';
 import {DTOCours} from '../cours/dto-cours.interface';
 import {DTOInformationsTickerBoursorama} from './dto-informations-ticker-boursorama.interface';
 import {TranslateModule} from '@ngx-translate/core';
+import {DTODividendes} from '../dividendes/dto-dividendes.class';
 
 describe('BoursoramaService', () => {
   let service: BoursoramaService;
@@ -61,5 +62,10 @@ describe('BoursoramaService', () => {
     const promiseCotationsTickers: Promise<Array<DTOInformationsTickerBoursorama>> = firstValueFrom(service.chargerInformationsTickers([VALEUR]));
     const dto = await promiseCotationsTickers;
     expect(dto).toHaveSize(1);
+  });
+
+  it('given BoursoramaService when #chargerDividendes then on doit récupérer les dividendes', async () => {
+    const promiseDividendes: Promise<DTODividendes> = firstValueFrom(service.chargerDividendes());
+    await promiseDividendes.catch(err => expect(err.status).toBe(400));
   });
 });

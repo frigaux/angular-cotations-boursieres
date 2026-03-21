@@ -6,8 +6,8 @@ import {CurrencyPipe, DatePipe, PercentPipe} from '@angular/common';
 import {TableModule} from 'primeng/table';
 import {ValeursService} from '../../services/valeurs/valeurs.service';
 import {DTOValeur} from '../../services/valeurs/dto-valeur.interface';
-import {AbcBourseService} from '../../services/abc-bourse/abc-bourse.service';
 import {DividendeDecore} from './dividende-decore.interface';
+import {BoursoramaService} from '../../services/boursorama/boursorama.service';
 
 @Component({
   selector: 'app-dividendes',
@@ -34,13 +34,13 @@ export class DividendesComponent implements OnInit {
   private valeurByTicker?: Map<string, DTOValeur>;
 
   constructor(private valeursService: ValeursService,
-              private abcBourseService: AbcBourseService,
+              private boursoramaService: BoursoramaService,
               private dividendesService: DividendesService) {
   }
 
   protected recupererDividendesABCBourse() {
     this.loading = true;
-    this.abcBourseService.chargerDividendes().subscribe({
+    this.boursoramaService.chargerDividendes().subscribe({
       next: dividendes => {
         this.dividendesService.enregistrer(dividendes);
         this.loading = false;
