@@ -345,7 +345,7 @@
         "TOTAUX": "Totaux"
       },
       "IMPORT_EXPORT": {
-        "IMPORT_EXPORT": "Import/export",
+        "IMPORT_EXPORT": "Import/export des achats",
         "CONFIGURATION": "Configuration au format JSON",
         "EXPORTER": "Exporter",
         "IMPORTER": "Importer"
@@ -353,14 +353,19 @@
     },
     "DIVIDENDES": {
       "DIVIDENDES": "Dividendes",
-      "RECUPERER_DIVIDENDES_ABCBOURSE": "Récupérer les dividendes depuis ABCBourse",
       "DATE_DERNIERE_RECUPERATION": "Date de dernière récupération : {{date}}",
       "DATE": "Date",
       "TICKER": "Ticker",
       "LIBELLE": "Libellé",
       "TYPE": "Type",
       "MONTANT": "Montant",
-      "POURCENTAGE_RENDEMENT": "Rendement"
+      "POURCENTAGE_RENDEMENT": "Rendement",
+      "IMPORT_EXPORT": {
+        "IMPORT_EXPORT": "Import/export des dividendes depuis ABCBourse",
+        "DIVIDENDES": "HTML pour l'import, export au format JSON",
+        "EXPORTER": "Exporter",
+        "IMPORTER": "Importer"
+      }
     },
     "PORTEFEUILLES": {
       "PORTEFEUILLES_DATE": "Portefeuilles à la date du {{jour}}",

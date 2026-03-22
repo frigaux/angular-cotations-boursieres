@@ -4,8 +4,11 @@ import {TableauOrdresVentesComponent} from './tableau-ordres-ventes.component';
 import {CoursService} from '../../../services/cours/cours.service';
 import {TranslateModule} from '@ngx-translate/core';
 import {ValeursService} from '../../../services/valeurs/valeurs.service';
+import {DialogueService} from '../../../services/dialogue/dialogue.service';
+import {ConfirmationService} from 'primeng/api';
 
 describe('TableauOrdresVentesComponent', () => {
+  let dialogueService: DialogueService;
   let component: TableauOrdresVentesComponent;
   let fixture: ComponentFixture<TableauOrdresVentesComponent>;
 
@@ -20,13 +23,15 @@ describe('TableauOrdresVentesComponent', () => {
       ],
       providers: [
         {provide: CoursService, useValue: mockCoursService},
-        {provide: ValeursService, useValue: mockValeursService}
+        {provide: ValeursService, useValue: mockValeursService},
+        ConfirmationService
       ]
     })
       .compileComponents();
 
     fixture = TestBed.createComponent(TableauOrdresVentesComponent);
     component = fixture.componentInstance;
+    dialogueService = TestBed.inject(DialogueService);
     fixture.detectChanges();
   });
 

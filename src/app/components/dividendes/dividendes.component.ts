@@ -7,7 +7,7 @@ import {TableModule} from 'primeng/table';
 import {ValeursService} from '../../services/valeurs/valeurs.service';
 import {DTOValeur} from '../../services/valeurs/dto-valeur.interface';
 import {DividendeDecore} from './dividende-decore.interface';
-import {BoursoramaService} from '../../services/boursorama/boursorama.service';
+import {DialogImportExportComponent} from './dialog-import-export/dialog-import-export.component';
 
 @Component({
   selector: 'app-dividendes',
@@ -17,7 +17,9 @@ import {BoursoramaService} from '../../services/boursorama/boursorama.service';
     DatePipe,
     TableModule,
     CurrencyPipe,
-    PercentPipe
+    PercentPipe,
+    DialogImportExportComponent,
+    DialogImportExportComponent
   ],
   templateUrl: './dividendes.component.html',
   styleUrls: ['./dividendes.component.sass', '../commun/titre.sass']
@@ -34,24 +36,23 @@ export class DividendesComponent implements OnInit {
   private valeurByTicker?: Map<string, DTOValeur>;
 
   constructor(private valeursService: ValeursService,
-              private boursoramaService: BoursoramaService,
               private dividendesService: DividendesService) {
   }
 
-  protected recupererDividendesABCBourse() {
-    this.loading = true;
-    this.boursoramaService.chargerDividendes().subscribe({
-      next: dividendes => {
-        this.dividendesService.enregistrer(dividendes);
-        this.loading = false;
-      },
-      error:
-        httpErrorResponse => {
-          console.error(httpErrorResponse);
-          this.loading = false
-        }
-    });
-  }
+  // protected recupererDividendesABCBourse() {
+  //   this.loading = true;
+  //   this.boursoramaService.chargerDividendes().subscribe({
+  //     next: dividendes => {
+  //       this.dividendesService.enregistrer(dividendes);
+  //       this.loading = false;
+  //     },
+  //     error:
+  //       httpErrorResponse => {
+  //         console.error(httpErrorResponse);
+  //         this.loading = false
+  //       }
+  //   });
+  // }
 
   ngOnInit(): void {
     this.dividendesService.onUpdate(dividendes => this.construireVue());
@@ -72,5 +73,9 @@ export class DividendesComponent implements OnInit {
         return {dividende, valeur};
       });
     }
+  }
+
+  protected importDividendesABCBourse() {
+
   }
 }
