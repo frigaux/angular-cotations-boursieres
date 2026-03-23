@@ -15,6 +15,8 @@ export class DividendesService {
     DividendesService.OBSERVERS_UPDATE.push(observer);
   });
 
+  public static readonly REPLACER = (key: string, value: any) => Number.isNaN(value) ? "NaN" : value;
+
   private cleMessageErreur: string | undefined;
 
   constructor(private translateService: TranslateService) {
@@ -73,8 +75,7 @@ export class DividendesService {
 
   public enregistrer(dividendes: DTODividendes): string | undefined {
     if (this.validerDividendes(dividendes)) {
-      const replacer = (key: string, value: any) => Number.isNaN(value) ? "NaN" : value;
-      window.localStorage.setItem(DividendesService.DIVIDENDES, JSON.stringify(dividendes, replacer));
+      window.localStorage.setItem(DividendesService.DIVIDENDES, JSON.stringify(dividendes, DividendesService.REPLACER));
       DividendesService.OBSERVERS_UPDATE.forEach(observer => observer.next(dividendes));
       return undefined;
     } else {

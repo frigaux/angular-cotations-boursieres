@@ -7,7 +7,7 @@
   <div class="conteneur">
     <div class="mois">
       @for (mois of moisDejaImportes; track mois) {
-        <p-chip [label]="(mois | date: 'MMMM yyyy') || '???'" [removable]="true"></p-chip>
+        <p-chip [label]="(mois | date: 'MMMM yyyy') || '???'" [removable]="true" (onRemove)="supprimerMois(mois)"></p-chip>
       }
     </div>
 

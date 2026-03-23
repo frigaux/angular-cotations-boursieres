@@ -25,7 +25,10 @@
           {{ 'COMPOSANTS.DIVIDENDES.DATE' | translate }}
           <p-sortIcon field="dividende.date"/>
         </th>
-        <th>{{ 'COMPOSANTS.DIVIDENDES.TICKER' | translate }}</th>
+        <th pSortableColumn="valeur.ticker">
+          {{ 'COMPOSANTS.DIVIDENDES.TICKER' | translate }}
+          <p-sortIcon field="valeur.ticker"/>
+        </th>
         <th pSortableColumn="valeur.libelle">
           {{ 'COMPOSANTS.DIVIDENDES.LIBELLE' | translate }}
           <p-sortIcon field="valeur.libelle"/>

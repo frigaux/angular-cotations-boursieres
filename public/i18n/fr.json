@@ -362,7 +362,7 @@
       "POURCENTAGE_RENDEMENT": "Rendement",
       "IMPORT_EXPORT": {
         "IMPORT_EXPORT": "Import/export des dividendes depuis ABCBourse",
-        "DIVIDENDES": "HTML pour l'import, export au format JSON",
+        "DIVIDENDES": "Import : HTML de la table ABCBourse sur une période mensuelle. Export : complet au format JSON.",
         "EXPORTER": "Exporter",
         "IMPORTER": "Importer"
       }
