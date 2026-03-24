@@ -78,26 +78,29 @@ export class AbcBourseService {
       (matches) => new DTOActualiteTicker(ParseUtil.parseDateFrAndMapTo8601(matches[1]), matches[3], matches[2])
     );
 
-    const elTables = document.querySelectorAll('table.tableDis');
+    const elTableVariations = document.querySelector('table.tblDisVar');
+    const elTables = document.querySelectorAll('div.disZone3 table.tablesorter');
 
-    if (elTables.length === 4) {
-      this.mapVariations(result.variations, elTables[0]);
-      this.mapDividendes(result.dividendes, elTables[1]);
-      this.mapRatios(result.ratios.indicateurs, elTables[2]);
-      this.mapIndicateurs(result, elTables[3]);
+    if (elTableVariations) {
+      this.mapVariations(result.variations, elTableVariations);
     }
-    if (elTables.length === 3) { // le bloc dividende est facultatif
-      this.mapVariations(result.variations, elTables[0]);
+
+    if (elTables.length === 3) {
+      this.mapDividendes(result.dividendes, elTables[0]);
       this.mapRatios(result.ratios.indicateurs, elTables[1]);
       this.mapIndicateurs(result, elTables[2]);
+    }
+    if (elTables.length === 2) { // le bloc dividende est facultatif
+      this.mapRatios(result.ratios.indicateurs, elTables[0]);
+      this.mapIndicateurs(result, elTables[1]);
     }
 
     return result;
   }
 
   private parseAndMapCotations(document: Document): DTOCotations | undefined {
-    const elDiv = document.querySelector('div.disqzone');
-    const elTables = document.querySelectorAll('table.mar6');
+    const elDiv = document.querySelector('div.barquotezone');
+    const elTables = document.querySelectorAll('div.chartzone table.tablesorter');
     const elTrs0 = elTables[0].querySelectorAll('tr');
     const elTrs1 = elTables[1].querySelectorAll('tr');
     if (elDiv && elTables.length === 3 && elTrs0.length === 6 && elTrs1.length === 5) {
@@ -129,7 +132,7 @@ export class AbcBourseService {
   }
 
   private mapDividendes(dividendes: DTODividendeTicker[], elTable: Element) {
-    elTable.querySelectorAll('tr:not(:first-child)')
+    elTable.querySelectorAll('tbody > tr')
       .forEach(elTr => {
         const elTds: NodeListOf<HTMLTableCellElement> = elTr.querySelectorAll('td');
         dividendes.push(new DTODividendeTicker(ParseUtil.parseYear(elTds[0].innerText), ParseUtil.parseNumber(elTds[1].innerText)));

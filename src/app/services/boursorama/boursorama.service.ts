@@ -222,7 +222,7 @@ export class BoursoramaService {
     const pourcentageRendementEstime = ParseUtil.queryAndParseNumber(elLIsCotations[10], 'p.c-list-info__value') / 100;
     const perEstime = ParseUtil.queryAndParseNumber(elLIsCotations[11], 'p.c-list-info__value');
     const dernierDividende = ParseUtil.queryAndParseNumber(elLIsCotations[12], 'p.c-list-info__value');
-    const dateDernierDividende = ParseUtil.queryAndParseDate(elLIsCotations[13], 'p.c-list-info__value');
+    const dateDernierDividende = ParseUtil.queryAndParseDate(elLIsCotations[12], 'p.c-list-info__value');
 
     const risqueESG = ParseUtil.queryAndParseString(elLIsCotations[15], 'p.c-list-info__value');
 
