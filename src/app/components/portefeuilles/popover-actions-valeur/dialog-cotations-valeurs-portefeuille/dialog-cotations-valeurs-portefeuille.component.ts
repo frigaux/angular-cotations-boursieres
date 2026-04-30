@@ -15,6 +15,7 @@ import {ColonneDividendesComponent} from '../../colonnes/dividendes/colonne-divi
 import {DividendesService} from '../../../../services/dividendes/dividendes.service';
 import {ClassVariation} from '../../../../directives/class-variation';
 import {IconeVariation} from '../../../../directives/icone-variation';
+import {TypeDividende} from '../../../../services/dividendes/type-dividende.enum';
 
 @Component({
   selector: 'app-dialog-cotations-valeurs-portefeuille',
@@ -61,8 +62,18 @@ export class DialogCotationsValeursPortefeuilleComponent {
             let i = 0;
             const dividendesByTicker = this.dividendesService.chargerMapByTicker();
             this.cotationsTickersDecores = cotationsTickersBoursorama.map(cotationsTickerBoursorama =>
-              new CotationsValeurBoursoramaDecore(this.translateService, i++, cotationsTickerBoursorama,
-                dividendesByTicker ? dividendesByTicker.get(cotationsTickerBoursorama.valeur.ticker) || [] : undefined)
+              cotationsTickerBoursorama.cotations.dateProchainDividende?
+                new CotationsValeurBoursoramaDecore(this.translateService, i++, cotationsTickerBoursorama,
+                  [{
+                    date: cotationsTickerBoursorama.cotations.dateProchainDividende,
+                    montant: cotationsTickerBoursorama.cotations.prochainDividende,
+                    ticker: cotationsTickerBoursorama.valeur.ticker,
+                    type: TypeDividende.DETACHEMENT,
+                    pourcentageRendement: 0
+                  }])
+                :
+                new CotationsValeurBoursoramaDecore(this.translateService, i++, cotationsTickerBoursorama,
+                  dividendesByTicker ? dividendesByTicker.get(cotationsTickerBoursorama.valeur.ticker) || [] : undefined)
             );
             this.loading = false;
           },

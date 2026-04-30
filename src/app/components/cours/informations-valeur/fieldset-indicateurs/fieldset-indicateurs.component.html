@@ -73,6 +73,15 @@
               {{ dtoBoursorama.cotations.dateDernierDividende | date: 'dd/MM/yyyy' }}
             </span>
           </div>
+          @if (dtoBoursorama.cotations.dateProchainDividende) {
+            <div>
+              <label>{{ 'COMPOSANTS.COURS.INFORMATIONS_VALEUR.RATIOS.PROCHAIN_DIVIDENDE' | translate }}</label>
+              <span>
+                {{ dtoBoursorama.cotations.prochainDividende | currency:'EUR':'symbol' }}
+                {{ dtoBoursorama.cotations.dateProchainDividende | date: 'dd/MM/yyyy' }}
+            </span>
+            </div>
+          }
           <div>
             <label>{{ 'COMPOSANTS.COURS.INFORMATIONS_VALEUR.RATIOS.RISQUE_ESG' | translate }}</label>
             <span>{{ dtoBoursorama.cotations.risqueESG }}</span>

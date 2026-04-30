@@ -14,6 +14,8 @@ export interface DTOCotations {
   perEstime: number;
   dernierDividende: number;
   dateDernierDividende?: string; // ISO 8601 : yyyy-MM-dd
+  prochainDividende: number;
+  dateProchainDividende?: string; // ISO 8601 : yyyy-MM-dd
   risqueESG?: string;
 
   MM20: number;

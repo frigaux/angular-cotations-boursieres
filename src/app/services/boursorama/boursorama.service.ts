@@ -149,7 +149,7 @@ export class BoursoramaService {
       .parseFromString(html, 'text/html');
 
     const elDIVCours = document.querySelector('div.c-faceplate__price');
-    const elLIsCotations = document.querySelectorAll('div.c-faceplate__data li.c-list-info__item');
+    const elULsCotations = document.querySelectorAll('div.c-faceplate__data ul.c-list-info__list');
     const elULsNouvelles = document.querySelectorAll('ul.c-list-news');
     const elTableByLabel = this.queryTables(document);
     const elTableFiveDaysHistory = elTableByLabel.get('five-days-history');
@@ -157,10 +157,10 @@ export class BoursoramaService {
     const elTableHistoricalData = elTableByLabel.get('historical-data');
     const elDIVsGauges = document.querySelectorAll('div.c-median-gauge');
 
-    if (elDIVCours && elLIsCotations.length === 16 && elULsNouvelles.length === 3
+    if (elDIVCours && elULsCotations.length === 6 && elULsNouvelles.length === 3
       && elTableFiveDaysHistory && elTableHistoricalData
       && elDIVsGauges.length >= 1) {
-      const cotations = this.parseAndMapCotations(elDIVCours, elLIsCotations, elTableHistoricalData);
+      const cotations = this.parseAndMapCotations(elDIVCours, elULsCotations, elTableHistoricalData);
       const ordres = this.parseAndMapOrdres(document);
       const actualites = this.parseAndMapInformations(elULsNouvelles[1]);
       const analyses = this.parseAndMapInformations(elULsNouvelles[2]);
@@ -205,26 +205,36 @@ export class BoursoramaService {
     return elTableByLabel;
   }
 
-  private parseAndMapCotations(elDIVCours: Element, elLIsCotations: NodeListOf<Element>, elTable: Element): DTOCotations {
+  private parseAndMapCotations(elDIVCours: Element, elULsCotations: NodeListOf<Element>, elTable: Element): DTOCotations {
     const cours = ParseUtil.queryAndParseNumber(elDIVCours, 'span.c-instrument');
 
-    const ouverture = ParseUtil.queryAndParseNumber(elLIsCotations[0], 'span.c-instrument');
-    const cloture = ParseUtil.queryAndParseNumber(elLIsCotations[1], 'span.c-instrument');
-    const plusHaut = ParseUtil.queryAndParseNumber(elLIsCotations[2], 'span.c-instrument');
-    const plusBas = ParseUtil.queryAndParseNumber(elLIsCotations[3], 'span.c-instrument');
-    const volume = ParseUtil.queryAndParseNumber(elLIsCotations[4], 'span.c-instrument');
+    const elLIsCotations1 = elULsCotations[0].querySelectorAll('li.c-list-info__item');
+    const ouverture = ParseUtil.queryAndParseNumber(elLIsCotations1[0], 'span.c-instrument');
+    const cloture = ParseUtil.queryAndParseNumber(elLIsCotations1[1], 'span.c-instrument');
+    const plusHaut = ParseUtil.queryAndParseNumber(elLIsCotations1[2], 'span.c-instrument');
+    const plusBas = ParseUtil.queryAndParseNumber(elLIsCotations1[3], 'span.c-instrument');
 
-    const pourcentageCapitalEchange = ParseUtil.queryAndParseNumber(elLIsCotations[5], 'p.c-list-info__value') / 100;
-    const valorisation = ParseUtil.queryAndParseString(elLIsCotations[6], 'p.c-list-info__value');
+    const elLIsCotations2 = elULsCotations[1].querySelectorAll('li.c-list-info__item');
+    const volume = ParseUtil.queryAndParseNumber(elLIsCotations2[0], 'span.c-instrument');
+    const pourcentageCapitalEchange = ParseUtil.queryAndParseNumber(elLIsCotations2[1], 'p.c-list-info__value') / 100;
+    const valorisation = ParseUtil.queryAndParseString(elLIsCotations2[2], 'p.c-list-info__value');
 
-    const limiteBaisse = ParseUtil.queryAndParseNumber(elLIsCotations[8], 'p.c-list-info__value');
-    const limiteHausse = ParseUtil.queryAndParseNumber(elLIsCotations[9], 'p.c-list-info__value');
-    const pourcentageRendementEstime = ParseUtil.queryAndParseNumber(elLIsCotations[10], 'p.c-list-info__value') / 100;
-    const perEstime = ParseUtil.queryAndParseNumber(elLIsCotations[11], 'p.c-list-info__value');
-    const dernierDividende = ParseUtil.queryAndParseNumber(elLIsCotations[12], 'p.c-list-info__value');
-    const dateDernierDividende = ParseUtil.queryAndParseDate(elLIsCotations[12], 'p.c-list-info__value');
+    const elLIsCotations3 = elULsCotations[2].querySelectorAll('li.c-list-info__item');
+    const limiteBaisse = ParseUtil.queryAndParseNumber(elLIsCotations3[0], 'p.c-list-info__value');
+    const limiteHausse = ParseUtil.queryAndParseNumber(elLIsCotations3[1], 'p.c-list-info__value');
 
-    const risqueESG = ParseUtil.queryAndParseString(elLIsCotations[15], 'p.c-list-info__value');
+    const elLIsCotations4 = elULsCotations[3].querySelectorAll('li.c-list-info__item');
+    const pourcentageRendementEstime = ParseUtil.queryAndParseNumber(elLIsCotations4[0], 'p.c-list-info__value') / 100;
+    const perEstime = ParseUtil.queryAndParseNumber(elLIsCotations4[1], 'p.c-list-info__value');
+
+    const elLIsCotations5 = elULsCotations[4].querySelectorAll('li.c-list-info__item');
+    const dernierDividende = ParseUtil.queryAndParseNumber(elLIsCotations5[0], 'p.c-list-info__value');
+    const dateDernierDividende = ParseUtil.queryAndParseDate(elLIsCotations5[1], 'p.c-list-info__value');
+    const prochainDividende = ParseUtil.queryAndParseNumber(elLIsCotations5[2], 'p.c-list-info__value');
+    const dateProchainDividende = ParseUtil.queryAndParseDate(elLIsCotations5[2], 'p.c-list-info__value');
+
+    const elLIsCotations6 = elULsCotations[5].querySelectorAll('li.c-list-info__item');
+    const risqueESG = ParseUtil.queryAndParseString(elLIsCotations6[1], 'p.c-list-info__value');
 
     const valeurs: Array<number> = [];
     elTable.querySelectorAll('tbody > tr.c-table__row')
@@ -242,7 +252,8 @@ export class BoursoramaService {
     return {
       cours, ouverture, clotureVeille: cloture, plusHaut, plusBas, volume,
       pourcentageCapitalEchange, valorisation, limiteBaisse, limiteHausse, pourcentageRendementEstime,
-      perEstime, dernierDividende, dateDernierDividende, risqueESG, MM20, MM50, MM100, RSI14
+      perEstime, dernierDividende, dateDernierDividende, prochainDividende, dateProchainDividende,
+      risqueESG, MM20, MM50, MM100, RSI14
     };
   }
 

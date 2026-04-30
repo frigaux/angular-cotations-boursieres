@@ -34,7 +34,7 @@ export class ParseUtil {
     return NaN;
   }
 
-  static parseDateFrAndMapTo8601(dateFr: string): string {
+  static parseDateFrAndMapTo8601(dateFr: string): string | undefined {
     const regexp = /(\d{2})[\/\.]{1}(\d{2})[\/\.]{1}(\d{2,4})/g;
     const match = regexp.exec(dateFr);
     if (match) {
@@ -44,7 +44,7 @@ export class ParseUtil {
         return `20${match[3]}-${match[2]}-${match[1]}`;
       }
     }
-    return dateFr;
+    return undefined;
   }
 
   static parseAndMapTagArticle(html: string) {

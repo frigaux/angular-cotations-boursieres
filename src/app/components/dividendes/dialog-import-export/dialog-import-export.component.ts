@@ -96,8 +96,8 @@ export class DialogImportExportComponent implements OnInit {
             const type: TypeDividende = elTDs[2].innerText.toLowerCase() as TypeDividende;
             const montant = ParseUtil.parseNumber(elTDs[3].innerText);
             const pourcentageRendement = ParseUtil.parseNumber(elTDs[4].innerText) / 100;
-            if (!matchTicker) {
-              console.error('ticker introuvable dans : %s', elA.href);
+            if (!date || !matchTicker) {
+              console.error('date (%s) et/ou ticker (%s) introuvable', elTDs[0].innerText, elA.href);
             } else {
               dividendes.push({date, ticker: matchTicker[1], type, montant, pourcentageRendement});
             }
