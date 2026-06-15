@@ -150,6 +150,7 @@ export class PortefeuillesComponent implements OnInit {
   }
 
   private chargerPortefeuilleCourant(): void {
+    this.coursSelectionne = undefined;
     this.portefeuillesAvecCours = this.chargerPortefeuilles();
     const portefeuilleAvecCours: PortefeuilleAvecCours = this.portefeuillesAvecCours[this.idxPortefeuilleCourant];
     this.loading = true;

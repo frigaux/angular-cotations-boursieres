@@ -63,8 +63,8 @@
         "AJOUTER_ORDRE_ACHAT": "Ajouter un ordre d'achat",
         "ENREGISTREMENT_REUSSI": "Enregistrement réussi",
         "ETAPE": "Etape",
-        "PRIX": "Prix",
-        "QUANTITE": "Quantité",
+        "PRIX_ACHAT": "Prix achat",
+        "QUANTITE_ACHAT": "Quantité",
         "DATE_ACHAT": "Date d'achat",
         "REVENDU": "Revendu",
         "PRIX_REVENTE": "Prix revente",
@@ -287,8 +287,8 @@
           "PRIX_REVENTE": "Prix revente",
           "COURS": "Cours",
           "VARIATION_ORDRE": "Var Ordre/Cours",
-          "VARIATION_ACHAT": "Var/Ac",
-          "VARIATION_REVENTE": "Var/Revente"
+          "VARIATION_ACHAT": "Var Cours/Achat",
+          "VARIATION_REVENTE": "Var Cours/Revente"
         }
       },
       "ORDRES_ACHATS": {
@@ -314,7 +314,7 @@
         "QUANTITE_ACHAT": "Quantité",
         "TOTAL_ACHAT": "Total achat",
         "CLOTURE": "Clôture",
-        "VARIATION_ACHAT": "Var/Achat",
+        "VARIATION_ACHAT": "Var Clôture/Achat",
         "TOTAL_CLOTURE": "Total clôture",
         "TOTAUX": "Totaux"
       },
@@ -329,7 +329,7 @@
         "QUANTITE_REVENTE": "Quantité",
         "TOTAL_REVENTE": "Total revente",
         "CLOTURE": "Clôture",
-        "VARIATION_REVENTE": "Var/Revente",
+        "VARIATION_REVENTE": "Var Clôture/Revente",
         "TOTAL_CLOTURE": "Total clôture",
         "TOTAUX": "Totaux"
       },
@@ -341,7 +341,7 @@
         "QUANTITE_ACHAT": "Quantité",
         "TOTAL_ACHAT": "Total achat",
         "PRIX_VENTE": "Prix vente",
-        "VARIATION_ACHAT": "Var/Achat",
+        "VARIATION_ACHAT": "Var Vente/Achat",
         "TOTAL_VENTE": "Total vente",
         "TOTAUX": "Totaux"
       },
