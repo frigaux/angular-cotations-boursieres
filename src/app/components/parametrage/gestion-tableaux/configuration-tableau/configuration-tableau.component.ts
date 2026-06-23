@@ -81,6 +81,7 @@ export class ConfigurationTableauComponent {
             this.construireTypeColonne(TypesColonnesPortefeuille.MOYENNE_MOBILE),
             this.construireTypeColonne(TypesColonnesPortefeuille.VARIATION),
             this.construireTypeColonne(TypesColonnesPortefeuille.DIVIDENDES),
+            this.construireTypeColonne(TypesColonnesPortefeuille.ECART_TYPE),
           ];
           break;
         case TypesColonnes.COURS:

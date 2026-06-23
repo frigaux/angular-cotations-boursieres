@@ -13,5 +13,6 @@ export enum TypesColonnesPortefeuille {
   COURS,
   MOYENNE_MOBILE,
   VARIATION,
-  DIVIDENDES
+  DIVIDENDES,
+  ECART_TYPE
 }

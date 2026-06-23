@@ -424,6 +424,8 @@ export class TableauxService {
         return (cours: CoursPortefeuille) => this.percentPipe.transform(cours.calculerVariation(colonne.parametre!), '1.2-2');
       case TypesColonnesPortefeuille.DIVIDENDES:
         return (cours: CoursPortefeuille) => cours.trouverDividendes(this.dividendesService);
+      case TypesColonnesPortefeuille.ECART_TYPE:
+        return (cours: CoursPortefeuille) => this.currencyPipe.transform(cours.calculerEcartType());
       default:
         throw new Error(`Colonne non gérée ${colonne.type}`);
     }
@@ -461,6 +463,8 @@ export class TableauxService {
         return (cours: CoursPortefeuille) => cours.calculerVariation(colonne.parametre!);
       case TypesColonnesPortefeuille.DIVIDENDES:
         return (cours: CoursPortefeuille) => cours.trouverDividendes(this.dividendesService);
+      case TypesColonnesPortefeuille.ECART_TYPE:
+        return (cours: CoursPortefeuille) => cours.calculerEcartType();
       default:
         throw new Error(`Colonne non gérée ${colonne.type}`);
     }

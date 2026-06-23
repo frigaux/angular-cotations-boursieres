@@ -119,6 +119,9 @@
                             <app-colonne-dividendes [reduit]="true"
                                                     [dividendes]="cours[colonneDecoree.id]"></app-colonne-dividendes>
                           }
+                          @case (TypesColonnesPortefeuille.ECART_TYPE) {
+                            {{ cours[colonneDecoree.id] | percent:'1.2-2' }}
+                          }
                           @default {
                             {{ cours[colonneDecoree.id] }}
                           }

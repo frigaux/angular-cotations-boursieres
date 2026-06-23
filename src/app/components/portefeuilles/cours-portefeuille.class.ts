@@ -83,6 +83,20 @@ export class CoursPortefeuille {
     }
   }
 
+  public calculerEcartType() {
+    if (this.coursAlleges.length !== 0) {
+      const moyenne =
+        this.coursAlleges.reduce((accumulator, cours) => accumulator + cours.cloture, 0)
+        / this.coursAlleges.length;
+      const variance =
+        this.coursAlleges.reduce((accumulator, cours) => accumulator + Math.pow(cours.cloture - moyenne, 2), 0)
+        / this.coursAlleges.length;
+      return Math.sqrt(variance) / moyenne;
+    } else {
+      return 0;
+    }
+  }
+
   public trouverDividendes(dividendesService: DividendesService) {
     return dividendesService.charger()?.dividendes
       .filter(dividende => dividende.ticker === this.ticker);
