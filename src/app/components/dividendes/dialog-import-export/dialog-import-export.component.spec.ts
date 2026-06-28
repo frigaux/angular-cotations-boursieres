@@ -8,7 +8,7 @@ describe('DialogImportExportComponent', () => {
   let component: DialogImportExportComponent;
   let fixture: ComponentFixture<DialogImportExportComponent>;
 
-  const mockDividendesService = jasmine.createSpyObj('DividendesService', ['charger', 'enregistrer']);
+  const mockDividendesService = jasmine.createSpyObj('DividendesService', ['charger', 'enregistrer', 'onUpdate']);
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({

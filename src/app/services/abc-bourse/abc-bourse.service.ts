@@ -70,12 +70,7 @@ export class AbcBourseService {
 
     result.cotations = this.parseAndMapCotations(document);
 
-    ParseUtil.execRegexpAndMap(
-      result.actualites,
-      html,
-      new RegExp('<div class="newsln2">\\s*<div>([^>]+)<\\/div>\\s*<div><a href="([^"]+)">([^>]+)<\\/a>', 'gm'),
-      (matches) => new DTOActualiteTicker(ParseUtil.parseDateFrAndMapTo8601(matches[1]) || matches[1], matches[3], matches[2])
-    );
+    this.mapActualites(result.actualites, document);
 
     const elTableVariations = document.querySelector('table.tblDisVar');
     const elTables = document.querySelectorAll('div.disZone3 table.tablesorter');
@@ -278,7 +273,7 @@ export class AbcBourseService {
     ParseUtil.execRegexpAndMap(
       result.analyses,
       html,
-      new RegExp('<article class="lastana-item">\\s*<a class="lastana-link" href="([^"]+)">\\s*<span class="lastana-name">([^<]+)<\\/span>:\\s*<span class="lastana-ttl">([^<]+)<\\/span>\\s*<\\/a>\\s*<div class="lastana-meta">([^<]+)', 'gm'),
+      new RegExp('<article class="lastana-item">\\s*<a class="lastana-link" href="([^"]+)">\\s*<span class="lastana-name">([^<]+)<\\/span>\\s*:\\s*<span class="lastana-ttl">([^<]+)<\\/span>\\s*<\\/a>\\s*<div class="lastana-meta">([^<]+)', 'gm'),
       (matches) => new DTOLien(matches[4], matches[2], matches[3], matches[1])
     );
     ParseUtil.execRegexpAndMap(
@@ -301,5 +296,16 @@ export class AbcBourseService {
         m2[1], ParseUtil.parseDateFrAndMapTo8601(m2[2]) || m2[2], ParseUtil.parseNumber(m2[3]), ParseUtil.parseNumber(m2[4])));
     }
     return result;
+  }
+
+  private mapActualites(actualites: DTOActualiteTicker[], document: Document) {
+    const elTRs = document.querySelectorAll('div.disZone22 table.disTblNews tr');
+    elTRs.forEach(elTR => {
+      const elTDs = elTR.querySelectorAll('div.disZone22 table.disTblNews td');
+      const elA = elTDs[1].querySelector('a');
+      actualites.push(
+        new DTOActualiteTicker(ParseUtil.parseDateFrAndMapTo8601(elTDs[0].innerHTML) || elTDs[0].innerHTML, elA!.innerHTML, elA!.pathname)
+      );
+    });
   }
 }

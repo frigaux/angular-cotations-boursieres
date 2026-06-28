@@ -18,8 +18,10 @@ export const DTO_INFORMATIONS_TICKER_BOURSORAMA: DTOInformationsTickerBoursorama
     "limiteHausse": 59.7,
     "pourcentageRendementEstime": 0.027000000000000003,
     "perEstime": 9.47,
-    "dernierDividende": 0.61,
-    "dateDernierDividende": "2025-10-07",
+    "dernierDividende": 1,
+    "dateDernierDividende": "2026-06-01",
+    "prochainDividende" : 1,
+    "dateProchainDividende": "2027-10-07",
     "risqueESG": "13,2/100 (faible)",
     "MM20": 55.282,
     "MM50": 55.687,
@@ -133,61 +135,61 @@ export const DTO_INFORMATIONS_TICKER_BOURSORAMA: DTOInformationsTickerBoursorama
   "actualites": [
     {
       "id": 0,
-      "date": "jeu.",
+      "date": "2025-11-13",
       "titre": "Sté Générale : sort par le haut d'un corridor 53/58,8E",
       "pathname": "/bourse/actualites/ste-generale-sort-par-le-haut-d-un-corridor-53-58-8e-b91321b634d158536cbbc84845b812c0"
     },
     {
       "id": 1,
-      "date": "10 nov.",
+      "date": "2025-11-12",
       "titre": "Sté Générale : refranchit le cap des 56,7E",
       "pathname": "/bourse/actualites/ste-generale-refranchit-le-cap-des-56-7e-bd79eda78003b8903abcc46fd5b8c88c"
     },
     {
       "id": 2,
-      "date": "07 nov.",
+      "date": "2025-11-11",
       "titre": "Société Générale annule près de 18,3 millions d'actions",
       "pathname": "/bourse/actualites/societe-generale-annule-pres-de-18-3-millions-d-actions-5c0f56a8f4e8648baa8708c76130413b"
     },
     {
       "id": 3,
-      "date": "07 nov.",
+      "date": "2025-11-10",
       "titre": "Tikehau chute après la vente de 1,25 mln d'actions par Temasek",
       "pathname": "/bourse/actualites/tikehau-chute-apres-la-vente-de-1-25-mln-d-actions-par-temasek-6a9539ba91d30f0e5fc0e10f63750893"
     },
     {
       "id": 4,
-      "date": "06 nov.",
+      "date": "2025-11-09",
       "titre": "Sté Générale : renoue avec les 56E, peut de nouveau viser les 59E",
       "pathname": "/bourse/actualites/ste-generale-renoue-avec-les-56e-peut-de-nouveau-viser-les-59e-7820e0887ca19993172b7bb037907455"
     },
     {
       "id": 5,
-      "date": "30 oct.",
+      "date": "2025-11-08",
       "titre": "Inflation maîtrisée mais horizon flou : la BCE conserve le statu quo",
       "pathname": "/bourse/actualites/inflation-maitrisee-mais-horizon-flou-la-bce-conserve-le-statu-quo-d6987a99d43c5422f127e06a99f439f9"
     },
     {
       "id": 6,
-      "date": "30 oct.",
+      "date": "2025-11-07",
       "titre": "Société Générale dépasse les attentes trimestrielles",
       "pathname": "/bourse/actualites/societe-generale-depasse-les-attentes-trimestrielles-54ba4b56bfc559e3fb4daa7a6a8a280f"
     },
     {
       "id": 7,
-      "date": "30 oct.",
+      "date": "2025-11-06",
       "titre": "Crédit Agricole-Bénéfice au T3 +10% avec la revalorisation de la participation dans BPM",
       "pathname": "/bourse/actualites/credit-agricole-benefice-au-t3-10-avec-la-revalorisation-de-la-participation-dans-bpm-da6f17b1fc30e8ccddcf252bc1080f4b"
     },
     {
       "id": 8,
-      "date": "30 oct.",
+      "date": "2025-11-05",
       "titre": "Société Générale poursuit sur sa lancée: résultat net en hausse au 3e trimestre",
       "pathname": "/bourse/actualites/societe-generale-poursuit-sur-sa-lancee-resultat-net-en-hausse-au-3e-trimestre-03932db5969ab277f6c1c87bd47e75a5"
     },
     {
       "id": 9,
-      "date": "30 oct.",
+      "date": "2025-11-04",
       "titre": "Ayvens-RNPG +85,9% au T3, distribution exceptionnelle de €700 mlns",
       "pathname": "/bourse/actualites/ayvens-rnpg-85-9-au-t3-distribution-exceptionnelle-de-700-mlns-a627572252eab533759923fd89924fcd"
     }
@@ -195,31 +197,31 @@ export const DTO_INFORMATIONS_TICKER_BOURSORAMA: DTOInformationsTickerBoursorama
   "analyses": [
     {
       "id": 0,
-      "date": "mer.",
+      "date": "2025-11-13",
       "titre": "Société Générale, plus forte hausse du CAC 40 à la clôture du mercredi 12 novembre 2025 -",
       "pathname": "/bourse/actualites/societe-generale-plus-forte-hausse-du-cac-40-a-la-cloture-du-mercredi-12-novembre-2025-cb9e256addc763f57177b1be77e4c46f"
     },
     {
       "id": 1,
-      "date": "10 nov.",
+      "date": "2025-11-12",
       "titre": "Société Générale, plus forte hausse du CAC 40 à la clôture de la séance du lundi 10 novembre 2025",
       "pathname": "/bourse/actualites/societe-generale-plus-forte-hausse-du-cac-40-a-la-cloture-de-la-seance-du-lundi-10-novembre-2025-64eb8e3af0561715bba742a2e96abb25"
     },
     {
       "id": 2,
-      "date": "10 nov.",
+      "date": "2025-11-11",
       "titre": "Société Générale, plus forte hausse du CAC 40 à la mi-séance du lundi 10 novembre 2025",
       "pathname": "/bourse/actualites/societe-generale-plus-forte-hausse-du-cac-40-a-la-mi-seance-du-lundi-10-novembre-2025-ff7542d90420bcd386c07f85acf486b9"
     },
     {
       "id": 3,
-      "date": "10 nov.",
+      "date": "2025-11-10",
       "titre": "SOCIETE GENERALE : Les signaux haussiers sont intacts",
       "pathname": "/bourse/actualites/societe-generale-les-signaux-haussiers-sont-intacts-8e7f7db1e9742133403e09c42ca539e5"
     },
     {
       "id": 4,
-      "date": "03 nov.",
+      "date": "2025-11-09",
       "titre": "Les changements de recommandations : Société Générale, Rémy Cointreau, Sopra Steria, Kering, Amundi...",
       "pathname": "/bourse/actualites/les-changements-de-recommandations-societe-generale-remy-cointreau-sopra-steria-kering-amundi-3d42718c353d070fcb2bff99ac42cc60"
     }
@@ -408,19 +410,19 @@ export const DTO_INFORMATIONS_TICKER_BOURSORAMA: DTOInformationsTickerBoursorama
   "evenements": [
     {
       "id": 0,
-      "date": "6 févr.",
+      "date": "2025-11-13",
       "titre": "Résultats annuels",
       "pathname": "/bourse/actualites/calendriers/societes-cotees"
     },
     {
       "id": 1,
-      "date": "30 avr.",
+      "date": "2025-11-10",
       "titre": "Résultats du 1er trimestre",
       "pathname": "/bourse/actualites/calendriers/societes-cotees"
     },
     {
       "id": 2,
-      "date": "27 mai",
+      "date": "2025-11-07",
       "titre": "Assemblée générale annuelle",
       "pathname": "/bourse/actualites/calendriers/societes-cotees"
     }

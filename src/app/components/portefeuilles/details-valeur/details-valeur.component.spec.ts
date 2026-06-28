@@ -38,7 +38,7 @@ describe('DetailsValeurComponent', () => {
   it('Given un cours when le composant est rendu then le <p-chart> est rendu', () => {
     mockValeursService.chargerAchatsTicker.and.returnValue([]);
     const element: HTMLElement = fixture.nativeElement;
-    fixture.componentRef.setInput('cours', COURS_PORTEFEUILLE);
+    fixture.componentRef.setInput('cours', {coursPortefeuille: COURS_PORTEFEUILLE, premier: false, dernier: false});
     fixture.detectChanges();
     const elChart = element.querySelector('p-chart');
     expect(elChart).toBeTruthy();
