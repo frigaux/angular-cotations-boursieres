@@ -76,6 +76,7 @@ describe('AbcBourseService', () => {
     expect(actualites.marches).toBeDefined();
     expect(actualites.analyses.length).toBeGreaterThan(0);
     expect(actualites.chroniques.length).toBeGreaterThan(0);
+    expect(actualites.nouvelles.length).toBeGreaterThan(0);
     expect(actualites.ventesADecouvert.length).toBeGreaterThan(0);
     expect(actualites.transactionsDirigeants.length).toBeGreaterThan(0);
   });

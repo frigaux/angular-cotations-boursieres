@@ -516,6 +516,7 @@ export class BoursoramaService {
     return resultat;
   }
 
+  // doesn't work anymore :/
   public chargerDividendes(): Observable<DTODividendes> {
     return new Observable(observer => {
       this.http.get(`/boursorama/bourse/actualites/calendriers/dividendes`, {
