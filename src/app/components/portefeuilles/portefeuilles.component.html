@@ -85,15 +85,9 @@
                           @case (TypesColonnesPortefeuille.MARCHE) {
                             {{ `ENUMERATIONS.MARCHE.${cours[colonneDecoree.id]}` | translate }}
                           }
-                          @case (TypesColonnesPortefeuille.OUVERTURE) {
-                            {{ cours[colonneDecoree.id] | currency:'EUR':'symbol' }}
-                          }
-                          @case (TypesColonnesPortefeuille.PLUS_HAUT) {
-                            {{ cours[colonneDecoree.id] | currency:'EUR':'symbol' }}
-                          }
-                          @case (TypesColonnesPortefeuille.PLUS_BAS) {
-                            {{ cours[colonneDecoree.id] | currency:'EUR':'symbol' }}
-                          }
+                          @case (TypesColonnesPortefeuille.OUVERTURE)
+                          @case (TypesColonnesPortefeuille.PLUS_HAUT)
+                          @case (TypesColonnesPortefeuille.PLUS_BAS)
                           @case (TypesColonnesPortefeuille.CLOTURE) {
                             {{ cours[colonneDecoree.id] | currency:'EUR':'symbol' }}
                           }
@@ -106,9 +100,7 @@
                           @case (TypesColonnesPortefeuille.VARIATION_ACHATS) {
                             {{ cours[colonneDecoree.id] | percent:'1.2-2' }}
                           }
-                          @case (TypesColonnesPortefeuille.COURS) {
-                            {{ cours[colonneDecoree.id] | currency:'EUR':'symbol' }}
-                          }
+                          @case (TypesColonnesPortefeuille.COURS)
                           @case (TypesColonnesPortefeuille.MOYENNE_MOBILE) {
                             {{ cours[colonneDecoree.id] | currency:'EUR':'symbol' }}
                           }
