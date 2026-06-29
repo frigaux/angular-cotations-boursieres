@@ -1,108 +1,123 @@
 import {Routes} from '@angular/router';
-
-import {ValeursComponent} from './components/valeurs/valeurs.component';
-import {PortefeuillesComponent} from './components/portefeuilles/portefeuilles.component';
 import {authentificationGuard} from './authentification.guard';
-import {AuthentificationComponent} from './components/authentification/authentification.component';
-import {ErreurTechniqueComponent} from './components/erreur-technique/erreur-technique.component';
-import {CoursComponent} from './components/cours/cours.component';
-import {
-  GestionPortefeuillesComponent
-} from './components/parametrage/gestion-portefeuilles/gestion-portefeuilles.component';
-import {GestionTableauxComponent} from './components/parametrage/gestion-tableaux/gestion-tableaux.component';
-import {AchatsValeursComponent} from './components/achats-valeurs/achats-valeurs.component';
-import {
-  SauvegardeRestaurationComponent
-} from './components/parametrage/sauvegarde-restauration/sauvegarde-restauration.component';
-import {DividendesComponent} from './components/dividendes/dividendes.component';
-import {
-  RegressionSuperviseeComponent
-} from './components/parametrage/modeles-tensor-flow/tutoriels/regression-supervisee/regression-supervisee.component';
-import {
-  ClassificationSuperviseeConvolutiveComponent
-} from './components/parametrage/modeles-tensor-flow/tutoriels/classification-supervisee-convolutive/classification-supervisee-convolutive.component';
-import {
-  GenerateurDonneesEntrainementModeleComponent
-} from './components/parametrage/modeles-tensor-flow/etudes/generateur-donnees-entrainement-modele/generateur-donnees-entrainement-modele.component';
-import {
-  EntrainementModeleRegressionSuperviseeComponent
-} from './components/parametrage/modeles-tensor-flow/etudes/entrainement-modele-regression-supervisee/entrainement-modele-regression-supervisee.component';
-import {
-  EntrainementModeleClassificationSuperviseeComponent
-} from './components/parametrage/modeles-tensor-flow/etudes/entrainement-modele-classification-supervisee/entrainement-modele-classification-supervisee.component';
 
 export const routes: Routes = [
   {
     path: 'authentification',
-    component: AuthentificationComponent
+    loadComponent: () =>
+      import('./components/authentification/authentification.component').then(
+        (m) => m.AuthentificationComponent
+      )
   },
   {
     path: 'erreur-technique',
-    component: ErreurTechniqueComponent
+    loadComponent: () =>
+      import('./components/erreur-technique/erreur-technique.component').then(
+        (m) => m.ErreurTechniqueComponent
+      )
   },
   {
     path: 'valeurs',
-    component: ValeursComponent,
+    loadComponent: () =>
+      import('./components/valeurs/valeurs.component').then(
+        (m) => m.ValeursComponent
+      ),
     canActivate: [authentificationGuard]
   },
   {
     path: 'cours',
-    component: CoursComponent,
+    loadComponent: () =>
+      import('./components/cours/cours.component').then(
+        (m) => m.CoursComponent
+      ),
     canActivate: [authentificationGuard]
   },
   {
     path: 'achats-valeurs',
-    component: AchatsValeursComponent,
+    loadComponent: () =>
+      import('./components/achats-valeurs/achats-valeurs.component').then(
+        (m) => m.AchatsValeursComponent
+      ),
     canActivate: [authentificationGuard]
   },
   {
     path: 'dividendes',
-    component: DividendesComponent,
+    loadComponent: () =>
+      import('./components/dividendes/dividendes.component').then(
+        (m) => m.DividendesComponent
+      ),
     canActivate: [authentificationGuard]
   },
   {
     path: 'portefeuilles',
-    component: PortefeuillesComponent,
+    loadComponent: () =>
+      import('./components/portefeuilles/portefeuilles.component').then(
+        (m) => m.PortefeuillesComponent
+      ),
     canActivate: [authentificationGuard]
   },
   {
     path: 'gestion-portefeuilles',
-    component: GestionPortefeuillesComponent,
+    loadComponent: () =>
+      import(
+        './components/parametrage/gestion-portefeuilles/gestion-portefeuilles.component'
+      ).then((m) => m.GestionPortefeuillesComponent),
     canActivate: [authentificationGuard]
   },
   {
     path: 'gestion-tableaux',
-    component: GestionTableauxComponent,
+    loadComponent: () =>
+      import(
+        './components/parametrage/gestion-tableaux/gestion-tableaux.component'
+      ).then((m) => m.GestionTableauxComponent),
     canActivate: [authentificationGuard]
   },
   {
     path: 'sauvegarde-restauration',
-    component: SauvegardeRestaurationComponent,
+    loadComponent: () =>
+      import(
+        './components/parametrage/sauvegarde-restauration/sauvegarde-restauration.component'
+      ).then((m) => m.SauvegardeRestaurationComponent),
     canActivate: [authentificationGuard]
   },
   {
     path: 'regression-supervisee',
-    component: RegressionSuperviseeComponent,
+    loadComponent: () =>
+      import(
+        './components/parametrage/modeles-tensor-flow/tutoriels/regression-supervisee/regression-supervisee.component'
+      ).then((m) => m.RegressionSuperviseeComponent),
     canActivate: [authentificationGuard]
   },
   {
     path: 'classification-supervisee-convolutive',
-    component: ClassificationSuperviseeConvolutiveComponent,
+    loadComponent: () =>
+      import(
+        './components/parametrage/modeles-tensor-flow/tutoriels/classification-supervisee-convolutive/classification-supervisee-convolutive.component'
+      ).then((m) => m.ClassificationSuperviseeConvolutiveComponent),
     canActivate: [authentificationGuard]
   },
   {
     path: 'generateur-donnees-entrainement-modele',
-    component: GenerateurDonneesEntrainementModeleComponent,
+    loadComponent: () =>
+      import(
+        './components/parametrage/modeles-tensor-flow/etudes/generateur-donnees-entrainement-modele/generateur-donnees-entrainement-modele.component'
+      ).then((m) => m.GenerateurDonneesEntrainementModeleComponent),
     canActivate: [authentificationGuard]
   },
   {
     path: 'entrainement-modele-regression-supervisee',
-    component: EntrainementModeleRegressionSuperviseeComponent,
+    loadComponent: () =>
+      import(
+        './components/parametrage/modeles-tensor-flow/etudes/entrainement-modele-regression-supervisee/entrainement-modele-regression-supervisee.component'
+      ).then((m) => m.EntrainementModeleRegressionSuperviseeComponent),
     canActivate: [authentificationGuard]
   },
   {
     path: 'entrainement-modele-classification-supervisee',
-    component: EntrainementModeleClassificationSuperviseeComponent,
+    loadComponent: () =>
+      import(
+        './components/parametrage/modeles-tensor-flow/etudes/entrainement-modele-classification-supervisee/entrainement-modele-classification-supervisee.component'
+      ).then((m) => m.EntrainementModeleClassificationSuperviseeComponent),
     canActivate: [authentificationGuard]
   },
   {path: '**', redirectTo: '/authentification'}
