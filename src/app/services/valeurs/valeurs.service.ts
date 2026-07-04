@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {DTOValeur} from './dto-valeur.interface';
-import {Observable, Subscriber} from 'rxjs';
+import {Observable, Subject, Subscription} from 'rxjs';
 import {TranslateService} from '@ngx-translate/core';
 import {DTOAchatsTicker} from './dto-achats-ticker.interface';
 import {DTOAchat} from './dto-achat.interface';
@@ -11,14 +11,8 @@ import {DTOAchat} from './dto-achat.interface';
 })
 export class ValeursService {
   private static readonly ACHATS: string = 'achats';
-  private static readonly OBSERVERS_IMPORT_ACHATS: Array<Subscriber<Array<DTOAchatsTicker>>> = [];
-  private static readonly OBSERVERS_UPDATE_ACHATS: Array<Subscriber<Array<DTOAchatsTicker>>> = [];
-  private static readonly OBSERVABLE_IMPORT_ACHATS: Observable<Array<DTOAchatsTicker>> = new Observable(observer => {
-    ValeursService.OBSERVERS_IMPORT_ACHATS.push(observer);
-  });
-  private static readonly OBSERVABLE_UPDATE_ACHATS: Observable<Array<DTOAchatsTicker>> = new Observable(observer => {
-    ValeursService.OBSERVERS_UPDATE_ACHATS.push(observer);
-  });
+  private readonly importSubject = new Subject<Array<DTOAchatsTicker>>();
+  private readonly updateSubject = new Subject<Array<DTOAchatsTicker>>();
 
   private cleMessageErreur: string | undefined;
 
@@ -65,7 +59,7 @@ export class ValeursService {
     if (this.validerAchatsTickers(achatsTickers)) {
       achatsTickers = this.filtrerTickerSansAchat(achatsTickers);
       window.localStorage.setItem(ValeursService.ACHATS, JSON.stringify(achatsTickers));
-      ValeursService.OBSERVERS_UPDATE_ACHATS.forEach(observer => observer.next(achatsTickers));
+      this.updateSubject.next(achatsTickers);
       return undefined;
     } else {
       return this.translateService.instant(this.cleMessageErreur!);
@@ -91,8 +85,8 @@ export class ValeursService {
     }
   }
 
-  public onUpdateAchats(handler: ((value: Array<DTOAchatsTicker>) => void)): void {
-    ValeursService.OBSERVABLE_UPDATE_ACHATS.subscribe(handler);
+  public onUpdateAchats(handler: ((value: Array<DTOAchatsTicker>) => void)): Subscription {
+    return this.updateSubject.subscribe(handler);
   }
 
   public importAchats(json: string): string | undefined {
@@ -101,7 +95,7 @@ export class ValeursService {
       if (this.validerAchatsTickers(achatsTickers)) {
         achatsTickers = this.filtrerTickerSansAchat(achatsTickers);
         window.localStorage.setItem(ValeursService.ACHATS, JSON.stringify(achatsTickers));
-        ValeursService.OBSERVERS_IMPORT_ACHATS.forEach(observer => observer.next(achatsTickers));
+        this.importSubject.next(achatsTickers);
         return undefined;
       } else {
         return this.translateService.instant(this.cleMessageErreur!);
@@ -111,8 +105,8 @@ export class ValeursService {
     }
   }
 
-  public onImportAchats(handler: ((value: Array<DTOAchatsTicker>) => void)): void {
-    ValeursService.OBSERVABLE_IMPORT_ACHATS.subscribe(handler);
+  public onImportAchats(handler: ((value: Array<DTOAchatsTicker>) => void)): Subscription {
+    return this.importSubject.subscribe(handler);
   }
 
   private validerAchatsTickers(achatsTickers: Array<DTOAchatsTicker>): boolean {

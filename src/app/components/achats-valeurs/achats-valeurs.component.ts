@@ -1,4 +1,4 @@
-import {Component, OnInit, viewChild} from '@angular/core';
+import {Component, OnDestroy, OnInit, viewChild} from '@angular/core';
 import {ValeursService} from '../../services/valeurs/valeurs.service';
 import {DTOAchatsTicker} from '../../services/valeurs/dto-achats-ticker.interface';
 import {DTOValeur} from '../../services/valeurs/dto-valeur.interface';
@@ -16,6 +16,7 @@ import {TableauOrdresAchatsComponent} from './tableau-ordres-achats/tableau-ordr
 import {EtapeValeur} from '../valeurs/achats-valeur/etape-valeur.enum';
 import {EtapeValeurUtil} from '../valeurs/achats-valeur/etape-valeur-util.class';
 import {TableauOrdresVentesComponent} from './tableau-ordres-ventes/tableau-ordres-ventes.component';
+import {Subscription} from 'rxjs';
 
 @Component({
   selector: 'app-achats-valeurs',
@@ -32,7 +33,7 @@ import {TableauOrdresVentesComponent} from './tableau-ordres-ventes/tableau-ordr
   templateUrl: './achats-valeurs.component.html',
   styleUrls: ['./achats-valeurs.component.sass', '../commun/titre.sass']
 })
-export class AchatsValeursComponent implements OnInit {
+export class AchatsValeursComponent implements OnInit, OnDestroy {
   public dialogCoursAchatsNonRevendusComponent = viewChild(DialogCoursAchatsComponent);
 
   // données pour la vue
@@ -44,6 +45,9 @@ export class AchatsValeursComponent implements OnInit {
 
   // private
   private valeurByTicker?: Map<string, DTOValeur>;
+  private onImportAchats?: Subscription;
+  private onUpdateAchats?: Subscription;
+
 
   constructor(private translateService: TranslateService,
               private valeursService: ValeursService,
@@ -52,14 +56,19 @@ export class AchatsValeursComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.valeursService.onImportAchats(achatsTickers => this.construireVue());
-    this.valeursService.onUpdateAchats(achatsTickers => this.construireVue());
+    this.onImportAchats = this.valeursService.onImportAchats(achatsTickers => this.construireVue());
+    this.onUpdateAchats = this.valeursService.onUpdateAchats(achatsTickers => this.construireVue());
     this.valeursService.chargerValeurs().subscribe(valeurs => {
       this.valeurByTicker = new Map<string, DTOValeur>();
       valeurs.forEach(valeur => this.valeurByTicker!.set(valeur.ticker, valeur));
       this.construireVue();
       this.loading = false;
     });
+  }
+
+  ngOnDestroy(): void {
+    this.onImportAchats?.unsubscribe();
+    this.onUpdateAchats?.unsubscribe();
   }
 
   private construireVue() {

@@ -1,4 +1,4 @@
-import {Component, OnInit, viewChild} from '@angular/core';
+import {Component, OnDestroy, OnInit, viewChild} from '@angular/core';
 import {CurrencyPipe, DatePipe, DecimalPipe, NgClass, NgStyle, PercentPipe} from '@angular/common';
 import {PortefeuillesService} from '../../services/portefeuilles/portefeuilles.service';
 import {TableModule} from 'primeng/table';
@@ -41,6 +41,7 @@ import {
 import {
   DialogCotationsValeursPortefeuilleComponent
 } from './popover-actions-valeur/dialog-cotations-valeurs-portefeuille/dialog-cotations-valeurs-portefeuille.component';
+import {Subscription} from 'rxjs';
 
 @Component({
   selector: 'app-portefeuilles',
@@ -75,7 +76,7 @@ import {
   templateUrl: './portefeuilles.component.html',
   styleUrls: ['./tabs-panel.sass', './portefeuilles.component.sass', '../commun/titre.sass']
 })
-export class PortefeuillesComponent implements OnInit {
+export class PortefeuillesComponent implements OnInit, OnDestroy {
   private actionsValeur = viewChild(PopoverActionsValeurComponent);
   private dialogCoursTickerComponent = viewChild(DialogCotationsValeurComponent);
   private dialogCotationsTickersPortefeuilleComponent = viewChild(DialogCotationsValeursPortefeuilleComponent);
@@ -104,6 +105,10 @@ export class PortefeuillesComponent implements OnInit {
   // privé
   private listeCours?: DTOCoursAvecListeAllege[];
   protected valeurByTicker?: Map<string, DTOValeur>;
+  private onUpdatePortefeuilles?: Subscription;
+  private onUpdateAchats?: Subscription;
+  private onUpdateTableaux?: Subscription;
+  private onUpdateDividendes?: Subscription;
 
   constructor(private portefeuillesService: PortefeuillesService,
               private valeursService: ValeursService,
@@ -112,10 +117,10 @@ export class PortefeuillesComponent implements OnInit {
               private dividendesService: DividendesService,
               private breakpointObserver: BreakpointObserver) {
     // restauration des paramètres ou modification des valeurs d'un portefeuille ou des achats de valeur
-    portefeuillesService.onUpdate(portefeuilles => this.chargerPortefeuilleCourant());
-    valeursService.onUpdateAchats(achatsTickers => this.chargerPortefeuilleCourant());
-    tableauxService.onUpdate(tableaux => this.definirCoursPortefeuilleCourant());
-    dividendesService.onUpdate(dividendes => this.definirCoursPortefeuilleCourant());
+    this.onUpdatePortefeuilles = portefeuillesService.onUpdate(portefeuilles => this.chargerPortefeuilleCourant());
+    this.onUpdateAchats = valeursService.onUpdateAchats(achatsTickers => this.chargerPortefeuilleCourant());
+    this.onUpdateTableaux = tableauxService.onUpdate(tableaux => this.definirCoursPortefeuilleCourant());
+    this.onUpdateDividendes = dividendesService.onUpdate(dividendes => this.definirCoursPortefeuilleCourant());
 
     // cet observable émet initialement une correspondance !
     breakpointObserver.observe([
@@ -131,6 +136,13 @@ export class PortefeuillesComponent implements OnInit {
       this.determinerIdxPortefeuilleCourant();
       this.chargerPortefeuilleCourant();
     });
+  }
+
+  ngOnDestroy(): void {
+    this.onUpdatePortefeuilles?.unsubscribe();
+    this.onUpdateAchats?.unsubscribe();
+    this.onUpdateTableaux?.unsubscribe();
+    this.onUpdateDividendes?.unsubscribe();
   }
 
   private determinerIdxPortefeuilleCourant() {

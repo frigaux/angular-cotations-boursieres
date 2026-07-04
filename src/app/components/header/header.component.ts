@@ -1,10 +1,11 @@
-import {Component} from '@angular/core';
+import {Component, OnDestroy} from '@angular/core';
 
 import {MenuItem} from 'primeng/api';
 import {Menubar} from 'primeng/menubar';
 import {CommonModule} from '@angular/common';
 import {TranslateService} from '@ngx-translate/core';
 import {PortefeuillesService} from '../../services/portefeuilles/portefeuilles.service';
+import {Subscription} from 'rxjs';
 
 @Component({
   selector: 'app-header',
@@ -12,13 +13,21 @@ import {PortefeuillesService} from '../../services/portefeuilles/portefeuilles.s
   templateUrl: './header.component.html',
   styleUrl: './header.component.sass'
 })
-export class HeaderComponent {
+export class HeaderComponent implements OnDestroy {
   items: MenuItem[] = [];
 
+  private onImportPortefeuilles?: Subscription;
+  private onUpdatePortefeuilles?: Subscription;
+
   constructor(private translateService: TranslateService, private portefeuillesService: PortefeuillesService) {
-    portefeuillesService.onUpdate(portefeuilles => this.makeItems(translateService))
-    portefeuillesService.onImport(portefeuilles => this.makeItems(translateService))
+    this.onImportPortefeuilles = portefeuillesService.onImport(portefeuilles => this.makeItems(translateService));
+    this.onUpdatePortefeuilles = portefeuillesService.onUpdate(portefeuilles => this.makeItems(translateService));
     this.makeItems(translateService);
+  }
+
+  ngOnDestroy(): void {
+    this.onImportPortefeuilles?.unsubscribe();
+    this.onUpdatePortefeuilles?.unsubscribe();
   }
 
   private makeItems(translateService: TranslateService) {

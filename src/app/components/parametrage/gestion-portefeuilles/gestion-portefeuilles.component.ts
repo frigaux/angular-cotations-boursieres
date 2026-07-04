@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {Card} from 'primeng/card';
 import {TranslatePipe, TranslateService} from '@ngx-translate/core';
@@ -17,6 +17,7 @@ import {CdkDrag, CdkDragDrop, CdkDropList, moveItemInArray} from '@angular/cdk/d
 import {DialogueService} from '../../../services/dialogue/dialogue.service';
 import {ConfirmationService} from 'primeng/api';
 import {Checkbox} from 'primeng/checkbox';
+import {Subscription} from 'rxjs';
 
 @Component({
   selector: 'app-gestion-portefeuilles',
@@ -38,13 +39,15 @@ import {Checkbox} from 'primeng/checkbox';
   templateUrl: './gestion-portefeuilles.component.html',
   styleUrls: ['./gestion-portefeuilles.component.sass', '../../commun/titre.sass']
 })
-export class GestionPortefeuillesComponent implements OnInit {
+export class GestionPortefeuillesComponent implements OnInit, OnDestroy {
   // données pour la vue
   portefeuilles: Array<DTOPortefeuille> = [];
   portefeuilleNomEnModification: DTOPortefeuille | undefined;
   portefeuilleValeursEnModification: DTOPortefeuille | undefined;
   portefeuilleAlertesEnModification: DTOPortefeuille | undefined;
   afficherCreation: boolean = false;
+
+  private onImportPortefeuilles?: Subscription;
 
   constructor(private portefeuillesService: PortefeuillesService,
               private translateService: TranslateService,
@@ -54,7 +57,11 @@ export class GestionPortefeuillesComponent implements OnInit {
 
   ngOnInit(): void {
     this.portefeuilles = this.portefeuillesService.charger();
-    this.portefeuillesService.onImport(portefeuilles => this.portefeuilles = portefeuilles);
+    this.onImportPortefeuilles = this.portefeuillesService.onImport(portefeuilles => this.portefeuilles = portefeuilles);
+  }
+
+  ngOnDestroy(): void {
+    this.onImportPortefeuilles?.unsubscribe();
   }
 
   creerPortefeuille(parametres: { nom: string, initialiserAlertes: boolean }) {

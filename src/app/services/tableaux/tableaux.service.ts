@@ -7,7 +7,7 @@ import {TypesColonnesPortefeuille} from './types-colonnes-portefeuille.enum';
 import {CoursPortefeuille} from '../../components/portefeuilles/cours-portefeuille.class';
 import {CurrencyPipe, DatePipe, DecimalPipe, PercentPipe} from '@angular/common';
 import {TypesColonnesCours} from './types-colonnes-cours.enum';
-import {Observable, Subscriber} from 'rxjs';
+import {Subject, Subscription} from 'rxjs';
 import {ValeursService} from '../valeurs/valeurs.service';
 import {DividendesService} from '../dividendes/dividendes.service';
 import {EtapeValeur} from '../../components/valeurs/achats-valeur/etape-valeur.enum';
@@ -17,16 +17,10 @@ import {EtapeValeur} from '../../components/valeurs/achats-valeur/etape-valeur.e
 })
 export class TableauxService {
   private static readonly TABLEAUX: string = 'tableaux';
-  private static readonly OBSERVERS_UPDATE: Array<Subscriber<DTOTableaux>> = [];
-  private static readonly OBSERVABLE_UPDATE: Observable<DTOTableaux> = new Observable(observer => {
-    TableauxService.OBSERVERS_UPDATE.push(observer);
-  });
-  private static readonly OBSERVERS_IMPORT: Array<Subscriber<DTOTableaux>> = [];
-  private static readonly OBSERVABLE_IMPORT: Observable<DTOTableaux> = new Observable(observer => {
-    TableauxService.OBSERVERS_IMPORT.push(observer);
-  });
 
   private cleMessageErreur?: string;
+  private readonly importSubject = new Subject<DTOTableaux>();
+  private readonly updateSubject = new Subject<DTOTableaux>();
 
   public static readonly CONFIGURATION_INITIALE: {
     DESKTOP: DTOTableaux,
@@ -356,7 +350,7 @@ export class TableauxService {
   public enregistrer(tableaux: DTOTableaux): string | undefined {
     if (this.validerTableaux(tableaux)) {
       window.localStorage.setItem(TableauxService.TABLEAUX, JSON.stringify(tableaux));
-      TableauxService.OBSERVERS_UPDATE.forEach(observer => observer.next(tableaux));
+      this.updateSubject.next(tableaux);
       return undefined;
     } else {
       return this.translateService.instant(this.cleMessageErreur!);
@@ -368,7 +362,7 @@ export class TableauxService {
       const tableaux: any = JSON.parse(json);
       if (this.validerTableaux(tableaux)) {
         window.localStorage.setItem(TableauxService.TABLEAUX, JSON.stringify(tableaux));
-        TableauxService.OBSERVERS_IMPORT.forEach(observer => observer.next(tableaux));
+        this.importSubject.next(tableaux);
         return undefined;
       } else {
         return this.translateService.instant(this.cleMessageErreur!);
@@ -378,12 +372,12 @@ export class TableauxService {
     }
   }
 
-  public onUpdate(handler: ((value: DTOTableaux) => void)): void {
-    TableauxService.OBSERVABLE_UPDATE.subscribe(handler);
+  public onUpdate(handler: ((value: DTOTableaux) => void)): Subscription {
+    return this.updateSubject.subscribe(handler);
   }
 
-  public onImport(handler: ((value: DTOTableaux) => void)): void {
-    TableauxService.OBSERVABLE_IMPORT.subscribe(handler);
+  public onImport(handler: ((value: DTOTableaux) => void)): Subscription {
+    return this.importSubject.subscribe(handler);
   }
 
   public typeAvecParametre<T extends TypesColonnesPortefeuille | TypesColonnesCours>(type: T) {

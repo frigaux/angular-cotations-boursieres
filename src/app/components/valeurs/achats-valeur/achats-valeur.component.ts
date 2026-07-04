@@ -1,4 +1,4 @@
-import {Component, input, InputSignal, OnInit} from '@angular/core';
+import {Component, input, InputSignal, OnDestroy, OnInit} from '@angular/core';
 import {ValeursService} from '../../../services/valeurs/valeurs.service';
 import {DTOAchat} from '../../../services/valeurs/dto-achat.interface';
 import {TranslatePipe, TranslateService} from '@ngx-translate/core';
@@ -11,6 +11,7 @@ import {ConfirmationService} from 'primeng/api';
 import {DialogueService} from '../../../services/dialogue/dialogue.service';
 import {EtapeValeur} from './etape-valeur.enum';
 import {Select} from 'primeng/select';
+import {Subscription} from 'rxjs';
 
 @Component({
   selector: 'app-achats-valeur',
@@ -24,7 +25,7 @@ import {Select} from 'primeng/select';
   templateUrl: './achats-valeur.component.html',
   styleUrl: './achats-valeur.component.sass'
 })
-export class AchatsValeurComponent implements OnInit {
+export class AchatsValeurComponent implements OnInit, OnDestroy {
   // input/output
   inputValeur: InputSignal<{ ticker: string, prixParDefaut: number } | undefined> = input(undefined,
     {transform: o => this.intercepteurTicker(o), alias: 'valeur'});
@@ -39,6 +40,7 @@ export class AchatsValeurComponent implements OnInit {
   etapesValeur?: Array<{ libelle: string, etape: EtapeValeur }>;
   protected readonly EtapeValeur = EtapeValeur;
 
+  private onImportAchats?: Subscription;
 
   constructor(private translateService: TranslateService,
               private valeursService: ValeursService,
@@ -54,7 +56,11 @@ export class AchatsValeurComponent implements OnInit {
       {libelle: this.translateService.instant('ENUMERATIONS.ETAPE_VALEUR.ORDRE_VENTE'), etape: EtapeValeur.ORDRE_VENTE},
       {libelle: this.translateService.instant('ENUMERATIONS.ETAPE_VALEUR.VENTE'), etape: EtapeValeur.VENTE},
     ];
-    this.valeursService.onImportAchats(achatsTickers => this.construireVue());
+    this.onImportAchats = this.valeursService.onImportAchats(achatsTickers => this.construireVue());
+  }
+
+  ngOnDestroy(): void {
+    this.onImportAchats?.unsubscribe();
   }
 
   private intercepteurTicker(valeur: { ticker: string, prixParDefaut: number } | undefined): {

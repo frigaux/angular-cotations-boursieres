@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {TranslatePipe} from "@ngx-translate/core";
 import {Dialog} from 'primeng/dialog';
 import {FloatLabel} from 'primeng/floatlabel';
@@ -11,6 +11,7 @@ import {DTODividende} from '../../../services/dividendes/dto-dividende.interface
 import {ParseUtil} from '../../../services/commun/parse-util.class';
 import {TypeDividende} from '../../../services/dividendes/type-dividende.enum';
 import {DTODividendes} from '../../../services/dividendes/dto-dividendes.class';
+import {Subscription} from 'rxjs';
 
 @Component({
   selector: 'app-dialog-import-export',
@@ -27,17 +28,23 @@ import {DTODividendes} from '../../../services/dividendes/dto-dividendes.class';
   templateUrl: './dialog-import-export.component.html',
   styleUrls: ['../../parametrage/gestion-portefeuilles/dialog-import-export/dialog-import-export.component.sass', './dialog-import-export.component.sass']
 })
-export class DialogImportExportComponent implements OnInit {
+export class DialogImportExportComponent implements OnInit, OnDestroy {
   visible: boolean = false;
   dividendes: string = '';
   erreur?: string;
   moisDejaImportes?: Array<string>;
 
+  private onUpdateDividendes?: Subscription;
+
   constructor(private dividendesService: DividendesService) {
   }
 
   ngOnInit(): void {
-    this.dividendesService.onUpdate(dividendes => this.construireVue());
+    this.onUpdateDividendes = this.dividendesService.onUpdate(dividendes => this.construireVue());
+  }
+
+  ngOnDestroy(): void {
+    this.onUpdateDividendes?.unsubscribe();
   }
 
   reinitialiserVue() {

@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {LoaderComponent} from '../loader/loader.component';
 import {TranslatePipe} from '@ngx-translate/core';
 import {DividendesService} from '../../services/dividendes/dividendes.service';
@@ -8,6 +8,7 @@ import {ValeursService} from '../../services/valeurs/valeurs.service';
 import {DTOValeur} from '../../services/valeurs/dto-valeur.interface';
 import {DividendeDecore} from './dividende-decore.interface';
 import {DialogImportExportComponent} from './dialog-import-export/dialog-import-export.component';
+import {Subscription} from 'rxjs';
 
 @Component({
   selector: 'app-dividendes',
@@ -24,7 +25,7 @@ import {DialogImportExportComponent} from './dialog-import-export/dialog-import-
   templateUrl: './dividendes.component.html',
   styleUrls: ['./dividendes.component.sass', '../commun/titre.sass']
 })
-export class DividendesComponent implements OnInit {
+export class DividendesComponent implements OnInit, OnDestroy {
   // chargement des valeurs et dividendes
   loading: boolean = true;
 
@@ -34,6 +35,7 @@ export class DividendesComponent implements OnInit {
 
   // private
   private valeurByTicker?: Map<string, DTOValeur>;
+  private onUpdateDividendes?: Subscription;
 
   constructor(private valeursService: ValeursService,
               private dividendesService: DividendesService) {
@@ -55,13 +57,17 @@ export class DividendesComponent implements OnInit {
   // }
 
   ngOnInit(): void {
-    this.dividendesService.onUpdate(dividendes => this.construireVue());
+    this.onUpdateDividendes = this.dividendesService.onUpdate(dividendes => this.construireVue());
     this.valeursService.chargerValeurs().subscribe(valeurs => {
       this.valeurByTicker = new Map<string, DTOValeur>();
       valeurs.forEach(valeur => this.valeurByTicker!.set(valeur.ticker, valeur));
       this.construireVue();
       this.loading = false;
     });
+  }
+
+  ngOnDestroy(): void {
+    this.onUpdateDividendes?.unsubscribe();
   }
 
   private construireVue() {

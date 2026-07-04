@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {TableauxService} from '../../../services/tableaux/tableaux.service';
 import {DTOTableaux} from '../../../services/tableaux/dto-tableaux.interface';
 import {ConfigurationTableauComponent} from './configuration-tableau/configuration-tableau.component';
@@ -6,6 +6,7 @@ import {TypesColonnes} from '../../../services/tableaux/types-colonnes.enum.ts';
 import {TranslatePipe, TranslateService} from '@ngx-translate/core';
 import {Card} from 'primeng/card';
 import {DialogImportExportComponent} from './dialog-import-export/dialog-import-export.component';
+import {Subscription} from 'rxjs';
 
 @Component({
   selector: 'app-gestion-tableaux',
@@ -18,12 +19,14 @@ import {DialogImportExportComponent} from './dialog-import-export/dialog-import-
   templateUrl: './gestion-tableaux.component.html',
   styleUrls: ['./gestion-tableaux.component.sass', '../../commun/titre.sass']
 })
-export class GestionTableauxComponent implements OnInit {
+export class GestionTableauxComponent implements OnInit, OnDestroy {
   // données pour la vue
   tableaux?: DTOTableaux;
   protected readonly TypesColonnes = TypesColonnes;
   erreur?: string;
   succes?: string;
+
+  private onImportTableaux?: Subscription;
 
   constructor(private translateService: TranslateService,
               private tableauxService: TableauxService) {
@@ -31,7 +34,11 @@ export class GestionTableauxComponent implements OnInit {
 
   ngOnInit(): void {
     this.tableaux = this.tableauxService.charger();
-    this.tableauxService.onImport(tableaux => this.tableaux = tableaux);
+    this.onImportTableaux = this.tableauxService.onImport(tableaux => this.tableaux = tableaux);
+  }
+
+  ngOnDestroy(): void {
+    this.onImportTableaux?.unsubscribe();
   }
 
   enregistrer() {

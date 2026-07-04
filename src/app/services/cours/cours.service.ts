@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
-import {Observable, of, Subscriber} from 'rxjs';
+import {Observable, of, Subject, Subscription} from 'rxjs';
 import {DTOListeCours} from './dto-liste-cours.interface';
 import {DTOCoursTicker} from './dto-cours-ticker.interface';
 import {DTOCoursTickerAllege} from './dto-cours-ticker-allege.interface';
@@ -13,14 +13,8 @@ import {DTOFiltre} from './dto-filtre.interface';
 })
 export class CoursService {
   private static readonly FILTRES: string = 'filtres';
-  private static readonly OBSERVERS_IMPORT_FILTRES: Array<Subscriber<Array<DTOFiltre>>> = [];
-  private static readonly OBSERVERS_UPDATE_FILTRES: Array<Subscriber<Array<DTOFiltre>>> = [];
-  private static readonly OBSERVABLE_IMPORT_FILTRES: Observable<Array<DTOFiltre>> = new Observable(observer => {
-    CoursService.OBSERVERS_IMPORT_FILTRES.push(observer);
-  });
-  private static readonly OBSERVABLE_UPDATE_FILTRES: Observable<Array<DTOFiltre>> = new Observable(observer => {
-    CoursService.OBSERVERS_UPDATE_FILTRES.push(observer);
-  });
+  private readonly importSubject = new Subject<Array<DTOFiltre>>();
+  private readonly updateSubject = new Subject<Array<DTOFiltre>>();
 
   private cleMessageErreur: string | undefined;
 
@@ -102,7 +96,7 @@ export class CoursService {
   public enregistrerFiltres(filtres: Array<DTOFiltre>): string | undefined {
     if (this.validerFiltres(filtres)) {
       window.localStorage.setItem(CoursService.FILTRES, JSON.stringify(filtres));
-      CoursService.OBSERVERS_UPDATE_FILTRES.forEach(observer => observer.next(filtres));
+      this.updateSubject.next(filtres);
       return undefined;
     } else {
       return this.translateService.instant(this.cleMessageErreur!);
@@ -114,7 +108,7 @@ export class CoursService {
       const filtres: any = JSON.parse(json);
       if (this.validerFiltres(filtres)) {
         window.localStorage.setItem(CoursService.FILTRES, JSON.stringify(filtres));
-        CoursService.OBSERVERS_IMPORT_FILTRES.forEach(observer => observer.next(filtres));
+        this.importSubject.next(filtres);
         return undefined;
       } else {
         return this.translateService.instant(this.cleMessageErreur!);
@@ -124,12 +118,12 @@ export class CoursService {
     }
   }
 
-  public onImportFiltres(handler: ((value: Array<DTOFiltre>) => void)): void {
-    CoursService.OBSERVABLE_IMPORT_FILTRES.subscribe(handler);
+  public onImportFiltres(handler: ((value: Array<DTOFiltre>) => void)): Subscription {
+    return this.importSubject.subscribe(handler);
   }
 
-  public onUpdateFiltres(handler: ((value: Array<DTOFiltre>) => void)): void {
-    CoursService.OBSERVABLE_UPDATE_FILTRES.subscribe(handler);
+  public onUpdateFiltres(handler: ((value: Array<DTOFiltre>) => void)): Subscription {
+    return this.updateSubject.subscribe(handler);
   }
 
   private validerFiltres(filtres: any): boolean {

@@ -1,9 +1,10 @@
-import {Component, OnInit, output} from '@angular/core';
+import {Component, OnDestroy, OnInit, output} from '@angular/core';
 import {CoursService} from '../../../services/cours/cours.service';
 import {TranslatePipe} from '@ngx-translate/core';
 import {DialogEditeurFiltresComponent} from '../dialog-editeur-filtres/dialog-editeur-filtres.component';
 import {FiltreDecore} from './filtre-decore.class';
 import {NgClass} from '@angular/common';
+import {Subscription} from 'rxjs';
 
 @Component({
   selector: 'app-selecteur-filtre',
@@ -15,7 +16,7 @@ import {NgClass} from '@angular/common';
   templateUrl: './selecteur-filtre.component.html',
   styleUrl: './selecteur-filtre.component.sass'
 })
-export class SelecteurFiltreComponent implements OnInit {
+export class SelecteurFiltreComponent implements OnInit, OnDestroy {
   selection = output<FiltreDecore | undefined>();
 
   // données pour la vue
@@ -23,13 +24,21 @@ export class SelecteurFiltreComponent implements OnInit {
   editeurVisible: boolean = false;
   filtreActif?: FiltreDecore;
 
+  private onImportFiltres?: Subscription;
+  private onUpdateFiltres?: Subscription;
+
   constructor(private coursService: CoursService) {
   }
 
   ngOnInit(): void {
-    this.coursService.onImportFiltres(filtres => this.decorerFiltres());
-    this.coursService.onUpdateFiltres(filtres => this.decorerFiltres());
+    this.onImportFiltres = this.coursService.onImportFiltres(filtres => this.decorerFiltres());
+    this.onUpdateFiltres = this.coursService.onUpdateFiltres(filtres => this.decorerFiltres());
     this.decorerFiltres();
+  }
+
+  ngOnDestroy(): void {
+    this.onImportFiltres?.unsubscribe();
+    this.onUpdateFiltres?.unsubscribe();
   }
 
   private decorerFiltres() {

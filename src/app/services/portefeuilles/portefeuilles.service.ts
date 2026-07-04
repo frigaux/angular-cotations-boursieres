@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {DTOPortefeuille} from './dto-portefeuille.interface';
-import {Observable, Subscriber} from 'rxjs';
+import {Subject, Subscription} from 'rxjs';
 import {TranslateService} from '@ngx-translate/core';
 
 @Injectable({
@@ -8,14 +8,8 @@ import {TranslateService} from '@ngx-translate/core';
 })
 export class PortefeuillesService {
   private static readonly PORTEFEUILLES: string = 'portefeuilles';
-  private static readonly OBSERVERS_IMPORT: Array<Subscriber<Array<DTOPortefeuille>>> = [];
-  private static readonly OBSERVERS_UPDATE: Array<Subscriber<Array<DTOPortefeuille>>> = [];
-  private static readonly OBSERVABLE_IMPORT: Observable<Array<DTOPortefeuille>> = new Observable(observer => {
-    PortefeuillesService.OBSERVERS_IMPORT.push(observer);
-  });
-  private static readonly OBSERVABLE_UPDATE: Observable<Array<DTOPortefeuille>> = new Observable(observer => {
-    PortefeuillesService.OBSERVERS_UPDATE.push(observer);
-  });
+  private readonly SUBJECT_IMPORT = new Subject<Array<DTOPortefeuille>>();
+  private readonly SUBJECT_UPDATE = new Subject<Array<DTOPortefeuille>>();
 
   private cleMessageErreur: string | undefined;
 
@@ -139,7 +133,7 @@ export class PortefeuillesService {
   public enregistrer(portefeuilles: Array<DTOPortefeuille>): string | undefined {
     if (this.validerPortefeuilles(portefeuilles)) {
       window.localStorage.setItem(PortefeuillesService.PORTEFEUILLES, JSON.stringify(portefeuilles));
-      PortefeuillesService.OBSERVERS_UPDATE.forEach(observer => observer.next(portefeuilles));
+      this.SUBJECT_UPDATE.next(portefeuilles);
       return undefined;
     } else {
       return this.translateService.instant(this.cleMessageErreur!);
@@ -151,7 +145,7 @@ export class PortefeuillesService {
       const portefeuilles: any = JSON.parse(json);
       if (this.validerPortefeuilles(portefeuilles)) {
         window.localStorage.setItem(PortefeuillesService.PORTEFEUILLES, JSON.stringify(portefeuilles));
-        PortefeuillesService.OBSERVERS_IMPORT.forEach(observer => observer.next(portefeuilles));
+        this.SUBJECT_IMPORT.next(portefeuilles);
         return undefined;
       } else {
         return this.translateService.instant(this.cleMessageErreur!);
@@ -161,16 +155,16 @@ export class PortefeuillesService {
     }
   }
 
-  public onImport(handler: ((value: Array<DTOPortefeuille>) => void)): void {
-    PortefeuillesService.OBSERVABLE_IMPORT.subscribe(handler);
+  public onImport(handler: ((value: Array<DTOPortefeuille>) => void)): Subscription {
+    return this.SUBJECT_IMPORT.subscribe(handler);
   }
 
   /**
    * Enregistrements et imports.
    * @param handler lambda avec les portefeuilles en paramètre
    */
-  public onUpdate(handler: ((value: Array<DTOPortefeuille>) => void)): void {
-    PortefeuillesService.OBSERVABLE_UPDATE.subscribe(handler);
+  public onUpdate(handler: ((value: Array<DTOPortefeuille>) => void)): Subscription {
+    return this.SUBJECT_UPDATE.subscribe(handler);
   }
 
   private validerPortefeuilles(portefeuilles: any): boolean {

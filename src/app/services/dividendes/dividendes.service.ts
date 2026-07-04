@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {Observable, Subscriber} from 'rxjs';
+import {Subject, Subscription} from 'rxjs';
 import {DTODividendes} from './dto-dividendes.class';
 import {TranslateService} from '@ngx-translate/core';
 import {TypeDividende} from './type-dividende.enum';
@@ -10,14 +10,12 @@ import {DTODividende} from './dto-dividende.interface';
 })
 export class DividendesService {
   private static readonly DIVIDENDES: string = 'dividendes';
-  private static readonly OBSERVERS_UPDATE: Array<Subscriber<DTODividendes>> = [];
-  private static readonly OBSERVABLE_UPDATE: Observable<DTODividendes> = new Observable(observer => {
-    DividendesService.OBSERVERS_UPDATE.push(observer);
-  });
 
   public static readonly REPLACER = (key: string, value: any) => Number.isNaN(value) ? "NaN" : value;
 
   private cleMessageErreur: string | undefined;
+  private readonly updateSubject = new Subject<DTODividendes>();
+
 
   constructor(private translateService: TranslateService) {
   }
@@ -69,14 +67,14 @@ export class DividendesService {
     return true;
   }
 
-  public onUpdate(handler: ((value: DTODividendes) => void)): void {
-    DividendesService.OBSERVABLE_UPDATE.subscribe(handler);
+  public onUpdate(handler: ((value: DTODividendes) => void)): Subscription {
+    return this.updateSubject.subscribe(handler);
   }
 
   public enregistrer(dividendes: DTODividendes): string | undefined {
     if (this.validerDividendes(dividendes)) {
       window.localStorage.setItem(DividendesService.DIVIDENDES, JSON.stringify(dividendes, DividendesService.REPLACER));
-      DividendesService.OBSERVERS_UPDATE.forEach(observer => observer.next(dividendes));
+      this.updateSubject.next(dividendes);
       return undefined;
     } else {
       return this.translateService.instant(this.cleMessageErreur!);
