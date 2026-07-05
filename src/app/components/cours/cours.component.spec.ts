@@ -68,7 +68,7 @@ describe('CoursComponent', () => {
       component.trierColonnes({field: 'libelle'}, component.marches![0]);
       component.trierColonnes({field: 'cloture'}, component.marches![0]);
       component.trierColonnes({field: 'var1'}, component.marches![0]);
-      expect(component.coursSelectionne).toEqual({cours, premier: true, dernier: true});
+      expect(component.coursSelectionne).toEqual({cours, valeur: VALEUR, premier: true, dernier: true});
     });
   });
 });

@@ -8,8 +8,8 @@ import {TranslateService} from '@ngx-translate/core';
 })
 export class PortefeuillesService {
   private static readonly PORTEFEUILLES: string = 'portefeuilles';
-  private readonly SUBJECT_IMPORT = new Subject<Array<DTOPortefeuille>>();
-  private readonly SUBJECT_UPDATE = new Subject<Array<DTOPortefeuille>>();
+  private readonly importSubject = new Subject<Array<DTOPortefeuille>>();
+  private readonly updateSubject = new Subject<Array<DTOPortefeuille>>();
 
   private cleMessageErreur: string | undefined;
 
@@ -133,7 +133,7 @@ export class PortefeuillesService {
   public enregistrer(portefeuilles: Array<DTOPortefeuille>): string | undefined {
     if (this.validerPortefeuilles(portefeuilles)) {
       window.localStorage.setItem(PortefeuillesService.PORTEFEUILLES, JSON.stringify(portefeuilles));
-      this.SUBJECT_UPDATE.next(portefeuilles);
+      this.updateSubject.next(portefeuilles);
       return undefined;
     } else {
       return this.translateService.instant(this.cleMessageErreur!);
@@ -145,7 +145,7 @@ export class PortefeuillesService {
       const portefeuilles: any = JSON.parse(json);
       if (this.validerPortefeuilles(portefeuilles)) {
         window.localStorage.setItem(PortefeuillesService.PORTEFEUILLES, JSON.stringify(portefeuilles));
-        this.SUBJECT_IMPORT.next(portefeuilles);
+        this.importSubject.next(portefeuilles);
         return undefined;
       } else {
         return this.translateService.instant(this.cleMessageErreur!);
@@ -156,7 +156,7 @@ export class PortefeuillesService {
   }
 
   public onImport(handler: ((value: Array<DTOPortefeuille>) => void)): Subscription {
-    return this.SUBJECT_IMPORT.subscribe(handler);
+    return this.importSubject.subscribe(handler);
   }
 
   /**
@@ -164,7 +164,7 @@ export class PortefeuillesService {
    * @param handler lambda avec les portefeuilles en paramètre
    */
   public onUpdate(handler: ((value: Array<DTOPortefeuille>) => void)): Subscription {
-    return this.SUBJECT_UPDATE.subscribe(handler);
+    return this.updateSubject.subscribe(handler);
   }
 
   private validerPortefeuilles(portefeuilles: any): boolean {

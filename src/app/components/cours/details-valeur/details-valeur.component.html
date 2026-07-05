@@ -28,7 +28,12 @@
     @if (informationsDetaillees) {
       <app-informations-ticker [cours]="dto.cours"></app-informations-ticker>
     } @else {
-      <app-chart-moyennes-mobiles [cours]="dto.cours"></app-chart-moyennes-mobiles>
+      <app-loader [affiche]="loading" [configuration]="[
+          {marginLeft: '0', marginTop: '0rem', height: '40rem', width: '100%'},
+      ]"></app-loader>
+      @if (!loading) {
+        <app-charts [cours]="dto.cours"></app-charts>
+      }
     }
   </p-panel>
 }

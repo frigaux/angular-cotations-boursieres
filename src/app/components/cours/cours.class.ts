@@ -14,12 +14,12 @@ export class Cours {
   cloture: number;
   volume: number;
   moyennesMobiles: number[];
-  coursAlleges: DTOCoursTickerAllege[];
+  coursAlleges?: DTOCoursTickerAllege[];
   var1?: number;
   dividendes?: Array<DTODividende>;
 
   private constructor(date: string, ticker: string, libelle: string, ouverture: number, plusHaut: number, plusBas: number,
-                      cloture: number, volume: number, moyennesMobiles: number[], coursAlleges: DTOCoursTickerAllege[], dividendes: Array<DTODividende>) {
+                      cloture: number, volume: number, moyennesMobiles: number[], coursAlleges?: DTOCoursTickerAllege[], dividendes?: Array<DTODividende>) {
     this.date = date;
     this.ticker = ticker;
     this.libelle = libelle;
@@ -37,15 +37,15 @@ export class Cours {
   }
 
   public static fromDTOCours(date: string, libelle: string, dto: DTOCours, dividendes: Array<DTODividende>) {
-    return new Cours(date, dto.ticker, libelle, dto.ouverture, dto.plusHaut, dto.plusBas, dto.cloture, dto.volume, dto.moyennesMobiles, [], dividendes);
+    return new Cours(date, dto.ticker, libelle, dto.ouverture, dto.plusHaut, dto.plusBas, dto.cloture, dto.volume, dto.moyennesMobiles, undefined, dividendes);
   }
 
   public static fromDTOCoursTicker(ticker: string, libelle: string, dto: DTOCoursTicker, cours: DTOCoursTickerAllege[]) {
-    return new Cours(dto.date, ticker, libelle, dto.ouverture, dto.plusHaut, dto.plusBas, dto.cloture, dto.volume, dto.moyennesMobiles, cours, []);
+    return new Cours(dto.date, ticker, libelle, dto.ouverture, dto.plusHaut, dto.plusBas, dto.cloture, dto.volume, dto.moyennesMobiles, cours, undefined);
   }
 
   public static fromCoursPortefeuille(dto: CoursPortefeuille) {
-    return new Cours(dto.date, dto.ticker, dto.libelle, dto.ouverture, dto.plusHaut, dto.plusBas, dto.cloture, dto.volume, dto.moyennesMobiles, dto.coursAlleges, []);
+    return new Cours(dto.date, dto.ticker, dto.libelle, dto.ouverture, dto.plusHaut, dto.plusBas, dto.cloture, dto.volume, dto.moyennesMobiles, dto.coursAlleges, undefined);
   }
 
   public iconeVariation(): string {

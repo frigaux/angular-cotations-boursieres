@@ -67,7 +67,7 @@ export class CoursComponent implements OnInit {
   protected valeurByTicker?: Map<string, DTOValeur>;
 
   // cours pour lequel afficher les moyennes mobiles
-  coursSelectionne?: { cours: Cours, premier: boolean, dernier: boolean };
+  coursSelectionne?: { cours: Cours, valeur: DTOValeur, premier: boolean, dernier: boolean };
 
   // private
   private translateService = inject(TranslateService);
@@ -156,11 +156,12 @@ export class CoursComponent implements OnInit {
   }
 
   private basculerAffichageCours(marche: MarcheDecore, cours: Cours) {
-    if (this.coursSelectionne === undefined || this.coursSelectionne.cours.ticker !== cours.ticker) {
+    if ( this.valeurByTicker && (this.coursSelectionne === undefined || this.coursSelectionne.cours.ticker !== cours.ticker)) {
       this.marcheSelectionne = marche;
       const idxCours = this.marcheSelectionne.cours.indexOf(cours);
       this.coursSelectionne = {
         cours,
+        valeur: this.valeurByTicker.get(cours.ticker)!,
         premier: idxCours === 0,
         dernier: idxCours === this.marcheSelectionne.cours.length - 1
       };
@@ -198,12 +199,13 @@ export class CoursComponent implements OnInit {
   }
 
   valeurPrecedente() {
-    if (this.marcheSelectionne) {
+    if (this.valeurByTicker && this.marcheSelectionne) {
       const idxCours = this.marcheSelectionne.cours.indexOf(this.coursSelectionne!.cours);
       if (idxCours > 0) {
         const cours = this.marcheSelectionne.cours[idxCours - 1];
         this.coursSelectionne = {
           cours,
+          valeur: this.valeurByTicker.get(cours.ticker)!,
           premier: idxCours - 1 === 0,
           dernier: false
         };
@@ -212,12 +214,13 @@ export class CoursComponent implements OnInit {
   }
 
   valeurSuivante() {
-    if (this.marcheSelectionne) {
+    if (this.valeurByTicker && this.marcheSelectionne) {
       const idxCours = this.marcheSelectionne.cours.indexOf(this.coursSelectionne!.cours);
       if (idxCours !== -1 && idxCours + 1 < this.marcheSelectionne.cours.length) {
         const cours = this.marcheSelectionne.cours[idxCours + 1];
         this.coursSelectionne = {
           cours,
+          valeur: this.valeurByTicker.get(cours.ticker)!,
           premier: false,
           dernier: idxCours + 1 === this.marcheSelectionne.cours.length - 1
         };
