@@ -1,4 +1,5 @@
 import {DTOInformationsTickerABCBourse} from '../abc-bourse/dto-informations-ticker-abc-bourse.class';
+import {DTOIdentiteTickerAbcbourse} from '../abc-bourse/dto-identite-ticker-abcbourse';
 
 export const DTO_INFORMATIONS_TICKER_ABCBOURSE: DTOInformationsTickerABCBourse = {
   "ticker": "GLE",
@@ -119,4 +120,16 @@ export const DTO_INFORMATIONS_TICKER_ABCBOURSE: DTOInformationsTickerABCBourse =
       "montant": 0.55
     }
   ]
+};
+
+export const DTO_IDENTITE_TICKER_ABCBOURSE: DTOIdentiteTickerAbcbourse = {
+  "aPropos": "\n        \n    Société Générale figure parmi les 1ers groupes bancaires français. Le Produit Net Bancaire (PNB) par activité se répartit comme suit :\n    -banque de financement et d'investissement (37,7%) : financements spécialisés (d'acquisitions, de projets, etc.), interventions sur les marchés actions, de taux, de change et de matières premières, opérations sur actions, conseil en fusions-acquisitions, activités de banque commerciale, etc. ;\n    -banque de détail en France (33,4% ; SG). En outre, le groupe développe des activités de gestion d'actifs et de banque privée (137 MdsEUR d’actifs gérés en 2025), et propose des prestations d’assurances, de banque en ligne et de courtage en ligne (Boursorama Banque) ainsi qu'un site d'informations économiques et financières (boursorama.com) ;\n    -prestations de services financiers spécialisés et d'assurance à l’international (15,6%) : crédit à la consommation, crédit-bail, gestion de flottes automobiles, financement de biens d’équipement professionnels et assurances ;\n    -banque de détail à l'international (13,3%).\n    A fin 2025, Société Générale gère 519,8 MdsEUR d'encours de dépôts et 454,5 MdsEUR d'encours de crédits.\n    La répartition géographique du PNB est la suivante : France (44,4%), Europe (34,9%), Amériques (10,2%), Asie et Océanie (5,6%) et Afrique (4,9%).\n    \n        ",
+  "marche": "Compartiment A",
+  "place": "Euronext Paris (France)",
+  "secteur": "Banque",
+  "indices": "CAC 40, CAC 40 ESG, CAC All Shares, CAC All-Tradable, CAC Large 60, Euronext 100,  SBF 120, STOXX Europe 600",
+  "nombreTitres": 744394214,
+  "adresse": "\n                            29 Boulevard Haussmann FR-75009 ParisFrance\n                        ",
+  "telephone": "+33 (0)1 42 14 20 00",
+  "dateAssemblee": "2026-05-27"
 };

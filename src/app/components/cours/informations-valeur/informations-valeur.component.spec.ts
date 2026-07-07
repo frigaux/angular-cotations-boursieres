@@ -8,7 +8,10 @@ import {provideAnimations} from '@angular/platform-browser/animations';
 import {TranslateModule} from '@ngx-translate/core';
 import {BoursoramaService} from '../../../services/boursorama/boursorama.service';
 import {ZoneBourseService} from '../../../services/zone-bourse/zone-bourse.service';
-import {DTO_INFORMATIONS_TICKER_ABCBOURSE} from '../../../services/jdd/jdd-abcbourse.dataset';
+import {
+  DTO_IDENTITE_TICKER_ABCBOURSE,
+  DTO_INFORMATIONS_TICKER_ABCBOURSE
+} from '../../../services/jdd/jdd-abcbourse.dataset';
 import {DTO_INFORMATIONS_TICKER_BOURSORAMA} from '../../../services/jdd/jdd-boursorama.dataset';
 
 describe('InformationsValeurComponent', () => {
@@ -16,7 +19,7 @@ describe('InformationsValeurComponent', () => {
   let fixture: ComponentFixture<InformationsValeurComponent>;
 
   const mockBoursoramaService = jasmine.createSpyObj('BoursoramaService', ['chargerInformationsTicker', 'chargerLien']);
-  const mockAbcBourseService = jasmine.createSpyObj('AbcBourseService', ['chargerInformationsTicker', 'chargerLien']);
+  const mockAbcBourseService = jasmine.createSpyObj('AbcBourseService', ['chargerInformationsTicker', 'chargerLien', 'chargerIndentiteTicker']);
   const mockZoneBourseService = jasmine.createSpyObj('ZoneBourseService', ['chargerLien']);
 
   beforeEach(async () => {
@@ -46,6 +49,7 @@ describe('InformationsValeurComponent', () => {
     beforeEach(() => {
       mockAbcBourseService.chargerInformationsTicker.and.returnValue(of(DTO_INFORMATIONS_TICKER_ABCBOURSE));
       mockBoursoramaService.chargerInformationsTicker.and.returnValue(of(DTO_INFORMATIONS_TICKER_BOURSORAMA));
+      mockAbcBourseService.chargerIndentiteTicker.and.returnValue(of(DTO_IDENTITE_TICKER_ABCBOURSE));
     });
 
     it('when input cours then le composant est chargé', () => {
