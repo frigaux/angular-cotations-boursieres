@@ -5,6 +5,7 @@ import {HttpErrorResponse, HttpInterceptorFn, provideHttpClient, withInterceptor
 import {firstValueFrom, lastValueFrom} from 'rxjs';
 import {DTOInformationsTickerABCBourse} from './dto-informations-ticker-abc-bourse.class';
 import {DTOActualitesABCBourse} from './dto-actualites-abc-bourse.class';
+import {DTOIdentiteTickerAbcbourse} from './dto-identite-ticker-abcbourse';
 
 describe('AbcBourseService', () => {
   let service: AbcBourseService;
@@ -79,5 +80,30 @@ describe('AbcBourseService', () => {
     expect(actualites.nouvelles.length).toBeGreaterThan(0);
     expect(actualites.ventesADecouvert.length).toBeGreaterThan(0);
     expect(actualites.transactionsDirigeants.length).toBeGreaterThan(0);
+  });
+
+  it('given AbcBourseService when #chargerActualites then on doit récupérer les actualités', async () => {
+    const promiseActualites: Promise<DTOActualitesABCBourse> = firstValueFrom(service.chargerActualites());
+    const actualites = await promiseActualites;
+    expect(actualites.marches).toBeDefined();
+    expect(actualites.analyses.length).toBeGreaterThan(0);
+    expect(actualites.chroniques.length).toBeGreaterThan(0);
+    expect(actualites.nouvelles.length).toBeGreaterThan(0);
+    expect(actualites.ventesADecouvert.length).toBeGreaterThan(0);
+    expect(actualites.transactionsDirigeants.length).toBeGreaterThan(0);
+  });
+
+  it('given AbcBourseService when #chargerIndentiteTicker then on récupère la carte d\'identité de la société', async () => {
+    const promiseIndentite: Promise<DTOIdentiteTickerAbcbourse> = firstValueFrom(service.chargerIndentiteTicker('AC'));
+    const actualites = await promiseIndentite;
+    expect(actualites.aPropos).toBeTruthy();
+    expect(actualites.marche).toBeTruthy();
+    expect(actualites.place).toBeTruthy();
+    expect(actualites.secteur).toBeTruthy();
+    expect(actualites.indices).toBeTruthy();
+    expect(actualites.nombreTitres).toBeTruthy();
+    expect(actualites.adresse).toBeTruthy();
+    expect(actualites.telephone).toBeTruthy();
+    expect(actualites.dateAssemblee).toBeTruthy();
   });
 });

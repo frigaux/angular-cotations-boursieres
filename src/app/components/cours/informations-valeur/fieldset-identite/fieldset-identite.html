@@ -1,0 +1,42 @@
+@if (identite) {
+  <p-fieldset
+    legend="{{ 'COMPOSANTS.COURS.INFORMATIONS_VALEUR.IDENTITE.IDENTITE' | translate }}">
+    <div>
+      {{ identite.aPropos }}
+    </div>
+    <div class="conteneur">
+      <div>
+        <label>{{ 'COMPOSANTS.COURS.INFORMATIONS_VALEUR.IDENTITE.MARCHE' | translate }}</label>
+        <span>{{ identite.marche }}</span>
+      </div>
+      <div>
+        <label>{{ 'COMPOSANTS.COURS.INFORMATIONS_VALEUR.IDENTITE.PLACE_COTATION' | translate }}</label>
+        <span>{{ identite.place }}</span>
+      </div>
+      <div>
+        <label>{{ 'COMPOSANTS.COURS.INFORMATIONS_VALEUR.IDENTITE.SECTEUR' | translate }}</label>
+        <span>{{ identite.secteur }}</span>
+      </div>
+      <div>
+        <label>{{ 'COMPOSANTS.COURS.INFORMATIONS_VALEUR.IDENTITE.INDICES' | translate }}</label>
+        <span>{{ identite.indices }}</span>
+      </div>
+      <div>
+        <label>{{ 'COMPOSANTS.COURS.INFORMATIONS_VALEUR.IDENTITE.NOMBRE_TITRES' | translate }}</label>
+        <span>{{ identite.nombreTitres | number }}</span>
+      </div>
+      <div>
+        <label>{{ 'COMPOSANTS.COURS.INFORMATIONS_VALEUR.IDENTITE.ADRESSE' | translate }}</label>
+        <span>{{ identite.adresse }}</span>
+      </div>
+      <div>
+        <label>{{ 'COMPOSANTS.COURS.INFORMATIONS_VALEUR.IDENTITE.TELEPHONE' | translate }}</label>
+        <span>{{ identite.telephone }}</span>
+      </div>
+      <div>
+        <label>{{ 'COMPOSANTS.COURS.INFORMATIONS_VALEUR.IDENTITE.DATE_ASSEMBLEE' | translate }}</label>
+        <span>{{ identite.dateAssemblee | date: 'dd/MM/yyyy' }}</span>
+      </div>
+    </div>
+  </p-fieldset>
+}

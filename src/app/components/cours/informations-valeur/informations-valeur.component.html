@@ -24,6 +24,7 @@
         <app-fieldset-cotations [dto]="dtoBoursoramaDecore"></app-fieldset-cotations>
       </div>
       <div class="colonne">
+        <app-fieldset-identite [identite]="dtoIdentiteTickerAbcbourse"></app-fieldset-identite>
         <app-fieldset-indicateurs [data]="{dtoAbcBourse, dtoBoursorama: dtoBoursoramaDecore.dtoBoursorama}"></app-fieldset-indicateurs>
         <app-fieldset-actualites [actualites]="actualites"
                                  (afficherInformation)="afficherActualite($event)"></app-fieldset-actualites>

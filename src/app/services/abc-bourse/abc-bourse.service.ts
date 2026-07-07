@@ -12,6 +12,7 @@ import {DTOLien} from './dto-lien.class';
 import {DTOVentesADecouvert} from './dto-ventes-a-decouvert.class';
 import {DTOTransaction} from './dto-transaction.class';
 import {DTOCotations} from './dto-cotations.interface';
+import {DTOIdentiteTickerAbcbourse} from './dto-identite-ticker-abcbourse';
 
 @Injectable({
   providedIn: 'root'
@@ -307,5 +308,48 @@ export class AbcBourseService {
         new DTOActualiteTicker(ParseUtil.parseDateFrAndMapTo8601(elTDs[0].innerHTML) || elTDs[0].innerHTML, elA!.innerHTML, elA!.pathname)
       );
     });
+  }
+
+  public chargerIndentiteTicker(ticker: string): Observable<DTOIdentiteTickerAbcbourse> {
+    return new Observable(observer => {
+      this.http.get(`/abcbourse/analyses/chiffres/${ticker}p`, {headers: AbcBourseService.HEADERS, responseType: 'text'}).subscribe({
+        error: httpErrorResponse => {
+          observer.error(httpErrorResponse);
+          observer.complete();
+        },
+        next: html => {
+          const dto = this.parseAndMapIndentite(html);
+          if (dto) {
+            observer.next(dto);
+          } else {
+            observer.error();
+          }
+          observer.complete();
+        }
+      });
+    });
+  }
+
+  private parseAndMapIndentite(html: string): DTOIdentiteTickerAbcbourse | undefined {
+    const document = new DOMParser().parseFromString(html, 'text/html');
+    const elPaPropos: HTMLParagraphElement | null = document.querySelector('p.co_b');
+    const elTableIdentite= document.querySelector('div.chiffres_infos table.tbl100_10');
+    const elTdsIdentite: NodeListOf<HTMLTableCellElement> = elTableIdentite!.querySelectorAll('tbody tr td:last-child');
+
+    if (elPaPropos && elTdsIdentite.length === 9) {
+      const aPropos = elPaPropos.innerText;
+      const marche = elTdsIdentite[0].innerText;
+      const place = elTdsIdentite[1].innerText;
+      const secteur = elTdsIdentite[2].innerText;
+      const indices = elTdsIdentite[4].innerText;
+      const nombreTitres = ParseUtil.parseNumber(elTdsIdentite[5].innerText);
+      const adresse = elTdsIdentite[6].innerText;
+      const telephone = elTdsIdentite[7].innerText;
+      const dateAssemblee = ParseUtil.parseDateFrAndMapTo8601(elTdsIdentite[8].innerText);
+      return new DTOIdentiteTickerAbcbourse(aPropos, marche, place, secteur, indices, nombreTitres, adresse, telephone, dateAssemblee);
+    } else {
+      console.error('impossible de recuperer la carte d\'identite de la société');
+      return undefined;
+    }
   }
 }

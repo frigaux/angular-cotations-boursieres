@@ -24,6 +24,8 @@ import {FieldsetPrevisionsComponent} from './fieldset-previsions/fieldset-previs
 import {DTOInformation} from '../../../services/boursorama/dto-information.interface';
 import {DividendesService} from '../../../services/dividendes/dividendes.service';
 import {DTOActualiteTicker} from '../../../services/abc-bourse/dto-actualite-ticker.class';
+import {DTOIdentiteTickerAbcbourse} from '../../../services/abc-bourse/dto-identite-ticker-abcbourse';
+import {FieldsetIdentite} from './fieldset-identite/fieldset-identite';
 
 @Component({
   selector: 'app-informations-ticker',
@@ -41,7 +43,8 @@ import {DTOActualiteTicker} from '../../../services/abc-bourse/dto-actualite-tic
     FieldsetCotationsComponent,
     FieldsetActualitesComponent,
     FieldsetAnalysesComponent,
-    FieldsetPrevisionsComponent
+    FieldsetPrevisionsComponent,
+    FieldsetIdentite
   ],
   templateUrl: './informations-valeur.component.html',
   styleUrl: './informations-valeur.component.sass'
@@ -60,6 +63,7 @@ export class InformationsValeurComponent {
 
   // données pour la vue
   dtoAbcBourse?: DTOInformationsTickerABCBourse;
+  dtoIdentiteTickerAbcbourse?: DTOIdentiteTickerAbcbourse;
   dtoBoursoramaDecore?: CotationsValeurBoursoramaDecore;
   actualites?: Array<DTOInformation>;
 
@@ -78,14 +82,16 @@ export class InformationsValeurComponent {
 
       forkJoin([
         this.abcBourseService.chargerInformationsTicker(cours.ticker),
+        this.abcBourseService.chargerIndentiteTicker(cours.ticker),
         this.boursoramaService.chargerInformationsTicker({ticker: cours.ticker, libelle: cours.libelle})
       ]).subscribe({
         error: httpErrorResponse => {
           this.loading = false;
         },
-        next: ([dtoAbcBourse, dtoBoursorama]) => {
+        next: ([dtoAbcBourse, dtoIdentiteTickerAbcbourse, dtoBoursorama]) => {
           this.actualites = this.agregerActualites(dtoAbcBourse.actualites, dtoBoursorama.actualites);
           this.dtoAbcBourse = dtoAbcBourse;
+          this.dtoIdentiteTickerAbcbourse = dtoIdentiteTickerAbcbourse;
           const dividendes = this.dividendesService.chargerParTicker(cours.ticker);
           this.dtoBoursoramaDecore = new CotationsValeurBoursoramaDecore(this.translateService, 0, dtoBoursorama, dividendes);
           this.loading = false;

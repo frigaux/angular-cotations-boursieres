@@ -245,6 +245,17 @@
         },
         "IA": {
           "GEMINI": "IA Google Gemini"
+        },
+        "IDENTITE": {
+          "IDENTITE": "Fiche d'identité",
+          "MARCHE": "Marché",
+          "PLACE_COTATION": "Place de cotation",
+          "SECTEUR": "Secteur d'activité",
+          "INDICES": "Indices",
+          "NOMBRE_TITRES": "Nombre de titres",
+          "ADRESSE": "Adresse",
+          "TELEPHONE": "Téléphone",
+          "DATE_ASSEMBLEE": "Date assemblée"
         }
       },
       "CONSEILS_GEMINI_VALEUR": {
