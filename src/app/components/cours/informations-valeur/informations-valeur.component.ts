@@ -86,7 +86,7 @@ export class InformationsValeurComponent {
         this.boursoramaService.chargerInformationsTicker({ticker: cours.ticker, libelle: cours.libelle})
       ]).subscribe({
         error: httpErrorResponse => {
-          console.log(httpErrorResponse);
+          console.error(httpErrorResponse);
           this.loading = false;
         },
         next: ([dtoAbcBourse, dtoIdentiteTickerAbcbourse, dtoBoursorama]) => {

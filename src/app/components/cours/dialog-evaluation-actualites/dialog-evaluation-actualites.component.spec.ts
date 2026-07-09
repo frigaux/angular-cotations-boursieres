@@ -2,17 +2,15 @@ import {ComponentFixture, TestBed} from '@angular/core/testing';
 
 import {DialogEvaluationActualitesComponent} from './dialog-evaluation-actualites.component';
 import {ZoneBourseService} from '../../../services/zone-bourse/zone-bourse.service';
-import {PortefeuillesService} from '../../../services/portefeuilles/portefeuilles.service';
 import {TranslateModule} from '@ngx-translate/core';
-import {BoursoramaService} from '../../../services/boursorama/boursorama.service';
-import {AbcBourseService} from '../../../services/abc-bourse/abc-bourse.service';
+import {DTOValeur} from '../../../services/valeurs/dto-valeur.interface';
+import {VALEURS} from '../../../services/jdd/jdd-valeurs.dataset';
+import {of} from 'rxjs';
 
 describe('DialogConseils', () => {
   let component: DialogEvaluationActualitesComponent;
   let fixture: ComponentFixture<DialogEvaluationActualitesComponent>;
 
-  const mockBoursoramaService = jasmine.createSpyObj('BoursoramaService', ['chargerLien']);
-  const mockAbcBourseService = jasmine.createSpyObj('AbcBourseService', ['chargerLien']);
   const mockZoneBourseService = jasmine.createSpyObj('ZoneBourseService', ['chargerActualites']);
 
   beforeEach(async () => {
@@ -22,8 +20,6 @@ describe('DialogConseils', () => {
         TranslateModule.forRoot({})
       ],
       providers: [
-        {provide: BoursoramaService, useValue: mockBoursoramaService},
-        {provide: AbcBourseService, useValue: mockAbcBourseService},
         {provide: ZoneBourseService, useValue: mockZoneBourseService}
       ]
     })
@@ -31,10 +27,16 @@ describe('DialogConseils', () => {
 
     fixture = TestBed.createComponent(DialogEvaluationActualitesComponent);
     component = fixture.componentInstance;
-    fixture.detectChanges();
+    await fixture.whenStable();
   });
 
   it('should create', () => {
     expect(component).toBeTruthy();
+    fixture.detectChanges();
+    const valeurByTicker = new Map<string, DTOValeur>();
+    VALEURS.forEach(valeur => valeurByTicker!.set(valeur.ticker, valeur));
+    mockZoneBourseService.chargerActualites.and.returnValue(of([]));
+    fixture.componentRef.setInput('valeurs', valeurByTicker);
+    component.reinitialiserVue();
   });
 });

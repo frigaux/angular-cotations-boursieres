@@ -87,6 +87,7 @@
       }
     },
     "COURS": {
+      "AUCUNE_VALEUR": "Le filtre n'a retourné aucune valeur",
       "MARCHES_DATE": "Marchés à la date du {{jour}}",
       "ACTIONS": "Actions sur la valeur",
       "LIBELLE": "Libellé",

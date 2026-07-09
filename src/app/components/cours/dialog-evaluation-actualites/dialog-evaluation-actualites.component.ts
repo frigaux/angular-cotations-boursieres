@@ -51,7 +51,7 @@ export class DialogEvaluationActualitesComponent {
     return valeurByTicker;
   }
 
-  protected reinitialiserVue() {
+  reinitialiserVue() {
     if (this.valeurByTicker) {
       this.loading = true;
       this.heure = new Date();

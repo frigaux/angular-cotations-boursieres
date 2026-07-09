@@ -52,6 +52,7 @@ describe('AchatsValeursComponent', () => {
     const nbAchats: number = 4;
     const nbOrdresAchats: number = 1;
     const nbOrdresVentes: number = 1;
+    const nbVentes: number = 1;
 
     beforeEach(() => {
       mockValeursService.chargerValeurs.and.returnValue(of(VALEURS));
@@ -77,7 +78,12 @@ describe('AchatsValeursComponent', () => {
       fixture.detectChanges();
       expect(component.dialogCoursAchatsNonRevendusComponent()).toBeDefined();
       const dialog: DialogCoursAchatsComponent = component.dialogCoursAchatsNonRevendusComponent()!;
-      expect(dialog.achats).toBeDefined();
+
+      expect(component.achats).toHaveSize(nbAchats);
+      expect(component.ordresAchats).toHaveSize(nbOrdresAchats);
+      expect(component.ordresVentes).toHaveSize(nbOrdresVentes);
+      expect(component.ventes).toHaveSize(nbVentes);
+
       expect(dialog.achats).toHaveSize(nbAchats);
       if (dialog.achats) {
         for (const achat of dialog.achats) {
@@ -85,9 +91,7 @@ describe('AchatsValeursComponent', () => {
         }
       }
 
-      expect(dialog.ordresAchats).toBeDefined();
       expect(dialog.ordresAchats).toHaveSize(nbOrdresAchats);
-      expect(dialog.ordresVentes).toBeDefined();
       expect(dialog.ordresVentes).toHaveSize(nbOrdresVentes);
       expect(dialog.loading).toBeFalse();
     });

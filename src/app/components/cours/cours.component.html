@@ -16,7 +16,7 @@
 <app-popover-actions-valeur></app-popover-actions-valeur>
 
 <div class="conteneur" [ngClass]="{'avec-details': coursSelectionne !== undefined}">
-  @if (!loading && marches) {
+  @if (!loading && marches && marches.length > 0) {
     <p-tabs [(value)]="idxMarcheCourant">
       <p-tablist>
         @for (marche of marches; track marche.libelle; let i = $index) {
@@ -114,5 +114,7 @@
 
     <app-details-valeur [cours]="coursSelectionne" (ferme)="coursSelectionne = undefined"
                         (precedent)="valeurPrecedente()" (suivant)="valeurSuivante()"></app-details-valeur>
+  } @else if (!loading) {
+    <div [innerHTML]="'COMPOSANTS.COURS.AUCUNE_VALEUR' | translate"></div>
   }
 </div>

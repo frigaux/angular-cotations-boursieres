@@ -41,21 +41,6 @@ export class DividendesComponent implements OnInit, OnDestroy {
               private dividendesService: DividendesService) {
   }
 
-  // protected recupererDividendesABCBourse() {
-  //   this.loading = true;
-  //   this.boursoramaService.chargerDividendes().subscribe({
-  //     next: dividendes => {
-  //       this.dividendesService.enregistrer(dividendes);
-  //       this.loading = false;
-  //     },
-  //     error:
-  //       httpErrorResponse => {
-  //         console.error(httpErrorResponse);
-  //         this.loading = false
-  //       }
-  //   });
-  // }
-
   ngOnInit(): void {
     this.onUpdateDividendes = this.dividendesService.onUpdate(dividendes => this.construireVue());
     this.valeursService.chargerValeurs().subscribe(valeurs => {
@@ -79,9 +64,5 @@ export class DividendesComponent implements OnInit, OnDestroy {
         return {dividende, valeur};
       });
     }
-  }
-
-  protected importDividendesABCBourse() {
-
   }
 }
