@@ -1,9 +1,7 @@
 @if (identite) {
   <p-fieldset
     legend="{{ 'COMPOSANTS.COURS.INFORMATIONS_VALEUR.IDENTITE.IDENTITE' | translate }}">
-    <div>
-      {{ identite.aPropos }}
-    </div>
+    <div [innerHTML]="identite.aPropos"></div>
     <div class="conteneur">
       <div>
         <label>{{ 'COMPOSANTS.COURS.INFORMATIONS_VALEUR.IDENTITE.MARCHE' | translate }}</label>

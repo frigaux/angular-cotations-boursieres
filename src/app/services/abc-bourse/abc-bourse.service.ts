@@ -318,7 +318,7 @@ export class AbcBourseService {
           observer.complete();
         },
         next: html => {
-          const dto = this.parseAndMapIndentite(html);
+          const dto = this.parseAndMapIdentite(html);
           if (dto) {
             observer.next(dto);
           } else {
@@ -330,14 +330,14 @@ export class AbcBourseService {
     });
   }
 
-  private parseAndMapIndentite(html: string): DTOIdentiteTickerAbcbourse | undefined {
+  private parseAndMapIdentite(html: string): DTOIdentiteTickerAbcbourse | undefined {
     const document = new DOMParser().parseFromString(html, 'text/html');
     const elPaPropos: HTMLParagraphElement | null = document.querySelector('p.co_b');
     const elTableIdentite= document.querySelector('div.chiffres_infos table.tbl100_10');
     const elTdsIdentite: NodeListOf<HTMLTableCellElement> = elTableIdentite!.querySelectorAll('tbody tr td:last-child');
 
     if (elPaPropos && elTdsIdentite.length === 9) {
-      const aPropos = elPaPropos.innerText;
+      const aPropos = elPaPropos.innerHTML;
       const marche = elTdsIdentite[0].innerText;
       const place = elTdsIdentite[1].innerText;
       const secteur = elTdsIdentite[2].innerText;
@@ -348,7 +348,7 @@ export class AbcBourseService {
       const dateAssemblee = ParseUtil.parseDateFrAndMapTo8601(elTdsIdentite[8].innerText);
       return new DTOIdentiteTickerAbcbourse(aPropos, marche, place, secteur, indices, nombreTitres, adresse, telephone, dateAssemblee);
     } else {
-      console.error('impossible de recuperer la carte d\'identite de la société');
+      console.error('impossible de recuperer les informations concernant la société');
       return undefined;
     }
   }

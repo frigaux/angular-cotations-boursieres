@@ -189,8 +189,11 @@ export class BoursoramaService {
         evenements,
         communiques
       };
+    } else {
+      console.error(elDIVCours, elULsCotations.length, elULsNouvelles.length,
+        elTableFiveDaysHistory, elTableHistoricalData, elDIVsGauges.length);
+      return undefined;
     }
-    return undefined;
   }
 
   private queryTables(document: Document): Map<string, HTMLTableElement> {

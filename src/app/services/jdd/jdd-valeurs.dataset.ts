@@ -43,9 +43,19 @@ export const ACHATS: Array<DTOAchatsTicker> = [
     "achats":
       [
         {
+          "quantite": 10,
+          "prix": 75.28
+        },
+        {
           "date": "2025-05-09",
           "quantite": 10,
           "prix": 70.87
+        },
+        {
+          "date": "2025-05-09",
+          "quantite": 10,
+          "prix": 70.87,
+          "prixRevente": 76.45
         }
       ]
   }];

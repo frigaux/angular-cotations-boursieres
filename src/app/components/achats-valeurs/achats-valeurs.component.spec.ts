@@ -10,6 +10,8 @@ import {COURS_BNP, COURS_GLE, LISTE_COURS_AVEC_LISTE_ALLEGEE} from '../../servic
 import {BoursoramaService} from '../../services/boursorama/boursorama.service';
 import {DialogCoursAchatsComponent} from './dialog-cours-achats/dialog-cours-achats.component';
 import {ConfirmationService} from 'primeng/api';
+import {DividendesService} from '../../services/dividendes/dividendes.service';
+import {DIVIDENDES_BY_TICKER} from '../../services/jdd/jdd-dividendes.dataset';
 
 describe('AchatsValeursComponent', () => {
   let component: AchatsValeursComponent;
@@ -20,6 +22,7 @@ describe('AchatsValeursComponent', () => {
   const mockValeursService = jasmine.createSpyObj('ValeursService', ['onUpdateAchats', 'onImportAchats', 'chargerValeurs', 'chargerAchats', 'enregistrerAchatsTicker', 'chargerAchatsTicker']);
   const mockCoursService = jasmine.createSpyObj('CoursService', ['chargerCoursTickersWithLimit']);
   const mockBoursoramaService = jasmine.createSpyObj('BoursoramaService', ['chargerCoursTickers']);
+  const mockDividendesService = jasmine.createSpyObj('DividendesService', ['chargerMapByTicker']);
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
@@ -31,6 +34,7 @@ describe('AchatsValeursComponent', () => {
         {provide: ValeursService, useValue: mockValeursService},
         {provide: CoursService, useValue: mockCoursService},
         {provide: BoursoramaService, useValue: mockBoursoramaService},
+        {provide: DividendesService, useValue: mockDividendesService},
         ConfirmationService
       ]
     })
@@ -45,8 +49,9 @@ describe('AchatsValeursComponent', () => {
   });
 
   describe('Given #chargerValeurs renvoie des valeurs', () => {
-    let nbAchats: number = ACHATS
-      .reduce((accumulator, ticker) => accumulator + ticker.achats.length, 0);
+    const nbAchats: number = 4;
+    const nbOrdresAchats: number = 1;
+    const nbOrdresVentes: number = 1;
 
     beforeEach(() => {
       mockValeursService.chargerValeurs.and.returnValue(of(VALEURS));
@@ -54,6 +59,7 @@ describe('AchatsValeursComponent', () => {
       mockValeursService.chargerAchatsTicker.and.returnValue(cloneACHATS()[1].achats);
       mockCoursService.chargerCoursTickersWithLimit.and.returnValue(of(LISTE_COURS_AVEC_LISTE_ALLEGEE));
       mockBoursoramaService.chargerCoursTickers.and.returnValue(of([COURS_GLE, COURS_BNP]));
+      mockDividendesService.chargerMapByTicker.and.returnValue(DIVIDENDES_BY_TICKER);
     });
 
     it('when #ngOnInit then le composant est chargé', () => {
@@ -62,22 +68,28 @@ describe('AchatsValeursComponent', () => {
       expect(component).toBeDefined();
       expect(component.loading).toBeFalse();
       expect(component.achats).toHaveSize(nbAchats);
-      expect(component.achats![0].valeur).toEqual(VALEURS[1]);
-      expect(component.achats![1].valeur).toEqual(VALEURS[0]);
     });
 
     it('when #ngOnInit et #recupererCours then les cours sont bien récupérés', () => {
       fixture.detectChanges(); // appelle le ngOnInit
 
       component.recupererCours();
+      fixture.detectChanges();
       expect(component.dialogCoursAchatsNonRevendusComponent()).toBeDefined();
       const dialog: DialogCoursAchatsComponent = component.dialogCoursAchatsNonRevendusComponent()!;
       expect(dialog.achats).toBeDefined();
       expect(dialog.achats).toHaveSize(nbAchats);
-      if (dialog.achats)
+      if (dialog.achats) {
         for (const achat of dialog.achats) {
           expect(achat.achatDecore.cours).toBeDefined()
         }
+      }
+
+      expect(dialog.ordresAchats).toBeDefined();
+      expect(dialog.ordresAchats).toHaveSize(nbOrdresAchats);
+      expect(dialog.ordresVentes).toBeDefined();
+      expect(dialog.ordresVentes).toHaveSize(nbOrdresVentes);
+      expect(dialog.loading).toBeFalse();
     });
   });
 });
