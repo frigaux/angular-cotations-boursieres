@@ -7,7 +7,7 @@ import {CoursService} from '../../services/cours/cours.service';
 import {DTOValeur} from '../../services/valeurs/dto-valeur.interface';
 import {PortefeuilleAvecCours} from './portefeuille-avec-cours.class';
 import {CoursPortefeuille} from './cours-portefeuille.class';
-import {TranslatePipe} from '@ngx-translate/core';
+import {TranslatePipe, TranslateService} from '@ngx-translate/core';
 import {DetailsValeurComponent} from './details-valeur/details-valeur.component';
 import {ColonneAlertesComponent} from './colonnes/alertes/colonne-alertes.component';
 import {Skeleton} from 'primeng/skeleton';
@@ -110,7 +110,8 @@ export class PortefeuillesComponent implements OnInit, OnDestroy {
   private onUpdateTableaux?: Subscription;
   private onUpdateDividendes?: Subscription;
 
-  constructor(private portefeuillesService: PortefeuillesService,
+  constructor(private translateService: TranslateService,
+              private portefeuillesService: PortefeuillesService,
               private valeursService: ValeursService,
               private coursService: CoursService,
               private tableauxService: TableauxService,
@@ -268,9 +269,9 @@ export class PortefeuillesComponent implements OnInit, OnDestroy {
   private construirePortefeuilleParEtapeValeur(): Map<EtapeValeur, DTOPortefeuille> {
     const achats = this.valeursService.chargerAchats();
     const resultat = new Map<EtapeValeur, DTOPortefeuille>();
-    this.ajouterPortefeuille(resultat, achats, EtapeValeur.ORDRE_ACHAT, 'OA');
-    this.ajouterPortefeuille(resultat, achats, EtapeValeur.ACHAT, 'A');
-    this.ajouterPortefeuille(resultat, achats, EtapeValeur.ORDRE_VENTE, 'OV');
+    this.ajouterPortefeuille(resultat, achats, EtapeValeur.ORDRE_ACHAT, this.translateService.instant('COMPOSANTS.PORTEFEUILLES.PORTEFEUILLE.ORDRES_ACHATS'));
+    this.ajouterPortefeuille(resultat, achats, EtapeValeur.ACHAT, this.translateService.instant('COMPOSANTS.PORTEFEUILLES.PORTEFEUILLE.ACHATS'));
+    this.ajouterPortefeuille(resultat, achats, EtapeValeur.ORDRE_VENTE, this.translateService.instant('COMPOSANTS.PORTEFEUILLES.PORTEFEUILLE.ORDRES_VENTES'));
     return resultat;
   }
 

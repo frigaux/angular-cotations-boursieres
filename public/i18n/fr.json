@@ -366,7 +366,7 @@
     },
     "DIVIDENDES": {
       "DIVIDENDES": "Dividendes",
-      "DATE_DERNIERE_RECUPERATION": "Date de dernière récupération : {{date}}",
+      "DATE_DERNIERE_RECUPERATION": "Date de la dernière récupération : {{date}}",
       "DATE": "Date",
       "TICKER": "Ticker",
       "LIBELLE": "Libellé",
@@ -384,6 +384,11 @@
       "PORTEFEUILLES_DATE": "Portefeuilles à la date du {{jour}}",
       "COURS_BOURSORAMA_PORTEFEUILLE": "Cours des valeurs du portefeuille depuis Boursorama",
       "ACTIONS": "Actions sur la valeur",
+      "PORTEFEUILLE" : {
+        "ORDRES_ACHATS": "Ordres achats",
+        "ACHATS": "Achats",
+        "ORDRES_VENTES": "Ordres ventes"
+      },
       "DETAILS_VALEUR": {
         "DETAILS_VALEUR": "{{valeur}} ({{ticker}}, {{marche}})",
         "COURBES": "Courbes : {{valeur}} ({{ticker}}, {{marche}})",
