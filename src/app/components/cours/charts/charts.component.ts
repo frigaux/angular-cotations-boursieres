@@ -73,11 +73,10 @@ export class ChartsComponent {
       const dataCours: number[] = [];
       const dataMM: number[] = [];
       const coursAlleges = this.cours.coursAlleges;
-      const surplus = this.cours.moyennesMobiles.length - coursAlleges!.length;
       for (let i = Math.min(coursAlleges!.length, this.periodeSelectionnee) - 1; i >= 0; i--) {
         labels.push(this.datepipe.transform(coursAlleges![i].date, 'dd/MM/yyyy')!);
         dataCours.push(coursAlleges![i].cloture);
-        dataMM.push(this.cours.moyennesMobiles[i + surplus]);
+        dataMM.push(this.cours.moyennesMobiles[i]);
       }
 
       this.data = this.wrapData(labels, dataCours, dataMM);

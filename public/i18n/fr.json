@@ -104,9 +104,6 @@
         "BOURSORAMA": "Cotations Boursorama",
         "AJOUTER_AU_PORTEFEUILLE": "Ajouter la valeur au portefeuille"
       },
-      "CHART_MOYENNES_MOBILES": {
-        "NB_JOURS_CALCUL": "Nombre de jours de cotations utilisés pour le calcul de la moyenne mobile"
-      },
       "CHARTS": {
         "JOURS": "Nombre de jours affichés",
         "COURS": "Cours à la clôture",
