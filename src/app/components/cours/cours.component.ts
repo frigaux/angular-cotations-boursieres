@@ -26,6 +26,7 @@ import {ClassVariation} from '../../directives/class-variation';
 import {ColonneDividendesComponent} from '../portefeuilles/colonnes/dividendes/colonne-dividendes.component';
 import {DividendesService} from '../../services/dividendes/dividendes.service';
 import {DTODividende} from '../../services/dividendes/dto-dividende.interface';
+import {Indicateurs} from './indicateurs/indicateurs';
 
 @Component({
   selector: 'app-cours',
@@ -49,7 +50,8 @@ import {DTODividende} from '../../services/dividendes/dto-dividende.interface';
     TabPanels,
     Tabs,
     ClassVariation,
-    ColonneDividendesComponent
+    ColonneDividendesComponent,
+    Indicateurs
   ],
   templateUrl: './cours.component.html',
   styleUrls: ['../portefeuilles/tabs-panel.sass', './cours.component.sass', '../commun/titre.sass']
@@ -65,6 +67,7 @@ export class CoursComponent implements OnInit {
   marches?: MarcheDecore[];
   idxMarcheCourant: number = NaN;
   protected valeurByTicker?: Map<string, DTOValeur>;
+  afficherIndicateurs: boolean = false;
 
   // cours pour lequel afficher les moyennes mobiles
   coursSelectionne?: { cours: Cours, valeur: DTOValeur, premier: boolean, dernier: boolean };
@@ -229,8 +232,10 @@ export class CoursComponent implements OnInit {
   }
 
   appliquerFiltre(filtreDecore: FiltreDecore | undefined) {
+    this.afficherIndicateurs = false;
     this.filtreActif = filtreDecore;
     this.construireVue();
     this.idxMarcheCourant = this.marches!.length > 0 ? 0 : NaN;
+    this.afficherIndicateurs = filtreDecore !== undefined;
   }
 }

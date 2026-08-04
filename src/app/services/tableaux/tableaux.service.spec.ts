@@ -4,15 +4,25 @@ import {TableauxService} from './tableaux.service';
 import {TranslateModule} from '@ngx-translate/core';
 import {CurrencyPipe, DatePipe, DecimalPipe, PercentPipe} from '@angular/common';
 import {
-  COLONNE_ALERTES_20, COLONNE_ALERTES_30,
-  COLONNE_CLOTURE_20, COLONNE_COURS_20,
-  COLONNE_DATE_20, COLONNE_DIVIDENDES_20,
-  COLONNE_LIBELLE_40, COLONNE_LIBELLE_50,
-  COLONNE_MARCHE_20, COLONNE_MOYENNE_MOBILE_20,
-  COLONNE_OUVERTURE_20, COLONNE_PLUS_BAS_20,
-  COLONNE_PLUS_HAUT_20, COLONNE_TICKER_20,
-  COLONNE_VARIATION_20, COLONNE_VARIATION_ACHATS_20,
-  COLONNE_VOLUME_20, TABLEAUX
+  COLONNE_ALERTES_20,
+  COLONNE_ALERTES_30,
+  COLONNE_CLOTURE_20,
+  COLONNE_COURS_20,
+  COLONNE_DATE_20,
+  COLONNE_DIVIDENDES_20,
+  COLONNE_ECART_TYPE_20,
+  COLONNE_LIBELLE_40,
+  COLONNE_LIBELLE_50,
+  COLONNE_MARCHE_20,
+  COLONNE_MOYENNE_MOBILE_20,
+  COLONNE_OUVERTURE_20,
+  COLONNE_PLUS_BAS_20,
+  COLONNE_PLUS_HAUT_20,
+  COLONNE_TICKER_20,
+  COLONNE_VARIATION_20,
+  COLONNE_VARIATION_ACHATS_20,
+  COLONNE_VOLUME_20,
+  TABLEAUX
 } from '../jdd/jdd-tableaux.dataset';
 import {AUCUNE_ALERTE, COURS_PORTEFEUILLE} from '../jdd/jdd-cours.dataset';
 import {TypesColonnesPortefeuille} from './types-colonnes-portefeuille.enum';
@@ -89,6 +99,7 @@ describe('TableauxService', () => {
       expect(service.valeurFormatteePourUnCours(COLONNE_MOYENNE_MOBILE_20)(COURS_PORTEFEUILLE)).toBe(`€${COURS_PORTEFEUILLE.moyennesMobiles[0]}0`);
       expect(service.valeurFormatteePourUnCours(COLONNE_VARIATION_20)(COURS_PORTEFEUILLE)).toBe('1.16%');
       expect(service.valeurFormatteePourUnCours(COLONNE_DIVIDENDES_20)(COURS_PORTEFEUILLE)).toEqual(DIVIDENDES_TICKER_GLE.dividendes);
+      expect(service.valeurFormatteePourUnCours(COLONNE_ECART_TYPE_20)(COURS_PORTEFEUILLE)).toEqual('€0.01');
     })
   });
 

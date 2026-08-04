@@ -11,6 +11,7 @@ import {Subject, Subscription} from 'rxjs';
 import {ValeursService} from '../valeurs/valeurs.service';
 import {DividendesService} from '../dividendes/dividendes.service';
 import {EtapeValeur} from '../../components/valeurs/achats-valeur/etape-valeur.enum';
+import {IndicateursUtil} from '../commun/indicateurs-util.class';
 
 @Injectable({
   providedIn: 'root'
@@ -418,8 +419,8 @@ export class TableauxService {
         return (cours: CoursPortefeuille) => this.percentPipe.transform(cours.calculerVariation(colonne.parametre!), '1.2-2');
       case TypesColonnesPortefeuille.DIVIDENDES:
         return (cours: CoursPortefeuille) => cours.trouverDividendes(this.dividendesService);
-      case TypesColonnesPortefeuille.ECART_TYPE:
-        return (cours: CoursPortefeuille) => this.currencyPipe.transform(cours.calculerEcartType());
+      case TypesColonnesPortefeuille.POURCENTAGE_ECART_TYPE:
+        return (cours: CoursPortefeuille) => this.currencyPipe.transform(IndicateursUtil.calculerPourcentageEcartType(cours.coursAlleges), '€');
       default:
         throw new Error(`Colonne non gérée ${colonne.type}`);
     }
@@ -457,8 +458,8 @@ export class TableauxService {
         return (cours: CoursPortefeuille) => cours.calculerVariation(colonne.parametre!);
       case TypesColonnesPortefeuille.DIVIDENDES:
         return (cours: CoursPortefeuille) => cours.trouverDividendes(this.dividendesService);
-      case TypesColonnesPortefeuille.ECART_TYPE:
-        return (cours: CoursPortefeuille) => cours.calculerEcartType();
+      case TypesColonnesPortefeuille.POURCENTAGE_ECART_TYPE:
+        return (cours: CoursPortefeuille) => IndicateursUtil.calculerPourcentageEcartType(cours.coursAlleges);
       default:
         throw new Error(`Colonne non gérée ${colonne.type}`);
     }

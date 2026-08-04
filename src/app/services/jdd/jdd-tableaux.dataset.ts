@@ -126,6 +126,13 @@ export const COLONNE_DIVIDENDES_20: DTOColonne<TypesColonnesPortefeuille> = {
   largeur: 20
 };
 
+export const COLONNE_ECART_TYPE_20: DTOColonne<TypesColonnesPortefeuille> = {
+  nom: 'Ecart-type',
+  type: TypesColonnesPortefeuille.POURCENTAGE_ECART_TYPE,
+  tri: true,
+  largeur: 20
+};
+
 export const TABLEAUX: DTOTableaux = {
   portefeuille: {
     colonnesPaysage: [COLONNE_LIBELLE_40, COLONNE_ALERTES_20, COLONNE_CLOTURE_20, COLONNE_VARIATION_20],

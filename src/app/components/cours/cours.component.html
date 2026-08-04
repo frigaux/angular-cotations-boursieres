@@ -81,6 +81,9 @@
                           [class]="cours.iconeVariation()"
                           title="{{ 'COMPOSANTS.COURS.ACTIONS' | translate }}"></span>
                     {{ cours.libelle }}
+                    @if (afficherIndicateurs) {
+                      <app-indicateurs [cours]="cours"></app-indicateurs>
+                    }
                   </td>
                   <td [appClassVariation]="cours.var1">
                     {{ cours.var1 | percent:'1.2-2' }}

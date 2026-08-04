@@ -234,7 +234,7 @@ export class PortefeuillesComponent implements OnInit, OnDestroy {
       || colonneDecoree.colonne.type === TypesColonnesPortefeuille.VARIATION) {
       return colonneDecoree.evaluer(cours) >= 0 ? 'positive' : 'negative';
     }
-    if (colonneDecoree.colonne.type === TypesColonnesPortefeuille.ECART_TYPE) {
+    if (colonneDecoree.colonne.type === TypesColonnesPortefeuille.POURCENTAGE_ECART_TYPE) {
       const MMmax = cours.moyennesMobiles[cours.moyennesMobiles.length - 1];
       const MM50 = cours.moyennesMobiles[Math.min(50, cours.moyennesMobiles.length - 1)];
       if (MMmax < MM50) {

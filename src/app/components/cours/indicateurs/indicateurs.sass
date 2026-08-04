@@ -1,0 +1,31 @@
+div
+  display: flex
+  flex-direction: column
+
+  div:not(:first-child)
+    margin-top: 0.25rem
+
+  div
+    display: flex
+    flex-direction: row
+    align-items: center
+
+    span:nth-child(2)
+      margin-left: 0.25rem
+      width: 4rem
+      text-align: right
+
+    .pi-euro.leger
+      color: var(--p-yellow-600)
+
+    .pi-euro.moyen
+      color: var(--p-blue-600)
+
+    .pi-euro.fort
+      color: var(--p-green-600)
+
+    .pi-angle-up, .pi-angle-double-up
+      color: var(--p-green-600)
+
+    .pi-angle-down, .pi-angle-double-down
+      color: var(--p-red-600)
