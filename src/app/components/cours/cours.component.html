@@ -82,7 +82,7 @@
                           title="{{ 'COMPOSANTS.COURS.ACTIONS' | translate }}"></span>
                     {{ cours.libelle }}
                     @if (afficherIndicateurs) {
-                      <app-indicateurs [cours]="cours"></app-indicateurs>
+                      <app-indicateurs [dto]="{cours, dividendesByTicker}"></app-indicateurs>
                     }
                   </td>
                   <td [appClassVariation]="cours.var1">

@@ -27,6 +27,7 @@ import {ColonneDividendesComponent} from '../portefeuilles/colonnes/dividendes/c
 import {DividendesService} from '../../services/dividendes/dividendes.service';
 import {DTODividende} from '../../services/dividendes/dto-dividende.interface';
 import {Indicateurs} from './indicateurs/indicateurs';
+import {IndicateursUtil} from '../../services/commun/indicateurs-util.class';
 
 @Component({
   selector: 'app-cours',
@@ -68,6 +69,7 @@ export class CoursComponent implements OnInit {
   idxMarcheCourant: number = NaN;
   protected valeurByTicker?: Map<string, DTOValeur>;
   afficherIndicateurs: boolean = false;
+  dividendesByTicker?: Map<string, Array<DTODividende>>;
 
   // cours pour lequel afficher les moyennes mobiles
   coursSelectionne?: { cours: Cours, valeur: DTOValeur, premier: boolean, dernier: boolean };
@@ -78,7 +80,6 @@ export class CoursComponent implements OnInit {
   private filtreActif?: FiltreDecore;
   private portefeuilles: boolean;
   private marcheSelectionne?: MarcheDecore;
-  private dividendesByTicker?: Map<string, Array<DTODividende>>;
 
   constructor(private valeursService: ValeursService,
               private coursService: CoursService,
@@ -132,7 +133,8 @@ export class CoursComponent implements OnInit {
             return this.filtreActif.evaluer(c.moyennesMobiles,
               this.filtreActif.avecOperandeMIN ? c.calculerMinimumMM() : undefined,
               this.filtreActif.avecOperandeMAX ? c.calculerMaximumMM() : undefined,
-              this.filtreActif.avecOperandeMOY ? c.calculerMoyenneMM() : undefined);
+              this.filtreActif.avecOperandeMOY ? c.calculerMoyenneMM() : undefined,
+              this.filtreActif.avecOperandeDIV ? 100 * IndicateursUtil.calculerPourcentageDividendes(c.ticker, c.cloture, this.dividendesByTicker) : undefined);
           }
         })
         .forEach(cours => {

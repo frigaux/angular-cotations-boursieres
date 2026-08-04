@@ -1,9 +1,9 @@
 import {Component, inject, input, InputSignal} from '@angular/core';
 import {Cours} from '../cours.class';
 import {CoursService} from '../../../services/cours/cours.service';
-import {DividendesService} from '../../../services/dividendes/dividendes.service';
 import {IndicateursUtil} from '../../../services/commun/indicateurs-util.class';
 import {PercentPipe} from '@angular/common';
+import {DTODividende} from '../../../services/dividendes/dto-dividende.interface';
 
 @Component({
   selector: 'app-indicateurs',
@@ -15,13 +15,16 @@ import {PercentPipe} from '@angular/common';
 })
 export class Indicateurs {
   private coursService = inject(CoursService);
-  private dividendesService = inject(DividendesService);
 
   // input/output
-  inputCours: InputSignal<Cours | undefined> = input(undefined,
-    {transform: o => this.intercepteurCours(o), alias: 'cours'});
+  inputCours: InputSignal<{
+    dividendesByTicker?: Map<string, Array<DTODividende>>,
+    cours: Cours
+  } | undefined> = input(undefined,
+    {transform: o => this.intercepteurCours(o), alias: 'dto'});
 
-  private cours: Cours | undefined;
+  private cours?: Cours;
+  private dividendesByTicker?: Map<string, Array<DTODividende>>;
 
   // données pour la vue
   pourcentageDividendes: number = 0;
@@ -29,25 +32,26 @@ export class Indicateurs {
   pourcentageEcartType: number = 0;
   classeEcartType: string = '';
 
-  private intercepteurCours(cours: Cours | undefined) {
-    this.cours = cours;
-    if (cours) {
-      if (!cours.coursAlleges) {
-        this.coursService.chargerCoursTickerWithLimit(cours.ticker, 300)
+  private intercepteurCours(dto: { dividendesByTicker?: Map<string, Array<DTODividende>>, cours: Cours } | undefined) {
+    if (dto) {
+      this.cours = dto.cours;
+      this.dividendesByTicker = dto.dividendesByTicker;
+      if (!this.cours.coursAlleges) {
+        this.coursService.chargerCoursTickerWithLimit(this.cours.ticker, 300)
           .subscribe(coursAlleges => {
-            cours.coursAlleges = coursAlleges;
+            this.cours!.coursAlleges = coursAlleges;
             this.calculerIndicateurs();
           });
       } else {
         this.calculerIndicateurs();
       }
     }
-    return cours;
+    return dto;
   }
 
   private calculerIndicateurs() {
     if (this.cours) {
-      this.pourcentageDividendes = this.calculerPourcentageDividendes();
+      this.pourcentageDividendes = IndicateursUtil.calculerPourcentageDividendes(this.cours.ticker, this.cours.cloture, this.dividendesByTicker);
       this.classeDividendes = this.pourcentageDividendes > 0.08 ? 'fort' : this.pourcentageDividendes > 0.04 ? 'moyen' : 'leger';
       this.pourcentageEcartType = IndicateursUtil.calculerPourcentageEcartType(this.cours.coursAlleges!);
       this.classeEcartType = this.determinerClasseEcartType();
@@ -64,18 +68,5 @@ export class Indicateurs {
       }
     }
     return '';
-  }
-
-  private calculerPourcentageDividendes(): number {
-    const anneePrecedente = String(new Date().getFullYear() - 1);
-    const dividendes = this.dividendesService.charger()?.dividendes
-      .filter(dividende => {
-        return dividende.ticker === this.cours!.ticker && dividende.date.substring(0, 4) === anneePrecedente;
-      });
-    if (dividendes) {
-      const somme = dividendes.reduce((acc, dividende) => acc + dividende.montant, 0);
-      return somme / this.cours!.cloture;
-    }
-    return 0;
   }
 }

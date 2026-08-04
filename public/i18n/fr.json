@@ -192,6 +192,7 @@
           "DOCUMENTATION_OPERANDES_STATISTIQUES_MIN": "moyenne mobile minimum (MIN(x) cad MIN(M[1..x]))",
           "DOCUMENTATION_OPERANDES_STATISTIQUES_MAX": "moyenne mobile maximum (MAX(x) cad MAX(M[1..x]))",
           "DOCUMENTATION_OPERANDES_STATISTIQUES_MOY": "moyenne des moyennes mobiles (MOY(x) cad MOY(M[1..x]))",
+          "DOCUMENTATION_OPERANDES_RENDEMENT_DIVIDENDES": "rendement dividendes de l'année passées (DIV)",
           "DOCUMENTATION_EXEMPLE": "Par exemple : M50 < M20 && M20 < M10",
           "CONDITION": "Condition",
           "MODIFIER": "Modifier la condition du filtre"
