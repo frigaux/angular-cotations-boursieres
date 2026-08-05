@@ -1,8 +1,11 @@
 <ul class="dividendes" [ngClass]="{'reduit': reduit}">
   @for (dividendeDecore of dividendesDecores; track dividendeDecore.id) {
     <li>
-      <span class="date">{{ dividendeDecore.dividende.date  | date: 'dd/MM/yyyy' }}</span>
-      <span class="montant">{{ dividendeDecore.dividende.montant | currency:'EUR':'symbol' }}</span>
+      <span class="date">{{ dividendeDecore.dividende.date  | date: 'MM/yy' }}</span>
+      @if (!reduit) {
+        <span class="montant">{{ dividendeDecore.dividende.montant | currency:'EUR':'symbol' }}</span>
+      }
+      <span class="pourcentage">{{ dividendeDecore.pourcentageDividende | percent:'1.2-2' }}</span>
     </li>
   }
 </ul>

@@ -79,6 +79,7 @@ export class DialogEditeurFiltresComponent {
   }
 
   editionFiltre(idx: number) {
+    this.filtres[idx].nom = this.noms.at(idx).value as string;
     this.filtreEnModification = this.filtres[idx];
   }
 
@@ -106,8 +107,8 @@ export class DialogEditeurFiltresComponent {
   }
 
   modifierFiltresPortefeuille() {
-    this.filtres.forEach((alerte, index) => {
-      alerte.nom = this.noms.at(index).value as string;
+    this.filtres.forEach((filtre, index) => {
+      filtre.nom = this.noms.at(index).value as string;
     });
     this.erreur = this.coursService.enregistrerFiltres(this.filtres);
     if (this.erreur === undefined) {

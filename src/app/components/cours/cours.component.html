@@ -90,7 +90,7 @@
                   </td>
                   <td>{{ cours.cloture | currency:'EUR':'symbol' }}</td>
                   <td>
-                    <app-colonne-dividendes [dividendes]="cours.dividendes"></app-colonne-dividendes>
+                    <app-colonne-dividendes [dto]="{dividendes: cours.dividendes, cloture: cours.cloture}"></app-colonne-dividendes>
                   </td>
                   <td [class]="evolutionCours(cours.cloture, cours.moyennesMobiles[4])">
                     {{ cours.moyennesMobiles[4] | currency:'EUR':'symbol' }}

@@ -39,7 +39,7 @@
         <td>{{ achatValeurDecore.valeur.libelle }} ({{ achatValeurDecore.valeur.ticker }})</td>
         <td>{{ achatValeurDecore.achatDecore.achat.date | date: 'dd/MM/yyyy' }}</td>
         <td>
-          <app-colonne-dividendes [dividendes]="achatValeurDecore.dividendes"></app-colonne-dividendes>
+          <app-colonne-dividendes [dto]="{dividendes: achatValeurDecore.dividendes, cloture: achatValeurDecore.achatDecore.achat.prix}"></app-colonne-dividendes>
         </td>
         <td>{{ achatValeurDecore.achatDecore.achat.prix  | currency:'EUR':'symbol':'1.3-3' }}</td>
         <td>{{ achatValeurDecore.achatDecore.achat.quantite  | number }}</td>

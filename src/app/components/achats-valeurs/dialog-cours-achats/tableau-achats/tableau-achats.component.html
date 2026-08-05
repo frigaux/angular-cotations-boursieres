@@ -37,7 +37,7 @@
       <tr>
         <td>{{ achatValeurDecore.valeur.libelle }}</td>
         <td>
-          <app-colonne-dividendes [dividendes]="achatValeurDecore.dividendes"></app-colonne-dividendes>
+          <app-colonne-dividendes [dto]="{dividendes: achatValeurDecore.dividendes, cloture: achatValeurDecore.achatDecore.achat.prix}"></app-colonne-dividendes>
         </td>
         <td>
           @if (etape == EtapeValeur.ORDRE_VENTE) {

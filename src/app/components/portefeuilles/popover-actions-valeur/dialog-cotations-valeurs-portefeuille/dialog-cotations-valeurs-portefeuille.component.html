@@ -44,7 +44,7 @@
             {{ cotationsTickerDecore.dtoBoursorama.valeur.libelle }}
           </td>
           <td>
-            <app-colonne-dividendes [dividendes]="cotationsTickerDecore.dividendes"></app-colonne-dividendes>
+            <app-colonne-dividendes [dto]="{dividendes: cotationsTickerDecore.dividendes, cloture: cotationsTickerDecore.dtoBoursorama.cotations.cours}"></app-colonne-dividendes>
           </td>
           <td>
             <app-jauge
