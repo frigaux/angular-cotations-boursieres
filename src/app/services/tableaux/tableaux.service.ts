@@ -75,6 +75,12 @@ export class TableauxService {
             largeur: 8
           },
           {
+            nom: 'Indicateurs',
+            type: TypesColonnesPortefeuille.INDICATEURS,
+            tri: false,
+            largeur: 7
+          },
+          {
             nom: 'MM5',
             type: TypesColonnesPortefeuille.MOYENNE_MOBILE,
             parametre: 5,
@@ -99,13 +105,6 @@ export class TableauxService {
             nom: 'MM100',
             type: TypesColonnesPortefeuille.MOYENNE_MOBILE,
             parametre: 100,
-            tri: false,
-            largeur: 7
-          },
-          {
-            nom: 'MM200',
-            type: TypesColonnesPortefeuille.MOYENNE_MOBILE,
-            parametre: 200,
             tri: false,
             largeur: 7
           }
@@ -421,6 +420,8 @@ export class TableauxService {
         return (cours: CoursPortefeuille) => [];
       case TypesColonnesPortefeuille.POURCENTAGE_ECART_TYPE:
         return (cours: CoursPortefeuille) => this.currencyPipe.transform(IndicateursUtil.calculerPourcentageEcartType(cours.coursAlleges), '€');
+      case TypesColonnesPortefeuille.INDICATEURS:
+        return (cours: CoursPortefeuille) => [];
       default:
         throw new Error(`Colonne non gérée ${colonne.type}`);
     }
@@ -460,6 +461,8 @@ export class TableauxService {
         return (cours: CoursPortefeuille) => [];
       case TypesColonnesPortefeuille.POURCENTAGE_ECART_TYPE:
         return (cours: CoursPortefeuille) => IndicateursUtil.calculerPourcentageEcartType(cours.coursAlleges);
+      case TypesColonnesPortefeuille.INDICATEURS:
+        return (cours: CoursPortefeuille) => [];
       default:
         throw new Error(`Colonne non gérée ${colonne.type}`);
     }

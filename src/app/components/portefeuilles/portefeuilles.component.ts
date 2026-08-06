@@ -43,6 +43,7 @@ import {
 } from './popover-actions-valeur/dialog-cotations-valeurs-portefeuille/dialog-cotations-valeurs-portefeuille.component';
 import {Subscription} from 'rxjs';
 import {DTODividende} from '../../services/dividendes/dto-dividende.interface';
+import {Indicateurs} from '../cours/indicateurs/indicateurs';
 
 @Component({
   selector: 'app-portefeuilles',
@@ -72,7 +73,8 @@ import {DTODividende} from '../../services/dividendes/dto-dividende.interface';
     IconeVariation,
     DetailsValeurComponent,
     DialogCotationsValeurComponent,
-    DialogCotationsValeursPortefeuilleComponent
+    DialogCotationsValeursPortefeuilleComponent,
+    Indicateurs
   ],
   templateUrl: './portefeuilles.component.html',
   styleUrls: ['./tabs-panel.sass', './portefeuilles.component.sass', '../commun/titre.sass']

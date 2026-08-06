@@ -114,6 +114,14 @@
                           @case (TypesColonnesPortefeuille.POURCENTAGE_ECART_TYPE) {
                             {{ cours[colonneDecoree.id] | percent:'1.2-2' }}
                           }
+                          @case (TypesColonnesPortefeuille.INDICATEURS) {
+                            <app-indicateurs [dto]="{
+                                      ticker: cours.ticker,
+                                      cloture: cours.cloture,
+                                      coursAlleges: cours.coursAlleges,
+                                      moyennesMobiles: cours.moyennesMobiles,
+                                      dividendes: dividendesByTicker?.get(cours.ticker) || []}"></app-indicateurs>
+                          }
                           @default {
                             {{ cours[colonneDecoree.id] }}
                           }
