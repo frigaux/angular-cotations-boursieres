@@ -99,6 +99,10 @@
       "MM50": "MM50",
       "MM100": "MM100",
       "MM200": "MM200",
+      "INDICATEURS": {
+        "ECART_TYPE": "Ecart-type en pourcentage",
+        "DIVIDENDES": "Dividendes en pourcentage"
+      },
       "ACTIONS_VALEUR": {
         "ABCBOURSE": "Cotations ABCBourse",
         "BOURSORAMA": "Cotations Boursorama",

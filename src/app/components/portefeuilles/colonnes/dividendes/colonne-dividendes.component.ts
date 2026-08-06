@@ -26,7 +26,6 @@ export class ColonneDividendesComponent {
   reduit?: boolean;
 
   private intercepteurDTO(dto?: { cloture: number, dividendes: Array<DTODividende> }) {
-    console.log(dto);
     this.dividendesDecores = dto?.dividendes.sort((d1, d2) => d1.date.localeCompare(d2.date))
       .map((dividende, id) => new DividendeDecore(id, dividende, dto.cloture));
     return dto;

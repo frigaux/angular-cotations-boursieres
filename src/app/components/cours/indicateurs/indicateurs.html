@@ -1,8 +1,11 @@
 <div>
   <div>
-    <span class="pi pi-euro" [class]="classeDividendes"></span><span>{{ pourcentageDividendes | percent:'1.2-2' }}</span>
+    <span class="pi" [class]="classeEcartType" title="{{ 'COMPOSANTS.COURS.INDICATEURS.ECART_TYPE' | translate }}"></span>
+    <span>{{ pourcentageEcartType | percent:'1.2-2' }}</span>
   </div>
   <div>
-    <span class="pi" [class]="classeEcartType"></span><span>{{ pourcentageEcartType | percent:'1.2-2' }}</span>
+    <span class="pi pi-euro"
+          [class]="classeDividendes" title="{{ 'COMPOSANTS.COURS.INDICATEURS.DIVIDENDES' | translate }}"></span>
+    <span>{{ pourcentageDividendes | percent:'1.2-2' }}</span>
   </div>
 </div>

@@ -4,11 +4,13 @@ import {CoursService} from '../../../services/cours/cours.service';
 import {IndicateursUtil} from '../../../services/commun/indicateurs-util.class';
 import {PercentPipe} from '@angular/common';
 import {DTODividende} from '../../../services/dividendes/dto-dividende.interface';
+import {TranslatePipe} from '@ngx-translate/core';
 
 @Component({
   selector: 'app-indicateurs',
   imports: [
-    PercentPipe
+    PercentPipe,
+    TranslatePipe
   ],
   templateUrl: './indicateurs.html',
   styleUrl: './indicateurs.sass',
@@ -60,10 +62,10 @@ export class Indicateurs {
 
   private determinerClasseEcartType(): string {
     const nbMM = this.cours!.moyennesMobiles.length;
-    if (nbMM > 10) {
-      if (this.cours!.moyennesMobiles[4] > this.cours!.moyennesMobiles[nbMM - 1]) {
+    if (nbMM > 50) {
+      if (this.cours!.moyennesMobiles[19] > this.cours!.moyennesMobiles[nbMM - 1]) { // tendance haussière
         return this.pourcentageEcartType > 0.1 ? 'pi-angle-double-up' : 'pi-angle-up';
-      } else {
+      } else { // tendance baissière
         return this.pourcentageEcartType > 0.1 ? 'pi-angle-double-down' : 'pi-angle-down';
       }
     }

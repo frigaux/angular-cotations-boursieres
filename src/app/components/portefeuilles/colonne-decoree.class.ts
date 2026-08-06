@@ -15,8 +15,7 @@ export class ColonneDecoree {
       colonne.type === TypesColonnesPortefeuille.MARCHE ||
       colonne.type === TypesColonnesPortefeuille.TICKER ||
       colonne.type === TypesColonnesPortefeuille.LIBELLE ||
-      colonne.type === TypesColonnesPortefeuille.ALERTES ||
-      colonne.type === TypesColonnesPortefeuille.DIVIDENDES) {
+      colonne.type === TypesColonnesPortefeuille.ALERTES) {
       this.textAlign = 'left';
     } else {
       this.textAlign = 'right';

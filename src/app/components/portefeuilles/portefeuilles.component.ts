@@ -42,6 +42,7 @@ import {
   DialogCotationsValeursPortefeuilleComponent
 } from './popover-actions-valeur/dialog-cotations-valeurs-portefeuille/dialog-cotations-valeurs-portefeuille.component';
 import {Subscription} from 'rxjs';
+import {DTODividende} from '../../services/dividendes/dto-dividende.interface';
 
 @Component({
   selector: 'app-portefeuilles',
@@ -94,6 +95,7 @@ export class PortefeuillesComponent implements OnInit, OnDestroy {
   protected date?: string;
   portefeuillesAvecCours: Array<PortefeuilleAvecCours> = [];
   idxPortefeuilleCourant: number = -1;
+  dividendesByTicker?: Map<string, Array<DTODividende>>;
 
   // cours pour lequel afficher les courbes
   coursSelectionne: {
@@ -190,6 +192,7 @@ export class PortefeuillesComponent implements OnInit, OnDestroy {
   private definirCoursPortefeuilleCourant(): void {
     if (this.listeCours) {
       this.date = this.listeCours.length > 0 ? this.listeCours[0].date : undefined;
+      this.dividendesByTicker = this.dividendesService.chargerMapByTicker();
 
       const portefeuilleAvecCours: PortefeuilleAvecCours = this.portefeuillesAvecCours[this.idxPortefeuilleCourant];
 
