@@ -2,10 +2,10 @@ import {DTOCoursTickerAllege} from '../cours/dto-cours-ticker-allege.interface';
 import {DTODividende} from '../dividendes/dto-dividende.interface';
 
 export class IndicateursUtil {
-  public static calculerPourcentageDividendes(ticker: string, cloture: number, dividendesByTicker?: Map<string, Array<DTODividende>>): number {
+  public static calculerPourcentageDividendes(ticker: string, cloture: number, dividendes: Array<DTODividende>): number {
     const anneePrecedente = String(new Date().getFullYear() - 1);
-    const dividendesTicker = dividendesByTicker?.get(ticker)?.filter(dividende => {
-      return dividende.ticker === ticker && dividende.date.substring(0, 4) === anneePrecedente;
+    const dividendesTicker = dividendes.filter(dividende => {
+      return dividende.date.substring(0, 4) === anneePrecedente;
     });
     if (dividendesTicker) {
       const somme = dividendesTicker.reduce((acc, dividende) => acc + dividende.montant, 0);

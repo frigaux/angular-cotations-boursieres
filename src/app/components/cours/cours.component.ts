@@ -134,7 +134,7 @@ export class CoursComponent implements OnInit {
               this.filtreActif.avecOperandeMIN ? c.calculerMinimumMM() : undefined,
               this.filtreActif.avecOperandeMAX ? c.calculerMaximumMM() : undefined,
               this.filtreActif.avecOperandeMOY ? c.calculerMoyenneMM() : undefined,
-              this.filtreActif.avecOperandeDIV ? 100 * IndicateursUtil.calculerPourcentageDividendes(c.ticker, c.cloture, this.dividendesByTicker) : undefined);
+              this.filtreActif.avecOperandeDIV ? 100 * IndicateursUtil.calculerPourcentageDividendes(c.ticker, c.cloture, c.dividendes!) : undefined);
           }
         })
         .forEach(cours => {
@@ -161,7 +161,7 @@ export class CoursComponent implements OnInit {
   }
 
   private basculerAffichageCours(marche: MarcheDecore, cours: Cours) {
-    if ( this.valeurByTicker && (this.coursSelectionne === undefined || this.coursSelectionne.cours.ticker !== cours.ticker)) {
+    if (this.valeurByTicker && (this.coursSelectionne === undefined || this.coursSelectionne.cours.ticker !== cours.ticker)) {
       this.marcheSelectionne = marche;
       const idxCours = this.marcheSelectionne.cours.indexOf(cours);
       this.coursSelectionne = {

@@ -82,7 +82,12 @@
                           title="{{ 'COMPOSANTS.COURS.ACTIONS' | translate }}"></span>
                     {{ cours.libelle }}
                     @if (afficherIndicateurs) {
-                      <app-indicateurs [dto]="{cours, dividendesByTicker}"></app-indicateurs>
+                      <app-indicateurs [dto]="{
+                      ticker: cours.ticker,
+                      cloture: cours.cloture,
+                      coursAlleges: cours.coursAlleges,
+                      moyennesMobiles: cours.moyennesMobiles,
+                      dividendes: cours.dividendes}"></app-indicateurs>
                     }
                   </td>
                   <td [appClassVariation]="cours.var1">
@@ -90,7 +95,8 @@
                   </td>
                   <td>{{ cours.cloture | currency:'EUR':'symbol' }}</td>
                   <td>
-                    <app-colonne-dividendes [dto]="{dividendes: cours.dividendes, cloture: cours.cloture}"></app-colonne-dividendes>
+                    <app-colonne-dividendes
+                      [dto]="{dividendes: cours.dividendes, cloture: cours.cloture}"></app-colonne-dividendes>
                   </td>
                   <td [class]="evolutionCours(cours.cloture, cours.moyennesMobiles[4])">
                     {{ cours.moyennesMobiles[4] | currency:'EUR':'symbol' }}

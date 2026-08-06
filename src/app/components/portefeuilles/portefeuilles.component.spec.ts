@@ -18,7 +18,7 @@ import {BoursoramaService} from '../../services/boursorama/boursorama.service';
 import {ZoneBourseService} from '../../services/zone-bourse/zone-bourse.service';
 import {ParametrageService} from '../../services/parametrage/parametrage.service';
 import {DividendesService} from '../../services/dividendes/dividendes.service';
-import {DIVIDENDES_TICKER_GLE} from '../../services/jdd/jdd-dividendes.dataset';
+import {DIVIDENDES_BY_TICKER} from '../../services/jdd/jdd-dividendes.dataset';
 
 describe('PortefeuillesComponent', () => {
   let component: PortefeuillesComponent;
@@ -33,7 +33,7 @@ describe('PortefeuillesComponent', () => {
   const mockBoursoramaService = jasmine.createSpyObj('BoursoramaService', ['chargerCoursTicker']);
   const mockZoneBourseService = jasmine.createSpyObj('ZoneBourseService', ['chargerActualites']);
   const mockParametrageService = jasmine.createSpyObj('ParametrageService', ['chargerUrlSauvegardeRestauration', 'sauvegarder', 'restaurer']);
-  const mockDividendesService = jasmine.createSpyObj('DividendesService', ['charger', 'onUpdate']);
+  const mockDividendesService = jasmine.createSpyObj('DividendesService', ['chargerMapByTicker', 'onUpdate']);
 
   const achatsByTicker = new Map<string, Array<DTOAchat>>();
 
@@ -82,7 +82,7 @@ describe('PortefeuillesComponent', () => {
       mockValeursService.chargerAchatsTicker.and.returnValue(ACHATS[0].achats);
       mockValeursService.chargerAchats.and.returnValue([ACHATS[0]]);
       mockCoursService.chargerCoursTickersWithLimit.and.returnValue(of(LISTE_COURS_AVEC_LISTE_ALLEGEE));
-      mockDividendesService.charger.and.returnValue(DIVIDENDES_TICKER_GLE);
+      mockDividendesService.chargerMapByTicker.and.returnValue(DIVIDENDES_BY_TICKER);
     });
 
     it('when #ngOnInit then le portefeuille est chargé avec adjonction du portefeuille "achats"', async () => {

@@ -1,10 +1,10 @@
 import {Component, inject, input, InputSignal} from '@angular/core';
-import {Cours} from '../cours.class';
 import {CoursService} from '../../../services/cours/cours.service';
 import {IndicateursUtil} from '../../../services/commun/indicateurs-util.class';
 import {PercentPipe} from '@angular/common';
 import {DTODividende} from '../../../services/dividendes/dto-dividende.interface';
 import {TranslatePipe} from '@ngx-translate/core';
+import {DTOCoursTickerAllege} from '../../../services/cours/dto-cours-ticker-allege.interface';
 
 @Component({
   selector: 'app-indicateurs',
@@ -20,13 +20,19 @@ export class Indicateurs {
 
   // input/output
   inputCours: InputSignal<{
-    dividendesByTicker?: Map<string, Array<DTODividende>>,
-    cours: Cours
+    ticker: string,
+    cloture: number,
+    coursAlleges?: DTOCoursTickerAllege[],
+    moyennesMobiles: number[],
+    dividendes: Array<DTODividende>,
   } | undefined> = input(undefined,
     {transform: o => this.intercepteurCours(o), alias: 'dto'});
 
-  private cours?: Cours;
-  private dividendesByTicker?: Map<string, Array<DTODividende>>;
+  private ticker?: string;
+  private cloture?: number;
+  private moyennesMobiles?: number[];
+  private coursAlleges?: DTOCoursTickerAllege[];
+  private dividendes?: Array<DTODividende>;
 
   // données pour la vue
   pourcentageDividendes: number = 0;
@@ -34,14 +40,23 @@ export class Indicateurs {
   pourcentageEcartType: number = 0;
   classeEcartType: string = '';
 
-  private intercepteurCours(dto: { dividendesByTicker?: Map<string, Array<DTODividende>>, cours: Cours } | undefined) {
+  private intercepteurCours(dto: {
+    ticker: string,
+    cloture: number,
+    coursAlleges?: DTOCoursTickerAllege[],
+    moyennesMobiles: number[],
+    dividendes: Array<DTODividende>,
+  } | undefined) {
     if (dto) {
-      this.cours = dto.cours;
-      this.dividendesByTicker = dto.dividendesByTicker;
-      if (!this.cours.coursAlleges) {
-        this.coursService.chargerCoursTickerWithLimit(this.cours.ticker, 300)
+      this.ticker = dto.ticker;
+      this.cloture = dto.cloture;
+      this.coursAlleges = dto.coursAlleges;
+      this.moyennesMobiles = dto.moyennesMobiles;
+      this.dividendes = dto.dividendes;
+      if (!this.coursAlleges) {
+        this.coursService.chargerCoursTickerWithLimit(this.ticker, 300)
           .subscribe(coursAlleges => {
-            this.cours!.coursAlleges = coursAlleges;
+            this.coursAlleges = coursAlleges;
             this.calculerIndicateurs();
           });
       } else {
@@ -52,18 +67,16 @@ export class Indicateurs {
   }
 
   private calculerIndicateurs() {
-    if (this.cours) {
-      this.pourcentageDividendes = IndicateursUtil.calculerPourcentageDividendes(this.cours.ticker, this.cours.cloture, this.dividendesByTicker);
-      this.classeDividendes = this.pourcentageDividendes > 0.08 ? 'fort' : this.pourcentageDividendes > 0.04 ? 'moyen' : 'leger';
-      this.pourcentageEcartType = IndicateursUtil.calculerPourcentageEcartType(this.cours.coursAlleges!);
-      this.classeEcartType = this.determinerClasseEcartType();
-    }
+    this.pourcentageDividendes = IndicateursUtil.calculerPourcentageDividendes(this.ticker!, this.cloture!, this.dividendes!);
+    this.classeDividendes = this.pourcentageDividendes > 0.08 ? 'fort' : this.pourcentageDividendes > 0.04 ? 'moyen' : 'leger';
+    this.pourcentageEcartType = IndicateursUtil.calculerPourcentageEcartType(this.coursAlleges!);
+    this.classeEcartType = this.determinerClasseEcartType();
   }
 
   private determinerClasseEcartType(): string {
-    const nbMM = this.cours!.moyennesMobiles.length;
+    const nbMM = this.moyennesMobiles!.length;
     if (nbMM > 50) {
-      if (this.cours!.moyennesMobiles[19] > this.cours!.moyennesMobiles[nbMM - 1]) { // tendance haussière
+      if (this.moyennesMobiles![19] > this.moyennesMobiles![nbMM - 1]) { // tendance haussière
         return this.pourcentageEcartType > 0.1 ? 'pi-angle-double-up' : 'pi-angle-up';
       } else { // tendance baissière
         return this.pourcentageEcartType > 0.1 ? 'pi-angle-double-down' : 'pi-angle-down';

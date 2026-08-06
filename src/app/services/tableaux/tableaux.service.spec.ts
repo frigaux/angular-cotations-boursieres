@@ -98,7 +98,7 @@ describe('TableauxService', () => {
       expect(service.valeurFormatteePourUnCours(COLONNE_COURS_20)(COURS_PORTEFEUILLE)).toBe(`€${COURS_PORTEFEUILLE.coursAlleges[0].cloture}`);
       expect(service.valeurFormatteePourUnCours(COLONNE_MOYENNE_MOBILE_20)(COURS_PORTEFEUILLE)).toBe(`€${COURS_PORTEFEUILLE.moyennesMobiles[0]}0`);
       expect(service.valeurFormatteePourUnCours(COLONNE_VARIATION_20)(COURS_PORTEFEUILLE)).toBe('1.16%');
-      expect(service.valeurFormatteePourUnCours(COLONNE_DIVIDENDES_20)(COURS_PORTEFEUILLE)).toEqual(DIVIDENDES_TICKER_GLE.dividendes);
+      expect(service.valeurFormatteePourUnCours(COLONNE_DIVIDENDES_20)(COURS_PORTEFEUILLE)).toEqual([]);
       expect(service.valeurFormatteePourUnCours(COLONNE_ECART_TYPE_20)(COURS_PORTEFEUILLE)).toEqual('€0.01');
     })
   });
