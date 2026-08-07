@@ -38,10 +38,16 @@ export class TableauxService {
             largeur: 20
           },
           {
+            nom: 'Indicateurs',
+            type: TypesColonnesPortefeuille.INDICATEURS,
+            tri: false,
+            largeur: 8
+          },
+          {
             nom: 'Alertes',
             type: TypesColonnesPortefeuille.ALERTES,
             tri: false,
-            largeur: 10
+            largeur: 8
           },
           {
             nom: 'Clôture',
@@ -72,13 +78,7 @@ export class TableauxService {
             nom: 'Dividendes',
             type: TypesColonnesPortefeuille.DIVIDENDES,
             tri: false,
-            largeur: 8
-          },
-          {
-            nom: 'Indicateurs',
-            type: TypesColonnesPortefeuille.INDICATEURS,
-            tri: false,
-            largeur: 7
+            largeur: 9
           },
           {
             nom: 'MM5',
@@ -154,6 +154,12 @@ export class TableauxService {
             largeur: 20
           },
           {
+            nom: 'Indicateurs',
+            type: TypesColonnesPortefeuille.INDICATEURS,
+            tri: false,
+            largeur: 12
+          },
+          {
             nom: 'Alertes',
             type: TypesColonnesPortefeuille.ALERTES,
             tri: false,
@@ -179,37 +185,21 @@ export class TableauxService {
             largeur: 10
           },
           {
-            nom: 'MM5',
-            type: TypesColonnesPortefeuille.MOYENNE_MOBILE,
-            parametre: 5,
-            tri: false,
+            nom: 'Ticker',
+            type: TypesColonnesPortefeuille.TICKER,
+            tri: true,
             largeur: 8
           },
           {
-            nom: 'MM20',
-            type: TypesColonnesPortefeuille.MOYENNE_MOBILE,
-            parametre: 20,
+            nom: 'Dividendes',
+            type: TypesColonnesPortefeuille.DIVIDENDES,
             tri: false,
-            largeur: 8
-          },
-          {
-            nom: 'MM50',
-            type: TypesColonnesPortefeuille.MOYENNE_MOBILE,
-            parametre: 50,
-            tri: false,
-            largeur: 8
-          },
-          {
-            nom: 'MM100',
-            type: TypesColonnesPortefeuille.MOYENNE_MOBILE,
-            parametre: 100,
-            tri: false,
-            largeur: 8
+            largeur: 12
           },
           {
             nom: 'MM200',
             type: TypesColonnesPortefeuille.MOYENNE_MOBILE,
-            parametre: 200,
+            parametre: 100,
             tri: false,
             largeur: 8
           }
@@ -259,6 +249,12 @@ export class TableauxService {
             largeur: 25
           },
           {
+            nom: 'Indicateurs',
+            type: TypesColonnesPortefeuille.INDICATEURS,
+            tri: false,
+            largeur: 15
+          },
+          {
             nom: 'Alertes',
             type: TypesColonnesPortefeuille.ALERTES,
             tri: false,
@@ -284,25 +280,10 @@ export class TableauxService {
             largeur: 10
           },
           {
-            nom: 'MM5',
-            type: TypesColonnesPortefeuille.MOYENNE_MOBILE,
-            parametre: 5,
+            nom: 'Dividendes',
+            type: TypesColonnesPortefeuille.DIVIDENDES,
             tri: false,
-            largeur: 10
-          },
-          {
-            nom: 'MM20',
-            type: TypesColonnesPortefeuille.MOYENNE_MOBILE,
-            parametre: 20,
-            tri: false,
-            largeur: 10
-          },
-          {
-            nom: 'MM50',
-            type: TypesColonnesPortefeuille.MOYENNE_MOBILE,
-            parametre: 50,
-            tri: false,
-            largeur: 10
+            largeur: 15
           }
         ],
         colonnesPortrait: [

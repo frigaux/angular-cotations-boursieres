@@ -10,6 +10,7 @@ import {AlertesDecorees} from './alertes-decorees.interface';
 import {EtapeValeurUtil} from '../valeurs/achats-valeur/etape-valeur-util.class';
 import {EtapeValeur} from '../valeurs/achats-valeur/etape-valeur.enum';
 import {IndicateursUtil} from '../../services/commun/indicateurs-util.class';
+import {DTODividende} from '../../services/dividendes/dto-dividende.interface';
 
 export class CoursPortefeuille {
   date: string; // ISO 8601 : yyyy-MM-dd
@@ -28,10 +29,13 @@ export class CoursPortefeuille {
   coursMaximum?: (nbJours: number) => number;
   coursMoyen?: (nbJours: number) => number;
   coursNbVagues?: (nbJours: number) => number;
+  pourcentageDividendes?: number;
+  pourcentageEcartType?: number;
 
   constructor(valeur: DTOValeur, dto: DTOCoursAvecListeAllege,
               alertes: AlertesDecorees,
-              colonnesDecorees: ColonneDecoree[]) {
+              colonnesDecorees: ColonneDecoree[],
+              dividendes: Array<DTODividende>) {
     this.date = dto.cours[0].date;
     this.ticker = dto.ticker;
     this.libelle = valeur.libelle;
@@ -67,6 +71,12 @@ export class CoursPortefeuille {
     if (alertes.avecOperandeNBV) {
       this.coursNbVagues = (nbJours: number) => IndicateursUtil.estimerNbVagues(this.coursAlleges, this.moyennesMobiles, nbJours);
     }
+    if (alertes.avecOperandeDIV) {
+      this.pourcentageDividendes = 100 * IndicateursUtil.calculerPourcentageDividendes(this.ticker, this.cloture, dividendes);
+    }
+    if (alertes.avecOperandeECA) {
+      this.pourcentageEcartType = 100 * IndicateursUtil.calculerPourcentageEcartType(this.coursAlleges);
+    }
 
     Object.assign(this, {var1: this.calculerVariation(1)});
 
@@ -86,7 +96,8 @@ export class CoursPortefeuille {
   evaluerAlertes(): AlerteAvecSonEvaluation[] {
     return this.alertes.alertesDecorees.map((dto, id) =>
       new AlerteAvecSonEvaluation(id, dto.alerte,
-        dto.evaluer(this.coursAlleges, this.moyennesMobiles, this.coursMinimum, this.coursMaximum, this.coursMoyen, this.coursNbVagues))
+        dto.evaluer(this.coursAlleges, this.moyennesMobiles, this.coursMinimum, this.coursMaximum,
+          this.coursMoyen, this.coursNbVagues, this.pourcentageDividendes, this.pourcentageEcartType))
     );
   }
 

@@ -6,6 +6,7 @@ import {DTOCoursAvecListeAllege} from '../cours/dto-cours-avec-liste-allege.inte
 import {CoursPortefeuille} from '../../components/portefeuilles/cours-portefeuille.class';
 import {VALEUR} from './jdd-valeurs.dataset';
 import {DTOFiltre} from '../cours/dto-filtre.interface';
+import {AlertesDecorees} from '../../components/portefeuilles/alertes-decorees.interface';
 
 export const COURS_GLE = {
   "ticker": "GLE",
@@ -108,15 +109,17 @@ export const LISTE_COURS_AVEC_LISTE_ALLEGEE: DTOCoursAvecListeAllege[] = [
   }
 ];
 
-export const AUCUNE_ALERTE = {
+export const AUCUNE_ALERTE: AlertesDecorees = {
   alertesDecorees: [],
   avecOperandeMIN: false,
   avecOperandeMAX: false,
   avecOperandeMOY: false,
-  avecOperandeNBV: false
+  avecOperandeNBV: false,
+  avecOperandeDIV: false,
+  avecOperandeECA: false
 };
 
-export const COURS_PORTEFEUILLE = new CoursPortefeuille(VALEUR, LISTE_COURS_AVEC_LISTE_ALLEGEE[0], AUCUNE_ALERTE, []);
+export const COURS_PORTEFEUILLE = new CoursPortefeuille(VALEUR, LISTE_COURS_AVEC_LISTE_ALLEGEE[0], AUCUNE_ALERTE, [], []);
 
 export const FILTRES: DTOFiltre[] = [
   {

@@ -22,7 +22,11 @@ export class PortefeuilleAvecCours {
       .find(alerte => alerte.condition.includes('MOY(')) !== undefined;
     const avecOperandeNBV = portefeuille.alertes
       .find(alerte => alerte.condition.includes('NBV(')) !== undefined;
-    this.alertes = {alertesDecorees, avecOperandeMIN, avecOperandeMAX, avecOperandeMOY, avecOperandeNBV};
+    const avecOperandeDIV = portefeuille.alertes
+      .find(alerte => alerte.condition.includes('DIV')) !== undefined;
+    const avecOperandeECA = portefeuille.alertes
+      .find(alerte => alerte.condition.includes('ECA')) !== undefined;
+    this.alertes = {alertesDecorees, avecOperandeMIN, avecOperandeMAX, avecOperandeMOY, avecOperandeNBV, avecOperandeDIV, avecOperandeECA};
     this.etapeValeur = etapeValeur;
   }
 
@@ -34,6 +38,6 @@ export class PortefeuilleAvecCours {
       .replaceAll(/M(\d+)/gi, (match, token) => {
         return `moyennes[${token - 1}]`;
       });
-    return {alerte, evaluer: new Function('cours', 'moyennes', 'MIN', 'MAX', 'MOY', 'NBV', `return ${condition};`)};
+    return {alerte, evaluer: new Function('cours', 'moyennes', 'MIN', 'MAX', 'MOY', 'NBV', 'DIV', 'ECA', `return ${condition};`)};
   }
 }

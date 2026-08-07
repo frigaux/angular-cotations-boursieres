@@ -206,7 +206,7 @@ export class PortefeuillesComponent implements OnInit, OnDestroy {
       }
       portefeuilleAvecCours.cours = this.listeCours.map(dto => {
         return new CoursPortefeuille(this.valeurByTicker!.get(dto.ticker)!, dto,
-          portefeuilleAvecCours.alertes, this.colonnesDecorees!);
+          portefeuilleAvecCours.alertes, this.colonnesDecorees!, this.dividendesByTicker?.get(dto.ticker) || []);
       });
     }
   }
