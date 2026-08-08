@@ -13,6 +13,7 @@ import {DTOVentesADecouvert} from './dto-ventes-a-decouvert.class';
 import {DTOTransaction} from './dto-transaction.class';
 import {DTOCotations} from './dto-cotations.interface';
 import {DTOIdentiteTickerAbcbourse} from './dto-identite-ticker-abcbourse';
+import {LocalStorageService} from '../local-storage/local-storage.service';
 
 @Injectable({
   providedIn: 'root'
@@ -21,7 +22,7 @@ export class AbcBourseService {
   private static readonly HEADERS = new HttpHeaders()
     .set('Accept', 'text/html; charset=utf-8');
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private localStorageService: LocalStorageService) {
   }
 
   public chargerInformationsTicker(ticker: string): Observable<DTOInformationsTickerABCBourse> {
@@ -51,12 +52,16 @@ export class AbcBourseService {
                 observer.complete();
               },
               next: html => {
-                observer.next(this.parseAndMapInformations(html, ticker));
+                const dto = this.parseAndMapInformations(html, ticker);
+                this.localStorageService.enregistrerDTO(ticker, dto);
+                observer.next(dto);
                 observer.complete();
               }
             });
           } else {
-            observer.next(this.parseAndMapInformations(response.body ?? '', ticker));
+            const dto = this.parseAndMapInformations(response.body ?? '', ticker);
+            this.localStorageService.enregistrerDTO(ticker, dto);
+            observer.next(dto);
             observer.complete();
           }
         }
@@ -312,7 +317,10 @@ export class AbcBourseService {
 
   public chargerIndentiteTicker(ticker: string): Observable<DTOIdentiteTickerAbcbourse> {
     return new Observable(observer => {
-      this.http.get(`/abcbourse/analyses/chiffres/${ticker}p`, {headers: AbcBourseService.HEADERS, responseType: 'text'}).subscribe({
+      this.http.get(`/abcbourse/analyses/chiffres/${ticker}p`, {
+        headers: AbcBourseService.HEADERS,
+        responseType: 'text'
+      }).subscribe({
         error: httpErrorResponse => {
           observer.error(httpErrorResponse);
           observer.complete();
@@ -320,6 +328,7 @@ export class AbcBourseService {
         next: html => {
           const dto = this.parseAndMapIdentite(html);
           if (dto) {
+            this.localStorageService.enregistrerDTO(ticker, dto);
             observer.next(dto);
           } else {
             observer.error();
@@ -333,7 +342,7 @@ export class AbcBourseService {
   private parseAndMapIdentite(html: string): DTOIdentiteTickerAbcbourse | undefined {
     const document = new DOMParser().parseFromString(html, 'text/html');
     const elPaPropos: HTMLParagraphElement | null = document.querySelector('p.co_b');
-    const elTableIdentite= document.querySelector('div.chiffres_infos table.tbl100_10');
+    const elTableIdentite = document.querySelector('div.chiffres_infos table.tbl100_10');
     const elTdsIdentite: NodeListOf<HTMLTableCellElement> = elTableIdentite!.querySelectorAll('tbody tr td:last-child');
 
     if (elPaPropos && elTdsIdentite.length === 9) {

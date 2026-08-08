@@ -9,7 +9,6 @@ import {DTOInformationsTickerBoursorama} from './dto-informations-ticker-boursor
 import {DTOInformation} from './dto-information.interface';
 import {DTOCotations} from './dto-cotations.interface';
 import {DTOValeur} from './dto-valeur.interface';
-import {TranslateService} from '@ngx-translate/core';
 import {DtoTransaction} from './dto-transaction.interface';
 import {DTOHistoriqueJour} from './dto-historique-jour.interface';
 import {DTOHistoriquePeriode} from './dto-historique-periode.interface';
@@ -21,6 +20,7 @@ import {RisqueESG} from './risque-esg.enum';
 import {DTODividendes} from '../dividendes/dto-dividendes.class';
 import {DTODividende} from '../dividendes/dto-dividende.interface';
 import {TypeDividende} from '../dividendes/type-dividende.enum';
+import {LocalStorageService} from '../local-storage/local-storage.service';
 
 @Injectable({
   providedIn: 'root'
@@ -31,8 +31,7 @@ export class BoursoramaService {
   private static readonly HEADERS_HTML = new HttpHeaders()
     .set('Accept', 'text/html');
 
-  constructor(private http: HttpClient,
-              private translateService: TranslateService) {
+  constructor(private http: HttpClient, private localStorageService: LocalStorageService) {
   }
 
   public chargerCoursTickers(tickers: Array<string>): Observable<Array<DTOCours>> {
@@ -107,6 +106,7 @@ export class BoursoramaService {
   private parseHtml(valeur: DTOValeur, html: string, observer: Subscriber<DTOInformationsTickerBoursorama>) {
     const dto = this.parseAndMapInformationsTicker(valeur, html);
     if (dto) {
+      this.localStorageService.enregistrerDTO(valeur.ticker, dto);
       observer.next(dto);
     } else {
       observer.error({

@@ -7,10 +7,10 @@ import {DTOParametrage} from './dto-parametrage.interface';
 import {DTOValeur} from '../valeurs/dto-valeur.interface';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Observable} from 'rxjs';
-import {
-  DTORestauration
-} from './dto-restauration.class';
+import {DTORestauration} from './dto-restauration.class';
 import {DividendesService} from '../dividendes/dividendes.service';
+import {LocalStorable} from '../local-storage/local-storable.enum';
+import {LocalStorageService} from '../local-storage/local-storage.service';
 
 @Injectable({
   providedIn: 'root'
@@ -25,7 +25,8 @@ export class ParametrageService {
               private coursService: CoursService,
               private portefeuillesService: PortefeuillesService,
               private tableauxService: TableauxService,
-              private dividendesService: DividendesService) {
+              private dividendesService: DividendesService,
+              private localStorageService: LocalStorageService) {
   }
 
   public chargerUrlSauvegardeRestauration(): string | undefined {
@@ -42,7 +43,10 @@ export class ParametrageService {
       filtres: this.coursService.chargerFiltres(),
       portefeuilles: this.portefeuillesService.charger(),
       tableaux: this.tableauxService.charger(),
-      dividendes: this.dividendesService.charger()
+      dividendes: this.dividendesService.charger(),
+      dtoInformationsTickerABCBourse: this.localStorageService.chargerDTOByTicker(LocalStorable.DTOInformationsTickerABCBourse),
+      dtoIdentiteTickerAbcbourse: this.localStorageService.chargerDTOByTicker(LocalStorable.DTOIdentiteTickerAbcbourse),
+      dtoInformationsTickerBoursorama: this.localStorageService.chargerDTOByTicker(LocalStorable.DTOInformationsTickerBoursorama)
     };
     const url = this.chargerUrlSauvegardeRestauration();
     if (url && URL.canParse(url)) {
@@ -78,6 +82,11 @@ export class ParametrageService {
           }
           if (dtoRestauration.dividendes && dto.dividendes) {
             this.dividendesService.enregistrer(dto.dividendes);
+          }
+          if (dtoRestauration.dto) {
+            this.localStorageService.enregistrerDTOByTicker(LocalStorable.DTOInformationsTickerABCBourse, dto.dtoInformationsTickerABCBourse);
+            this.localStorageService.enregistrerDTOByTicker(LocalStorable.DTOIdentiteTickerAbcbourse, dto.dtoIdentiteTickerAbcbourse);
+            this.localStorageService.enregistrerDTOByTicker(LocalStorable.DTOInformationsTickerBoursorama, dto.dtoInformationsTickerBoursorama);
           }
         });
         return o;

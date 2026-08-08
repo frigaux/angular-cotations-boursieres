@@ -44,6 +44,8 @@ import {
 import {Subscription} from 'rxjs';
 import {DTODividende} from '../../services/dividendes/dto-dividende.interface';
 import {Indicateurs} from '../cours/indicateurs/indicateurs';
+import {LocalStorageService} from '../../services/local-storage/local-storage.service';
+import {LocalStorable} from '../../services/local-storage/local-storable.enum';
 
 @Component({
   selector: 'app-portefeuilles',
@@ -98,6 +100,7 @@ export class PortefeuillesComponent implements OnInit, OnDestroy {
   portefeuillesAvecCours: Array<PortefeuilleAvecCours> = [];
   idxPortefeuilleCourant: number = -1;
   dividendesByTicker?: Map<string, Array<DTODividende>>;
+  dtoByTicker?: any;
 
   // cours pour lequel afficher les courbes
   coursSelectionne: {
@@ -120,12 +123,14 @@ export class PortefeuillesComponent implements OnInit, OnDestroy {
               private coursService: CoursService,
               private tableauxService: TableauxService,
               private dividendesService: DividendesService,
-              private breakpointObserver: BreakpointObserver) {
+              private breakpointObserver: BreakpointObserver,
+              private localStorageService: LocalStorageService) {
     // restauration des paramètres ou modification des valeurs d'un portefeuille ou des achats de valeur
     this.onUpdatePortefeuilles = portefeuillesService.onUpdate(portefeuilles => this.chargerPortefeuilleCourant());
     this.onUpdateAchats = valeursService.onUpdateAchats(achatsTickers => this.chargerPortefeuilleCourant());
     this.onUpdateTableaux = tableauxService.onUpdate(tableaux => this.definirCoursPortefeuilleCourant());
     this.onUpdateDividendes = dividendesService.onUpdate(dividendes => this.definirCoursPortefeuilleCourant());
+    // TODO : onUpdateDTO
 
     // cet observable émet initialement une correspondance !
     breakpointObserver.observe([
@@ -195,7 +200,7 @@ export class PortefeuillesComponent implements OnInit, OnDestroy {
     if (this.listeCours) {
       this.date = this.listeCours.length > 0 ? this.listeCours[0].date : undefined;
       this.dividendesByTicker = this.dividendesService.chargerMapByTicker();
-
+      this.dtoByTicker = this.localStorageService.chargerDTOByTicker(LocalStorable.DTOIdentiteTickerAbcbourse);
       const portefeuilleAvecCours: PortefeuilleAvecCours = this.portefeuillesAvecCours[this.idxPortefeuilleCourant];
 
       this.colonnesDecorees = this.decorerColonnes(portefeuilleAvecCours.etapeValeur);
@@ -251,7 +256,14 @@ export class PortefeuillesComponent implements OnInit, OnDestroy {
     return '';
   }
 
-  _basculerAffichageCours(cours: CoursPortefeuille) {
+  protected aPropos(cours: CoursPortefeuille): string {
+    if (this.dtoByTicker.hasOwnProperty(cours.ticker)) {
+      return this.dtoByTicker[cours.ticker].aPropos.replaceAll('<br>', '\n');;
+    }
+    return '';
+  }
+
+  public basculerAffichageCours(cours: CoursPortefeuille) {
     if (this.coursSelectionne === undefined || this.coursSelectionne.coursPortefeuille.ticker !== cours.ticker) {
       this.coursSelectionne = {coursPortefeuille: cours, premier: false, dernier: false};
     } else {
@@ -267,7 +279,7 @@ export class PortefeuillesComponent implements OnInit, OnDestroy {
     if (event.target instanceof Element && event.target.tagName === 'SPAN' && event.target.className.indexOf('pi') !== -1) {
       this.afficherActions(event, cours, portefeuilleAvecCours);
     } else {
-      this._basculerAffichageCours(cours);
+      this.basculerAffichageCours(cours);
     }
   }
 

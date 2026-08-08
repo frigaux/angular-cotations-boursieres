@@ -584,6 +584,7 @@
           "FILTRES": "les filtres des cours",
           "ACHATS": "la liste des achats de valeurs",
           "DIVIDENDES": "la liste des dividendes",
+          "DTO": "les DTO ABCBourse et Boursorama",
           "SAUVEGARDER": "Sauvegarder"
         },
         "SAUVEGARDE_REUSSI": "Sauvegarde réussie !",
@@ -594,6 +595,7 @@
           "FILTRES": "les filtres des cours",
           "ACHATS": "la liste des achats de valeurs",
           "DIVIDENDES": "la liste des dividendes",
+          "DTO": "les DTO ABCBourse et Boursorama",
           "RESTAURER": "Restaurer"
         },
         "RESTAURATION_REUSSIE": "Restauration réussie !"

@@ -75,7 +75,8 @@
                 </tr>
               </ng-template>
               <ng-template #body let-cours>
-                <tr (click)="onClickCours($event, marche, cours)">
+                <tr (click)="onClickCours($event, marche, cours)"
+                    [title]="aPropos(cours)">
                   <td class="libelle">
                     <span class="pi"
                           [class]="cours.iconeVariation()"

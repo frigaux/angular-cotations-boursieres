@@ -28,6 +28,8 @@ import {DividendesService} from '../../services/dividendes/dividendes.service';
 import {DTODividende} from '../../services/dividendes/dto-dividende.interface';
 import {Indicateurs} from './indicateurs/indicateurs';
 import {IndicateursUtil} from '../../services/commun/indicateurs-util.class';
+import {LocalStorageService} from '../../services/local-storage/local-storage.service';
+import {LocalStorable} from '../../services/local-storage/local-storable.enum';
 
 @Component({
   selector: 'app-cours',
@@ -70,6 +72,7 @@ export class CoursComponent implements OnInit {
   protected valeurByTicker?: Map<string, DTOValeur>;
   afficherIndicateurs: boolean = false;
   dividendesByTicker?: Map<string, Array<DTODividende>>;
+  dtoByTicker?: any;
 
   // cours pour lequel afficher les moyennes mobiles
   coursSelectionne?: { cours: Cours, valeur: DTOValeur, premier: boolean, dernier: boolean };
@@ -84,12 +87,14 @@ export class CoursComponent implements OnInit {
   constructor(private valeursService: ValeursService,
               private coursService: CoursService,
               private portefeuillesService: PortefeuillesService,
-              private dividendesService: DividendesService) {
+              private dividendesService: DividendesService,
+              private localStorageService: LocalStorageService) {
     this.portefeuilles = this.portefeuillesService.auMoinsUnPortefeuilleCorrectementConfigure();
   }
 
   ngOnInit(): void {
     this.dividendesByTicker = this.dividendesService.chargerMapByTicker();
+    this.dtoByTicker = this.localStorageService.chargerDTOByTicker(LocalStorable.DTOIdentiteTickerAbcbourse);
     this.chargerValeurs();
   }
 
@@ -158,6 +163,13 @@ export class CoursComponent implements OnInit {
     } else {
       this.basculerAffichageCours(marche, cours);
     }
+  }
+
+  aPropos(cours: Cours): string {// TODO : replaceAll + factorisation avec portefeuilles
+    if (this.dtoByTicker.hasOwnProperty(cours.ticker)) {
+      return this.dtoByTicker[cours.ticker].aPropos.replaceAll('<br>', '\n');
+    }
+    return '';
   }
 
   private basculerAffichageCours(marche: MarcheDecore, cours: Cours) {

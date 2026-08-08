@@ -4,4 +4,5 @@ export class DTORestauration {
   filtres: boolean = true;
   achats: boolean = true;
   dividendes: boolean = true;
+  dto: boolean = false;
 }

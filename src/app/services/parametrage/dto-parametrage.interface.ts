@@ -10,4 +10,7 @@ export interface DTOParametrage {
   portefeuilles: Array<DTOPortefeuille>;
   tableaux: DTOTableaux;
   dividendes?: DTODividendes;
+  dtoInformationsTickerABCBourse: any;
+  dtoIdentiteTickerAbcbourse: any;
+  dtoInformationsTickerBoursorama: any;
 }

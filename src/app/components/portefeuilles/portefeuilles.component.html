@@ -67,7 +67,8 @@
                   </tr>
                 </ng-template>
                 <ng-template #body let-cours>
-                  <tr (click)="onClickCours($event, cours, portefeuilleAvecCours)">
+                  <tr (click)="onClickCours($event, cours, portefeuilleAvecCours)"
+                      [title]="aPropos(cours)">
                     @for (colonneDecoree of colonnesDecorees; track colonneDecoree.id) {
                       <td
                         [ngStyle]="{'text-align': colonneDecoree.textAlign}"
@@ -108,8 +109,9 @@
                             {{ cours[colonneDecoree.id] | percent:'1.2-2' }}
                           }
                           @case (TypesColonnesPortefeuille.DIVIDENDES) {
-                            <app-colonne-dividendes [dto]="{dividendes: dividendesByTicker?.get(cours.ticker) || [], cloture: cours.cloture}"
-                                                    [reduit]="true"></app-colonne-dividendes>
+                            <app-colonne-dividendes
+                              [dto]="{dividendes: dividendesByTicker?.get(cours.ticker) || [], cloture: cours.cloture}"
+                              [reduit]="true"></app-colonne-dividendes>
                           }
                           @case (TypesColonnesPortefeuille.POURCENTAGE_ECART_TYPE) {
                             {{ cours[colonneDecoree.id] | percent:'1.2-2' }}
