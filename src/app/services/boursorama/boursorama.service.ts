@@ -21,6 +21,7 @@ import {DTODividendes} from '../dividendes/dto-dividendes.class';
 import {DTODividende} from '../dividendes/dto-dividende.interface';
 import {TypeDividende} from '../dividendes/type-dividende.enum';
 import {LocalStorageService} from '../local-storage/local-storage.service';
+import {LocalStorable} from '../local-storage/local-storable.enum';
 
 @Injectable({
   providedIn: 'root'
@@ -106,7 +107,7 @@ export class BoursoramaService {
   private parseHtml(valeur: DTOValeur, html: string, observer: Subscriber<DTOInformationsTickerBoursorama>) {
     const dto = this.parseAndMapInformationsTicker(valeur, html);
     if (dto) {
-      this.localStorageService.enregistrerDTO(valeur.ticker, dto);
+      this.localStorageService.enregistrerDTO(LocalStorable.DTOInformationsTickerBoursorama, valeur.ticker, dto);
       observer.next(dto);
     } else {
       observer.error({

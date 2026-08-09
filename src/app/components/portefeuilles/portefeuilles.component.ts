@@ -46,6 +46,7 @@ import {DTODividende} from '../../services/dividendes/dto-dividende.interface';
 import {Indicateurs} from '../cours/indicateurs/indicateurs';
 import {LocalStorageService} from '../../services/local-storage/local-storage.service';
 import {LocalStorable} from '../../services/local-storage/local-storable.enum';
+import {ParseUtil} from '../../services/commun/parse-util.class';
 
 @Component({
   selector: 'app-portefeuilles',
@@ -116,6 +117,7 @@ export class PortefeuillesComponent implements OnInit, OnDestroy {
   private onUpdateAchats?: Subscription;
   private onUpdateTableaux?: Subscription;
   private onUpdateDividendes?: Subscription;
+  private onUpdateDTO?: Subscription;
 
   constructor(private translateService: TranslateService,
               private portefeuillesService: PortefeuillesService,
@@ -130,7 +132,12 @@ export class PortefeuillesComponent implements OnInit, OnDestroy {
     this.onUpdateAchats = valeursService.onUpdateAchats(achatsTickers => this.chargerPortefeuilleCourant());
     this.onUpdateTableaux = tableauxService.onUpdate(tableaux => this.definirCoursPortefeuilleCourant());
     this.onUpdateDividendes = dividendesService.onUpdate(dividendes => this.definirCoursPortefeuilleCourant());
-    // TODO : onUpdateDTO
+    this.onUpdateDTO = localStorageService.onUpdate(
+      (value: { cle: LocalStorable, dtoByTicker: any }) => {
+        if (value.cle == LocalStorable.DTOIdentiteTickerAbcbourse) {
+          this.dtoByTicker = value.dtoByTicker;
+        }
+      });
 
     // cet observable émet initialement une correspondance !
     breakpointObserver.observe([
@@ -258,7 +265,7 @@ export class PortefeuillesComponent implements OnInit, OnDestroy {
 
   protected aPropos(cours: CoursPortefeuille): string {
     if (this.dtoByTicker.hasOwnProperty(cours.ticker)) {
-      return this.dtoByTicker[cours.ticker].aPropos.replaceAll('<br>', '\n');;
+      return ParseUtil.htmlToText(this.dtoByTicker[cours.ticker].aPropos);
     }
     return '';
   }

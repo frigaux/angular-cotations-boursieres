@@ -91,6 +91,14 @@ export class ParseUtil {
     return undefined;
   }
 
+  static htmlToText(html: string): string {
+    return html
+      .replaceAll('<br>', '\n')
+      .replaceAll('<li>', '- ')
+      .replaceAll('</li>', '\n')
+      .replaceAll(/<[^>]+>/g, '');
+  }
+
   static parseDateBoursoramaAndMapTo8601(dateBoursorama: string): string {
     dateBoursorama = dateBoursorama.trim();
     const matchJour = ParseUtil.REGEXP_BOURSORAMA_JOUR.exec(dateBoursorama);

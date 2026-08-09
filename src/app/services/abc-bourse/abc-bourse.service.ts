@@ -14,6 +14,7 @@ import {DTOTransaction} from './dto-transaction.class';
 import {DTOCotations} from './dto-cotations.interface';
 import {DTOIdentiteTickerAbcbourse} from './dto-identite-ticker-abcbourse';
 import {LocalStorageService} from '../local-storage/local-storage.service';
+import {LocalStorable} from '../local-storage/local-storable.enum';
 
 @Injectable({
   providedIn: 'root'
@@ -53,14 +54,14 @@ export class AbcBourseService {
               },
               next: html => {
                 const dto = this.parseAndMapInformations(html, ticker);
-                this.localStorageService.enregistrerDTO(ticker, dto);
+                this.localStorageService.enregistrerDTO(LocalStorable.DTOInformationsTickerABCBourse, ticker, dto);
                 observer.next(dto);
                 observer.complete();
               }
             });
           } else {
             const dto = this.parseAndMapInformations(response.body ?? '', ticker);
-            this.localStorageService.enregistrerDTO(ticker, dto);
+            this.localStorageService.enregistrerDTO(LocalStorable.DTOInformationsTickerABCBourse, ticker, dto);
             observer.next(dto);
             observer.complete();
           }
@@ -271,7 +272,7 @@ export class AbcBourseService {
       ParseUtil.execRegexpAndMap(
         result.nouvelles,
         divNews[0].innerHTML,
-        new RegExp('<span class="news-time">(\\d{2}:\\d{2})<\\/span>\\s*<a href="([^"]+)">([^<]+)', 'gm'),
+        new RegExp('<span class="news-time">(\\d{2}:\\d{2})<\\/span>\\s*<a href="([^"]+)">((<b>[^<]+</b>)?[^<]+)', 'gm'),
         (matches) => new DTOLien(matches[1], undefined, matches[3], matches[2])
       );
     }
@@ -328,7 +329,7 @@ export class AbcBourseService {
         next: html => {
           const dto = this.parseAndMapIdentite(html);
           if (dto) {
-            this.localStorageService.enregistrerDTO(ticker, dto);
+            this.localStorageService.enregistrerDTO(LocalStorable.DTOIdentiteTickerAbcbourse, ticker, dto);
             observer.next(dto);
           } else {
             observer.error();

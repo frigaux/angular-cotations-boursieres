@@ -30,6 +30,7 @@ import {Indicateurs} from './indicateurs/indicateurs';
 import {IndicateursUtil} from '../../services/commun/indicateurs-util.class';
 import {LocalStorageService} from '../../services/local-storage/local-storage.service';
 import {LocalStorable} from '../../services/local-storage/local-storable.enum';
+import {ParseUtil} from '../../services/commun/parse-util.class';
 
 @Component({
   selector: 'app-cours',
@@ -165,9 +166,9 @@ export class CoursComponent implements OnInit {
     }
   }
 
-  aPropos(cours: Cours): string {// TODO : replaceAll + factorisation avec portefeuilles
+  aPropos(cours: Cours): string {
     if (this.dtoByTicker.hasOwnProperty(cours.ticker)) {
-      return this.dtoByTicker[cours.ticker].aPropos.replaceAll('<br>', '\n');
+      return ParseUtil.htmlToText(this.dtoByTicker[cours.ticker].aPropos);
     }
     return '';
   }
