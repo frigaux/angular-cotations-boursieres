@@ -11,7 +11,7 @@
       </ng-template>
       <ng-template #body let-lienDecore>
         <tr>
-          <td>{{ lienDecore.lien.moment }}</td>
+          <td [innerHTML]="lienDecore.lien.moment"></td>
           <td (click)="chargerLien(lienDecore)">
             @if (lienDecore.lien.objet) {
               <strong [innerHTML]="lienDecore.lien.objet"></strong> : <span [innerHTML]="lienDecore.lien.titre"></span>

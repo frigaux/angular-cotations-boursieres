@@ -113,11 +113,7 @@ export class PortefeuillesComponent implements OnInit, OnDestroy {
   // privé
   private listeCours?: DTOCoursAvecListeAllege[];
   protected valeurByTicker?: Map<string, DTOValeur>;
-  private onUpdatePortefeuilles?: Subscription;
-  private onUpdateAchats?: Subscription;
-  private onUpdateTableaux?: Subscription;
-  private onUpdateDividendes?: Subscription;
-  private onUpdateDTO?: Subscription;
+  private subscriptions: Array<Subscription> = [];
 
   constructor(private translateService: TranslateService,
               private portefeuillesService: PortefeuillesService,
@@ -128,16 +124,16 @@ export class PortefeuillesComponent implements OnInit, OnDestroy {
               private breakpointObserver: BreakpointObserver,
               private localStorageService: LocalStorageService) {
     // restauration des paramètres ou modification des valeurs d'un portefeuille ou des achats de valeur
-    this.onUpdatePortefeuilles = portefeuillesService.onUpdate(portefeuilles => this.chargerPortefeuilleCourant());
-    this.onUpdateAchats = valeursService.onUpdateAchats(achatsTickers => this.chargerPortefeuilleCourant());
-    this.onUpdateTableaux = tableauxService.onUpdate(tableaux => this.definirCoursPortefeuilleCourant());
-    this.onUpdateDividendes = dividendesService.onUpdate(dividendes => this.definirCoursPortefeuilleCourant());
-    this.onUpdateDTO = localStorageService.onUpdate(
+    this.subscriptions.push(portefeuillesService.onUpdate(portefeuilles => this.chargerPortefeuilleCourant()));
+    this.subscriptions.push(valeursService.onUpdateAchats(achatsTickers => this.chargerPortefeuilleCourant()));
+    this.subscriptions.push(tableauxService.onUpdate(tableaux => this.definirCoursPortefeuilleCourant()));
+    this.subscriptions.push(dividendesService.onUpdate(dividendes => this.definirCoursPortefeuilleCourant()));
+    this.subscriptions.push(localStorageService.onUpdate(
       (value: { cle: LocalStorable, dtoByTicker: any }) => {
         if (value.cle == LocalStorable.DTOIdentiteTickerAbcbourse) {
           this.dtoByTicker = value.dtoByTicker;
         }
-      });
+      }));
 
     // cet observable émet initialement une correspondance !
     breakpointObserver.observe([
@@ -156,10 +152,7 @@ export class PortefeuillesComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.onUpdatePortefeuilles?.unsubscribe();
-    this.onUpdateAchats?.unsubscribe();
-    this.onUpdateTableaux?.unsubscribe();
-    this.onUpdateDividendes?.unsubscribe();
+    this.subscriptions.forEach(subscription => subscription?.unsubscribe());
   }
 
   private determinerIdxPortefeuilleCourant() {
