@@ -232,10 +232,10 @@ export class BoursoramaService {
     const perEstime = ParseUtil.queryAndParseNumber(elLIsCotations4[1], 'p.c-list-info__value');
 
     const elLIsCotations5 = elULsCotations[4].querySelectorAll('li.c-list-info__item');
-    const dernierDividende = ParseUtil.queryAndParseNumber(elLIsCotations5[0], 'p.c-list-info__value');
-    const dateDernierDividende = ParseUtil.queryAndParseDate(elLIsCotations5[1], 'p.c-list-info__value');
-    const prochainDividende = ParseUtil.queryAndParseNumber(elLIsCotations5[2], 'p.c-list-info__value');
-    const dateProchainDividende = ParseUtil.queryAndParseDate(elLIsCotations5[2], 'p.c-list-info__value');
+    const dernierDividende = ParseUtil.queryAndParseNumberFromNodeList(elLIsCotations5, 0, 'p.c-list-info__value');
+    const dateDernierDividende = ParseUtil.queryAndParseDateFromNodeList(elLIsCotations5, 1, 'p.c-list-info__value');
+    const prochainDividende = ParseUtil.queryAndParseNumberFromNodeList(elLIsCotations5, 2, 'p.c-list-info__value');
+    const dateProchainDividende = ParseUtil.queryAndParseDateFromNodeList(elLIsCotations5, 2, 'p.c-list-info__value');
 
     const elLIsCotations6 = elULsCotations[5].querySelectorAll('li.c-list-info__item');
     const risqueESG = ParseUtil.queryAndParseString(elLIsCotations6[1], 'p.c-list-info__value');

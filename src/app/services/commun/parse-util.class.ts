@@ -70,6 +70,13 @@ export class ParseUtil {
     return NaN;
   }
 
+  static queryAndParseNumberFromNodeList(list: NodeListOf<Element>, index: number, selector: string): number {
+    if (index < list.length) {
+      return ParseUtil.queryAndParseNumber(list[index], selector);
+    }
+    return NaN;
+  }
+
   static queryAndParseString(parent: ParentNode, selector: string): string | undefined {
     const el = parent.querySelector(selector);
     if (el) {
@@ -87,6 +94,13 @@ export class ParseUtil {
     const el = parent.querySelector(selector);
     if (el) {
       return this.parseDateFrAndMapTo8601(el.innerHTML.trim());
+    }
+    return undefined;
+  }
+
+  static queryAndParseDateFromNodeList(list: NodeListOf<Element>, index: number, selector: string): string | undefined {
+    if (index < list.length) {
+      return ParseUtil.queryAndParseDate(list[index], selector);
     }
     return undefined;
   }
