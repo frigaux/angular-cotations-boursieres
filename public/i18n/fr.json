@@ -386,7 +386,7 @@
       "PORTEFEUILLES_DATE": "Portefeuilles à la date du {{jour}}",
       "COURS_BOURSORAMA_PORTEFEUILLE": "Cours des valeurs du portefeuille depuis Boursorama",
       "ACTIONS": "Actions sur la valeur",
-      "PORTEFEUILLE" : {
+      "PORTEFEUILLE": {
         "ORDRES_ACHATS": "Ordres achats",
         "ACHATS": "Achats",
         "ORDRES_VENTES": "Ordres ventes"
@@ -584,7 +584,7 @@
           "FILTRES": "les filtres des cours",
           "ACHATS": "la liste des achats de valeurs",
           "DIVIDENDES": "la liste des dividendes",
-          "DTO": "les DTO ABCBourse et Boursorama",
+          "DTO": "les DTO ABCBourse",
           "SAUVEGARDER": "Sauvegarder"
         },
         "SAUVEGARDE_REUSSI": "Sauvegarde réussie !",
@@ -595,7 +595,7 @@
           "FILTRES": "les filtres des cours",
           "ACHATS": "la liste des achats de valeurs",
           "DIVIDENDES": "la liste des dividendes",
-          "DTO": "les DTO ABCBourse et Boursorama",
+          "DTO": "les DTO ABCBourse",
           "RESTAURER": "Restaurer"
         },
         "RESTAURATION_REUSSIE": "Restauration réussie !"

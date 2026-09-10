@@ -95,7 +95,7 @@ export class CoursComponent implements OnInit {
 
   ngOnInit(): void {
     this.dividendesByTicker = this.dividendesService.chargerMapByTicker();
-    this.dtoByTicker = this.localStorageService.chargerDTOByTicker(LocalStorable.DTOIdentiteTickerAbcbourse);
+    this.dtoByTicker = this.localStorageService.chargerDTOs(LocalStorable.DTOIdentiteTickerAbcbourse);
     this.chargerValeurs();
   }
 

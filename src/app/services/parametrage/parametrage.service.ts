@@ -44,9 +44,8 @@ export class ParametrageService {
       portefeuilles: this.portefeuillesService.charger(),
       tableaux: this.tableauxService.charger(),
       dividendes: this.dividendesService.charger(),
-      dtoInformationsTickerABCBourse: this.localStorageService.chargerDTOByTicker(LocalStorable.DTOInformationsTickerABCBourse),
-      dtoIdentiteTickerAbcbourse: this.localStorageService.chargerDTOByTicker(LocalStorable.DTOIdentiteTickerAbcbourse),
-      dtoInformationsTickerBoursorama: this.localStorageService.chargerDTOByTicker(LocalStorable.DTOInformationsTickerBoursorama)
+      dtoInformationsTickerABCBourse: this.localStorageService.chargerDTOs(LocalStorable.DTOInformationsTickerABCBourse),
+      dtoIdentiteTickerAbcbourse: this.localStorageService.chargerDTOs(LocalStorable.DTOIdentiteTickerAbcbourse)
     };
     const url = this.chargerUrlSauvegardeRestauration();
     if (url && URL.canParse(url)) {
@@ -86,7 +85,6 @@ export class ParametrageService {
           if (dtoRestauration.dto) {
             this.localStorageService.enregistrerDTOByTicker(LocalStorable.DTOInformationsTickerABCBourse, dto.dtoInformationsTickerABCBourse);
             this.localStorageService.enregistrerDTOByTicker(LocalStorable.DTOIdentiteTickerAbcbourse, dto.dtoIdentiteTickerAbcbourse);
-            this.localStorageService.enregistrerDTOByTicker(LocalStorable.DTOInformationsTickerBoursorama, dto.dtoInformationsTickerBoursorama);
           }
         });
         return o;

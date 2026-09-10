@@ -19,12 +19,12 @@ describe('LocalStorage', () => {
     );
   });
 
-  it('Given #enregistrerDTO when #chargerDTO then on récupère le DTO', () => {
+  it('Given #enregistrerDTO when #chargerDTOByTicker then on récupère le DTO', () => {
     const dto = {aPropos: 'A propos'};
     let resultat: any;
     service.onUpdate((value: { cle: LocalStorable, dtoByTicker: any }) => resultat = value);
     service.enregistrerDTO(LocalStorable.DTOIdentiteTickerAbcbourse, 'GLE', dto);
-    expect(service.chargerDTO(LocalStorable.DTOIdentiteTickerAbcbourse, 'GLE')).toEqual(dto);
+    expect(service.chargerDTOByTicker(LocalStorable.DTOIdentiteTickerAbcbourse, 'GLE')).toEqual(dto);
     expect(resultat).toEqual({
       cle: 'dtoIdentiteTickerAbcbourse',
       dtoByTicker:

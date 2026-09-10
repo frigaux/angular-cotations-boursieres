@@ -200,7 +200,7 @@ export class PortefeuillesComponent implements OnInit, OnDestroy {
     if (this.listeCours) {
       this.date = this.listeCours.length > 0 ? this.listeCours[0].date : undefined;
       this.dividendesByTicker = this.dividendesService.chargerMapByTicker();
-      this.dtoByTicker = this.localStorageService.chargerDTOByTicker(LocalStorable.DTOIdentiteTickerAbcbourse);
+      this.dtoByTicker = this.localStorageService.chargerDTOs(LocalStorable.DTOIdentiteTickerAbcbourse);
       const portefeuilleAvecCours: PortefeuilleAvecCours = this.portefeuillesAvecCours[this.idxPortefeuilleCourant];
 
       this.colonnesDecorees = this.decorerColonnes(portefeuilleAvecCours.etapeValeur);

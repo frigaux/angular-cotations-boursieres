@@ -12,5 +12,4 @@ export interface DTOParametrage {
   dividendes?: DTODividendes;
   dtoInformationsTickerABCBourse: any;
   dtoIdentiteTickerAbcbourse: any;
-  dtoInformationsTickerBoursorama: any;
 }

@@ -34,7 +34,7 @@ export class LocalStorageService {
     return this.updateSubject.subscribe(handler);
   }
 
-  public chargerDTO(cle: LocalStorable, ticker: string): any | undefined {
+  public chargerDTOByTicker(cle: LocalStorable, ticker: string): any | undefined {
     const json = window.localStorage.getItem(cle) || '{}';
     try {
       const dtoByTicker: any = JSON.parse(json);
@@ -47,7 +47,7 @@ export class LocalStorageService {
     return undefined;
   }
 
-  public chargerDTOByTicker(cle: LocalStorable): any {
+  public chargerDTOs(cle: LocalStorable): any {
     const json = window.localStorage.getItem(cle) || '{}';
     try {
       return JSON.parse(json);
