@@ -342,24 +342,38 @@ export class AbcBourseService {
 
   private parseAndMapIdentite(html: string): DTOIdentiteTickerAbcbourse | undefined {
     const document = new DOMParser().parseFromString(html, 'text/html');
-    const elPaPropos: HTMLParagraphElement | null = document.querySelector('p.co_b');
+    const elPaPropos: NodeListOf<HTMLParagraphElement> = document.querySelectorAll('div.page > div.main_columns > div.inner_left > p');
     const elTableIdentite = document.querySelector('div.chiffres_infos table.tbl100_10');
     const elTdsIdentite: NodeListOf<HTMLTableCellElement> = elTableIdentite!.querySelectorAll('tbody tr td:last-child');
 
-    if (elPaPropos && elTdsIdentite.length === 9) {
-      const aPropos = elPaPropos.innerHTML;
-      const marche = elTdsIdentite[0].innerText;
-      const place = elTdsIdentite[1].innerText;
-      const secteur = elTdsIdentite[2].innerText;
-      const indices = elTdsIdentite[4].innerText;
+    if (elPaPropos.length > 1 && elTdsIdentite.length === 9) {
+      const aPropos = this.parseAPropos(elPaPropos);
+      const marche = elTdsIdentite[0].innerText.trim();
+      const place = elTdsIdentite[1].innerText.trim();
+      const secteur = elTdsIdentite[2].innerText.trim();
+      const indices = elTdsIdentite[4].innerText.trim();
       const nombreTitres = ParseUtil.parseNumber(elTdsIdentite[5].innerText);
-      const adresse = elTdsIdentite[6].innerText;
-      const telephone = elTdsIdentite[7].innerText;
+      const adresse = elTdsIdentite[6].innerText.trim();
+      const telephone = elTdsIdentite[7].innerText.trim();
       const dateAssemblee = ParseUtil.parseDateFrAndMapTo8601(elTdsIdentite[8].innerText);
       return new DTOIdentiteTickerAbcbourse(aPropos, marche, place, secteur, indices, nombreTitres, adresse, telephone, dateAssemblee);
     } else {
       console.error('impossible de recuperer les informations concernant la société');
       return undefined;
     }
+  }
+
+  private parseAPropos(elPaPropos: NodeListOf<HTMLParagraphElement>): string {
+    let resultat = '';
+    for (const elP of elPaPropos) {
+      const str = elP.innerText.trim();
+      if (str) {
+        resultat += str + '<br>';
+      }
+      if (!str && resultat) {
+        break;
+      }
+    }
+    return resultat;
   }
 }
