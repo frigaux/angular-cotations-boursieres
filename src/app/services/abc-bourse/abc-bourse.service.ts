@@ -292,7 +292,7 @@ export class AbcBourseService {
   }
 
   private parseAndMapTransactions(html: string): Array<DTOTransaction> {
-    const r1 = new RegExp('<tr>\\s*<td><a href="([^"]+)">([^<]+)<\\/a><\\/td>\\s*<td>([^<]+)<\\/td>\\s*<td class="[^"]*">([^<]+)<\\/td>\\s*<td>([^<]+)<\\/td>\\s*<td>([^<]+)<\\/td>', 'gm');
+    const r1 = new RegExp('<tr>\\s*<td><a href="([^"]+)">([^<]+)<\\/a><\\/td>\\s*<td>([^<]+)<\\/td>\\s*<td class="[^"]*">([^<]+)<\\/td>\\s*<td class="[^"]*">([^<]+)<\\/td>\\s*<td>([^<]+)<\\/td>', 'gm');
     const r2 = new RegExp('Auteur: <\\/span>([^<]+)<\\/td>\\s*<\\/tr>\\s*<tr>\\s*<td><span class="bold">Date d\'opération: <\\/span>([^<]+)<\\/td>\\s*<td><span class="bold">Quantité: <\\/span>([^<]+)<\\/td>\\s*<td><span class="bold">Prix: <\\/span>([^<]+)', 'gm');
 
     const result: Array<DTOTransaction> = [];

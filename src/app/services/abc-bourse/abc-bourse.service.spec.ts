@@ -82,17 +82,6 @@ describe('AbcBourseService', () => {
     expect(actualites.transactionsDirigeants.length).toBeGreaterThan(0);
   });
 
-  it('given AbcBourseService when #chargerActualites then on doit récupérer les actualités', async () => {
-    const promiseActualites: Promise<DTOActualitesABCBourse> = firstValueFrom(service.chargerActualites());
-    const actualites = await promiseActualites;
-    expect(actualites.marches).toBeDefined();
-    expect(actualites.analyses.length).toBeGreaterThan(0);
-    expect(actualites.chroniques.length).toBeGreaterThan(0);
-    expect(actualites.nouvelles.length).toBeGreaterThan(0);
-    expect(actualites.ventesADecouvert.length).toBeGreaterThan(0);
-    expect(actualites.transactionsDirigeants.length).toBeGreaterThan(0);
-  });
-
   it('given AbcBourseService when #chargerIndentiteTicker then on récupère la carte d\'identité de la société', async () => {
     const promiseIndentite: Promise<DTOIdentiteTickerAbcbourse> = firstValueFrom(service.chargerIndentiteTicker('AC'));
     const actualites = await promiseIndentite;
