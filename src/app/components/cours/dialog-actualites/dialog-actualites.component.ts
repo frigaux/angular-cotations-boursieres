@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, NgZone} from '@angular/core';
 import {Dialog} from 'primeng/dialog';
 import {TranslatePipe} from '@ngx-translate/core';
 import {AbcBourseService} from '../../../services/abc-bourse/abc-bourse.service';
@@ -38,7 +38,7 @@ export class DialogActualitesComponent {
   acquisitions?: Array<DTOTransaction>;
   cessions?: Array<DTOTransaction>;
 
-  constructor(private abcBourseService: AbcBourseService) {
+  constructor(private abcBourseService: AbcBourseService, private zone: NgZone) {
   }
 
   reinitialiserVue() {
@@ -49,14 +49,16 @@ export class DialogActualitesComponent {
             this.loading = false;
           },
           next: dto => {
-            this.actualites = dto;
-            this.acquisitions = dto.transactionsDirigeants
-              .filter(transaction => transaction.operation === 'Acquisition' || transaction.operation === 'Souscription')
-              .sort((t1, t2) => t2.montant - t1.montant);
-            this.cessions = dto.transactionsDirigeants
-              .filter(transaction => transaction.operation === 'Cession')
-              .sort((t1, t2) => t2.montant - t1.montant);
-            this.loading = false;
+            this.zone.run(() => {
+              this.actualites = dto;
+              this.acquisitions = dto.transactionsDirigeants
+                .filter(transaction => transaction.operation === 'Acquisition' || transaction.operation === 'Souscription')
+                .sort((t1, t2) => t2.montant - t1.montant);
+              this.cessions = dto.transactionsDirigeants
+                .filter(transaction => transaction.operation === 'Cession')
+                .sort((t1, t2) => t2.montant - t1.montant);
+              this.loading = false;
+            });
           }
         }
       );

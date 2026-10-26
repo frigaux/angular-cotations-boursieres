@@ -1,4 +1,4 @@
-import {Component, input, InputSignal, viewChild} from '@angular/core';
+import {Component, input, InputSignal, NgZone, viewChild} from '@angular/core';
 import {Dialog} from 'primeng/dialog';
 import {LoaderComponent} from '../../loader/loader.component';
 import {TranslatePipe} from '@ngx-translate/core';
@@ -43,7 +43,7 @@ export class DialogEvaluationActualitesComponent {
   heure?: Date;
   actualites?: Array<DTOActualitesZoneBourse>;
 
-  constructor(private zoneBourseService: ZoneBourseService) {
+  constructor(private zoneBourseService: ZoneBourseService, private zone: NgZone) {
   }
 
   private intercepteurValeurs(valeurByTicker: Map<string, DTOValeur> | undefined) {
@@ -58,8 +58,10 @@ export class DialogEvaluationActualitesComponent {
       this.zoneBourseService.chargerActualites(2, this.valeurByTicker)
         .subscribe({
           next: actualites => {
-            this.actualites = actualites;
-            this.loading = false;
+            this.zone.run(() => {
+              this.actualites = actualites;
+              this.loading = false;
+            });
           },
           error:
             httpErrorResponse => this.loading = false
