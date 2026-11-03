@@ -14,9 +14,7 @@ import {PrimeNG} from 'primeng/config';
 import {PickList} from 'primeng/picklist';
 import {NavigationBar} from '@squareetlabs/capacitor-navigation-bar';
 
-// TODO : service ABCBourse de récupération des informations pour un ticker : récupérer la pré-ouverture ?
 // TODO : capacitor android : proxy obligatoire pour requêter les autres domaines ? problème CORS ou pas ?
-// TODO : coverage
 // TODO : examiner les logs du debugger android studio
 // TODO : intégrer tailwind ?
 @Component({

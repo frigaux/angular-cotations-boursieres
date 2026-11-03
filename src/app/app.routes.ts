@@ -61,7 +61,7 @@ export const routes: Routes = [
     loadComponent: () =>
       import(
         './components/parametrage/gestion-portefeuilles/gestion-portefeuilles.component'
-      ).then((m) => m.GestionPortefeuillesComponent),
+        ).then((m) => m.GestionPortefeuillesComponent),
     canActivate: [authentificationGuard]
   },
   {
@@ -69,7 +69,7 @@ export const routes: Routes = [
     loadComponent: () =>
       import(
         './components/parametrage/gestion-tableaux/gestion-tableaux.component'
-      ).then((m) => m.GestionTableauxComponent),
+        ).then((m) => m.GestionTableauxComponent),
     canActivate: [authentificationGuard]
   },
   {
@@ -77,7 +77,15 @@ export const routes: Routes = [
     loadComponent: () =>
       import(
         './components/parametrage/sauvegarde-restauration/sauvegarde-restauration.component'
-      ).then((m) => m.SauvegardeRestaurationComponent),
+        ).then((m) => m.SauvegardeRestaurationComponent),
+    canActivate: [authentificationGuard]
+  },
+  {
+    path: 'dernieres-executions-batchs',
+    loadComponent: () =>
+      import(
+        './components/parametrage/dernieres-executions-batchs/dernieres-executions-batchs.component'
+        ).then((m) => m.DernieresExecutionsBatchs),
     canActivate: [authentificationGuard]
   },
   {
@@ -85,7 +93,7 @@ export const routes: Routes = [
     loadComponent: () =>
       import(
         './components/parametrage/modeles-tensor-flow/tutoriels/regression-supervisee/regression-supervisee.component'
-      ).then((m) => m.RegressionSuperviseeComponent),
+        ).then((m) => m.RegressionSuperviseeComponent),
     canActivate: [authentificationGuard]
   },
   {
@@ -93,7 +101,7 @@ export const routes: Routes = [
     loadComponent: () =>
       import(
         './components/parametrage/modeles-tensor-flow/tutoriels/classification-supervisee-convolutive/classification-supervisee-convolutive.component'
-      ).then((m) => m.ClassificationSuperviseeConvolutiveComponent),
+        ).then((m) => m.ClassificationSuperviseeConvolutiveComponent),
     canActivate: [authentificationGuard]
   },
   {
@@ -101,7 +109,7 @@ export const routes: Routes = [
     loadComponent: () =>
       import(
         './components/parametrage/modeles-tensor-flow/etudes/generateur-donnees-entrainement-modele/generateur-donnees-entrainement-modele.component'
-      ).then((m) => m.GenerateurDonneesEntrainementModeleComponent),
+        ).then((m) => m.GenerateurDonneesEntrainementModeleComponent),
     canActivate: [authentificationGuard]
   },
   {
@@ -109,7 +117,7 @@ export const routes: Routes = [
     loadComponent: () =>
       import(
         './components/parametrage/modeles-tensor-flow/etudes/entrainement-modele-regression-supervisee/entrainement-modele-regression-supervisee.component'
-      ).then((m) => m.EntrainementModeleRegressionSuperviseeComponent),
+        ).then((m) => m.EntrainementModeleRegressionSuperviseeComponent),
     canActivate: [authentificationGuard]
   },
   {
@@ -117,7 +125,7 @@ export const routes: Routes = [
     loadComponent: () =>
       import(
         './components/parametrage/modeles-tensor-flow/etudes/entrainement-modele-classification-supervisee/entrainement-modele-classification-supervisee.component'
-      ).then((m) => m.EntrainementModeleClassificationSuperviseeComponent),
+        ).then((m) => m.EntrainementModeleClassificationSuperviseeComponent),
     canActivate: [authentificationGuard]
   },
   {path: '**', redirectTo: '/authentification'}

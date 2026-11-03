@@ -38,6 +38,8 @@ export class AuthentificationComponent implements OnInit {
         this.statut = StatutAuthentification.SUCCES;
         if (this.portefeuillesService.auMoinsUnPortefeuilleCorrectementConfigure()) {
           this.router.navigate(['portefeuilles']);
+        } else {
+          this.router.navigate(['gestion-portefeuilles']);
         }
       }
     });

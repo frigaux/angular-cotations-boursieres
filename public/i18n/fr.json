@@ -39,6 +39,7 @@
         "GESTION_PORTEFEUILLES": "Gestion des portefeuilles",
         "GESTION_TABLEAUX": "Gestion des tableaux",
         "SAUVEGARDE_RESTAURATION": "Sauvegarde / restauration",
+        "DERNIERES_EXECUTIONS_BATCHS": "Dernières exécutions des batchs",
         "SOUS_MENU_ML": "Machine learning",
         "ML": {
           "SOUS_MENU_TUTORIELS": "Tutoriels",
@@ -599,6 +600,9 @@
           "RESTAURER": "Restaurer"
         },
         "RESTAURATION_REUSSIE": "Restauration réussie !"
+      },
+      "DERNIERES_EXECUTIONS_BATCHS": {
+
       },
       "ML": {
         "NOMBRE_TENSEURS": "Tenseurs",

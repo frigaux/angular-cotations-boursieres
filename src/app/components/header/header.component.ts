@@ -80,6 +80,11 @@ export class HeaderComponent implements OnDestroy {
           icon: 'pi pi-sync'
         },
         {
+          label: translateService.instant('COMPOSANTS.HEADER.PARAMETRAGE.DERNIERES_EXECUTIONS_BATCHS'),
+          routerLink: 'dernieres-executions-batchs',
+          icon: 'pi pi-book'
+        },
+        {
           label: translateService.instant('COMPOSANTS.HEADER.PARAMETRAGE.SOUS_MENU_ML'),
           icon: 'pi pi-microchip-ai',
           items: [
