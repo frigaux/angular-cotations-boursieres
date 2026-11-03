@@ -1,7 +1,7 @@
 import {ComponentFixture, TestBed} from '@angular/core/testing';
 
 import {FormulaireCleApiGeminiComponent} from './formulaire-cle-api-gemini.component';
-import {IAService} from '../../../../services/IA/ia.service';
+import {IAService} from '../../../../services/gemini/ia.service';
 import {TranslateModule} from '@ngx-translate/core';
 
 describe('FormulaireCleApiGeminiComponent', () => {

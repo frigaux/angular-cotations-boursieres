@@ -4,7 +4,7 @@ import {FloatLabel} from 'primeng/floatlabel';
 import {AutoFocus} from 'primeng/autofocus';
 import {TranslatePipe} from '@ngx-translate/core';
 import {Button} from 'primeng/button';
-import {IAService} from '../../../../services/IA/ia.service';
+import {IAService} from '../../../../services/gemini/ia.service';
 import {InputText} from 'primeng/inputtext';
 
 @Component({

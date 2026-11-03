@@ -1,9 +1,9 @@
 import {ComponentFixture, TestBed} from '@angular/core/testing';
 
 import {ConseilsGeminiValeurComponent} from './conseils-gemini-valeur.component';
-import {IAService} from '../../../services/IA/ia.service';
+import {IAService} from '../../../services/gemini/ia.service';
 import {of} from 'rxjs';
-import {DTOConseilsGeminiTicker} from '../../../services/IA/dto-conseils-gemini-ticker.class';
+import {DTOConseilsGeminiTicker} from '../../../services/gemini/dto-conseils-gemini-ticker.class';
 import {REPONSE_API_GEMINI} from '../../../services/jdd/jdd-ia.dataset';
 import {COURS_CROISSANT} from '../../../services/jdd/jdd-cours.dataset';
 import {TranslateModule} from '@ngx-translate/core';

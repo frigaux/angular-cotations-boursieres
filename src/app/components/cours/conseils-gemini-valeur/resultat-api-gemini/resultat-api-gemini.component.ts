@@ -1,7 +1,7 @@
 import {Component, input, InputSignal} from '@angular/core';
 import {CurrencyPipe} from "@angular/common";
 import {TranslatePipe} from "@ngx-translate/core";
-import {DTOConseilsGeminiTicker} from '../../../../services/IA/dto-conseils-gemini-ticker.class';
+import {DTOConseilsGeminiTicker} from '../../../../services/gemini/dto-conseils-gemini-ticker.class';
 
 @Component({
   selector: 'app-resultat-api-gemini',

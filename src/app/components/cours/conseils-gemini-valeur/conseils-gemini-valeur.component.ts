@@ -1,9 +1,9 @@
 import {Component, input, InputSignal, OnInit} from '@angular/core';
 import {Cours} from '../cours.class';
 import {LoaderComponent} from '../../loader/loader.component';
-import {IAService} from '../../../services/IA/ia.service';
+import {IAService} from '../../../services/gemini/ia.service';
 import {ReactiveFormsModule} from '@angular/forms';
-import {DTOConseilsGeminiTicker} from '../../../services/IA/dto-conseils-gemini-ticker.class';
+import {DTOConseilsGeminiTicker} from '../../../services/gemini/dto-conseils-gemini-ticker.class';
 import {FormulaireCleApiGeminiComponent} from './formulaire-cle-api-gemini/formulaire-cle-api-gemini.component';
 import {ResultatApiGeminiComponent} from './resultat-api-gemini/resultat-api-gemini.component';
 import {TranslatePipe} from '@ngx-translate/core';
