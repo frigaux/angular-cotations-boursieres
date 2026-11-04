@@ -23,7 +23,7 @@ export class DernieresExecutionsBatchs implements OnInit {
   }
 
   ngOnInit(): void {
-    this.batchService.chargerDerniereExecution().subscribe(
+    this.batchService.chargerDernieresExecutions().subscribe(
       jobInstances => {
         this.jobInstances = jobInstances;
         this.loading = false;

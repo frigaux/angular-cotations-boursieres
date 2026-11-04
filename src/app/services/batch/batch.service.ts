@@ -10,7 +10,7 @@ export class BatchService {
   constructor(private http: HttpClient) {
   }
 
-  public chargerDerniereExecution(): Observable<DTOJobInstance[]> {
+  public chargerDernieresExecutions(): Observable<DTOJobInstance[]> {
     return this.http.get<DTOJobInstance[]>(
       '/bourse/jobs?jobNames=jobMajAbcLibelles,jobMajAbcCotations,jobMajBoursoramaCours,jobConvertirEnValeurCours,jobCalculerMoyennes'
     );
