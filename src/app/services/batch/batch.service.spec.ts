@@ -34,7 +34,7 @@ describe('BatchService', () => {
     expect(batchService).toBeTruthy();
   });
 
-  it('#chargerDerniereExecution doit renvoyer les derniers batchs', async () => {
+  it('#chargerDernieresExecutions doit renvoyer les derniers batchs', async () => {
     // 1 - création d'une promesse sur l'observable qui fait la requête HTTP
     const promiseDerniereExecution: Promise<DTOJobInstance[]> = firstValueFrom(batchService.chargerDernieresExecutions());
     // bouchonnage de la ressource HTTP

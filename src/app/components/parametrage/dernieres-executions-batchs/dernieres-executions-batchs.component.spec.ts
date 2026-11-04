@@ -13,7 +13,7 @@ describe('DernieresExecutionsBatchs', () => {
   let component: DernieresExecutionsBatchs;
   let fixture: ComponentFixture<DernieresExecutionsBatchs>;
 
-  const mockBatchService = jasmine.createSpyObj('BatchService', ['chargerDerniereExecution']);
+  const mockBatchService = jasmine.createSpyObj('BatchService', ['chargerDernieresExecutions']);
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
@@ -31,9 +31,9 @@ describe('DernieresExecutionsBatchs', () => {
     component = fixture.componentInstance;
   });
 
-  describe('Given #chargerDerniereExecution renvoie des batchs', () => {
+  describe('Given #chargerDernieresExecutions renvoie des batchs', () => {
     beforeEach(() => {
-      mockBatchService.chargerDerniereExecution.and.returnValue(of(DTO_BATCHS));
+      mockBatchService.chargerDernieresExecutions.and.returnValue(of(DTO_BATCHS));
     });
 
     it('when #ngOnInit then le composant est chargé', () => {
