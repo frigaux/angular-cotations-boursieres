@@ -1,1 +1,52 @@
-<p>dernieres-executions-batchs works!</p>
+<app-loader [affiche]="loading" [configuration]="[
+  {marginLeft: '0', marginTop: '1rem', height: '10rem', width: '100%'}
+]"></app-loader>
+
+@if (!loading && jobInstances) {
+  @for (jobInstance of jobInstances; track jobInstance.nom) {
+    <div class="job-instance">
+      <div>{{ jobInstance.nom }}</div>
+      @for (jobExecution of jobInstance.executions; track jobExecution.debut) {
+        <div class="job-execution {{ jobExecution.statut }}">
+          <div class="ligne">
+            <span [ngClass]="{'pi pi-check-circle': jobExecution.statut === 'COMPLETED'}"></span>
+            <div>
+              {{ jobExecution.creation | date: 'dd/MM/yyyy' }} :
+              {{ jobExecution.debut | date: 'hh:mm:ss' }} &rarr; {{ jobExecution.fin | date: 'hh:mm:ss' }}
+            </div>
+          </div>
+          @if (jobExecution.message) {
+            <div class="ligne">
+              <span class="pi pi-times-circle"></span>
+              <div>{{ jobExecution.message }}</div>
+            </div>
+          }
+          @for (jobExecutionParam of jobExecution.parametres; track jobExecutionParam.nom) {
+            <div class="ligne job-execution-param">
+              <span class="pi pi-at"></span>
+              <div>{{ jobExecutionParam.nom }} = {{ jobExecutionParam.valeur }}</div>
+            </div>
+          }
+          @for (stepExecution of jobExecution.etapes; track stepExecution.nom) {
+            <div class="step-execution {{ stepExecution.statut }}">
+              <div class="ligne">
+                <span [ngClass]="{'pi pi-check-circle': stepExecution.statut === 'COMPLETED'}"></span>
+                <div>
+                  {{ stepExecution.nom }}
+                  ({{ stepExecution.creation | date: 'dd/MM/yyyy' }} :
+                  {{ stepExecution.debut | date: 'hh:mm:ss' }} &rarr; {{ stepExecution.fin | date: 'hh:mm:ss' }})
+                </div>
+              </div>
+              @if (stepExecution.message) {
+                <div class="ligne">
+                  <span class="pi pi-times-circle"></span>
+                  <div>{{ stepExecution.message }}</div>
+                </div>
+              }
+            </div>
+          }
+        </div>
+      }
+    </div>
+  }
+}
