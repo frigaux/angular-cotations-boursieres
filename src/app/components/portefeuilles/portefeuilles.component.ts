@@ -46,7 +46,7 @@ import {DTODividende} from '../../services/dividendes/dto-dividende.interface';
 import {Indicateurs} from '../cours/indicateurs/indicateurs';
 import {LocalStorageService} from '../../services/local-storage/local-storage.service';
 import {LocalStorable} from '../../services/local-storage/local-storable.enum';
-import {ParseUtil} from '../../services/commun/parse-util.class';
+import {DialogAproposComponent} from '../cours/dialog-apropos/dialog-apropos.component';
 
 @Component({
   selector: 'app-portefeuilles',
@@ -77,7 +77,8 @@ import {ParseUtil} from '../../services/commun/parse-util.class';
     DetailsValeurComponent,
     DialogCotationsValeurComponent,
     DialogCotationsValeursPortefeuilleComponent,
-    Indicateurs
+    Indicateurs,
+    DialogAproposComponent
   ],
   templateUrl: './portefeuilles.component.html',
   styleUrls: ['./tabs-panel.sass', './portefeuilles.component.sass', '../commun/titre.sass']
@@ -256,13 +257,6 @@ export class PortefeuillesComponent implements OnInit, OnDestroy {
     return '';
   }
 
-  protected aPropos(cours: CoursPortefeuille): string {
-    if (this.dtoByTicker.hasOwnProperty(cours.ticker)) {
-      return ParseUtil.htmlToText(this.dtoByTicker[cours.ticker].aPropos);
-    }
-    return '';
-  }
-
   public basculerAffichageCours(cours: CoursPortefeuille) {
     if (this.coursSelectionne === undefined || this.coursSelectionne.coursPortefeuille.ticker !== cours.ticker) {
       this.coursSelectionne = {coursPortefeuille: cours, premier: false, dernier: false};
@@ -276,7 +270,7 @@ export class PortefeuillesComponent implements OnInit, OnDestroy {
   }
 
   protected onClickCours(event: MouseEvent, cours: CoursPortefeuille, portefeuilleAvecCours: PortefeuilleAvecCours) {
-    if (event.target instanceof Element && event.target.tagName === 'SPAN' && event.target.className.indexOf('pi') !== -1) {
+    if (event.target instanceof Element && event.target.tagName === 'SPAN' && event.target.className.indexOf('pi-arrow') !== -1) {
       this.afficherActions(event, cours, portefeuilleAvecCours);
     } else {
       this.basculerAffichageCours(cours);

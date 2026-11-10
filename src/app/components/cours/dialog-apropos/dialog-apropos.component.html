@@ -2,7 +2,7 @@
       title="{{ 'COMPOSANTS.COURS.A_PROPOS.A_PROPOS' | translate }}"></span>
 
 @if (cours && aPropos) {
-  <p-dialog [header]="cours?.libelle"
+  <p-dialog [header]="cours.libelle"
             [modal]="true" [(visible)]="visible" [style]="{ width: '70vw' }"
             (click)="$event.stopImmediatePropagation()">
     <div>

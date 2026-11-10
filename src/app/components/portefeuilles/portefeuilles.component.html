@@ -67,8 +67,7 @@
                   </tr>
                 </ng-template>
                 <ng-template #body let-cours>
-                  <tr (click)="onClickCours($event, cours, portefeuilleAvecCours)"
-                      [title]="aPropos(cours)">
+                  <tr (click)="onClickCours($event, cours, portefeuilleAvecCours)">
                     @for (colonneDecoree of colonnesDecorees; track colonneDecoree.id) {
                       <td
                         [ngStyle]="{'text-align': colonneDecoree.textAlign}"
@@ -80,6 +79,12 @@
                                 title="{{ 'COMPOSANTS.PORTEFEUILLES.ACTIONS' | translate }}"></span>
                         }
                         @switch (colonneDecoree.colonne.type) {
+                          @case (TypesColonnesPortefeuille.LIBELLE) {
+                            {{ cours[colonneDecoree.id] }}
+                            @if (dtoByTicker.hasOwnProperty(cours.ticker)) {
+                              <app-dialog-apropos [cours]="{cours, aPropos: dtoByTicker[cours.ticker].aPropos}"></app-dialog-apropos>
+                            }
+                          }
                           @case (TypesColonnesPortefeuille.DATE) {
                             {{ cours[colonneDecoree.id] | date: 'dd/MM/yyyy' }}
                           }
