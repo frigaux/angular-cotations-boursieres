@@ -34,7 +34,7 @@ export class ValeursComponent implements OnInit {
 
   // données pour la vue
   marches?: MarcheDecore[];
-  idxMarcheCourant: number = NaN;
+  idxMarcheCourant?: number;
 
   // valeur pour laquelle afficher les détails
   valeurSelectionnee: ValeurDecore | undefined = undefined;
@@ -47,7 +47,7 @@ export class ValeursComponent implements OnInit {
   ngOnInit(): void {
     this.valeursService.chargerValeurs().subscribe(valeurs => {
       this.construireVue(valeurs);
-      this.idxMarcheCourant = this.marches!.length > 0 ? 0 : NaN;
+      this.idxMarcheCourant = this.marches!.length > 0 ? 0 : undefined;
       this.loading = false;
     });
   }

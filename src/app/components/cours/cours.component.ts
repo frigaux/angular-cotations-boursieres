@@ -69,7 +69,7 @@ export class CoursComponent implements OnInit {
   // données pour la vue
   date?: string;
   marches?: MarcheDecore[];
-  idxMarcheCourant: number = NaN;
+  idxMarcheCourant?: number;
   protected valeurByTicker?: Map<string, DTOValeur>;
   afficherIndicateurs: boolean = false;
   dividendesByTicker?: Map<string, Array<DTODividende>>;
@@ -113,7 +113,7 @@ export class CoursComponent implements OnInit {
     this.coursService.chargerCours().subscribe(liste => {
       this.listeCours = liste;
       this.construireVue();
-      this.idxMarcheCourant = !this.idxMarcheCourant && this.marches!.length > 0 ? 0 : NaN;
+      this.idxMarcheCourantParDefaut();
       this.loading = false;
     })
   }
@@ -250,7 +250,13 @@ export class CoursComponent implements OnInit {
     this.afficherIndicateurs = false;
     this.filtreActif = filtreDecore;
     this.construireVue();
-    this.idxMarcheCourant = this.marches!.length > 0 ? 0 : NaN;
+    if (!this.idxMarcheCourant || (this.idxMarcheCourant >= this.marches!.length)) {
+      this.idxMarcheCourantParDefaut();
+    }
     this.afficherIndicateurs = filtreDecore !== undefined;
+  }
+
+  private idxMarcheCourantParDefaut() {
+    this.idxMarcheCourant = this.marches!.length > 0 ? 0 : undefined;
   }
 }
