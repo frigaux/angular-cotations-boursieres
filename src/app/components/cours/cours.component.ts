@@ -30,7 +30,7 @@ import {Indicateurs} from './indicateurs/indicateurs';
 import {IndicateursUtil} from '../../services/commun/indicateurs-util.class';
 import {LocalStorageService} from '../../services/local-storage/local-storage.service';
 import {LocalStorable} from '../../services/local-storage/local-storable.enum';
-import {ParseUtil} from '../../services/commun/parse-util.class';
+import {DialogAproposComponent} from './dialog-apropos/dialog-apropos.component';
 
 @Component({
   selector: 'app-cours',
@@ -55,7 +55,8 @@ import {ParseUtil} from '../../services/commun/parse-util.class';
     Tabs,
     ClassVariation,
     ColonneDividendesComponent,
-    Indicateurs
+    Indicateurs,
+    DialogAproposComponent
   ],
   templateUrl: './cours.component.html',
   styleUrls: ['../portefeuilles/tabs-panel.sass', './cours.component.sass', '../commun/titre.sass']
@@ -159,18 +160,12 @@ export class CoursComponent implements OnInit {
   }
 
   onClickCours(event: MouseEvent, marche: MarcheDecore, cours: Cours) {
-    if (event.target instanceof Element && event.target.tagName === 'SPAN' && this.portefeuilles) {
+    if (event.target instanceof Element && event.target.tagName === 'SPAN'
+      && event.target.className.indexOf('pi-arrow') !== -1 && this.portefeuilles) {
       this.afficherAjoutAuPortefeuille(event, cours);
     } else {
       this.basculerAffichageCours(marche, cours);
     }
-  }
-
-  aPropos(cours: Cours): string {
-    if (this.dtoByTicker.hasOwnProperty(cours.ticker)) {
-      return ParseUtil.htmlToText(this.dtoByTicker[cours.ticker].aPropos);
-    }
-    return '';
   }
 
   private basculerAffichageCours(marche: MarcheDecore, cours: Cours) {

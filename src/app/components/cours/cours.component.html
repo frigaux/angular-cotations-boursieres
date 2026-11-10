@@ -75,13 +75,15 @@
                 </tr>
               </ng-template>
               <ng-template #body let-cours>
-                <tr (click)="onClickCours($event, marche, cours)"
-                    [title]="aPropos(cours)">
+                <tr (click)="onClickCours($event, marche, cours)">
                   <td class="libelle">
                     <span class="pi"
                           [class]="cours.iconeVariation()"
                           title="{{ 'COMPOSANTS.COURS.ACTIONS' | translate }}"></span>
                     {{ cours.libelle }}
+                    @if (dtoByTicker.hasOwnProperty(cours.ticker)) {
+                      <app-dialog-apropos [cours]="{cours, aPropos: dtoByTicker[cours.ticker].aPropos}"></app-dialog-apropos>
+                    }
                     @if (afficherIndicateurs) {
                       <app-indicateurs [dto]="{
                       ticker: cours.ticker,

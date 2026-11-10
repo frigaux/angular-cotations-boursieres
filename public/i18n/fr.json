@@ -282,6 +282,9 @@
           "true": "oui",
           "false": "non"
         }
+      },
+      "A_PROPOS": {
+        "A_PROPOS": "A propos"
       }
     },
     "ACHATS_VALEURS": {

@@ -1,0 +1,12 @@
+<span class="pi pi-info-circle" (click)="ouvrir($event)"
+      title="{{ 'COMPOSANTS.COURS.A_PROPOS.A_PROPOS' | translate }}"></span>
+
+@if (cours && aPropos) {
+  <p-dialog [header]="cours?.libelle"
+            [modal]="true" [(visible)]="visible" [style]="{ width: '70vw' }"
+            (click)="$event.stopImmediatePropagation()">
+    <div>
+      <span [innerHTML]="aPropos"></span>
+    </div>
+  </p-dialog>
+}
