@@ -35,17 +35,17 @@ export class TableauxService {
             nom: 'Libellé',
             type: TypesColonnesPortefeuille.LIBELLE,
             tri: true,
-            largeur: 20
-          },
-          {
-            nom: 'Indicateurs',
-            type: TypesColonnesPortefeuille.INDICATEURS,
-            tri: false,
-            largeur: 8
+            largeur: 17
           },
           {
             nom: 'Alertes',
             type: TypesColonnesPortefeuille.ALERTES,
+            tri: false,
+            largeur: 6
+          },
+          {
+            nom: 'Indicateurs',
+            type: TypesColonnesPortefeuille.INDICATEURS,
             tri: false,
             largeur: 8
           },
@@ -69,44 +69,60 @@ export class TableauxService {
             largeur: 7
           },
           {
-            nom: 'Ticker',
-            type: TypesColonnesPortefeuille.TICKER,
-            tri: true,
-            largeur: 6
-          },
-          {
-            nom: 'Dividendes',
-            type: TypesColonnesPortefeuille.DIVIDENDES,
-            tri: false,
-            largeur: 9
-          },
-          {
             nom: 'MM5',
             type: TypesColonnesPortefeuille.MOYENNE_MOBILE,
             parametre: 5,
             tri: false,
-            largeur: 7
+            largeur: 6
+          },
+          {
+            nom: 'MM10',
+            type: TypesColonnesPortefeuille.MOYENNE_MOBILE,
+            parametre: 10,
+            tri: false,
+            largeur: 6
           },
           {
             nom: 'MM20',
             type: TypesColonnesPortefeuille.MOYENNE_MOBILE,
             parametre: 20,
             tri: false,
-            largeur: 7
+            largeur: 6
           },
           {
             nom: 'MM50',
             type: TypesColonnesPortefeuille.MOYENNE_MOBILE,
             parametre: 50,
             tri: false,
-            largeur: 7
+            largeur: 6
           },
           {
             nom: 'MM100',
             type: TypesColonnesPortefeuille.MOYENNE_MOBILE,
             parametre: 100,
             tri: false,
-            largeur: 7
+            largeur: 6
+          },
+          {
+            nom: 'MM150',
+            type: TypesColonnesPortefeuille.MOYENNE_MOBILE,
+            parametre: 150,
+            tri: false,
+            largeur: 6
+          },
+          {
+            nom: 'MM200',
+            type: TypesColonnesPortefeuille.MOYENNE_MOBILE,
+            parametre: 200,
+            tri: false,
+            largeur: 6
+          },
+          {
+            nom: 'MM300',
+            type: TypesColonnesPortefeuille.MOYENNE_MOBILE,
+            parametre: 300,
+            tri: false,
+            largeur: 6
           }
         ],
         colonnesPortrait: [
@@ -151,19 +167,19 @@ export class TableauxService {
             nom: 'Libellé',
             type: TypesColonnesPortefeuille.LIBELLE,
             tri: true,
-            largeur: 20
-          },
-          {
-            nom: 'Indicateurs',
-            type: TypesColonnesPortefeuille.INDICATEURS,
-            tri: false,
-            largeur: 12
+            largeur: 18
           },
           {
             nom: 'Alertes',
             type: TypesColonnesPortefeuille.ALERTES,
             tri: false,
-            largeur: 12
+            largeur: 11
+          },
+          {
+            nom: 'Indicateurs',
+            type: TypesColonnesPortefeuille.INDICATEURS,
+            tri: false,
+            largeur: 11
           },
           {
             nom: 'Clôture',
@@ -185,19 +201,28 @@ export class TableauxService {
             largeur: 10
           },
           {
-            nom: 'Ticker',
-            type: TypesColonnesPortefeuille.TICKER,
-            tri: true,
+            nom: 'MM5',
+            type: TypesColonnesPortefeuille.MOYENNE_MOBILE,
+            parametre: 5,
+            tri: false,
             largeur: 8
           },
           {
-            nom: 'Dividendes',
-            type: TypesColonnesPortefeuille.DIVIDENDES,
+            nom: 'MM20',
+            type: TypesColonnesPortefeuille.MOYENNE_MOBILE,
+            parametre: 20,
             tri: false,
-            largeur: 12
+            largeur: 8
           },
           {
-            nom: 'MM200',
+            nom: 'MM50',
+            type: TypesColonnesPortefeuille.MOYENNE_MOBILE,
+            parametre: 50,
+            tri: false,
+            largeur: 8
+          },
+          {
+            nom: 'MM100',
             type: TypesColonnesPortefeuille.MOYENNE_MOBILE,
             parametre: 100,
             tri: false,
@@ -249,14 +274,14 @@ export class TableauxService {
             largeur: 25
           },
           {
-            nom: 'Indicateurs',
-            type: TypesColonnesPortefeuille.INDICATEURS,
+            nom: 'Alertes',
+            type: TypesColonnesPortefeuille.ALERTES,
             tri: false,
             largeur: 15
           },
           {
-            nom: 'Alertes',
-            type: TypesColonnesPortefeuille.ALERTES,
+            nom: 'Indicateurs',
+            type: TypesColonnesPortefeuille.INDICATEURS,
             tri: false,
             largeur: 15
           },
