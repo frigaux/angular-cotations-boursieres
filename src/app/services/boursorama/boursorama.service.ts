@@ -20,7 +20,6 @@ import {RisqueESG} from './risque-esg.enum';
 import {DTODividendes} from '../dividendes/dto-dividendes.class';
 import {DTODividende} from '../dividendes/dto-dividende.interface';
 import {TypeDividende} from '../dividendes/type-dividende.enum';
-import {LocalStorageService} from '../local-storage/local-storage.service';
 
 @Injectable({
   providedIn: 'root'
@@ -31,7 +30,7 @@ export class BoursoramaService {
   private static readonly HEADERS_HTML = new HttpHeaders()
     .set('Accept', 'text/html');
 
-  constructor(private http: HttpClient, private localStorageService: LocalStorageService) {
+  constructor(private http: HttpClient) {
   }
 
   public chargerCoursTickers(tickers: Array<string>): Observable<Array<DTOCours>> {

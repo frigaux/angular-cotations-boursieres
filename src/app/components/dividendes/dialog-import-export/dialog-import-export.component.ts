@@ -1,4 +1,4 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Component, NgZone, OnDestroy, OnInit} from '@angular/core';
 import {TranslatePipe} from "@ngx-translate/core";
 import {Dialog} from 'primeng/dialog';
 import {FloatLabel} from 'primeng/floatlabel';
@@ -36,7 +36,7 @@ export class DialogImportExportComponent implements OnInit, OnDestroy {
 
   private onUpdateDividendes?: Subscription;
 
-  constructor(private dividendesService: DividendesService) {
+  constructor(private dividendesService: DividendesService, private zone: NgZone) {
   }
 
   ngOnInit(): void {
@@ -57,10 +57,12 @@ export class DialogImportExportComponent implements OnInit, OnDestroy {
   construireVue() {
     const dividendes = this.dividendesService.charger();
     if (dividendes) {
-      const moisDistinct: Set<string> = new Set();
-      dividendes.dividendes.forEach(dividende =>
-        moisDistinct.add(`${dividende.date.substring(0, 7)}-01`));
-      this.moisDejaImportes = Array.from(moisDistinct).sort();
+      this.zone.run(() => {
+        const moisDistinct: Set<string> = new Set();
+        dividendes.dividendes.forEach(dividende =>
+          moisDistinct.add(`${dividende.date.substring(0, 7)}-01`));
+        this.moisDejaImportes = Array.from(moisDistinct).sort();
+      });
     }
   }
 

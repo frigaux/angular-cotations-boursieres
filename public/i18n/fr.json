@@ -383,6 +383,7 @@
       "IMPORT_EXPORT": {
         "IMPORT_EXPORT": "Import/export des dividendes depuis ABCBourse",
         "DIVIDENDES": "Import : HTML de la table ABCBourse sur une période mensuelle. Export : complet au format JSON.",
+        "LIEN": "Dividendes sur ABCBourse",
         "EXPORTER": "Exporter",
         "IMPORTER": "Importer"
       }

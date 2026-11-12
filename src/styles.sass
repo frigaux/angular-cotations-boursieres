@@ -20,6 +20,7 @@
   --p-popover-border-color: var(--p-blue-500) !important
   --p-skeleton-background: #FFFFFF !important
   --p-skeleton-animation-background: rgba(0, 0, 0, 1) !important
+  --p-chip-background: var(--p-blue-100) !important
   background: linear-gradient(to right, var(--p-violet-200), var(--p-violet-300))
 
   .lien-bandeau
@@ -29,6 +30,13 @@
     border-style: solid
     cursor: pointer
 
+  app-formulaire-cle-api-gemini, app-dialog-import-export
+    a
+      text-decoration: none
+      color: var(--p-blue-500)
+
+      &:hover
+        text-decoration: underline
 
   //
   // https://angular.dev/guide/drag-drop#transfer-draggable-elements-between-lists
@@ -150,7 +158,7 @@
 
 
   app-achats-valeurs
-    .pi-times:not(.icon), .pi-download:not(.icon), .pi-shopping-bag:not(.icon)
+    .pi-times:not(.icon), .pi-download:not(.icon):not(.p-button-icon), .pi-shopping-bag:not(.icon)
       font-size: x-large
 
 
