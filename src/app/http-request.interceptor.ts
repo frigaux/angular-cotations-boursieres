@@ -19,7 +19,8 @@ export const httpRequestInterceptor: HttpInterceptorFn = (req, next) => {
 };
 
 function isRequeteProxy(pathname: string): boolean {
-  return pathname.startsWith('/abcbourse') || pathname.startsWith('/boursorama') || pathname.startsWith('/zonebourse');
+  return pathname.startsWith('/abcbourse') || pathname.startsWith('/boursorama')
+    || pathname.startsWith('/zonebourse')|| pathname.startsWith('/yahoo');
 }
 
 function makeProxyCall(req: HttpRequest<unknown>, next: (req: HttpRequest<unknown>) => Observable<HttpEvent<unknown>>) {
