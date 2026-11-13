@@ -28,7 +28,7 @@ describe('YahooService', () => {
     expect(service).toBeTruthy();
   });
 
-  it('given un ticker when #chargerCotationsTickers then on doit récupérer les cotations pour les tickers', async () => {
+  it('given un ticker when #chargerCotationsTicker then on doit récupérer les cotations pour le ticker', async () => {
     const promiseDTOCotations: Promise<DTOCotations> = firstValueFrom(service.chargerCotationsTicker(VALEUR.ticker));
     const dto = await promiseDTOCotations;
     expect(dto.ticker).toBe(VALEUR.ticker);

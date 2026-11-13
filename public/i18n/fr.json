@@ -482,6 +482,13 @@
         }
       }
     },
+    "BOURSICOTAGE": {
+      "PORTEFEUILLE": "Portefeuille",
+      "DELAI": "Délai",
+      "DELAI_RAFRAICHISSEMENT": "Délai de rafraîchissement",
+      "VARIATION": "Variation",
+      "ALERTE_VARIATION": "Alerte variation en pourcentage"
+    },
     "PARAMETRAGE": {
       "GESTION_PORTEFEUILLES": {
         "CREER": "Créer un portefeuille",

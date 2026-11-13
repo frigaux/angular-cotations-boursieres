@@ -1,1 +1,26 @@
-<p>boursicotage works!</p>
+<div class="ligne">
+  <div>
+    <p-floatlabel>
+      <p-select [(ngModel)]="portefeuille" inputId="portefeuille"
+                [options]="portefeuilles" optionLabel="nom" style="width: 10rem; text-align: left;" />
+      <label for="portefeuille">{{ 'COMPOSANTS.BOURSICOTAGE.PORTEFEUILLE' | translate }}</label>
+    </p-floatlabel>
+  </div>
+  <div [title]="'COMPOSANTS.BOURSICOTAGE.DELAI_RAFRAICHISSEMENT' | translate">
+    <p-floatlabel>
+      <p-inputNumber [(ngModel)]="delaiRafraichissement" inputId="delai" required
+                     [inputSize]="2" mode="decimal" [min]="1" [max]="60"/>
+      <label for="delai">{{ 'COMPOSANTS.BOURSICOTAGE.DELAI' | translate }}</label>
+    </p-floatlabel>
+  </div>
+  <div [title]="'COMPOSANTS.BOURSICOTAGE.ALERTE_VARIATION' | translate">
+    <p-floatlabel>
+      <p-inputNumber [(ngModel)]="alerteVariation" inputId="variation" required
+                     [inputSize]="2" mode="decimal" [maxFractionDigits]="1" [min]="0" [max]="9"/>
+      <label for="variation">{{ 'COMPOSANTS.BOURSICOTAGE.VARIATION' | translate }}</label>
+    </p-floatlabel>
+  </div>
+  <div>
+    <!--Message rafraichissement-->
+  </div>
+</div>
