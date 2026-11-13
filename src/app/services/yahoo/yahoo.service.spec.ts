@@ -2,7 +2,7 @@ import {TestBed} from '@angular/core/testing';
 
 import {YahooService} from './yahoo.service';
 import {HttpInterceptorFn, provideHttpClient, withInterceptors} from '@angular/common/http';
-import {VALEURS} from '../jdd/jdd-valeurs.dataset';
+import {VALEUR, VALEURS} from '../jdd/jdd-valeurs.dataset';
 import {firstValueFrom} from 'rxjs';
 import {DTOCotations} from './dto-cotations.interface';
 
@@ -28,10 +28,16 @@ describe('YahooService', () => {
     expect(service).toBeTruthy();
   });
 
+  it('given un ticker when #chargerCotationsTickers then on doit récupérer les cotations pour les tickers', async () => {
+    const promiseDTOCotations: Promise<DTOCotations> = firstValueFrom(service.chargerCotationsTicker(VALEUR.ticker));
+    const dto = await promiseDTOCotations;
+    expect(dto.ticker).toBe(VALEUR.ticker);
+  });
+
   it('given des tickers when #chargerCotationsTickers then on doit récupérer les cotations pour les tickers', async () => {
     const tickers = VALEURS.map(valeur => valeur.ticker);
-    const promiseDTOsCours: Promise<DTOCotations[]> = firstValueFrom(service.chargerCotationsTickers(tickers));
-    const dtos = await promiseDTOsCours;
+    const promiseDTOsCotations: Promise<DTOCotations[]> = firstValueFrom(service.chargerCotationsTickers(tickers));
+    const dtos = await promiseDTOsCotations;
     expect(dtos).toHaveSize(tickers.length);
     dtos.forEach((dto, i) => {
       expect(dto.ticker).toBe(tickers[i]);

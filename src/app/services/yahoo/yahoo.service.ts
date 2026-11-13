@@ -11,6 +11,25 @@ export class YahooService {
   constructor(private http: HttpClient) {
   }
 
+  public chargerCotationsTicker(ticker: string): Observable<DTOCotations> {
+    return new Observable(observer => {
+      this.http.get(`/yahoo/quote/${ticker}.PA/`, {
+        responseType: 'text'
+      })
+        .subscribe({
+          error: httpErrorResponse => {
+            observer.error(httpErrorResponse);
+            observer.complete();
+          },
+          next: html => {
+            const dto = this.parseHtml(ticker, html);
+            dto ? observer.next(dto) : observer.error();
+            observer.complete();
+          }
+        });
+    });
+  }
+
   public chargerCotationsTickers(tickers: Array<string>): Observable<Array<DTOCotations>> {
     return new Observable(observer => {
       forkJoin(tickers.map(ticker =>

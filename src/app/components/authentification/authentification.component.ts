@@ -37,7 +37,7 @@ export class AuthentificationComponent implements OnInit {
       complete: () => {
         this.statut = StatutAuthentification.SUCCES;
         if (this.portefeuillesService.auMoinsUnPortefeuilleCorrectementConfigure()) {
-          this.router.navigate(['portefeuilles']);
+          this.router.navigate(['boursicotage']);
         } else {
           this.router.navigate(['gestion-portefeuilles']);
         }

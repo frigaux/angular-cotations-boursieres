@@ -59,6 +59,11 @@ export class HeaderComponent implements OnDestroy {
         routerLink: 'portefeuilles',
         icon: 'pi pi-book'
       });
+      this.items.push({
+        label: translateService.instant('COMPOSANTS.HEADER.BOURSICOTAGE'),
+        routerLink: 'boursicotage',
+        icon: 'pi pi-bell'
+      });
     }
     this.items.push({
       label: translateService.instant('COMPOSANTS.HEADER.SOUS_MENU_PARAMETRAGE'),

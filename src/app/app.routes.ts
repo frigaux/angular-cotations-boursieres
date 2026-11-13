@@ -57,6 +57,14 @@ export const routes: Routes = [
     canActivate: [authentificationGuard]
   },
   {
+    path: 'boursicotage',
+    loadComponent: () =>
+      import('./components/boursicotage/boursicotage.component').then(
+        (m) => m.BoursicotageComponent
+      ),
+    canActivate: [authentificationGuard]
+  },
+  {
     path: 'gestion-portefeuilles',
     loadComponent: () =>
       import(

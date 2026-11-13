@@ -7,6 +7,7 @@
     "ACHATS_VALEURS": "Achats de valeurs",
     "DIVIDENDES": "Dividendes",
     "PORTEFEUILLES": "Portefeuilles",
+    "BOURSICOTAGE": "Boursicotage",
     "GESTION_PORTEFEUILLES": "Gestion des portefeuilles",
     "GESTION_TABLEAUX": "Gestion des tableaux",
     "SAUVEGARDE_RESTAURATION": "Sauvegarde / restauration",
@@ -35,6 +36,7 @@
       "ACHATS_VALEURS": "Achats",
       "DIVIDENDES": "Dividendes",
       "PORTEFEUILLES": "Portefeuilles",
+      "BOURSICOTAGE": "Boursicotage",
       "SOUS_MENU_PARAMETRAGE": "Paramétrage",
       "PARAMETRAGE": {
         "GESTION_PORTEFEUILLES": "Gestion des portefeuilles",
