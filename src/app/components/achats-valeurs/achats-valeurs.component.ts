@@ -1,4 +1,4 @@
-import {Component, OnDestroy, OnInit, viewChild} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {ValeursService} from '../../services/valeurs/valeurs.service';
 import {DTOAchatsTicker} from '../../services/valeurs/dto-achats-ticker.interface';
 import {DTOValeur} from '../../services/valeurs/dto-valeur.interface';
@@ -10,7 +10,6 @@ import {ConfirmationService} from 'primeng/api';
 import {DialogueService} from '../../services/dialogue/dialogue.service';
 import {TableauAchatsComponent} from './tableau-achats/tableau-achats.component';
 import {AchatValeurDecore} from './tableau-achats/achat-valeur-decore.class';
-import {DialogCoursAchatsComponent} from './dialog-cours-achats/dialog-cours-achats.component';
 import {TableauVentesComponent} from './tableau-ventes/tableau-ventes.component';
 import {TableauOrdresAchatsComponent} from './tableau-ordres-achats/tableau-ordres-achats.component';
 import {EtapeValeur} from '../valeurs/achats-valeur/etape-valeur.enum';
@@ -25,7 +24,6 @@ import {Subscription} from 'rxjs';
     LoaderComponent,
     DialogImportExportComponent,
     TableauAchatsComponent,
-    DialogCoursAchatsComponent,
     TableauVentesComponent,
     TableauOrdresAchatsComponent,
     TableauOrdresVentesComponent
@@ -34,8 +32,6 @@ import {Subscription} from 'rxjs';
   styleUrls: ['./achats-valeurs.component.sass', '../commun/titre.sass']
 })
 export class AchatsValeursComponent implements OnInit, OnDestroy {
-  public dialogCoursAchatsNonRevendusComponent = viewChild(DialogCoursAchatsComponent);
-
   // données pour la vue
   loading: boolean = true; // chargement des valeurs
   ordresAchats?: Array<AchatValeurDecore>;
@@ -97,12 +93,5 @@ export class AchatsValeursComponent implements OnInit, OnDestroy {
     })
     resultat.sort((a1, a2) => a1.valeur.libelle.localeCompare(a2.valeur.libelle));
     return resultat;
-  }
-
-  recupererCours() {
-    this.dialogCoursAchatsNonRevendusComponent()?.afficherCours(
-      JSON.parse(JSON.stringify(this.ordresAchats!)),
-      JSON.parse(JSON.stringify(this.achats!)),
-      JSON.parse(JSON.stringify(this.ordresVentes!)));
   }
 }

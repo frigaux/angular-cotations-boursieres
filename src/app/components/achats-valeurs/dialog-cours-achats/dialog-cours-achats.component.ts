@@ -44,7 +44,7 @@ export class DialogCoursAchatsComponent {
     this.achats = achats;
     this.ordresVentes = ordresVentes;
 
-    const tickers: Set<string> = this.tickersDistinct();
+    const tickers: Set<string> = this.tickersDistincts();
     if (tickers.size > 0) {
       this.visible = true;
       this.loading = true;
@@ -59,7 +59,7 @@ export class DialogCoursAchatsComponent {
     }
   }
 
-  private tickersDistinct(): Set<string> {
+  private tickersDistincts(): Set<string> {
     const resultat = new Set<string>();
     if (this.ordresAchats && this.achats && this.ordresVentes) {
       this.ordresAchats.forEach(achat => resultat.add(achat.valeur.ticker));

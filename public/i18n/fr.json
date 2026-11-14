@@ -291,7 +291,6 @@
     },
     "ACHATS_VALEURS": {
       "ACHATS_VALEURS": "Ordres d'achats, achats, ordres de ventes et ventes de valeurs",
-      "RECUPERER_COURS": "Récupérer les cours sur Boursorama",
       "TABLEAU_ORDRES_ACHATS": "Ordres d'achats",
       "TABLEAU_ACHATS": "Achats",
       "TABLEAU_ORDRES_VENTES": "Ordres de ventes",
@@ -392,7 +391,6 @@
     },
     "PORTEFEUILLES": {
       "PORTEFEUILLES_DATE": "Portefeuilles à la date du {{jour}}",
-      "COURS_BOURSORAMA_PORTEFEUILLE": "Cours des valeurs du portefeuille depuis Boursorama",
       "ACTIONS": "Actions sur la valeur",
       "PORTEFEUILLE": {
         "ORDRES_ACHATS": "Ordres achats",

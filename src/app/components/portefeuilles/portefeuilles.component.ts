@@ -38,9 +38,6 @@ import {SortEvent} from 'primeng/api';
 import {
   DialogCotationsValeurComponent
 } from './popover-actions-valeur/dialog-cotations-valeur/dialog-cotations-valeur.component';
-import {
-  DialogCotationsValeursPortefeuilleComponent
-} from './popover-actions-valeur/dialog-cotations-valeurs-portefeuille/dialog-cotations-valeurs-portefeuille.component';
 import {Subscription} from 'rxjs';
 import {DTODividende} from '../../services/dividendes/dto-dividende.interface';
 import {Indicateurs} from '../cours/indicateurs/indicateurs';
@@ -76,7 +73,6 @@ import {DialogAproposComponent} from '../cours/dialog-apropos/dialog-apropos.com
     IconeVariation,
     DetailsValeurComponent,
     DialogCotationsValeurComponent,
-    DialogCotationsValeursPortefeuilleComponent,
     Indicateurs,
     DialogAproposComponent
   ],
@@ -86,7 +82,6 @@ import {DialogAproposComponent} from '../cours/dialog-apropos/dialog-apropos.com
 export class PortefeuillesComponent implements OnInit, OnDestroy {
   private actionsValeur = viewChild(PopoverActionsValeurComponent);
   private dialogCoursTickerComponent = viewChild(DialogCotationsValeurComponent);
-  private dialogCotationsTickersPortefeuilleComponent = viewChild(DialogCotationsValeursPortefeuilleComponent);
 
   // chargement des valeurs et cours
   loading: boolean = true;
@@ -351,9 +346,5 @@ export class PortefeuillesComponent implements OnInit, OnDestroy {
         };
       }
     }
-  }
-
-  protected coursBoursoramaPortefeuille() {
-    this.dialogCotationsTickersPortefeuilleComponent()?.afficherPortefeuille(this.portefeuillesAvecCours[this.idxPortefeuilleCourant], this.dialogCoursTickerComponent());
   }
 }
