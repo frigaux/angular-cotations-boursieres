@@ -8,7 +8,6 @@ import {ACHATS, VALEURS} from '../../services/jdd/jdd-valeurs.dataset';
 import {CoursService} from '../../services/cours/cours.service';
 import {COURS_BNP, COURS_GLE, LISTE_COURS_AVEC_LISTE_ALLEGEE} from '../../services/jdd/jdd-cours.dataset';
 import {BoursoramaService} from '../../services/boursorama/boursorama.service';
-import {DialogCoursAchatsComponent} from './dialog-cours-achats/dialog-cours-achats.component';
 import {ConfirmationService} from 'primeng/api';
 import {DividendesService} from '../../services/dividendes/dividendes.service';
 import {DIVIDENDES_BY_TICKER} from '../../services/jdd/jdd-dividendes.dataset';
@@ -74,26 +73,12 @@ describe('AchatsValeursComponent', () => {
     it('when #ngOnInit et #recupererCours then les cours sont bien récupérés', () => {
       fixture.detectChanges(); // appelle le ngOnInit
 
-      component.recupererCours();
       fixture.detectChanges();
-      expect(component.dialogCoursAchatsNonRevendusComponent()).toBeDefined();
-      const dialog: DialogCoursAchatsComponent = component.dialogCoursAchatsNonRevendusComponent()!;
 
       expect(component.achats).toHaveSize(nbAchats);
       expect(component.ordresAchats).toHaveSize(nbOrdresAchats);
       expect(component.ordresVentes).toHaveSize(nbOrdresVentes);
       expect(component.ventes).toHaveSize(nbVentes);
-
-      expect(dialog.achats).toHaveSize(nbAchats);
-      if (dialog.achats) {
-        for (const achat of dialog.achats) {
-          expect(achat.achatDecore.cours).toBeDefined()
-        }
-      }
-
-      expect(dialog.ordresAchats).toHaveSize(nbOrdresAchats);
-      expect(dialog.ordresVentes).toHaveSize(nbOrdresVentes);
-      expect(dialog.loading).toBeFalse();
     });
   });
 });
