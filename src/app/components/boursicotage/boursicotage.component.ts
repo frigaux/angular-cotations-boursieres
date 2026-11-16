@@ -143,13 +143,4 @@ export class BoursicotageComponent implements OnInit {
       this.dateRafraichissement = new Date();
     }
   }
-
-  private ajouterCotations(listeCotationsDecorees: CotationsDecorees[], cotationsByTicker: Map<string, DTOCotations>) {
-    listeCotationsDecorees.forEach(cotationsDecorees => {
-      const ticker = cotationsDecorees.valeur.ticker;
-      if (cotationsByTicker.has(ticker)) {
-        cotationsDecorees.cotations.push(cotationsByTicker.get(ticker)!);
-      }
-    });
-  }
 }
