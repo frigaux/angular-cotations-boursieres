@@ -1,0 +1,120 @@
+//table.portefeuille
+//  thead
+//    th:nth-child(7)
+//      width: 6rem
+//      text-align: right
+//
+//    th:nth-child(8)
+//      text-align: left
+//
+//  tbody
+//    td:nth-child(8)
+//      text-align: left
+//
+//    td:nth-child(7)
+//      text-align: right
+//
+//
+//table:not(.portefeuille)
+//  thead
+//    th:nth-child(7)
+//      width: 7rem
+//      text-align: right
+//
+//    th:nth-child(8)
+//      width: 10rem
+//      text-align: right
+//
+//    th:nth-child(9)
+//      width: 6rem
+//      text-align: right
+//
+//    th:nth-child(10)
+//      text-align: left
+//
+//  tbody
+//    td:nth-child(10)
+//      text-align: left
+//
+//    td:nth-child(7), td:nth-child(8), td:nth-child(9)
+//      text-align: right
+
+.alerte
+  background-color: var(--p-red-200)
+
+table
+  width: 100%
+  border-collapse: collapse
+
+  th, td
+    padding: 0 0.25rem
+
+thead
+  th
+    background-color: white
+    font-weight: bold
+    border-bottom: 1px solid var(--p-tabs-tablist-border-color)
+
+  th:nth-child(1)
+    width: 5rem
+    text-align: left
+
+  th:nth-child(2)
+    width: 15rem
+    text-align: left
+
+  th:nth-child(3)
+    width: 5rem
+    text-align: center
+
+  th:nth-child(4)
+    width: 5rem
+    text-align: right
+
+  th:nth-child(5)
+    width: 10rem
+    text-align: center
+
+  th:nth-child(6)
+    width: 9rem
+    text-align: right
+
+  th:nth-child(7)
+    width: 7rem
+    text-align: right
+
+  th:nth-child(8)
+    width: 10rem
+    text-align: right
+
+  th:nth-child(9)
+    width: 6rem
+    text-align: right
+
+  th:nth-child(10)
+    text-align: left
+
+tbody
+  tr:hover
+    background-color: white
+
+  td
+    border-bottom: 1px solid var(--p-datatable-body-cell-border-color)
+
+    &.positive
+      color: var(--p-green-600)
+
+    &.negative
+      color: var(--p-red-600)
+
+    --p-inputtext-sm-padding-x: 0.1rem
+    --p-inputtext-sm-padding-y: 0.1rem
+
+  td:nth-child(1), td:nth-child(2), td:nth-child(10)
+    text-align: left
+
+  td:nth-child(4), td:nth-child(6), td:nth-child(7), td:nth-child(8), td:nth-child(9)
+    text-align: right
+
+  td:nth-child(5), td:nth-child(3)
+    text-align: center

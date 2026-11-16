@@ -1,32 +1,41 @@
-.libelles
-  & > span
-    display: inline-block
-    width: 50%
-    font-weight: lighter
+div.conteneur.taille-reduite
+  .libelles
+    display: none
 
-  & > span:nth-child(1)
-    text-align: left
+  .jauge
+    .valeur
+      display: none
 
-  & > span:nth-child(2)
-    text-align: right
+div.conteneur
+  .libelles
+    & > span
+      display: inline-block
+      width: 50%
+      font-weight: lighter
 
-.jauge
-  position: relative
-  height: 1.25rem
-  border: 0.1rem solid black
+    & > span:nth-child(1)
+      text-align: left
 
-  .pourcentage
-    position: absolute
-    height: 100%
+    & > span:nth-child(2)
+      text-align: right
 
-    &.rouge
-      background-color: var(--p-red-700)
+  .jauge
+    position: relative
+    height: 1.25rem
+    border: 0.1rem solid black
 
-    &.vert
-      background-color: var(--p-green-700)
+    .pourcentage
+      position: absolute
+      height: 100%
 
-  .valeur
-    position: absolute
-    color: black
-    text-align: center
-    width: 100%
+      &.rouge
+        background-color: var(--p-red-700)
+
+      &.vert
+        background-color: var(--p-green-700)
+
+    .valeur
+      position: absolute
+      color: black
+      text-align: center
+      width: 100%

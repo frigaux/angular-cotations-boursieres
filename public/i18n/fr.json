@@ -483,9 +483,30 @@
     "BOURSICOTAGE": {
       "PORTEFEUILLE": "Portefeuille",
       "DELAI": "Délai",
-      "DELAI_RAFRAICHISSEMENT": "Délai de rafraîchissement",
+      "DELAI_RAFRAICHISSEMENT": "Délai de rafraîchissement en minutes",
       "VARIATION": "Variation",
-      "ALERTE_VARIATION": "Alerte variation en pourcentage"
+      "SEUIL_VARIATION": "Seuil de variation en pourcentage",
+      "MESSAGE_RAFRAICHISSEMENT": "Dernier rafraîchissement à {{heure}}",
+      "TABLEAU_COTATIONS": {
+        "TICKER": "Ticker",
+        "VALEUR": "Valeur",
+        "COURS": "Cours",
+        "SEUIL_COURS": "Seuil",
+        "VARIATION_COURS": "Variation cours",
+        "JAUGE": "Jauge",
+        "PRIX_ORDRE_ACHAT": "Prix ordre achat",
+        "PRIX_ACHAT": "Prix achat",
+        "PRIX_REVENTE": "Prix revente",
+        "VARIATION_ORDRE": "Var Ordre/Cours",
+        "VARIATION_ACHAT": "Var Cours/Achat",
+        "VARIATION_REVENTE": "Var Cours/Revente",
+        "VOLUME": "Volume",
+        "NOTIFICATIONS": "Notifications",
+        "VARIATION_HAUSSE": "{{variation}}% à la hausse à {{heure}}",
+        "VARIATION_BAISSE": "{{variation}}% à la baisse à {{heure}}",
+        "COURS_HAUSSE": "{{cours}} à la hausse à {{heure}}",
+        "COURS_BAISSE": "{{cours}} à la baisse à {{heure}}"
+      }
     },
     "PARAMETRAGE": {
       "GESTION_PORTEFEUILLES": {

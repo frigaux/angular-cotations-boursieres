@@ -4,6 +4,11 @@ import {forkJoin, Observable} from 'rxjs';
 import {DTOCotations} from './dto-cotations.interface';
 import {ParseUtil} from '../commun/parse-util.class';
 
+// https://www.boursedirect.fr/api/search/stlap/lucky
+// https://www.boursedirect.fr/fr/marche/euronext-paris/stellantis-n-v-NL00150001Q9-STLAP-EUR-XPAR/seance
+// https://www.boursedirect.fr/api/instrument/intraday/XPAR/STLAP/EUR
+// https://www.boursedirect.fr/api/instrument/intraday/XPAR/TE/EUR
+
 @Injectable({
   providedIn: 'root',
 })

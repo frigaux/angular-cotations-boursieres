@@ -1,26 +1,59 @@
-<div class="ligne">
-  <div>
-    <p-floatlabel>
-      <p-select [(ngModel)]="portefeuille" inputId="portefeuille"
-                [options]="portefeuilles" optionLabel="nom" style="width: 10rem; text-align: left;" />
-      <label for="portefeuille">{{ 'COMPOSANTS.BOURSICOTAGE.PORTEFEUILLE' | translate }}</label>
-    </p-floatlabel>
+<app-loader [affiche]="loading"
+            [configuration]="[{marginLeft: '0', marginTop: '1rem', height: 'calc(100vh - 5rem)', width: '100%'}]"></app-loader>
+
+@if (!loading) {
+  <div class="ligne">
+    <div>
+      <p-floatlabel>
+        <p-select [(ngModel)]="portefeuille" inputId="portefeuille"
+                  [options]="portefeuilles" optionLabel="nom"
+                  style="width: 10rem; text-align: left;"
+                  (onChange)="selectionPortefeuille($event)"/>
+        <label for="portefeuille">{{ 'COMPOSANTS.BOURSICOTAGE.PORTEFEUILLE' | translate }}</label>
+      </p-floatlabel>
+    </div>
+    <div [title]="'COMPOSANTS.BOURSICOTAGE.DELAI_RAFRAICHISSEMENT' | translate">
+      <p-floatlabel>
+        <p-inputNumber [(ngModel)]="delaiRafraichissement" inputId="delai" required
+                       [inputSize]="3" mode="decimal" [maxlength]="2" [maxFractionDigits]="0" [min]="1" [max]="99"
+                       (onBlur)="selectionDelaiRafraichissement($event)"/>
+        <label for="delai">{{ 'COMPOSANTS.BOURSICOTAGE.DELAI' | translate }}</label>
+      </p-floatlabel>
+    </div>
+    <div [title]="'COMPOSANTS.BOURSICOTAGE.SEUIL_VARIATION' | translate">
+      <p-floatlabel>
+        <p-inputNumber [(ngModel)]="seuilVariation" inputId="seuilVariation" required
+                       [inputSize]="3" mode="decimal" [maxlength]="3" [maxFractionDigits]="1" [min]="0.1" [max]="9.9"/>
+        <label for="seuilVariation">{{ 'COMPOSANTS.BOURSICOTAGE.VARIATION' | translate }}</label>
+      </p-floatlabel>
+    </div>
+    @if (dateRafraichissement) {
+      <div>
+        {{ 'COMPOSANTS.BOURSICOTAGE.MESSAGE_RAFRAICHISSEMENT' | translate : {heure: dateRafraichissement | date: 'HH:mm:ss'} }}
+      </div>
+    }
   </div>
-  <div [title]="'COMPOSANTS.BOURSICOTAGE.DELAI_RAFRAICHISSEMENT' | translate">
-    <p-floatlabel>
-      <p-inputNumber [(ngModel)]="delaiRafraichissement" inputId="delai" required
-                     [inputSize]="2" mode="decimal" [min]="1" [max]="60"/>
-      <label for="delai">{{ 'COMPOSANTS.BOURSICOTAGE.DELAI' | translate }}</label>
-    </p-floatlabel>
+
+  <div class="conteneur">
+    @if (cotationsPortefeuille) {
+      <app-tableau-cotations
+        [dto]="{cotations: cotationsPortefeuille, seuilVariation}"
+        [cotationsByTicker]="cotationsByTicker"></app-tableau-cotations>
+    }
+    @if (cotationsOrdresAchats) {
+      <app-tableau-cotations
+        [dto]="{cotations: cotationsOrdresAchats, etape: EtapeValeur.ORDRE_ACHAT, seuilVariation}"
+        [cotationsByTicker]="cotationsByTicker"></app-tableau-cotations>
+    }
+    @if (cotationsAchats) {
+      <app-tableau-cotations
+        [dto]="{cotations: cotationsAchats, etape: EtapeValeur.ACHAT, seuilVariation}"
+        [cotationsByTicker]="cotationsByTicker"></app-tableau-cotations>
+    }
+    @if (cotationsOrdresVentes) {
+      <app-tableau-cotations
+        [dto]="{cotations: cotationsOrdresVentes, etape: EtapeValeur.ORDRE_VENTE, seuilVariation}"
+        [cotationsByTicker]="cotationsByTicker"></app-tableau-cotations>
+    }
   </div>
-  <div [title]="'COMPOSANTS.BOURSICOTAGE.ALERTE_VARIATION' | translate">
-    <p-floatlabel>
-      <p-inputNumber [(ngModel)]="alerteVariation" inputId="variation" required
-                     [inputSize]="2" mode="decimal" [maxFractionDigits]="1" [min]="0" [max]="9"/>
-      <label for="variation">{{ 'COMPOSANTS.BOURSICOTAGE.VARIATION' | translate }}</label>
-    </p-floatlabel>
-  </div>
-  <div>
-    <!--Message rafraichissement-->
-  </div>
-</div>
+}

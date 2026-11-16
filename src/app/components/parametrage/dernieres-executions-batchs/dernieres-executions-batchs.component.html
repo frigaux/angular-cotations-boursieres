@@ -12,7 +12,7 @@
             <span [ngClass]="{'pi pi-check-circle': jobExecution.statut === 'COMPLETED'}"></span>
             <div>
               {{ jobExecution.creation | date: 'dd/MM/yyyy' }} :
-              {{ jobExecution.debut | date: 'hh:mm:ss' }} &rarr; {{ jobExecution.fin | date: 'hh:mm:ss' }}
+              {{ jobExecution.debut | date: 'HH:mm:ss' }} &rarr; {{ jobExecution.fin | date: 'HH:mm:ss' }}
             </div>
           </div>
           @if (jobExecution.message) {
@@ -34,7 +34,7 @@
                 <div>
                   {{ stepExecution.nom }}
                   ({{ stepExecution.creation | date: 'dd/MM/yyyy' }} :
-                  {{ stepExecution.debut | date: 'hh:mm:ss' }} &rarr; {{ stepExecution.fin | date: 'hh:mm:ss' }})
+                  {{ stepExecution.debut | date: 'HH:mm:ss' }} &rarr; {{ stepExecution.fin | date: 'HH:mm:ss' }})
                 </div>
               </div>
               @if (stepExecution.message) {

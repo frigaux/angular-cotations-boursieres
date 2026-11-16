@@ -12,10 +12,13 @@ import {CurrencyPipe, NgClass} from '@angular/common';
 })
 export class JaugeComponent {
   // input/output
+  inputTailleReduite: InputSignal<boolean | undefined> = input(undefined,
+    {transform: o => this.intercepteurTailleReduite(o), alias: 'tailleReduite'});
   inputDonnees: InputSignal<{ cours: number, plusBas: number, plusHaut: number } | undefined> = input(undefined,
     {transform: o => this.intercepteurDonnees(o), alias: 'donnees'});
 
   // données pour la vue
+  tailleReduite: boolean = false;
   cours?: number;
   plusBas?: number;
   plusHaut?: number;
@@ -34,5 +37,10 @@ export class JaugeComponent {
       this.pourcentage = undefined;
     }
     return donnees;
+  }
+
+  private intercepteurTailleReduite(tailleReduite?: boolean) {
+    this.tailleReduite = tailleReduite ? tailleReduite : false;
+    return tailleReduite;
   }
 }

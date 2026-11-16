@@ -1,0 +1,88 @@
+@if (cotations && cotations.length > 0) {
+  <table [ngClass]="{'portefeuille':etape === undefined}">
+    <thead>
+    <th> {{ 'COMPOSANTS.BOURSICOTAGE.TABLEAU_COTATIONS.TICKER' | translate }}</th>
+    <th> {{ 'COMPOSANTS.BOURSICOTAGE.TABLEAU_COTATIONS.VALEUR' | translate }}</th>
+    <th> {{ 'COMPOSANTS.BOURSICOTAGE.TABLEAU_COTATIONS.SEUIL_COURS' | translate }}</th>
+    <th> {{ 'COMPOSANTS.BOURSICOTAGE.TABLEAU_COTATIONS.COURS' | translate }}</th>
+    <th> {{ 'COMPOSANTS.BOURSICOTAGE.TABLEAU_COTATIONS.JAUGE' | translate }}</th>
+    <th> {{ 'COMPOSANTS.BOURSICOTAGE.TABLEAU_COTATIONS.VARIATION_COURS' | translate }}</th>
+      @switch (etape) {
+        @case (EtapeValeur.ORDRE_ACHAT) {
+          <th> {{ 'COMPOSANTS.BOURSICOTAGE.TABLEAU_COTATIONS.PRIX_ORDRE_ACHAT' | translate }}</th>
+          <th> {{ 'COMPOSANTS.BOURSICOTAGE.TABLEAU_COTATIONS.VARIATION_ORDRE' | translate }}</th>
+        }
+        @case (EtapeValeur.ACHAT) {
+          <th> {{ 'COMPOSANTS.BOURSICOTAGE.TABLEAU_COTATIONS.PRIX_ACHAT' | translate }}</th>
+          <th> {{ 'COMPOSANTS.BOURSICOTAGE.TABLEAU_COTATIONS.VARIATION_ACHAT' | translate }}</th>
+        }
+        @case (EtapeValeur.ORDRE_VENTE) {
+          <th> {{ 'COMPOSANTS.BOURSICOTAGE.TABLEAU_COTATIONS.PRIX_REVENTE' | translate }}</th>
+          <th> {{ 'COMPOSANTS.BOURSICOTAGE.TABLEAU_COTATIONS.VARIATION_REVENTE' | translate }}</th>
+        }
+        @default {
+          <th></th>
+          <th></th>
+        }
+      }
+    <th> {{ 'COMPOSANTS.BOURSICOTAGE.TABLEAU_COTATIONS.VOLUME' | translate }}</th>
+    <th> {{ 'COMPOSANTS.BOURSICOTAGE.TABLEAU_COTATIONS.NOTIFICATIONS' | translate }}</th>
+    </thead>
+    <tbody>
+      @for (cotation of cotations; track cotation) {
+        <tr>
+          <td>
+            {{ cotation.valeur.ticker }}
+          </td>
+          <td>
+            {{ cotation.valeur.libelle }}
+          </td>
+          <td>
+            <p-inputNumber [(ngModel)]="cotation.seuilCours" size="small"
+                           [inputSize]="8" mode="decimal" [maxlength]="8" [maxFractionDigits]="3"/>
+          </td>
+          <td [ngClass]="{'alerte':cotation.notifierSeuilCours}">
+            @if (cotation.cotations.length > 0) {
+              {{ cotation.cotations[cotation.cotations.length - 1].cours | currency:'EUR':'symbol' }}
+            }
+          </td>
+          <td>
+            @if (cotation.cotations.length > 0) {
+              <app-jauge
+                [tailleReduite]="true"
+                [donnees]="{
+                cours: cotation.cotations[cotation.cotations.length - 1].cours,
+                plusBas: cotation.cotations[cotation.cotations.length - 1].plusBas,
+                plusHaut: cotation.cotations[cotation.cotations.length - 1].plusHaut
+              }"></app-jauge>
+            }
+          </td>
+          <td [appClassVariation]="cotation.variationDernierCours"
+              [ngClass]="{'alerte':cotation.notifierVariationDernierCours}">
+            {{ cotation.variationDernierCours | percent:'1.2-2' }}
+          </td>
+          <td>
+            @if (etape == EtapeValeur.ORDRE_VENTE) {
+              {{ cotation.achat!.prixRevente  | currency:'EUR':'symbol' }}
+            } @else if (etape == EtapeValeur.ACHAT || etape == EtapeValeur.ORDRE_ACHAT) {
+              {{ cotation.achat!.prix  | currency:'EUR':'symbol' }}
+            }
+          </td>
+          <td [appClassVariation]="cotation.variationAchat">
+            {{ cotation.variationAchat | percent:'1.2-2' }}
+          </td>
+          <td>
+            @if (cotation.cotations.length > 0) {
+              {{ cotation.cotations[cotation.cotations.length - 1].volume | number }}
+            }
+          </td>
+          <td>
+            @for (notification of cotation.notifications; track notification) {
+              {{ notification }}
+            }
+          </td>
+        </tr>
+      }
+    </tbody>
+  </table>
+}

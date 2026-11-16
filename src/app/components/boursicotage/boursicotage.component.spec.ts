@@ -1,6 +1,7 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { BoursicotageComponent } from './boursicotage.component';
+import {BoursicotageComponent} from './boursicotage.component';
+import {TranslateModule} from '@ngx-translate/core';
 
 describe('BoursicotageComponent', () => {
   let component: BoursicotageComponent;
@@ -8,9 +9,10 @@ describe('BoursicotageComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [BoursicotageComponent]
+      imports: [BoursicotageComponent,
+        TranslateModule.forRoot({})]
     })
-    .compileComponents();
+      .compileComponents();
 
     fixture = TestBed.createComponent(BoursicotageComponent);
     component = fixture.componentInstance;
