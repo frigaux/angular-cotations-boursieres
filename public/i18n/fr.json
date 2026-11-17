@@ -483,15 +483,16 @@
     "BOURSICOTAGE": {
       "PORTEFEUILLE": "Portefeuille",
       "DELAI": "Délai",
-      "DELAI_RAFRAICHISSEMENT": "Délai de rafraîchissement en minutes",
-      "VARIATION": "Variation",
-      "SEUIL_VARIATION": "Seuil de variation en pourcentage",
+      "DELAI_RAFRAICHISSEMENT": "Délai de rafraîchissement des cotations en minutes",
+      "SEUIL": "Seuil",
+      "SEUIL_VARIATION": "Seuil de la variation du cours en pourcentage",
       "MESSAGE_RAFRAICHISSEMENT": "Dernier rafraîchissement à {{heure}}",
       "TABLEAU_COTATIONS": {
         "TICKER": "Ticker",
         "VALEUR": "Valeur",
         "COURS": "Cours",
-        "SEUIL_COURS": "Seuil",
+        "SEUIL": "Seuil",
+        "SEUIL_COURS": "Seuil de changement du cours en euros",
         "VARIATION_COURS": "Variation cours",
         "JAUGE": "Jauge",
         "PRIX_ORDRE_ACHAT": "Prix ordre achat",
@@ -635,7 +636,6 @@
         "RESTAURATION_REUSSIE": "Restauration réussie !"
       },
       "DERNIERES_EXECUTIONS_BATCHS": {
-
       },
       "ML": {
         "NOMBRE_TENSEURS": "Tenseurs",

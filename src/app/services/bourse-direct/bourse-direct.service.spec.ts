@@ -37,7 +37,6 @@ describe('BourseDirectService', () => {
   it('given un ticker when #chargerCotationsTicker then on doit récupérer les cotations pour le ticker', async () => {
     const promiseDTOCotations: Promise<DTOCotations> = firstValueFrom(service.chargerCotationsTicker(VALEUR.ticker));
     const dto = await promiseDTOCotations;
-    console.log(dto);
     expect(dto.ticker).toBe(VALEUR.ticker);
   });
 });

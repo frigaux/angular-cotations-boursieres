@@ -2,6 +2,7 @@ import {ComponentFixture, TestBed} from '@angular/core/testing';
 
 import {TableauCotationsComponent} from './tableau-cotations.component';
 import {TranslateModule} from '@ngx-translate/core';
+import {DatePipe} from '@angular/common';
 
 describe('TableauCotationsComponent', () => {
   let component: TableauCotationsComponent;
@@ -9,8 +10,13 @@ describe('TableauCotationsComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [TableauCotationsComponent,
-        TranslateModule.forRoot({})]
+      imports: [
+        TableauCotationsComponent,
+        TranslateModule.forRoot({})
+      ],
+      providers: [
+        DatePipe
+      ]
     })
       .compileComponents();
 

@@ -3,7 +3,7 @@
     <thead>
     <th> {{ 'COMPOSANTS.BOURSICOTAGE.TABLEAU_COTATIONS.TICKER' | translate }}</th>
     <th> {{ 'COMPOSANTS.BOURSICOTAGE.TABLEAU_COTATIONS.VALEUR' | translate }}</th>
-    <th> {{ 'COMPOSANTS.BOURSICOTAGE.TABLEAU_COTATIONS.SEUIL_COURS' | translate }}</th>
+    <th> {{ 'COMPOSANTS.BOURSICOTAGE.TABLEAU_COTATIONS.SEUIL' | translate }}</th>
     <th> {{ 'COMPOSANTS.BOURSICOTAGE.TABLEAU_COTATIONS.COURS' | translate }}</th>
     <th> {{ 'COMPOSANTS.BOURSICOTAGE.TABLEAU_COTATIONS.JAUGE' | translate }}</th>
     <th> {{ 'COMPOSANTS.BOURSICOTAGE.TABLEAU_COTATIONS.VARIATION_COURS' | translate }}</th>
@@ -35,11 +35,12 @@
             {{ cotation.valeur.ticker }}
           </td>
           <td>
-            {{ cotation.valeur.libelle }}
+            <a href="https://www.abcbourse.com/cotation/{{cotation.valeur.ticker}}p" target="_blank">{{ cotation.valeur.libelle }}</a>
           </td>
           <td>
             <p-inputNumber [(ngModel)]="cotation.seuilCours" size="small"
-                           [inputSize]="8" mode="decimal" [maxlength]="8" [maxFractionDigits]="3"/>
+                           [inputSize]="8" mode="decimal" [maxlength]="8" [maxFractionDigits]="3"
+                           [pTooltip]="'COMPOSANTS.BOURSICOTAGE.TABLEAU_COTATIONS.SEUIL_COURS' | translate"/>
           </td>
           <td [ngClass]="{'alerte':cotation.notifierSeuilCours}">
             @if (cotation.cotations.length > 0) {

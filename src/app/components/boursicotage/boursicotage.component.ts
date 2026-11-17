@@ -12,11 +12,12 @@ import {EtapeValeurUtil} from '../valeurs/achats-valeur/etape-valeur-util.class'
 import {EtapeValeur} from '../valeurs/achats-valeur/etape-valeur.enum';
 import {ValeursService} from '../../services/valeurs/valeurs.service';
 import {DTOAchatsTicker} from '../../services/valeurs/dto-achats-ticker.interface';
-import {YahooService} from '../../services/yahoo/yahoo.service';
 import {DTOCotations} from '../../services/yahoo/dto-cotations.interface';
 import {DTOValeur} from '../../services/valeurs/dto-valeur.interface';
 import {CotationsDecorees} from './cotations-decorees.class';
 import {DatePipe} from '@angular/common';
+import {BourseDirectService} from '../../services/bourse-direct/bourse-direct.service';
+import {Tooltip} from 'primeng/tooltip';
 
 @Component({
   selector: 'app-boursicotage',
@@ -29,7 +30,8 @@ import {DatePipe} from '@angular/common';
     Select,
     LoaderComponent,
     TableauCotationsComponent,
-    DatePipe
+    DatePipe,
+    Tooltip
   ],
   templateUrl: './boursicotage.component.html',
   styleUrl: './boursicotage.component.sass',
@@ -57,7 +59,7 @@ export class BoursicotageComponent implements OnInit {
 
   constructor(private portefeuillesService: PortefeuillesService,
               private valeursService: ValeursService,
-              private yahooService: YahooService) {
+              private bourseDirectService: BourseDirectService) {
   }
 
   ngOnInit(): void {
@@ -129,11 +131,11 @@ export class BoursicotageComponent implements OnInit {
     let nextTicker = tickers.next();
     if (!nextTicker.done) {
       const ticker = nextTicker.value;
-      this.yahooService.chargerCotationsTicker(ticker).subscribe({
+      this.bourseDirectService.chargerCotationsTicker(ticker).subscribe({
         error: httpErrorResponse => {
           this.appelsSuccessifs(tickers, cotationsByTicker);
         },
-        next: dto => {
+        next: dto => {console.log(ticker, dto);
           cotationsByTicker.set(ticker, dto);
           setTimeout(() => this.appelsSuccessifs(tickers, cotationsByTicker), Math.floor(100 + Math.random() * 400));
         }

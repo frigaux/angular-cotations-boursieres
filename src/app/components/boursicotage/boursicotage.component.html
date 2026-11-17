@@ -12,7 +12,7 @@
         <label for="portefeuille">{{ 'COMPOSANTS.BOURSICOTAGE.PORTEFEUILLE' | translate }}</label>
       </p-floatlabel>
     </div>
-    <div [title]="'COMPOSANTS.BOURSICOTAGE.DELAI_RAFRAICHISSEMENT' | translate">
+    <div [pTooltip]="'COMPOSANTS.BOURSICOTAGE.DELAI_RAFRAICHISSEMENT' | translate">
       <p-floatlabel>
         <p-inputNumber [(ngModel)]="delaiRafraichissement" inputId="delai" required
                        [inputSize]="3" mode="decimal" [maxlength]="2" [maxFractionDigits]="0" [min]="1" [max]="99"
@@ -20,16 +20,16 @@
         <label for="delai">{{ 'COMPOSANTS.BOURSICOTAGE.DELAI' | translate }}</label>
       </p-floatlabel>
     </div>
-    <div [title]="'COMPOSANTS.BOURSICOTAGE.SEUIL_VARIATION' | translate">
+    <div [pTooltip]="'COMPOSANTS.BOURSICOTAGE.SEUIL_VARIATION' | translate">
       <p-floatlabel>
         <p-inputNumber [(ngModel)]="seuilVariation" inputId="seuilVariation" required
                        [inputSize]="3" mode="decimal" [maxlength]="3" [maxFractionDigits]="1" [min]="0.1" [max]="9.9"/>
-        <label for="seuilVariation">{{ 'COMPOSANTS.BOURSICOTAGE.VARIATION' | translate }}</label>
+        <label for="seuilVariation">{{ 'COMPOSANTS.BOURSICOTAGE.SEUIL' | translate }}</label>
       </p-floatlabel>
     </div>
     @if (dateRafraichissement) {
       <div>
-        {{ 'COMPOSANTS.BOURSICOTAGE.MESSAGE_RAFRAICHISSEMENT' | translate : {heure: dateRafraichissement | date: 'HH:mm:ss'} }}
+        {{ 'COMPOSANTS.BOURSICOTAGE.MESSAGE_RAFRAICHISSEMENT' | translate : {heure: dateRafraichissement | date: "HH':'mm"} }}
       </div>
     }
   </div>

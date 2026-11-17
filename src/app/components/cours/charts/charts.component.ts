@@ -28,14 +28,17 @@ export class ChartsComponent {
   inputCours: InputSignal<Cours | undefined> = input(undefined,
     {transform: o => this.intercepteurCours(o), alias: 'cours'});
 
-  cours: Cours | undefined;
-
   // données pour la vue
+  protected cours: Cours | undefined;
+
   // https://www.chartjs.org/
-  data: any;
-  options: any;
-  periodes: number[] = [];
-  periodeSelectionnee: number = 50;
+  protected data: any;
+  protected options: any;
+  protected periodes: number[] = [];
+  protected periodeSelectionnee: number = 50;
+
+  // private
+  private numberFormatToCurrency = new Intl.NumberFormat('fr-FR', {style: 'currency', currency: 'EUR'});
 
   constructor(private translateService: TranslateService,
               private valeursService: ValeursService,
@@ -90,8 +93,7 @@ export class ChartsComponent {
 
   private wrapOptions() {
     const formatPercent: Function = (value: number) => this.percentPipe.transform(value, '1.2-2');
-    const numberFormat = new Intl.NumberFormat('fr-FR', {style: 'currency', currency: 'EUR'});
-    const formatCurrency: Function = (value: number) => numberFormat.format(value);
+    const formatCurrency: Function = (value: number) => this.numberFormatToCurrency.format(value);
     const cloture: number = this.cours!.cloture;
     const titleCours = this.translateService.instant('COMPOSANTS.COURS.CHARTS.TITLE_COURS');
     const titleMM = this.translateService.instant('COMPOSANTS.COURS.CHARTS.TITLE_MM');

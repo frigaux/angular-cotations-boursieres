@@ -16,6 +16,8 @@ export class CotationsValeurBoursoramaDecore {
   coursDataChartLine: any;
   coursOptionsChartLine: any; // https://www.chartjs.org/
 
+  private numberFormatToCurrency = new Intl.NumberFormat('fr-FR', {style: 'currency', currency: 'EUR'});
+
   constructor(private translateService: TranslateService,
               id: number, dto: DTOInformationsTickerBoursorama,
               dividendes: Array<DTODividende> | undefined) {
@@ -112,6 +114,7 @@ export class CotationsValeurBoursoramaDecore {
   }
 
   private wrapCoursOptionsChartLine() {
+    const formatCurrency: Function = (value: number) => this.numberFormatToCurrency.format(value);
     return {
       scales: {
         x: {
@@ -122,7 +125,7 @@ export class CotationsValeurBoursoramaDecore {
         y: {
           ticks: {
             callback: function (value: number) {
-              return new Intl.NumberFormat('fr-FR', {style: 'currency', currency: 'EUR'}).format(value);
+              return formatCurrency(value);
             }
           }
         }
@@ -137,7 +140,7 @@ export class CotationsValeurBoursoramaDecore {
               return context[0].label;
             },
             label: function (context: any) {
-              return new Intl.NumberFormat('fr-FR', {style: 'currency', currency: 'EUR'}).format(context.parsed.y);
+              return formatCurrency(context.parsed.y);
             }
           }
         }

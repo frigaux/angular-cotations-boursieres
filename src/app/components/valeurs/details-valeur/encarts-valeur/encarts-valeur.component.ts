@@ -31,10 +31,10 @@ export class EncartsValeurComponent {
   croissant: boolean = true;
 
   // privé
-  private currencyFormatter: Intl.NumberFormat;
+  private numberFormatToCurrency = new Intl.NumberFormat('fr-FR', {style: 'currency', currency: 'EUR'});
+
 
   constructor(private translateService: TranslateService) {
-    this.currencyFormatter = new Intl.NumberFormat('fr-FR', {style: 'currency', currency: 'EUR'});
   }
 
   private intercepteurCours(cours: Cours | undefined) {
@@ -59,7 +59,7 @@ export class EncartsValeurComponent {
   addItem(translateService: TranslateService, keyTranslate: string, cours: number): void {
     this.timelineItems.push({
       libelle: translateService.instant(`COMPOSANTS.VALEURS.DETAILS_VALEUR.ENCARTS_VALEUR.${keyTranslate}`),
-      cours: this.currencyFormatter.format(cours)
+      cours: this.numberFormatToCurrency.format(cours)
     });
   }
 }

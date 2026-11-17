@@ -1,13 +1,14 @@
-import {Component, Inject, input, InputSignal, LOCALE_ID} from '@angular/core';
+import {Component, input, InputSignal} from '@angular/core';
 import {EtapeValeur} from '../../valeurs/achats-valeur/etape-valeur.enum';
 import {CotationsDecorees} from '../cotations-decorees.class';
-import {CurrencyPipe, DecimalPipe, formatCurrency, formatDate, NgClass, PercentPipe} from '@angular/common';
+import {CurrencyPipe, DatePipe, DecimalPipe, NgClass, PercentPipe} from '@angular/common';
 import {ClassVariation} from '../../../directives/class-variation';
 import {TranslatePipe, TranslateService} from '@ngx-translate/core';
 import {FormsModule} from '@angular/forms';
 import {InputNumber} from 'primeng/inputnumber';
 import {JaugeComponent} from '../../commun/jauge/jauge.component';
 import {DTOCotations} from '../../../services/yahoo/dto-cotations.interface';
+import {Tooltip} from 'primeng/tooltip';
 
 @Component({
   selector: 'app-tableau-cotations',
@@ -20,7 +21,8 @@ import {DTOCotations} from '../../../services/yahoo/dto-cotations.interface';
     FormsModule,
     InputNumber,
     JaugeComponent,
-    NgClass
+    NgClass,
+    Tooltip
   ],
   templateUrl: './tableau-cotations.component.html',
   styleUrl: './tableau-cotations.component.sass',
@@ -41,8 +43,12 @@ export class TableauCotationsComponent {
   protected etape?: EtapeValeur;
   protected seuilVariation?: number;
 
+  // private
+  private numberFormatToCurrency = new Intl.NumberFormat('fr-FR', {style: 'currency', currency: 'EUR'});
+  private formatCurrency: Function = (value: number) => this.numberFormatToCurrency.format(value);
+
   constructor(private translateService: TranslateService,
-              @Inject(LOCALE_ID) private locale: string) {
+              private datepipe: DatePipe) {
   }
 
   private intercepteurDTO(dto: {
@@ -105,19 +111,19 @@ export class TableauCotationsComponent {
         if (c1.cours <= cotationsDecorees.seuilCours && cotationsDecorees.seuilCours <= c2.cours) {
           cotationsDecorees.notifierSeuilCours = true;
           this.translateService.instant('COMPOSANTS.BOURSICOTAGE.TABLEAU_COTATIONS.COURS_HAUSSE',
-            {'cours': formatCurrency(c2.cours, this.locale, 'EUR'), 'heure': this.heureCourante()});
+            {'cours': this.formatCurrency(c2.cours), 'heure': this.heureCourante()});
         }
         if (c2.cours <= cotationsDecorees.seuilCours && cotationsDecorees.seuilCours <= c1.cours) {
           cotationsDecorees.notifierSeuilCours = true;
           this.translateService.instant('COMPOSANTS.BOURSICOTAGE.TABLEAU_COTATIONS.COURS_BAISSE',
-            {'cours': formatCurrency(c2.cours, this.locale, 'EUR'), 'heure': this.heureCourante()});
+            {'cours': this.formatCurrency(c2.cours), 'heure': this.heureCourante()});
         }
       }
     }
   }
 
   private heureCourante(): string {
-    return formatDate(new Date(), 'HH:mm:ss', this.locale);
+    return this.datepipe.transform(new Date(), 'HH:mm:ss')!;
   }
 
   private calculerVariationAchat(cotationsDecorees: CotationsDecorees) {

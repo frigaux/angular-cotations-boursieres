@@ -3,7 +3,7 @@
     <span>{{ plusBas  | currency:'EUR':'symbol' }}</span>
     <span>{{ plusHaut  | currency:'EUR':'symbol' }}</span>
   </div>
-  <div class="jauge">
+  <div class="jauge" [pTooltip]="tooltip">
     @if (pourcentage) {
       <div class="pourcentage"
            [ngClass]="{'rouge': pourcentage < 50, 'vert': pourcentage >= 50}"

@@ -1,11 +1,13 @@
 import {Component, input, InputSignal} from '@angular/core';
 import {CurrencyPipe, NgClass} from '@angular/common';
+import {Tooltip} from 'primeng/tooltip';
 
 @Component({
   selector: 'app-jauge',
   imports: [
     NgClass,
-    CurrencyPipe
+    CurrencyPipe,
+    Tooltip
   ],
   templateUrl: './jauge.component.html',
   styleUrl: './jauge.component.sass'
@@ -23,17 +25,24 @@ export class JaugeComponent {
   plusBas?: number;
   plusHaut?: number;
   pourcentage?: number;
+  tooltip?: string;
+
+  // private
+  private numberFormatToCurrency = new Intl.NumberFormat('fr-FR', {style: 'currency', currency: 'EUR'});
+  private formatCurrency: Function = (value: number) => this.numberFormatToCurrency.format(value);
 
   private intercepteurDonnees(donnees: { cours: number; plusBas: number; plusHaut: number } | undefined) {
     if (donnees) {
       this.cours = donnees.cours;
       this.plusBas = donnees.plusBas;
       this.plusHaut = donnees.plusHaut;
+      this.tooltip = `${this.formatCurrency(this.plusBas)} - ${this.formatCurrency(this.plusHaut)}`;
       this.pourcentage = Math.round(100 * (this.cours - this.plusBas) / (this.plusHaut - this.plusBas));
     } else {
       this.cours = undefined;
       this.plusBas = undefined;
       this.plusHaut = undefined;
+      this.tooltip = undefined;
       this.pourcentage = undefined;
     }
     return donnees;
