@@ -1,53 +1,53 @@
 @if (cotations && cotations.length > 0) {
   <table [ngClass]="{'portefeuille':etape === undefined}">
     <thead>
-    <th> {{ 'COMPOSANTS.BOURSICOTAGE.TABLEAU_COTATIONS.TICKER' | translate }}</th>
-    <th> {{ 'COMPOSANTS.BOURSICOTAGE.TABLEAU_COTATIONS.VALEUR' | translate }}</th>
-    <th> {{ 'COMPOSANTS.BOURSICOTAGE.TABLEAU_COTATIONS.SEUIL' | translate }}</th>
-    <th> {{ 'COMPOSANTS.BOURSICOTAGE.TABLEAU_COTATIONS.COURS' | translate }}</th>
-    <th> {{ 'COMPOSANTS.BOURSICOTAGE.TABLEAU_COTATIONS.JAUGE' | translate }}</th>
-    <th> {{ 'COMPOSANTS.BOURSICOTAGE.TABLEAU_COTATIONS.VARIATION_COURS' | translate }}</th>
+    <th class="ticker"> {{ 'COMPOSANTS.BOURSICOTAGE.TABLEAU_COTATIONS.TICKER' | translate }}</th>
+    <th class="valeur"> {{ 'COMPOSANTS.BOURSICOTAGE.TABLEAU_COTATIONS.VALEUR' | translate }}</th>
+    <th class="seuil"> {{ 'COMPOSANTS.BOURSICOTAGE.TABLEAU_COTATIONS.SEUIL' | translate }}</th>
+    <th class="nombre"> {{ 'COMPOSANTS.BOURSICOTAGE.TABLEAU_COTATIONS.COURS' | translate }}</th>
+    <th class="jauge"> {{ 'COMPOSANTS.BOURSICOTAGE.TABLEAU_COTATIONS.JAUGE' | translate }}</th>
+    <th class="nombre"> {{ 'COMPOSANTS.BOURSICOTAGE.TABLEAU_COTATIONS.VARIATION_PRECEDENT' | translate }}</th>
+    <th class="nombre"> {{ 'COMPOSANTS.BOURSICOTAGE.TABLEAU_COTATIONS.VARIATION_OUVERTURE' | translate }}</th>
       @switch (etape) {
         @case (EtapeValeur.ORDRE_ACHAT) {
-          <th> {{ 'COMPOSANTS.BOURSICOTAGE.TABLEAU_COTATIONS.PRIX_ORDRE_ACHAT' | translate }}</th>
-          <th> {{ 'COMPOSANTS.BOURSICOTAGE.TABLEAU_COTATIONS.VARIATION_ORDRE' | translate }}</th>
+          <th class="nombre"> {{ 'COMPOSANTS.BOURSICOTAGE.TABLEAU_COTATIONS.PRIX_ORDRE_ACHAT' | translate }}</th>
+          <th class="nombre"> {{ 'COMPOSANTS.BOURSICOTAGE.TABLEAU_COTATIONS.VARIATION_ORDRE_ACHAT' | translate }}</th>
         }
         @case (EtapeValeur.ACHAT) {
-          <th> {{ 'COMPOSANTS.BOURSICOTAGE.TABLEAU_COTATIONS.PRIX_ACHAT' | translate }}</th>
-          <th> {{ 'COMPOSANTS.BOURSICOTAGE.TABLEAU_COTATIONS.VARIATION_ACHAT' | translate }}</th>
+          <th class="nombre"> {{ 'COMPOSANTS.BOURSICOTAGE.TABLEAU_COTATIONS.PRIX_ACHAT' | translate }}</th>
+          <th class="nombre"> {{ 'COMPOSANTS.BOURSICOTAGE.TABLEAU_COTATIONS.VARIATION_ACHAT' | translate }}</th>
         }
         @case (EtapeValeur.ORDRE_VENTE) {
-          <th> {{ 'COMPOSANTS.BOURSICOTAGE.TABLEAU_COTATIONS.PRIX_REVENTE' | translate }}</th>
-          <th> {{ 'COMPOSANTS.BOURSICOTAGE.TABLEAU_COTATIONS.VARIATION_REVENTE' | translate }}</th>
+          <th class="nombre"> {{ 'COMPOSANTS.BOURSICOTAGE.TABLEAU_COTATIONS.PRIX_REVENTE' | translate }}</th>
+          <th class="nombre"> {{ 'COMPOSANTS.BOURSICOTAGE.TABLEAU_COTATIONS.VARIATION_REVENTE' | translate }}</th>
         }
         @default {
-          <th></th>
-          <th></th>
+          <th class="nombre"></th>
+          <th class="nombre"></th>
         }
       }
-    <th> {{ 'COMPOSANTS.BOURSICOTAGE.TABLEAU_COTATIONS.VOLUME' | translate }}</th>
-    <th> {{ 'COMPOSANTS.BOURSICOTAGE.TABLEAU_COTATIONS.NOTIFICATIONS' | translate }}</th>
+    <th class="notifications"> {{ 'COMPOSANTS.BOURSICOTAGE.TABLEAU_COTATIONS.NOTIFICATIONS' | translate }}</th>
     </thead>
     <tbody>
       @for (cotation of cotations; track cotation) {
         <tr>
-          <td>
+          <td class="ticker">
             {{ cotation.valeur.ticker }}
           </td>
-          <td>
+          <td class="valeur">
             <a href="https://www.abcbourse.com/cotation/{{cotation.valeur.ticker}}p" target="_blank">{{ cotation.valeur.libelle }}</a>
           </td>
-          <td>
+          <td class="seuil">
             <p-inputNumber [(ngModel)]="cotation.seuilCours" size="small"
                            [inputSize]="8" mode="decimal" [maxlength]="8" [maxFractionDigits]="3"
                            [pTooltip]="'COMPOSANTS.BOURSICOTAGE.TABLEAU_COTATIONS.SEUIL_COURS' | translate"/>
           </td>
-          <td [ngClass]="{'alerte':cotation.notifierSeuilCours}">
+          <td class="nombre" [ngClass]="{'alerte':cotation.notifierSeuilCours}">
             @if (cotation.cotations.length > 0) {
               {{ cotation.cotations[cotation.cotations.length - 1].cours | currency:'EUR':'symbol' }}
             }
           </td>
-          <td>
+          <td class="jauge">
             @if (cotation.cotations.length > 0) {
               <app-jauge
                 [tailleReduite]="true"
@@ -58,26 +58,24 @@
               }"></app-jauge>
             }
           </td>
-          <td [appClassVariation]="cotation.variationDernierCours"
-              [ngClass]="{'alerte':cotation.notifierVariationDernierCours}">
-            {{ cotation.variationDernierCours | percent:'1.2-2' }}
+          <td class="nombre" [appClassVariation]="cotation.variationPrecedent"
+              [ngClass]="{'alerte':cotation.notifierVariationPrecedent}">
+            {{ cotation.variationPrecedent | percent:'1.2-2' }}
           </td>
-          <td>
+          <td class="nombre" [appClassVariation]="cotation.variationOuverture">
+            {{ cotation.variationOuverture | percent:'1.2-2' }}
+          </td>
+          <td class="nombre">
             @if (etape == EtapeValeur.ORDRE_VENTE) {
               {{ cotation.achat!.prixRevente  | currency:'EUR':'symbol' }}
             } @else if (etape == EtapeValeur.ACHAT || etape == EtapeValeur.ORDRE_ACHAT) {
               {{ cotation.achat!.prix  | currency:'EUR':'symbol' }}
             }
           </td>
-          <td [appClassVariation]="cotation.variationAchat">
+          <td class="nombre" [appClassVariation]="cotation.variationAchat">
             {{ cotation.variationAchat | percent:'1.2-2' }}
           </td>
-          <td>
-            @if (cotation.cotations.length > 0) {
-              {{ cotation.cotations[cotation.cotations.length - 1].volume | number }}
-            }
-          </td>
-          <td>
+          <td class="notifications">
             @for (notification of cotation.notifications; track notification) {
               <div>{{ notification }}</div>
             }

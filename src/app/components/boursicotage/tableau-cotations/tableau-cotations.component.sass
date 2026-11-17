@@ -55,43 +55,27 @@ thead
     font-weight: bold
     border-bottom: 1px solid var(--p-tabs-tablist-border-color)
 
-  th:nth-child(1)
+  th.ticker
     width: 5rem
     text-align: left
 
-  th:nth-child(2)
+  th.valeur
     width: 15rem
     text-align: left
 
-  th:nth-child(3)
+  th.seuil
     width: 5rem
     text-align: center
 
-  th:nth-child(4)
-    width: 5rem
-    text-align: right
-
-  th:nth-child(5)
-    width: 10rem
-    text-align: center
-
-  th:nth-child(6)
-    width: 9rem
-    text-align: right
-
-  th:nth-child(7)
-    width: 9rem
-    text-align: right
-
-  th:nth-child(8)
-    width: 10rem
-    text-align: right
-
-  th:nth-child(9)
+  th.nombre
     width: 6rem
     text-align: right
 
-  th:nth-child(10)
+  th.jauge
+    width: 10rem
+    text-align: center
+
+  th.notifications
     text-align: left
 
 tbody
@@ -110,16 +94,16 @@ tbody
     --p-inputtext-sm-padding-x: 0.1rem
     --p-inputtext-sm-padding-y: 0.1rem
 
-  td:nth-child(1), td:nth-child(2), td:nth-child(10)
+  td.ticker, td.valeur, td.notifications
     text-align: left
 
-  td:nth-child(4), td:nth-child(6), td:nth-child(7), td:nth-child(8), td:nth-child(9)
+  td.nombre
     text-align: right
 
-  td:nth-child(5), td:nth-child(3)
+  td.jauge, td.seuil
     text-align: center
 
-  td:nth-child(10)
+  td.notifications
     div
       color: var(--p-red-600)
       background-color: var(--p-red-200)

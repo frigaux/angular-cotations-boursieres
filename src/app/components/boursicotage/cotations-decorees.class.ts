@@ -1,14 +1,15 @@
-import {DTOCotations} from '../../services/yahoo/dto-cotations.interface';
 import {DTOValeur} from '../../services/valeurs/dto-valeur.interface';
 import {DTOAchat} from '../../services/valeurs/dto-achat.interface';
+import {DTOCotations} from '../../services/bourse-direct/dto-cotations.interface';
 
 export class CotationsDecorees {
   valeur: DTOValeur;
   achat?: DTOAchat;
   variationAchat?: number;
   cotations: DTOCotations[];
-  variationDernierCours?: number;
-  notifierVariationDernierCours: boolean;
+  variationPrecedent?: number;
+  notifierVariationPrecedent: boolean;
+  variationOuverture?: number;
   seuilCours?: number;
   notifierSeuilCours: boolean;
   notifications: string[];
@@ -17,7 +18,7 @@ export class CotationsDecorees {
     this.valeur = valeur;
     this.achat = achat;
     this.cotations = [];
-    this.notifierVariationDernierCours = false;
+    this.notifierVariationPrecedent = false;
     this.notifierSeuilCours = false;
     this.notifications = [];
   }

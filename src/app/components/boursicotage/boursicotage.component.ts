@@ -12,12 +12,12 @@ import {EtapeValeurUtil} from '../valeurs/achats-valeur/etape-valeur-util.class'
 import {EtapeValeur} from '../valeurs/achats-valeur/etape-valeur.enum';
 import {ValeursService} from '../../services/valeurs/valeurs.service';
 import {DTOAchatsTicker} from '../../services/valeurs/dto-achats-ticker.interface';
-import {DTOCotations} from '../../services/yahoo/dto-cotations.interface';
 import {DTOValeur} from '../../services/valeurs/dto-valeur.interface';
 import {CotationsDecorees} from './cotations-decorees.class';
 import {DatePipe} from '@angular/common';
 import {BourseDirectService} from '../../services/bourse-direct/bourse-direct.service';
 import {Tooltip} from 'primeng/tooltip';
+import {DTOCotations} from '../../services/bourse-direct/dto-cotations.interface';
 
 @Component({
   selector: 'app-boursicotage',
@@ -135,7 +135,7 @@ export class BoursicotageComponent implements OnInit {
         error: httpErrorResponse => {
           this.appelsSuccessifs(tickers, cotationsByTicker);
         },
-        next: dto => {console.log(ticker, dto);
+        next: dto => {
           cotationsByTicker.set(ticker, dto);
           setTimeout(() => this.appelsSuccessifs(tickers, cotationsByTicker), Math.floor(100 + Math.random() * 400));
         }
