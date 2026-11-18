@@ -75,6 +75,7 @@ export class CoursService {
     );
   }
 
+  // TODO : remplacer les tickers: Array<string> par tickers: Set<string>
   public chargerCoursTickersWithLimit(tickers: Array<string>, limit: number): Observable<DTOCoursAvecListeAllege[]> {
     if (tickers.length > 0) {
       const liste: string = tickers.reduce((t1, t2) => t1 + ',' + t2);

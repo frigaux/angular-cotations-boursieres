@@ -4,8 +4,7 @@ import {BourseDirectService} from './bourse-direct.service';
 import {HttpInterceptorFn, provideHttpClient, withInterceptors} from '@angular/common/http';
 import {TranslateModule} from '@ngx-translate/core';
 import {BoursoramaService} from '../boursorama/boursorama.service';
-import {VALEUR, VALEURS} from '../jdd/jdd-valeurs.dataset';
-import {DTOCours} from '../cours/dto-cours.interface';
+import {VALEUR} from '../jdd/jdd-valeurs.dataset';
 import {firstValueFrom} from 'rxjs';
 import {DTOCotations} from '../yahoo/dto-cotations.interface';
 

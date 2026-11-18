@@ -9,6 +9,7 @@ import {InputNumber} from 'primeng/inputnumber';
 import {JaugeComponent} from '../../commun/jauge/jauge.component';
 import {Tooltip} from 'primeng/tooltip';
 import {DTOCotations} from '../../../services/bourse-direct/dto-cotations.interface';
+import {BoursicotageComponent} from '../boursicotage.component';
 
 @Component({
   selector: 'app-tableau-cotations',
@@ -41,6 +42,7 @@ export class TableauCotationsComponent {
   protected cotations?: CotationsDecorees[];
   protected etape?: EtapeValeur;
   protected seuilVariation?: number;
+  protected readonly BoursicotageComponent = BoursicotageComponent;
 
   // private
   private numberFormatToCurrency = new Intl.NumberFormat('fr-FR', {style: 'currency', currency: 'EUR'});
@@ -56,9 +58,11 @@ export class TableauCotationsComponent {
     seuilVariation: number
   } | undefined) {
     if (dto) {
-      this.cotations = dto.cotations;
+      this.cotations = dto.cotations
+        .sort((c1, c2) => c1.valeur.libelle.localeCompare(c2.valeur.libelle));
       this.etape = dto.etape;
       this.seuilVariation = dto.seuilVariation;
+      this.calculerJaugePeriode();
     } else {
       this.cotations = undefined;
       this.etape = undefined;
@@ -89,7 +93,9 @@ export class TableauCotationsComponent {
       this.calculerVariationCours(cotationsDecorees);
       this.calculerVariationAchat(cotationsDecorees);
       this.notificationsVariation(cotationsDecorees);
+      this.iconeVariationPrecedent(cotationsDecorees);
       this.notificationsCours(cotationsDecorees);
+      console.log(cotationsDecorees);
     });
   }
 
@@ -140,6 +146,20 @@ export class TableauCotationsComponent {
     }
   }
 
+  public iconeVariationPrecedent(cotationsDecorees: CotationsDecorees) {
+    if (cotationsDecorees.variationPrecedent !== undefined) {
+      if (cotationsDecorees.variationPrecedent == 0) {
+        cotationsDecorees.iconeVariationPrecedent = 'pi-arrow-circle-right';
+      } else if (cotationsDecorees.variationPrecedent > 0) {
+        cotationsDecorees.iconeVariationPrecedent = 'pi-arrow-circle-up';
+      } else {
+        cotationsDecorees.iconeVariationPrecedent = 'pi-arrow-circle-down';
+      }
+    } else {
+      cotationsDecorees.iconeVariationPrecedent = '';
+    }
+  }
+
   private heureCourante(): string {
     return this.datepipe.transform(new Date(), 'HH:mm:ss')!;
   }
@@ -160,5 +180,25 @@ export class TableauCotationsComponent {
           break;
       }
     }
+  }
+
+  private calculerJaugePeriode() {
+    this.cotations?.forEach((cotationsDecorees) => {
+      if (cotationsDecorees.cours && cotationsDecorees.cours.cours.length > 0) {
+        const liste = cotationsDecorees.cours.cours;
+        let plusBas = liste[0].cloture;
+        let plusHaut = liste[0].cloture;
+        liste.forEach((cours) => {
+          if (plusBas > cours.cloture) {
+            plusBas = cours.cloture;
+          }
+          if (plusHaut < cours.cloture) {
+            plusHaut = cours.cloture;
+          }
+        });
+        cotationsDecorees.plusBas = plusBas;
+        cotationsDecorees.plusHaut = plusHaut;
+      }
+    });
   }
 }

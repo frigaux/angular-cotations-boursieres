@@ -1,5 +1,5 @@
-import {Component, input, InputSignal} from '@angular/core';
-import {CurrencyPipe, NgClass} from '@angular/common';
+import {Component, inject, input, InputSignal} from '@angular/core';
+import {CurrencyPipe, NgClass, PercentPipe} from '@angular/common';
 import {Tooltip} from 'primeng/tooltip';
 
 @Component({
@@ -13,6 +13,8 @@ import {Tooltip} from 'primeng/tooltip';
   styleUrl: './jauge.component.sass'
 })
 export class JaugeComponent {
+  private percentPipe = inject(PercentPipe);
+
   // input/output
   inputTailleReduite: InputSignal<boolean | undefined> = input(undefined,
     {transform: o => this.intercepteurTailleReduite(o), alias: 'tailleReduite'});
@@ -33,10 +35,11 @@ export class JaugeComponent {
 
   private intercepteurDonnees(donnees: { cours: number; plusBas: number; plusHaut: number } | undefined) {
     if (donnees) {
+      this.corrigerDonnees(donnees);
       this.cours = donnees.cours;
       this.plusBas = donnees.plusBas;
       this.plusHaut = donnees.plusHaut;
-      this.tooltip = `${this.formatCurrency(this.plusBas)} - ${this.formatCurrency(this.plusHaut)}`;
+      this.tooltip = `${this.formatCurrency(this.plusBas)} - ${this.formatCurrency(this.plusHaut)} : ${this.percentPipe.transform((donnees.plusHaut - donnees.plusBas) / donnees.plusBas, '1.2-2')}`;
       this.pourcentage = Math.round(100 * (this.cours - this.plusBas) / (this.plusHaut - this.plusBas));
     } else {
       this.cours = undefined;
@@ -51,5 +54,14 @@ export class JaugeComponent {
   private intercepteurTailleReduite(tailleReduite?: boolean) {
     this.tailleReduite = tailleReduite ? tailleReduite : false;
     return tailleReduite;
+  }
+
+  private corrigerDonnees(donnees: { cours: number; plusBas: number; plusHaut: number }) {
+    if (donnees.cours < donnees.plusBas) {
+      donnees.plusBas = donnees.cours;
+    }
+    if (donnees.cours > donnees.plusHaut) {
+      donnees.plusHaut = donnees.cours;
+    }
   }
 }

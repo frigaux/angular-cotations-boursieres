@@ -49,7 +49,7 @@ export class Cours {
   }
 
   public iconeVariation(): string {
-    if (this.moyennesMobiles.length > 0) {
+    if (this.moyennesMobiles.length > 1) {
       if (this.moyennesMobiles[0] == this.moyennesMobiles[1]) {
         return 'pi-arrow-circle-right';
       } else if (this.moyennesMobiles[0] > this.moyennesMobiles[1]) {

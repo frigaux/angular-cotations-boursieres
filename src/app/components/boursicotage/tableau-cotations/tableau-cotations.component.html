@@ -5,24 +5,23 @@
     <th class="valeur"> {{ 'COMPOSANTS.BOURSICOTAGE.TABLEAU_COTATIONS.VALEUR' | translate }}</th>
     <th class="seuil"> {{ 'COMPOSANTS.BOURSICOTAGE.TABLEAU_COTATIONS.SEUIL' | translate }}</th>
     <th class="nombre"> {{ 'COMPOSANTS.BOURSICOTAGE.TABLEAU_COTATIONS.COURS' | translate }}</th>
-    <th class="jauge"> {{ 'COMPOSANTS.BOURSICOTAGE.TABLEAU_COTATIONS.JAUGE' | translate }}</th>
+    <th class="jauge"> {{ 'COMPOSANTS.BOURSICOTAGE.TABLEAU_COTATIONS.PLUS_BAS_PLUS_HAUT_JOUR' | translate }}</th>
     <th class="nombre"> {{ 'COMPOSANTS.BOURSICOTAGE.TABLEAU_COTATIONS.VARIATION_PRECEDENT' | translate }}</th>
     <th class="nombre"> {{ 'COMPOSANTS.BOURSICOTAGE.TABLEAU_COTATIONS.VARIATION_OUVERTURE' | translate }}</th>
+    <th
+      class="jauge"> {{ 'COMPOSANTS.BOURSICOTAGE.TABLEAU_COTATIONS.PLUS_BAS_PLUS_HAUT_PERIODE' | translate : {nbJour: BoursicotageComponent.NB_JOURS} }}
+    </th>
       @switch (etape) {
         @case (EtapeValeur.ORDRE_ACHAT) {
-          <th class="nombre"> {{ 'COMPOSANTS.BOURSICOTAGE.TABLEAU_COTATIONS.PRIX_ORDRE_ACHAT' | translate }}</th>
           <th class="nombre"> {{ 'COMPOSANTS.BOURSICOTAGE.TABLEAU_COTATIONS.VARIATION_ORDRE_ACHAT' | translate }}</th>
         }
         @case (EtapeValeur.ACHAT) {
-          <th class="nombre"> {{ 'COMPOSANTS.BOURSICOTAGE.TABLEAU_COTATIONS.PRIX_ACHAT' | translate }}</th>
           <th class="nombre"> {{ 'COMPOSANTS.BOURSICOTAGE.TABLEAU_COTATIONS.VARIATION_ACHAT' | translate }}</th>
         }
         @case (EtapeValeur.ORDRE_VENTE) {
-          <th class="nombre"> {{ 'COMPOSANTS.BOURSICOTAGE.TABLEAU_COTATIONS.PRIX_REVENTE' | translate }}</th>
           <th class="nombre"> {{ 'COMPOSANTS.BOURSICOTAGE.TABLEAU_COTATIONS.VARIATION_REVENTE' | translate }}</th>
         }
         @default {
-          <th class="nombre"></th>
           <th class="nombre"></th>
         }
       }
@@ -32,15 +31,17 @@
       @for (cotation of cotations; track cotation) {
         <tr>
           <td class="ticker">
-            {{ cotation.valeur.ticker }}
+            <span class="pi" [class]="cotation.iconeVariationPrecedent"></span>
+            <span>{{ cotation.valeur.ticker }}</span>
           </td>
           <td class="valeur">
-            <a href="https://www.abcbourse.com/cotation/{{cotation.valeur.ticker}}p" target="_blank">{{ cotation.valeur.libelle }}</a>
+            <a href="https://www.abcbourse.com/cotation/{{cotation.valeur.ticker}}p"
+               target="_blank">{{ cotation.valeur.libelle }}</a>
           </td>
           <td class="seuil">
             <p-inputNumber [(ngModel)]="cotation.seuilCours" size="small"
                            [inputSize]="8" mode="decimal" [maxlength]="8" [maxFractionDigits]="3"
-                           [pTooltip]="'COMPOSANTS.BOURSICOTAGE.TABLEAU_COTATIONS.SEUIL_COURS' | translate"/>
+                           [pTooltip]="'COMPOSANTS.BOURSICOTAGE.TABLEAU_COTATIONS.SEUIL_COURS' | translate"></p-inputNumber>
           </td>
           <td class="nombre" [ngClass]="{'alerte':cotation.notifierSeuilCours}">
             @if (cotation.cotations.length > 0) {
@@ -65,11 +66,15 @@
           <td class="nombre" [appClassVariation]="cotation.variationOuverture">
             {{ cotation.variationOuverture | percent:'1.2-2' }}
           </td>
-          <td class="nombre">
-            @if (etape == EtapeValeur.ORDRE_VENTE) {
-              {{ cotation.achat!.prixRevente  | currency:'EUR':'symbol' }}
-            } @else if (etape == EtapeValeur.ACHAT || etape == EtapeValeur.ORDRE_ACHAT) {
-              {{ cotation.achat!.prix  | currency:'EUR':'symbol' }}
+          <td class="jauge">
+            @if (cotation.plusBas && cotation.plusHaut && cotation.cotations.length > 0) {
+              <app-jauge
+                [tailleReduite]="true"
+                [donnees]="{
+                cours: cotation.cotations[cotation.cotations.length - 1].cours,
+                plusBas: cotation.plusBas,
+                plusHaut: cotation.plusHaut
+              }"></app-jauge>
             }
           </td>
           <td class="nombre" [appClassVariation]="cotation.variationAchat">

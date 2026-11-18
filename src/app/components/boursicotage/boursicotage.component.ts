@@ -18,6 +18,8 @@ import {DatePipe} from '@angular/common';
 import {BourseDirectService} from '../../services/bourse-direct/bourse-direct.service';
 import {Tooltip} from 'primeng/tooltip';
 import {DTOCotations} from '../../services/bourse-direct/dto-cotations.interface';
+import {CoursService} from '../../services/cours/cours.service';
+import {DTOCoursAvecListeAllege} from '../../services/cours/dto-cours-avec-liste-allege.interface';
 
 @Component({
   selector: 'app-boursicotage',
@@ -37,6 +39,8 @@ import {DTOCotations} from '../../services/bourse-direct/dto-cotations.interface
   styleUrl: './boursicotage.component.sass',
 })
 export class BoursicotageComponent implements OnInit {
+  public static readonly NB_JOURS = 300;
+
   // données pour la vue
   protected readonly EtapeValeur = EtapeValeur;
   loading: boolean = true; // chargement des cours depuis Boursorama
@@ -59,6 +63,7 @@ export class BoursicotageComponent implements OnInit {
 
   constructor(private portefeuillesService: PortefeuillesService,
               private valeursService: ValeursService,
+              private coursService: CoursService,
               private bourseDirectService: BourseDirectService) {
   }
 
@@ -71,7 +76,7 @@ export class BoursicotageComponent implements OnInit {
       this.cotationsOrdresAchats = this.cotationsDecorees(achats, EtapeValeur.ORDRE_ACHAT);
       this.cotationsAchats = this.cotationsDecorees(achats, EtapeValeur.ACHAT);
       this.cotationsOrdresVentes = this.cotationsDecorees(achats, EtapeValeur.ORDRE_VENTE);
-      this.loading = false;
+      this.chargerCoursTickersWithLimit();
       this.rafraichirCotations();
       this.programmerRafraichissementAutomatique();
     });
@@ -89,8 +94,19 @@ export class BoursicotageComponent implements OnInit {
   }
 
   protected selectionPortefeuille(event: SelectChangeEvent) {
-    this.cotationsPortefeuille = this.portefeuille?.tickers
-      .map(ticker => new CotationsDecorees(this.valeurByTicker!.get(ticker)!));
+    this.coursService.chargerCoursTickersWithLimit(this.portefeuille?.tickers || [], BoursicotageComponent.NB_JOURS)
+      .subscribe(liste => {
+        const coursByTicker = new Map<string, DTOCoursAvecListeAllege>();
+        liste.forEach(cours => coursByTicker!.set(cours.ticker, cours));
+        this.cotationsPortefeuille = this.portefeuille?.tickers
+          .map(ticker => {
+            const cotationsDecorees = new CotationsDecorees(this.valeurByTicker!.get(ticker)!);
+            cotationsDecorees.cours = coursByTicker.get(cotationsDecorees.valeur.ticker)
+            return cotationsDecorees;
+          });
+        this.rafraichirCotations();
+        this.programmerRafraichissementAutomatique();
+      });
   }
 
   protected selectionDelaiRafraichissement(event: Event) {
@@ -107,23 +123,14 @@ export class BoursicotageComponent implements OnInit {
   }
 
   private rafraichirCotations() {
-    if (this.cotationsOrdresAchats && this.cotationsAchats && this.cotationsOrdresVentes) {
-      const tickers = this.tickersDistincts();
-      const cotationsByTicker = new Map<string, DTOCotations>();
-      this.appelsSuccessifs(tickers.values(), cotationsByTicker);
-    }
+    const tickers = this.tickersDistincts([this.cotationsOrdresAchats, this.cotationsAchats, this.cotationsOrdresVentes, this.cotationsPortefeuille]);
+    const cotationsByTicker = new Map<string, DTOCotations>();
+    this.appelsSuccessifs(tickers.values(), cotationsByTicker);
   }
 
-  private tickersDistincts(): Set<string> {
+  private tickersDistincts(ll: (CotationsDecorees[] | undefined)[]): Set<string> {
     const resultat = new Set<string>();
-    if (this.cotationsOrdresAchats && this.cotationsAchats && this.cotationsOrdresVentes) {
-      this.cotationsOrdresAchats.forEach(cotations => resultat.add(cotations.valeur.ticker));
-      this.cotationsAchats.forEach(cotations => resultat.add(cotations.valeur.ticker));
-      this.cotationsOrdresVentes.forEach(cotations => resultat.add(cotations.valeur.ticker));
-      if (this.cotationsPortefeuille) {
-        this.cotationsPortefeuille.forEach(cotations => resultat.add(cotations.valeur.ticker));
-      }
-    }
+    ll.forEach(l => l?.forEach(cotations => resultat.add(cotations.valeur.ticker)));
     return resultat;
   }
 
@@ -133,7 +140,7 @@ export class BoursicotageComponent implements OnInit {
       const ticker = nextTicker.value;
       this.bourseDirectService.chargerCotationsTicker(ticker).subscribe({
         error: httpErrorResponse => {
-          this.appelsSuccessifs(tickers, cotationsByTicker);
+          setTimeout(() => this.appelsSuccessifs(tickers, cotationsByTicker), Math.floor(100 + Math.random() * 400));
         },
         next: dto => {
           cotationsByTicker.set(ticker, dto);
@@ -144,5 +151,22 @@ export class BoursicotageComponent implements OnInit {
       this.cotationsByTicker = cotationsByTicker;
       this.dateRafraichissement = new Date();
     }
+  }
+
+  private chargerCoursTickersWithLimit() {
+    const tickers = this.tickersDistincts([this.cotationsOrdresAchats, this.cotationsAchats, this.cotationsOrdresVentes]);
+    this.coursService.chargerCoursTickersWithLimit(Array.from(tickers), BoursicotageComponent.NB_JOURS)
+      .subscribe(liste => {
+        const coursByTicker = new Map<string, DTOCoursAvecListeAllege>();
+        liste.forEach(cours => coursByTicker!.set(cours.ticker, cours));
+        this.definirCours(this.cotationsOrdresAchats!, coursByTicker);
+        this.definirCours(this.cotationsAchats!, coursByTicker);
+        this.definirCours(this.cotationsOrdresVentes!, coursByTicker);
+        this.loading = false;
+      });
+  }
+
+  private definirCours(liste: CotationsDecorees[], coursByTicker: Map<string, DTOCoursAvecListeAllege>) {
+    liste.forEach(cotations => cotations.cours = coursByTicker.get(cotations.valeur.ticker));
   }
 }
