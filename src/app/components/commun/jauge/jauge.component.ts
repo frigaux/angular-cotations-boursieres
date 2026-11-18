@@ -7,7 +7,8 @@ import {Tooltip} from 'primeng/tooltip';
   imports: [
     NgClass,
     CurrencyPipe,
-    Tooltip
+    Tooltip,
+    PercentPipe
   ],
   templateUrl: './jauge.component.html',
   styleUrl: './jauge.component.sass'
@@ -27,6 +28,7 @@ export class JaugeComponent {
   plusBas?: number;
   plusHaut?: number;
   pourcentage?: number;
+  variationPlusBasPlusHaut?: number;
   tooltip?: string;
 
   // private
@@ -39,8 +41,9 @@ export class JaugeComponent {
       this.cours = donnees.cours;
       this.plusBas = donnees.plusBas;
       this.plusHaut = donnees.plusHaut;
-      this.tooltip = `${this.formatCurrency(this.plusBas)} - ${this.formatCurrency(this.plusHaut)} : ${this.percentPipe.transform((donnees.plusHaut - donnees.plusBas) / donnees.plusBas, '1.2-2')}`;
       this.pourcentage = Math.round(100 * (this.cours - this.plusBas) / (this.plusHaut - this.plusBas));
+      this.variationPlusBasPlusHaut = (donnees.plusHaut - donnees.plusBas) / donnees.plusBas;
+      this.tooltip = `${this.formatCurrency(this.plusBas)} - ${this.formatCurrency(this.plusHaut)}`;
     } else {
       this.cours = undefined;
       this.plusBas = undefined;

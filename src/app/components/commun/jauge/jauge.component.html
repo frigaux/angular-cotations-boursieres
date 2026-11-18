@@ -3,12 +3,18 @@
     <span>{{ plusBas  | currency:'EUR':'symbol' }}</span>
     <span>{{ plusHaut  | currency:'EUR':'symbol' }}</span>
   </div>
-  <div class="jauge" [pTooltip]="tooltip">
+  <div class="jauge" [pTooltip]="tailleReduite?tooltip:''">
     @if (pourcentage) {
       <div class="pourcentage"
            [ngClass]="{'rouge': pourcentage < 50, 'vert': pourcentage >= 50}"
            [style]="{ width: `${pourcentage}%` }"></div>
     }
-    <div class="valeur">{{ cours | currency:'EUR':'symbol' }}</div>
+    <div class="valeur">
+      @if (tailleReduite) {
+        {{ variationPlusBasPlusHaut | percent:'1.2-2' }}
+      } @else {
+        {{ cours | currency:'EUR':'symbol' }}
+      }
+    </div>
   </div>
 </div>
