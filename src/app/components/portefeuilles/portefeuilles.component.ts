@@ -252,7 +252,9 @@ export class PortefeuillesComponent implements OnInit, OnDestroy {
 
   public basculerAffichageCours(cours: CoursPortefeuille) {
     if (this.coursSelectionne === undefined || this.coursSelectionne.coursPortefeuille.ticker !== cours.ticker) {
-      this.coursSelectionne = {coursPortefeuille: cours, premier: false, dernier: false};
+      const portefeuilleAvecCours: PortefeuilleAvecCours = this.portefeuillesAvecCours[this.idxPortefeuilleCourant];
+      const idxCours = portefeuilleAvecCours.cours.indexOf(cours);
+      this.coursSelectionne = {coursPortefeuille: cours, premier: idxCours === 0, dernier: idxCours === portefeuilleAvecCours.cours.length - 1};
     } else {
       this.coursSelectionne = undefined;
     }
