@@ -72,7 +72,6 @@ import {DialogAproposComponent} from '../cours/dialog-apropos/dialog-apropos.com
     TabPanel,
     IconeVariation,
     DetailsValeurComponent,
-    DialogCotationsValeurComponent,
     Indicateurs,
     DialogAproposComponent
   ],
@@ -81,7 +80,6 @@ import {DialogAproposComponent} from '../cours/dialog-apropos/dialog-apropos.com
 })
 export class PortefeuillesComponent implements OnInit, OnDestroy {
   private actionsValeur = viewChild(PopoverActionsValeurComponent);
-  private dialogCoursTickerComponent = viewChild(DialogCotationsValeurComponent);
 
   // chargement des valeurs et cours
   loading: boolean = true;
