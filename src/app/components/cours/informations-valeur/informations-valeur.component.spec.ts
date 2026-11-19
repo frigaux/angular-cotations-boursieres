@@ -13,6 +13,7 @@ import {
   DTO_INFORMATIONS_TICKER_ABCBOURSE
 } from '../../../services/jdd/jdd-abcbourse.dataset';
 import {DTO_INFORMATIONS_TICKER_BOURSORAMA} from '../../../services/jdd/jdd-boursorama.dataset';
+import {PercentPipe} from '@angular/common';
 
 describe('InformationsValeurComponent', () => {
   let component: InformationsValeurComponent;
@@ -32,6 +33,7 @@ describe('InformationsValeurComponent', () => {
         {provide: BoursoramaService, useValue: mockBoursoramaService},
         {provide: AbcBourseService, useValue: mockAbcBourseService},
         {provide: ZoneBourseService, useValue: mockZoneBourseService},
+        PercentPipe,
         provideAnimations()
       ]
     })

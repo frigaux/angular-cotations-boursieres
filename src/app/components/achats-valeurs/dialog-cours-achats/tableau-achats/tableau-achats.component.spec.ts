@@ -2,6 +2,7 @@ import {ComponentFixture, TestBed} from '@angular/core/testing';
 
 import {TableauAchatsComponent} from './tableau-achats.component';
 import {TranslateModule} from '@ngx-translate/core';
+import {PercentPipe} from '@angular/common';
 
 describe('TableauAchatsComponent', () => {
   let component: TableauAchatsComponent;
@@ -13,7 +14,7 @@ describe('TableauAchatsComponent', () => {
         TableauAchatsComponent,
         TranslateModule.forRoot({})
       ],
-      providers: []
+      providers: [PercentPipe]
     })
       .compileComponents();
 

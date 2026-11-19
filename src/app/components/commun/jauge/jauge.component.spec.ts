@@ -3,6 +3,7 @@ import {By} from '@angular/platform-browser';
 
 import {JaugeComponent} from './jauge.component';
 import {TranslateModule} from '@ngx-translate/core';
+import {PercentPipe} from '@angular/common';
 
 // généré par Junie le 04/11/2025
 describe('JaugeComponent', () => {
@@ -14,7 +15,8 @@ describe('JaugeComponent', () => {
       imports: [
         JaugeComponent,
         TranslateModule.forRoot({})
-      ]
+      ],
+      providers: [PercentPipe]
     })
       .compileComponents();
 
@@ -29,7 +31,7 @@ describe('JaugeComponent', () => {
 
   it('should display translated min and max labels', () => {
     const donnees = {cours: 3, plusBas: 2, plusHaut: 5};
-    fixture.componentRef.setInput('donnees' , donnees);
+    fixture.componentRef.setInput('donnees', donnees);
     fixture.detectChanges();
 
     const labels = fixture.debugElement.queryAll(By.css('.libelles span'));
@@ -40,7 +42,7 @@ describe('JaugeComponent', () => {
 
   it('should render percentage bar with correct width and red class when < 50%', () => {
     const donnees = {cours: 5, plusBas: 4, plusHaut: 8};
-    fixture.componentRef.setInput('donnees' , donnees);
+    fixture.componentRef.setInput('donnees', donnees);
     fixture.detectChanges();
 
     const barDe = fixture.debugElement.query(By.css('.pourcentage'));
@@ -53,7 +55,7 @@ describe('JaugeComponent', () => {
 
   it('should render percentage bar with green class when >= 50%', () => {
     const donnees = {cours: 7, plusBas: 4, plusHaut: 8};
-    fixture.componentRef.setInput('donnees' , donnees);
+    fixture.componentRef.setInput('donnees', donnees);
     fixture.detectChanges();
 
     const barDe = fixture.debugElement.query(By.css('.pourcentage'));
@@ -66,13 +68,13 @@ describe('JaugeComponent', () => {
 
   it('should not render the percentage bar when pourcentage is 0 or undefined', () => {
     // undefined
-    fixture.componentRef.setInput('donnees' , undefined);
+    fixture.componentRef.setInput('donnees', undefined);
     fixture.detectChanges();
     expect(fixture.debugElement.query(By.css('.pourcentage'))).toBeNull();
 
     // 0 is falsy, should not render due to template @if (pourcentage)
     const donnees = {cours: 4, plusBas: 4, plusHaut: 8};
-    fixture.componentRef.setInput('donnees' , donnees);
+    fixture.componentRef.setInput('donnees', donnees);
     fixture.detectChanges();
     expect(fixture.debugElement.query(By.css('.pourcentage'))).toBeNull();
   });

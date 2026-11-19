@@ -2,7 +2,7 @@ import {ComponentFixture, TestBed} from '@angular/core/testing';
 
 import {TableauCotationsComponent} from './tableau-cotations.component';
 import {TranslateModule} from '@ngx-translate/core';
-import {DatePipe} from '@angular/common';
+import {DatePipe, PercentPipe} from '@angular/common';
 
 describe('TableauCotationsComponent', () => {
   let component: TableauCotationsComponent;
@@ -15,7 +15,8 @@ describe('TableauCotationsComponent', () => {
         TranslateModule.forRoot({})
       ],
       providers: [
-        DatePipe
+        DatePipe,
+        PercentPipe
       ]
     })
       .compileComponents();
