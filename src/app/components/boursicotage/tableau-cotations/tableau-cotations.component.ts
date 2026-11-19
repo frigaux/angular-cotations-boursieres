@@ -104,7 +104,6 @@ export class TableauCotationsComponent {
       this.notificationsVariation(cotationsDecorees);
       this.iconeVariationPrecedent(cotationsDecorees);
       this.notificationsCours(cotationsDecorees);
-      console.log(cotationsDecorees);
     });
   }
 

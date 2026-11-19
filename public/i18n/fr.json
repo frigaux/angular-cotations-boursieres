@@ -511,7 +511,8 @@
         "COURBES": "Courbes : {{valeur}} ({{ticker}}, {{marche}})",
         "INFORMATIONS_DETAILLEES": "Informations détaillées ABCBourse : {{valeur}} ({{ticker}}, {{marche}})",
         "ABCBOURSE": "Lien vers ABCBourse",
-        "BOURSORAMA": "Lien vers Boursorama"
+        "BOURSORAMA": "Lien vers Boursorama",
+        "COURS": "Cours"
       }
     },
     "PARAMETRAGE": {
@@ -844,9 +845,6 @@
           "CONDITION_INVALIDE": "Attribut condition invalide"
         }
       }
-    },
-    "BOURSORAMA": {
-      "COURS": "Cours"
     },
     "DIVIDENDES": {
       "ERREURS": {

@@ -33,6 +33,8 @@
         <app-informations-ticker [cours]="cours"></app-informations-ticker>
       } @else {
         <div class="ligne">
+          <p-chart type="line" [data]="coursDataChartLine"
+                   [options]="coursOptionsChartLine"/>
           <app-charts [cours]="cours"></app-charts>
         </div>
       }

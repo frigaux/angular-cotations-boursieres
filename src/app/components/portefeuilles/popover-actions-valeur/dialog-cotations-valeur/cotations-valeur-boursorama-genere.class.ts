@@ -105,7 +105,7 @@ export class CotationsValeurBoursoramaDecore {
       labels,
       datasets: [
         {
-          label: this.translateService.instant('SERVICES.BOURSORAMA.COURS'),
+          label: this.translateService.instant('COMPOSANTS.PORTEFEUILLES.ACTIONS_VALEUR.DIALOG_COTATIONS_VALEUR.COURS'),
           data,
           tension: 0.4 // Bezier curve tension of the line. Set to 0 to draw straightlines. This option is ignored if monotone cubic interpolation is used.
         }

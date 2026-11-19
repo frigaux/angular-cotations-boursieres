@@ -17,7 +17,12 @@ p-panel
   .ligne
     display: flex
     flex-direction: row
-    align-items: center
+
+    p-chart, app-charts
+      margin: 0 0.5rem
+
+    p-chart
+      width: calc(40% - 1.5rem)
 
     app-charts
-      width: 50%
+      width: calc(60% - 1.5rem)
