@@ -1,44 +1,3 @@
-//table.portefeuille
-//  thead
-//    th:nth-child(7)
-//      width: 6rem
-//      text-align: right
-//
-//    th:nth-child(8)
-//      text-align: left
-//
-//  tbody
-//    td:nth-child(8)
-//      text-align: left
-//
-//    td:nth-child(7)
-//      text-align: right
-//
-//
-//table:not(.portefeuille)
-//  thead
-//    th:nth-child(7)
-//      width: 7rem
-//      text-align: right
-//
-//    th:nth-child(8)
-//      width: 10rem
-//      text-align: right
-//
-//    th:nth-child(9)
-//      width: 6rem
-//      text-align: right
-//
-//    th:nth-child(10)
-//      text-align: left
-//
-//  tbody
-//    td:nth-child(10)
-//      text-align: left
-//
-//    td:nth-child(7), td:nth-child(8), td:nth-child(9)
-//      text-align: right
-
 .alerte
   background-color: var(--p-red-200)
 
@@ -49,71 +8,80 @@ table
   th, td
     padding: 0 0.25rem
 
-thead
-  th
-    background-color: white
-    font-weight: bold
-    border-bottom: 1px solid var(--p-tabs-tablist-border-color)
+  &.tailleReduite
+    tr
+      th:nth-child(n+3), td:nth-child(n+3)
+        display: none
+        width: 0
 
-  th.ticker
-    width: 5rem
-    text-align: left
+  thead
+    th
+      background-color: white
+      font-weight: bold
+      border-bottom: 1px solid var(--p-tabs-tablist-border-color)
 
-  th.valeur
-    width: 15rem
-    text-align: left
+    th.ticker
+      width: 5rem
+      text-align: left
 
-  th.seuil
-    width: 5rem
-    text-align: center
+    th.valeur
+      width: 15rem
+      text-align: left
 
-  th.nombre
-    width: 6rem
-    text-align: right
+    th.seuil
+      width: 5rem
+      text-align: center
 
-  th.jauge
-    width: 10rem
-    text-align: center
+    th.nombre
+      width: 6rem
+      text-align: right
 
-  th.notifications
-    text-align: left
+    th.jauge
+      width: 10rem
+      text-align: center
 
-tbody
-  tr:hover
-    background-color: white
+    th.notifications
+      text-align: left
 
-  td
-    border-bottom: 1px solid var(--p-datatable-body-cell-border-color)
+  tbody
+    tr:hover
+      background-color: white
 
-    &.positive
+    td
+      border-bottom: 1px solid var(--p-datatable-body-cell-border-color)
+
+      &.positive
+        color: var(--p-green-600)
+
+      &.negative
+        color: var(--p-red-600)
+
+      --p-inputtext-sm-padding-x: 0.1rem
+      --p-inputtext-sm-padding-y: 0.1rem
+
+    .pi-arrow-circle-up
       color: var(--p-green-600)
 
-    &.negative
+    .pi-arrow-circle-down
       color: var(--p-red-600)
 
-    --p-inputtext-sm-padding-x: 0.1rem
-    --p-inputtext-sm-padding-y: 0.1rem
+    td.ticker
+      cursor: pointer
+      color: var(--p-blue-500)
 
-  .pi-arrow-circle-up
-    color: var(--p-green-600)
+      span:nth-child(2)
+        margin-left: 0.5rem
 
-  .pi-arrow-circle-down
-    color: var(--p-red-600)
+    td.ticker, td.valeur, td.notifications
+      text-align: left
 
-  td.ticker
-    span:nth-child(2)
-      margin-left: 0.5rem
+    td.nombre
+      text-align: right
 
-  td.ticker, td.valeur, td.notifications
-    text-align: left
+    td.jauge, td.seuil
+      text-align: center
 
-  td.nombre
-    text-align: right
-
-  td.jauge, td.seuil
-    text-align: center
-
-  td.notifications
-    div
-      color: var(--p-red-600)
-      background-color: var(--p-red-200)
+    td.notifications
+      div
+        color: var(--p-red-600)
+        background-color: var(--p-red-200)

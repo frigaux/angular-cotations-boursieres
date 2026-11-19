@@ -34,26 +34,34 @@
     }
   </div>
 
-  <div class="conteneur">
-    @if (cotationsPortefeuille) {
-      <app-tableau-cotations
-        [dto]="{cotations: cotationsPortefeuille, seuilVariation}"
-        [cotationsByTicker]="cotationsByTicker"></app-tableau-cotations>
-    }
-    @if (cotationsOrdresAchats) {
-      <app-tableau-cotations
-        [dto]="{cotations: cotationsOrdresAchats, etape: EtapeValeur.ORDRE_ACHAT, seuilVariation}"
-        [cotationsByTicker]="cotationsByTicker"></app-tableau-cotations>
-    }
-    @if (cotationsAchats) {
-      <app-tableau-cotations
-        [dto]="{cotations: cotationsAchats, etape: EtapeValeur.ACHAT, seuilVariation}"
-        [cotationsByTicker]="cotationsByTicker"></app-tableau-cotations>
-    }
-    @if (cotationsOrdresVentes) {
-      <app-tableau-cotations
-        [dto]="{cotations: cotationsOrdresVentes, etape: EtapeValeur.ORDRE_VENTE, seuilVariation}"
-        [cotationsByTicker]="cotationsByTicker"></app-tableau-cotations>
-    }
+  <div class="conteneur" [ngClass]="{'avec-details': cotationsSelectionnees !== undefined}">
+    <div class="tableaux">
+      @if (cotationsPortefeuille && cotationsPortefeuille.length > 0) {
+        <app-tableau-cotations
+          [dto]="{cotations: cotationsPortefeuille, seuilVariation}"
+          [cotationsByTicker]="cotationsByTicker" [tailleReduite]="cotationsSelectionnees !== undefined"
+          (cotationsCliquees)="cotationsCliquees($event)"></app-tableau-cotations>
+      }
+      @if (cotationsOrdresAchats && cotationsOrdresAchats.length > 0) {
+        <app-tableau-cotations
+          [dto]="{cotations: cotationsOrdresAchats, etape: EtapeValeur.ORDRE_ACHAT, seuilVariation}"
+          [cotationsByTicker]="cotationsByTicker" [tailleReduite]="cotationsSelectionnees !== undefined"
+          (cotationsCliquees)="cotationsCliquees($event)"></app-tableau-cotations>
+      }
+      @if (cotationsAchats && cotationsAchats.length > 0) {
+        <app-tableau-cotations
+          [dto]="{cotations: cotationsAchats, etape: EtapeValeur.ACHAT, seuilVariation}"
+          [cotationsByTicker]="cotationsByTicker" [tailleReduite]="cotationsSelectionnees !== undefined"
+          (cotationsCliquees)="cotationsCliquees($event)"></app-tableau-cotations>
+      }
+      @if (cotationsOrdresVentes && cotationsOrdresVentes.length > 0) {
+        <app-tableau-cotations
+          [dto]="{cotations: cotationsOrdresVentes, etape: EtapeValeur.ORDRE_VENTE, seuilVariation}"
+          [cotationsByTicker]="cotationsByTicker" [tailleReduite]="cotationsSelectionnees !== undefined"
+          (cotationsCliquees)="cotationsCliquees($event)"></app-tableau-cotations>
+      }
+    </div>
+    <app-details-valeur [cotations]="cotationsSelectionnees"
+                        (ferme)="cotationsSelectionnees = undefined"></app-details-valeur>
   </div>
 }

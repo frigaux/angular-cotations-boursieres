@@ -1,0 +1,41 @@
+@if (cotationsDecorees) {
+  <p-panel>
+    <ng-template #header>
+      <h2>
+        <span class="pi" [class]="cotationsDecorees.iconeVariationPrecedent"></span>
+        {{
+          'COMPOSANTS.BOURSICOTAGE.DETAILS_VALEUR.DETAILS_VALEUR'
+            | translate: {
+            valeur: cotationsDecorees.valeur.libelle,
+            ticker: cotationsDecorees.valeur.ticker,
+            marche: `ENUMERATIONS.MARCHE.${cotationsDecorees.valeur.marche}` | translate
+          }
+        }}
+      </h2>
+      <span class="lien-bandeau" (click)="abcBourse()"
+            title="{{ 'COMPOSANTS.BOURSICOTAGE.DETAILS_VALEUR.ABCBOURSE' | translate}}">A</span>
+      <span class="lien-bandeau" (click)="boursorama()"
+            title="{{ 'COMPOSANTS.BOURSICOTAGE.DETAILS_VALEUR.BOURSORAMA' | translate}}">B</span>
+      <span class="pi" [ngClass]="{'pi-chart-line': informationsDetaillees, 'pi-info-circle': !informationsDetaillees}"
+            (click)="informationsDetaillees = !informationsDetaillees"
+            title="{{
+          (informationsDetaillees ? 'COMPOSANTS.BOURSICOTAGE.DETAILS_VALEUR.COURBES' : 'COMPOSANTS.BOURSICOTAGE.DETAILS_VALEUR.INFORMATIONS_DETAILLEES')
+            | translate : {
+            valeur: cotationsDecorees.valeur.libelle,
+            ticker: cotationsDecorees.valeur.ticker,
+            marche: `ENUMERATIONS.MARCHE.${cotationsDecorees.valeur.marche}` | translate
+          }
+        }}"></span>
+      <span class="pi pi-times-circle" (click)="this.ferme.emit()"></span>
+    </ng-template>
+    <div class="conteneur">
+      @if (informationsDetaillees) {
+        <app-informations-ticker [cours]="cours"></app-informations-ticker>
+      } @else {
+        <div class="ligne">
+          <app-charts [cours]="cours"></app-charts>
+        </div>
+      }
+    </div>
+  </p-panel>
+}

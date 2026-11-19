@@ -3,6 +3,8 @@ import {DTOCoursTicker} from '../../services/cours/dto-cours-ticker.interface';
 import {DTOCoursTickerAllege} from '../../services/cours/dto-cours-ticker-allege.interface';
 import {CoursPortefeuille} from '../portefeuilles/cours-portefeuille.class';
 import {DTODividende} from '../../services/dividendes/dto-dividende.interface';
+import {DTOValeur} from '../../services/valeurs/dto-valeur.interface';
+import {DTOCoursAvecListeAllege} from '../../services/cours/dto-cours-avec-liste-allege.interface';
 
 export class Cours {
   date: string; // ISO 8601 : yyyy-MM-dd
@@ -46,6 +48,10 @@ export class Cours {
 
   public static fromCoursPortefeuille(dto: CoursPortefeuille) {
     return new Cours(dto.date, dto.ticker, dto.libelle, dto.ouverture, dto.plusHaut, dto.plusBas, dto.cloture, dto.volume, dto.moyennesMobiles, dto.coursAlleges, undefined);
+  }
+
+  public static fromValeurEtCours(valeur: DTOValeur, cours: DTOCoursAvecListeAllege) {
+    return new Cours(cours.date, valeur.ticker, valeur.libelle, cours.ouverture, cours.plusHaut, cours.plusBas, cours.cloture, cours.volume, cours.moyennesMobiles, cours.cours, undefined);
   }
 
   public iconeVariation(): string {

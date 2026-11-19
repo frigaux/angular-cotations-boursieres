@@ -1,16 +1,17 @@
 @if (cotations && cotations.length > 0) {
-  <table [ngClass]="{'portefeuille':etape === undefined}">
+  <table [ngClass]="{'portefeuille':etape === undefined, 'tailleReduite': tailleReduite}">
     <thead>
-    <th class="ticker"> {{ 'COMPOSANTS.BOURSICOTAGE.TABLEAU_COTATIONS.TICKER' | translate }}</th>
-    <th class="valeur"> {{ 'COMPOSANTS.BOURSICOTAGE.TABLEAU_COTATIONS.VALEUR' | translate }}</th>
-    <th class="seuil"> {{ 'COMPOSANTS.BOURSICOTAGE.TABLEAU_COTATIONS.SEUIL' | translate }}</th>
-    <th class="nombre"> {{ 'COMPOSANTS.BOURSICOTAGE.TABLEAU_COTATIONS.COURS' | translate }}</th>
-    <th class="jauge"> {{ 'COMPOSANTS.BOURSICOTAGE.TABLEAU_COTATIONS.PLUS_BAS_PLUS_HAUT_JOUR' | translate }}</th>
-    <th class="nombre"> {{ 'COMPOSANTS.BOURSICOTAGE.TABLEAU_COTATIONS.VARIATION_PRECEDENT' | translate }}</th>
-    <th class="nombre"> {{ 'COMPOSANTS.BOURSICOTAGE.TABLEAU_COTATIONS.VARIATION_OUVERTURE' | translate }}</th>
-    <th
-      class="jauge"> {{ 'COMPOSANTS.BOURSICOTAGE.TABLEAU_COTATIONS.PLUS_BAS_PLUS_HAUT_PERIODE' | translate : {nbJour: BoursicotageComponent.NB_JOURS} }}
-    </th>
+    <tr>
+      <th class="ticker"> {{ 'COMPOSANTS.BOURSICOTAGE.TABLEAU_COTATIONS.TICKER' | translate }}</th>
+      <th class="valeur"> {{ 'COMPOSANTS.BOURSICOTAGE.TABLEAU_COTATIONS.VALEUR' | translate }}</th>
+      <th class="seuil"> {{ 'COMPOSANTS.BOURSICOTAGE.TABLEAU_COTATIONS.SEUIL' | translate }}</th>
+      <th class="nombre"> {{ 'COMPOSANTS.BOURSICOTAGE.TABLEAU_COTATIONS.COURS' | translate }}</th>
+      <th class="jauge"> {{ 'COMPOSANTS.BOURSICOTAGE.TABLEAU_COTATIONS.PLUS_BAS_PLUS_HAUT_JOUR' | translate }}</th>
+      <th class="nombre"> {{ 'COMPOSANTS.BOURSICOTAGE.TABLEAU_COTATIONS.VARIATION_PRECEDENT' | translate }}</th>
+      <th class="nombre"> {{ 'COMPOSANTS.BOURSICOTAGE.TABLEAU_COTATIONS.VARIATION_OUVERTURE' | translate }}</th>
+      <th
+        class="jauge"> {{ 'COMPOSANTS.BOURSICOTAGE.TABLEAU_COTATIONS.PLUS_BAS_PLUS_HAUT_PERIODE' | translate : {nbJour: BoursicotageComponent.NB_JOURS} }}
+      </th>
       @switch (etape) {
         @case (EtapeValeur.ORDRE_ACHAT) {
           <th class="nombre"> {{ 'COMPOSANTS.BOURSICOTAGE.TABLEAU_COTATIONS.VARIATION_ORDRE_ACHAT' | translate }}</th>
@@ -25,12 +26,13 @@
           <th class="nombre"></th>
         }
       }
-    <th class="notifications"> {{ 'COMPOSANTS.BOURSICOTAGE.TABLEAU_COTATIONS.NOTIFICATIONS' | translate }}</th>
+      <th class="notifications"> {{ 'COMPOSANTS.BOURSICOTAGE.TABLEAU_COTATIONS.NOTIFICATIONS' | translate }}</th>
+    </tr>
     </thead>
     <tbody>
       @for (cotation of cotations; track cotation) {
         <tr>
-          <td class="ticker">
+          <td class="ticker" (click)="cotationsCliquees.emit(cotation)">
             <span class="pi" [class]="cotation.iconeVariationPrecedent"></span>
             <span>{{ cotation.valeur.ticker }}</span>
           </td>

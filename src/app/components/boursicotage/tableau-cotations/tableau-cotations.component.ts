@@ -1,4 +1,4 @@
-import {Component, input, InputSignal} from '@angular/core';
+import {Component, input, InputSignal, output} from '@angular/core';
 import {EtapeValeur} from '../../valeurs/achats-valeur/etape-valeur.enum';
 import {CotationsDecorees} from '../cotations-decorees.class';
 import {CurrencyPipe, DatePipe, NgClass, PercentPipe} from '@angular/common';
@@ -36,12 +36,16 @@ export class TableauCotationsComponent {
     {transform: o => this.intercepteurDTO(o), alias: 'dto'});
   inputCotationsByTicker: InputSignal<Map<string, DTOCotations> | undefined> = input(undefined,
     {transform: o => this.intercepteurCotationsByTicker(o), alias: 'cotationsByTicker'});
+  inputTailleReduite: InputSignal<boolean | undefined> = input(undefined,
+    {transform: o => this.intercepteurTailleReduite(o), alias: 'tailleReduite'});
+  cotationsCliquees = output<CotationsDecorees>();
 
   // données pour la vue
   protected readonly EtapeValeur = EtapeValeur;
   protected cotations?: CotationsDecorees[];
   protected etape?: EtapeValeur;
   protected seuilVariation?: number;
+  protected tailleReduite: boolean = false;
   protected readonly BoursicotageComponent = BoursicotageComponent;
 
   // private
@@ -86,6 +90,11 @@ export class TableauCotationsComponent {
       this.construireVue();
     }
     return cotationsByTicker;
+  }
+
+  private intercepteurTailleReduite(tailleReduite?: boolean) {
+    this.tailleReduite = tailleReduite ? tailleReduite : false;
+    return tailleReduite;
   }
 
   private construireVue() {

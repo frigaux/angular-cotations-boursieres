@@ -14,12 +14,14 @@ import {ValeursService} from '../../services/valeurs/valeurs.service';
 import {DTOAchatsTicker} from '../../services/valeurs/dto-achats-ticker.interface';
 import {DTOValeur} from '../../services/valeurs/dto-valeur.interface';
 import {CotationsDecorees} from './cotations-decorees.class';
-import {DatePipe} from '@angular/common';
+import {DatePipe, NgClass} from '@angular/common';
 import {BourseDirectService} from '../../services/bourse-direct/bourse-direct.service';
 import {Tooltip} from 'primeng/tooltip';
 import {DTOCotations} from '../../services/bourse-direct/dto-cotations.interface';
 import {CoursService} from '../../services/cours/cours.service';
 import {DTOCoursAvecListeAllege} from '../../services/cours/dto-cours-avec-liste-allege.interface';
+
+import {DetailsValeurComponent} from './details-valeur/details-valeur.component';
 
 @Component({
   selector: 'app-boursicotage',
@@ -33,7 +35,9 @@ import {DTOCoursAvecListeAllege} from '../../services/cours/dto-cours-avec-liste
     LoaderComponent,
     TableauCotationsComponent,
     DatePipe,
-    Tooltip
+    Tooltip,
+    DetailsValeurComponent,
+    NgClass,
   ],
   templateUrl: './boursicotage.component.html',
   styleUrl: './boursicotage.component.sass',
@@ -51,6 +55,7 @@ export class BoursicotageComponent implements OnInit {
   protected cotationsPortefeuille?: CotationsDecorees[];
   protected dateRafraichissement?: Date;
   protected cotationsByTicker?: Map<string, DTOCotations>;
+  protected cotationsSelectionnees?: CotationsDecorees;
 
   // formulaire
   protected delaiRafraichissement: number = 60;
@@ -168,5 +173,14 @@ export class BoursicotageComponent implements OnInit {
 
   private definirCours(liste: CotationsDecorees[], coursByTicker: Map<string, DTOCoursAvecListeAllege>) {
     liste.forEach(cotations => cotations.cours = coursByTicker.get(cotations.valeur.ticker));
+  }
+
+  protected cotationsCliquees(cotations: CotationsDecorees) {
+    if (this.cotationsSelectionnees === undefined
+      || this.cotationsSelectionnees.valeur.ticker !== cotations.valeur.ticker) {
+      this.cotationsSelectionnees = cotations;
+    } else {
+      this.cotationsSelectionnees = undefined;
+    }
   }
 }

@@ -9,9 +9,36 @@
     &:not(:first-child)
       margin-left: 1rem
 
-.conteneur
+div.conteneur
   display: flex
-  flex-direction: column
 
   app-tableau-cotations
     margin-top: 0.5rem
+
+  div.tableaux
+    display: flex
+    flex-direction: column
+
+  &:not(.avec-details)
+    app-details-valeur
+      display: none
+
+    div.tableaux
+      width: 100%
+
+// orientation verticale
+@media screen and (orientation: portrait)
+  div.conteneur
+    flex-direction: column
+
+@media screen and (orientation: landscape)
+  div.conteneur
+    flex-direction: row
+
+    &.avec-details
+      div.tableaux
+        width: 20rem
+
+      app-details-valeur
+        margin-top: 0.5rem
+        width: calc(100% - 20rem)

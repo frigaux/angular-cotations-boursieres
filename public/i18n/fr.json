@@ -505,6 +505,13 @@
         "VARIATION_BAISSE": "{{variation}}% à la baisse à {{heure}}",
         "COURS_HAUSSE": "{{cours}} à la hausse à {{heure}}",
         "COURS_BAISSE": "{{cours}} à la baisse à {{heure}}"
+      },
+      "DETAILS_VALEUR": {
+        "DETAILS_VALEUR": "{{valeur}} ({{ticker}}, {{marche}})",
+        "COURBES": "Courbes : {{valeur}} ({{ticker}}, {{marche}})",
+        "INFORMATIONS_DETAILLEES": "Informations détaillées ABCBourse : {{valeur}} ({{ticker}}, {{marche}})",
+        "ABCBOURSE": "Lien vers ABCBourse",
+        "BOURSORAMA": "Lien vers Boursorama"
       }
     },
     "PARAMETRAGE": {
