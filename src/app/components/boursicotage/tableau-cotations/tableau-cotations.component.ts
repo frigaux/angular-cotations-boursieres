@@ -131,11 +131,13 @@ export class TableauCotationsComponent {
           cotationsDecorees.notifications.push(
             this.translateService.instant('COMPOSANTS.BOURSICOTAGE.TABLEAU_COTATIONS.COURS_HAUSSE',
               {'cours': this.formatCurrency(dernier.cours), 'heure': this.heureCourante()}));
+          this.notifierDerniereNotificationSurAndroid(cotationsDecorees);
         }
         if (dernier.cours <= cotationsDecorees.seuilCours && cotationsDecorees.seuilCours <= avantDernier.cours) {
           cotationsDecorees.notifierSeuilCours = true;
           cotationsDecorees.notifications.push(this.translateService.instant('COMPOSANTS.BOURSICOTAGE.TABLEAU_COTATIONS.COURS_BAISSE',
             {'cours': this.formatCurrency(dernier.cours), 'heure': this.heureCourante()}));
+          this.notifierDerniereNotificationSurAndroid(cotationsDecorees);
         }
       }
     }
@@ -151,7 +153,7 @@ export class TableauCotationsComponent {
             'pourcentage': this.percentPipe.transform(cotationsDecorees.variationPrecedent, '1.2-2'),
             'heure': this.heureCourante()
           }));
-        this.notificationAndroid(cotationsDecorees);
+        this.notifierDerniereNotificationSurAndroid(cotationsDecorees);
       }
     }
   }
@@ -216,15 +218,17 @@ export class TableauCotationsComponent {
     cotationsDecorees.notifications.splice(indexCotation, 1);
   }
 
-  private notificationAndroid(cotationsDecorees: CotationsDecorees) {
-    if (Capacitor.isNativePlatform()) {
+  private notifierDerniereNotificationSurAndroid(cotationsDecorees: CotationsDecorees) {
+    if (Capacitor.isNativePlatform() && cotationsDecorees.notifications.length > 0) {
       LocalNotifications.schedule({
         notifications: [
           {
-            id: Math.floor(Date.now() % 2147483647), // entier unique requis
+            id: Math.floor(Date.now() % 2147483647),
+            channelId: 'alertes_urgentes',
             title: cotationsDecorees.valeur.libelle,
             body: cotationsDecorees.notifications[cotationsDecorees.notifications.length - 1],
-            extra: {ticker: cotationsDecorees.valeur.ticker}
+            extra: {ticker: cotationsDecorees.valeur.ticker},
+            silent: false
           }
         ]
       });

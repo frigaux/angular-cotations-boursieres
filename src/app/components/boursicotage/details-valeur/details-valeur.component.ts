@@ -9,8 +9,6 @@ import {Cours} from '../../cours/cours.class';
 import {UIChart} from 'primeng/chart';
 import {DTOCotations} from '../../../services/bourse-direct/dto-cotations.interface';
 
-// TODO : notifications
-// TODO : coverage
 @Component({
   selector: 'app-details-valeur',
   imports: [

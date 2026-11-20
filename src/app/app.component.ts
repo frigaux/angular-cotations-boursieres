@@ -33,6 +33,7 @@ export class AppComponent {
     this.configurationTraduction();
     this.configurationAndroid();
     this.requestAndroidPermissions();
+    this.createAndroidChannel();
     this.fixPrimeNgPickList();
   }
 
@@ -85,6 +86,21 @@ export class AppComponent {
         if (request.display !== 'granted') {
           console.warn(this.translateService.instant('PERMISSION_NOTIFICATION_REFUSEE'));
         }
+      }
+    }
+  }
+
+  private async createAndroidChannel() {
+    if (Capacitor.isNativePlatform()) {
+      if (Capacitor.getPlatform() === 'android') {
+        await LocalNotifications.createChannel({
+          id: 'alertes_urgentes',
+          name: 'Alertes urgentes',
+          description: 'Notifications avec son, vibration et bannière',
+          importance: 5, // 4 ou 5 requis pour faire apparaître la bannière (heads-up)
+          visibility: 1, // 1 = Public (visible sur l'écran de verrouillage)
+          vibration: true
+        });
       }
     }
   }
