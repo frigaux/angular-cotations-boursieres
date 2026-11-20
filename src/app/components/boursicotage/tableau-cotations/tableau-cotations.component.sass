@@ -44,6 +44,9 @@ table
       text-align: left
 
   tbody
+    tr
+      height: 1.5rem
+
     tr:hover
       background-color: white
 
@@ -66,11 +69,12 @@ table
       color: var(--p-red-600)
 
     td.ticker
-      cursor: pointer
-      color: var(--p-blue-500)
-
       span:nth-child(2)
         margin-left: 0.5rem
+
+    td.valeur
+      cursor: pointer
+      color: var(--p-blue-500)
 
     td.ticker, td.valeur, td.notifications
       text-align: left

@@ -32,13 +32,15 @@
     <tbody>
       @for (cotation of cotations; track cotation) {
         <tr>
-          <td class="ticker" (click)="cotationsCliquees.emit(cotation)">
-            <span class="pi" [class]="cotation.iconeVariationPrecedent"></span>
-            <span>{{ cotation.valeur.ticker }}</span>
-          </td>
-          <td class="valeur">
+          <td class="ticker">
             <a href="https://www.abcbourse.com/cotation/{{cotation.valeur.ticker}}p"
-               target="_blank">{{ cotation.valeur.libelle }}</a>
+               target="_blank">
+              <span class="pi" [class]="cotation.iconeVariationPrecedent"></span>
+              <span>{{ cotation.valeur.ticker }}</span>
+            </a>
+          </td>
+          <td class="valeur" (click)="cotationsCliquees.emit(cotation)">
+            {{ cotation.valeur.libelle }}
           </td>
           <td class="seuil">
             <p-inputNumber [(ngModel)]="cotation.seuilCours" size="small"

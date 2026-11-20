@@ -141,12 +141,12 @@ export class TableauCotationsComponent {
   private notificationsVariation(cotationsDecorees: CotationsDecorees) {
     cotationsDecorees.notifierVariationPrecedent = false;
     if (this.seuilVariation) {
-      if (cotationsDecorees.variationPrecedent! >= this.seuilVariation) {
+      if (cotationsDecorees.variationPrecedent! * 100 >= this.seuilVariation) {
         cotationsDecorees.notifierVariationPrecedent = true;
         cotationsDecorees.notifications.push(this.translateService.instant('COMPOSANTS.BOURSICOTAGE.TABLEAU_COTATIONS.VARIATION_HAUSSE',
           {'variation': cotationsDecorees.variationPrecedent, 'heure': this.heureCourante()}));
       }
-      if (cotationsDecorees.variationPrecedent! <= -this.seuilVariation) {
+      if (cotationsDecorees.variationPrecedent! * 100 <= -this.seuilVariation) {
         cotationsDecorees.notifierVariationPrecedent = true;
         cotationsDecorees.notifications.push(this.translateService.instant('COMPOSANTS.BOURSICOTAGE.TABLEAU_COTATIONS.VARIATION_BAISSE',
           {'variation': cotationsDecorees.variationPrecedent, 'heure': this.heureCourante()}));
