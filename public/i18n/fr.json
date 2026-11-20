@@ -501,8 +501,7 @@
         "VARIATION_ACHAT": "Var C/A",
         "VARIATION_REVENTE": "Var C/R",
         "NOTIFICATIONS": "Notifications",
-        "VARIATION_HAUSSE": "{{variation}}% à la hausse à {{heure}}",
-        "VARIATION_BAISSE": "{{variation}}% à la baisse à {{heure}}",
+        "VARIATION": "{{pourcentage}} à {{heure}}",
         "COURS_HAUSSE": "{{cours}} à la hausse à {{heure}}",
         "COURS_BAISSE": "{{cours}} à la baisse à {{heure}}"
       },

@@ -53,7 +53,8 @@ export class TableauCotationsComponent {
   private formatCurrency: Function = (value: number) => this.numberFormatToCurrency.format(value);
 
   constructor(private translateService: TranslateService,
-              private datepipe: DatePipe) {
+              private datepipe: DatePipe,
+              private percentPipe: PercentPipe) {
   }
 
   private intercepteurDTO(dto: {
@@ -141,15 +142,13 @@ export class TableauCotationsComponent {
   private notificationsVariation(cotationsDecorees: CotationsDecorees) {
     cotationsDecorees.notifierVariationPrecedent = false;
     if (this.seuilVariation) {
-      if (cotationsDecorees.variationPrecedent! * 100 >= this.seuilVariation) {
+      if (Math.abs(cotationsDecorees.variationPrecedent! * 100) >= this.seuilVariation) {
         cotationsDecorees.notifierVariationPrecedent = true;
-        cotationsDecorees.notifications.push(this.translateService.instant('COMPOSANTS.BOURSICOTAGE.TABLEAU_COTATIONS.VARIATION_HAUSSE',
-          {'variation': cotationsDecorees.variationPrecedent, 'heure': this.heureCourante()}));
-      }
-      if (cotationsDecorees.variationPrecedent! * 100 <= -this.seuilVariation) {
-        cotationsDecorees.notifierVariationPrecedent = true;
-        cotationsDecorees.notifications.push(this.translateService.instant('COMPOSANTS.BOURSICOTAGE.TABLEAU_COTATIONS.VARIATION_BAISSE',
-          {'variation': cotationsDecorees.variationPrecedent, 'heure': this.heureCourante()}));
+        cotationsDecorees.notifications.push(this.translateService.instant('COMPOSANTS.BOURSICOTAGE.TABLEAU_COTATIONS.VARIATION',
+          {
+            'pourcentage': this.percentPipe.transform(cotationsDecorees.variationPrecedent, '1.2-2'),
+            'heure': this.heureCourante()
+          }));
       }
     }
   }
@@ -208,5 +207,9 @@ export class TableauCotationsComponent {
         cotationsDecorees.plusHaut = plusHaut;
       }
     });
+  }
+
+  protected supprimerNotification(cotation: CotationsDecorees, i: number) {
+    cotation.notifications.splice(i, 1);
   }
 }

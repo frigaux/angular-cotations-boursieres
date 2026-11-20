@@ -85,8 +85,8 @@
             {{ cotation.variationAchat | percent:'1.2-2' }}
           </td>
           <td class="notifications">
-            @for (notification of cotation.notifications; track notification) {
-              <div>{{ notification }}</div>
+            @for (notification of cotation.notifications; track notification; ; let i = $index) {
+              <div (click)="supprimerNotification(cotation, i)">{{ notification }}</div>
             }
           </td>
         </tr>
