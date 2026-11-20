@@ -10,6 +10,8 @@ import {JaugeComponent} from '../../commun/jauge/jauge.component';
 import {Tooltip} from 'primeng/tooltip';
 import {DTOCotations} from '../../../services/bourse-direct/dto-cotations.interface';
 import {BoursicotageComponent} from '../boursicotage.component';
+import {LocalNotifications} from '@capacitor/local-notifications';
+import {Capacitor} from '@capacitor/core';
 
 @Component({
   selector: 'app-tableau-cotations',
@@ -149,6 +151,7 @@ export class TableauCotationsComponent {
             'pourcentage': this.percentPipe.transform(cotationsDecorees.variationPrecedent, '1.2-2'),
             'heure': this.heureCourante()
           }));
+        this.notificationAndroid(cotationsDecorees);
       }
     }
   }
@@ -209,7 +212,22 @@ export class TableauCotationsComponent {
     });
   }
 
-  protected supprimerNotification(cotation: CotationsDecorees, i: number) {
-    cotation.notifications.splice(i, 1);
+  protected supprimerNotification(cotationsDecorees: CotationsDecorees, indexCotation: number) {
+    cotationsDecorees.notifications.splice(indexCotation, 1);
+  }
+
+  private notificationAndroid(cotationsDecorees: CotationsDecorees) {
+    if (Capacitor.isNativePlatform()) {
+      LocalNotifications.schedule({
+        notifications: [
+          {
+            id: Math.floor(Date.now() % 2147483647), // entier unique requis
+            title: cotationsDecorees.valeur.libelle,
+            body: cotationsDecorees.notifications[cotationsDecorees.notifications.length - 1],
+            extra: {ticker: cotationsDecorees.valeur.ticker}
+          }
+        ]
+      });
+    }
   }
 }

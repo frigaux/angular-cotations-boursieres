@@ -13,10 +13,12 @@ import {ScreenOrientation} from '@capacitor/screen-orientation';
 import {PrimeNG} from 'primeng/config';
 import {PickList} from 'primeng/picklist';
 import {NavigationBar} from '@squareetlabs/capacitor-navigation-bar';
+import {LocalNotifications} from '@capacitor/local-notifications';
 
 // TODO : capacitor android : proxy obligatoire pour requêter les autres domaines ? problème CORS ou pas ?
 // TODO : examiner les logs du debugger android studio
 // TODO : intégrer tailwind ?
+// TODO : update @capacitor version to 8 et virer @squareetlabs/capacitor-navigation-bar
 @Component({
   selector: 'app-root',
   standalone: true,
@@ -30,6 +32,7 @@ export class AppComponent {
               private titleService: Title, private primeng: PrimeNG) {
     this.configurationTraduction();
     this.configurationAndroid();
+    this.requestAndroidPermissions();
     this.fixPrimeNgPickList();
   }
 
@@ -72,5 +75,17 @@ export class AppComponent {
         this.titleService.setTitle(this.translateService.instant(`ROUTER.${translateKey}`));
       }
     });
+  }
+
+  private async requestAndroidPermissions() {
+    if (Capacitor.isNativePlatform()) {
+      const permission = await LocalNotifications.checkPermissions();
+      if (permission.display !== 'granted') {
+        const request = await LocalNotifications.requestPermissions();
+        if (request.display !== 'granted') {
+          console.warn(this.translateService.instant('PERMISSION_NOTIFICATION_REFUSEE'));
+        }
+      }
+    }
   }
 }

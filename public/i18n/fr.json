@@ -25,7 +25,8 @@
       "ENREGISTRER": "Enregistrer",
       "ABANDONNER": "Abandonner",
       "ENREGISTRER_MODIFICATIONS": "Enregistrer les modifications",
-      "ABANDONNER_MODIFICATIONS": "Abandonner les modifications"
+      "ABANDONNER_MODIFICATIONS": "Abandonner les modifications",
+      "PERMISSION_NOTIFICATION_REFUSEE": "Permission de notification refusée"
     },
     "AUTHENTIFICATION": {
       "REUSSIE": "Authentification réussie !"
