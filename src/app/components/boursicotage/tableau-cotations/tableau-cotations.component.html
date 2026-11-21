@@ -43,8 +43,9 @@
             {{ cotation.valeur.libelle }}
           </td>
           <td class="seuil">
-            <p-inputNumber [(ngModel)]="cotation.seuilCours" size="small"
-                           [inputSize]="8" mode="decimal" [maxlength]="8" [maxFractionDigits]="3"
+            <p-inputNumber [(ngModel)]="cotation.seuilCours" size="small" [inputStyle]="{'text-align': 'right'}"
+                           [inputSize]="8" [maxlength]="8" [maxFractionDigits]="3"
+                           mode="currency" currency="EUR" locale="fr-FR"
                            [pTooltip]="'COMPOSANTS.BOURSICOTAGE.TABLEAU_COTATIONS.SEUIL_COURS' | translate"></p-inputNumber>
           </td>
           <td class="nombre" [ngClass]="{'alerte':cotation.notifierSeuilCours}">
