@@ -39,7 +39,7 @@
               <span>{{ cotation.valeur.ticker }}</span>
             </a>
           </td>
-          <td class="valeur" (click)="cotationsCliquees.emit(cotation)">
+          <td class="valeur" (click)="libelleClique.emit(cotation)">
             {{ cotation.valeur.libelle }}
           </td>
           <td class="seuil">
@@ -82,7 +82,7 @@
               }"></app-jauge>
             }
           </td>
-          <td class="nombre" [appClassVariation]="cotation.variationAchat">
+          <td class="achats" [appClassVariation]="cotation.variationAchat" (click)="achatClique.emit(cotation)">
             {{ cotation.variationAchat | percent:'1.2-2' }}
           </td>
           <td class="notifications">

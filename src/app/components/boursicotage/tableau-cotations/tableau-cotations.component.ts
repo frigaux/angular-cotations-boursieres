@@ -38,7 +38,8 @@ export class TableauCotationsComponent {
     {transform: o => this.intercepteurCotationsByTicker(o), alias: 'cotationsByTicker'});
   inputTailleReduite: InputSignal<boolean | undefined> = input(undefined,
     {transform: o => this.intercepteurTailleReduite(o), alias: 'tailleReduite'});
-  cotationsCliquees = output<CotationsDecorees>();
+  libelleClique = output<CotationsDecorees>();
+  achatClique = output<CotationsDecorees>();
 
   // données pour la vue
   protected readonly EtapeValeur = EtapeValeur;

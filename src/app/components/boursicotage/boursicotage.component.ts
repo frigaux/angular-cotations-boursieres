@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, viewChild} from '@angular/core';
 import {InputNumber} from 'primeng/inputnumber';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {FloatLabel} from 'primeng/floatlabel';
@@ -22,6 +22,9 @@ import {CoursService} from '../../services/cours/cours.service';
 import {DTOCoursAvecListeAllege} from '../../services/cours/dto-cours-avec-liste-allege.interface';
 
 import {DetailsValeurComponent} from './details-valeur/details-valeur.component';
+import {
+  DialogAchatsValeurComponent
+} from '../portefeuilles/popover-actions-valeur/dialog-achats-valeur/dialog-achats-valeur.component';
 
 @Component({
   selector: 'app-boursicotage',
@@ -38,11 +41,14 @@ import {DetailsValeurComponent} from './details-valeur/details-valeur.component'
     Tooltip,
     DetailsValeurComponent,
     NgClass,
+    DialogAchatsValeurComponent,
   ],
   templateUrl: './boursicotage.component.html',
   styleUrl: './boursicotage.component.sass',
 })
 export class BoursicotageComponent implements OnInit {
+  private dialogAchatsValeurComponent = viewChild(DialogAchatsValeurComponent);
+
   public static readonly NB_JOURS = 300;
 
   // données pour la vue
@@ -175,12 +181,22 @@ export class BoursicotageComponent implements OnInit {
     liste.forEach(cotations => cotations.cours = coursByTicker.get(cotations.valeur.ticker));
   }
 
-  protected cotationsCliquees(cotations: CotationsDecorees) {
+  protected afficherDetails(cotations: CotationsDecorees) {
     if (this.cotationsSelectionnees === undefined
       || this.cotationsSelectionnees.valeur.ticker !== cotations.valeur.ticker) {
       this.cotationsSelectionnees = cotations;
     } else {
       this.cotationsSelectionnees = undefined;
     }
+  }
+
+  protected editerAchats(cotation: CotationsDecorees) {
+    const prixParDefaut = cotation.cotations.length > 0 ?
+      cotation.cotations[cotation.cotations.length - 1].cours : cotation.cours?.cloture || 0;
+    this.dialogAchatsValeurComponent()?.afficherAchats({
+      ticker: cotation.valeur.ticker,
+      libelle: cotation.valeur.libelle,
+      prixParDefaut
+    });
   }
 }
