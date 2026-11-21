@@ -1,6 +1,14 @@
 .alerte
   background-color: var(--p-red-300)
 
+table.formulaire
+  th.achats, td.achats
+    text-align: center
+
+table:not(.formulaire)
+  th.achats, td.achats
+    text-align: center
+
 table
   width: 100%
   border-collapse: collapse
@@ -35,6 +43,9 @@ table
     th.nombre
       width: 6rem
       text-align: right
+
+    th.achats
+      width: 6rem
 
     th.jauge
       width: 10rem
@@ -83,7 +94,6 @@ table
       text-align: right
 
     td.achats
-      text-align: right
       cursor: pointer
 
     td.jauge, td.seuil

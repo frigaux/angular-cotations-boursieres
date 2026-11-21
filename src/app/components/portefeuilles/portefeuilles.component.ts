@@ -35,9 +35,6 @@ import {EtapeValeur} from '../valeurs/achats-valeur/etape-valeur.enum';
 import {DTOAchatsTicker} from '../../services/valeurs/dto-achats-ticker.interface';
 import {DTOPortefeuille} from '../../services/portefeuilles/dto-portefeuille.interface';
 import {SortEvent} from 'primeng/api';
-import {
-  DialogCotationsValeurComponent
-} from './popover-actions-valeur/dialog-cotations-valeur/dialog-cotations-valeur.component';
 import {Subscription} from 'rxjs';
 import {DTODividende} from '../../services/dividendes/dto-dividende.interface';
 import {Indicateurs} from '../cours/indicateurs/indicateurs';

@@ -42,7 +42,8 @@
         <app-tableau-cotations
           [dto]="{cotations: cotationsPortefeuille, seuilVariation}"
           [cotationsByTicker]="cotationsByTicker" [tailleReduite]="cotationsSelectionnees !== undefined"
-          (libelleClique)="afficherDetails($event)"></app-tableau-cotations>
+          (libelleClique)="afficherDetails($event)"
+          (achatClique)="editerAchats($event)"></app-tableau-cotations>
       }
       @if (cotationsOrdresAchats && cotationsOrdresAchats.length > 0) {
         <app-tableau-cotations

@@ -1,4 +1,4 @@
-import {Component, OnInit, viewChild} from '@angular/core';
+import {Component, OnDestroy, OnInit, viewChild} from '@angular/core';
 import {InputNumber} from 'primeng/inputnumber';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {FloatLabel} from 'primeng/floatlabel';
@@ -25,6 +25,7 @@ import {DetailsValeurComponent} from './details-valeur/details-valeur.component'
 import {
   DialogAchatsValeurComponent
 } from '../portefeuilles/popover-actions-valeur/dialog-achats-valeur/dialog-achats-valeur.component';
+import {Subscription} from 'rxjs';
 
 @Component({
   selector: 'app-boursicotage',
@@ -46,7 +47,7 @@ import {
   templateUrl: './boursicotage.component.html',
   styleUrl: './boursicotage.component.sass',
 })
-export class BoursicotageComponent implements OnInit {
+export class BoursicotageComponent implements OnInit, OnDestroy {
   private dialogAchatsValeurComponent = viewChild(DialogAchatsValeurComponent);
 
   public static readonly NB_JOURS = 300;
@@ -71,11 +72,13 @@ export class BoursicotageComponent implements OnInit {
   // private
   private valeurByTicker?: Map<string, DTOValeur>;
   private idInterval?: any;
+  private subscriptions: Array<Subscription> = [];
 
   constructor(private portefeuillesService: PortefeuillesService,
               private valeursService: ValeursService,
               private coursService: CoursService,
               private bourseDirectService: BourseDirectService) {
+    this.subscriptions.push(valeursService.onUpdateAchats(achatsTickers => this.majListesCotations(achatsTickers)));
   }
 
   ngOnInit(): void {
@@ -93,6 +96,10 @@ export class BoursicotageComponent implements OnInit {
     });
   }
 
+  ngOnDestroy(): void {
+    this.subscriptions.forEach(subscription => subscription?.unsubscribe());
+  }
+
   private cotationsDecorees(achats: Array<DTOAchatsTicker>, etape: EtapeValeur): CotationsDecorees[] {
     const resultat: CotationsDecorees[] = []
     EtapeValeurUtil.filtrerParEtape(achats, etape)
@@ -102,6 +109,19 @@ export class BoursicotageComponent implements OnInit {
         })
       });
     return resultat;
+  }
+
+  private chargerCoursTickersWithLimit() {
+    const tickers = this.tickersDistincts([this.cotationsOrdresAchats, this.cotationsAchats, this.cotationsOrdresVentes]);
+    this.coursService.chargerCoursTickersWithLimit(Array.from(tickers), BoursicotageComponent.NB_JOURS)
+      .subscribe(liste => {
+        const coursByTicker = new Map<string, DTOCoursAvecListeAllege>();
+        liste.forEach(cours => coursByTicker!.set(cours.ticker, cours));
+        this.definirCours(this.cotationsOrdresAchats!, coursByTicker);
+        this.definirCours(this.cotationsAchats!, coursByTicker);
+        this.definirCours(this.cotationsOrdresVentes!, coursByTicker);
+        this.loading = false;
+      });
   }
 
   protected selectionPortefeuille(event: SelectChangeEvent) {
@@ -164,19 +184,6 @@ export class BoursicotageComponent implements OnInit {
     }
   }
 
-  private chargerCoursTickersWithLimit() {
-    const tickers = this.tickersDistincts([this.cotationsOrdresAchats, this.cotationsAchats, this.cotationsOrdresVentes]);
-    this.coursService.chargerCoursTickersWithLimit(Array.from(tickers), BoursicotageComponent.NB_JOURS)
-      .subscribe(liste => {
-        const coursByTicker = new Map<string, DTOCoursAvecListeAllege>();
-        liste.forEach(cours => coursByTicker!.set(cours.ticker, cours));
-        this.definirCours(this.cotationsOrdresAchats!, coursByTicker);
-        this.definirCours(this.cotationsAchats!, coursByTicker);
-        this.definirCours(this.cotationsOrdresVentes!, coursByTicker);
-        this.loading = false;
-      });
-  }
-
   private definirCours(liste: CotationsDecorees[], coursByTicker: Map<string, DTOCoursAvecListeAllege>) {
     liste.forEach(cotations => cotations.cours = coursByTicker.get(cotations.valeur.ticker));
   }
@@ -198,5 +205,46 @@ export class BoursicotageComponent implements OnInit {
       libelle: cotation.valeur.libelle,
       prixParDefaut
     });
+  }
+
+  private majListesCotations(achats: Array<DTOAchatsTicker>) {
+    const cotationsActuelles = [this.cotationsPortefeuille, this.cotationsOrdresAchats, this.cotationsAchats, this.cotationsOrdresVentes];
+    this.cotationsOrdresAchats = this.clonerCotations(achats, EtapeValeur.ORDRE_ACHAT, cotationsActuelles, 1);
+    this.cotationsAchats = this.clonerCotations(achats, EtapeValeur.ACHAT, cotationsActuelles, 2);
+    this.cotationsOrdresVentes = this.clonerCotations(achats, EtapeValeur.ORDRE_VENTE, cotationsActuelles, 3);
+  }
+
+  private clonerCotations(achats: Array<DTOAchatsTicker>, etape: EtapeValeur, cotationsActuelles: (CotationsDecorees[] | undefined)[], indexAPrivilegier: number) {
+    const resultat: CotationsDecorees[] = []
+    EtapeValeurUtil.filtrerParEtape(achats, etape)
+      .forEach(achats => {
+        achats.achats.forEach(achat => {
+          const cotations = this.trouverCotationACloner(achats.ticker, cotationsActuelles, indexAPrivilegier);
+          if (cotations) {
+            resultat.push(CotationsDecorees.cloner(cotations, achat));
+          }
+        })
+      });
+    return resultat;
+  }
+
+  private trouverCotationACloner(ticker: string, cotationsActuelles: (CotationsDecorees[] | undefined)[], indexAPrivilegier: number): CotationsDecorees | undefined {
+    for (let i = indexAPrivilegier; i < cotationsActuelles.length; i++) {
+      for (const cotations of cotationsActuelles[i] || []) {
+        if (cotations.valeur.ticker === ticker) {
+          return cotations;
+        }
+      }
+    }
+    if (indexAPrivilegier > 0) {
+      for (let i = indexAPrivilegier; i >= 0; i--) {
+        for (const cotations of cotationsActuelles[i] || []) {
+          if (cotations.valeur.ticker === ticker) {
+            return cotations;
+          }
+        }
+      }
+    }
+    return undefined;
   }
 }

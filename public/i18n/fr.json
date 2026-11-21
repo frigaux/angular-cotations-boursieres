@@ -501,6 +501,7 @@
         "VARIATION_ORDRE_ACHAT": "Var OA/C",
         "VARIATION_ACHAT": "Var C/A",
         "VARIATION_REVENTE": "Var C/R",
+        "ACHATS": "Achats",
         "NOTIFICATIONS": "Notifications",
         "VARIATION": "{{pourcentage}} à {{heure}}",
         "COURS_HAUSSE": "{{cours}} à la hausse à {{heure}}",

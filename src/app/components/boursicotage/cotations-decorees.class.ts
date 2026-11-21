@@ -28,15 +28,33 @@ export class CotationsDecorees {
     this.notifierVariationPrecedent = false;
     this.notifierSeuilCours = false;
     this.notifications = [];
+    CotationsDecorees.determinerSeuilCoursParDefaut(this, achat);
+  }
+
+  // static car le clonage abandonne les fonctions
+  private static determinerSeuilCoursParDefaut(cotations: CotationsDecorees, achat: DTOAchat | undefined) {
     if (achat) {
       switch (EtapeValeurUtil.etapeValeur(achat)) {
         case EtapeValeur.ORDRE_ACHAT:
-          this.seuilCours = achat.prix;
+          cotations.seuilCours = achat.prix;
           break;
         case EtapeValeur.ORDRE_VENTE:
-          this.seuilCours = achat.prixRevente;
+          cotations.seuilCours = achat.prixRevente;
+          break;
+        default:
+          cotations.seuilCours = undefined;
           break;
       }
+    } else {
+      cotations.seuilCours = undefined;
     }
+  }
+
+  // static car le clonage abandonne les fonctions
+  public static cloner(cotations: CotationsDecorees, achat?: DTOAchat): CotationsDecorees {
+    cotations = JSON.parse(JSON.stringify(cotations));
+    cotations.achat = achat
+    CotationsDecorees.determinerSeuilCoursParDefaut(cotations, achat);
+    return cotations;
   }
 }

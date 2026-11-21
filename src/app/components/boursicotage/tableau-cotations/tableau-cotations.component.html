@@ -14,16 +14,16 @@
       </th>
       @switch (etape) {
         @case (EtapeValeur.ORDRE_ACHAT) {
-          <th class="nombre"> {{ 'COMPOSANTS.BOURSICOTAGE.TABLEAU_COTATIONS.VARIATION_ORDRE_ACHAT' | translate }}</th>
+          <th class="achats"> {{ 'COMPOSANTS.BOURSICOTAGE.TABLEAU_COTATIONS.VARIATION_ORDRE_ACHAT' | translate }}</th>
         }
         @case (EtapeValeur.ACHAT) {
-          <th class="nombre"> {{ 'COMPOSANTS.BOURSICOTAGE.TABLEAU_COTATIONS.VARIATION_ACHAT' | translate }}</th>
+          <th class="achats"> {{ 'COMPOSANTS.BOURSICOTAGE.TABLEAU_COTATIONS.VARIATION_ACHAT' | translate }}</th>
         }
         @case (EtapeValeur.ORDRE_VENTE) {
-          <th class="nombre"> {{ 'COMPOSANTS.BOURSICOTAGE.TABLEAU_COTATIONS.VARIATION_REVENTE' | translate }}</th>
+          <th class="achats"> {{ 'COMPOSANTS.BOURSICOTAGE.TABLEAU_COTATIONS.VARIATION_REVENTE' | translate }}</th>
         }
         @default {
-          <th class="nombre"></th>
+          <th class="achats"> {{ 'COMPOSANTS.BOURSICOTAGE.TABLEAU_COTATIONS.ACHATS' | translate }}</th>
         }
       }
       <th class="notifications"> {{ 'COMPOSANTS.BOURSICOTAGE.TABLEAU_COTATIONS.NOTIFICATIONS' | translate }}</th>
@@ -83,7 +83,11 @@
             }
           </td>
           <td class="achats" [appClassVariation]="cotation.variationAchat" (click)="achatClique.emit(cotation)">
-            {{ cotation.variationAchat | percent:'1.2-2' }}
+            @if (etape == undefined) {
+              <span class="pi pi-shopping-bag"></span>
+            } @else {
+              {{ cotation.variationAchat | percent:'1.2-2' }}
+            }
           </td>
           <td class="notifications">
             @for (notification of cotation.notifications; track notification; ; let i = $index) {
