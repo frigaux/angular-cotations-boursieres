@@ -18,8 +18,12 @@
 
     @if (!loading) {
       <div class="content">
-        <app-encarts-valeur [cours]="cours"></app-encarts-valeur>
-        <app-charts [cours]="cours"></app-charts>
+        <div>
+          <app-encarts-valeur [cours]="cours"></app-encarts-valeur>
+        </div>
+        <div>
+          <app-charts [cours]="cours"></app-charts>
+        </div>
       </div>
     }
   </p-panel>
