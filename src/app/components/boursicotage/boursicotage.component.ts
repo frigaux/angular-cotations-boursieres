@@ -237,7 +237,7 @@ export class BoursicotageComponent implements OnInit, OnDestroy {
       }
     }
     if (indexAPrivilegier > 0) {
-      for (let i = indexAPrivilegier; i >= 0; i--) {
+      for (let i = indexAPrivilegier - 1; i >= 0; i--) {
         for (const cotations of cotationsActuelles[i] || []) {
           if (cotations.valeur.ticker === ticker) {
             return cotations;
