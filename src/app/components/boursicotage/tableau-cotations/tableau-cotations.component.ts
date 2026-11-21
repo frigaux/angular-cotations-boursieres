@@ -10,6 +10,8 @@ import {JaugeComponent} from '../../commun/jauge/jauge.component';
 import {Tooltip} from 'primeng/tooltip';
 import {DTOCotations} from '../../../services/bourse-direct/dto-cotations.interface';
 import {BoursicotageComponent} from '../boursicotage.component';
+import {LocalNotifications} from '@capacitor/local-notifications';
+import {Capacitor} from '@capacitor/core';
 
 @Component({
   selector: 'app-tableau-cotations',
@@ -130,11 +132,13 @@ export class TableauCotationsComponent {
           cotationsDecorees.notifications.push(
             this.translateService.instant('COMPOSANTS.BOURSICOTAGE.TABLEAU_COTATIONS.COURS_HAUSSE',
               {'cours': this.formatCurrency(dernier.cours), 'heure': this.heureCourante()}));
+          this.notifierDerniereNotificationSurAndroid(cotationsDecorees);
         }
         if (dernier.cours <= cotationsDecorees.seuilCours && cotationsDecorees.seuilCours <= avantDernier.cours) {
           cotationsDecorees.notifierSeuilCours = true;
           cotationsDecorees.notifications.push(this.translateService.instant('COMPOSANTS.BOURSICOTAGE.TABLEAU_COTATIONS.COURS_BAISSE',
             {'cours': this.formatCurrency(dernier.cours), 'heure': this.heureCourante()}));
+          this.notifierDerniereNotificationSurAndroid(cotationsDecorees);
         }
       }
     }
@@ -150,6 +154,7 @@ export class TableauCotationsComponent {
             'pourcentage': this.percentPipe.transform(cotationsDecorees.variationPrecedent, '1.2-2'),
             'heure': this.heureCourante()
           }));
+        this.notifierDerniereNotificationSurAndroid(cotationsDecorees);
       }
     }
   }
@@ -210,7 +215,24 @@ export class TableauCotationsComponent {
     });
   }
 
-  protected supprimerNotification(cotation: CotationsDecorees, i: number) {
-    cotation.notifications.splice(i, 1);
+  protected supprimerNotification(cotationsDecorees: CotationsDecorees, indexCotation: number) {
+    cotationsDecorees.notifications.splice(indexCotation, 1);
+  }
+
+  private notifierDerniereNotificationSurAndroid(cotationsDecorees: CotationsDecorees) {
+    if (Capacitor.isNativePlatform() && cotationsDecorees.notifications.length > 0) {
+      LocalNotifications.schedule({
+        notifications: [
+          {
+            id: Math.floor(Date.now() % 2147483647),
+            channelId: 'alertes_urgentes',
+            title: cotationsDecorees.valeur.libelle,
+            body: cotationsDecorees.notifications[cotationsDecorees.notifications.length - 1],
+            extra: {ticker: cotationsDecorees.valeur.ticker},
+            silent: false
+          }
+        ]
+      });
+    }
   }
 }
