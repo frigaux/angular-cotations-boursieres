@@ -3,6 +3,7 @@ import {Popover} from 'primeng/popover';
 import {TranslatePipe} from '@ngx-translate/core';
 import {CotationsValeurBoursoramaDecore} from '../../dialog-cotations-valeur/cotations-valeur-boursorama-genere.class';
 import {DialogCotationsValeurComponent} from '../../dialog-cotations-valeur/dialog-cotations-valeur.component';
+import {AbcBourseService} from '../../../../../services/abc-bourse/abc-bourse.service';
 
 @Component({
   selector: 'app-popover-actions-valeur',
@@ -34,7 +35,7 @@ export class PopoverActionsValeurComponent {
   }
 
   protected abcBourse() {
-    window.open(`https://www.abcbourse.com/cotation/${this.cotationsTickerDecore?.dtoBoursorama.valeur.ticker}p`);
+    window.open(AbcBourseService.urlCotation(this.cotationsTickerDecore?.dtoBoursorama.valeur.ticker));
     this.popover()?.hide();
   }
 

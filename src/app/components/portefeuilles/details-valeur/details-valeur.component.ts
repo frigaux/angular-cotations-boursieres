@@ -8,6 +8,7 @@ import {AlerteAvecSonEvaluation} from '../alerte-avec-son-evaluation.class';
 import {TranslatePipe} from '@ngx-translate/core';
 import {InformationsValeurComponent} from '../../cours/informations-valeur/informations-valeur.component';
 import {NgClass} from '@angular/common';
+import {AbcBourseService} from '../../../services/abc-bourse/abc-bourse.service';
 
 @Component({
   selector: 'app-details-valeur',
@@ -57,6 +58,6 @@ export class DetailsValeurComponent {
   }
 
   abcBourse() {
-    window.open(`https://www.abcbourse.com/cotation/${this.cours?.ticker}p`);
+    window.open(AbcBourseService.urlCotation(this.cours?.ticker));
   }
 }

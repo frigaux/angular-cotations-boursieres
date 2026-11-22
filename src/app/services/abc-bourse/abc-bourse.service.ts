@@ -376,4 +376,8 @@ export class AbcBourseService {
     }
     return resultat;
   }
+
+  public static urlCotation(ticker?: string) {
+    return `https://www.abcbourse.com/cotation/${ticker}p`;
+  }
 }

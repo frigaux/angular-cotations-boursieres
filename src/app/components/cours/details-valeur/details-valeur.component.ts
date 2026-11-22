@@ -8,6 +8,7 @@ import {ChartsComponent} from '../charts/charts.component';
 import {CoursService} from '../../../services/cours/cours.service';
 import {DTOValeur} from '../../../services/valeurs/dto-valeur.interface';
 import {LoaderComponent} from '../../loader/loader.component';
+import {AbcBourseService} from '../../../services/abc-bourse/abc-bourse.service';
 
 @Component({
   selector: 'app-details-valeur',
@@ -63,6 +64,6 @@ export class DetailsValeurComponent {
   }
 
   abcBourse() {
-    window.open(`https://www.abcbourse.com/cotation/${this.dto?.cours.ticker}p`);
+    window.open(AbcBourseService.urlCotation(this.dto?.cours.ticker));
   }
 }

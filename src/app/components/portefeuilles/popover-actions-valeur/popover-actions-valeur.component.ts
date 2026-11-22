@@ -10,6 +10,7 @@ import {FormsModule} from '@angular/forms';
 import {DialogAchatsValeurComponent} from './dialog-achats-valeur/dialog-achats-valeur.component';
 import {CoursPortefeuille} from '../cours-portefeuille.class';
 import {PortefeuilleAvecCours} from '../portefeuille-avec-cours.class';
+import {AbcBourseService} from '../../../services/abc-bourse/abc-bourse.service';
 
 @Component({
   selector: 'app-popover-actions-valeur',
@@ -127,7 +128,7 @@ export class PopoverActionsValeurComponent {
   }
 
   protected abcBourse() {
-    window.open(`https://www.abcbourse.com/cotation/${this.cours!.ticker}p`);
+    window.open(AbcBourseService.urlCotation(this.cours!.ticker));
     this.popover()?.hide();
   }
 }

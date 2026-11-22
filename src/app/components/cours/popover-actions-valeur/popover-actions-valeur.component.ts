@@ -5,6 +5,7 @@ import {Select} from 'primeng/select';
 import {DTOPortefeuille} from '../../../services/portefeuilles/dto-portefeuille.interface';
 import {FormsModule} from '@angular/forms';
 import {TranslatePipe} from '@ngx-translate/core';
+import {AbcBourseService} from '../../../services/abc-bourse/abc-bourse.service';
 
 @Component({
   selector: 'app-popover-actions-valeur',
@@ -60,7 +61,7 @@ export class PopoverActionsValeurComponent implements OnInit {
   }
 
   protected abcBourse() {
-    window.open(`https://www.abcbourse.com/cotation/${this.ticker}p`);
+    window.open(AbcBourseService.urlCotation(this.ticker));
     this.popover()?.hide();
   }
 }

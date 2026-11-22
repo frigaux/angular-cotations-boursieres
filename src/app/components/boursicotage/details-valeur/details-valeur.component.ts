@@ -8,6 +8,7 @@ import {InformationsValeurComponent} from '../../cours/informations-valeur/infor
 import {Cours} from '../../cours/cours.class';
 import {UIChart} from 'primeng/chart';
 import {DTOCotations} from '../../../services/bourse-direct/dto-cotations.interface';
+import {AbcBourseService} from '../../../services/abc-bourse/abc-bourse.service';
 
 @Component({
   selector: 'app-details-valeur',
@@ -110,6 +111,6 @@ export class DetailsValeurComponent {
   }
 
   abcBourse() {
-    window.open(`https://www.abcbourse.com/cotation/${this.cotationsDecorees?.valeur.ticker}p`);
+    window.open(AbcBourseService.urlCotation(this.cotationsDecorees?.valeur.ticker));
   }
 }
