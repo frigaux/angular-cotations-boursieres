@@ -11,6 +11,7 @@ import {DialogAchatsValeurComponent} from './dialog-achats-valeur/dialog-achats-
 import {CoursPortefeuille} from '../cours-portefeuille.class';
 import {PortefeuilleAvecCours} from '../portefeuille-avec-cours.class';
 import {AbcBourseService} from '../../../services/abc-bourse/abc-bourse.service';
+import {BoursoramaService} from '../../../services/boursorama/boursorama.service';
 
 @Component({
   selector: 'app-popover-actions-valeur',
@@ -123,7 +124,7 @@ export class PopoverActionsValeurComponent {
   }
 
   protected boursorama() {
-    window.open(`https://www.boursorama.com/cours/1rP${this.cours!.ticker}/`);
+    window.open(BoursoramaService.urlCotation(this.cours!.ticker));
     this.popover()?.hide();
   }
 

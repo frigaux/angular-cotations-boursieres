@@ -6,6 +6,7 @@ import {DTOPortefeuille} from '../../../services/portefeuilles/dto-portefeuille.
 import {FormsModule} from '@angular/forms';
 import {TranslatePipe} from '@ngx-translate/core';
 import {AbcBourseService} from '../../../services/abc-bourse/abc-bourse.service';
+import {BoursoramaService} from '../../../services/boursorama/boursorama.service';
 
 @Component({
   selector: 'app-popover-actions-valeur',
@@ -56,7 +57,7 @@ export class PopoverActionsValeurComponent implements OnInit {
   }
 
   protected boursorama() {
-    window.open(`https://www.boursorama.com/cours/1rP${this.ticker}/`);
+    window.open(BoursoramaService.urlCotation(this.ticker));
     this.popover()?.hide();
   }
 

@@ -513,4 +513,8 @@ export class BoursoramaService {
       });
     return resultat;
   }
+
+  public static urlCotation(ticker?: string) {
+    return `https://www.boursorama.com/cours/1rP${ticker}/`;
+  }
 }

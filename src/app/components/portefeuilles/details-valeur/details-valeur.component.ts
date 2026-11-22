@@ -9,6 +9,7 @@ import {TranslatePipe} from '@ngx-translate/core';
 import {InformationsValeurComponent} from '../../cours/informations-valeur/informations-valeur.component';
 import {NgClass} from '@angular/common';
 import {AbcBourseService} from '../../../services/abc-bourse/abc-bourse.service';
+import {BoursoramaService} from '../../../services/boursorama/boursorama.service';
 
 @Component({
   selector: 'app-details-valeur',
@@ -54,7 +55,7 @@ export class DetailsValeurComponent {
   }
 
   boursorama() {
-    window.open(`https://www.boursorama.com/cours/1rP${this.cours?.ticker}/`);
+    window.open(BoursoramaService.urlCotation(this.cours?.ticker));
   }
 
   abcBourse() {

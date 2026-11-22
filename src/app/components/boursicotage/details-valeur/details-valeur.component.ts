@@ -9,6 +9,7 @@ import {Cours} from '../../cours/cours.class';
 import {UIChart} from 'primeng/chart';
 import {DTOCotations} from '../../../services/bourse-direct/dto-cotations.interface';
 import {AbcBourseService} from '../../../services/abc-bourse/abc-bourse.service';
+import {BoursoramaService} from '../../../services/boursorama/boursorama.service';
 
 @Component({
   selector: 'app-details-valeur',
@@ -107,7 +108,7 @@ export class DetailsValeurComponent {
   }
 
   boursorama() {
-    window.open(`https://www.boursorama.com/cours/1rP${this.cotationsDecorees?.valeur.ticker}/`);
+    window.open(BoursoramaService.urlCotation(this.cotationsDecorees?.valeur.ticker));
   }
 
   abcBourse() {

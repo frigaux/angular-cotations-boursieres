@@ -4,6 +4,7 @@ import {TranslatePipe} from '@ngx-translate/core';
 import {CotationsValeurBoursoramaDecore} from '../../dialog-cotations-valeur/cotations-valeur-boursorama-genere.class';
 import {DialogCotationsValeurComponent} from '../../dialog-cotations-valeur/dialog-cotations-valeur.component';
 import {AbcBourseService} from '../../../../../services/abc-bourse/abc-bourse.service';
+import {BoursoramaService} from '../../../../../services/boursorama/boursorama.service';
 
 @Component({
   selector: 'app-popover-actions-valeur',
@@ -30,7 +31,7 @@ export class PopoverActionsValeurComponent {
   }
 
   protected boursorama() {
-    window.open(`https://www.boursorama.com/cours/1rP${this.cotationsTickerDecore?.dtoBoursorama.valeur.ticker}/`);
+    window.open(BoursoramaService.urlCotation(this.cotationsTickerDecore?.dtoBoursorama.valeur.ticker));
     this.popover()?.hide();
   }
 
