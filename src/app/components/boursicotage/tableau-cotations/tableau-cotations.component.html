@@ -33,7 +33,7 @@
       @for (cotation of cotations; track cotation) {
         <tr>
           <td class="ticker">
-            <a href="https://www.abcbourse.com/cotation/{{cotation.valeur.ticker}}p"
+            <a href="{{ BoursoramaService.urlCotation(cotation.valeur.ticker) }}"
                target="_blank">
               <span class="pi" [class]="cotation.iconeVariationPrecedent"></span>
               <span>{{ cotation.valeur.ticker }}</span>

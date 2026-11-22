@@ -12,6 +12,7 @@ import {DTOCotations} from '../../../services/bourse-direct/dto-cotations.interf
 import {BoursicotageComponent} from '../boursicotage.component';
 import {LocalNotifications} from '@capacitor/local-notifications';
 import {Capacitor} from '@capacitor/core';
+import {BoursoramaService} from '../../../services/boursorama/boursorama.service';
 
 @Component({
   selector: 'app-tableau-cotations',
@@ -50,6 +51,7 @@ export class TableauCotationsComponent {
   protected seuilVariation?: number;
   protected tailleReduite: boolean = false;
   protected readonly BoursicotageComponent = BoursicotageComponent;
+  protected readonly BoursoramaService = BoursoramaService;
 
   // private
   private numberFormatToCurrency = new Intl.NumberFormat('fr-FR', {style: 'currency', currency: 'EUR'});
