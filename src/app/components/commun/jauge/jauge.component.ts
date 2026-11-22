@@ -1,14 +1,14 @@
 import {Component, inject, input, InputSignal} from '@angular/core';
 import {CurrencyPipe, NgClass, PercentPipe} from '@angular/common';
-import {Tooltip} from 'primeng/tooltip';
+import {Popover} from 'primeng/popover';
 
 @Component({
   selector: 'app-jauge',
   imports: [
     NgClass,
     CurrencyPipe,
-    Tooltip,
-    PercentPipe
+    PercentPipe,
+    Popover
   ],
   templateUrl: './jauge.component.html',
   styleUrl: './jauge.component.sass'

@@ -3,7 +3,9 @@
     <span>{{ plusBas  | currency:'EUR':'symbol' }}</span>
     <span>{{ plusHaut  | currency:'EUR':'symbol' }}</span>
   </div>
-  <div class="jauge" [pTooltip]="tailleReduite?tooltip:''">
+  <div class="jauge" (click)="tailleReduite && popover.toggle($event)"
+       (mouseover)="tailleReduite && popover.show($event)"
+       (mouseout)="tailleReduite && popover.hide()">
     @if (pourcentage) {
       <div class="pourcentage"
            [ngClass]="{'rouge': pourcentage < 50, 'vert': pourcentage >= 50}"
@@ -17,4 +19,5 @@
       }
     </div>
   </div>
+  <p-popover #popover>{{ tooltip }}</p-popover>
 </div>
