@@ -26,6 +26,7 @@ import {
   DialogAchatsValeurComponent
 } from '../portefeuilles/popover-actions-valeur/dialog-achats-valeur/dialog-achats-valeur.component';
 import {Subscription} from 'rxjs';
+import {DialogActualitesComponent} from '../cours/dialog-actualites/dialog-actualites.component';
 
 @Component({
   selector: 'app-boursicotage',
@@ -43,6 +44,7 @@ import {Subscription} from 'rxjs';
     DetailsValeurComponent,
     NgClass,
     DialogAchatsValeurComponent,
+    DialogActualitesComponent,
   ],
   templateUrl: './boursicotage.component.html',
   styleUrl: './boursicotage.component.sass',

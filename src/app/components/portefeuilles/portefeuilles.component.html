@@ -77,7 +77,8 @@
                           @case (TypesColonnesPortefeuille.LIBELLE) {
                             {{ cours[colonneDecoree.id] }}
                             @if (dtoByTicker.hasOwnProperty(cours.ticker)) {
-                              <app-dialog-apropos [cours]="{cours, aPropos: dtoByTicker[cours.ticker].aPropos}"></app-dialog-apropos>
+                              <app-dialog-apropos
+                                [dto]="{libelle: cours.libelle, aPropos: dtoByTicker[cours.ticker].aPropos}"></app-dialog-apropos>
                             }
                           }
                           @case (TypesColonnesPortefeuille.DATE) {

@@ -14,18 +14,18 @@ import {Cours} from '../cours.class';
 })
 export class DialogAproposComponent {
   // input/output
-  inputCours: InputSignal<{ cours: Cours, aPropos: string } | undefined> = input(undefined, {
-    transform: dto => this.intercepteurCours(dto), alias: 'cours'
+  inputDTO: InputSignal<{ libelle: string, aPropos: string } | undefined> = input(undefined, {
+    transform: dto => this.intercepteurDTO(dto), alias: 'dto'
   });
 
   // données pour la vue
   visible: boolean = false;
-  cours?: Cours;
+  libelle?: string;
   aPropos?: string;
 
-  private intercepteurCours(dto: { cours: Cours, aPropos: string } | undefined) {
+  private intercepteurDTO(dto: { libelle: string, aPropos: string } | undefined) {
     if (dto) {
-      this.cours = dto.cours;
+      this.libelle = dto.libelle;
       this.aPropos = dto.aPropos;
     }
     return dto;

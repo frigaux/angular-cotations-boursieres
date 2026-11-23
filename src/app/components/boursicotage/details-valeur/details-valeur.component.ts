@@ -57,7 +57,7 @@ export class DetailsValeurComponent {
     const data: Array<number> = [];
 
     cotations.jour?.forEach(cours => {
-      labels.push(this.datepipe.transform(cours.date, 'HH:mm')!);
+      labels.push(this.datepipe.transform(cours.date * 1000, 'HH:mm')!);
       data.push(cours.cours);
     });
     return {

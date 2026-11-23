@@ -41,6 +41,9 @@
           </td>
           <td class="valeur" (click)="libelleClique.emit(cotation)">
             {{ cotation.valeur.libelle }}
+            @if (abcBourseByTicker.hasOwnProperty(cotation.valeur.ticker)) {
+              <app-dialog-apropos [dto]="{libelle: cotation.valeur.libelle, aPropos: abcBourseByTicker[cotation.valeur.ticker].aPropos}"></app-dialog-apropos>
+            }
           </td>
           <td class="seuil">
             <p-inputNumber [(ngModel)]="cotation.seuilCours" size="small" [inputStyle]="{'text-align': 'right'}"

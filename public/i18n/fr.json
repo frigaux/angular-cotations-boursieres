@@ -114,7 +114,7 @@
         "AJOUTER_AU_PORTEFEUILLE": "Ajouter la valeur au portefeuille"
       },
       "CHARTS": {
-        "JOURS": "Nombre de jours affichés",
+        "JOURS": "jours",
         "COURS": "Cours à la clôture",
         "MOYENNES_MOBILES": "Moyennes mobiles au ",
         "ORDRES_ACHATS": "Ordres d'achats",

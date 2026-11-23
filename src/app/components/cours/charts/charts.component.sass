@@ -1,6 +1,12 @@
 div:nth-child(2)
   margin-top: 1rem
 
-p-radiobutton
-  margin: 0 0.5rem 0 1rem
+div:nth-child(1)
+  p-radiobutton:first-child
+    margin: 0 0.5rem 0 0
 
+  p-radiobutton:not(:first-child)
+    margin: 0 0.5rem
+
+  label:last-child
+    margin-left: 0.25rem

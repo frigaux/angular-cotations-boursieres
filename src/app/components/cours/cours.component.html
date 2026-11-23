@@ -82,7 +82,8 @@
                           title="{{ 'COMPOSANTS.COURS.ACTIONS' | translate }}"></span>
                     {{ cours.libelle }}
                     @if (dtoByTicker.hasOwnProperty(cours.ticker)) {
-                      <app-dialog-apropos [cours]="{cours, aPropos: dtoByTicker[cours.ticker].aPropos}"></app-dialog-apropos>
+                      <app-dialog-apropos
+                        [dto]="{libelle: cours.libelle, aPropos: dtoByTicker[cours.ticker].aPropos}"></app-dialog-apropos>
                     }
                     @if (afficherIndicateurs) {
                       <app-indicateurs [dto]="{

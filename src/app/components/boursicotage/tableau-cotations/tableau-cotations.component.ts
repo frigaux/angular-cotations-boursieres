@@ -13,6 +13,9 @@ import {BoursicotageComponent} from '../boursicotage.component';
 import {LocalNotifications} from '@capacitor/local-notifications';
 import {Capacitor} from '@capacitor/core';
 import {BoursoramaService} from '../../../services/boursorama/boursorama.service';
+import {LocalStorable} from '../../../services/local-storage/local-storable.enum';
+import {LocalStorageService} from '../../../services/local-storage/local-storage.service';
+import {DialogAproposComponent} from '../../cours/dialog-apropos/dialog-apropos.component';
 
 @Component({
   selector: 'app-tableau-cotations',
@@ -25,7 +28,8 @@ import {BoursoramaService} from '../../../services/boursorama/boursorama.service
     InputNumber,
     JaugeComponent,
     NgClass,
-    Tooltip
+    Tooltip,
+    DialogAproposComponent
   ],
   templateUrl: './tableau-cotations.component.html',
   styleUrl: './tableau-cotations.component.sass',
@@ -50,6 +54,7 @@ export class TableauCotationsComponent {
   protected etape?: EtapeValeur;
   protected seuilVariation?: number;
   protected tailleReduite: boolean = false;
+  protected abcBourseByTicker?: any;
   protected readonly BoursicotageComponent = BoursicotageComponent;
   protected readonly BoursoramaService = BoursoramaService;
 
@@ -59,7 +64,9 @@ export class TableauCotationsComponent {
 
   constructor(private translateService: TranslateService,
               private datepipe: DatePipe,
-              private percentPipe: PercentPipe) {
+              private percentPipe: PercentPipe,
+              private localStorageService: LocalStorageService) {
+    this.abcBourseByTicker = this.localStorageService.chargerDTOs(LocalStorable.DTOIdentiteTickerAbcbourse);
   }
 
   private intercepteurDTO(dto: {
@@ -114,12 +121,14 @@ export class TableauCotationsComponent {
   }
 
   private calculerVariationCours(cotationsDecorees: CotationsDecorees) {
+    if (cotationsDecorees.cotations.length > 0) {
+      const dernier = cotationsDecorees.cotations[cotationsDecorees.cotations.length - 1];
+      cotationsDecorees.variationOuverture = (dernier.cours / dernier.ouverture) - 1;
+    }
     if (cotationsDecorees.cotations.length > 1) {
-      const premier = cotationsDecorees.cotations[0];
       const avantDernier = cotationsDecorees.cotations[cotationsDecorees.cotations.length - 2];
       const dernier = cotationsDecorees.cotations[cotationsDecorees.cotations.length - 1];
       cotationsDecorees.variationPrecedent = (dernier.cours / avantDernier.cours) - 1;
-      cotationsDecorees.variationOuverture = (dernier.cours / premier.cours) - 1;
     }
   }
 
