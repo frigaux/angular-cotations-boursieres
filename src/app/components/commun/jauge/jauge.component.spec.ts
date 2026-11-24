@@ -45,7 +45,7 @@ describe('JaugeComponent', () => {
     fixture.componentRef.setInput('donnees', donnees);
     fixture.detectChanges();
 
-    const barDe = fixture.debugElement.query(By.css('.pourcentage'));
+    const barDe = fixture.debugElement.query(By.css('.pourcentageCours'));
     expect(barDe).toBeTruthy();
     const barEl: HTMLElement = barDe.nativeElement;
     expect(barEl.style.width).toBe('25%');
@@ -58,7 +58,7 @@ describe('JaugeComponent', () => {
     fixture.componentRef.setInput('donnees', donnees);
     fixture.detectChanges();
 
-    const barDe = fixture.debugElement.query(By.css('.pourcentage'));
+    const barDe = fixture.debugElement.query(By.css('.pourcentageCours'));
     expect(barDe).toBeTruthy();
     const barEl: HTMLElement = barDe.nativeElement;
     expect(barEl.style.width).toBe('75%');
@@ -70,12 +70,12 @@ describe('JaugeComponent', () => {
     // undefined
     fixture.componentRef.setInput('donnees', undefined);
     fixture.detectChanges();
-    expect(fixture.debugElement.query(By.css('.pourcentage'))).toBeNull();
+    expect(fixture.debugElement.query(By.css('.pourcentageCours'))).toBeNull();
 
     // 0 is falsy, should not render due to template @if (pourcentage)
     const donnees = {cours: 4, plusBas: 4, plusHaut: 8};
     fixture.componentRef.setInput('donnees', donnees);
     fixture.detectChanges();
-    expect(fixture.debugElement.query(By.css('.pourcentage'))).toBeNull();
+    expect(fixture.debugElement.query(By.css('.pourcentageCours'))).toBeNull();
   });
 });

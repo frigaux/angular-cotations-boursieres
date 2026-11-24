@@ -45,10 +45,7 @@ export class AchatsValeursComponent implements OnInit, OnDestroy {
   private onUpdateAchats?: Subscription;
 
 
-  constructor(private translateService: TranslateService,
-              private valeursService: ValeursService,
-              private confirmationService: ConfirmationService,
-              private dialogueService: DialogueService) {
+  constructor(private valeursService: ValeursService) {
   }
 
   ngOnInit(): void {

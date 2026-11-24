@@ -58,11 +58,11 @@ export class BoursicotageComponent implements OnInit, OnDestroy {
   protected readonly EtapeValeur = EtapeValeur;
   loading: boolean = true; // chargement des cours depuis Boursorama
   protected portefeuilles?: Array<DTOPortefeuille>;
-  protected cotationsOrdresAchats?: CotationsDecorees[];
-  protected cotationsAchats?: CotationsDecorees[];
-  protected cotationsOrdresVentes?: CotationsDecorees[];
+  cotationsOrdresAchats?: CotationsDecorees[];
+  cotationsAchats?: CotationsDecorees[];
+  cotationsOrdresVentes?: CotationsDecorees[];
   protected cotationsPortefeuille?: CotationsDecorees[];
-  protected dateRafraichissement?: Date;
+  dateRafraichissement?: Date;
   protected cotationsByTicker?: Map<string, DTOCotations>;
   protected cotationsSelectionnees?: CotationsDecorees;
 
