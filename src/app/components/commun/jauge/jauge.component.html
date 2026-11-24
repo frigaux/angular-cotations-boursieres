@@ -6,10 +6,12 @@
   <div class="jauge" (click)="tailleReduite && popover.toggle($event)"
        (mouseover)="tailleReduite && popover.show($event)"
        (mouseout)="tailleReduite && popover.hide()">
-    @if (pourcentage) {
-      <div class="pourcentage"
-           [ngClass]="{'rouge': pourcentage < 50, 'vert': pourcentage >= 50}"
-           [style]="{ width: `${pourcentage}%` }"></div>
+    @if (pourcentageCours) {
+      <div class="pourcentageCours"
+           [ngClass]="{'rouge': pourcentageCours < 50, 'vert': pourcentageCours >= 50}"
+           [style]="{ width: `${pourcentageCours}%` }"></div>
+      <div class="pourcentageOuverture"
+           [style]="{ width: `${pourcentageOuverture}%` }"></div>
     }
     <div class="valeur">
       @if (tailleReduite) {

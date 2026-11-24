@@ -8,7 +8,7 @@
       <th class="nombre"> {{ 'COMPOSANTS.BOURSICOTAGE.TABLEAU_COTATIONS.COURS' | translate }}</th>
       <th class="jauge"> {{ 'COMPOSANTS.BOURSICOTAGE.TABLEAU_COTATIONS.PLUS_BAS_PLUS_HAUT_JOUR' | translate }}</th>
       <th class="nombre"> {{ 'COMPOSANTS.BOURSICOTAGE.TABLEAU_COTATIONS.VARIATION_PRECEDENT' | translate }}</th>
-      <th class="nombre"> {{ 'COMPOSANTS.BOURSICOTAGE.TABLEAU_COTATIONS.VARIATION_OUVERTURE' | translate }}</th>
+      <th class="nombre"> {{ 'COMPOSANTS.BOURSICOTAGE.TABLEAU_COTATIONS.VARIATION_CLOTURE' | translate }}</th>
       <th
         class="jauge"> {{ 'COMPOSANTS.BOURSICOTAGE.TABLEAU_COTATIONS.PLUS_BAS_PLUS_HAUT_PERIODE' | translate : {nbJour: BoursicotageComponent.NB_JOURS} }}
       </th>
@@ -47,7 +47,7 @@
           </td>
           <td class="seuil">
             <p-inputNumber [(ngModel)]="cotation.seuilCours" size="small" [inputStyle]="{'text-align': 'right'}"
-                           [inputSize]="8" [maxlength]="8" [maxFractionDigits]="3"
+                           [inputSize]="7" [maxlength]="8" [maxFractionDigits]="3"
                            mode="currency" currency="EUR" locale="fr-FR"
                            [pTooltip]="'COMPOSANTS.BOURSICOTAGE.TABLEAU_COTATIONS.SEUIL_COURS' | translate"></p-inputNumber>
           </td>
@@ -62,6 +62,7 @@
                 [tailleReduite]="true"
                 [donnees]="{
                 cours: cotation.cotations[cotation.cotations.length - 1].cours,
+                ouverture: cotation.cotations[cotation.cotations.length - 1].ouverture,
                 plusBas: cotation.cotations[cotation.cotations.length - 1].plusBas,
                 plusHaut: cotation.cotations[cotation.cotations.length - 1].plusHaut
               }"></app-jauge>
@@ -71,8 +72,8 @@
               [ngClass]="{'alerte':cotation.notifierVariationPrecedent}">
             {{ cotation.variationPrecedent | percent:'1.2-2' }}
           </td>
-          <td class="nombre" [appClassVariation]="cotation.variationOuverture">
-            {{ cotation.variationOuverture | percent:'1.2-2' }}
+          <td class="nombre" [appClassVariation]="cotation.variationCloture">
+            {{ cotation.variationCloture | percent:'1.2-2' }}
           </td>
           <td class="jauge">
             @if (cotation.plusBas && cotation.plusHaut && cotation.cotations.length > 0) {
@@ -80,6 +81,7 @@
                 [tailleReduite]="true"
                 [donnees]="{
                 cours: cotation.cotations[cotation.cotations.length - 1].cours,
+                ouverture: cotation.cotations[cotation.cotations.length - 1].ouverture,
                 plusBas: cotation.plusBas,
                 plusHaut: cotation.plusHaut
               }"></app-jauge>

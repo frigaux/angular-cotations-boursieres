@@ -16,6 +16,7 @@ export class CotationsDecorees {
   variationPrecedent?: number;
   iconeVariationPrecedent?: string;
   notifierVariationPrecedent: boolean;
+  variationCloture?: number;
   variationOuverture?: number;
   seuilCours?: number;
   notifierSeuilCours: boolean;

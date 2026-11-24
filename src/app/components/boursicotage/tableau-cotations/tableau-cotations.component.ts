@@ -123,6 +123,7 @@ export class TableauCotationsComponent {
   private calculerVariationCours(cotationsDecorees: CotationsDecorees) {
     if (cotationsDecorees.cotations.length > 0) {
       const dernier = cotationsDecorees.cotations[cotationsDecorees.cotations.length - 1];
+      cotationsDecorees.variationCloture = (dernier.cours / dernier.derniereCloture) - 1;
       cotationsDecorees.variationOuverture = (dernier.cours / dernier.ouverture) - 1;
     }
     if (cotationsDecorees.cotations.length > 1) {

@@ -100,6 +100,9 @@ export class BoursicotageComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.subscriptions.forEach(subscription => subscription?.unsubscribe());
+    if (this.idInterval) {
+      clearInterval(this.idInterval);
+    }
   }
 
   private cotationsDecorees(achats: Array<DTOAchatsTicker>, etape: EtapeValeur): CotationsDecorees[] {
