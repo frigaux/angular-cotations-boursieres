@@ -7,18 +7,15 @@ import translationsFR from "../../public/i18n/fr.json";
 import {Title} from '@angular/platform-browser';
 import {ConfirmDialog} from 'primeng/confirmdialog';
 import {ConfirmationService} from 'primeng/api';
-import {StatusBar} from '@capacitor/status-bar';
-import {Capacitor} from '@capacitor/core';
+import {Capacitor, SystemBars, SystemBarType} from '@capacitor/core';
 import {ScreenOrientation} from '@capacitor/screen-orientation';
 import {PrimeNG} from 'primeng/config';
 import {PickList} from 'primeng/picklist';
-import {NavigationBar} from '@squareetlabs/capacitor-navigation-bar';
 import {LocalNotifications} from '@capacitor/local-notifications';
 
 // TODO : capacitor android : proxy obligatoire pour requêter les autres domaines ? problème CORS ou pas ?
 // TODO : examiner les logs du debugger android studio
 // TODO : intégrer tailwind ?
-// TODO : update @capacitor version to 8 et virer @squareetlabs/capacitor-navigation-bar
 @Component({
   selector: 'app-root',
   standalone: true,
@@ -44,11 +41,11 @@ export class AppComponent {
     }
   }
 
-  private configurationAndroid() {
+  private async configurationAndroid() {
     if (Capacitor.isNativePlatform()) {
       ScreenOrientation.lock({orientation: 'landscape'});
-      StatusBar.hide();
-      NavigationBar.hide();
+      await SystemBars.hide({ bar: SystemBarType.StatusBar });
+      await SystemBars.hide({ bar: SystemBarType.NavigationBar });
     }
   }
 
