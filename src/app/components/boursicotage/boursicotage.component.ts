@@ -27,6 +27,7 @@ import {
 } from '../portefeuilles/popover-actions-valeur/dialog-achats-valeur/dialog-achats-valeur.component';
 import {Subscription} from 'rxjs';
 import {DialogActualitesComponent} from '../cours/dialog-actualites/dialog-actualites.component';
+import {KeepAwake} from '@capacitor-community/keep-awake';
 
 @Component({
   selector: 'app-boursicotage',
@@ -51,6 +52,9 @@ import {DialogActualitesComponent} from '../cours/dialog-actualites/dialog-actua
 })
 export class BoursicotageComponent implements OnInit, OnDestroy {
   private dialogAchatsValeurComponent = viewChild(DialogAchatsValeurComponent);
+
+  private static keepAwake = async () => await KeepAwake.keepAwake();
+  private static allowSleep = async () => await KeepAwake.allowSleep();
 
   public static readonly NB_JOURS = 300;
 
@@ -84,6 +88,7 @@ export class BoursicotageComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+    BoursicotageComponent.keepAwake();
     this.portefeuilles = this.portefeuillesService.charger();
     const achats = this.valeursService.chargerAchats();
     this.valeursService.chargerValeurs().subscribe(valeurs => {
@@ -99,6 +104,7 @@ export class BoursicotageComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
+    BoursicotageComponent.allowSleep();
     this.subscriptions.forEach(subscription => subscription?.unsubscribe());
     if (this.idInterval) {
       clearInterval(this.idInterval);
