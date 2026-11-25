@@ -26,7 +26,7 @@
     <div [pTooltip]="'COMPOSANTS.BOURSICOTAGE.SEUIL_VARIATION' | translate">
       <p-floatlabel>
         <p-inputNumber [(ngModel)]="seuilVariation" inputId="seuilVariation" required
-                       [inputSize]="3" mode="decimal" [maxlength]="3" [maxFractionDigits]="1" [min]="0.1" [max]="9.9"/>
+                       [inputSize]="3" mode="decimal" [maxlength]="4" [maxFractionDigits]="2" [min]="0.01" [max]="9.99"/>
         <label for="seuilVariation">{{ 'COMPOSANTS.BOURSICOTAGE.SEUIL' | translate }}</label>
       </p-floatlabel>
     </div>

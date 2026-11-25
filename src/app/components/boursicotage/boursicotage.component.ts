@@ -71,8 +71,8 @@ export class BoursicotageComponent implements OnInit, OnDestroy {
   protected cotationsSelectionnees?: CotationsDecorees;
 
   // formulaire
-  protected delaiRafraichissement: number = 60;
-  protected seuilVariation: number = 1;
+  protected delaiRafraichissement: number = 15;
+  protected seuilVariation: number = 0.25;
   protected portefeuille?: DTOPortefeuille;
 
   // private
