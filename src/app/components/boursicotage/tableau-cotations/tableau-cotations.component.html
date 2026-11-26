@@ -4,14 +4,10 @@
     <tr>
       <th class="ticker"> {{ 'COMPOSANTS.BOURSICOTAGE.TABLEAU_COTATIONS.TICKER' | translate }}</th>
       <th class="valeur"> {{ 'COMPOSANTS.BOURSICOTAGE.TABLEAU_COTATIONS.VALEUR' | translate }}</th>
-      <th class="seuil"> {{ 'COMPOSANTS.BOURSICOTAGE.TABLEAU_COTATIONS.SEUIL' | translate }}</th>
       <th class="nombre"> {{ 'COMPOSANTS.BOURSICOTAGE.TABLEAU_COTATIONS.COURS' | translate }}</th>
-      <th class="jauge"> {{ 'COMPOSANTS.BOURSICOTAGE.TABLEAU_COTATIONS.PLUS_BAS_PLUS_HAUT_JOUR' | translate }}</th>
       <th class="nombre"> {{ 'COMPOSANTS.BOURSICOTAGE.TABLEAU_COTATIONS.VARIATION_PRECEDENT' | translate }}</th>
+      <th class="nombre"> {{ 'COMPOSANTS.BOURSICOTAGE.TABLEAU_COTATIONS.VARIATION_OUVERTURE' | translate }}</th>
       <th class="nombre"> {{ 'COMPOSANTS.BOURSICOTAGE.TABLEAU_COTATIONS.VARIATION_CLOTURE' | translate }}</th>
-      <th
-        class="jauge"> {{ 'COMPOSANTS.BOURSICOTAGE.TABLEAU_COTATIONS.PLUS_BAS_PLUS_HAUT_PERIODE' | translate : {nbJour: BoursicotageComponent.NB_JOURS} }}
-      </th>
       @switch (etape) {
         @case (EtapeValeur.ORDRE_ACHAT) {
           <th class="achats"> {{ 'COMPOSANTS.BOURSICOTAGE.TABLEAU_COTATIONS.VARIATION_ORDRE_ACHAT' | translate }}</th>
@@ -26,6 +22,9 @@
           <th class="achats"> {{ 'COMPOSANTS.BOURSICOTAGE.TABLEAU_COTATIONS.ACHATS' | translate }}</th>
         }
       }
+      <th class="jauge"> {{ 'COMPOSANTS.BOURSICOTAGE.TABLEAU_COTATIONS.PLUS_BAS_PLUS_HAUT_JOUR' | translate }}</th>
+      <th class="jauge"> {{ 'COMPOSANTS.BOURSICOTAGE.TABLEAU_COTATIONS.PLUS_BAS_PLUS_HAUT_PERIODE' | translate : {nbJour: BoursicotageComponent.NB_JOURS} }}</th>
+      <th class="seuil"> {{ 'COMPOSANTS.BOURSICOTAGE.TABLEAU_COTATIONS.SEUIL' | translate }}</th>
       <th class="notifications"> {{ 'COMPOSANTS.BOURSICOTAGE.TABLEAU_COTATIONS.NOTIFICATIONS' | translate }}</th>
     </tr>
     </thead>
@@ -45,15 +44,26 @@
               <app-dialog-apropos [dto]="{libelle: cotation.valeur.libelle, aPropos: abcBourseByTicker[cotation.valeur.ticker].aPropos}"></app-dialog-apropos>
             }
           </td>
-          <td class="seuil">
-            <p-inputNumber [(ngModel)]="cotation.seuilCours" size="small" [inputStyle]="{'text-align': 'right'}"
-                           [inputSize]="7" [maxlength]="8" [maxFractionDigits]="3"
-                           mode="currency" currency="EUR" locale="fr-FR"
-                           [pTooltip]="'COMPOSANTS.BOURSICOTAGE.TABLEAU_COTATIONS.SEUIL_COURS' | translate"></p-inputNumber>
-          </td>
           <td class="nombre" [ngClass]="{'alerte':cotation.notifierSeuilCours}">
             @if (cotation.cotations.length > 0) {
               {{ cotation.cotations[cotation.cotations.length - 1].cours | currency:'EUR':'symbol' }}
+            }
+          </td>
+          <td class="nombre" [appClassVariation]="cotation.variationPrecedent"
+              [ngClass]="{'alerte':cotation.notifierVariationPrecedent}">
+            {{ cotation.variationPrecedent | percent:'1.2-2' }}
+          </td>
+          <td class="nombre" [appClassVariation]="cotation.variationOuverture">
+            {{ cotation.variationOuverture | percent:'1.2-2' }}
+          </td>
+          <td class="nombre" [appClassVariation]="cotation.variationCloture">
+            {{ cotation.variationCloture | percent:'1.2-2' }}
+          </td>
+          <td class="achats" [appClassVariation]="cotation.variationAchat" (click)="achatClique.emit(cotation)">
+            @if (etape == undefined) {
+              <span class="pi pi-shopping-bag"></span>
+            } @else {
+              {{ cotation.variationAchat | percent:'1.2-2' }}
             }
           </td>
           <td class="jauge">
@@ -68,13 +78,6 @@
               }"></app-jauge>
             }
           </td>
-          <td class="nombre" [appClassVariation]="cotation.variationPrecedent"
-              [ngClass]="{'alerte':cotation.notifierVariationPrecedent}">
-            {{ cotation.variationPrecedent | percent:'1.2-2' }}
-          </td>
-          <td class="nombre" [appClassVariation]="cotation.variationCloture">
-            {{ cotation.variationCloture | percent:'1.2-2' }}
-          </td>
           <td class="jauge">
             @if (cotation.plusBas && cotation.plusHaut && cotation.cotations.length > 0) {
               <app-jauge
@@ -87,12 +90,11 @@
               }"></app-jauge>
             }
           </td>
-          <td class="achats" [appClassVariation]="cotation.variationAchat" (click)="achatClique.emit(cotation)">
-            @if (etape == undefined) {
-              <span class="pi pi-shopping-bag"></span>
-            } @else {
-              {{ cotation.variationAchat | percent:'1.2-2' }}
-            }
+          <td class="seuil">
+            <p-inputNumber [(ngModel)]="cotation.seuilCours" size="small" [inputStyle]="{'text-align': 'right'}"
+                           [inputSize]="7" [maxlength]="8" [maxFractionDigits]="3"
+                           mode="currency" currency="EUR" locale="fr-FR"
+                           [pTooltip]="'COMPOSANTS.BOURSICOTAGE.TABLEAU_COTATIONS.SEUIL_COURS' | translate"></p-inputNumber>
           </td>
           <td class="notifications">
             @for (notification of cotation.notifications; track notification; ; let i = $index) {
