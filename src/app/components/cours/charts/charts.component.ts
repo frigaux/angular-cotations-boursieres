@@ -8,7 +8,6 @@ import {FormsModule} from '@angular/forms';
 import {ValeursService} from '../../../services/valeurs/valeurs.service';
 import {EtapeValeurUtil} from '../../valeurs/achats-valeur/etape-valeur-util.class';
 import {DTOAchat} from '../../../services/valeurs/dto-achat.interface';
-import {CoursComponent} from '../cours.component';
 
 @Component({
   selector: 'app-charts',
@@ -24,6 +23,8 @@ import {CoursComponent} from '../cours.component';
 })
 export class ChartsComponent {
   @ViewChild('chart') chart?: UIChart;
+
+  public static readonly NB_JOURS_MAX = 300;
 
   // input/output
   inputCours: InputSignal<Cours | undefined> = input(undefined,
@@ -79,7 +80,7 @@ export class ChartsComponent {
   private listePeriodes(intervalle: number): number[] {
     const periodes = [];
     let i = intervalle;
-    while (i < CoursComponent.NB_JOURS_MAX) {
+    while (i < ChartsComponent.NB_JOURS_MAX) {
       periodes.push(i);
       i += intervalle;
     }
