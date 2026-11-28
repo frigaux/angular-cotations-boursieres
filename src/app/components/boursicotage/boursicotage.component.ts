@@ -56,7 +56,7 @@ export class BoursicotageComponent implements OnInit, OnDestroy {
   private static keepAwake = async () => await KeepAwake.keepAwake();
   private static allowSleep = async () => await KeepAwake.allowSleep();
 
-  public static readonly NB_JOURS = 300;
+  public static readonly NB_JOURS_MAX = 300;
 
   // données pour la vue
   protected readonly EtapeValeur = EtapeValeur;
@@ -124,7 +124,7 @@ export class BoursicotageComponent implements OnInit, OnDestroy {
 
   private chargerCoursTickersWithLimit() {
     const tickers = this.tickersDistincts([this.cotationsOrdresAchats, this.cotationsAchats, this.cotationsOrdresVentes]);
-    this.coursService.chargerCoursTickersWithLimit(Array.from(tickers), BoursicotageComponent.NB_JOURS)
+    this.coursService.chargerCoursTickersWithLimit(Array.from(tickers), BoursicotageComponent.NB_JOURS_MAX)
       .subscribe(liste => {
         const coursByTicker = new Map<string, DTOCoursAvecListeAllege>();
         liste.forEach(cours => coursByTicker!.set(cours.ticker, cours));
@@ -136,7 +136,7 @@ export class BoursicotageComponent implements OnInit, OnDestroy {
   }
 
   protected selectionPortefeuille(event: SelectChangeEvent) {
-    this.coursService.chargerCoursTickersWithLimit(this.portefeuille?.tickers || [], BoursicotageComponent.NB_JOURS)
+    this.coursService.chargerCoursTickersWithLimit(this.portefeuille?.tickers || [], BoursicotageComponent.NB_JOURS_MAX)
       .subscribe(liste => {
         const coursByTicker = new Map<string, DTOCoursAvecListeAllege>();
         liste.forEach(cours => coursByTicker!.set(cours.ticker, cours));

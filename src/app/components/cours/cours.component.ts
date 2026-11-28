@@ -64,6 +64,8 @@ import {DialogAproposComponent} from './dialog-apropos/dialog-apropos.component'
 export class CoursComponent implements OnInit {
   private actionsValeur = viewChild(PopoverActionsValeurComponent);
 
+  public static readonly NB_JOURS_MAX = 300;
+
   // chargement des cours
   loading: boolean = true;
 

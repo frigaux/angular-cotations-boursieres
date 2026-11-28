@@ -10,6 +10,7 @@ import {DTOValeur} from '../../../services/valeurs/dto-valeur.interface';
 import {LoaderComponent} from '../../loader/loader.component';
 import {AbcBourseService} from '../../../services/abc-bourse/abc-bourse.service';
 import {BoursoramaService} from '../../../services/boursorama/boursorama.service';
+import {CoursComponent} from '../cours.component';
 
 @Component({
   selector: 'app-details-valeur',
@@ -50,7 +51,7 @@ export class DetailsValeurComponent {
     if (dto) {
       this.dto = dto;
       this.loading = true;
-      this.coursService.chargerCoursTickerWithLimit(dto.cours.ticker, 300)
+      this.coursService.chargerCoursTickerWithLimit(dto.cours.ticker, CoursComponent.NB_JOURS_MAX)
         .subscribe(coursAlleges => {
           dto.cours.coursAlleges = coursAlleges;
           this.loading = false;

@@ -5,6 +5,7 @@ import {PercentPipe} from '@angular/common';
 import {DTODividende} from '../../../services/dividendes/dto-dividende.interface';
 import {TranslatePipe} from '@ngx-translate/core';
 import {DTOCoursTickerAllege} from '../../../services/cours/dto-cours-ticker-allege.interface';
+import {CoursComponent} from '../cours.component';
 
 @Component({
   selector: 'app-indicateurs',
@@ -54,7 +55,7 @@ export class Indicateurs {
       this.moyennesMobiles = dto.moyennesMobiles;
       this.dividendes = dto.dividendes;
       if (!this.coursAlleges) {
-        this.coursService.chargerCoursTickerWithLimit(this.ticker, 300)
+        this.coursService.chargerCoursTickerWithLimit(this.ticker, CoursComponent.NB_JOURS_MAX)
           .subscribe(coursAlleges => {
             this.coursAlleges = coursAlleges;
             this.calculerIndicateurs();

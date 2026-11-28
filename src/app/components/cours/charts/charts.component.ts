@@ -8,6 +8,7 @@ import {FormsModule} from '@angular/forms';
 import {ValeursService} from '../../../services/valeurs/valeurs.service';
 import {EtapeValeurUtil} from '../../valeurs/achats-valeur/etape-valeur-util.class';
 import {DTOAchat} from '../../../services/valeurs/dto-achat.interface';
+import {CoursComponent} from '../cours.component';
 
 @Component({
   selector: 'app-charts',
@@ -35,7 +36,8 @@ export class ChartsComponent {
   protected data: any;
   protected options: any;
   protected periodes: number[] = [];
-  protected periodeSelectionnee: number = 50;
+  protected periodeSelectionnee?: number;
+  private static variablePartagee?: number;
 
   // private
   private numberFormatToCurrency = new Intl.NumberFormat('fr-FR', {style: 'currency', currency: 'EUR'});
@@ -53,21 +55,35 @@ export class ChartsComponent {
   }
 
   clickPeriode(): void {
+    ChartsComponent.variablePartagee = this.periodeSelectionnee;
     this.displayChart();
   }
 
   initChart() {
     if (this.cours) {
-      this.periodes = [];
-      for (const periode of [50, 100, 150, 200, 250, 300]) {
-        this.periodes.push(periode);
-        if (this.cours.coursAlleges!.length <= periode) {
-          this.periodeSelectionnee = periode;
-          break;
-        }
-      }
+      this.periodes = this.listePeriodes(50);
+      this.periodeSelectionnee = ChartsComponent.variablePartagee ? ChartsComponent.variablePartagee : this.periodeSelectionneeParDefaut();
       this.displayChart();
     }
+  }
+
+  private periodeSelectionneeParDefaut() {
+    for (const periode of this.periodes) {
+      if (this.cours!.coursAlleges!.length <= periode) {
+        return periode;
+      }
+    }
+    return undefined;
+  }
+
+  private listePeriodes(intervalle: number): number[] {
+    const periodes = [];
+    let i = intervalle;
+    while (i < CoursComponent.NB_JOURS_MAX) {
+      periodes.push(i);
+      i += intervalle;
+    }
+    return periodes;
   }
 
   displayChart() {
@@ -76,7 +92,7 @@ export class ChartsComponent {
       const dataCours: number[] = [];
       const dataMM: number[] = [];
       const coursAlleges = this.cours.coursAlleges;
-      for (let i = Math.min(coursAlleges!.length, this.periodeSelectionnee) - 1; i >= 0; i--) {
+      for (let i = Math.min(coursAlleges!.length, this.periodeSelectionnee!) - 1; i >= 0; i--) {
         labels.push(this.datepipe.transform(coursAlleges![i].date, 'dd/MM/yyyy')!);
         dataCours.push(coursAlleges![i].cloture);
         dataMM.push(this.cours.moyennesMobiles[i]);
